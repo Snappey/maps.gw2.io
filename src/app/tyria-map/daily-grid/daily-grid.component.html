@@ -1,0 +1,26 @@
+<div class="grid my-0">
+  <div class="lg:col-3 md:col-12">
+    <h1 class="my-2">{{this.friendlyCatNames["pve"]}}</h1>
+    <div *ngFor="let event of this.dailies['pve']">
+      <app-daily-panel [achievement]="event"></app-daily-panel>
+    </div>
+  </div>
+  <div class="lg:col-3 md:col-12">
+    <h1 class="my-2">{{this.friendlyCatNames["pvp"]}}</h1>
+    <div *ngFor="let event of this.dailies['pvp']">
+      <app-daily-panel [achievement]="event"></app-daily-panel>
+    </div>
+  </div>
+  <div class="lg:col-3 md:col-12">
+    <h1 class="my-2">{{this.friendlyCatNames["wvw"]}}</h1>
+    <div *ngFor="let event of this.dailies['wvw']">
+      <app-daily-panel [achievement]="event"></app-daily-panel>
+    </div>
+  </div>
+  <div class="lg:col-3 md:col-12">
+    <h1 class="my-2">{{this.friendlyCatNames["fractals"]}}</h1>
+    <div *ngFor="let event of this.dailies['fractals'] | orderBy:'id'">
+      <app-daily-panel [achievement]="event"></app-daily-panel>
+    </div>
+  </div>
+</div>

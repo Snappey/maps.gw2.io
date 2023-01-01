@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="formgrid" *ngIf="markerType != 0">
+    <ng-container *ngFor="let field of fields | keyvalue">
+      <div class="field">
+        <label [for]="field">{{field.key}}</label>
+        <input *ngIf="field.value === 'string'" autofocus [(ngModel)]="results[field.key]" [id]="field" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+      </div>
+    </ng-container>
+    <div class="field">
+      <button pButton type="button" label="Submit" class="p-button-success" (click)="submit()"></button>
+    </div>
+  </div>
+</div>

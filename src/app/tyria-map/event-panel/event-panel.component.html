@@ -1,0 +1,25 @@
+<div *ngIf="event" class="event-panel w-full" [ngClass]="[event.xpac]"
+     (mouseenter)="this.hovering = true"
+     (mouseleave)="this.hovering = false">
+  <div>
+
+  </div>
+  <div class="pt-2 pr-1">
+    <i class="pi pi-external-link clickable px-1" style="float: right" (click)="openWiki($event, event)"></i>
+    <i class="pi pi-link clickable px-1" style="float: right" (click)="copyToClipboard($event, event)"></i>
+    <i class="pi pi-search clickable px-1" style="float: right" (click)="onClick()"></i>
+  </div>
+  <div class="p-1">
+    <h2 class="text-overflow-ellipsis overflow-hidden white-space-nowrap m-0">
+      {{event.name}}
+    </h2>
+  </div>
+  <div class="px-2 pb-1">
+    <div class="grid grid-nogutter">
+      <p class="col-6 text-left font-italic m-0">{{event.map}}</p>
+      <p *ngIf="hovering" class="col-6 text-right font-bold font-italic m-0">{{event.timeUntil | number: '1.0-0'}} Minutes</p>
+      <p *ngIf="!hovering" class="col-6 text-right font-italic m-0">{{event.nextEvent | date : 'HH:mm'}}</p>
+    </div>
+  </div>
+</div>
+

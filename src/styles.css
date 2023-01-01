@@ -1,1 +1,201 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body {
+  font-family: 'PT Serif', serif;
+  margin: 0;
+  cursor: url("assets/cursor.png"), default !important;
+}
+
+.clickable {
+  cursor: url("assets/cursor-pointer.png"), default !important;
+}
+
+.leaflet-container {
+  background: #ddd;
+  cursor: url("assets/cursor.png"), default !important;
+}
+
+.leaflet-interactive {
+  cursor: url("assets/cursor-pointer.png"), default !important;
+}
+
+.region-heading {
+  fill: #FFCC66;
+  font-family: 'PT Serif', serif;
+  font-style: italic;
+  font-size: 20rem;
+  text-shadow: 3px 2px 3px #000, -2px -2px 3px #010;
+}
+
+.map-heading {
+  fill: #FFCC66;
+  font-family: 'PT Serif', serif;
+  font-style: italic;
+  font-size: 12rem;
+  text-shadow: 3px 2px 3px #000, -2px -2px 3px #000;
+}
+
+.map-subheading {
+  fill: #DDD;
+  font-family: 'PT Serif', serif;
+  font-style: italic;
+  font-size: 11.6rem;
+  text-shadow: 2px 2px 3px #000, -2px -2px 2px #010;
+}
+
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+  border: none !important;
+}
+
+.tooltip {
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("assets/tooltip.png");
+  background-size: cover;
+  border: 2px solid #111 !important;
+  border-radius: 2px;
+  color: #ffcc77 !important;
+
+  background-position:center top;
+}
+
+
+.tooltip.overlay-red {
+  background-image: linear-gradient(90deg, rgba(220, 57, 57, 0.25) 0%, rgba(220, 57, 57, 0.15) 40%, rgba(220, 57, 57, 0) 100%), url("assets/tooltip.png");
+}
+
+.tooltip.overlay-green {
+  background-image: linear-gradient(to right, rgba(67, 208, 113, 0.25) 0%, rgba(67, 208, 113, 0.15) 40%, rgba(67, 208, 113, 0) 100%), url("/assets/tooltip.png");
+}
+
+.tooltip.overlay-blue {
+  background-image: linear-gradient(to right, rgba(36, 162, 231, 0.25) 0%, rgba(36, 162, 231, 0.15) 40%, rgba(36, 162, 231, 0) 100%), url("/assets/tooltip.png");
+}
+
+
+.leaflet-popup-content-wrapper {
+  padding: 4px 6px 4px 6px;
+  border: 2px solid #111;
+  border-radius: 2px;
+}
+
+.p-sidebar-header {
+  padding: 0 !important;
+}
+
+.leaflet-tile-container img {
+  width: 256.5px !important;
+  height: 256.5px !important;
+}
+/*
+Custom Toastr
+*/
+.toast-container .custom-toastr {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 6px;
+  padding: 10px;
+  width: 300px;
+  box-shadow: 0 0 12px #999999;
+
+  font-family: 'PT Serif', serif;
+  font-style: italic;
+
+  background-image: url("assets/tooltip.png");
+  background-size: cover;
+  border: 2px solid #111 !important;
+  border-radius: 2px;
+  color: #ffcc77 !important;
+}
+.toast-container .custom-toastr:hover {
+  box-shadow: 0 0 12px #000000;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.toast-container.toast-top-center .custom-toastr,
+.toast-container.toast-bottom-center .custom-toastr {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.toast-container.toast-top-full-width .custom-toastr,
+.toast-container.toast-bottom-full-width .custom-toastr {
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.custom-toastr {
+  background-color: #030303;
+  pointer-events: auto;
+}
+
+.toast-top-full-width-offset {
+  top: 50%;
+  left: 50%;
+  margin-top: -5rem;
+  margin-left: -10rem;
+  width: 20rem;
+}
+
+/* Responsive Design */
+@media all and (max-width: 240px) {
+  .toast-container .custom-toastr.div {
+    padding: 8px 8px 8px 50px;
+    width: 11em;
+  }
+  .toast-container .toast-close-button {
+    right: -0.2em;
+    top: -0.2em;
+  }
+}
+@media all and (min-width: 241px) and (max-width: 480px) {
+  .toast-container .custom-toastr.div {
+    padding: 8px 8px 8px 50px;
+    width: 18em;
+  }
+  .toast-container .toast-close-button {
+    right: -0.2em;
+    top: -0.2em;
+  }
+}
+@media all and (min-width: 481px) and (max-width: 768px) {
+  .toast-container .custom-toastr.div {
+    padding: 15px 15px 15px 50px;
+    width: 25em;
+  }
+}
+
+
+.mists-spawn {
+  fill: #DDD;
+  font-family: 'PT Serif', serif;
+  font-style: italic;
+  font-size: 3.75rem;
+  text-shadow: 3px 2px 3px #000, -2px -2px 3px #000;
+}
+
+.mists-score {
+  fill: #DDD;
+  font-family: 'PT Serif', serif;
+  font-size: 1.25rem;
+}
+
+.mists-red {
+  fill: #DC3939 !important;
+  color: #DC3939 !important;
+}
+
+.mists-blue {
+  fill: #24A2E7 !important;
+  color: #24A2E7 !important;
+}
+
+.mists-green {
+  fill: #43D071 !important;
+  color: #43D071 !important;
+}

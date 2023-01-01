@@ -1,0 +1,34 @@
+<app-search-bar  style="position: absolute; z-index: 999; left: 15px; top: 15px"
+  [(showResults)]="showSearchResults" (clickedResult)="panToSearchResult($event)"></app-search-bar>
+
+<div style="height: 100vh; background: #000;"
+     leaflet
+     [leafletOptions]="options"
+     (leafletMapReady)="onMapReady($event)"
+     (leafletDoubleClick)="onMapDoubleClick($event)"
+     (leafletMapZoomEnd)="onMapZoomFinished($event)"
+     (leafletMapMoveEnd)="closeSearchResults()"
+     tabindex="0">
+</div>
+
+<div class="flex flex-row align-items-center justify-content-center" style="position: absolute;  z-index: 999; width: 100%; bottom: 5px;">
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showEvents = true" icon="pi pi-clock"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showDailies = true" icon="pi pi-calendar"></button>
+</div>
+
+
+<p-sidebar [(visible)]="showEvents" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">
+  <app-event-grid [upcomingEvents]="this.upcomingEvents" (eventClicked)="panToEvent($event)"></app-event-grid>
+</p-sidebar>
+
+<p-sidebar [(visible)]="showDailies" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">
+  <app-daily-grid></app-daily-grid>
+</p-sidebar>
+
+<ng-container *ngIf="!smallScreen">
+  <img src="assets/compass.png" style="scale: 1.25; position: absolute; z-index: 999; bottom: 65px; right: 55px" />
+  <img src="assets/compass_core_pointer.png" class="clickable compass-button" title="Core Tyria" alt="Core Tyria" style="position: absolute; z-index: 1000; bottom: 165px; right: 95px" (click)="this.panTo([49024,31272])" />
+  <img src="assets/compass_eod_pointer.png" class="clickable compass-button" title="End of Dragons" alt="End of Dragons" style="position: absolute; z-index: 1000; bottom: 45px; right: 95px" (click)="this.panTo([28832,101176])" />
+  <img src="assets/compass_pof_pointer.png" class="clickable compass-button" title="Path of Fire" alt="Path of Fire" style="position: absolute; z-index: 1000; bottom: 105px; right: 35px" (click)="this.panTo([59904,48080])" />
+  <img src="assets/compass_hot_pointer.png" class="clickable compass-button" title="Heart of Thorns" alt="Heart of Thorns" style="position: absolute; z-index: 1000; bottom: 108px; right: 155px" (click)="this.panTo([35407,33800])" />
+</ng-container>

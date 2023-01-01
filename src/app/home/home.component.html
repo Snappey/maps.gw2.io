@@ -1,0 +1,5 @@
+<ng-container [ngSwitch]="selectedMap">
+  <button pButton style="position: absolute; right: 15px; top: 15px; z-index: 999" type="button" class="p-button-rounded" icon="pi pi-compass" (click)="switchMap()"></button>
+  <tyria-map *ngSwitchCase="'tyria'"></tyria-map>
+  <mists-map *ngSwitchCase="'mists'"></mists-map>
+</ng-container>

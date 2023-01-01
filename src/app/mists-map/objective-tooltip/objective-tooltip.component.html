@@ -1,0 +1,24 @@
+<ng-container *ngIf="obj">
+  <p class="m-0 pl-1 text-base">{{obj.name}}</p>
+  <p class="m-0 pl-1"><span class="mx-1">{{obj.type}}</span>
+    <span class="mx-1">- Tier {{upgradeLevel}} {{friendlyUpgradeLevel}}</span>
+    <img *ngFor="let _ of [].constructor(upgradeLevel)" style='padding-left: 1px' src='assets/upgrade_pip.png'/>
+  </p>
+  <p class="m-0 pl-2 vertical-align-middle"><img src="assets/capture_icon.png" width="16" height="16" class="vertical-align-middle"> +{{obj.points_capture}} Capture</p>
+  <hr>
+  <p class="m-0">Controlled By:</p>
+  <p class="m-0 pl-1" [ngClass]="['mists-' + obj.owner]">Insert TeamName</p>
+  <ng-container *ngIf="obj.claimed_by">
+    <p class="m-0">Claimed By:</p>
+    <p class="m-0 pl-1">{{this.guildService.getGuild(obj.claimed_by) | async}}</p>
+  </ng-container>
+
+  <ng-container *ngIf="obj.claimed_at">
+    <p class="m-0">Claimed By:</p>
+    <p class="m-0 pl-1">{{obj.claimed_at | date}}</p>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="!obj">
+  <p class="text-base">Invalid Objective..</p>
+</ng-container>

@@ -1,0 +1,74 @@
+<div style="height: 100vh; background: #000;"
+     leaflet
+     [leafletOptions]="options"
+     (leafletMapReady)="onMapReady($event)"
+     (leafletDoubleClick)="onMapDoubleClick($event)"
+     tabindex="0">
+</div>
+
+
+<div style="position: absolute; z-index: 999; left: 10px; top: 15px">
+  <div class="flex flex-column">
+    <div *ngIf="loadingWorld" class="flex align-items-center h-2rem tooltip">
+      <span class="text-left ml-2 mr-1 my-1 mists-score" >Loading..</span>
+    </div>
+
+    <ng-container *ngIf="selectedMatch && !loadingWorld">
+      <div class="flex align-items-center h-2rem tooltip" [ngClass]="'overlay-' + team.key" *ngFor="let team of selectedMatch.scores | keyvalue: valueDescOrder">
+        <ng-container *ngIf="!smallScreen">
+          <span class="text-left ml-2 mr-1 my-1 mists-score w-8 white-space-nowrap flex-grow-1" >{{selectedMatch.all_worlds_names[team.key].join(", ")}}</span>
+          <span class="text-left mists-score w-2 ml-4 mr-2 flex-1" style="float: right">{{selectedMatch.victory_points[team.key] | number}}</span>
+          <!--<span class="text-right mists-score w-2 ml-0 mr-2 flex-1" style="float: right">({{team.value | number}})</span>-->
+          <ng-container *ngIf="selectedMatchSkirmishSummary">
+            <span class="text-right mists-score w-2 ml-0 mr-2 flex-1" style="float: right">{{selectedMatchSkirmishSummary.Scores[team.key] | number}}</span>
+            <span class="text-right mists-score w-2 ml-0 mr-2 flex-1" style="float: right">+{{selectedMatchSkirmishSummary.Tick[team.key] | number}}</span>
+          </ng-container>
+
+        </ng-container>
+        <ng-container *ngIf="smallScreen">
+          <h1 class="text-center mx-2 my-0 mists-score" [ngClass]="team.key"
+              [pTooltip]="selectedMatch.all_worlds_names[team.key].join(', ')" tooltipPosition="right">
+              {{team.value | number}}
+          </h1>
+        </ng-container>
+      </div>
+    </ng-container>
+    <div *ngIf="!selectedMatch && !loadingWorld" class="flex align-items-center">
+      Failed to load match data..
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-row align-items-center justify-content-center" style="position: absolute;  z-index: 999; width: 100%; bottom: 5px;">
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showScore = true" icon="pi pi-chart-bar"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable p-button-danger" (click)="this.panTo([10724, 10550], 4.25)" icon="pi pi-shield"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable p-button-success" (click)="this.panTo([6913, 13267], 4.25)" icon="pi pi-shield"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable p-button-info" (click)="this.panTo([14058, 12736], 4.25)" icon="pi pi-shield"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable p-button-secondary"  (click)="this.panTo([10572, 14467], 4.25)" icon="pi pi-shield"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showSettings = true" icon="pi pi-cog"></button>
+</div>
+
+<p-dialog header="Settings" [(visible)]="showSettings" [style]="{width: '25%', height: '35%'}">
+  <label class="font-bold">World:</label>
+  <p-dropdown *ngIf="worlds$ | async as worlds"
+              appendTo="body"
+              [style]="{width: '100%'}"
+              [options]="worlds | orderBy:'id'" optionLabel="name" [(ngModel)]="selectedWorld"
+              [filter]="true" filterBy="name"
+              (onChange)="worldChanged(selectedWorld)">
+  </p-dropdown>
+</p-dialog>
+
+<p-sidebar [(visible)]="showScore" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">
+  <div class="grid my-0" *ngIf="selectedMatch">
+    <div class="lg:col-4 col-12">
+      <h1 class="my-2 text-center">Fight Stats</h1>
+      <p-chart type="pie" height="24rem" [options]="fightChartOptions" [data]="selectedMatchFightStats"></p-chart>
+    </div>
+    <div class="lg:col-8 col-12">
+      <h1 class="my-2 text-center">Skirmish Stats</h1>
+      <p-chart type="line" height="24rem" [options]="skirmishChartOptions"  [data]="selectedMatchSkirmishStats"></p-chart>
+    </div>
+  </div>
+</p-sidebar>
+

@@ -1,0 +1,32 @@
+<div class="grid my-0">
+  <div class="lg:col md:col-12">
+    <h1 class="my-2">{{this.friendlyXpacNames["core"]}}</h1>
+    <div *ngFor="let event of this.upcomingEvents['core']">
+      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
+    </div>
+  </div>
+  <div class="lg:col md:col-12">
+    <h1 class="my-2">{{this.friendlyXpacNames["hot"]}}</h1>
+    <div *ngFor="let event of this.upcomingEvents['hot']">
+      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
+    </div>
+  </div>
+  <div class="lg:col md:col-12">
+    <h1 class="my-2">{{this.friendlyXpacNames["pof"]}}</h1>
+    <div *ngFor="let event of this.upcomingEvents['pof']">
+      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
+    </div>
+  </div>
+  <div class="lg:col md:col-12">
+    <h1 class="my-2">{{this.friendlyXpacNames["ibs"]}}</h1>
+    <div *ngFor="let event of this.upcomingEvents['ibs']">
+      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
+    </div>
+  </div>
+  <div class="lg:col md:col-12">
+    <h1 class="my-2">{{this.friendlyXpacNames["eod"]}}</h1>
+    <div *ngFor="let event of this.upcomingEvents['eod']">
+      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
+    </div>
+  </div>
+</div>

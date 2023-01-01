@@ -1,0 +1,481 @@
+[
+  {
+    "id": 81312,
+    "coordinates": [
+      46256,
+      35056
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Sea of Sorrows"
+    }
+  },
+  {
+    "id": 83024,
+    "coordinates": [
+      42416,
+      40608
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Strait of Malchor"
+    }
+  },
+  {
+    "id": 69264,
+    "coordinates": [
+      46720,
+      22544
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Woodland Cascades"
+    }
+  },
+  {
+    "id": 75392,
+    "coordinates": [
+      54768,
+      20624
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Far Shiverpeaks"
+    }
+  },
+  {
+    "id": 60168,
+    "coordinates": [
+      40328,
+      19840
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Janthir Bay"
+    }
+  },
+  {
+    "id": 57056,
+    "coordinates": [
+      39344,
+      17712
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Isles of Janthir"
+    }
+  },
+  {
+    "id": 81776,
+    "coordinates": [
+      61248,
+      20528
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Blood Legion Homelands"
+    }
+  },
+  {
+    "id": 88576,
+    "coordinates": [
+      62624,
+      25952
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Blazeridge Mountains"
+    }
+  },
+  {
+    "id": 91664,
+    "coordinates": [
+      57040,
+      34624
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Deldrimor Front"
+    }
+  },
+  {
+    "id": 90208,
+    "coordinates": [
+      38880,
+      51328
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Unending Ocean"
+    }
+  },
+  {
+    "id": 97968,
+    "coordinates": [
+      50680,
+      47288
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Scavenger's Causeway"
+    }
+  },
+  {
+    "id": 100016,
+    "coordinates": [
+      55672,
+      44344
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Elon River"
+    }
+  },
+  {
+    "id": 102124,
+    "coordinates": [
+      59812,
+      42312
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Crystal Desert"
+    }
+  },
+  {
+    "id": 115280,
+    "coordinates": [
+      68144,
+      47136
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Dzalana"
+    }
+  },
+  {
+    "id": 104656,
+    "coordinates": [
+      52160,
+      52496
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Dajkah"
+    }
+  },
+  {
+    "id": 114992,
+    "coordinates": [
+      60464,
+      54528
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Sulfurous Wastelands"
+    }
+  },
+  {
+    "id": 124720,
+    "coordinates": [
+      65328,
+      59392
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Kourna"
+    }
+  },
+  {
+    "id": 118640,
+    "coordinates": [
+      66096,
+      52544
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Vabbi"
+    }
+  },
+  {
+    "id": 117552,
+    "coordinates": [
+      55072,
+      62480
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Isle of Istan"
+    }
+  },
+  {
+    "id": 131345,
+    "coordinates": [
+      40306.530094131354,
+      91038.52626465147
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Unending Ocean"
+    }
+  },
+  {
+    "id": 125201,
+    "coordinates": [
+      29186.530094131354,
+      96014.52626465147
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Drowned Kaineng"
+    }
+  },
+  {
+    "id": 141217,
+    "coordinates": [
+      36706.530094131354,
+      104510.52626465147
+    ],
+    "type": "region",
+    "data": {
+      "heading": "The Jade Sea"
+    }
+  },
+  {
+    "id": 135617,
+    "coordinates": [
+      36626.530094131354,
+      98990.52626465147
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Great Turtle Highlands"
+    }
+  },
+  {
+    "id": 135920,
+    "coordinates": [
+      27120,
+      108800
+    ],
+    "type": "region",
+    "data": {
+      "heading": "Kirin Peak"
+    }
+  },
+  {
+    "id": 135232,
+    "coordinates": [
+      30864,
+      104368
+    ],
+    "type": "region",
+    "data": {
+      "heading": "The Echovald Forest"
+    }
+  },
+  {
+    "id": 115020,
+    "coordinates": [
+      52838,
+      62182
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Fahranur, the First City",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 111104,
+    "coordinates": [
+      53792,
+      57312
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Sandswept Isles",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 95348,
+    "coordinates": [
+      45712,
+      49636
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Dragonfall",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 94548,
+    "coordinates": [
+      55676,
+      38872
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Labyrnthine Cliffs",
+      "subheading": "1-80"
+    }
+  },
+  {
+    "id": 101012,
+    "coordinates": [
+      59948,
+      41064
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Desert Highlands",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 103616,
+    "coordinates": [
+      60008,
+      43608
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Crystal Oasis",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 106312,
+    "coordinates": [
+      59896,
+      46416
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Elon Riverlands",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 119556,
+    "coordinates": [
+      65844,
+      53712
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Domain of Vabbi",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 110768,
+    "coordinates": [
+      59860,
+      50908
+    ],
+    "type": "map",
+    "data": {
+      "heading": "The Desolation",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 123336,
+    "coordinates": [
+      65288,
+      58048
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Jahai Bluffs",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 126655,
+    "coordinates": [
+      65319.99986500981,
+      61335.999178809696
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Domain of Kourna",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 116380,
+    "coordinates": [
+      64696,
+      51684
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Windswept Haven",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 118804,
+    "coordinates": [
+      67272,
+      51532
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Key of Ahdashim",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 67056,
+    "coordinates": [
+      45816,
+      21240
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Bastion of the Penitent",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 64424,
+    "coordinates": [
+      34216,
+      30208
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Windswept Haven",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 69048,
+    "coordinates": [
+      35986,
+      33062
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Gilded Hollow",
+      "subheading": "80"
+    }
+  },
+  {
+    "id": 126949,
+    "coordinates": [
+      22195.104803007234,
+      104753.90290110727
+    ],
+    "type": "map",
+    "data": {
+      "heading": "Isle of Reflection",
+      "subheading": "80"
+    }
+  }
+]

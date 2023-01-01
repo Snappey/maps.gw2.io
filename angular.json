@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [ "leaflet" ],
             "outputPath": "dist/map-gw2-io",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -20,10 +21,22 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/leaflet/dist/images",
+                "output": "assets/"
+              }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "./node_modules/primeicons/primeicons.css",
+              "./node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/primeflex/primeflex.css",
+              "./node_modules/leaflet/dist/leaflet.css",
+              "./node_modules/leaflet-contextmenu/dist/leaflet.contextmenu.css",
+              "./node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -32,8 +45,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1.5mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -97,5 +110,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

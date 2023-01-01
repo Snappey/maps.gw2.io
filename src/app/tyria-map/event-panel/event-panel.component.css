@@ -1,0 +1,52 @@
+
+.event-panel {
+  margin-top: 3px;
+  color: #222;
+
+  min-height: 60px;
+  min-width: 100%;
+}
+
+.core {
+  background-color: #EC5752;
+}
+
+.core:hover {
+  background-color: #FD6863;
+}
+
+.hot {
+  background-color: #99CC33;
+}
+
+.hot:hover {
+  background-color: #AADD44;
+}
+
+.pof {
+  background-color: #9966CC;
+}
+
+.pof:hover {
+  background-color: #AA77DD;
+}
+
+.ibs {
+  background-color: #6699CC;
+}
+
+.ibs:hover {
+  background-color: #77AADD;
+}
+
+.eod {
+  background-color: #33CCCC;
+}
+
+.eod:hover {
+  background-color: #44DDDD;
+}
+
+.pi.clickable:hover {
+  color: lightskyblue;
+}
