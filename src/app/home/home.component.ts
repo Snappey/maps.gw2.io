@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {CookieService} from "ngx-cookie";
 
 enum MapTypes {
-  Tyria = "tyria",
-  Mists = "mists"
+  Tyria = "Tyria",
+  Mists = "Mists"
 }
 
 @Component({
@@ -29,9 +29,12 @@ export class HomeComponent implements OnInit {
   switchMap() {
     switch(this.selectedMap) {
       case MapTypes.Mists:
-        return this.selectedMap = MapTypes.Tyria;
+        this.selectedMap = MapTypes.Tyria;
+        break;
       case MapTypes.Tyria:
-        return this.selectedMap = MapTypes.Mists;
+        this.selectedMap = MapTypes.Mists;
+        break;
     }
+    this.cookieService.put(this.COOKIE_SELECTED_MAP, this.selectedMap);
   }
 }
