@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet'
 import {DialogModule} from 'primeng/dialog';
@@ -32,7 +32,6 @@ import {ArraySortPipe} from "../pipes/orderBy.pipe";
 import {SpinnerModule} from "primeng/spinner";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {CookieModule} from "ngx-cookie";
-import {NgAnimatedCounterModule} from "@bugsplat/ng-animated-counter";
 import {ChartModule} from "primeng/chart";
 import { ObjectiveTooltipComponent } from './mists-map/objective-tooltip/objective-tooltip.component';
 import { HomeComponent } from './home/home.component';
@@ -74,9 +73,9 @@ import { HomeComponent } from './home/home.component';
     StyleClassModule,
     SpinnerModule,
     ProgressSpinnerModule,
-    NgAnimatedCounterModule,
     ChartModule
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
   bootstrap: [HomeComponent]
 })
