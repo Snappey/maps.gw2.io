@@ -20,7 +20,7 @@
     "@angular/platform-browser": "^15.0.4",
     "@angular/platform-browser-dynamic": "^15.0.4",
     "@angular/router": "^15.0.4",
-    "@asymmetrik/ngx-leaflet": "^14.0.0",
+    "@asymmetrik/ngx-leaflet": "^15.0.0",
     "chart.js": "^4.1.1",
     "fuzzy-search": "^3.2.1",
     "leaflet": "^1.8.0",
@@ -32,7 +32,7 @@
     "ngx-toastr": "^15.0.0",
     "primeflex": "^3.2.1",
     "primeicons": "^6.0.0",
-    "primeng": "^14.0.0",
+    "primeng": "^15.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
