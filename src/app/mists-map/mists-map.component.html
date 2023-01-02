@@ -16,20 +16,25 @@
     <ng-container *ngIf="selectedMatch && !loadingWorld">
       <div class="flex align-items-center h-2rem tooltip" [ngClass]="'overlay-' + team.key" *ngFor="let team of selectedMatch.scores | keyvalue: valueDescOrder">
         <ng-container *ngIf="!smallScreen">
-          <span class="text-left ml-2 mr-1 my-1 mists-score w-8 white-space-nowrap flex-grow-1" >{{selectedMatch.all_worlds_names[team.key].join(", ")}}</span>
-          <span class="text-left mists-score w-2 ml-4 mr-2 flex-1" style="float: right">{{selectedMatch.victory_points[team.key] | number}}</span>
+          <span class="text-left ml-2 mr-2 my-1 mists-score w-6 white-space-nowrap flex-grow-1" >{{selectedMatch.all_worlds_names[team.key].join(", ")}}</span>
+          <span class="text-left mists-score w-auto ml-4 mr-0 flex-1" style="float: right">
+            {{selectedMatch.victory_points[team.key] | number}}
+          </span>
+          <img class="mx-1 w-auto flex-1" src="assets/capture_icon.png" width="16" height="16" class="vertical-align-middle">
           <!--<span class="text-right mists-score w-2 ml-0 mr-2 flex-1" style="float: right">({{team.value | number}})</span>-->
           <ng-container *ngIf="selectedMatchSkirmishSummary">
-            <span class="text-right mists-score w-2 ml-0 mr-2 flex-1" style="float: right">{{selectedMatchSkirmishSummary.Scores[team.key] | number}}</span>
-            <span class="text-right mists-score w-2 ml-0 mr-2 flex-1" style="float: right">+{{selectedMatchSkirmishSummary.Tick[team.key] | number}}</span>
+            <span class="text-right mists-score w-auto ml-0 mr-2 flex-1" style="float: right">{{selectedMatchSkirmishSummary.Scores[team.key] | number}}</span>
+            <span class="text-right mists-score w-auto ml-0 mr-2 flex-1" style="float: right">+{{selectedMatchSkirmishSummary.Tick[team.key] | number}}</span>
           </ng-container>
 
         </ng-container>
         <ng-container *ngIf="smallScreen">
-          <h1 class="text-center mx-2 my-0 mists-score" [ngClass]="team.key"
-              [pTooltip]="selectedMatch.all_worlds_names[team.key].join(', ')" tooltipPosition="right">
-              {{team.value | number}}
-          </h1>
+          <h1 class="text-left mx-2 my-0 mists-score flex-grow-1" [ngClass]="team.key"
+              [pTooltip]="selectedMatch.all_worlds_names[team.key].join(', ')" tooltipPosition="right">{{selectedMatch.victory_points[team.key] | number}}</h1>
+          <ng-container *ngIf="selectedMatchSkirmishSummary">
+            <span class="text-left mists-score w-auto ml-0 mr-2 flex-grow-1" style="float: right">{{selectedMatchSkirmishSummary.Scores[team.key] | number}}</span>
+            <span class="text-right mists-score w-auto ml-0 mr-2 flex-grow-1" style="float: right">+{{selectedMatchSkirmishSummary.Tick[team.key] | number}}</span>
+          </ng-container>
         </ng-container>
       </div>
     </ng-container>

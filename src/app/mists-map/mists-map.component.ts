@@ -108,7 +108,6 @@ export class MistsMapComponent extends BaseMap implements OnInit {
 
   showScore: boolean = false;
   showSettings: boolean = false;
-  smallScreen: boolean = false;
 
   constructor(
     private layerService: LayerService,
@@ -147,12 +146,14 @@ export class MistsMapComponent extends BaseMap implements OnInit {
     return 0;
   }
 
+  checkScreenSize = () => document.body.offsetWidth < 1024;
+  smallScreen: boolean = this.checkScreenSize();
+
   ngOnInit(): void {
-    const checkScreenSize = () => document.body.offsetWidth < 1024;
     const screenSizeChanged$ = fromEvent(window, 'resize')
       .pipe(
         debounceTime(200),
-        map(checkScreenSize)
+        map(this.checkScreenSize)
       );
 
     screenSizeChanged$.subscribe((small) => this.smallScreen = small);
