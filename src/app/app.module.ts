@@ -35,6 +35,9 @@ import {CookieModule} from "ngx-cookie";
 import {ChartModule} from "primeng/chart";
 import { ObjectiveTooltipComponent } from './mists-map/objective-tooltip/objective-tooltip.component';
 import { HomeComponent } from './home/home.component';
+import { ScoreOverviewComponent } from './mists-map/score-overview/score-overview.component';
+import { FightStatsChartComponent } from './mists-map/fight-stats-chart/fight-stats-chart.component';
+import { SkirmishStatsChartComponent } from './mists-map/skirmish-stats-chart/skirmish-stats-chart.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { HomeComponent } from './home/home.component';
     MistsMapComponent,
     ArraySortPipe,
     ObjectiveTooltipComponent,
-    HomeComponent
+    HomeComponent,
+    ScoreOverviewComponent,
+    FightStatsChartComponent,
+    SkirmishStatsChartComponent
   ],
   imports: [
     BrowserModule,

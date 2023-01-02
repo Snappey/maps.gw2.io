@@ -170,6 +170,13 @@ Custom Toastr
   }
 }
 
+.mists-loading {
+  color: #FFCC66;
+  font-family: 'PT Serif', serif;
+  font-style: italic;
+  font-size: 8rem;
+  text-shadow: 3px 2px 3px #000, -2px -2px 3px #000;
+}
 
 .mists-spawn {
   fill: #DDD;
@@ -180,22 +187,35 @@ Custom Toastr
 }
 
 .mists-score {
-  fill: #DDD;
+  fill: #FFCC66;
   font-family: 'PT Serif', serif;
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
-.mists-red {
+.mists.red {
   fill: #DC3939 !important;
   color: #DC3939 !important;
 }
 
-.mists-blue {
+.mists.blue {
   fill: #24A2E7 !important;
   color: #24A2E7 !important;
 }
 
-.mists-green {
+.mists.green {
   fill: #43D071 !important;
   color: #43D071 !important;
+}
+
+
+.red-background {
+  background-color: #DC3939 !important;
+}
+
+.blue-background {
+  background-color: #24A2E7 !important;
+}
+
+.green-background {
+  background-color:  #43D071 !important;
 }

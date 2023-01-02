@@ -8,39 +8,11 @@
 
 
 <div style="position: absolute; z-index: 999; left: 10px; top: 15px">
-  <div class="flex flex-column">
-    <div *ngIf="loadingWorld" class="flex align-items-center h-2rem tooltip">
-      <span class="text-left ml-2 mr-1 my-1 mists-score" >Loading..</span>
-    </div>
-
-    <ng-container *ngIf="selectedMatch && !loadingWorld">
-      <div class="flex align-items-center h-2rem tooltip" [ngClass]="'overlay-' + team.key" *ngFor="let team of selectedMatch.scores | keyvalue: valueDescOrder">
-        <ng-container *ngIf="!smallScreen">
-          <span class="text-left ml-2 mr-2 my-1 mists-score w-6 white-space-nowrap flex-grow-1" >{{selectedMatch.all_worlds_names[team.key].join(", ")}}</span>
-          <span class="text-left mists-score w-auto ml-4 mr-0 flex-1" style="float: right">
-            {{selectedMatch.victory_points[team.key] | number}}
-          </span>
-          <img class="mx-1 w-auto flex-1" src="assets/capture_icon.png" width="16" height="16" class="vertical-align-middle">
-          <!--<span class="text-right mists-score w-2 ml-0 mr-2 flex-1" style="float: right">({{team.value | number}})</span>-->
-          <ng-container *ngIf="selectedMatchSkirmishSummary">
-            <span class="text-right mists-score w-auto ml-0 mr-2 flex-1" style="float: right">{{selectedMatchSkirmishSummary.Scores[team.key] | number}}</span>
-            <span class="text-right mists-score w-auto ml-0 mr-2 flex-1" style="float: right">+{{selectedMatchSkirmishSummary.Tick[team.key] | number}}</span>
-          </ng-container>
-
-        </ng-container>
-        <ng-container *ngIf="smallScreen">
-          <h1 class="text-left mx-2 my-0 mists-score flex-grow-1" [ngClass]="team.key"
-              [pTooltip]="selectedMatch.all_worlds_names[team.key].join(', ')" tooltipPosition="right">{{selectedMatch.victory_points[team.key] | number}}</h1>
-          <ng-container *ngIf="selectedMatchSkirmishSummary">
-            <span class="text-left mists-score w-auto ml-0 mr-2 flex-grow-1" style="float: right">{{selectedMatchSkirmishSummary.Scores[team.key] | number}}</span>
-            <span class="text-right mists-score w-auto ml-0 mr-2 flex-grow-1" style="float: right">+{{selectedMatchSkirmishSummary.Tick[team.key] | number}}</span>
-          </ng-container>
-        </ng-container>
-      </div>
-    </ng-container>
-    <div *ngIf="!selectedMatch && !loadingWorld" class="flex align-items-center">
-      Failed to load match data..
-    </div>
+  <ng-container *ngIf="selectedMatch">
+    <app-score-overview [loading]="loadingWorld" [small]="smallScreen" [match]="selectedMatch"></app-score-overview>
+  </ng-container>
+  <div *ngIf="!selectedMatch && !loadingWorld" class="flex align-items-center h-2rem tooltip">
+    <span class="text-left ml-2 mr-1 my-1 mists-score">Failed to load match data..</span>
   </div>
 </div>
 
@@ -53,7 +25,7 @@
   <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showSettings = true" icon="pi pi-cog"></button>
 </div>
 
-<p-dialog header="Settings" [(visible)]="showSettings" [style]="{width: '25%', height: '35%'}">
+<p-dialog header="Settings" [(visible)]="showSettings">
   <label class="font-bold">World:</label>
   <p-dropdown *ngIf="worlds$ | async as worlds"
               appendTo="body"
@@ -68,11 +40,11 @@
   <div class="grid my-0" *ngIf="selectedMatch">
     <div class="lg:col-4 col-12">
       <h1 class="my-2 text-center">Fight Stats</h1>
-      <p-chart type="pie" height="24rem" [options]="fightChartOptions" [data]="selectedMatchFightStats"></p-chart>
+      <app-fight-stats-chart height="24rem" [match]="selectedMatch"></app-fight-stats-chart>
     </div>
     <div class="lg:col-8 col-12">
       <h1 class="my-2 text-center">Skirmish Stats</h1>
-      <p-chart type="line" height="24rem" [options]="skirmishChartOptions"  [data]="selectedMatchSkirmishStats"></p-chart>
+      <app-skirmish-stats-chart height="24rem" [match]="selectedMatch"></app-skirmish-stats-chart>
     </div>
   </div>
 </p-sidebar>

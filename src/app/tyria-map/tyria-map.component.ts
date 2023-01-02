@@ -215,7 +215,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit {
 
     map.options.crs = L.CRS.Simple;
     map.setMaxBounds(new LatLngBounds(
-        map.unproject([0, 0], map.getMinZoom()),
+        map.unproject([0, 0], map.getMaxZoom()),
         map.unproject(this.layerService.tyriaDimensions, map.getMaxZoom())
     ));
 

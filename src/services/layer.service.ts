@@ -472,7 +472,10 @@ export class LayerService {
               const marker = this.labelService.createCanvasMarker(leaflet, data.coord as PointTuple, markerUrl, data.type === "Ruins" ? [24,24] : [32, 32], 16, icons)
                 .bindTooltip("Loading...", { className: "tooltip", offset: new Point(15, 0)})
                 .on("click", (_: any) => {
-                   const msg = data.claimed_by + " by " + data.owner;
+                  const msg = data.claimed_by + " by " + data.owner;
+
+
+                  console.log(data);
 
                   this.toastr.info(msg, "", {
                     toastClass: "custom-toastr",
@@ -496,7 +499,7 @@ export class LayerService {
               content += `
               <text x="${label.label_coord[0]}" y="${label.label_coord[1]}"
                     dominant-baseline="middle" text-anchor="middle"
-                    class="mists-spawn mists-${label.owner.toLowerCase()}">
+                    class="mists-spawn mists ${label.owner.toLowerCase()}">
                     ${teamNames[label.owner]}
               </text>`
             }

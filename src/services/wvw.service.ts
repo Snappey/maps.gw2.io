@@ -19,12 +19,14 @@ export interface Objective {
 }
 
 export interface Scores {
+  [team: string]: number;
   red: number;
   blue: number;
   green: number;
 }
 
 export interface AllWorlds {
+  [team: string]: string[];
   red: string[];
   blue: string[];
   green: string[];
@@ -129,7 +131,7 @@ export class WvwService {
     return this.httpClient.get<Match>(`https://api.guildwars2.com/v2/wvw/matches?world=${worldId}`)
       .pipe(
         switchMap(match => {
-          const worldNames = this.getWorldNames(Object.values(match.all_worlds));
+          const worldNames = this.getWorldNames(Object.values(match.all_worlds).flat());
           return forkJoin({names: worldNames}).pipe(
             map(world => {
               const mapNames = (ids: string[]) => ids.map(id => {
