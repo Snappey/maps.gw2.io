@@ -1,0 +1,16 @@
+<div class="grid grid-nogutter">
+  <div class="col-12 md:col-6">
+    <div class="flex align-items-end flex-column flex-wrap px-6">
+      <div class="my-2 flex-1 flex-grow-1 clickable hover" *ngFor="let match of euMatches">
+        <app-score-overview (click)="selectedMatch(match)" [match]="match" [loading]="false"></app-score-overview>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 md:col-6">
+    <div class="flex align-items-start flex-column flex-wrap px-6">
+      <div class="my-2 flex-1 flex-grow-1 clickable hover" *ngFor="let match of usMatches">
+        <app-score-overview (click)="selectedMatch(match)" [match]="match" [loading]="false"></app-score-overview>
+      </div>
+    </div>
+  </div>
+</div>

@@ -54,6 +54,7 @@ export class MistsMapComponent extends BaseMap implements OnInit {
 
   showScore: boolean = false;
   showSettings: boolean = false;
+  showMatches: boolean = false;
 
   constructor(
     private layerService: LayerService,
@@ -74,6 +75,9 @@ export class MistsMapComponent extends BaseMap implements OnInit {
             break;
           case "Digit2":
             this.showSettings = !this.showSettings;
+            break;
+          case "Digit3":
+            this.showMatches = !this.showMatches;
             break;
         }
       });
@@ -158,7 +162,7 @@ export class MistsMapComponent extends BaseMap implements OnInit {
   }
 
   worldChanged(newWorld: World) {
-    if (this.Map) {
+    if (this.Map && newWorld.id != this.selectedWorld.id) {
       this.cookieService.put(this.WvW_WORLD_KEY, JSON.stringify(newWorld));
       this.selectWorld$.next(newWorld.id);
     }
@@ -180,5 +184,12 @@ export class MistsMapComponent extends BaseMap implements OnInit {
         return of(new LayerGroup());
       })
     )
+  }
+
+  overviewMatchClicked(match: Match) {
+    this.selectedMatch = match;
+    this.showMatches = false;
+
+    this.selectWorld$.next(match.worlds.red.toString());
   }
 }

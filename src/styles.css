@@ -13,6 +13,11 @@ body {
   cursor: url("assets/cursor-pointer.png"), default !important;
 }
 
+.clickable.hover:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(32, 162, 238) 0px 0px 0px 3px;
+}
+
 .leaflet-container {
   background: #ddd;
   cursor: url("assets/cursor.png"), default !important;
@@ -75,6 +80,7 @@ body {
 .tooltip.overlay-blue {
   background-image: linear-gradient(to right, rgba(36, 162, 231, 0.25) 0%, rgba(36, 162, 231, 0.15) 40%, rgba(36, 162, 231, 0) 100%), url("/assets/tooltip.png");
 }
+
 
 
 .leaflet-popup-content-wrapper {

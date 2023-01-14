@@ -7,9 +7,9 @@
 </div>
 
 
-<div style="position: absolute; z-index: 999; left: 10px; top: 15px">
+<div [hidden]="showMatches" style="position: absolute; z-index: 999; left: 10px; top: 15px">
   <ng-container *ngIf="selectedMatch">
-    <app-score-overview [loading]="loadingWorld" [small]="smallScreen" [match]="selectedMatch"></app-score-overview>
+    <app-score-overview [loading]="false" [small]="smallScreen" [match]="selectedMatch"></app-score-overview>
   </ng-container>
   <div *ngIf="!selectedMatch && !loadingWorld" class="flex align-items-center h-2rem tooltip">
     <span class="text-left ml-2 mr-1 my-1 mists-score">Failed to load match data..</span>
@@ -26,14 +26,16 @@
 </div>
 
 <p-dialog header="Settings" [(visible)]="showSettings">
-  <label class="font-bold">World:</label>
+  <label class="font-bold">Home World:</label>
   <p-dropdown *ngIf="worlds$ | async as worlds"
               appendTo="body"
               [style]="{width: '100%'}"
               [options]="worlds | orderBy:'id'" optionLabel="name" [(ngModel)]="selectedWorld"
-              [filter]="true" filterBy="name"
-              (onChange)="worldChanged(selectedWorld)">
+              [filter]="true" filterBy="name">
   </p-dropdown>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="worldChanged(selectedWorld); this.showSettings = false" label="Save" styleClass="p-button p-button-text p-button-success"></p-button>
+  </ng-template>
 </p-dialog>
 
 <p-sidebar [(visible)]="showScore" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">
@@ -49,3 +51,6 @@
   </div>
 </p-sidebar>
 
+<div [hidden]="!showMatches" class="overflow-auto h-auto w-auto my-5" style="position: absolute; z-index: 999; left: 0; right: 0; top: 25px; margin-left: auto; margin-right: auto">
+  <app-match-overview (clickedMatch)="overviewMatchClicked($event)"></app-match-overview>
+</div>

@@ -1,6 +1,6 @@
 import {ViewContainerRef, Injectable, Injector} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, map, tap, switchMap, combineLatest, mergeMap, forkJoin, of, from, iif} from "rxjs";
+import {Observable, map, tap, switchMap, combineLatest, mergeMap, forkJoin, of, from, iif, delay} from "rxjs";
 import L, {
   FeatureGroup,
   LatLngBounds, Layer,
@@ -400,19 +400,7 @@ export class LayerService {
         switchMap(match => {
           return combineLatest({
             match: of(match),
-            objectives: this.wvwService.getAllObjectives(),
-            guilds: of(match).
-              pipe(
-                switchMap(match => {
-                  const objs = match.maps.flat().map(m => m.objectives).flat();
-                  return forkJoin(objs.map(o => {
-                    if (o.claimed_by) {
-                      return this.guildService.getGuild(o.claimed_by);
-                    }
-                    return null;
-                  }).filter(o => o !== null));
-                }),
-              )
+            objectives: this.wvwService.getAllObjectives()
           });
         }),
         map((vals) => {
@@ -485,7 +473,7 @@ export class LayerService {
                 .addTo(objectives);
 
               this.updateObjectiveTooltip(marker, data, teamNames)
-                .subscribe(content => marker.setTooltipContent(content));
+                 .subscribe(content => marker.setTooltipContent(content));
             }
           }
 
@@ -540,7 +528,7 @@ export class LayerService {
         content += "<hr>"
 
         content += "<p class='m-0'>Controlled By:</p>"
-        content += `<p class="m-0 pl-1 mists-${obj.owner.toLowerCase()}">${teamNames[obj.owner]}</p>`
+        content += `<p class="m-0 pl-1 mists ${obj.owner.toLowerCase()}">${teamNames[obj.owner]}</p>`
 
         if (obj.claimed_by) {
           content += "<p class='m-0'>Claimed By:</p>"
@@ -553,6 +541,7 @@ export class LayerService {
           content += `<p class="m-0 pl-1">${moment(obj.last_flipped).utc(false).fromNow()}</p>` // .format("ddd, LTS")
         }
 
+        console.log("finished: " + obj.owner);
         return content;
       })
     )

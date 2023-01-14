@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {forkJoin, concatMap, exhaustMap, map, mergeAll, mergeMap, Observable, zip, reduce, switchMap} from "rxjs";
-import {combineLatest} from "rxjs/internal/operators/combineLatest";
+import {forkJoin, concatMap, exhaustMap, map, mergeAll, mergeMap, Observable, zip, reduce, combineLatest, switchMap} from "rxjs";
 import {GuildService} from "./guild.service";
 
 export interface Objective {
@@ -79,6 +78,8 @@ export interface Match {
   worlds: Scores;
   all_worlds: AllWorlds;
   all_worlds_names: AllWorlds // Custom
+  tier: string;
+  region: string;
   deaths: Scores;
   kills: Scores;
   victory_points: Scores;
@@ -123,34 +124,56 @@ export class WvwService {
       );*/
   }
 
+  getAllMatchDetails(): Observable<Match[]> {
+    return this.httpClient.get<string[]>(`https://api.guildwars2.com/v2/wvw/matches`)
+      .pipe(
+        switchMap(ids => combineLatest(ids.map(id => this.getMatchDetails(id))))
+      )
+  }
+
+  private mapMetadata(match: Match): Observable<Match> {
+    const worldNames = this.getWorldNames(Object.values(match.all_worlds).flat());
+    return forkJoin({names: worldNames}).pipe(
+      map(world => {
+        const mapNames = (ids: string[]) => ids.map(id => {
+          if (id in world.names) {
+            return world.names[id].name;
+          }
+          return "unknown"
+        });
+
+        match.all_worlds_names = {
+          red: mapNames(match.all_worlds.red),
+          green: mapNames(match.all_worlds.green),
+          blue: mapNames(match.all_worlds.blue)
+        }
+        match.tier = this.getTier(match);
+        match.region = this.getRegion(match);
+
+        return match;
+      })
+    )
+  }
+
+  getTier(match: Match): string {
+    return match.id.split("-")[1];
+  }
+
+  getRegion(match: Match): string {
+    return match.id.split("-")[0] === "1" ? "us" : "eu";
+  }
+
   getMatchDetails(id: string): Observable<Match> {
-    return this.httpClient.get<Match>(`https://api.guildwars2.com/v2/wvw/matches/${id}`);
+    return this.httpClient.get<Match>(`https://api.guildwars2.com/v2/wvw/matches/${id}`)
+      .pipe(
+        switchMap(match => this.mapMetadata(match))
+      );
   }
 
   getMatchDetailsByWorldId(worldId: string): Observable<Match> {
     return this.httpClient.get<Match>(`https://api.guildwars2.com/v2/wvw/matches?world=${worldId}`)
       .pipe(
-        switchMap(match => {
-          const worldNames = this.getWorldNames(Object.values(match.all_worlds).flat());
-          return forkJoin({names: worldNames}).pipe(
-            map(world => {
-              const mapNames = (ids: string[]) => ids.map(id => {
-                if (id in world.names) {
-                  return world.names[id].name;
-                }
-                return "unknown"
-              });
-
-              match.all_worlds_names = {
-                red: mapNames(match.all_worlds.red),
-                green: mapNames(match.all_worlds.green),
-                blue: mapNames(match.all_worlds.blue)
-              }
-
-              return match;
-            })
-          )
-        })
+        switchMap(match => this.mapMetadata(match))
       );
   }
 
@@ -222,5 +245,12 @@ export class WvwService {
       default:
         return "N/A"
     }
+  }
+
+  calculateMatchPointsTick(match: Match, team: string): number {
+    return match.maps.flat()
+      .map(o => o.objectives).flat()
+      .filter(o => o.owner.toLowerCase() === team.toLowerCase())
+      .map(o => o.points_tick).reduce((total, cur) => total + cur);
   }
 }

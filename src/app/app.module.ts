@@ -38,6 +38,7 @@ import { HomeComponent } from './home/home.component';
 import { ScoreOverviewComponent } from './mists-map/score-overview/score-overview.component';
 import { FightStatsChartComponent } from './mists-map/fight-stats-chart/fight-stats-chart.component';
 import { SkirmishStatsChartComponent } from './mists-map/skirmish-stats-chart/skirmish-stats-chart.component';
+import { MatchOverviewComponent } from './mists-map/match-overview/match-overview.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { SkirmishStatsChartComponent } from './mists-map/skirmish-stats-chart/sk
     HomeComponent,
     ScoreOverviewComponent,
     FightStatsChartComponent,
-    SkirmishStatsChartComponent
+    SkirmishStatsChartComponent,
+    MatchOverviewComponent
   ],
   imports: [
     BrowserModule,

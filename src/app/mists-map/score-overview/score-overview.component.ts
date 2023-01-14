@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Match, Scores} from "../../../services/wvw.service";
+import {Match, Scores, WvwService} from "../../../services/wvw.service";
 
 interface SkirmishSummary {
   Scores: Scores
@@ -19,6 +19,7 @@ export class ScoreOverviewComponent implements OnInit {
   @Input()
   small: boolean = false;
 
+  sortedScores: { name: string; score: number }[] = [];
   skirmishStats: SkirmishSummary = {
     Scores: {
       red: 0,
@@ -32,28 +33,31 @@ export class ScoreOverviewComponent implements OnInit {
     }
   }
 
-  constructor() {
+  constructor(private wvwService: WvwService) {
   }
 
   ngOnInit() {
     console.log(this.match);
+
+    this.sortedScores = Object.entries(this.match.victory_points)
+      .map(([team, score]) => {
+        return {name: team, score}
+      }).sort((a,b) => b.score - a.score);
+
+    this.calculateSkirmishStats()
+  }
+
+  calculateSkirmishStats() {
     const latestSkirmish = this.match.skirmishes.at(-1)
     if (latestSkirmish) {
       this.skirmishStats = {
         Scores: latestSkirmish.scores,
         Tick: {
-          red: this.calculateMatchPointsTick(this.match, "red"),
-          blue: this.calculateMatchPointsTick(this.match, "blue"),
-          green: this.calculateMatchPointsTick(this.match, "green")
+          red: this.wvwService.calculateMatchPointsTick(this.match, "red"),
+          blue: this.wvwService.calculateMatchPointsTick(this.match, "blue"),
+          green: this.wvwService.calculateMatchPointsTick(this.match, "green")
         }
       }
     }
-  }
-
-  calculateMatchPointsTick(match: Match, team: string): number {
-    return match.maps.flat()
-      .map(o => o.objectives).flat()
-      .filter(o => o.owner.toLowerCase() === team.toLowerCase())
-      .map(o => o.points_tick).reduce((total, cur) => total + cur);
   }
 }
