@@ -458,7 +458,7 @@ export class LayerService {
               }
 
               const marker = this.labelService.createCanvasMarker(leaflet, data.coord as PointTuple, markerUrl, data.type === "Ruins" ? [24,24] : [32, 32], 16, icons)
-                .bindTooltip("Loading...", { className: "tooltip", offset: new Point(15, 0)})
+                .bindTooltip("Loading...", { className: "tooltip-overlay", offset: new Point(15, 0)})
                 .on("click", (_: any) => {
                   const msg = data.claimed_by + " by " + data.owner;
 
@@ -541,7 +541,6 @@ export class LayerService {
           content += `<p class="m-0 pl-1">${moment(obj.last_flipped).utc(false).fromNow()}</p>` // .format("ddd, LTS")
         }
 
-        console.log("finished: " + obj.owner);
         return content;
       })
     )

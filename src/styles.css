@@ -59,6 +59,16 @@ body {
 }
 
 .tooltip {
+  background-image: url("assets/tooltip.png");
+  background-size: cover;
+  border: 2px solid #111 !important;
+  border-radius: 2px;
+  color: #ffcc77 !important;
+
+  background-position:center top;
+}
+
+.tooltip-overlay {
   background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("assets/tooltip.png");
   background-size: cover;
   border: 2px solid #111 !important;
