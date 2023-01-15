@@ -120,7 +120,7 @@ export class MistsMapComponent extends BaseMap implements OnInit {
       ),
       (worldId => this.updateMatch(worldId)),
       catchError((err) => {
-        this.toastr.error(err, "Failed to update..");
+        this.toastr.error(err, "Failed to update");
         return of(null);
       })
     ).subscribe(layer => {
@@ -148,9 +148,11 @@ export class MistsMapComponent extends BaseMap implements OnInit {
 
     if (this.cookieService.hasKey(this.WvW_WORLD_KEY)) {
       this.selectedWorld = this.cookieService.getObject(this.WvW_WORLD_KEY) as World;
+      if (this.selectedWorld.id) {
+        this.selectWorld$.next(this.selectedWorld.id);
+      }
     }
 
-    this.worldChanged(this.selectedWorld);
   }
 
   onMapDoubleClick(event: LeafletMouseEvent) {
