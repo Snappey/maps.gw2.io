@@ -11,6 +11,9 @@
   <ng-container *ngIf="selectedMatch">
     <app-score-overview [loading]="false" [small]="smallScreen" [match]="selectedMatch"></app-score-overview>
   </ng-container>
+  <div *ngIf="loadingWorld" class="flex align-items-center h-2rem tooltip">
+    <span class="text-left ml-2 mr-1 my-1 mists-score">Loading match data..</span>
+  </div>
   <div *ngIf="!selectedMatch && !loadingWorld" class="flex align-items-center h-2rem tooltip">
     <span class="text-left ml-2 mr-1 my-1 mists-score">Failed to load match data..</span>
   </div>
