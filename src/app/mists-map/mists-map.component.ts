@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
   latLng,
   LatLngBounds, LayerGroup,
@@ -18,7 +18,7 @@ import {
   mergeMap,
   Observable,
   of,
-  Subject,
+  Subject, Subscription,
   switchMap,
   tap
 } from "rxjs";
@@ -30,12 +30,13 @@ import {CookieService} from "ngx-cookie";
   templateUrl: './mists-map.component.html',
   styleUrls: ['./mists-map.component.css']
 })
-export class MistsMapComponent extends BaseMap implements OnInit {
+export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   private WvW_WORLD_KEY = "gw2.io_WvW_World" as const;
   title = 'Guild Wars 2 Mists Map';
 
   worlds$: Observable<World[]>;
   selectWorld$: Subject<string> = new Subject<string>();
+  updateLayer$: Subscription;
 
   selectedWorld: World = { id: "1001", name: "Anvil Rock", population: "unknown"};
   selectedMatch: Match | undefined;
@@ -81,6 +82,20 @@ export class MistsMapComponent extends BaseMap implements OnInit {
             break;
         }
       });
+
+    this.updateLayer$ = interval(30000)
+      .pipe(
+        switchMap(_ => this.updateMatch(of(this.selectedWorld.id))),
+        catchError((err) => {
+          this.toastr.error(err, "Failed to update..");
+          return of(null);
+        })
+      )
+      .subscribe(layer => {
+        if (layer) {
+          this.updateLayer("match_objectives", layer)
+        }
+      });
   }
 
   checkScreenSize = () => document.body.offsetWidth < 1024;
@@ -94,6 +109,10 @@ export class MistsMapComponent extends BaseMap implements OnInit {
       );
 
     screenSizeChanged$.subscribe((small) => this.smallScreen = small);
+  }
+
+  ngOnDestroy() {
+    this.updateLayer$.unsubscribe()
   }
 
   onMapReady(leaflet: Map) {
@@ -129,20 +148,6 @@ export class MistsMapComponent extends BaseMap implements OnInit {
         this.loadingWorld = false;
       }
     })
-
-    interval(30000)
-      .pipe(
-        switchMap(_ => this.updateMatch(of(this.selectedWorld.id))),
-        catchError((err) => {
-          this.toastr.error(err, "Failed to update..");
-          return of(null);
-        })
-      )
-      .subscribe(layer => {
-        if (layer) {
-          this.updateLayer("match_objectives", layer)
-        }
-      });
 
     this.registerLayer("map_headings", {Layer: this.layerService.getMistsMapHeadings(leaflet), MinZoomLevel: 0, Hidden: false})
 

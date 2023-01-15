@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {
   debounceTime,
   fromEvent,
   map,
-  Subject
+  Subject, Subscription
 } from 'rxjs';
 import * as L from 'leaflet';
 import {
@@ -34,11 +34,10 @@ import {BaseMap} from "../../lib/base-map";
   styleUrls: ['./tyria-map.component.css'],
   providers: [DialogService]
 })
-export class TyriaMapComponent extends BaseMap implements OnInit {
+export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   title = 'Guild Wars 2 Map';
 
   smallScreen: boolean = false;
-  showEditor: boolean = false;
   showEvents: boolean = false;
   showDailies: boolean = false;
 
@@ -46,6 +45,8 @@ export class TyriaMapComponent extends BaseMap implements OnInit {
 
   private searchUnfocused: Subject<any> = new Subject<any>();
   showSearchResults: boolean = false;
+
+  eventTimer$: Subscription;
 
   constructor(
     private dialogService: DialogService,
@@ -78,6 +79,19 @@ export class TyriaMapComponent extends BaseMap implements OnInit {
       this.showSearchResults = false
     })
 
+    this.eventTimer$ = this.eventTimerService.getNextEventsSubscription(5)
+      .subscribe((events) => {
+        if (this.Map) {
+          const layer = this.eventTimerService.createEventsLayer(this.Map, events);
+          if (!this.hasLayer("events_layer")) {
+            this.registerLayer("events_layer", {Layer: layer, Hidden: false})
+          } else {
+            this.updateLayer("events_layer", layer);
+          }
+
+          this.upcomingEvents = events;
+        }
+      });
   }
 
   ngOnInit() {
@@ -89,6 +103,10 @@ export class TyriaMapComponent extends BaseMap implements OnInit {
       );
 
     screenSizeChanged$.subscribe((small) => this.smallScreen = small);
+  }
+
+  ngOnDestroy() {
+    this.eventTimer$.unsubscribe()
   }
 
   getCoords(latlng: LatLng): PointTuple {
@@ -281,18 +299,6 @@ export class TyriaMapComponent extends BaseMap implements OnInit {
         } else {
           this.updateLayer("editable_text", layer);
         }
-      });
-
-    this.eventTimerService.getNextEventsSubscription(5)
-      .subscribe((events) => {
-        const layer = this.eventTimerService.createEventsLayer(map, events);
-        if (!this.hasLayer("events_layer")) {
-          this.registerLayer("events_layer", {Layer: layer, Hidden: false})
-        } else {
-          this.updateLayer("events_layer", layer);
-        }
-
-        this.upcomingEvents = events;
       });
   }
 
