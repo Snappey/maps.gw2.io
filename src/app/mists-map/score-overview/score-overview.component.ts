@@ -37,8 +37,6 @@ export class ScoreOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.match);
-
     this.sortedScores = Object.entries(this.match.victory_points)
       .map(([team, score]) => {
         return {name: team, score}

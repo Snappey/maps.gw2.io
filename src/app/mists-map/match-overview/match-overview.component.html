@@ -1,16 +1,32 @@
 <div class="grid grid-nogutter">
   <div class="col-12 md:col-6">
     <div class="flex align-items-end flex-column flex-wrap px-6">
-      <div class="my-2 flex-1 flex-grow-1 clickable hover" *ngFor="let match of euMatches">
-        <app-score-overview (click)="selectedMatch(match)" [match]="match" [loading]="false"></app-score-overview>
+      <div class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem lg:w-30rem md:w-auto tooltip scalein animation-duration-200">
+        <h2 class="my-1 text-center">EU Matches</h2>
       </div>
+      <div *ngIf="loading" class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem lg:w-30rem md:w-auto tooltip scalein animation-duration-200">
+        <h3 class="ml-4 my-2">Loading...</h3>
+      </div>
+      <ng-container *ngIf="!loading">
+        <div class="my-2 flex-1 flex-grow-1 clickable hover" *ngFor="let match of euMatches">
+          <app-score-overview (click)="selectedMatch(match)" [match]="match" [loading]="false"></app-score-overview>
+        </div>
+      </ng-container>
     </div>
   </div>
   <div class="col-12 md:col-6">
     <div class="flex align-items-start flex-column flex-wrap px-6">
-      <div class="my-2 flex-1 flex-grow-1 clickable hover" *ngFor="let match of usMatches">
-        <app-score-overview (click)="selectedMatch(match)" [match]="match" [loading]="false"></app-score-overview>
+      <div class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem lg:w-30rem md:w-auto tooltip scalein animation-duration-200">
+        <h2 class="my-1 text-center">US Matches</h2>
       </div>
+      <div *ngIf="loading" class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem lg:w-30rem md:w-auto tooltip scalein animation-duration-200">
+        <h3 class="ml-4 my-2">Loading...</h3>
+      </div>
+      <ng-container *ngIf="!loading">
+        <div class="my-2 flex-1 flex-grow-1 clickable hover" *ngFor="let match of usMatches">
+          <app-score-overview (click)="selectedMatch(match)" [match]="match" [loading]="false"></app-score-overview>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

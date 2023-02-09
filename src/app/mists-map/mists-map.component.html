@@ -2,21 +2,15 @@
      leaflet
      [leafletOptions]="options"
      (leafletMapReady)="onMapReady($event)"
-     (leafletDoubleClick)="onMapDoubleClick($event)"
      tabindex="0">
 </div>
 
-
 <div [hidden]="showMatches" style="position: absolute; z-index: 999; left: 10px; top: 15px">
-  <ng-container *ngIf="selectedMatch">
-    <app-score-overview [loading]="false" [small]="smallScreen" [match]="selectedMatch"></app-score-overview>
+  <ng-container *ngIf="activeMatch$ | async as activeMatch">
+    <ng-container *ngIf="activeMatch">
+      <app-score-overview [loading]="false" [small]="smallScreen" [match]="activeMatch"></app-score-overview>
+    </ng-container>
   </ng-container>
-  <div *ngIf="loadingWorld" class="flex align-items-center h-2rem tooltip">
-    <span class="text-left ml-2 mr-1 my-1 mists-score">Loading match data..</span>
-  </div>
-  <div *ngIf="!selectedMatch && !loadingWorld" class="flex align-items-center h-2rem tooltip">
-    <span class="text-left ml-2 mr-1 my-1 mists-score">Failed to load match data..</span>
-  </div>
 </div>
 
 <div class="flex flex-row align-items-center justify-content-center" style="position: absolute;  z-index: 999; width: 100%; bottom: 5px;">
@@ -28,6 +22,7 @@
   <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showSettings = true" icon="pi pi-cog"></button>
 </div>
 
+
 <p-dialog header="Settings" [(visible)]="showSettings">
   <label class="font-bold">Home World:</label>
   <p-dropdown *ngIf="worlds$ | async as worlds"
@@ -37,10 +32,13 @@
               [filter]="true" filterBy="name">
   </p-dropdown>
   <ng-template pTemplate="footer">
-    <p-button icon="pi pi-check" (click)="worldChanged(selectedWorld); this.showSettings = false" label="Save" styleClass="p-button p-button-text p-button-success"></p-button>
+    <p-button icon="pi pi-check" (click)="saveSettings(selectedWorld); this.showSettings = false" label="Save" styleClass="p-button p-button-text p-button-success"></p-button>
+    <p-button icon="pi pi-times" (click)="this.showSettings = false" label="Cancel" styleClass="p-button p-button-text p-button-danger"></p-button>
   </ng-template>
 </p-dialog>
 
+
+<!--
 <p-sidebar [(visible)]="showScore" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">
   <div class="grid my-0" *ngIf="selectedMatch">
     <div class="lg:col-4 col-12">
@@ -53,7 +51,14 @@
     </div>
   </div>
 </p-sidebar>
+-->
 
 <div [hidden]="!showMatches" class="overflow-auto h-auto w-auto my-5" style="position: absolute; z-index: 999; left: 0; right: 0; top: 25px; margin-left: auto; margin-right: auto">
-  <app-match-overview (clickedMatch)="overviewMatchClicked($event)"></app-match-overview>
+    <app-match-overview (clickedMatch)="overviewMatchClicked($event)"></app-match-overview>
 </div>
+
+
+<p-dialog header="Objective Upgrades" [(visible)]="showObjectiveDetails" [style]="{width: '50vw'}"
+          [draggable]="true" [resizable]="false">
+  <app-objective-details *ngIf="selectedObjective" [objective]="selectedObjective"></app-objective-details>
+</p-dialog>

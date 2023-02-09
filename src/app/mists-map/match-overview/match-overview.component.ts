@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Match, WvwService} from "../../../services/wvw.service";
-import {map, Observable} from "rxjs";
+import {map, Observable, tap} from "rxjs";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../../state/appState";
 
 @Component({
   selector: 'app-match-overview',
@@ -11,15 +13,20 @@ export class MatchOverviewComponent {
   euMatches: Match[] = [];
   usMatches: Match[] = [];
 
+  matches$ = this.store.select(state => state.mists.matches);
+  matchesLoading$ = this.store.select(state => state.mists.loading);
+  loading: boolean = true;
+
   @Output()
   clickedMatch = new EventEmitter<Match>();
 
-  constructor(public wvwService: WvwService) {
-    wvwService.getAllMatchDetails()
-      .subscribe(matches => {
-        this.euMatches = matches.filter(m => m.region === "eu");
-        this.usMatches = matches.filter(m => m.region === "us");
-      });
+  constructor(private readonly store: Store<AppState>) {
+    this.matches$.subscribe(matches => {
+      this.euMatches = Object.values(matches).filter(m => m.region === "eu");
+      this.usMatches = Object.values(matches).filter(m => m.region === "us");
+    });
+
+    this.matchesLoading$.subscribe(loading => this.loading = loading);
   }
 
   selectedMatch(match: Match) {

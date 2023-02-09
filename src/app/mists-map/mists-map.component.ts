@@ -1,46 +1,43 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
+  FeatureGroup,
   latLng,
   LatLngBounds, LayerGroup,
-  LeafletMouseEvent,
   Map,
 } from 'leaflet';
 import * as L from "leaflet";
 import {LayerService} from "../../services/layer.service";
 import {ToastrService} from "ngx-toastr";
-import {Match, World, WvwService} from "../../services/wvw.service";
+import {Match, MergedObjective, World, WvwService} from "../../services/wvw.service";
 import {
-  catchError,
   debounceTime,
-  fromEvent,
-  interval,
+  fromEvent, interval,
   map,
-  mergeMap,
-  Observable,
-  of,
-  Subject, Subscription,
-  switchMap,
-  tap
+  Observable, switchMap, tap,
 } from "rxjs";
 import {BaseMap} from "../../lib/base-map";
 import {CookieService} from "ngx-cookie";
+import {Store} from "@ngrx/store";
+import {mistsActions} from "../../state/mists/mists.action";
+import {AppState} from "../../state/appState";
+import {DialogService} from "primeng/dynamicdialog";
 
 @Component({
   selector: 'mists-map',
   templateUrl: './mists-map.component.html',
-  styleUrls: ['./mists-map.component.css']
+  styleUrls: ['./mists-map.component.css'],
+  providers: [DialogService]
 })
-export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
+export class MistsMapComponent extends BaseMap implements OnInit {
   private WvW_WORLD_KEY = "gw2.io_WvW_World" as const;
-  title = 'Guild Wars 2 Mists Map';
+  private OBJECTIVE_LAYER = "mists_objective" as const;
+  private HEADINGS_LAYER = "mists_headings" as const;
 
   worlds$: Observable<World[]>;
-  selectWorld$: Subject<string> = new Subject<string>();
-  updateLayer$: Subscription;
+  selectedWorld: World | undefined;
+  selectedObjective: MergedObjective | undefined;
 
-  selectedWorld: World = { id: "1001", name: "Anvil Rock", population: "unknown"};
-  selectedMatch: Match | undefined;
-  loadingWorld: boolean = true;
+  activeMatch$ = this.store.select(state => state.mists.activeMatch);
 
   options = {
     preferCanvas: true,
@@ -56,15 +53,20 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   showScore: boolean = false;
   showSettings: boolean = false;
   showMatches: boolean = false;
+  showObjectiveDetails: boolean = false;
 
   constructor(
     private layerService: LayerService,
     private wvwService: WvwService,
     private toastr: ToastrService,
     private cookieService: CookieService,
+    private readonly store: Store<AppState>,
+    private dialogService: DialogService
   ) {
     super()
-    this.worlds$ = this.wvwService.getAllWorlds();
+
+    this.worlds$ = wvwService.getAllWorlds();
+    this.store.dispatch(mistsActions.loadMatches())
 
     fromEvent(document, "keydown")
       .subscribe(event => {
@@ -82,121 +84,88 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
             break;
         }
       });
-
-    this.updateLayer$ = interval(30000)
-      .pipe(
-        switchMap(_ => this.updateMatch(of(this.selectedWorld.id))),
-        catchError((err) => {
-          this.toastr.error(err, "Failed to update..");
-          return of(null);
-        })
-      )
-      .subscribe(layer => {
-        if (layer) {
-          this.updateLayer("match_objectives", layer)
-        }
-      });
   }
 
   checkScreenSize = () => document.body.offsetWidth < 1024;
   smallScreen: boolean = this.checkScreenSize();
 
   ngOnInit(): void {
-    const screenSizeChanged$ = fromEvent(window, 'resize')
+    fromEvent(window, 'resize')
       .pipe(
         debounceTime(200),
         map(this.checkScreenSize)
-      );
-
-    screenSizeChanged$.subscribe((small) => this.smallScreen = small);
-  }
-
-  ngOnDestroy() {
-    this.updateLayer$.unsubscribe()
+      ).subscribe((small) => this.smallScreen = small);
   }
 
   onMapReady(leaflet: Map) {
     this.Map = leaflet;
 
     leaflet.options.crs = L.CRS.Simple;
+    leaflet.options.maxBoundsViscosity = 1;
     leaflet.setMaxBounds(new LatLngBounds(
       [-256, 0],
-      [-32, 272]
+      [-48, 256]
     ));
 
-    const mistsLayer = this.layerService.getMistsLayer()
-    leaflet.addLayer(mistsLayer);
-
-    this.registerLayer("match_objectives", {Layer: new LayerGroup(), MinZoomLevel: 0, Hidden: false});
-    this.selectWorld$.pipe(
-      tap(() => this.loadingWorld = true),
-      mergeMap((worldId) =>
-        this.layerService.getMistsObjectivesLayer(leaflet)
-          .pipe(
-            tap((layer) => this.updateLayer("match_objectives", layer) ),
-            map((_: any) => worldId)
-          )
-      ),
-      (worldId => this.updateMatch(worldId)),
-      catchError((err) => {
-        this.toastr.error(err, "Failed to update");
-        return of(null);
-      })
-    ).subscribe(layer => {
-      if (layer) {
-        this.updateLayer("match_objectives", layer)
-        this.loadingWorld = false;
-      }
-    })
-
-    this.registerLayer("map_headings", {Layer: this.layerService.getMistsMapHeadings(leaflet), MinZoomLevel: 0, Hidden: false})
+    this.layerService.getMistsLayer().addTo(leaflet)
+    this.registerLayer(this.OBJECTIVE_LAYER, {Layer: new LayerGroup(), MinZoomLevel: 0, Hidden: false});
+    this.registerLayer(this.HEADINGS_LAYER, {Layer: this.layerService.getMistsMapHeadings(leaflet), MinZoomLevel: 0, Hidden: false})
 
     if (this.cookieService.hasKey(this.WvW_WORLD_KEY)) {
-      this.selectedWorld = this.cookieService.getObject(this.WvW_WORLD_KEY) as World;
-      if (this.selectedWorld.id) {
-        this.selectWorld$.next(this.selectedWorld.id);
+      this.selectedWorld = this.cookieService.getObject(this.WvW_WORLD_KEY) as (World | undefined);
+      if (this.selectedWorld) {
+        this.store.dispatch(mistsActions.setActiveWorld({ worldId: this.selectedWorld.id }))
+      } else {
+        this.showSettings = true;
       }
     }
 
+    this.layerService.getMistsObjectivesLayer(leaflet)
+      .subscribe((layer) => this.updateLayer(this.OBJECTIVE_LAYER, layer))
+
+
+    this.activeMatch$.pipe(
+        map(activeMatch => {
+          if (this.Map && activeMatch) {
+            return this.layerService.createMistsObjectivesLayer(this.Map, activeMatch)
+          }
+          return new FeatureGroup();
+        }),
+        tap(layer => layer.on("click", (data: any) => this.openObjectiveDetails(data.data as MergedObjective)))
+      ).subscribe(objectiveLayer => this.updateLayer(this.OBJECTIVE_LAYER, objectiveLayer))
+
+    interval(20000)
+      .pipe(
+        switchMap(_ => this.store.select(state => state.mists.activeMatchId)),
+        map(activeMatchId => {
+          if (activeMatchId) {
+            this.store.dispatch(mistsActions.updateMatch({ matchId: activeMatchId }))
+          }
+        }),
+      ).subscribe(_ => _)
   }
 
-  onMapDoubleClick(event: LeafletMouseEvent) {
+  saveSettings(selectedWorld: World | undefined) {
+    if (selectedWorld) {
+      this.selectedWorld = selectedWorld;
+      this.cookieService.put(this.WvW_WORLD_KEY, JSON.stringify(selectedWorld));
+
+      this.store.dispatch(mistsActions.setActiveWorld({ worldId: selectedWorld.id }))
+    }
+  }
+
+  overviewMatchClicked($event: Match) {
     if (this.Map) {
-      this.toastr.info(this.Map.project(event.latlng, this.Map.getMaxZoom()).toString())
-      this.toastr.warning(event.latlng.toString())
-      this.toastr.error(this.Map.getZoom().toString())
+      this.layerService.getMistsObjectivesLayer(this.Map)
+        .subscribe((layer) => this.updateLayer(this.OBJECTIVE_LAYER, layer))
     }
-  }
 
-  worldChanged(newWorld: World) {
-    if (this.Map && newWorld.id != this.selectedWorld.id) {
-      this.cookieService.put(this.WvW_WORLD_KEY, JSON.stringify(newWorld));
-      this.selectWorld$.next(newWorld.id);
-    }
-  }
-
-  updateMatch(worldId$: Observable<string>) {
-    return worldId$.pipe(
-      mergeMap((worldId) =>
-        this.wvwService.getMatchDetailsByWorldId(worldId)
-          .pipe(
-            tap((match) => this.selectedMatch = match),
-            map((_: any) => worldId)
-          )
-      ),
-      switchMap(worldId => {
-        if (this.Map) {
-          return this.layerService.getMistsMatchObjectivesLayer(this.Map, worldId)
-        }
-        return of(new LayerGroup());
-      })
-    )
-  }
-
-  overviewMatchClicked(match: Match) {
-    this.selectedMatch = match;
+    this.store.dispatch(mistsActions.setActiveMatch({ matchId: $event.id }))
     this.showMatches = false;
+  }
 
-    this.selectWorld$.next(match.worlds.red.toString());
+  openObjectiveDetails(objective: MergedObjective) {
+    this.showObjectiveDetails = true;
+    this.selectedObjective = objective;
   }
 }

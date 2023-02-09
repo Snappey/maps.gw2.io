@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {forkJoin, concatMap, exhaustMap, map, mergeAll, mergeMap, Observable, zip, reduce, combineLatest, switchMap} from "rxjs";
+import {
+  forkJoin,
+  map,
+  Observable,
+  tap,
+  combineLatest,
+  switchMap,
+} from "rxjs";
 import {GuildService} from "./guild.service";
 
 export interface Objective {
@@ -24,11 +31,18 @@ export interface Scores {
   green: number;
 }
 
-export interface AllWorlds {
+export interface WorldNames {
   [team: string]: string[];
   red: string[];
   blue: string[];
   green: string[];
+}
+
+export interface FriendlyWorldNames {
+  [team: string]: string;
+  red: string;
+  blue: string;
+  green: string;
 }
 
 export interface MapScore {
@@ -51,13 +65,14 @@ export interface MatchObjective {
   id: string;
   type: string;
   owner: string;
+  friendlyOwner: string;
   last_flipped: Date;
   points_tick: number;
   points_capture: number;
   claimed_by: string;
   claimed_at?: Date;
   yaks_delivered?: number;
-  guild_upgrades: number[];
+  guild_upgrades: string[];
 }
 
 export interface Map {
@@ -76,8 +91,6 @@ export interface Match {
   end_time: Date;
   scores: Scores;
   worlds: Scores;
-  all_worlds: AllWorlds;
-  all_worlds_names: AllWorlds // Custom
   tier: string;
   region: string;
   deaths: Scores;
@@ -85,6 +98,12 @@ export interface Match {
   victory_points: Scores;
   skirmishes: Skirmish[];
   maps: Map[];
+
+  // Custom
+  all_worlds: WorldNames;
+  all_worlds_names: WorldNames
+  friendly_names: FriendlyWorldNames
+  objectives: MergedObjective[]
 }
 
 export interface World {
@@ -97,6 +116,23 @@ export interface WorldDictionary {
   [id: string]: World;
 }
 
+export interface Upgrade {
+  name: string;
+  description: string;
+  icon: string;
+}
+
+export interface Tier {
+  name: string;
+  yaks_required: number;
+  upgrades: Upgrade[];
+}
+
+export interface ObjectiveTiers {
+  id: number;
+  tiers: Tier[];
+}
+
 export interface MergedObjective extends MatchObjective, Objective {}
 
 @Injectable({
@@ -106,7 +142,7 @@ export class WvwService {
 
   constructor(private httpClient: HttpClient, private guildService: GuildService) { }
 
-  getObjectives(): Observable<string[]> {
+  listObjectives(): Observable<string[]> {
     return this.httpClient.get<string[]>(`https://api.guildwars2.com/v2/wvw/objectives`);
   }
 
@@ -131,13 +167,18 @@ export class WvwService {
       )
   }
 
-  private mapMetadata(match: Match): Observable<Match> {
+  getObjectiveTiers(id: number): Observable<ObjectiveTiers> {
+    return this.httpClient.get<ObjectiveTiers>(`https://api.guildwars2.com/v2/wvw/upgrades/${id}`)
+  }
+
+  private mapWorldNames(match: Match): Observable<Match> {
     const worldNames = this.getWorldNames(Object.values(match.all_worlds).flat());
-    return forkJoin({names: worldNames}).pipe(
-      map(world => {
+    return forkJoin([worldNames]).pipe(
+      map(src => {
+        const names = src[0]
         const mapNames = (ids: string[]) => ids.map(id => {
-          if (id in world.names) {
-            return world.names[id].name;
+          if (id in names) {
+            return names[id].name;
           }
           return "unknown"
         });
@@ -147,8 +188,32 @@ export class WvwService {
           green: mapNames(match.all_worlds.green),
           blue: mapNames(match.all_worlds.blue)
         }
+        match.friendly_names = {
+          red: match.all_worlds_names.red.join(", "),
+          green: match.all_worlds_names.green.join(", "),
+          blue: match.all_worlds_names.blue.join(", ")
+        }
         match.tier = this.getTier(match);
         match.region = this.getRegion(match);
+
+        return match;
+      })
+    )
+  }
+
+  private mapObjectives(match: Match): Observable<Match> {
+    return forkJoin([this.getAllObjectives()]).pipe(
+      map(src => {
+        const objectives = src[0]
+        const matchObj = match.maps.map(m => m.objectives).flat();
+        match.objectives = matchObj.reduce((res: MergedObjective[], matchObj) => {
+          const obj = objectives.find(o => matchObj.id === o.id);
+          if (obj) {
+            res.push({...obj, ...matchObj, friendlyOwner: match.friendly_names[matchObj.owner.toLowerCase()]})
+          }
+
+          return res;
+        }, []);
 
         return match;
       })
@@ -166,14 +231,15 @@ export class WvwService {
   getMatchDetails(id: string): Observable<Match> {
     return this.httpClient.get<Match>(`https://api.guildwars2.com/v2/wvw/matches/${id}`)
       .pipe(
-        switchMap(match => this.mapMetadata(match))
+        switchMap(match => this.mapWorldNames(match)),
+        switchMap(match => this.mapObjectives(match))
       );
   }
 
   getMatchDetailsByWorldId(worldId: string): Observable<Match> {
     return this.httpClient.get<Match>(`https://api.guildwars2.com/v2/wvw/matches?world=${worldId}`)
       .pipe(
-        switchMap(match => this.mapMetadata(match))
+        switchMap(match => this.mapWorldNames(match))
       );
   }
 
@@ -244,6 +310,23 @@ export class WvwService {
         return "Secured";
       default:
         return "N/A"
+    }
+  }
+
+  hasUpgradeLevel(yaksDelivered: number | undefined, friendlyUpgradeLevel: string): boolean {
+    if (yaksDelivered === undefined) {
+      return false;
+    }
+
+    switch (friendlyUpgradeLevel) {
+      case "Secured":
+        return yaksDelivered >= 20;
+      case "Reinforced":
+        return yaksDelivered >= 60;
+      case "Fortified":
+        return yaksDelivered >= 140;
+      default:
+        return false;
     }
   }
 

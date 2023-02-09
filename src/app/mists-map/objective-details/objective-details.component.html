@@ -1,0 +1,61 @@
+<div class="grid grid-nogutter">
+  <div class="col-12">
+    <h3 class="mb-2 mt-0">{{objective.name}}</h3>
+  </div>
+  <div class="col-4">
+    <div class="flex align-content-start">
+      <ng-container *ngIf="(guildDetails$) && guildDetails$ | async as guildDetails">
+        <img class="border-1 h-5rem" [hidden]="!emblemLoaded" [src]="guildEmblem" (load)="emblemLoaded = true"/>
+        <div class="flex flex-column align-items-start" style="overflow-wrap: break-word; word-break: break-word">
+          <h4 class="mb-0 pl-1">[{{guildDetails.tag}}]</h4>
+          <h3 class="mt-0 pl-1">{{guildDetails.name}}</h3>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!guildDetails$">
+        <h5>Unclaimed</h5>
+      </ng-container>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="flex flex-wrap align-content-center justify-content-center flex-column">
+      <h4 class="m-0">Type:</h4>
+      <h3 class="m-0">{{objective.type}}</h3>
+      <p class="m-0 pl-2 vertical-align-middle">
+        <img src="assets/capture_icon.png" width="16" height="16" class="vertical-align-middle"> +{{objective.points_capture}} Capture</p>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="flex flex-wrap align-content-center justify-content-center flex-column">
+      <h4 class="m-0">Team:</h4>
+      <h3 class="m-0 mists" [ngClass]="objective.owner.toLowerCase()">{{objective.friendlyOwner}}</h3>
+      <p class="m-0 pl-2 vertical-align-middle">
+        Held for: {{heldFor$ | async}}
+      </p>
+    </div>
+  </div>
+  <div class="col-8 mt-2">
+    <div class="flex flex-wrap flex-column min-w-0" *ngIf="(upgradeDetails$) && upgradeDetails$ | async as upgradeDetails">
+      <div class="flex flex-row justify-content-evenly" *ngFor="let tier of upgradeDetails.tiers">
+        <div *ngFor="let upgrade of tier.upgrades">
+          <div class="flex flex-wrap flex-column">
+            <img class="clickable p-2 max-w-full" [ngClass]="{'grayscale': !this.wvwService.hasUpgradeLevel(objective.yaks_delivered, tier.name) }" [src]="upgrade.icon" [pTooltip]="upgrade.name">
+          </div>
+        </div>
+        <div class="flex flex-wrap flex-column justify-content-center text-center w-6rem">
+          <img class="clickable" [src]="'assets/' + tier.name.toLowerCase() + '.png'" [pTooltip]="tier.name">
+          <h4 class="my-0">{{Math.min(objective.yaks_delivered ?? 0, tier.yaks_required)}} / {{tier.yaks_required}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 mt-2">
+    <div class="flex flex-wrap flex-row h-full">
+      <div class="text-center my-4 px-2" style="flex-basis: 50%" *ngFor="let upgradeId of objective.guild_upgrades">
+        <img class="max-w-full"  *ngIf="guildService.getGuildUpgrade(upgradeId) | async as upgrade" [src]="upgrade.icon" [pTooltip]="upgrade.name">
+      </div>
+      <div class="flex-grow-1 text-center" *ngIf="objective.guild_upgrades.length === 0">
+        <h3>No Guild Upgrades</h3>
+      </div>
+    </div>
+  </div>
+</div>

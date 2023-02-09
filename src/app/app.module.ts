@@ -39,6 +39,17 @@ import { ScoreOverviewComponent } from './mists-map/score-overview/score-overvie
 import { FightStatsChartComponent } from './mists-map/fight-stats-chart/fight-stats-chart.component';
 import { SkirmishStatsChartComponent } from './mists-map/skirmish-stats-chart/skirmish-stats-chart.component';
 import { MatchOverviewComponent } from './mists-map/match-overview/match-overview.component';
+import { ObjectiveDetailsComponent } from './mists-map/objective-details/objective-details.component';
+import {SkeletonModule} from "primeng/skeleton";
+import {TabMenuModule} from "primeng/tabmenu";
+import {RouterTestingModule} from "@angular/router/testing";
+import {StoreModule} from "@ngrx/store";
+import {mistsFeature} from "../state/mists/mists.feature";
+import {EffectsModule} from "@ngrx/effects";
+import {MistsEffects} from "../state/mists/mists.effects";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {guildFeature} from "../state/guild/guild.feature";
+import {GuildEffects} from "../state/guild/guild.effects";
 
 @NgModule({
   declarations: [
@@ -56,35 +67,54 @@ import { MatchOverviewComponent } from './mists-map/match-overview/match-overvie
     ScoreOverviewComponent,
     FightStatsChartComponent,
     SkirmishStatsChartComponent,
-    MatchOverviewComponent
+    MatchOverviewComponent,
+    ObjectiveDetailsComponent,
   ],
-  imports: [
-    BrowserModule,
-    LeafletModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    CookieModule.withOptions(),
-    HttpClientModule,
-    ClipboardModule,
-    DialogModule,
-    DynamicDialogModule,
-    DropdownModule,
-    FormsModule,
-    ButtonModule,
-    SidebarModule,
-    CardModule,
-    InputTextModule,
-    TooltipModule,
-    OverlayPanelModule,
-    PanelModule,
-    DividerModule,
-    StyleClassModule,
-    SpinnerModule,
-    ProgressSpinnerModule,
-    ChartModule
-  ],
+    imports: [
+      BrowserModule,
+      LeafletModule,
+      BrowserAnimationsModule,
+      ToastrModule.forRoot(),
+      CookieModule.withOptions(),
+      HttpClientModule,
+      ClipboardModule,
+
+      DialogModule,
+      DynamicDialogModule,
+      DropdownModule,
+      FormsModule,
+      ButtonModule,
+      SidebarModule,
+      CardModule,
+      InputTextModule,
+      TooltipModule,
+      OverlayPanelModule,
+      PanelModule,
+      DividerModule,
+      StyleClassModule,
+      SpinnerModule,
+      ProgressSpinnerModule,
+      ChartModule,
+      SkeletonModule,
+      TabMenuModule,
+      RouterTestingModule,
+
+      StoreModule.forRoot(),
+      StoreModule.forFeature(mistsFeature),
+      StoreModule.forFeature(guildFeature),
+      EffectsModule.forRoot([
+        MistsEffects,
+        GuildEffects
+      ]),
+
+      StoreDevtoolsModule.instrument({
+        maxAge: 25,
+        logOnly: false,
+      }),
+    ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
-  bootstrap: [HomeComponent]
+  bootstrap: [HomeComponent],
+  entryComponents: [ ObjectiveDetailsComponent ]
 })
 export class AppModule { }

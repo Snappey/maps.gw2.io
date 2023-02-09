@@ -16,7 +16,7 @@ import {ClipboardService} from "ngx-clipboard";
 import {ToastrService} from "ngx-toastr";
 import {CanvasIcon, LabelService} from "./label.service";
 import {SearchService} from "./search.service";
-import {MatchObjective, Objective, MergedObjective, WvwService} from "./wvw.service";
+import {MatchObjective, Objective, MergedObjective, WvwService, Match} from "./wvw.service";
 import {Guild, GuildService} from "./guild.service";
 import {ObjectiveTooltipComponent} from "../app/mists-map/objective-tooltip/objective-tooltip.component";
 import moment from "moment";
@@ -394,112 +394,74 @@ export class LayerService {
     return svgOverlay(mapLabelsLayer, new LatLngBounds(leaflet.unproject([0, 0], leaflet.getMaxZoom()), leaflet.unproject(this.mistsDimensions, leaflet.getMaxZoom())))
   }
 
-  getMistsMatchObjectivesLayer(leaflet: Map, worldId: string): Observable<LayerGroup> {
-    return this.wvwService.getMatchDetailsByWorldId(worldId)
-      .pipe(
-        switchMap(match => {
-          return combineLatest({
-            match: of(match),
-            objectives: this.wvwService.getAllObjectives()
-          });
-        }),
-        map((vals) => {
-          const objectives = new LayerGroup();
-          const match = vals.match;
-          const objs = vals.objectives;
+  createMistsObjectivesLayer(leaflet: Map, match: Match): FeatureGroup {
+    const layer = new FeatureGroup();
+    const objectives = match.objectives;
 
-          const teamNames: {[team: string]: string} = {
-            "Red": match.all_worlds_names.red.join(", "),
-            "Green": match.all_worlds_names.green.join(", "),
-            "Blue": match.all_worlds_names.blue.join(", ")
+    for (let objKey in objectives) {
+      const data = objectives[objKey];
+
+      if (data.coord && data.label_coord) {
+        const markerUrl = data.claimed_by === "" ? data.marker : `/assets/${data.type}_${data.owner}.png`.toLowerCase()
+        const icons: CanvasIcon[] = [];
+
+        let upgradeLevel = this.wvwService.calculateUpgradeLevel(data.yaks_delivered);
+        if (data.type !== "Ruins") {
+          icons.push(...Array.from({length: upgradeLevel},
+            (_, i): CanvasIcon => ({ url: "assets/upgrade_pip.png", position: "top", offset: [0, i % 2 === 1 ? 0 : 5], size: [10, 10] })));
+
+          if (data.claimed_by) {
+            icons.push({
+              url: "assets/guild_claimed.png",
+              position: "bottomRight",
+              size: [13,13],
+              offset: [0, 0]
+            })
           }
 
-          const matchObj = match.maps.map(m => m.objectives).flat();
-          const matchObjMerged = matchObj.reduce((res: MergedObjective[], matchObj) => {
-            const obj = objs.find(o => matchObj.id === o.id);
-            if (obj) {
-              res.push({...obj, ...matchObj})
-            }
-
-            return res;
-          }, []);
-
-          for (let objKey in matchObjMerged) {
-            const data = matchObjMerged[objKey];
-
-            if (data.coord && data.label_coord) {
-              const markerUrl = data.claimed_by === "" ? data.marker : `/assets/${data.type}_${data.owner}.png`.toLowerCase()
-              const icons: CanvasIcon[] = [];
-
-              let upgradeLevel = this.wvwService.calculateUpgradeLevel(data.yaks_delivered);
-              if (data.type !== "Ruins") {
-                icons.push(...Array.from({length: upgradeLevel},
-                  (_, i): CanvasIcon => ({ url: "assets/upgrade_pip.png", position: "top", offset: [0, i % 2 === 1 ? 0 : 5], size: [10, 10] })));
-
-                if (data.claimed_by) {
-                  icons.push({
-                    url: "assets/guild_claimed.png",
-                    position: "bottomRight",
-                    size: [13,13],
-                    offset: [0, 0]
-                  })
-                }
-
-                if (data.last_flipped) {
-                  if (moment(moment.now()).diff(moment(data.last_flipped), "second") <= 300) {
-                    icons.push({
-                      url: "assets/no_entry.png",
-                      position: "bottomLeft",
-                      size: [13,13],
-                      offset: [0, 0]
-                    })
-                  }
-                }
-              }
-
-              const marker = this.labelService.createCanvasMarker(leaflet, data.coord as PointTuple, markerUrl, data.type === "Ruins" ? [24,24] : [32, 32], 16, icons)
-                .bindTooltip("Loading...", { className: "tooltip-overlay", offset: new Point(15, 0)})
-                .on("click", (_: any) => {
-                  const msg = data.claimed_by + " by " + data.owner;
-
-
-                  console.log(data);
-
-                  this.toastr.info(msg, "", {
-                    toastClass: "custom-toastr",
-                    positionClass: "toast-top-right"
-                  });
-                })
-                .addTo(objectives);
-
-              this.updateObjectiveTooltip(marker, data, teamNames)
-                 .subscribe(content => marker.setTooltipContent(content));
+          if (data.last_flipped) {
+            if (moment(moment.now()).diff(moment(data.last_flipped), "second") <= 300) {
+              icons.push({
+                url: "assets/no_entry.png",
+                position: "bottomLeft",
+                size: [13,13],
+                offset: [0, 0]
+              })
             }
           }
+        }
 
-          const regionLabelLayer = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-          regionLabelLayer.setAttribute('xmlns', "http://www.w3.org/2000/svg");
-          regionLabelLayer.setAttribute('viewBox', `0 0 ${this.mistsDimensions[0]} ${this.mistsDimensions[1]}`);
+        const marker = this.labelService.createCanvasMarker(leaflet, data.coord as PointTuple, markerUrl, data.type === "Ruins" ? [24, 24] : [32, 32], 16, icons)
+          .bindTooltip("Loading...", {className: "tooltip-overlay", offset: new Point(15, 0)})
+          .on("click", (event: any) => event.data = data)
+          .addTo(layer);
 
-          let content = "";
-          matchObjMerged.forEach(label => {
-            if (label.label_coord && label.type === "Spawn" && label.map_id !== 968) {
-              content += `
+        this.updateObjectiveTooltip(marker, data, match.friendly_names)
+          .subscribe(content => marker.setTooltipContent(content));
+      }
+    }
+
+    const regionLabelLayer = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    regionLabelLayer.setAttribute('xmlns', "http://www.w3.org/2000/svg");
+    regionLabelLayer.setAttribute('viewBox', `0 0 ${this.mistsDimensions[0]} ${this.mistsDimensions[1]}`);
+
+    let content = "";
+    objectives.forEach(label => {
+      if (label.label_coord && label.type === "Spawn" && label.map_id !== 968) {
+        content += `
               <text x="${label.label_coord[0]}" y="${label.label_coord[1]}"
                     dominant-baseline="middle" text-anchor="middle"
                     class="mists-spawn mists ${label.owner.toLowerCase()}">
-                    ${teamNames[label.owner]}
+                    ${match.friendly_names[label.owner.toLowerCase()]}
               </text>`
-            }
-          });
-          regionLabelLayer.innerHTML = content
+      }
+    });
+    regionLabelLayer.innerHTML = content
 
-          svgOverlay(regionLabelLayer, new LatLngBounds(leaflet.unproject([0, 0], leaflet.getMaxZoom()), leaflet.unproject(this.mistsDimensions, leaflet.getMaxZoom())))
-            .addTo(objectives);
+    svgOverlay(regionLabelLayer, new LatLngBounds(leaflet.unproject([0, 0], leaflet.getMaxZoom()), leaflet.unproject(this.mistsDimensions, leaflet.getMaxZoom())))
+      .addTo(layer);
 
-          return objectives;
-        })
-      )
+    return layer;
   }
 
   updateObjectiveTooltip(marker: Marker, obj: MergedObjective, teamNames: {[team: string]: string}): Observable<string> {
@@ -528,7 +490,7 @@ export class LayerService {
         content += "<hr>"
 
         content += "<p class='m-0'>Controlled By:</p>"
-        content += `<p class="m-0 pl-1 mists ${obj.owner.toLowerCase()}">${teamNames[obj.owner]}</p>`
+        content += `<p class="m-0 pl-1 mists ${obj.owner.toLowerCase()}">${teamNames[obj.owner.toLowerCase()]}</p>`
 
         if (obj.claimed_by) {
           content += "<p class='m-0'>Claimed By:</p>"

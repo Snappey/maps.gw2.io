@@ -24,7 +24,7 @@ export class BaseMap {
   }
 
   updateLayer(id: string, layer: Layer) {
-    if (id in this.Layers && this.Map) {
+    if (this.hasLayer(id) && this.Map) {
       this.Map.removeLayer(this.Layers[id].Layer);
 
       this.Layers[id].Layer = layer;
