@@ -77,10 +77,10 @@ export class MistsMapComponent extends BaseMap implements OnInit {
             this.showScore = !this.showScore;
             break;
           case "Digit2":
-            this.showSettings = !this.showSettings;
+            this.showMatches = !this.showMatches;
             break;
           case "Digit3":
-            this.showMatches = !this.showMatches;
+            this.showSettings = !this.showSettings;
             break;
         }
       });

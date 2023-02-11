@@ -99,9 +99,6 @@ export class LayerService {
   getRegionLayer(leaflet: Map): Observable<SVGOverlay> {
     return this.getRegionLabels()
       .pipe(
-        tap((labels) => {
-          //labels.forEach((label) => this.searchService.addSearch({coords: label.label_coordinates as PointTuple, type: label.type, name: label.heading, description: label.subheading}))
-        }),
         map(labels => {
         const regionLabelLayer = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         regionLabelLayer.setAttribute('xmlns', "http://www.w3.org/2000/svg");

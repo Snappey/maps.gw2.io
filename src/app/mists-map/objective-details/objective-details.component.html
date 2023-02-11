@@ -2,7 +2,7 @@
   <div class="col-12">
     <h3 class="mb-2 mt-0">{{objective.name}}</h3>
   </div>
-  <div class="col-4">
+  <div class="lg:col-4 md:col-12">
     <div class="flex align-content-start">
       <ng-container *ngIf="(guildDetails$) && guildDetails$ | async as guildDetails">
         <img class="border-1 h-5rem" [hidden]="!emblemLoaded" [src]="guildEmblem" (load)="emblemLoaded = true"/>
@@ -16,7 +16,7 @@
       </ng-container>
     </div>
   </div>
-  <div class="col-4">
+  <div class="lg:col-4 md:col-12 md:mt-2">
     <div class="flex flex-wrap align-content-center justify-content-center flex-column">
       <h4 class="m-0">Type:</h4>
       <h3 class="m-0">{{objective.type}}</h3>
@@ -24,7 +24,7 @@
         <img src="assets/capture_icon.png" width="16" height="16" class="vertical-align-middle"> +{{objective.points_capture}} Capture</p>
     </div>
   </div>
-  <div class="col-4">
+  <div class="lg:col-4 md:col-12 md:mt-2">
     <div class="flex flex-wrap align-content-center justify-content-center flex-column">
       <h4 class="m-0">Team:</h4>
       <h3 class="m-0 mists" [ngClass]="objective.owner.toLowerCase()">{{objective.friendlyOwner}}</h3>
@@ -33,7 +33,7 @@
       </p>
     </div>
   </div>
-  <div class="col-8 mt-2">
+  <div class="lg:col-8 md:col-12 mt-2">
     <div class="flex flex-wrap flex-column min-w-0" *ngIf="(upgradeDetails$) && upgradeDetails$ | async as upgradeDetails">
       <div class="flex flex-row justify-content-evenly" *ngFor="let tier of upgradeDetails.tiers">
         <div *ngFor="let upgrade of tier.upgrades">
@@ -43,12 +43,12 @@
         </div>
         <div class="flex flex-wrap flex-column justify-content-center text-center w-6rem">
           <img class="clickable" [src]="'assets/' + tier.name.toLowerCase() + '.png'" [pTooltip]="tier.name">
-          <h4 class="my-0">{{Math.min(objective.yaks_delivered ?? 0, tier.yaks_required)}} / {{tier.yaks_required}}</h4>
+          <h4 class="my-0">{{Math.min(wvwService.calculateUpgradeProgress(objective.yaks_delivered, tier.name), tier.yaks_required)}} / {{tier.yaks_required}}</h4>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-4 mt-2">
+  <div class="lg:col-4 md:col-12 mt-2">
     <div class="flex flex-wrap flex-row h-full">
       <div class="text-center my-4 px-2" style="flex-basis: 50%" *ngFor="let upgradeId of objective.guild_upgrades">
         <img class="max-w-full"  *ngIf="guildService.getGuildUpgrade(upgradeId) | async as upgrade" [src]="upgrade.icon" [pTooltip]="upgrade.name">

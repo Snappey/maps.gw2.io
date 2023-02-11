@@ -34,12 +34,26 @@ export class SkirmishStatsChartComponent implements OnInit {
     },
     scales: {
       RunningTotal: {
+        ticks: {
+          color: "#FFCC66",
+          font: "PT Serif"
+        },
         type: 'linear',
         position: 'right',
       },
       PerSkirmish: {
+        ticks: {
+          color: "#FFCC66",
+          font: "PT Serif"
+        },
         type: 'linear',
         position: 'left',
+      },
+      xAxis: {
+        ticks: {
+          color: "#FFCC66",
+          font: "PT Serif"
+        }
       }
     },
     animation: {
@@ -71,42 +85,48 @@ export class SkirmishStatsChartComponent implements OnInit {
           label: this.match.all_worlds_names.red.join(", "),
           data: this.runningTotal(this.match.skirmishes.map(s => s.scores.red)),
           borderColor: "#DC3939",
-          yAxisID: "RunningTotal"
+          yAxisID: "RunningTotal",
+          xAxisID: "xAxis"
         },
         {
           type: 'line',
           label: this.match.all_worlds_names.blue.join(", "),
           data: this.runningTotal(this.match.skirmishes.map(s => s.scores.blue)),
           borderColor: "#24A2E7",
-          yAxisID: "RunningTotal"
+          yAxisID: "RunningTotal",
+          xAxisID: "xAxis"
         },
         {
           type: 'line',
           label: this.match.all_worlds_names.green.join(", "),
           data: this.runningTotal(this.match.skirmishes.map(s => s.scores.green)),
           borderColor: "#43D071",
-          yAxisID: "RunningTotal"
+          yAxisID: "RunningTotal",
+          xAxisID: "xAxis"
         },
         {
           type: 'bar',
           label: this.match.all_worlds_names.red.join(", "),
           data: this.match.skirmishes.map(s => s.scores.red),
           backgroundColor: "#DC3939",
-          yAxisID: "PerSkirmish"
+          yAxisID: "PerSkirmish",
+          xAxisID: "xAxis"
         },
         {
           type: 'bar',
           label: this.match.all_worlds_names.blue.join(", "),
           data: this.match.skirmishes.map(s => s.scores.blue),
           backgroundColor: "#24A2E7",
-          yAxisID: "PerSkirmish"
+          yAxisID: "PerSkirmish",
+          xAxisID: "xAxis"
         },
         {
           type: 'bar',
           label: this.match.all_worlds_names.green.join(", "),
           data: this.match.skirmishes.map(s => s.scores.green),
           backgroundColor: "#43D071",
-          yAxisID: "PerSkirmish"
+          yAxisID: "PerSkirmish",
+          xAxisID: "xAxis"
         },
       ]
     }

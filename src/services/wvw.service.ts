@@ -285,6 +285,23 @@ export class WvwService {
     return resetDay;
   }
 
+  calculateUpgradeProgress(yaksDelivered: number | undefined, friendlyUpgradeLevel: string): number {
+    if (yaksDelivered === undefined) {
+      return 0;
+    }
+
+    switch (friendlyUpgradeLevel) {
+      case "Secured":
+        return Math.max(yaksDelivered, 0)
+      case "Reinforced":
+        return Math.max(yaksDelivered - 20, 0)
+      case "Fortified":
+        return Math.max(yaksDelivered - 60, 0);
+      default:
+        return Math.max(yaksDelivered, 0);
+    }
+  }
+
   calculateUpgradeLevel(yaksDelivered: number | undefined): number {
     if (yaksDelivered === undefined) {
       return 0;

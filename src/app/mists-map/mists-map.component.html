@@ -14,12 +14,9 @@
 </div>
 
 <div class="flex flex-row align-items-center justify-content-center" style="position: absolute;  z-index: 999; width: 100%; bottom: 5px;">
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showScore = true" icon="pi pi-chart-bar"></button>
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable p-button-danger" (click)="this.panTo([10724, 10550], 4.25)" icon="pi pi-shield"></button>
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable p-button-success" (click)="this.panTo([6913, 13267], 4.25)" icon="pi pi-shield"></button>
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable p-button-info" (click)="this.panTo([14058, 12736], 4.25)" icon="pi pi-shield"></button>
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable p-button-secondary"  (click)="this.panTo([10572, 14467], 4.25)" icon="pi pi-shield"></button>
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showSettings = true" icon="pi pi-cog"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showScore = !showScore" icon="pi pi-chart-bar"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showMatches = !showMatches" icon="pi pi-list"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showSettings = !showSettings" icon="pi pi-cog"></button>
 </div>
 
 
@@ -37,6 +34,14 @@
   </ng-template>
 </p-dialog>
 
+
+<div *ngIf="showScore" style="position: absolute; z-index: 999; left: 15%; top: 25%; width: 75vw; height: 50vh;">
+  <ng-container *ngIf="activeMatch$ | async as activeMatch">
+    <div class="tooltip p-3" *ngIf="activeMatch">
+      <app-skirmish-stats-chart [match]="activeMatch" height="50vh"></app-skirmish-stats-chart>
+    </div>
+  </ng-container>
+</div>
 
 <!--
 <p-sidebar [(visible)]="showScore" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">
