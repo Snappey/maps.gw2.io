@@ -232,6 +232,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     this.Map = map;
 
     map.options.crs = L.CRS.Simple;
+    map.options.maxBoundsViscosity = 1;
     map.setMaxBounds(new LatLngBounds(
         map.unproject([0, 0], map.getMaxZoom()),
         map.unproject(this.layerService.tyriaDimensions, map.getMaxZoom())
