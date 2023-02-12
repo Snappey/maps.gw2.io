@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
   FeatureGroup,
   latLng,
@@ -10,10 +10,10 @@ import {LayerService} from "../../services/layer.service";
 import {ToastrService} from "ngx-toastr";
 import {Match, MergedObjective, World, WvwService} from "../../services/wvw.service";
 import {
-  debounceTime,
+  debounceTime, first,
   fromEvent, interval,
   map,
-  Observable, switchMap, tap,
+  Observable, Subject, Subscription, switchMap, take, takeUntil, tap,
 } from "rxjs";
 import {BaseMap} from "../../lib/base-map";
 import {CookieService} from "ngx-cookie";
@@ -21,6 +21,7 @@ import {Store} from "@ngrx/store";
 import {mistsActions} from "../../state/mists/mists.action";
 import {AppState} from "../../state/appState";
 import {DialogService} from "primeng/dynamicdialog";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'mists-map',
@@ -28,7 +29,7 @@ import {DialogService} from "primeng/dynamicdialog";
   styleUrls: ['./mists-map.component.css'],
   providers: [DialogService]
 })
-export class MistsMapComponent extends BaseMap implements OnInit {
+export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   private WvW_WORLD_KEY = "gw2.io_WvW_World" as const;
   private OBJECTIVE_LAYER = "mists_objective" as const;
   private HEADINGS_LAYER = "mists_headings" as const;
@@ -61,40 +62,72 @@ export class MistsMapComponent extends BaseMap implements OnInit {
     private toastr: ToastrService,
     private cookieService: CookieService,
     private readonly store: Store<AppState>,
-    private dialogService: DialogService
+    private route: ActivatedRoute
   ) {
     super()
 
     this.worlds$ = wvwService.getAllWorlds();
     this.store.dispatch(mistsActions.loadMatches())
 
-    fromEvent(document, "keydown")
-      .subscribe(event => {
-        const keyEvent = event as KeyboardEvent;
+    fromEvent(document, "keydown").pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(event => {
+      const keyEvent = event as KeyboardEvent;
 
-        switch (keyEvent.code) {
-          case "Digit1":
-            this.showScore = !this.showScore;
-            break;
-          case "Digit2":
-            this.showMatches = !this.showMatches;
-            break;
-          case "Digit3":
-            this.showSettings = !this.showSettings;
-            break;
-        }
-      });
+      switch (keyEvent.code) {
+        case "Digit1":
+          this.showScore = !this.showScore;
+          break;
+        case "Digit2":
+          this.showMatches = !this.showMatches;
+          break;
+        case "Digit3":
+          this.showSettings = !this.showSettings;
+          break;
+      }
+    });
+
+    fromEvent(window, 'resize')
+      .pipe(
+        debounceTime(200),
+        map(this.checkScreenSize),
+        takeUntil(this.unsubscribe$),
+      ).subscribe((small) => this.smallScreen = small);
   }
 
   checkScreenSize = () => document.body.offsetWidth < 1024;
   smallScreen: boolean = this.checkScreenSize();
 
+  unsubscribe$ = new Subject<void>();
   ngOnInit(): void {
-    fromEvent(window, 'resize')
-      .pipe(
-        debounceTime(200),
-        map(this.checkScreenSize)
-      ).subscribe((small) => this.smallScreen = small);
+    this.route.params.pipe(
+      map(params=> params["id"] as string),
+      map(id => {
+        if (id) {
+          return id
+        }
+
+        if (this.cookieService.hasKey(this.WvW_WORLD_KEY)) {
+          this.selectedWorld = this.cookieService.getObject(this.WvW_WORLD_KEY) as (World | undefined);
+          if (this.selectedWorld) {
+            return this.selectedWorld.id
+          }
+        }
+        return undefined
+      }),
+      takeUntil(this.unsubscribe$)
+    ).subscribe((id: string | undefined) => {
+      if (id) {
+        id.toString().includes("-") ?
+          this.store.dispatch(mistsActions.setActiveMatch({ matchId: id })) :
+          this.store.dispatch(mistsActions.setActiveWorld({ worldId: id }))
+      }
+    })
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onMapReady(leaflet: Map) {
@@ -111,18 +144,9 @@ export class MistsMapComponent extends BaseMap implements OnInit {
     this.registerLayer(this.OBJECTIVE_LAYER, {Layer: new LayerGroup(), MinZoomLevel: 0, Hidden: false});
     this.registerLayer(this.HEADINGS_LAYER, {Layer: this.layerService.getMistsMapHeadings(leaflet), MinZoomLevel: 0, Hidden: false})
 
-    if (this.cookieService.hasKey(this.WvW_WORLD_KEY)) {
-      this.selectedWorld = this.cookieService.getObject(this.WvW_WORLD_KEY) as (World | undefined);
-      if (this.selectedWorld) {
-        this.store.dispatch(mistsActions.setActiveWorld({ worldId: this.selectedWorld.id }))
-      } else {
-        this.showSettings = true;
-      }
-    }
-
-    this.layerService.getMistsObjectivesLayer(leaflet)
-      .subscribe((layer) => this.updateLayer(this.OBJECTIVE_LAYER, layer))
-
+    this.layerService.getMistsObjectivesLayer(leaflet).pipe(
+      first(),
+    ).subscribe((layer) => this.updateLayer(this.OBJECTIVE_LAYER, layer))
 
     this.activeMatch$.pipe(
         map(activeMatch => {
@@ -131,7 +155,8 @@ export class MistsMapComponent extends BaseMap implements OnInit {
           }
           return new FeatureGroup();
         }),
-        tap(layer => layer.on("click", (data: any) => this.openObjectiveDetails(data.data as MergedObjective)))
+        tap(layer => layer.on("click", (data: any) => this.openObjectiveDetails(data.data as MergedObjective))),
+        takeUntil(this.unsubscribe$)
       ).subscribe(objectiveLayer => this.updateLayer(this.OBJECTIVE_LAYER, objectiveLayer))
 
     interval(20000)
@@ -142,6 +167,7 @@ export class MistsMapComponent extends BaseMap implements OnInit {
             this.store.dispatch(mistsActions.updateMatch({ matchId: activeMatchId }))
           }
         }),
+        takeUntil(this.unsubscribe$)
       ).subscribe(_ => _)
   }
 
@@ -156,8 +182,9 @@ export class MistsMapComponent extends BaseMap implements OnInit {
 
   overviewMatchClicked($event: Match) {
     if (this.Map) {
-      this.layerService.getMistsObjectivesLayer(this.Map)
-        .subscribe((layer) => this.updateLayer(this.OBJECTIVE_LAYER, layer))
+      this.layerService.getMistsObjectivesLayer(this.Map).pipe(
+        first()
+      ).subscribe((layer) => this.updateLayer(this.OBJECTIVE_LAYER, layer))
     }
 
     this.store.dispatch(mistsActions.setActiveMatch({ matchId: $event.id }))

@@ -122,7 +122,7 @@ export class EventTimerService {
       }));
   }
 
-  getNextEventsSubscription(count: number = 5): Observable<EventMap> {
+  getNextEventsTimer(count: number = 5): Observable<EventMap> {
     return timer(0, 15000)
       .pipe(
         switchMap(() => this.getNextEvents(count)),

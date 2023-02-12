@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {
-  debounceTime,
+  combineLatest,
+  debounceTime, first,
   fromEvent,
   map,
-  Subject, Subscription
+  Subject, Subscription, takeUntil
 } from 'rxjs';
 import * as L from 'leaflet';
 import {
@@ -25,8 +26,9 @@ import {DialogService} from "primeng/dynamicdialog";
 import {EditorModalComponent} from "./editor-modal/editor-modal.component";
 import {ClipboardService} from "ngx-clipboard";
 import {EventMap, Event, EventTimerService} from "../../services/event-timer.service";
-import {SearchEntry} from "../../services/search.service";
+import {SearchEntry, SearchService} from "../../services/search.service";
 import {BaseMap} from "../../lib/base-map";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'tyria-map',
@@ -46,7 +48,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   private searchUnfocused: Subject<any> = new Subject<any>();
   showSearchResults: boolean = false;
 
-  eventTimer$: Subscription;
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private dialogService: DialogService,
@@ -55,58 +57,63 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     private editorService: EditorService,
     private clipboardService: ClipboardService,
     private eventTimerService: EventTimerService,
+    private route: ActivatedRoute,
+    private searchService: SearchService
   ) {
     super()
     // Setup Shortcuts
-    fromEvent(document, "keydown")
-      .subscribe(event => {
-        const keyEvent = event as KeyboardEvent;
+    fromEvent(document, "keydown").pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(event => {
+      const keyEvent = event as KeyboardEvent;
 
-        switch (keyEvent.code) {
-          case "Digit1":
-            this.showEvents = !this.showEvents;
-            break;
-          case "Digit2":
-            this.showDailies = !this.showDailies;
-            break;
-        }
-      });
+      switch (keyEvent.code) {
+        case "Digit1":
+          this.showEvents = !this.showEvents;
+          break;
+        case "Digit2":
+          this.showDailies = !this.showDailies;
+          break;
+      }
+    });
 
     // Setup Searchbox debouncing
     this.searchUnfocused.pipe(
-      debounceTime(500)
+      debounceTime(500),
+      takeUntil(this.unsubscribe$)
     ).subscribe(() => {
       this.showSearchResults = false
     })
 
-    this.eventTimer$ = this.eventTimerService.getNextEventsSubscription(5)
-      .subscribe((events) => {
-        if (this.Map) {
-          const layer = this.eventTimerService.createEventsLayer(this.Map, events);
-          if (!this.hasLayer("events_layer")) {
-            this.registerLayer("events_layer", {Layer: layer, Hidden: false})
-          } else {
-            this.updateLayer("events_layer", layer);
-          }
-
-          this.upcomingEvents = events;
+    this.eventTimerService.getNextEventsTimer(5).pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe((events) => {
+      if (this.Map) {
+        const layer = this.eventTimerService.createEventsLayer(this.Map, events);
+        if (!this.hasLayer("events_layer")) {
+          this.registerLayer("events_layer", {Layer: layer, Hidden: false})
+        } else {
+          this.updateLayer("events_layer", layer);
         }
-      });
+
+        this.upcomingEvents = events;
+      }
+    });
   }
 
   ngOnInit() {
     const checkScreenSize = () => document.body.offsetWidth < 1024;
-    const screenSizeChanged$ = fromEvent(window, 'resize')
+    fromEvent(window, 'resize')
       .pipe(
         debounceTime(200),
-        map(checkScreenSize)
-      );
-
-    screenSizeChanged$.subscribe((small) => this.smallScreen = small);
+        map(checkScreenSize),
+        takeUntil(this.unsubscribe$)
+      ).subscribe((small) => this.smallScreen = small);
   }
 
   ngOnDestroy() {
-    this.eventTimer$.unsubscribe()
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   getCoords(latlng: LatLng): PointTuple {
@@ -217,7 +224,9 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
           type: type,
           coords: coords,
         }
-      }).onClose.subscribe(res => {
+      }).onClose.pipe(
+        takeUntil(this.unsubscribe$),
+      ).subscribe(res => {
         if (this.Map)
           if (type === MarkerType.Map || type === MarkerType.Region) {
             this.editorService.addText(this.Map, type, coords, res);
@@ -228,14 +237,14 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     }
   }
 
-  onMapReady(map: Map) {
-    this.Map = map;
+  onMapReady(leaflet: Map) {
+    this.Map = leaflet;
 
-    map.options.crs = L.CRS.Simple;
-    map.options.maxBoundsViscosity = 1;
-    map.setMaxBounds(new LatLngBounds(
-        map.unproject([0, 0], map.getMaxZoom()),
-        map.unproject(this.layerService.tyriaDimensions, map.getMaxZoom())
+    leaflet.options.crs = L.CRS.Simple;
+    leaflet.options.maxBoundsViscosity = 1;
+    leaflet.setMaxBounds(new LatLngBounds(
+        leaflet.unproject([0, 0], leaflet.getMaxZoom()),
+        leaflet.unproject(this.layerService.tyriaDimensions, leaflet.getMaxZoom())
     ));
 
     this.registerLayer("core", {
@@ -243,49 +252,56 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       Hidden: false,
     });
 
-    this.layerService.getPoiLayer(map)
-      .subscribe(layers => {
-        for (let layersKey in layers) {
-          let layer = layers[layersKey];
-          switch (layersKey) {
-            case "waypoint":
-              this.registerLayer(layersKey, { Layer: layer, MinZoomLevel: 5, Hidden: false})
-              break;
-            case "unlock":
-              this.registerLayer(layersKey, { Layer: layer, MinZoomLevel: 3, Hidden: false})
-              break;
-            default:
-              this.registerLayer(layersKey, { Layer: layer, MinZoomLevel: 6, Hidden: false})
-          }
-
+    this.layerService.getPoiLayer(leaflet).pipe(
+      first()
+    ).subscribe(layers => {
+      for (let layersKey in layers) {
+        let layer = layers[layersKey];
+        switch (layersKey) {
+          case "waypoint":
+            this.registerLayer(layersKey, { Layer: layer, MinZoomLevel: 5, Hidden: false})
+            break;
+          case "unlock":
+            this.registerLayer(layersKey, { Layer: layer, MinZoomLevel: 3, Hidden: false})
+            break;
+          default:
+            this.registerLayer(layersKey, { Layer: layer, MinZoomLevel: 6, Hidden: false})
         }
-      });
 
-    this.layerService.getHeartLayer(map)
-      .subscribe(layer => this.registerLayer("heart_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
+      }
+    });
 
-    this.layerService.getSkillPointLayer(map)
-      .subscribe(layer => this.registerLayer("heropoint_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
+    this.layerService.getHeartLayer(leaflet).pipe(
+      first()
+    ).subscribe(layer => this.registerLayer("heart_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
 
-    this.layerService.getMasteryPointLayer(map)
-      .subscribe(layer => this.registerLayer("masteries_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
+    this.layerService.getSkillPointLayer(leaflet).pipe(
+      first()
+    ).subscribe(layer => this.registerLayer("heropoint_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
 
-    this.layerService.getRegionLayer(map)
-      .subscribe(layer => {
+    this.layerService.getMasteryPointLayer(leaflet).pipe(
+      first()
+    ).subscribe(layer => this.registerLayer("masteries_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
+
+    this.layerService.getRegionLayer(leaflet).pipe(
+      first()
+    ).subscribe(layer => {
         this.registerLayer("region_labels",
           {Layer: layer, MaxZoomLevel: 5, MinZoomLevel: 2, Hidden: false, OpacityLevels: {5: .2, 4: .6}})
         layer.bringToFront();
       });
 
-    this.layerService.getMapLayer(map)
-      .subscribe(layer => {
+    this.layerService.getMapLayer(leaflet).pipe(
+      first()
+    ).subscribe(layer => {
         this.registerLayer("map_labels",
           {Layer: layer, MaxZoomLevel: 6, MinZoomLevel: 2, Hidden: false, OpacityLevels: {5: .8, 6: .5}})
         layer.bringToFront();
       });
 
-    this.editorService.getMarkerLayerEvents()
-      .subscribe(layer => {
+    this.editorService.getMarkerLayerEvents().pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(layer => {
         if (!this.hasLayer("editable_markers")) {
           this.registerLayer("editable_markers", {Layer: layer, MinZoomLevel: 3, Hidden: false})
         } else {
@@ -293,14 +309,24 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
         }
       });
 
-    this.editorService.getTextLayerEvents()
-      .subscribe(layer => {
-        if (!this.hasLayer("editable_text")) {
-          this.registerLayer("editable_text", {Layer: layer, MaxZoomLevel: 6, MinZoomLevel: 2, Hidden: false, OpacityLevels: {5: .8, 6: .5}})
-        } else {
-          this.updateLayer("editable_text", layer);
-        }
-      });
+    this.editorService.getTextLayerEvents().pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(layer => {
+      if (!this.hasLayer("editable_text")) {
+        this.registerLayer("editable_text", {Layer: layer, MaxZoomLevel: 6, MinZoomLevel: 2, Hidden: false, OpacityLevels: {5: .8, 6: .5}})
+      } else {
+        this.updateLayer("editable_text", layer);
+      }
+    });
+
+    this.route.params.pipe(
+      map(params=> params["chat_link"] as string),
+      takeUntil(this.unsubscribe$)
+    ).subscribe(chatLink => {
+      if (chatLink) {
+
+      }
+    })
   }
 
   onMapDoubleClick(event: LeafletMouseEvent) {

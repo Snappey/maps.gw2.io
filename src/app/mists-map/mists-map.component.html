@@ -5,6 +5,8 @@
      tabindex="0">
 </div>
 
+<button pButton style="position: absolute; right: 15px; top: 15px; z-index: 999" type="button" class="p-button-rounded" icon="pi pi-compass" routerLink="/tyria"></button>
+
 <div [hidden]="showMatches" style="position: absolute; z-index: 999; left: 10px; top: 15px">
   <ng-container *ngIf="activeMatch$ | async as activeMatch">
     <ng-container *ngIf="activeMatch">

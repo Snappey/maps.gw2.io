@@ -42,13 +42,13 @@ export class BaseMap {
       return;
     }
 
-    if (!options.Hidden) {
-      this.Map?.addLayer(options.Layer);
-    }
-
     this.Layers[id] = options;
 
     if (this.Map) {
+      if (!options.Hidden) {
+        this.Map.addLayer(options.Layer);
+      }
+
       this.updateLayerVisibility(this.Map.getZoom())
     }
 
