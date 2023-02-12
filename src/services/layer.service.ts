@@ -1,9 +1,9 @@
-import {ViewContainerRef, Injectable, Injector} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, map, tap, switchMap, combineLatest, mergeMap, forkJoin, of, from, iif, delay} from "rxjs";
-import L, {
+import {Observable, map, tap, of, iif} from "rxjs";
+import {
   FeatureGroup,
-  LatLngBounds, Layer,
+  LatLngBounds,
   LayerGroup,
   Map, Marker, Point,
   PointTuple,
@@ -16,9 +16,8 @@ import {ClipboardService} from "ngx-clipboard";
 import {ToastrService} from "ngx-toastr";
 import {CanvasIcon, LabelService} from "./label.service";
 import {SearchService} from "./search.service";
-import {MatchObjective, Objective, MergedObjective, WvwService, Match} from "./wvw.service";
+import {MergedObjective, WvwService, Match} from "./wvw.service";
 import {Guild, GuildService} from "./guild.service";
-import {ObjectiveTooltipComponent} from "../app/mists-map/objective-tooltip/objective-tooltip.component";
 import moment from "moment";
 
 export interface GroupedLayer {
@@ -166,7 +165,7 @@ export class LayerService {
               if (map.poi) {
                 map.poi.forEach(poi => {
                   if ("tooltip" in poi.data)
-                    this.searchService.addSearch({type: poi.type, coords: poi.coordinates, name: poi.data.tooltip, data: poi.data})
+                    this.searchService.addSearch({type: poi.type, coords: poi.coordinates, name: poi.data.tooltip, chatLink: poi.data.chat_link, data: poi.data})
                 })
               }
             })
@@ -238,7 +237,7 @@ export class LayerService {
               map.hearts
                 .forEach((heart) => {
                   if (heart.coordinates)
-                    this.searchService.addSearch({type: "heart", coords: heart.coordinates, name: heart.data.tooltip, data: heart.data})
+                    this.searchService.addSearch({type: "heart", coords: heart.coordinates, name: heart.data.tooltip, chatLink: heart.data.chat_link, data: heart.data})
                 })
             })
         }),
@@ -265,7 +264,6 @@ export class LayerService {
           return hearts;
         })
       );
-
   }
 
   getSkillPointLabels(): Observable<GroupedLabels<MapData>> {

@@ -5,6 +5,7 @@ import FuzzySearch from 'fuzzy-search'
 
 export interface SearchEntry {
   coords: PointTuple
+  chatLink: string;
   type: string;
   name: string
   description?: string
@@ -19,7 +20,7 @@ export class SearchService {
   private searcher: FuzzySearch;
 
   constructor() {
-    this.searcher = new FuzzySearch(this.searchEntries, ["name", "description"], { sort: true });
+    this.searcher = new FuzzySearch(this.searchEntries, ["name", "chatLink", "description"], { sort: true });
   }
 
   public addSearch(entry: SearchEntry) {
