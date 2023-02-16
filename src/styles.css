@@ -59,7 +59,7 @@ body {
 }
 
 .tooltip.p-dialog {
-  background-image: url("assets/tooltip.png");
+  background-image: url("/assets/tooltip.png");
   background-size: cover;
   border: 2px solid #111 !important;
   border-radius: 2px;
@@ -69,7 +69,7 @@ body {
 }
 
 .tooltip {
-  background-image: url("assets/tooltip.png");
+  background-image: url("/assets/tooltip.png");
   background-size: cover;
   border: 2px solid #111 !important;
   border-radius: 2px;
@@ -247,4 +247,10 @@ Custom Toastr
 
 .grayscale {
   filter: grayscale(1);
+}
+
+.tooltip > .p-tooltip-text {
+  background: unset !important;
+  color: #ffcc77 !important;
+  padding: .25rem !important;
 }

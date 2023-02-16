@@ -1,6 +1,37 @@
 
-.compass-button:hover {
-  color: rgba(255, 255, 255, 1);
-  border-radius: 26px;
-  box-shadow: 0 0 25px #8AF7F5;
+.compass-button {
+  width: 48px;
+  height: 48px;
+}
+
+.compass-button.core {
+  background-image: url("/assets/compass_core_pointer.png");
+}
+
+.compass-button.core:hover {
+  background-image: url("/assets/compass_core_pointer_activated.png");
+}
+
+.compass-button.hot {
+  background-image: url("/assets/compass_hot_pointer.png");
+}
+
+.compass-button.hot:hover {
+  background-image: url("/assets/compass_hot_pointer_activated.png");
+}
+
+.compass-button.pof {
+  background-image: url("/assets/compass_pof_pointer.png");
+}
+
+.compass-button.pof:hover {
+  background-image: url("/assets/compass_pof_pointer_activated.png");
+}
+
+.compass-button.eod {
+  background-image: url("/assets/compass_eod_pointer.png");
+}
+
+.compass-button.eod:hover {
+  background-image: url("/assets/compass_eod_pointer_activated.png");
 }
