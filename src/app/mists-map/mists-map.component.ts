@@ -169,6 +169,9 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe(_ => _)
+
+
+    this.setupDrawing()
   }
 
   saveSettings(selectedWorld: World | undefined) {

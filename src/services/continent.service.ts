@@ -48,12 +48,12 @@ export interface MapLabel {
 export class ContinentService {
   constructor(private http: HttpClient, private mapService: MapService) { }
 
-  getContinents(): Observable<Continent[]> {
-    return this.http.get<Continent[]>("https://api.guildwars2.com/v2/continents/1/floors?ids=1")
+  getContinent(id: number): Observable<Continent[]> {
+    return this.http.get<Continent[]>(`https://api.guildwars2.com/v2/continents/${id}/floors?ids=1`)
   }
 
-  getMapLabels(): Observable<MapLabel[]> {
-    return this.getContinents()
+  getMapLabels(continentId: number): Observable<MapLabel[]> {
+    return this.getContinent(continentId)
       .pipe(
         map((v, idx): MapLabel[] => {
           const labels: MapLabel[] = [];

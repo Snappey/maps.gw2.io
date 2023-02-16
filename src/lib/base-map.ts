@@ -1,8 +1,10 @@
 import * as L from 'leaflet';
 import {
-  Layer,
-  Map, PointTuple, TileLayer,
+  LatLng,
+  Layer, LeafletMouseEvent,
+  Map, PointTuple, Polyline, TileLayer,
 } from 'leaflet';
+import {interval, Observable, Subscription, take} from "rxjs";
 
 export interface LayerOptions {
   Layer: Layer;
@@ -13,18 +15,16 @@ export interface LayerOptions {
 }
 
 export class BaseMap {
-  Map: Map | undefined;
+  Map!: Map;
   Layers: {[key: string]: LayerOptions} = {};
 
   public panTo(coords: PointTuple, zoom: number = 4) {
-    if (this.Map) {
-      const latLng = this.Map.unproject(coords, this.Map.getMaxZoom());
-      this.Map.setView(latLng, zoom);
-    }
+    const latLng = this.Map.unproject(coords, this.Map.getMaxZoom());
+    this.Map.setView(latLng, zoom);
   }
 
   updateLayer(id: string, layer: Layer) {
-    if (this.hasLayer(id) && this.Map) {
+    if (this.hasLayer(id)) {
       this.Map.removeLayer(this.Layers[id].Layer);
 
       this.Layers[id].Layer = layer;
@@ -59,7 +59,7 @@ export class BaseMap {
 
   unregisterLayer(id: string) {
     if (this.Layers[id]) {
-      this.Map?.removeLayer(this.Layers[id].Layer);
+      this.Map.removeLayer(this.Layers[id].Layer);
       delete this.Layers[id];
     }
   }
@@ -68,8 +68,8 @@ export class BaseMap {
     if (this.Layers[id]) {
       const options = this.Layers[id];
 
-      if (!this.Map?.hasLayer(options.Layer)) {
-        this.Map?.addLayer(options.Layer);
+      if (!this.Map.hasLayer(options.Layer)) {
+        this.Map.addLayer(options.Layer);
         options.Hidden = false;
       }
     }
@@ -79,8 +79,8 @@ export class BaseMap {
     if (this.Layers[id]) {
       const options = this.Layers[id];
 
-      if (this.Map?.hasLayer(options.Layer)) {
-        this.Map?.removeLayer(options.Layer);
+      if (this.Map.hasLayer(options.Layer)) {
+        this.Map.removeLayer(options.Layer);
         options.Hidden = true;
       }
     }
@@ -117,4 +117,40 @@ export class BaseMap {
     }
   }
 
+
+  setupDrawing() {
+
+    this.Map.on("mousedown", ($event) => {
+      if ($event.originalEvent.button == this.RIGHT_MB) {
+        this.createLine()
+      }
+    })
+  }
+
+  private RIGHT_MB = 2
+
+  private createLine() {
+    const line = new Polyline([], { color: "#DDD", opacity: 0.9 }).addTo(this.Map)
+    let isDrawing = true;
+    let trimLine: Subscription;
+
+    this.Map.on("mousemove", ($event) => {
+      if (isDrawing) {
+        line.addLatLng($event.latlng)
+      }
+    })
+    this.Map.on("mouseup", (_) => {
+      isDrawing = false
+      trimLine = interval(500).pipe(
+        take(20)
+      ).subscribe({
+        next: i =>
+          line.setStyle({
+            opacity: 1.0 - (i * .05)
+          })
+        ,
+        complete: () => line.removeFrom(this.Map)
+      })
+    })
+  }
 }

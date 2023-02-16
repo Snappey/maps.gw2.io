@@ -9,5 +9,6 @@ import {Router} from "@angular/router";
 })
 export class HomeComponent {
   constructor() {
+    document.addEventListener('contextmenu', event => event.preventDefault());
   }
 }

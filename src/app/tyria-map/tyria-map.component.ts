@@ -16,7 +16,7 @@ import {
   LeafletEvent,
   LeafletMouseEvent,
   Map,
-  PointTuple,
+  PointTuple, Polyline,
   TileLayer
 } from 'leaflet';
 import "leaflet-contextmenu"
@@ -131,7 +131,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     zoom: 3,
     zoomControl: false,
     center: latLng(-260, 365),
-    contextmenu: true,
+    contextmenu: false,
     contextmenuWidth: 140,
     contextmenuItems: [{
       text: "Place Waypoint",
@@ -324,9 +324,11 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe$)
     ).subscribe(chatLink => {
       if (chatLink) {
-
+        // TODO: Sort out search state, so we can link directly to places in the world without a weird race condition waiting for data to be filled
       }
     })
+
+    this.setupDrawing()
   }
 
   onMapDoubleClick(event: LeafletMouseEvent) {
