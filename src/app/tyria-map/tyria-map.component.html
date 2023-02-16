@@ -1,7 +1,9 @@
 <app-search-bar  style="position: absolute; z-index: 999; left: 15px; top: 15px"
   [(showResults)]="showSearchResults" (clickedResult)="panToSearchResult($event)"></app-search-bar>
 
-<button pButton style="position: absolute; right: 15px; top: 15px; z-index: 999" type="button" class="p-button-rounded" icon="pi pi-shield" routerLink="/wvw"></button>
+<button pButton style="position: absolute; right: 15px; top: 15px; z-index: 999" type="button" class="p-button-rounded" routerLink="/wvw">
+  <img src="assets/wvw-icon.png"/>
+</button>
 
 <div style="height: 100vh; background: #000;"
      leaflet
