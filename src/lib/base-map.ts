@@ -139,14 +139,14 @@ export class BaseMap {
         line.addLatLng($event.latlng)
       }
     })
-    this.Map.on("mouseup", (_) => {
+    this.Map.once("mouseup", (_) => {
       isDrawing = false
-      trimLine = interval(500).pipe(
-        take(20)
+      trimLine = interval(100).pipe(
+        take(100)
       ).subscribe({
         next: i =>
           line.setStyle({
-            opacity: 1.0 - (i * .05)
+            opacity: 1.0 - (i * .01)
           })
         ,
         complete: () => line.removeFrom(this.Map)
