@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [ "leaflet", "moment" ],
+            "allowedCommonJsDependencies": [ "leaflet", "moment", "ngx-mqtt" ],
             "outputPath": "dist/map-gw2-io",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -45,8 +45,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1.5mb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "2.5mb",
+                  "maximumError": "4mb"
                 },
                 {
                   "type": "anyComponentStyle",
