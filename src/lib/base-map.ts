@@ -41,10 +41,10 @@ export class BaseMap {
   Map!: Map;
   Layers: {[key: string]: LayerOptions} = {};
 
-  zeroVector: CharacterForward = { X: 1, Y: 0, Z: 0 }
   constructor(private mqttService: MqttService, private labelService: LabelService) {
     const liveLayer = new FeatureGroup();
     const markers: {[player: string]: Marker} = {};
+    const zeroVector:CharacterForward = { X: 1, Y: 0, Z: 0 }
     this.registerLayer("LIVE_MAP", {Hidden: false, Layer: liveLayer})
 
     this.mqttService.observe('maps.gw2.io/global/#').subscribe((message: IMqttMessage) => {
@@ -54,10 +54,8 @@ export class BaseMap {
 
       const data = JSON.parse(message.payload.toString()) as LivePlayerData;
       const latLng = this.Map.unproject([data.MapPosition.X, data.MapPosition.Y], this.Map.getMaxZoom())
-      //console.log((data.CharacterForward.X + 1) * 180);
+      const rotation = this.degreesBetweenVectors(data.CharacterForward, zeroVector)
 
-      console.log(this.degreesBetweenVectors(data.CharacterForward, this.zeroVector));
-      const rotation = this.degreesBetweenVectors(data.CharacterForward, this.zeroVector)
       if (data.Character in markers) {
         // @ts-ignore
         markers[data.Character].options.img.rotate = rotation
@@ -67,13 +65,6 @@ export class BaseMap {
         markers[data.Character] = labelService.createCanvasMarker(this.Map, [data.MapPosition.X, data.MapPosition.Y], "/assets/player_marker.png", rotation)
           .bindTooltip(data.Character, {className: "tooltip-overlay", offset: new Point(15, 0)})
           .addTo(liveLayer);
-        /*
-          new Marker(latLng, { icon: L.icon({
-              iconUrl: "/assets/player_marker.png",
-              iconSize: [32, 32]
-            })
-          })
-         */
       }
     });
   }
