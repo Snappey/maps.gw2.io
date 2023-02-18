@@ -190,7 +190,7 @@ export class LayerService {
                   icon = label.data.icon;
                 }
 
-                this.labelService.createCanvasMarker(leaflet, label.coordinates, icon, [32,32], 16)
+                this.labelService.createCanvasMarker(leaflet, label.coordinates, icon, 0,[32,32], 16)
                   .bindTooltip(label.data.tooltip !== "" ? label.data.tooltip : label.data.chat_link, { className: "tooltip", offset: new Point(25, 0)} )
                   .addTo(layers[label.type])
                   .on("click", (_: any) => {
@@ -426,7 +426,7 @@ export class LayerService {
           }
         }
 
-        const marker = this.labelService.createCanvasMarker(leaflet, data.coord as PointTuple, markerUrl, data.type === "Ruins" ? [24, 24] : [32, 32], 16, icons)
+        const marker = this.labelService.createCanvasMarker(leaflet, data.coord as PointTuple, markerUrl, 0, data.type === "Ruins" ? [24, 24] : [32, 32], 16, icons)
           .bindTooltip("Loading...", {className: "tooltip-overlay", offset: new Point(15, 0)})
           .on("click", (event: any) => event.data = data)
           .addTo(layer);

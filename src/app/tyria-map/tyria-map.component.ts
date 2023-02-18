@@ -29,6 +29,8 @@ import {EventMap, Event, EventTimerService} from "../../services/event-timer.ser
 import {SearchEntry, SearchService} from "../../services/search.service";
 import {BaseMap} from "../../lib/base-map";
 import {ActivatedRoute} from "@angular/router";
+import {MqttService} from "ngx-mqtt";
+import {LabelService} from "../../services/label.service";
 
 @Component({
   selector: 'tyria-map',
@@ -58,9 +60,11 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     private clipboardService: ClipboardService,
     private eventTimerService: EventTimerService,
     private route: ActivatedRoute,
-    private searchService: SearchService
+    private searchService: SearchService,
+    mqttService: MqttService,
+    labelService: LabelService
   ) {
-    super()
+    super(mqttService, labelService)
     // Setup Shortcuts
     fromEvent(document, "keydown").pipe(
       takeUntil(this.unsubscribe$)

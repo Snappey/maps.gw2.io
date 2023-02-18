@@ -51,6 +51,13 @@ import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {guildFeature} from "../state/guild/guild.feature";
 import {GuildEffects} from "../state/guild/guild.effects";
 import {RouterModule} from "@angular/router";
+import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
+
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: 'post.gw2.io',
+  port: 8083,
+  path: '/mqtt'
+};
 
 @NgModule({
   declarations: [
@@ -79,6 +86,8 @@ import {RouterModule} from "@angular/router";
     CookieModule.withOptions(),
     HttpClientModule,
     ClipboardModule,
+
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
 
     DialogModule,
     DynamicDialogModule,

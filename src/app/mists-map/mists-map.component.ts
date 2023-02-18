@@ -22,6 +22,8 @@ import {mistsActions} from "../../state/mists/mists.action";
 import {AppState} from "../../state/appState";
 import {DialogService} from "primeng/dynamicdialog";
 import {ActivatedRoute} from "@angular/router";
+import {MqttService} from "ngx-mqtt";
+import {LabelService} from "../../services/label.service";
 
 @Component({
   selector: 'mists-map',
@@ -62,9 +64,11 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private cookieService: CookieService,
     private readonly store: Store<AppState>,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    mqttService: MqttService,
+    labelService: LabelService
   ) {
-    super()
+    super(mqttService, labelService)
 
     this.worlds$ = wvwService.getAllWorlds();
     this.store.dispatch(mistsActions.loadMatches())

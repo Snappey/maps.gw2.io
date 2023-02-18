@@ -17,7 +17,7 @@ export class LabelService {
 
   constructor() { }
 
-  public createCanvasMarker(leaflet: Map, coordinates: PointTuple, image: string, size: number[] = [32,32], radius: number = 16, icons: CanvasIcon[] = []): Marker {
+  public createCanvasMarker(leaflet: Map, coordinates: PointTuple, image: string, rotation: number = 0, size: number[] = [32,32], radius: number = 16, icons: CanvasIcon[] = []): Marker {
     // @ts-ignore
     return L.canvasMarker(leaflet.unproject(coordinates, leaflet.getMaxZoom()),
     {
@@ -25,6 +25,7 @@ export class LabelService {
       overlayIcons: icons,
       img: {
         url: image,
+        rotate: rotation,
         size: size,
       }
     });

@@ -1,10 +1,13 @@
 import * as L from 'leaflet';
 import {
+  FeatureGroup, Icon,
   LatLng,
   Layer, LeafletMouseEvent,
-  Map, PointTuple, Polyline, TileLayer,
+  Map, Marker, Point, PointTuple, Polyline, TileLayer,
 } from 'leaflet';
 import {interval, Observable, Subscription, take} from "rxjs";
+import {IMqttMessage, MqttService} from "ngx-mqtt";
+import {LabelService} from "../services/label.service";
 
 export interface LayerOptions {
   Layer: Layer;
@@ -14,9 +17,77 @@ export interface LayerOptions {
   Hidden: boolean;
 }
 
+export interface MapPosition {
+  X: number;
+  Y: number;
+}
+
+export interface CharacterForward {
+  X: number;
+  Y: number;
+  Z: number;
+}
+
+export interface LivePlayerData {
+  Character: string;
+  MapPosition: MapPosition;
+  CharacterForward: CharacterForward;
+  IsCommander: boolean;
+  MapId: number;
+}
+
+
 export class BaseMap {
   Map!: Map;
   Layers: {[key: string]: LayerOptions} = {};
+
+  zeroVector: CharacterForward = { X: 1, Y: 0, Z: 0 }
+  constructor(private mqttService: MqttService, private labelService: LabelService) {
+    const liveLayer = new FeatureGroup();
+    const markers: {[player: string]: Marker} = {};
+    this.registerLayer("LIVE_MAP", {Hidden: false, Layer: liveLayer})
+
+    this.mqttService.observe('maps.gw2.io/global/#').subscribe((message: IMqttMessage) => {
+      if (!this.Map) {
+        return
+      }
+
+      const data = JSON.parse(message.payload.toString()) as LivePlayerData;
+      const latLng = this.Map.unproject([data.MapPosition.X, data.MapPosition.Y], this.Map.getMaxZoom())
+      //console.log((data.CharacterForward.X + 1) * 180);
+
+      console.log(this.degreesBetweenVectors(data.CharacterForward, this.zeroVector));
+      const rotation = this.degreesBetweenVectors(data.CharacterForward, this.zeroVector)
+      if (data.Character in markers) {
+        // @ts-ignore
+        markers[data.Character].options.img.rotate = rotation
+        markers[data.Character]
+          .setLatLng(latLng);
+      } else {
+        markers[data.Character] = labelService.createCanvasMarker(this.Map, [data.MapPosition.X, data.MapPosition.Y], "/assets/player_marker.png", rotation)
+          .bindTooltip(data.Character, {className: "tooltip-overlay", offset: new Point(15, 0)})
+          .addTo(liveLayer);
+        /*
+          new Marker(latLng, { icon: L.icon({
+              iconUrl: "/assets/player_marker.png",
+              iconSize: [32, 32]
+            })
+          })
+         */
+      }
+    });
+  }
+
+  degreesBetweenVectors(vector1: CharacterForward, vector2: CharacterForward) {
+    const dotProduct = vector1.X * vector2.X + vector1.Y * vector2.Y;
+    const magnitude1 = Math.sqrt(vector1.X * vector1.X + vector1.Y * vector1.Y);
+    const magnitude2 = Math.sqrt(vector2.X * vector2.X + vector2.Y * vector2.Y);
+    const cosTheta = dotProduct / (magnitude1 * magnitude2);
+    const thetaRadians = Math.acos(cosTheta);
+    const crossProduct = vector1.X * vector2.Y - vector1.Y * vector2.X;
+    const sign = crossProduct >= 0 ? 1 : -1;
+    return sign * thetaRadians * (180 / Math.PI);
+  }
 
   public panTo(coords: PointTuple, zoom: number = 4) {
     const latLng = this.Map.unproject(coords, this.Map.getMaxZoom());
@@ -117,9 +188,7 @@ export class BaseMap {
     }
   }
 
-
   setupDrawing() {
-
     this.Map.on("mousedown", ($event) => {
       if ($event.originalEvent.button == this.RIGHT_MB) {
         this.createLine()
