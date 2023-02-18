@@ -55,8 +55,9 @@ import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'post.gw2.io',
+  protocol: "wss",
   port: 8083,
-  path: '/mqtt'
+  path: '/ws'
 };
 
 @NgModule({
