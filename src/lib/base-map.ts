@@ -66,6 +66,8 @@ export class BaseMap {
           .bindTooltip(data.Character, {className: "tooltip-overlay", offset: new Point(15, 0)})
           .addTo(liveLayer);
       }
+
+      liveLayer.bringToFront();
     });
   }
 
