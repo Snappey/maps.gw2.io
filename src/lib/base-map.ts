@@ -29,7 +29,8 @@ export interface CharacterForward {
 }
 
 export interface LivePlayerData {
-  Character: string;
+  AccountName: string;
+  CharacterName: string;
   MapPosition: MapPosition;
   CharacterForward: CharacterForward;
   IsCommander: boolean;
@@ -56,14 +57,14 @@ export class BaseMap {
       const latLng = this.Map.unproject([data.MapPosition.X, data.MapPosition.Y], this.Map.getMaxZoom())
       const rotation = this.degreesBetweenVectors(data.CharacterForward, zeroVector)
 
-      if (data.Character in markers) {
+      if (data.CharacterName in markers) {
         // @ts-ignore
-        markers[data.Character].options.img.rotate = rotation
-        markers[data.Character]
+        markers[data.CharacterName].options.img.rotate = rotation
+        markers[data.CharacterName]
           .setLatLng(latLng);
       } else {
-        markers[data.Character] = labelService.createCanvasMarker(this.Map, [data.MapPosition.X, data.MapPosition.Y], "/assets/player_marker.png", rotation)
-          .bindTooltip(data.Character, {className: "tooltip-overlay", offset: new Point(15, 0)})
+        markers[data.CharacterName] = labelService.createCanvasMarker(this.Map, [data.MapPosition.X, data.MapPosition.Y], "/assets/player_marker.png", rotation)
+          .bindTooltip(data.CharacterName + "(" + data.AccountName + ")", {className: "tooltip-overlay", offset: new Point(15, 0)})
           .addTo(liveLayer);
       }
 
