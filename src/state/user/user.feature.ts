@@ -27,7 +27,7 @@ const initialState: UserState = {
   id: "",
   monthly_ap: 0,
   name: "",
-  world: 0,
+  world: "0",
   wvw_rank: 0
 };
 
@@ -81,7 +81,7 @@ export const userFeature = createFeature({
 export const selectUserRegion = createSelector(
   (state: AppState) => state.user.world,
   (worldId) => {
-    return worldId >= 2000 ? "eu" : "us";
+    return parseInt(worldId) >= 2000 ? "eu" : "us";
   }
 );
 
@@ -90,10 +90,12 @@ export const selectUserWvwTeam = createSelector(
   (state: AppState) => state.user.world,
   (matchDetails, worldId) => {
     if (matchDetails) {
+      console.log(worldId);
+      console.log(matchDetails.all_worlds);
       return {
-        team: matchDetails.all_worlds.red.includes(worldId.toString()) ?
+        team: matchDetails.all_worlds.red.includes(worldId) ?
           "red" :
-          matchDetails.all_worlds.green.includes(worldId.toString()) ?
+          matchDetails.all_worlds.green.includes(worldId) ?
             "green" :
             "blue",
         matchId: matchDetails.id

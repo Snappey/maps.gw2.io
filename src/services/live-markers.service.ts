@@ -77,6 +77,7 @@ export class LiveMarkersService {
   subscribeToChannel(): Observable<IMqttMessage> {
     return this.store.select(selectUserTopic).pipe(
       filter(topic => !!topic),
+      tap(topic => console.log("Subscribed to " + topic)),
       switchMap(topic => this.mqttService.observe(topic!, { qos: 0 }))
     )
   }

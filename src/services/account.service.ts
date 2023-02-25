@@ -7,7 +7,7 @@ export interface AccountInfo {
   id: string;
   name: string;
   age: number;
-  world: number;
+  world: string;
   guilds: string[];
   guild_leader: string[];
   created: Date | undefined;

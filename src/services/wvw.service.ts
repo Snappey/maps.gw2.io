@@ -268,7 +268,7 @@ export class WvwService {
     return this.httpClient.get<World[]>(`https://api.guildwars2.com/v2/worlds?ids=all`);
   }
 
-  getMatchOverviewByWorldId(worldId: number): Observable<MatchOverview> {
+  getMatchOverviewByWorldId(worldId: string): Observable<MatchOverview> {
     return this.httpClient.get<MatchOverview>(`https://api.guildwars2.com/v2/wvw/matches/overview?world=${worldId}`)
   }
 
