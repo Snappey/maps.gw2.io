@@ -1,0 +1,72 @@
+<p-dialog header="Settings" [(visible)]="this.visible" [style]="{width: '50vw'}">
+  <form id="settings-form" [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label for="api-key" class="block">API Key:</label>
+      <p-password id="api-key" formControlName="apiKey" [inputStyle]="{width: '100%'}" [style]="{width: '100%'}"  [toggleMask]="true" [feedback]="false"></p-password>
+      <ng-container *ngrxLet="validateApiKey$ as user">
+        <small *ngIf="user" id="api-key-validated-success" class="block text-green-500 font-italic">Valid API Key: {{user.name}}</small>
+        <small *ngIf="!user" id="api-key-validated-failed" class="block text-red-500 font-italic">Invalid API Key.. failed to get data from Guild Wars 2 API</small>
+      </ng-container>
+      <small id="api-key-help" class="block">Requires account permission.</small>
+    </div>
+
+    <div class="field">
+      <label for="home-world" class="block">Home World:</label>
+      <p-dropdown *ngIf="worlds$ | async as worlds"
+                  id="home-world"
+                  appendTo="body"
+                  [style]="{width: '100%'}"
+                  [options]="worlds | orderBy:'id'"
+                  optionLabel="name" optionValue="id"
+                  formControlName="homeWorld"
+                  [filter]="true" filterBy="name">
+      </p-dropdown>
+      <small id="home-world-help" class="block">Default WvW world to use.</small>
+    </div>
+
+    <h3>Live Map</h3>
+    <div class="field">
+      <p-selectButton [options]="[ { label: 'On', value: true }, { label: 'Off', value: false }]" formControlName="liveMapEnabled" optionLabel="label" optionValue="value"></p-selectButton>
+      <small id="live-map-toggle-help" class="block">See players location on your map, can be filtered to global, guild or custom channels.</small>
+    </div>
+
+    <ng-container *ngIf="settingsForm.get('liveMapEnabled')?.value">
+      <div class="field">
+        <label for="selectedChannel" class="block">Channel:</label>
+        <p-dropdown id="selectedChannel"
+                    appendTo="body"
+                    [style]="{width: '100%'}"
+                    [options]="channels"
+                    formControlName="selectedChannel">
+        </p-dropdown>
+        <small id="selectedChannel-help" class="block">Channel you want to use.</small>
+      </div>
+
+      <div class="field" *ngIf="settingsForm.get('selectedChannel')?.value === ChannelType.Guild">
+        <label for="guild" class="block">Guild:</label>
+        <p-dropdown *ngrxLet="userGuilds$ as userGuilds"
+                    id="guild"
+                    appendTo="body"
+                    [style]="{width: '100%'}"
+                    [options]="userGuilds | orderBy: 'name'"
+                    optionLabel="name" optionValue="id"
+                    formControlName="guildChannel">
+          <ng-template let-guild pTemplate="item">
+            [{{guild.tag}}] {{guild.name}}
+          </ng-template>
+        </p-dropdown>
+        <small id="guild-help" class="block">Guild you want to display.</small>
+      </div>
+
+      <div class="field" *ngIf="settingsForm.get('selectedChannel')?.value === ChannelType.Custom">
+        <label for="custom" class="block">Custom:</label>
+        <p-password id="custom" formControlName="customChannel" [inputStyle]="{width: '100%'}" [style]="{width: '100%'}" [toggleMask]="true" [feedback]="false"></p-password>
+        <small id="custom-help" class="block">ID of the custom channel you want to display.</small>
+      </div>
+    </ng-container>
+  </form>
+  <ng-template pTemplate="footer">
+    <button pButton icon="pi pi-check" type="submit" form="settings-form" label="Save" [disabled]="!this.settingsForm.valid" class="p-button p-button-text p-button-success"></button>
+    <p-button icon="pi pi-times" (click)="close()" label="Cancel" styleClass="p-button p-button-text p-button-danger"></p-button>
+  </ng-template>
+</p-dialog>

@@ -1,4 +1,5 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet'
 import {DialogModule} from 'primeng/dialog';
@@ -43,7 +44,7 @@ import {ObjectiveDetailsComponent} from './mists-map/objective-details/objective
 import {SkeletonModule} from "primeng/skeleton";
 import {TabMenuModule} from "primeng/tabmenu";
 import {RouterTestingModule} from "@angular/router/testing";
-import {StoreModule} from "@ngrx/store";
+import {Store, StoreModule} from "@ngrx/store";
 import {mistsFeature} from "../state/mists/mists.feature";
 import {EffectsModule} from "@ngrx/effects";
 import {MistsEffects} from "../state/mists/mists.effects";
@@ -52,12 +53,20 @@ import {guildFeature} from "../state/guild/guild.feature";
 import {GuildEffects} from "../state/guild/guild.effects";
 import {RouterModule} from "@angular/router";
 import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
+import { SettingsModalComponent } from './settings-modal/settings-modal.component';
+import {settingsFeature} from "../state/settings/settings.feature";
+import {liveMarkersFeature} from "../state/live-markers/live-markers.feature";
+import {LiveMarkersEffects} from "../state/live-markers/live-markers.effects";
+import {SettingsEffects} from "../state/settings/settings.effects";
+import {PasswordModule} from "primeng/password";
+import {userFeature} from "../state/user/user.feature";
+import {UserEffects} from "../state/user/user.effects";
+import { LetModule } from '@ngrx/component';
+import {ToggleButtonModule} from "primeng/togglebutton";
+import {SelectButtonModule} from "primeng/selectbutton";
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-  hostname: 'post.gw2.io',
-  protocol: "wss",
-  port: 8084,
-  path: '/ws'
+  connectOnCreate: false
 };
 
 @NgModule({
@@ -78,6 +87,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     SkirmishStatsChartComponent,
     MatchOverviewComponent,
     ObjectiveDetailsComponent,
+    SettingsModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +97,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     CookieModule.withOptions(),
     HttpClientModule,
     ClipboardModule,
+    ReactiveFormsModule,
 
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
 
@@ -110,25 +121,35 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     TabMenuModule,
     RouterTestingModule,
     RouterModule.forRoot([
-      { path: "tyria", component: TyriaMapComponent },
-      { path: "wvw", component: MistsMapComponent },
-      { path: "wvw/:id", component: MistsMapComponent },
-      { path: "**", redirectTo: "/tyria", pathMatch: "full" }
+      {path: "tyria", component: TyriaMapComponent},
+      {path: "wvw", component: MistsMapComponent},
+      {path: "wvw/:id", component: MistsMapComponent},
+      {path: "**", redirectTo: "/tyria", pathMatch: "full"}
     ]),
 
-
+    LetModule,
     StoreModule.forRoot(),
+    StoreModule.forFeature(settingsFeature),
+    StoreModule.forFeature(userFeature),
     StoreModule.forFeature(mistsFeature),
     StoreModule.forFeature(guildFeature),
+    StoreModule.forFeature(liveMarkersFeature),
+
     EffectsModule.forRoot([
+      SettingsEffects,
+      UserEffects,
       MistsEffects,
-      GuildEffects
+      GuildEffects,
+      LiveMarkersEffects
     ]),
 
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: false,
     }),
+    PasswordModule,
+    ToggleButtonModule,
+    SelectButtonModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

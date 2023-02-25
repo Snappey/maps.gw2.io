@@ -31,6 +31,10 @@ import {BaseMap} from "../../lib/base-map";
 import {ActivatedRoute} from "@angular/router";
 import {MqttService} from "ngx-mqtt";
 import {LabelService} from "../../services/label.service";
+import {LiveMarkersService} from "../../services/live-markers.service";
+import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../state/appState";
 
 @Component({
   selector: 'tyria-map',
@@ -39,11 +43,12 @@ import {LabelService} from "../../services/label.service";
   providers: [DialogService]
 })
 export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
-  title = 'Guild Wars 2 Map';
+  private CONTINENT_ID = 1 as const;
 
   smallScreen: boolean = false;
   showEvents: boolean = false;
   showDailies: boolean = false;
+  showSettings: boolean = false;
 
   upcomingEvents: EventMap = {};
 
@@ -61,10 +66,12 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     private eventTimerService: EventTimerService,
     private route: ActivatedRoute,
     private searchService: SearchService,
+    private store: Store<AppState>,
     mqttService: MqttService,
-    labelService: LabelService
+    labelService: LabelService,
+    liveMarkerService: LiveMarkersService
   ) {
-    super(mqttService, labelService)
+    super(mqttService, labelService, liveMarkerService)
     // Setup Shortcuts
     fromEvent(document, "keydown").pipe(
       takeUntil(this.unsubscribe$)
@@ -106,6 +113,8 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.store.dispatch(liveMarkersActions.setActiveContinent({ continentId: this.CONTINENT_ID }))
+
     const checkScreenSize = () => document.body.offsetWidth < 1024;
     fromEvent(window, 'resize')
       .pipe(

@@ -1,13 +1,10 @@
-import * as L from 'leaflet';
-import {
-  FeatureGroup, Icon,
-  LatLng,
-  Layer, LeafletMouseEvent,
-  Map, Marker, Point, PointTuple, Polyline, TileLayer,
-} from 'leaflet';
-import {interval, Observable, Subscription, take} from "rxjs";
-import {IMqttMessage, MqttService} from "ngx-mqtt";
-import {LabelService} from "../services/label.service";
+import {FeatureGroup, Layer, Map, Marker, Point, PointTuple, Polyline, TileLayer} from 'leaflet';
+import {combineLatestWith, interval, map, Subscription, take, takeUntil} from "rxjs";
+import {MqttConnectionState, MqttService} from "ngx-mqtt";
+import {CanvasIcon, LabelService} from "../services/label.service";
+import {LiveMarkersService} from "../services/live-markers.service";
+import {Store} from "@ngrx/store";
+import {AppState} from "../state/appState";
 
 export interface LayerOptions {
   Layer: Layer;
@@ -29,47 +26,104 @@ export interface CharacterForward {
 }
 
 export interface LivePlayerData {
+  Type: string;
   AccountName: string;
   CharacterName: string;
+  ContinentId: number;
+  MapId: number;
   MapPosition: MapPosition;
   CharacterForward: CharacterForward;
+  WorldId: number;
+  ShardId: number;
+  ServerConnectionInfo: string;
+  BuildId: number;
   IsCommander: boolean;
-  MapId: number;
+  Mount: number;
+  Profession: number;
+  Specialisation: number;
 }
 
+const mountIcons: {[i: number]: string} = {
+  1: "/assets/jackal_icon.png",
+  2: "/assets/griffon_icon.png",
+  3: "/assets/springer_icon.png",
+  4: "/assets/skimmer_icon.png",
+  5: "/assets/raptor_icon.png",
+  6: "/assets/beetle_icon.png",
+  7: "/assets/warclaw_icon.png",
+  8: "/assets/skyscale_icon.png",
+  9: "/assets/skiff_icon.png",
+  10: "/assets/turtle_icon.png"
+}
 
 export class BaseMap {
   Map!: Map;
   Layers: {[key: string]: LayerOptions} = {};
 
-  constructor(private mqttService: MqttService, private labelService: LabelService) {
+  liveMapState$ = this.liveMarkersService.stateChange.pipe(
+    map(s => {
+      switch (s) {
+        case MqttConnectionState.CONNECTED:
+          return "connected";
+        case MqttConnectionState.CONNECTING:
+          return "connecting";
+        case MqttConnectionState.CLOSED:
+          return "disconnected";
+        default:
+          return "unknown";
+      }
+    })
+  )
+
+  constructor(private mqttService: MqttService, private labelService: LabelService, private liveMarkersService: LiveMarkersService) {
     const liveLayer = new FeatureGroup();
     const markers: {[player: string]: Marker} = {};
-    const zeroVector:CharacterForward = { X: 1, Y: 0, Z: 0 }
+    const zeroVector: CharacterForward = { X: 1, Y: 0, Z: 0 }
     this.registerLayer("LIVE_MAP", {Hidden: false, Layer: liveLayer})
+    
+    this.liveMarkersService.onConnected.subscribe(_ => {
+      this.liveMarkersService.subscribeToChannel().subscribe(message => {
+        if (!this.Map) {
+          return
+        }
 
-    this.mqttService.observe('maps.gw2.io/global/#').subscribe((message: IMqttMessage) => {
-      if (!this.Map) {
-        return
-      }
+        const data = JSON.parse(message.payload.toString()) as LivePlayerData;
+        const latLng = this.Map.unproject([data.MapPosition.X, data.MapPosition.Y], this.Map.getMaxZoom())
+        const rotation = this.degreesBetweenVectors(data.CharacterForward, zeroVector)
 
-      const data = JSON.parse(message.payload.toString()) as LivePlayerData;
-      const latLng = this.Map.unproject([data.MapPosition.X, data.MapPosition.Y], this.Map.getMaxZoom())
-      const rotation = this.degreesBetweenVectors(data.CharacterForward, zeroVector)
+        if (data.CharacterName in markers) {
+          // @ts-ignore
+          markers[data.CharacterName].options.img.rotate = rotation
+          markers[data.CharacterName]
+            .setLatLng(latLng);
+        } else {
+          const icons: CanvasIcon[] = [];
 
-      if (data.CharacterName in markers) {
-        // @ts-ignore
-        markers[data.CharacterName].options.img.rotate = rotation
-        markers[data.CharacterName]
-          .setLatLng(latLng);
-      } else {
-        markers[data.CharacterName] = labelService.createCanvasMarker(this.Map, [data.MapPosition.X, data.MapPosition.Y], "/assets/player_marker.png", rotation)
-          .bindTooltip(data.CharacterName + "(" + data.AccountName + ")", {className: "tooltip-overlay", offset: new Point(15, 0)})
-          .addTo(liveLayer);
-      }
+          if (data.IsCommander) {
+            icons.push({
+              url: "/assets/commander_blue.png",
+              position: "top",
+              size: [12,12],
+              offset: [0, 0]
+            })
+          }
 
-      liveLayer.bringToFront();
-    });
+          markers[data.CharacterName] = labelService.createCanvasMarker(
+            this.Map,
+            [data.MapPosition.X, data.MapPosition.Y],
+            "/assets/player_marker.png",
+            rotation,
+            [32, 32],
+            32,
+            icons
+          )
+            .bindTooltip(data.CharacterName + "(" + data.AccountName + ")", {className: "tooltip-overlay", offset: new Point(15, 0)})
+            .addTo(liveLayer);
+        }
+
+        liveLayer.bringToFront();
+      })
+    })
   }
 
   degreesBetweenVectors(vector1: CharacterForward, vector2: CharacterForward) {
@@ -173,7 +227,6 @@ export class BaseMap {
             (layerOptions.Layer as TileLayer).setOpacity(1);
           }
         }
-
       } else {
         //console.log("Hiding " + layersKey);
         this.hideLayer(layersKey);
@@ -191,7 +244,6 @@ export class BaseMap {
   }
 
   private RIGHT_MB = 2
-
   private createLine() {
     const line = new Polyline([], { color: "#DDD", opacity: 0.9 }).addTo(this.Map)
     let isDrawing = true;

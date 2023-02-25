@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {CookieService} from "ngx-cookie";
-import {Router} from "@angular/router";
+import {Store} from "@ngrx/store";
+import {settingsAction} from "../../state/settings/settings.action";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,11 @@ import {Router} from "@angular/router";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor() {
-    document.addEventListener('contextmenu', event => event.preventDefault());
+  constructor(private store: Store) {
+    this.store.dispatch(settingsAction.loadCookie());
+
+    if (environment.production) {
+      document.addEventListener('contextmenu', event => event.preventDefault());
+    }
   }
 }

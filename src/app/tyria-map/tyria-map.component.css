@@ -35,3 +35,9 @@
 .compass-button.eod:hover {
   background-image: url("/assets/compass_eod_pointer_activated.png");
 }
+
+.compass-button-player {
+  width: 32px;
+  height: 32px;
+  background-image: url("/assets/compass_player_location.png");
+}

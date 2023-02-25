@@ -106,6 +106,14 @@ export interface Match {
   objectives: MergedObjective[]
 }
 
+export interface MatchOverview {
+  id: string;
+  worlds: Scores;
+  all_worlds: WorldNames;
+  start_time: Date;
+  end_time: Date;
+}
+
 export interface World {
   id: string;
   name: string;
@@ -258,6 +266,10 @@ export class WvwService {
 
   getAllWorlds(): Observable<World[]> {
     return this.httpClient.get<World[]>(`https://api.guildwars2.com/v2/worlds?ids=all`);
+  }
+
+  getMatchOverviewByWorldId(worldId: number): Observable<MatchOverview> {
+    return this.httpClient.get<MatchOverview>(`https://api.guildwars2.com/v2/wvw/matches/overview?world=${worldId}`)
   }
 
   private getLastDayOccurence (date: Date, day: "sun" | "mon" | "tue" | "wed" | "thurs" | "fri" | "sat"): Date {

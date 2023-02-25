@@ -10,13 +10,13 @@ import {LayerService} from "../../services/layer.service";
 import {ToastrService} from "ngx-toastr";
 import {Match, MergedObjective, World, WvwService} from "../../services/wvw.service";
 import {
+  combineLatestWith,
   debounceTime, first,
   fromEvent, interval,
   map,
   Observable, Subject, Subscription, switchMap, take, takeUntil, tap,
 } from "rxjs";
 import {BaseMap} from "../../lib/base-map";
-import {CookieService} from "ngx-cookie";
 import {Store} from "@ngrx/store";
 import {mistsActions} from "../../state/mists/mists.action";
 import {AppState} from "../../state/appState";
@@ -24,6 +24,8 @@ import {DialogService} from "primeng/dynamicdialog";
 import {ActivatedRoute} from "@angular/router";
 import {MqttService} from "ngx-mqtt";
 import {LabelService} from "../../services/label.service";
+import {LiveMarkersService} from "../../services/live-markers.service";
+import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 
 @Component({
   selector: 'mists-map',
@@ -35,6 +37,7 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   private WvW_WORLD_KEY = "gw2.io_WvW_World" as const;
   private OBJECTIVE_LAYER = "mists_objective" as const;
   private HEADINGS_LAYER = "mists_headings" as const;
+  private CONTINENT_ID = 2 as const;
 
   worlds$: Observable<World[]>;
   selectedWorld: World | undefined;
@@ -62,13 +65,13 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
     private layerService: LayerService,
     private wvwService: WvwService,
     private toastr: ToastrService,
-    private cookieService: CookieService,
     private readonly store: Store<AppState>,
     private route: ActivatedRoute,
     mqttService: MqttService,
-    labelService: LabelService
+    labelService: LabelService,
+    liveMarkerService: LiveMarkersService
   ) {
-    super(mqttService, labelService)
+    super(mqttService, labelService, liveMarkerService)
 
     this.worlds$ = wvwService.getAllWorlds();
     this.store.dispatch(mistsActions.loadMatches())
@@ -84,9 +87,6 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
           break;
         case "Digit2":
           this.showMatches = !this.showMatches;
-          break;
-        case "Digit3":
-          this.showSettings = !this.showSettings;
           break;
       }
     });
@@ -104,19 +104,20 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
 
   unsubscribe$ = new Subject<void>();
   ngOnInit(): void {
+    this.store.dispatch(liveMarkersActions.setActiveContinent({ continentId: this.CONTINENT_ID }))
+
     this.route.params.pipe(
       map(params=> params["id"] as string),
-      map(id => {
+      combineLatestWith(this.store.select(s => s.settings.homeWorld)),
+      map(([id, homeWorldId]) => {
         if (id) {
           return id
         }
 
-        if (this.cookieService.hasKey(this.WvW_WORLD_KEY)) {
-          this.selectedWorld = this.cookieService.getObject(this.WvW_WORLD_KEY) as (World | undefined);
-          if (this.selectedWorld) {
-            return this.selectedWorld.id
-          }
+        if (homeWorldId) {
+          return homeWorldId;
         }
+
         return undefined
       }),
       takeUntil(this.unsubscribe$)
@@ -176,15 +177,6 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
 
 
     this.setupDrawing()
-  }
-
-  saveSettings(selectedWorld: World | undefined) {
-    if (selectedWorld) {
-      this.selectedWorld = selectedWorld;
-      this.cookieService.put(this.WvW_WORLD_KEY, JSON.stringify(selectedWorld));
-
-      this.store.dispatch(mistsActions.setActiveWorld({ worldId: selectedWorld.id }))
-    }
   }
 
   overviewMatchClicked($event: Match) {

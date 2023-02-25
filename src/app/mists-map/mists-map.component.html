@@ -23,21 +23,7 @@
   <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showSettings = !showSettings" icon="pi pi-cog"></button>
 </div>
 
-
-<p-dialog header="Settings" [(visible)]="showSettings">
-  <label class="font-bold">Home World:</label>
-  <p-dropdown *ngIf="worlds$ | async as worlds"
-              appendTo="body"
-              [style]="{width: '100%'}"
-              [options]="worlds | orderBy:'id'" optionLabel="name" [(ngModel)]="selectedWorld"
-              [filter]="true" filterBy="name">
-  </p-dropdown>
-  <ng-template pTemplate="footer">
-    <p-button icon="pi pi-check" (click)="saveSettings(selectedWorld); this.showSettings = false" label="Save" styleClass="p-button p-button-text p-button-success"></p-button>
-    <p-button icon="pi pi-times" (click)="this.showSettings = false" label="Cancel" styleClass="p-button p-button-text p-button-danger"></p-button>
-  </ng-template>
-</p-dialog>
-
+<app-settings-modal [(visible)]="showSettings"></app-settings-modal>
 
 <div *ngIf="showScore" style="position: absolute; z-index: 999; left: 15%; top: 25%; width: 75vw; height: 50vh;">
   <ng-container *ngIf="activeMatch$ | async as activeMatch">
