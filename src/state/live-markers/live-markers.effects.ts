@@ -7,6 +7,7 @@ import {combineLatestWith, filter, interval, map, of, switchMap, tap, timer, wit
 import {LiveMarker} from "../../lib/live-marker";
 import {AppState} from "../appState";
 import {LabelService} from "../../services/label.service";
+import {selectUserAccountName} from "../user/user.feature";
 
 @Injectable()
 export class LiveMarkersEffects {
@@ -15,15 +16,16 @@ export class LiveMarkersEffects {
   createPlayerMarker$ = createEffect(() => this.actions$.pipe(
     ofType(liveMarkersActions.upsertPlayerData),
     filter(data => !(data.data.AccountName in this.markers)),
-    combineLatestWith(this.liveMarkerService.activeMapLayer$),
-    tap(([playerData, activeMapLayer]) => console.log(playerData, activeMapLayer)),
-    map(([playerData, activeMapLayer]) => {
+    combineLatestWith(this.liveMarkerService.activeMapLayer$, this.store.select(selectUserAccountName)),
+    tap(([playerData, activeMapLayer, accountName]) => console.log(playerData, activeMapLayer, accountName)),
+    map(([playerData, activeMapLayer, accountName]) => {
       this.markers[playerData.data.AccountName] = new LiveMarker(
         activeMapLayer[0],
         activeMapLayer[1],
         this.store,
         this.labelService,
-        playerData.data);
+        playerData.data,
+        playerData.data.AccountName === accountName);
 
       return liveMarkersActions.createdLivePlayerMarker({ accountName: playerData.data.AccountName })
     })

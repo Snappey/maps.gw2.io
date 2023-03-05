@@ -133,15 +133,9 @@ export const selectUserTopic = createSelector(
   }
 );
 
-export const selectUserData = (AccountName: string) => createSelector(
-  (state: AppState) => state.liveMarkers.players[AccountName] ?? undefined,
-  (data) => data
-)
-
 export const {
   name, // feature name
 } = liveMarkersFeature;
-
 
 export interface LivePlayerData extends CharacterPositionUpdate, CharacterStateUpdate, CharacterMarkerInfo {}
 
