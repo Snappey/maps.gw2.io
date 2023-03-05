@@ -33,7 +33,6 @@ export class LiveMarkersService {
   private markers: { [accountId: string]: LiveMarker } = {};
 
   onConnected$: Observable<boolean> = this.mqttService.state.pipe(
-    tap(state => console.log(state)),
     map(state => state === MqttConnectionState.CONNECTED),
     filter(state => state)
   );
@@ -58,20 +57,23 @@ export class LiveMarkersService {
     // Update AuthToken when a user changes their API Key
     store.select(s => s.settings.liveMapEnabled).pipe(
       withLatestFrom(this.store.select(s => s.settings.apiKey)),
-      filter(([_, apiKey]) => !!apiKey),
-      switchMap(([_, apiKey]) => this.getAuthToken(apiKey!))
+      filter(([enabled, _]) => enabled),
+      map(([_, apiKey]) => apiKey ? apiKey : "buff_reaper"),
+      tap(apiKey => console.log(apiKey)),
+      switchMap((apiKey) => this.getAuthToken(apiKey))
     ).subscribe(authToken => this.store.dispatch(liveMarkersActions.setAuthToken({ authToken })))
 
     // When a users authToken changes try and connect to the MQTT Broker
     store.select(selectUserWithAuthToken).pipe(
-      filter((data) => !!data.authToken && !!data.user),
+      filter((data) => !!data.authToken),
       withLatestFrom(this.stateChange),
       filter(([_, state]) => state !== MqttConnectionState.CONNECTED),
+      tap(d => console.log(d)),
       map(([data, _]) =>
         this.mqttService.connect({
           ...this.mqttOptions,
-          clientId: data.user,
-          username: data.user,
+          clientId: data.user ? data.user : "anonymous-" + (Math.random() + 1).toString(36).substring(7),
+          username: data.user ? data.user : "anonymous",
           password: data.authToken!
         })
       ),
