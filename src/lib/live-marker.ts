@@ -40,12 +40,14 @@ export class LiveMarker {
   private marker: Marker;
   private readonly forwardVector: Vector3 = { X: 1, Y: 0, Z: 0 }
   private readonly accountName: string;
-  private readonly isUser: boolean;
+  private readonly isSelf: boolean;
+  private lastUpdate: number;
+  private readonly expiryMs: number = 40_000;
 
-  constructor(private leaflet: Map, private layer: FeatureGroup, private store: Store<AppState>, private labelService: LabelService, data: CharacterPositionUpdate, isUser: boolean) {
+  constructor(private leaflet: Map, private layer: FeatureGroup, private store: Store<AppState>, private labelService: LabelService, data: CharacterPositionUpdate, isSelf: boolean) {
     console.log("created live marker for", data.AccountName, data.MapPosition.X, data.MapPosition.Y);
     this.accountName = data.AccountName;
-    this.isUser = isUser;
+    this.isSelf = isSelf;
 
     this.marker = this.createMarker(
       [data.MapPosition.X, data.MapPosition.Y],
@@ -53,13 +55,14 @@ export class LiveMarker {
       data.CharacterName,
       []
     );
+    this.lastUpdate = Date.now()
   }
 
   createMarker(coords: [number, number], rotation: number, characterName: string, icons: CanvasIcon[]): Marker {
     return this.labelService.createCanvasMarker(
       this.leaflet,
       coords,
-      this.isUser ? "/assets/player_marker.png" : "/assets/global_player_dot.png",
+      this.isSelf ? "/assets/player_marker.png" : "/assets/global_player_dot.png",
       rotation,
       [32, 32],
       32,
@@ -76,6 +79,8 @@ export class LiveMarker {
     const newMarker = this.createMarker([coords.x, coords.y], rotation, state.CharacterName, this.getIcons(state));
     this.marker.remove();
     this.marker = newMarker;
+
+    this.lastUpdate = Date.now();
   }
 
   updatePosition(data: CharacterPositionUpdate) {
@@ -84,6 +89,7 @@ export class LiveMarker {
     this.marker.setLatLng(
       this.leaflet.unproject([data.MapPosition.X, data.MapPosition.Y], this.leaflet.getMaxZoom()));
 
+    this.lastUpdate = Date.now();
     //this.updateMarkerRotation.next(this.degreesBetweenVectors(data.CharacterForward, this.forwardVector))
     //this.updateMarkerPosition.next(data.MapPosition);
   }
@@ -103,11 +109,17 @@ export class LiveMarker {
     return icons;
   }
 
-  Remove() {
+  remove() {
     console.log("deleted live marker for " + this.accountName);
     this.marker.remove();
     this.updateMarkerPosition$.unsubscribe();
     this.updateMarkerRotation$.unsubscribe();
+  }
+
+  checkExpiry() {
+    if (Date.now() - this.lastUpdate > this.expiryMs) {
+      this.remove();
+    }
   }
 
   private getMarkerCoords(): Vector2 {

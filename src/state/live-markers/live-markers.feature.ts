@@ -6,13 +6,11 @@ import {ChannelType} from "../settings/settings.feature";
 import {PointTuple} from "leaflet";
 
 export interface LiveMarkersState {
-  players: { [id: string]: LivePlayerData };
   authToken: string;
   activeContinentId: 1 | 2;
 }
 
 const initialState: LiveMarkersState = {
-  players: {},
   authToken: "",
   activeContinentId: 1,
 };
@@ -21,64 +19,6 @@ export const liveMarkersFeature = createFeature({
   name: 'liveMarkers',
   reducer: createReducer(
     initialState,
-    on(liveMarkersActions.clearAllPlayerData, (state) => {
-      return {
-        ...state,
-        players: {}
-      }
-    }),
-    on(liveMarkersActions.upsertPlayerData, (state, props) => {
-      return {
-        ...state,
-        players: {
-          ...state.players,
-          [props.data.AccountName]: {
-            ...state.players[props.data.AccountName],
-            ...props.data,
-
-            LastMessageTimestamp: Date.now()
-          },
-        }
-      }
-    }),
-    on(liveMarkersActions.updatePlayerState, (state, props) => {
-      return {
-        ...state,
-        players: {
-          ...state.players,
-          [props.data.AccountName]: {
-            ...state.players[props.data.AccountName],
-            ...props.data,
-
-            LastMessageTimestamp: Date.now(),
-            ReDraw: true
-          }
-        }
-      }
-    }),
-    on(liveMarkersActions.deletePlayerData, (state, props) => {
-      const newPlayers = {...state.players}
-      delete newPlayers[props.accountName]
-
-      return {
-        ...state,
-        players: {
-          ...newPlayers
-        }
-      }
-    }),
-    on(liveMarkersActions.updatePlayerKeepalive, (state, props) => {
-      return {
-        ...state,
-        players: {
-          ...state.players,
-          [props.accountName]: {
-            ...state.players[props.accountName],
-            LastMessageTimestamp: Date.now()
-          }
-        }
-      }
-    }),
     on(liveMarkersActions.setAuthToken, (state, props) => {
       return {
         ...state,

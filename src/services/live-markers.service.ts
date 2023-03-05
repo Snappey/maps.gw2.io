@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {IMqttMessage, IMqttServiceOptions, MqttConnectionState, MqttService} from "ngx-mqtt";
 import {environment} from '../environments/environment';
-import {FeatureGroup, Layer, LayerGroup, Map} from 'leaflet';
+import {FeatureGroup, LatLngBounds, Layer, LayerGroup, Map, Point} from 'leaflet';
 import {
   catchError, combineLatestWith,
   filter,
@@ -21,11 +21,17 @@ import {
   selectUserTopic,
   selectUserWithAuthToken, CharacterStateUpdate
 } from "../state/live-markers/live-markers.feature";
+import {LiveMarker} from "../lib/live-marker";
+import {selectUserAccountName} from "../state/user/user.feature";
+import {LabelService} from "./label.service";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LiveMarkersService {
+  private markers: { [accountId: string]: LiveMarker } = {};
+
   onConnected$: Observable<boolean> = this.mqttService.state.pipe(
     tap(state => console.log(state)),
     map(state => state === MqttConnectionState.CONNECTED),
@@ -36,11 +42,6 @@ export class LiveMarkersService {
     map(state => state === MqttConnectionState.CLOSED),
     filter(state => !state)
   );
-
-  livePlayerData$: Observable<LivePlayerData[]> =
-    this.store.select(s => s.liveMarkers.players).pipe(
-      map(p => Object.values(p))
-    )
 
   stateChange: Observable<MqttConnectionState> = this.mqttService.state;
   private mqttOptions: IMqttServiceOptions = {
@@ -53,7 +54,7 @@ export class LiveMarkersService {
   private activeMapLayer: Subject<[Map, FeatureGroup]> = new Subject<[Map, FeatureGroup]>();
   activeMapLayer$: Observable<[Map, FeatureGroup]> = this.activeMapLayer.asObservable();
 
-  constructor(private mqttService: MqttService, private http: HttpClient, private store: Store<AppState>) {
+  constructor(private mqttService: MqttService, private http: HttpClient, private store: Store<AppState>, private labelService: LabelService, private toastr: ToastrService) {
     // Update AuthToken when a user changes their API Key
     store.select(s => s.settings.liveMapEnabled).pipe(
       withLatestFrom(this.store.select(s => s.settings.apiKey)),
@@ -77,10 +78,16 @@ export class LiveMarkersService {
       catchError( async error => console.log("failed to connect to broker: " + error))
     ).subscribe();
 
+    this.mqttService.state.subscribe(state => this.toastr.info(MqttConnectionState[state].toString(), "Live Markers", {
+      toastClass: "custom-toastr",
+      positionClass: "toast-top-right"
+    }))
+
     // Update Player Data Store from Broker
     this.onConnected$.pipe(
-      switchMap(_ => this.subscribeToChannel())
-    ).subscribe((message) => {
+      switchMap(_ => this.subscribeToChannel()),
+      combineLatestWith(this.activeMapLayer$, this.store.select(selectUserAccountName)),
+    ).subscribe(([message, [map, layer], userAccount]) => {
       const data = JSON.parse(message.payload.toString()) as { Type: string };
       const accountName = message.topic.split("/").pop()
       if (!accountName) {
@@ -89,13 +96,28 @@ export class LiveMarkersService {
       }
       switch (data.Type) {
         case "UpsertCharacterMovement":
-          return this.store.dispatch(liveMarkersActions.upsertPlayerData({ data: { ...data as CharacterPositionUpdate, AccountName: accountName } }));
+          const msg = { ...data as CharacterPositionUpdate, AccountName: accountName };
+          if (accountName in this.markers) {
+            if (map.getBounds().contains(map.unproject(new Point(msg.MapPosition.X, msg.MapPosition.Y), map.getMaxZoom()))) {
+              return this.markers[accountName].updatePosition(msg)
+            }
+            return;
+          } else {
+            return this.markers[accountName] = new LiveMarker(
+              map,
+              layer,
+              this.store,
+              this.labelService,
+              msg,
+              accountName === userAccount)
+          }
         case "UpdateCharacterState":
-          return this.store.dispatch(liveMarkersActions.updatePlayerState({ data: { ...data as CharacterStateUpdate, AccountName: accountName }  }));
+          return this.markers[accountName].updateState({ ...data as CharacterStateUpdate, AccountName: accountName })
         case "DeleteCharacterData":
-          return this.store.dispatch(liveMarkersActions.deletePlayerData({ accountName }));
+          this.markers[accountName].remove();
+          return delete this.markers[accountName];
         case "UpdateCharacterKeepAlive":
-          return this.store.dispatch(liveMarkersActions.updatePlayerKeepalive({ accountName }));
+          return this.markers[accountName].checkExpiry();
         default:
           console.warn("received unimplemented packet type: " + data.Type);
       }
