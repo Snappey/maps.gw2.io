@@ -176,7 +176,9 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
       ).subscribe(_ => _)
 
 
-    this.setupDrawing()
+    this.setupDrawing();
+
+    super.onMapInitialised(leaflet);
   }
 
   overviewMatchClicked($event: Match) {

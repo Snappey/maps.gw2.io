@@ -1,10 +1,13 @@
 import {FeatureGroup, Layer, Map, Marker, Point, PointTuple, Polyline, TileLayer} from 'leaflet';
-import {combineLatestWith, interval, map, Subscription, take, takeUntil} from "rxjs";
+import {filter, interval, map, of, Subscription, switchMap, take, tap} from "rxjs";
 import {MqttConnectionState, MqttService} from "ngx-mqtt";
 import {CanvasIcon, LabelService} from "../services/label.service";
 import {LiveMarkersService} from "../services/live-markers.service";
-import {Store} from "@ngrx/store";
+import {Vector3} from "../state/live-markers/live-markers.feature";
 import {AppState} from "../state/appState";
+import {Store} from "@ngrx/store";
+import {liveMarkersActions} from "../state/live-markers/live-markers.action";
+import {LiveMarker} from "./live-marker";
 
 export interface LayerOptions {
   Layer: Layer;
@@ -12,48 +15,6 @@ export interface LayerOptions {
   MaxZoomLevel?: number;
   OpacityLevels?: {[zoomLevel: number]: number};
   Hidden: boolean;
-}
-
-export interface MapPosition {
-  X: number;
-  Y: number;
-}
-
-export interface CharacterForward {
-  X: number;
-  Y: number;
-  Z: number;
-}
-
-export interface LivePlayerData {
-  Type: string;
-  AccountName: string;
-  CharacterName: string;
-  ContinentId: number;
-  MapId: number;
-  MapPosition: MapPosition;
-  CharacterForward: CharacterForward;
-  WorldId: number;
-  ShardId: number;
-  ServerConnectionInfo: string;
-  BuildId: number;
-  IsCommander: boolean;
-  Mount: number;
-  Profession: number;
-  Specialisation: number;
-}
-
-const mountIcons: {[i: number]: string} = {
-  1: "/assets/jackal_icon.png",
-  2: "/assets/griffon_icon.png",
-  3: "/assets/springer_icon.png",
-  4: "/assets/skimmer_icon.png",
-  5: "/assets/raptor_icon.png",
-  6: "/assets/beetle_icon.png",
-  7: "/assets/warclaw_icon.png",
-  8: "/assets/skyscale_icon.png",
-  9: "/assets/skiff_icon.png",
-  10: "/assets/turtle_icon.png"
 }
 
 export class BaseMap {
@@ -76,65 +37,12 @@ export class BaseMap {
   )
 
   constructor(private mqttService: MqttService, private labelService: LabelService, private liveMarkersService: LiveMarkersService) {
-    const liveLayer = new FeatureGroup();
-    const markers: {[player: string]: Marker} = {};
-    const zeroVector: CharacterForward = { X: 1, Y: 0, Z: 0 }
-    this.registerLayer("LIVE_MAP", {Hidden: false, Layer: liveLayer})
-    
-    this.liveMarkersService.onConnected.subscribe(_ => {
-      this.liveMarkersService.subscribeToChannel().subscribe(message => {
-        if (!this.Map) {
-          return
-        }
-
-        const data = JSON.parse(message.payload.toString()) as LivePlayerData;
-        const latLng = this.Map.unproject([data.MapPosition.X, data.MapPosition.Y], this.Map.getMaxZoom())
-        const rotation = this.degreesBetweenVectors(data.CharacterForward, zeroVector)
-
-        if (data.CharacterName in markers) {
-          // @ts-ignore
-          markers[data.CharacterName].options.img.rotate = rotation
-          markers[data.CharacterName]
-            .setLatLng(latLng);
-        } else {
-          const icons: CanvasIcon[] = [];
-
-          if (data.IsCommander) {
-            icons.push({
-              url: "/assets/commander_blue.png",
-              position: "top",
-              size: [12,12],
-              offset: [0, 0]
-            })
-          }
-
-          markers[data.CharacterName] = labelService.createCanvasMarker(
-            this.Map,
-            [data.MapPosition.X, data.MapPosition.Y],
-            "/assets/player_marker.png",
-            rotation,
-            [32, 32],
-            32,
-            icons
-          )
-            .bindTooltip(data.CharacterName + "(" + data.AccountName + ")", {className: "tooltip-overlay", offset: new Point(15, 0)})
-            .addTo(liveLayer);
-        }
-
-        liveLayer.bringToFront();
-      })
-    })
   }
 
-  degreesBetweenVectors(vector1: CharacterForward, vector2: CharacterForward) {
-    const dotProduct = vector1.X * vector2.X + vector1.Y * vector2.Y;
-    const magnitude1 = Math.sqrt(vector1.X * vector1.X + vector1.Y * vector1.Y);
-    const magnitude2 = Math.sqrt(vector2.X * vector2.X + vector2.Y * vector2.Y);
-    const cosTheta = dotProduct / (magnitude1 * magnitude2);
-    const thetaRadians = Math.acos(cosTheta);
-    const crossProduct = vector1.X * vector2.Y - vector1.Y * vector2.X;
-    const sign = crossProduct >= 0 ? 1 : -1;
-    return sign * thetaRadians * (180 / Math.PI);
+  onMapInitialised(leaflet: Map) {
+    const liveLayer = new FeatureGroup();
+    this.registerLayer("LIVE_MAP", {Hidden: false, Layer: liveLayer});
+    this.liveMarkersService.setActiveMapLayer(leaflet, liveLayer);
   }
 
   public panTo(coords: PointTuple, zoom: number = 4) {

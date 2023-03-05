@@ -69,7 +69,7 @@ export class LayerService {
 
   getTyriaLayer(): TileLayer {
     return tileLayer('https://tiles.gw2.io/1/1/{z}/{x}/{y}.jpg', {
-        maxNativeZoom: 7,
+        maxNativeZoom: 9,
         minNativeZoom: 1,
         maxZoom: 7,
         noWrap: true,

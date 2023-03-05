@@ -7,8 +7,8 @@ import {
   map,
   Subject, Subscription, takeUntil
 } from 'rxjs';
-import * as L from 'leaflet';
 import {
+  CRS,
   LatLng,
   latLng,
   LatLngBounds,
@@ -140,6 +140,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   //layersControls: LeafletControlLayersConfig = {baseLayers: {}, overlays: {}}
   options = {
     preferCanvas: true,
+    maxNativeZoom: 9,
     maxZoom: 7,
     zoom: 3,
     zoomControl: false,
@@ -253,7 +254,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   onMapReady(leaflet: Map) {
     this.Map = leaflet;
 
-    leaflet.options.crs = L.CRS.Simple;
+    leaflet.options.crs = CRS.Simple;
     leaflet.options.maxBoundsViscosity = 1;
     leaflet.setMaxBounds(new LatLngBounds(
         leaflet.unproject([0, 0], leaflet.getMaxZoom()),
@@ -341,7 +342,9 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       }
     })
 
-    this.setupDrawing()
+    this.setupDrawing();
+
+    super.onMapInitialised(leaflet);
   }
 
   onMapDoubleClick(event: LeafletMouseEvent) {

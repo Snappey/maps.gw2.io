@@ -27,7 +27,7 @@
     "@ngrx/store-devtools": "^15.2.1",
     "chart.js": "^4.1.1",
     "fuzzy-search": "^3.2.1",
-    "leaflet": "^1.8.0",
+    "leaflet": "^1.9.3",
     "leaflet-canvas-markers": "^1.0.7",
     "leaflet-contextmenu": "^1.4.0",
     "moment": "^2.29.4",

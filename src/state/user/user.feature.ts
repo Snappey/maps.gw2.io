@@ -85,6 +85,11 @@ export const selectUserRegion = createSelector(
   }
 );
 
+export const selectUserAccountName = createSelector(
+  (state: AppState) => state.user.name,
+  (name) => name
+);
+
 export const selectUserWvwTeam = createSelector(
   (state: AppState) => state.user.match_details,
   (state: AppState) => state.user.world,
