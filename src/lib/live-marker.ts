@@ -2,20 +2,50 @@ import {Map, Layer, Marker, Point, LayerGroup, FeatureGroup, Polyline, latLng} f
 import {Store} from "@ngrx/store";
 import {AppState} from "../state/appState";
 import {CanvasIcon, LabelService} from "../services/label.service";
-import {CharacterPositionUpdate, CharacterStateUpdate, Vector3} from "../state/live-markers/live-markers.feature";
-import {filter, interval, map, Subscription, tap} from "rxjs";
+import {CharacterPositionUpdate, CharacterStateUpdate, Vector3, Vector2} from "../state/live-markers/live-markers.feature";
+import {
+  filter,
+  interval,
+  map,
+  of,
+  Subject,
+  Subscription,
+  switchMap,
+  delay,
+  concatMap,
+  tap,
+  mergeMap,
+  range
+} from "rxjs";
 
 export class LiveMarker {
+  private updateMarkerPosition: Subject<Vector2> = new Subject<Vector2>();
+  private updateMarkerPosition$ = this.updateMarkerPosition.pipe(
+    switchMap(endPosition => of(...this.createPath(this.getMarkerCoords(), endPosition, 500)).pipe(
+      delay(5),
+      tap(newPosition => this.marker.setLatLng(
+        this.leaflet.unproject([newPosition.X, newPosition.Y], this.leaflet.getMaxZoom())))
+    ))
+  ).subscribe()
+  private updateMarkerRotation: Subject<number> = new Subject<number>();
+  private updateMarkerRotation$ = this.updateMarkerRotation.pipe(
+    // @ts-ignore
+    switchMap(endRotation => of(...this.createAnglePath(this.marker.options.img.rotate, endRotation, 180)).pipe(
+      delay(50),
+      // @ts-ignore
+      tap(newPosition => this.marker.options.img.rotate = newPosition)
+    ))
+  ).subscribe()
+
   private marker: Marker;
-  private markerTrail: Polyline;
   private readonly forwardVector: Vector3 = { X: 1, Y: 0, Z: 0 }
   private readonly accountName: string;
+  private readonly isUser: boolean;
 
-
-  private markerTrailUpdate: Subscription;
-  constructor(private leaflet: Map, private layer: FeatureGroup, private store: Store<AppState>, private labelService: LabelService, data: CharacterPositionUpdate) {
-    console.log("created live marker for", data.AccountName);
+  constructor(private leaflet: Map, private layer: FeatureGroup, private store: Store<AppState>, private labelService: LabelService, data: CharacterPositionUpdate, isUser: boolean) {
+    console.log("created live marker for", data.AccountName, data.MapPosition.X, data.MapPosition.Y);
     this.accountName = data.AccountName;
+    this.isUser = isUser;
 
     this.marker = this.createMarker(
       [data.MapPosition.X, data.MapPosition.Y],
@@ -23,21 +53,13 @@ export class LiveMarker {
       data.CharacterName,
       []
     );
-
-    this.markerTrail = new Polyline([this.marker.getLatLng()], { color: "#DDD", stroke: true, weight: 5.5, dashArray: "0.5 50" } )
-    this.markerTrail.addTo(layer);
-
-    this.markerTrailUpdate = interval(500).pipe(
-      map(_ => this.marker.getLatLng()),
-      filter(latLng => latLng !== this.markerTrail.getLatLngs().at(-1)),
-    ).subscribe(latLng => this.markerTrail.addLatLng(latLng));
   }
 
   createMarker(coords: [number, number], rotation: number, characterName: string, icons: CanvasIcon[]): Marker {
     return this.labelService.createCanvasMarker(
       this.leaflet,
       coords,
-      "/assets/player_marker.png",
+      this.isUser ? "/assets/player_marker.png" : "/assets/global_player_dot.png",
       rotation,
       [32, 32],
       32,
@@ -61,6 +83,9 @@ export class LiveMarker {
     this.marker.options.img.rotate = this.degreesBetweenVectors(data.CharacterForward, this.forwardVector)
     this.marker.setLatLng(
       this.leaflet.unproject([data.MapPosition.X, data.MapPosition.Y], this.leaflet.getMaxZoom()));
+
+    //this.updateMarkerRotation.next(this.degreesBetweenVectors(data.CharacterForward, this.forwardVector))
+    //this.updateMarkerPosition.next(data.MapPosition);
   }
 
   getIcons(state: CharacterStateUpdate): CanvasIcon[] {
@@ -81,8 +106,16 @@ export class LiveMarker {
   Remove() {
     console.log("deleted live marker for " + this.accountName);
     this.marker.remove();
-    this.markerTrail.remove()
-    this.markerTrailUpdate.unsubscribe();
+    this.updateMarkerPosition$.unsubscribe();
+    this.updateMarkerRotation$.unsubscribe();
+  }
+
+  private getMarkerCoords(): Vector2 {
+    const coords = this.leaflet.project(this.marker.getLatLng(), this.leaflet.getMaxZoom());
+    return {
+      X: coords.x,
+      Y: coords.y
+    };
   }
 
   private degreesBetweenVectors(vector1: Vector3, vector2: Vector3) {
@@ -95,4 +128,56 @@ export class LiveMarker {
     const sign = crossProduct >= 0 ? 1 : -1;
     return sign * thetaRadians * (180 / Math.PI);
   }
+
+  private createPath(start: Vector2, end: Vector2, iterations: number): Vector2[] {
+    const res: Vector2[] = [];
+    for (let i = 0; i < iterations; i++) {
+      res.push(this.perpVector2(start, end, (1 - i/iterations)))
+    }
+    return res.reverse();
+  }
+
+  private lerpVector2(start: Vector2, end: Vector2, t: number): Vector2 {
+    return {
+      X: start.X + (end.X - start.X) * t,
+      Y: start.Y + (end.Y - start.Y) * t
+    }
+  }
+
+  private perpVector2(start: Vector2, end: Vector2, t: number): Vector2 {
+    return {
+      X: (1 - t) * (1 - t) * start.X + 2 * (1 - t) * t * (start.X + end.X) / 2 + t * t * end.X,
+      Y: (1 - t) * (1 - t) * start.Y + 2 * (1 - t) * t * (start.Y + end.Y) / 2 + t * t * end.Y
+    }
+  }
+
+  private createAnglePath(startAngle: number, endAngle: number, iterations: number): number[] {
+    const res: number[] = [];
+    for (let i = 0; i < iterations; i++) {
+      res.push(this.lerpAngle(startAngle, endAngle, (1 - i/iterations)))
+    }
+    return res.reverse()
+  }
+
+  private lerpAngle(startAngle: number, endAngle: number, t: number): number {
+    // convert angles to the range of -180 to 180 degrees
+    startAngle = ((startAngle + 540) % 360) - 180;
+    endAngle = ((endAngle + 540) % 360) - 180;
+
+    // choose the shortest path for interpolation
+    if (endAngle - startAngle > 180) {
+      endAngle -= 360;
+    } else if (endAngle - startAngle < -180) {
+      endAngle += 360;
+    }
+
+    // perform the linear interpolation
+    var angle = startAngle + (endAngle - startAngle) * t;
+
+    // convert angle back to the range of -180 to 180 degrees
+    angle = ((angle + 540) % 360) - 180;
+
+    return angle;
+  }
 }
+
