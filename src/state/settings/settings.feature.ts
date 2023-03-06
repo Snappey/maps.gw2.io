@@ -8,7 +8,8 @@ import {AppState} from "../appState";
 export enum ChannelType {
   Global = "Global",
   Guild = "Guild",
-  Custom = "Custom"
+  Custom = "Custom",
+  Solo = "Solo"
 }
 
 export interface SettingsState {

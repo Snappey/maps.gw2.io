@@ -30,7 +30,8 @@ export class SettingsModalComponent implements OnDestroy {
 
   maps: string[] = ["Tyria", "Mists"];
   ChannelType = ChannelType;
-  channels: ChannelType[] = [ChannelType.Global, ChannelType.Guild, ChannelType.Custom];
+  authChannelTypes: ChannelType[] = [ChannelType.Global, ChannelType.Guild, ChannelType.Solo, ChannelType.Custom];
+  unauthChannelTypes: ChannelType[] = [ChannelType.Global]
   worlds$: Observable<World[]> = this.wvwService.getAllWorlds()
   settings$: Subscription;
   validateApiKey$ = this.settingsForm.get("apiKey")?.valueChanges.pipe(

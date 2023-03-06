@@ -26,8 +26,9 @@
 
     <h3>Live Map</h3>
     <div class="field">
-      <p-selectButton [options]="[ { label: 'On', value: true }, { label: 'Off', value: false }]" formControlName="liveMapEnabled" optionLabel="label" optionValue="value"></p-selectButton>
-      <small id="live-map-toggle-help" class="block">See players location on your map, can be filtered to global, guild or custom channels.</small>
+      <p-selectButton [options]="[ { label: 'On', value: true }, { label: 'Off', value: false }]"
+                      formControlName="liveMapEnabled" optionLabel="label" optionValue="value"></p-selectButton>
+      <small id="live-map-toggle-help" class="block">See players location on your map, can be filtered to global, guild, solo or custom channels.</small>
     </div>
 
     <ng-container *ngIf="settingsForm.get('liveMapEnabled')?.value">
@@ -36,10 +37,10 @@
         <p-dropdown id="selectedChannel"
                     appendTo="body"
                     [style]="{width: '100%'}"
-                    [options]="channels"
+                    [options]="settingsForm.get('apiKey')?.value ? authChannelTypes : unauthChannelTypes"
                     formControlName="selectedChannel">
         </p-dropdown>
-        <small id="selectedChannel-help" class="block">Channel you want to use.</small>
+        <small id="selectedChannel-help" class="block">Channel type to subscribe to.</small>
       </div>
 
       <div class="field" *ngIf="settingsForm.get('selectedChannel')?.value === ChannelType.Guild">
@@ -55,7 +56,7 @@
             [{{guild.tag}}] {{guild.name}}
           </ng-template>
         </p-dropdown>
-        <small id="guild-help" class="block">Guild you want to display.</small>
+        <small id="guild-help" class="block">Guild you want to subscribe to.</small>
       </div>
 
       <div class="field" *ngIf="settingsForm.get('selectedChannel')?.value === ChannelType.Custom">

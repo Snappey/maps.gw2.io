@@ -1,7 +1,7 @@
 import {createFeature, createReducer, createSelector, on} from '@ngrx/store';
 import {liveMarkersActions} from "./live-markers.action";
 import {AppState} from "../appState";
-import {selectUserRegion, selectUserWvwTeam} from "../user/user.feature";
+import {selectUserAccountName, selectUserRegion, selectUserWvwTeam} from "../user/user.feature";
 import {ChannelType} from "../settings/settings.feature";
 import {PointTuple} from "leaflet";
 
@@ -53,7 +53,8 @@ export const selectUserTopic = createSelector(
   (state: AppState) => state.liveMarkers.activeContinentId,
   selectUserRegion,
   selectUserWvwTeam,
-  (settings, continentId, region, teamDetails) => {
+  selectUserAccountName,
+  (settings, continentId, region, teamDetails, accountName) => {
     if (teamDetails === undefined) {
       return undefined;
     }
@@ -67,10 +68,17 @@ export const selectUserTopic = createSelector(
         return `maps.gw2.io/guild/${settings.guildChannel}/#`
       case ChannelType.Custom:
         return `maps.gw2.io/custom/${settings.customChannel}/#`
+      case ChannelType.Solo:
+        return `maps.gw2.io/solo/${accountName}/#`
       default:
         return undefined;
     }
   }
+);
+
+export const selectLiveMapEnabled = createSelector(
+  (state: AppState) => state.settings.liveMapEnabled,
+  (enabled) => enabled
 );
 
 export const {

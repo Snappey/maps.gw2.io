@@ -5,8 +5,8 @@ import {FeatureGroup, LatLngBounds, Layer, LayerGroup, Map, Point} from 'leaflet
 import {
   catchError, combineLatestWith,
   filter,
-  map,
-  Observable, Subject,
+  map, merge,
+  Observable, skip, Subject,
   switchMap, tap,
   withLatestFrom
 } from "rxjs";
@@ -19,7 +19,7 @@ import {
   CharacterDeleteUpdate,
   CharacterPositionUpdate,
   selectUserTopic,
-  selectUserWithAuthToken, CharacterStateUpdate
+  selectUserWithAuthToken, CharacterStateUpdate, selectLiveMapEnabled
 } from "../state/live-markers/live-markers.feature";
 import {LiveMarker} from "../lib/live-marker";
 import {selectUserAccountName} from "../state/user/user.feature";
@@ -66,24 +66,29 @@ export class LiveMarkersService {
     // When a users authToken changes try and connect to the MQTT Broker
     store.select(selectUserWithAuthToken).pipe(
       filter((data) => !!data.authToken),
-      withLatestFrom(this.stateChange),
-      filter(([_, state]) => state !== MqttConnectionState.CONNECTED),
-      tap(d => console.log(d)),
-      map(([data, _]) =>
-        this.mqttService.connect({
-          ...this.mqttOptions,
-          clientId: data.user ? data.user : "anonymous-" + (Math.random() + 1).toString(36).substring(7),
-          username: data.user ? data.user : "anonymous",
-          password: data.authToken!
-        })
-      ),
-      catchError( async error => console.log("failed to connect to broker: " + error))
-    ).subscribe();
+      withLatestFrom(this.stateChange, this.store.select(selectLiveMapEnabled)),
+      filter(([_, state, isEnabled]) => isEnabled && state !== MqttConnectionState.CONNECTED),
+    ).subscribe(([data, _, __]) => this.mqttService.connect({
+      ...this.mqttOptions,
+      clientId: data.user ? data.user : "anonymous-" + (Math.random() + 1).toString(36).substring(7),
+      username: data.user ? data.user : "anonymous",
+      password: data.authToken!
+    }));
 
-    this.mqttService.state.subscribe(state => this.toastr.info(MqttConnectionState[state].toString(), "Live Markers", {
+    // Disconnect from broker if liveMapDisabled
+    store.select(s => s.settings.liveMapEnabled).pipe(
+      filter(enabled => !enabled),
+      withLatestFrom(this.mqttService.state),
+      filter(([_, state]) => state === MqttConnectionState.CONNECTED)
+    ).subscribe(_ => this.mqttService.disconnect(true));
+
+    // Notify connections
+    this.mqttService.state.pipe(
+      skip(1),
+    ).subscribe(state => this.toastr.info(MqttConnectionState[state].toString(), "Live Markers", {
       toastClass: "custom-toastr",
-      positionClass: "toast-top-right"
-    }))
+      positionClass: "toast-bottom-left"
+    }));
 
     // Update Player Data Store from Broker
     this.onConnected$.pipe(
