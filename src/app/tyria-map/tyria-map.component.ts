@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {
   debounceTime, first,
@@ -64,12 +64,13 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private searchService: SearchService,
     private store: Store<AppState>,
+    ngZone: NgZone,
     mqttService: MqttService,
     labelService: LabelService,
     liveMarkerService: LiveMarkersService,
     router: Router,
   ) {
-    super(mqttService, labelService, liveMarkerService, router)
+    super(ngZone, mqttService, labelService, liveMarkerService, router)
     // Setup Shortcuts
     fromEvent(document, "keydown").pipe(
       takeUntil(this.unsubscribe$)

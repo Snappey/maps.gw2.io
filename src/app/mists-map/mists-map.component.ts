@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {
   FeatureGroup,
   latLng,
@@ -66,12 +66,13 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private readonly store: Store<AppState>,
     private route: ActivatedRoute,
+    ngZone: NgZone,
     mqttService: MqttService,
     labelService: LabelService,
     liveMarkerService: LiveMarkersService,
     router: Router
   ) {
-    super(mqttService, labelService, liveMarkerService, router)
+    super(ngZone, mqttService, labelService, liveMarkerService, router)
 
     this.worlds$ = wvwService.getAllWorlds();
     this.store.dispatch(mistsActions.loadMatches())

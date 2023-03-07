@@ -4,13 +4,14 @@ import {
   Layer,
   Map,
   PointTuple,
-  Polyline,
+  Polyline, svg,
 } from 'leaflet';
 import {filter, interval, map, Subscription, take} from "rxjs";
 import {MqttConnectionState, MqttService} from "ngx-mqtt";
 import {LabelService} from "../services/label.service";
 import {LiveMarkersService} from "../services/live-markers.service";
 import {Router} from "@angular/router";
+import {NgZone} from "@angular/core";
 
 export interface LayerOptions {
   Layer: Layer;
@@ -39,7 +40,12 @@ export class BaseMap {
     })
   )
 
-  constructor(private mqttService: MqttService, private labelService: LabelService, private liveMarkersService: LiveMarkersService, private router: Router) {
+  constructor(
+    private ngZone: NgZone,
+    private mqttService: MqttService,
+    private labelService: LabelService,
+    private liveMarkersService: LiveMarkersService,
+    private router: Router) {
   }
 
   onMapInitialised(leaflet: Map) {
@@ -57,15 +63,13 @@ export class BaseMap {
       map(([lat, lng, zoom]): [LatLng, number] => [new LatLng(lat, lng), zoom])
     ).subscribe(([latLng, zoom]) => this.Map.setView(latLng, zoom));
 
-    this.Map.on("zoomend", () => this.router.navigate([], { fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") }));
-    this.Map.on("moveend", () => this.router.navigate([], { fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") }));
+    this.Map.on("zoomend", () => this.ngZone.run(() => this.router.navigate([], { fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") })));
+    this.Map.on("moveend", () => this.ngZone.run(() => this.router.navigate([], { fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") })));
 
     // Drawing
-    const drawingLayer = new FeatureGroup();
-    this.registerLayer("DRAWING_MAP", {Hidden: false, Layer: drawingLayer});
     this.Map.on("mousedown", ($event) => {
       if ($event.originalEvent.button == this.RIGHT_MB) {
-        this.createLine(drawingLayer)
+        this.createLine()
       }
     })
   }
@@ -170,8 +174,8 @@ export class BaseMap {
   }
 
   private RIGHT_MB = 2
-  private createLine(layer: FeatureGroup) {
-    const line = new Polyline([], { color: "#DDD", opacity: 0.9 }).addTo(layer)
+  private createLine() {
+    const line = new Polyline([], { color: "#DDD", opacity: 0.9, renderer: svg() }).addTo(this.Map)
     let isDrawing = true;
     let trimLine: Subscription;
 
