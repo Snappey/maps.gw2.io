@@ -1,4 +1,16 @@
-import {FeatureGroup, Layer, Map, Marker, Point, PointTuple, Polyline, TileLayer} from 'leaflet';
+import {
+  FeatureGroup,
+  latLng,
+  LatLng,
+  LatLngBounds,
+  Layer,
+  Map,
+  Marker,
+  Point,
+  PointTuple,
+  Polyline,
+  TileLayer
+} from 'leaflet';
 import {filter, interval, map, of, Subscription, switchMap, take, tap} from "rxjs";
 import {MqttConnectionState, MqttService} from "ngx-mqtt";
 import {CanvasIcon, LabelService} from "../services/label.service";
@@ -8,6 +20,7 @@ import {AppState} from "../state/appState";
 import {Store} from "@ngrx/store";
 import {liveMarkersActions} from "../state/live-markers/live-markers.action";
 import {LiveMarker} from "./live-marker";
+import {ActivatedRoute, Router} from "@angular/router";
 
 export interface LayerOptions {
   Layer: Layer;
@@ -36,13 +49,23 @@ export class BaseMap {
     })
   )
 
-  constructor(private mqttService: MqttService, private labelService: LabelService, private liveMarkersService: LiveMarkersService) {
+  constructor(private mqttService: MqttService, private labelService: LabelService, private liveMarkersService: LiveMarkersService, private router: Router) {
   }
 
   onMapInitialised(leaflet: Map) {
     const liveLayer = new FeatureGroup();
     this.registerLayer("LIVE_MAP", {Hidden: false, Layer: liveLayer});
     this.liveMarkersService.setActiveMapLayer(leaflet, liveLayer);
+
+    this.router.routerState.root.fragment.pipe(
+      filter(fragment => !!fragment),
+      take(1),
+      map(fragment => fragment!.split(",").map(f => parseInt(f))),
+      map(([lat, lng, zoom]): [LatLng, number] => [new LatLng(lat, lng), zoom])
+    ).subscribe(([latLng, zoom]) => this.Map.setView(latLng, zoom));
+
+    this.Map.on("zoomend", () => this.router.navigate([], { fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") }));
+    this.Map.on("moveend", () => this.router.navigate([], { fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") }));
   }
 
   public panTo(coords: PointTuple, zoom: number = 4) {

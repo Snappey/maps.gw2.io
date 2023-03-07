@@ -28,7 +28,7 @@ import {ClipboardService} from "ngx-clipboard";
 import {EventMap, Event, EventTimerService} from "../../services/event-timer.service";
 import {SearchEntry, SearchService} from "../../services/search.service";
 import {BaseMap} from "../../lib/base-map";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MqttService} from "ngx-mqtt";
 import {LabelService} from "../../services/label.service";
 import {LiveMarkersService} from "../../services/live-markers.service";
@@ -69,9 +69,10 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     private store: Store<AppState>,
     mqttService: MqttService,
     labelService: LabelService,
-    liveMarkerService: LiveMarkersService
+    liveMarkerService: LiveMarkersService,
+    router: Router,
   ) {
-    super(mqttService, labelService, liveMarkerService)
+    super(mqttService, labelService, liveMarkerService, router)
     // Setup Shortcuts
     fromEvent(document, "keydown").pipe(
       takeUntil(this.unsubscribe$)

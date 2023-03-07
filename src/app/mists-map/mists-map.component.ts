@@ -21,7 +21,7 @@ import {Store} from "@ngrx/store";
 import {mistsActions} from "../../state/mists/mists.action";
 import {AppState} from "../../state/appState";
 import {DialogService} from "primeng/dynamicdialog";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MqttService} from "ngx-mqtt";
 import {LabelService} from "../../services/label.service";
 import {LiveMarkersService} from "../../services/live-markers.service";
@@ -69,9 +69,10 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     mqttService: MqttService,
     labelService: LabelService,
-    liveMarkerService: LiveMarkersService
+    liveMarkerService: LiveMarkersService,
+    router: Router
   ) {
-    super(mqttService, labelService, liveMarkerService)
+    super(mqttService, labelService, liveMarkerService, router)
 
     this.worlds$ = wvwService.getAllWorlds();
     this.store.dispatch(mistsActions.loadMatches())
