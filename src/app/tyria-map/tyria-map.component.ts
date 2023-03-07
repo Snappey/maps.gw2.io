@@ -1,23 +1,20 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {
-  combineLatest,
   debounceTime, first,
   fromEvent,
   map,
-  Subject, Subscription, takeUntil
+  Subject, takeUntil
 } from 'rxjs';
 import {
   CRS,
   LatLng,
   latLng,
   LatLngBounds,
-  Layer,
   LeafletEvent,
   LeafletMouseEvent,
   Map,
-  PointTuple, Polyline,
-  TileLayer
+  PointTuple,
 } from 'leaflet';
 import "leaflet-contextmenu"
 import {LayerService} from "../../services/layer.service";
@@ -203,12 +200,12 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     "-",
     {
       text: "Copy Marker JSON",
-      callback: (e: LeafletMouseEvent) =>
+      callback: (_: LeafletMouseEvent) =>
         this.editorService.copyMarkerData()
     },
     {
       text: "Copy Text JSON",
-      callback: (e: LeafletMouseEvent) =>
+      callback: (_: LeafletMouseEvent) =>
         this.editorService.copyTextData()
     },
     "-",
@@ -343,12 +340,10 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       }
     })
 
-    this.setupDrawing();
-
     super.onMapInitialised(leaflet);
   }
 
-  onMapDoubleClick(event: LeafletMouseEvent) {
+  onMapDoubleClick(_: LeafletMouseEvent) {
   }
 
   onMapZoomFinished(_: LeafletEvent) {

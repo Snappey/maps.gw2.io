@@ -14,7 +14,7 @@ import {
   debounceTime, first,
   fromEvent, interval,
   map,
-  Observable, Subject, Subscription, switchMap, take, takeUntil, tap,
+  Observable, Subject, switchMap, takeUntil, tap,
 } from "rxjs";
 import {BaseMap} from "../../lib/base-map";
 import {Store} from "@ngrx/store";
@@ -34,7 +34,6 @@ import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
   providers: [DialogService]
 })
 export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
-  private WvW_WORLD_KEY = "gw2.io_WvW_World" as const;
   private OBJECTIVE_LAYER = "mists_objective" as const;
   private HEADINGS_LAYER = "mists_headings" as const;
   private CONTINENT_ID = 2 as const;
@@ -175,9 +174,6 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe(_ => _)
-
-
-    this.setupDrawing();
 
     super.onMapInitialised(leaflet);
   }

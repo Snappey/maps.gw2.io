@@ -1,26 +1,16 @@
 import {
-  FeatureGroup,
-  latLng,
+  FeatureGroup, ImageOverlay,
   LatLng,
-  LatLngBounds,
   Layer,
   Map,
-  Marker,
-  Point,
   PointTuple,
   Polyline,
-  TileLayer
 } from 'leaflet';
-import {filter, interval, map, of, Subscription, switchMap, take, tap} from "rxjs";
+import {filter, interval, map, Subscription, take} from "rxjs";
 import {MqttConnectionState, MqttService} from "ngx-mqtt";
-import {CanvasIcon, LabelService} from "../services/label.service";
+import {LabelService} from "../services/label.service";
 import {LiveMarkersService} from "../services/live-markers.service";
-import {Vector3} from "../state/live-markers/live-markers.feature";
-import {AppState} from "../state/appState";
-import {Store} from "@ngrx/store";
-import {liveMarkersActions} from "../state/live-markers/live-markers.action";
-import {LiveMarker} from "./live-marker";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 export interface LayerOptions {
   Layer: Layer;
@@ -53,10 +43,13 @@ export class BaseMap {
   }
 
   onMapInitialised(leaflet: Map) {
+
+    // Live Markers
     const liveLayer = new FeatureGroup();
     this.registerLayer("LIVE_MAP", {Hidden: false, Layer: liveLayer});
     this.liveMarkersService.setActiveMapLayer(leaflet, liveLayer);
 
+    // LatLng Url
     this.router.routerState.root.fragment.pipe(
       filter(fragment => !!fragment),
       take(1),
@@ -66,6 +59,15 @@ export class BaseMap {
 
     this.Map.on("zoomend", () => this.router.navigate([], { fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") }));
     this.Map.on("moveend", () => this.router.navigate([], { fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") }));
+
+    // Drawing
+    const drawingLayer = new FeatureGroup();
+    this.registerLayer("DRAWING_MAP", {Hidden: false, Layer: drawingLayer});
+    this.Map.on("mousedown", ($event) => {
+      if ($event.originalEvent.button == this.RIGHT_MB) {
+        this.createLine(drawingLayer)
+      }
+    })
   }
 
   public panTo(coords: PointTuple, zoom: number = 4) {
@@ -153,9 +155,10 @@ export class BaseMap {
         if (layerOptions.OpacityLevels) {
           if (zoomLevel in layerOptions.OpacityLevels) {
             //console.log("Updating layer opacity to " + layerOptions.OpacityLevels[zoomLevel]);
-            (layerOptions.Layer as TileLayer).setOpacity(layerOptions.OpacityLevels[zoomLevel]);
+            (layerOptions.Layer as ImageOverlay).setOpacity(layerOptions.OpacityLevels[zoomLevel]);
+            console.log("setting opacity");
           } else {
-            (layerOptions.Layer as TileLayer).setOpacity(1);
+            (layerOptions.Layer as ImageOverlay).setOpacity(1);
           }
         }
       } else {
@@ -166,17 +169,9 @@ export class BaseMap {
     }
   }
 
-  setupDrawing() {
-    this.Map.on("mousedown", ($event) => {
-      if ($event.originalEvent.button == this.RIGHT_MB) {
-        this.createLine()
-      }
-    })
-  }
-
   private RIGHT_MB = 2
-  private createLine() {
-    const line = new Polyline([], { color: "#DDD", opacity: 0.9 }).addTo(this.Map)
+  private createLine(layer: FeatureGroup) {
+    const line = new Polyline([], { color: "#DDD", opacity: 0.9 }).addTo(layer)
     let isDrawing = true;
     let trimLine: Subscription;
 
