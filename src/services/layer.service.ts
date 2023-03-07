@@ -75,7 +75,7 @@ export class LayerService {
         noWrap: true,
         tileSize: 256,
         attribution: `<a href="https://www.arena.net/">ArenaNet</a> / <a href="https://twitter.com/that_shaman">ThatShaman</a>`,
-        minZoom: 1,
+        minZoom: 2,
       });
   }
 

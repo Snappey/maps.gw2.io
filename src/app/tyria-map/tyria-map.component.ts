@@ -275,7 +275,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
             this.registerLayer(layersKey, { Layer: layer, MinZoomLevel: 5, Hidden: false})
             break;
           case "unlock":
-            this.registerLayer(layersKey, { Layer: layer, MinZoomLevel: 3, Hidden: false})
+            this.registerLayer(layersKey, { Layer: layer, MinZoomLevel: 4, Hidden: false})
             break;
           default:
             this.registerLayer(layersKey, { Layer: layer, MinZoomLevel: 6, Hidden: false})
@@ -308,7 +308,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       first()
     ).subscribe(layer => {
         this.registerLayer("map_labels",
-          {Layer: layer, MaxZoomLevel: 6, MinZoomLevel: 2, Hidden: false, OpacityLevels: {5: .8, 6: .5}})
+          {Layer: layer, MaxZoomLevel: 6, MinZoomLevel: 3, Hidden: false, OpacityLevels: {5: .8, 6: .5}})
         layer.bringToFront();
       });
 

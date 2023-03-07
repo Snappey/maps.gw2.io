@@ -95,8 +95,6 @@ export const selectUserWvwTeam = createSelector(
   (state: AppState) => state.user.world,
   (matchDetails, worldId) => {
     if (matchDetails) {
-      console.log(worldId);
-      console.log(matchDetails.all_worlds);
       return {
         team: matchDetails.all_worlds.red.includes(worldId) ?
           "red" :

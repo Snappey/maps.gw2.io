@@ -45,7 +45,6 @@ export class LiveMarker {
   private readonly expiryMs: number = 40_000;
 
   constructor(private leaflet: Map, private layer: FeatureGroup, private store: Store<AppState>, private labelService: LabelService, data: CharacterPositionUpdate, isSelf: boolean) {
-    console.log("created live marker for", data.AccountName, data.MapPosition.X, data.MapPosition.Y);
     this.accountName = data.AccountName;
     this.isSelf = isSelf;
 
@@ -110,7 +109,6 @@ export class LiveMarker {
   }
 
   remove() {
-    console.log("deleted live marker for " + this.accountName);
     this.marker.remove();
     this.updateMarkerPosition$.unsubscribe();
     this.updateMarkerRotation$.unsubscribe();

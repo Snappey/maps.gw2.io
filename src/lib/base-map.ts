@@ -153,20 +153,16 @@ export class BaseMap {
       const maxZoom = layerOptions.MaxZoomLevel ?? this.Map.getMaxZoom();
 
       if (zoomLevel >= minZoom && zoomLevel <= maxZoom) {
-        //console.log("Showing " + layersKey);
         this.showLayer(layersKey);
 
         if (layerOptions.OpacityLevels) {
           if (zoomLevel in layerOptions.OpacityLevels) {
-            //console.log("Updating layer opacity to " + layerOptions.OpacityLevels[zoomLevel]);
             (layerOptions.Layer as ImageOverlay).setOpacity(layerOptions.OpacityLevels[zoomLevel]);
-            console.log("setting opacity");
           } else {
             (layerOptions.Layer as ImageOverlay).setOpacity(1);
           }
         }
       } else {
-        //console.log("Hiding " + layersKey);
         this.hideLayer(layersKey);
       }
 

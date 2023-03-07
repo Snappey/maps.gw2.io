@@ -59,7 +59,6 @@ export class LiveMarkersService {
       withLatestFrom(this.store.select(s => s.settings.apiKey)),
       filter(([enabled, _]) => enabled),
       map(([_, apiKey]) => apiKey ? apiKey : "buff_reaper"),
-      tap(apiKey => console.log(apiKey)),
       switchMap((apiKey) => this.getAuthToken(apiKey))
     ).subscribe(authToken => this.store.dispatch(liveMarkersActions.setAuthToken({ authToken })))
 
@@ -141,7 +140,7 @@ export class LiveMarkersService {
   subscribeToChannel(): Observable<IMqttMessage> {
     return this.store.select(selectUserTopic).pipe(
       filter(topic => !!topic),
-      tap(topic => console.log("Subscribed to " + topic)),
+      tap(topic => console.log("subscribed to " + topic)),
       switchMap(topic => this.mqttService.observe(topic!, { qos: 0 }))
     )
   }
