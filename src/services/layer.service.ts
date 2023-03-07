@@ -129,7 +129,7 @@ export class LayerService {
           if (label.label_coordinates && label.type.toLowerCase() === "map") {
             content += `
               <text x="${label.label_coordinates[0]}" y="${label.label_coordinates[1]}" dominant-baseline="middle" text-anchor="middle" class="map-heading">${label.heading}</text>
-              <text x="${label.label_coordinates[0]}" y="${label.label_coordinates[1] + 180}" dominant-baseline="middle" text-anchor="middle" class="map-subheading">${label.subheading ?? ""}</text>`
+              <text x="${label.label_coordinates[0]}" y="${label.label_coordinates[1] + 120}" dominant-baseline="middle" text-anchor="middle" class="map-subheading">${label.subheading ?? ""}</text>`
           }
         });
         mapLabelLayer.innerHTML = content

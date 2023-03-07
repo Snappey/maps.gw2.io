@@ -39,7 +39,7 @@ body {
   fill: #FFCC66;
   font-family: 'PT Serif', serif;
   font-style: italic;
-  font-size: 12rem;
+  font-size: 8rem;
   text-shadow: 3px 2px 3px #000, -2px -2px 3px #000;
 }
 
@@ -47,7 +47,7 @@ body {
   fill: #DDD;
   font-family: 'PT Serif', serif;
   font-style: italic;
-  font-size: 11.6rem;
+  font-size: 7.6em;
   text-shadow: 2px 2px 3px #000, -2px -2px 2px #010;
 }
 
