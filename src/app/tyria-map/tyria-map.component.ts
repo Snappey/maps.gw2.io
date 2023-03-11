@@ -308,7 +308,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       first()
     ).subscribe(layer => {
         this.registerLayer("map_labels",
-          {Layer: layer, MaxZoomLevel: 6, MinZoomLevel: 3, Hidden: false, OpacityLevels: {5: .8, 6: .5}})
+          {Layer: layer, MaxZoomLevel: 5, MinZoomLevel: 3, Hidden: false, OpacityLevels: {5: .7}})
         layer.bringToFront();
       });
 
