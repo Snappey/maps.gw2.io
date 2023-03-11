@@ -63,8 +63,8 @@ export class BaseMap {
       map(([lat, lng, zoom]): [LatLng, number] => [new LatLng(lat, lng), zoom])
     ).subscribe(([latLng, zoom]) => this.Map.setView(latLng, zoom));
 
-    this.Map.on("zoomend", () => this.ngZone.run(() => this.router.navigate([], { fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") })));
-    this.Map.on("moveend", () => this.ngZone.run(() => this.router.navigate([], { fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") })));
+    this.Map.on("zoomend", () => this.ngZone.run(() => this.router.navigate([], { replaceUrl: true, fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") })));
+    this.Map.on("moveend", () => this.ngZone.run(() => this.router.navigate([], { replaceUrl: true, fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") })));
 
     // Drawing
     this.Map.on("mousedown", ($event) => {
