@@ -42,7 +42,7 @@ import {AppState} from "../../state/appState";
 export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   private CONTINENT_ID = 1 as const;
 
-  smallScreen: boolean = false;
+  smallScreen: boolean = document.body.offsetWidth < 1024;
   showEvents: boolean = false;
   showDailies: boolean = false;
   showSettings: boolean = false;
@@ -311,6 +311,10 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
           {Layer: layer, MaxZoomLevel: 5, MinZoomLevel: 3, Hidden: false, OpacityLevels: {5: .7}})
         layer.bringToFront();
       });
+
+    this.layerService.getAdventuresLayer(leaflet).pipe(
+      first()
+    ).subscribe(layer => this.registerLayer("adventure_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
 
     this.editorService.getMarkerLayerEvents().pipe(
       takeUntil(this.unsubscribe$)

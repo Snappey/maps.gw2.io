@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, map, tap, of, iif} from "rxjs";
+import {Observable, map, tap, of, iif, combineLatestWith} from "rxjs";
 import {
   FeatureGroup,
   LatLngBounds,
@@ -332,6 +332,26 @@ export class LayerService {
 
         return masteries;
       }));
+  }
+
+
+  getAdventureLabels(): Observable<MarkerLabel[]> {
+    return this.http.get<MarkerLabel[]>("/assets/data/adventure_labels.json")
+  }
+
+  getAdventuresLayer(leaflet: Map): Observable<FeatureGroup> {
+    return this.getAdventureLabels().pipe(
+      combineLatestWith(of(new FeatureGroup())),
+      tap(([labels, layer]) => labels.forEach(label => this.labelService.createCanvasMarker(leaflet, label.coordinates as PointTuple, "/assets/adventure_icon.png")
+        .bindTooltip(label.id, { className: "tooltip", offset: new Point(25, 0) } )
+        .addTo(layer)
+        .on("dblclick", (_: any) => {
+          window.open(label.data.url)
+        }))),
+      map(([_, layer]) => {
+        return layer;
+      }),
+    )
   }
 
   getMistsObjectivesLayer(leaflet: Map): Observable<LayerGroup> {
