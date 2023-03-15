@@ -77,6 +77,7 @@ async function generate() {
             label_coordinates: map.label_coord,
             coordinates: mapDetails.data.continent_rect,
             heading: mapDetails.data.name,
+            sectors: mapDetails.data.sectors,
             subheading: subheading
           })
         }

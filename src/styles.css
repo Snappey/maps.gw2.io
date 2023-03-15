@@ -51,6 +51,23 @@ body {
   text-shadow: 2px 2px 3px #000, -2px -2px 2px #010;
 }
 
+.sector-heading {
+  fill: #DDD;
+  font-family: 'PT Serif', serif;
+  font-style: italic;
+  font-size: .9rem;
+  text-shadow: 1px 1px 2px #000, -1px -1px 1px #010;
+}
+
+.sector-subheading {
+  fill: #DDD;
+  font-family: 'PT Serif', serif;
+  font-style: italic;
+  font-size: .75rem;
+  text-shadow: 1px 1px 2px #000, -1px -1px 1px #010;
+}
+
+
 .leaflet-tooltip-top:before,
 .leaflet-tooltip-bottom:before,
 .leaflet-tooltip-left:before,

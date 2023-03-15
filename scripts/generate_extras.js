@@ -7,7 +7,7 @@ const adventuresQueryUrl = "https://wiki.guildwars2.com/api.php?action=ask&forma
 axios.get(adventuresQueryUrl)
   .then((queryData) => queryData.data.query)
   .then(adventureData => Object.entries(adventureData.results))
-  .then(results => results.filter(([name, data]) => data.printouts["Has game description"][0] !== undefined)) // Filters out NPCs linked to adventures
+  .then(results => results.filter(([_, data]) => data.printouts["Has game description"][0] !== undefined)) // Filters out NPCs linked to adventures
   .then(results => results.map(([name, data]) => ({
       id: name,
       coordinates: [data.printouts["Has x coordinate"][0], data.printouts["Has y coordinate"][0]],

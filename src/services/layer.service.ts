@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, map, tap, of, iif, combineLatestWith} from "rxjs";
+import {Observable, map, tap, of, iif, combineLatestWith, from, withLatestFrom, switchMap} from "rxjs";
 import {
+  Canvas,
   FeatureGroup,
-  LatLngBounds,
-  LayerGroup,
+  LatLngBounds, Layer,
+  LayerGroup, LeafletEvent, LeafletMouseEvent,
   Map, Marker, Point,
-  PointTuple,
+  PointExpression,
+  PointTuple, Polygon, svg,
   svgOverlay,
   SVGOverlay,
   tileLayer,
@@ -65,22 +67,23 @@ export class LayerService {
     private searchService: SearchService,
     private wvwService: WvwService,
     private guildService: GuildService,
-  ) { }
+  ) {
+  }
 
   getTyriaLayer(): TileLayer {
     return tileLayer('https://tiles.gw2.io/1/1/{z}/{x}/{y}.jpg', {
-        maxNativeZoom: 9,
-        minNativeZoom: 1,
-        maxZoom: 7,
-        noWrap: true,
-        tileSize: 256,
-        attribution: `<a href="https://www.arena.net/">ArenaNet</a> / <a href="https://twitter.com/that_shaman">ThatShaman</a>`,
-        minZoom: 2,
-      });
+      maxNativeZoom: 9,
+      minNativeZoom: 1,
+      maxZoom: 7,
+      noWrap: true,
+      tileSize: 256,
+      attribution: `<a href="https://www.arena.net/">ArenaNet</a> / <a href="https://twitter.com/that_shaman">ThatShaman</a>`,
+      minZoom: 2,
+    });
   }
 
   getMistsLayer(): TileLayer {
-    return tileLayer( 'https://tiles.guildwars2.com/2/1/{z}/{x}/{y}.jpg', {
+    return tileLayer('https://tiles.guildwars2.com/2/1/{z}/{x}/{y}.jpg', {
       maxNativeZoom: 6,
       minNativeZoom: 3,
       maxZoom: 6,
@@ -95,51 +98,47 @@ export class LayerService {
     return this.http.get<RegionLabel[]>("/assets/data/region_labels.json");
   }
 
+  private getSvgLayer(dimensions: PointTuple): Observable<SVGSVGElement> {
+    const layer = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    layer.setAttribute('viewBox', `0 0 ${dimensions[0]} ${dimensions[1]}`);
+    return of(layer);
+  }
+
   getRegionLayer(leaflet: Map): Observable<SVGOverlay> {
     return this.getRegionLabels()
       .pipe(
-        map(labels => {
-        const regionLabelLayer = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        regionLabelLayer.setAttribute('xmlns', "http://www.w3.org/2000/svg");
-        regionLabelLayer.setAttribute('viewBox', `0 0 ${this.tyriaDimensions[0]} ${this.tyriaDimensions[1]}`);
-
-        let content = "";
-        labels.forEach(label => {
-          if (label.label_coordinates && label.type.toLowerCase() === "region") {
-            content += `
-              <text x="${label.label_coordinates[0]}" y="${label.label_coordinates[1]}" dominant-baseline="middle" text-anchor="middle" class="region-heading">${label.heading}</text>`
-          }
-        });
-        regionLabelLayer.innerHTML = content
-
-        return svgOverlay(regionLabelLayer, new LatLngBounds(leaflet.unproject([0, 0], leaflet.getMaxZoom()), leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())), {zIndex: 999})
+        map(labels => labels.filter(l => l.label_coordinates && l.type.toLowerCase() === "region")),
+        map((labels) => labels.reduce((prev, label) => prev +=
+          `<text x="${label.label_coordinates[0]}" y="${label.label_coordinates[1]}" dominant-baseline="middle" text-anchor="middle" class="region-heading">${label.heading}</text>`, "")),
+        withLatestFrom(this.getSvgLayer(this.tyriaDimensions)),
+        map(([overlayContent, layer]) => {
+          layer.innerHTML = overlayContent;
+          return svgOverlay(layer, new LatLngBounds(leaflet.unproject([0, 0], leaflet.getMaxZoom()), leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())), {zIndex: 999})
         })
       );
   }
 
   getMapLayer(leaflet: Map): Observable<SVGOverlay> {
     return this.getRegionLabels()
-      .pipe(map(labels => {
-        const mapLabelLayer = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        mapLabelLayer.setAttribute('xmlns', "http://www.w3.org/2000/svg");
-        mapLabelLayer.setAttribute('viewBox', `0 0 ${this.tyriaDimensions[0]} ${this.tyriaDimensions[1]}`);
-
-        let content = "";
-        labels.forEach(label => {
-          if (label.label_coordinates && label.type.toLowerCase() === "map") {
-            content += `
-              <text x="${label.label_coordinates[0]}" y="${label.label_coordinates[1]}" dominant-baseline="middle" text-anchor="middle" class="map-heading">${label.heading}</text>
-              <text x="${label.label_coordinates[0]}" y="${label.label_coordinates[1] + 120}" dominant-baseline="middle" text-anchor="middle" class="map-subheading">${label.subheading ?? ""}</text>`
-          }
-        });
-        mapLabelLayer.innerHTML = content
-
-        return svgOverlay(mapLabelLayer, new LatLngBounds(leaflet.unproject([0, 0], leaflet.getMaxZoom()), leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())), {zIndex: 999})
-      }));
+      .pipe(
+        map(labels => labels.filter(l => l.label_coordinates && l.type.toLowerCase() === "map")),
+        map((labels) => labels.reduce((prev, label) => prev +=
+            `<text x="${label.label_coordinates[0]}" y="${label.label_coordinates[1]}" dominant-baseline="middle" text-anchor="middle" class="map-heading">${label.heading}</text>
+           <text x="${label.label_coordinates[0]}" y="${label.label_coordinates[1] + 120}" dominant-baseline="middle" text-anchor="middle" class="map-subheading">${label.subheading ?? ""}</text>`,
+          "")),
+        withLatestFrom(this.getSvgLayer(this.tyriaDimensions)),
+        map(([overlayContent, layer]) => {
+          layer.innerHTML = overlayContent
+          return svgOverlay(layer, new LatLngBounds(leaflet.unproject([0, 0], leaflet.getMaxZoom()), leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())), {zIndex: 999})
+        }));
   }
 
-  getPoiLabels(): Observable<GroupedLabels<MapData>> {
-    return this.http.get<GroupedLabels<MapData>>("/assets/data/poi_labels.json")
+  private getFeatureGroup(): Observable<FeatureGroup> {
+    return of(new FeatureGroup());
+  }
+
+  getPoiLabels(): Observable<MarkerLabel[]> {
+    return this.http.get<MarkerLabel[]>(`/assets/data/poi_labels.json`);
   }
 
   getIcon(type: string): string {
@@ -156,139 +155,154 @@ export class LayerService {
     return "assets/poi.png";
   }
 
-  getPoiLayer(leaflet: Map): Observable<GroupedLayer> {
-    return this.getPoiLabels()
-      .pipe(
-        tap((labels) => {
-          Object.values(labels)
-            .forEach(map => {
-              if (map.poi) {
-                map.poi.forEach(poi => {
-                  if ("tooltip" in poi.data)
-                    this.searchService.addSearch({type: poi.type, coords: poi.coordinates, name: poi.data.tooltip, chatLink: poi.data.chat_link, data: poi.data})
-                })
-              }
-            })
-        }),
-        map(labels => {
-        const layers: GroupedLayer = {
-          "waypoint": new FeatureGroup(),
-          "landmark": new FeatureGroup(),
-          "vista": new FeatureGroup(),
-          "unlock": new FeatureGroup()
-        }
-
-        for (let labelsKey in labels) {
-          let data = labels[labelsKey];
-
-          if (data.poi) {
-            data.poi.forEach(label => {
-              if (label.coordinates && label.type) {
-                let icon = this.getIcon(label.type);
-
-                if (label.data.icon) {
-                  icon = label.data.icon;
-                }
-
-                this.labelService.createCanvasMarker(leaflet, label.coordinates, icon, 0,[32,32], 16)
-                  .bindTooltip(label.data.tooltip !== "" ? label.data.tooltip : label.data.chat_link, { className: "tooltip", offset: new Point(25, 0)} )
-                  .addTo(layers[label.type])
-                  .on("click", (_: any) => {
-                    this.clipboard.copy(label.data.chat_link);
-
-                    const msg = label.data.tooltip === "" ?
-                      `Copied ${label.data.chat_link} to clipboard!` :
-                      `Copied [${label.data.tooltip}] to clipboard!`;
-
-                    this.toastr.info(msg, "", {
-                      toastClass: "custom-toastr",
-                      positionClass: "toast-top-right"
-                    });
-                  })
-                  .on("dblclick", (_: any) => {
-                    if (label.data.tooltip !== "")
-                      window.open(`https://wiki.guildwars2.com/wiki/?search=${label.data.tooltip}&ns0=1`)
-                    else {
-                      const chatLink = encodeURIComponent(label.data.chat_link)
-                      window.open(`https://wiki.guildwars2.com/wiki/?search=${chatLink}&ns0=1`)
-                    }
-                  });
-
-              }
-            })
-          }
-        }
-
-        return layers;
+  private createStandardCanvasMarker(leaflet: Map, label: MarkerLabel, layer: LayerGroup) {
+    this.labelService.createCanvasMarker(leaflet, label.coordinates, label.data.icon ?? this.getIcon(label.type), 0, [32, 32], 16)
+      .bindTooltip(label.data.tooltip !== "" ? label.data.tooltip : label.data.chat_link, {
+        className: "tooltip",
+        offset: new Point(25, 0)
       })
+      .on("click", (_: any) => {
+        this.clipboard.copy(label.data.chat_link);
+
+        const msg = label.data.tooltip === "" ?
+          `Copied ${label.data.chat_link} to clipboard!` :
+          `Copied [${label.data.tooltip}] to clipboard!`;
+
+        this.toastr.info(msg, "", {
+          toastClass: "custom-toastr",
+          positionClass: "toast-top-right"
+        });
+      })
+      .on("dblclick", (_: any) => {
+        if (label.data.tooltip !== "")
+          window.open(`https://wiki.guildwars2.com/wiki/?search=${label.data.tooltip}&ns0=1`)
+        else {
+          const chatLink = encodeURIComponent(label.data.chat_link)
+          window.open(`https://wiki.guildwars2.com/wiki/?search=${chatLink}&ns0=1`)
+        }
+      })
+      .addTo(layer)
+  }
+
+  getLandmarkLayer(leaflet: Map): Observable<FeatureGroup> {
+    return this.getPoiLabels().pipe(
+      map(labels => labels.filter(l => l.coordinates && l.type === "landmark")),
+      combineLatestWith(this.getFeatureGroup()),
+      tap(([labels, layer]) => labels.forEach(label => this.createStandardCanvasMarker(leaflet, label, layer))),
+      map(([_, layer]) => layer)
+    )
+  }
+
+  getWaypointLayer(leaflet: Map): Observable<FeatureGroup> {
+    return this.getPoiLabels().pipe(
+      map(labels => labels.filter(l => l.coordinates && l.type === "waypoint")),
+      combineLatestWith(this.getFeatureGroup()),
+      tap(([labels, layer]) => labels.forEach(label => this.createStandardCanvasMarker(leaflet, label, layer))),
+      map(([_, layer]) => layer)
+    )
+  }
+
+  getVistaLayer(leaflet: Map): Observable<FeatureGroup> {
+    return this.getPoiLabels().pipe(
+      map(labels => labels.filter(l => l.coordinates && l.type === "vista")),
+      combineLatestWith(this.getFeatureGroup()),
+      tap(([labels, layer]) => labels.forEach(label =>
+        this.labelService.createCanvasMarker(leaflet, label.coordinates, "/assets/vista.png", 0, [32, 32], 16)
+          .addTo(layer)
+      )),
+      map(([_, layer]) => layer)
+    )
+  }
+
+  getUnlockLayer(leaflet: Map): Observable<FeatureGroup> {
+    return this.getPoiLabels().pipe(
+      map(labels => labels.filter(l => l.coordinates && l.type === "unlock")),
+      combineLatestWith(this.getFeatureGroup()),
+      tap(([labels, layer]) => labels.forEach(label => this.createStandardCanvasMarker(leaflet, label, layer))),
+      map(([_, layer]) => layer)
+    )
+  }
+
+  private createHeartBounds(label: MarkerLabel, leaflet: Map): Polygon {
+    return new Polygon(
+      label.data.bounds.map((coords: PointExpression) => leaflet.unproject(coords, leaflet.getMaxZoom())),
+      { color: "yellow", opacity: .7, fillOpacity: .2, renderer: svg(), interactive: false }
     );
   }
 
-  getHeartLabels(): Observable<GroupedLabels<MapData>> {
-    return this.http.get<GroupedLabels<MapData>>("/assets/data/poi_labels.json")
-  }
+  getHeartLayer(leaflet: Map): Observable<FeatureGroup> {
+    return this.getPoiLabels().pipe(
+      map(labels => labels.filter(l => l.coordinates && l.type === "heart")),
+      combineLatestWith(this.getFeatureGroup()),
+      tap(([labels, layer]) => labels.forEach(label => {
+        const marker = this.labelService.createCanvasMarker(leaflet, label.coordinates as PointTuple, "/assets/hearts.png")
+          .bindTooltip(`${label.data.tooltip}`, {className: "tooltip", offset: new Point(25, 0)})
+          .on("dblclick", (_: any) => {
+            window.open(`https://wiki.guildwars2.com/wiki/?search=${label.data.tooltip.substring(0, label.data.tooltip.length - 1)}&ns0=1`)
+          })
 
-  getHeartLayer(leaflet: Map): Observable<LayerGroup> {
-    return this.getHeartLabels()
-      .pipe(
-        tap((labels) => {
-          Object.values(labels)
-            .forEach(map => {
-              map.hearts
-                .forEach((heart) => {
-                  if (heart.coordinates)
-                    this.searchService.addSearch({type: "heart", coords: heart.coordinates, name: heart.data.tooltip, chatLink: heart.data.chat_link, data: heart.data})
-                })
-            })
-        }),
-        map(labels => {
-          const hearts = new LayerGroup();
+        if (label.data.bounds) {
+          marker.on("mouseover", (_: LeafletMouseEvent) => {
+            console.log("created polygon for " + label.data.tooltip);
+            const bounds: Polygon = this.createHeartBounds(label, leaflet)
+              .addTo(leaflet)
 
-          for (let labelsKey in labels) {
-            let data = labels[labelsKey];
-
-            if (data.hearts) {
-              data.hearts.forEach(label => {
-                if (label.coordinates) {
-                  this.labelService.createCanvasMarker(leaflet, label.coordinates as PointTuple, "assets/hearts.png")
-                    .bindTooltip(`${label.data.tooltip}`, { className: "tooltip", offset: new Point(25, 0) } )
-                    .addTo(hearts)
-                    .on("dblclick", (_: any) => {
-                      window.open(`https://wiki.guildwars2.com/wiki/?search=${label.data.tooltip.substring(0, label.data.tooltip.length - 1)}&ns0=1`)
-                    });
-                }
-              })
-            }
-          }
-
-          return hearts;
-        })
-      );
-  }
-
-  getSkillPointLabels(): Observable<GroupedLabels<MapData>> {
-    return this.http.get<GroupedLabels<MapData>>("/assets/data/poi_labels.json")
-  }
-
-  getSkillPointLayer(leaflet: Map): Observable<LayerGroup> {
-    return this.getSkillPointLabels()
-      .pipe(map(labels => {
-        const skillPoints = new LayerGroup();
-
-        for (let labelsKey in labels) {
-          let data = labels[labelsKey];
-
-          if (data.skillpoints) {
-            data.skillpoints.forEach(label => {
-              if (label.coordinates) {
-                this.labelService.createCanvasMarker(leaflet, label.coordinates as PointTuple, "assets/heropoint.png")
-                  .addTo(skillPoints)
-              }
-            })
-          }
+            marker.once('mouseout', (_) => bounds.remove());
+            marker.once("remove", (_) => bounds.remove());
+          });
         }
 
-        return skillPoints;
+        marker.addTo(layer);
+      })),
+      map(([_, layer]) => layer)
+    )
+  }
+
+  getSkillPointLayer(leaflet: Map): Observable<FeatureGroup> {
+    return this.getPoiLabels().pipe(
+      map(labels => labels.filter(l => l.coordinates && l.type === "skillpoint")),
+      combineLatestWith(this.getFeatureGroup()),
+      tap(([labels, layer]) => labels.forEach(label =>
+        this.labelService.createCanvasMarker(leaflet, label.coordinates as PointTuple, "/assets/heropoint.png")
+          .addTo(layer))),
+      map(([_, layer]) => layer)
+    )
+  }
+
+  getSectorLayer(leaflet: Map): Observable<FeatureGroup> {
+    return this.getPoiLabels().pipe(
+      map(labels => labels.filter(l => l.coordinates && l.type === "sector")),
+      combineLatestWith(this.getFeatureGroup()),
+      tap(([labels, layer]) => labels.forEach(label =>
+        new Polygon(label.data.bounds.map((coords: PointExpression) => leaflet.unproject(coords, leaflet.getMaxZoom())),  {color: 'white'})
+          .bindTooltip(label.data.tooltip !== "" ? label.data.tooltip : label.data.chat_link, { className: "tooltip", offset: new Point(25, 0)} )
+          .on("click", (_: any) => {
+            this.clipboard.copy(label.data.chat_link);
+
+            const msg = label.data.tooltip === "" ?
+              `Copied ${label.data.chat_link} to clipboard!` :
+              `Copied [${label.data.tooltip}] to clipboard!`;
+
+            this.toastr.info(msg, "", {
+              toastClass: "custom-toastr",
+              positionClass: "toast-top-right"
+            });
+          })
+          .addTo(layer))),
+      map(([_, layer]) => layer)
+    )
+  }
+
+  getSectorTextLayer(leaflet: Map): Observable<SVGOverlay> {
+    return this.getPoiLabels().pipe(
+      map(labels => labels.filter(l => l.coordinates && l.type === "sector")),
+      map((labels) => labels.reduce((prev, label) => prev +=
+          `<text x="${label.coordinates[0]}" y="${label.coordinates[1]}" dominant-baseline="middle" text-anchor="middle" class="sector-heading">${label.data.tooltip}</text>`,
+        "")),
+      withLatestFrom(this.getSvgLayer(this.tyriaDimensions)),
+      map(([overlayContent, layer]) => {
+        layer.innerHTML = overlayContent
+        return svgOverlay(layer, new LatLngBounds(leaflet.unproject([0, 0], leaflet.getMaxZoom()), leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())), {zIndex: 999})
       }));
   }
 
@@ -308,32 +322,16 @@ export class LayerService {
     return "assets/core_mastery.png";
   }
 
-  getMasteryPointLabels(): Observable<GroupedLabels<MapData>> {
-    return this.http.get<GroupedLabels<MapData>>("/assets/data/poi_labels.json")
-  }
-
   getMasteryPointLayer(leaflet: Map): Observable<LayerGroup> {
-    return this.getMasteryPointLabels()
-      .pipe(map(labels => {
-        const masteries = new LayerGroup();
-
-        for (let labelsKey in labels) {
-          let data = labels[labelsKey];
-
-          if (data.masterypoints) {
-            data.masterypoints.forEach(label => {
-              if (label.coordinates) {
-                this.labelService.createCanvasMarker(leaflet, label.coordinates as PointTuple, this.getMasteryPointIcon(label.data.type))
-                  .addTo(masteries)
-              }
-            })
-          }
-        }
-
-        return masteries;
-      }));
+    return this.getPoiLabels().pipe(
+      map(labels => labels.filter(l => l.coordinates && l.type === "mastery")),
+      combineLatestWith(this.getFeatureGroup()),
+      tap(([labels, layer]) => labels.forEach(label =>
+        this.labelService.createCanvasMarker(leaflet, label.coordinates as PointTuple, this.getMasteryPointIcon(label.data.type))
+          .addTo(layer))),
+      map(([_, layer]) => layer)
+    )
   }
-
 
   getAdventureLabels(): Observable<MarkerLabel[]> {
     return this.http.get<MarkerLabel[]>("/assets/data/adventure_labels.json")

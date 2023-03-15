@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "cache-regions": "node scripts/generate_regions.js",
-    "cache-poi": "node scripts/generate_pois.js"
+    "cache-poi": "node scripts/generate_pois.js",
+    "cache-extras": "node scripts/generate_extras.js"
   },
   "private": true,
   "dependencies": {

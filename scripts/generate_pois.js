@@ -33,53 +33,16 @@ function hasKey(obj, key) {
   return key in obj;
 }
 
-async function getInitLabels() {
-  const seedData = JSON.parse(fs.readFileSync("./scripts/static/poi_labels.json"))
-  const labels = {
-    "unknown": {
-      "hearts": [],
-      "masterypoints": [],
-      "poi": [],
-      "skillpoints": []
-    }
-  };
-
-  seedData.forEach((label) => {
-    switch(label.type) {
-      case "heart":
-        labels.unknown.hearts.push(label);
-        break;
-      case "mastery":
-        labels.unknown.masterypoints.push(label);
-        break;
-      case "skillpoint":
-        labels.unknown.skillpoints.push(label);
-        break;
-      case "landmark":
-      case "vista":
-      case "waypoint":
-        labels.unknown.poi.push(label);
-        break;
-    }
-  });
-
-  return labels;
+function getStaticLabels () {
+  return JSON.parse(fs.readFileSync("./scripts/static/poi_labels.json").toString())
 }
 
 async function generate() {
   const details = await getContinent(1, 1);
-  const labels = await getInitLabels()
+  const labels = await getStaticLabels()
 
   for (let region of Object.values(details.data.regions)) {
     console.log(region.name)
-
-    if (!hasKey(labels, region.name))
-      labels[region.name] = {
-        "skillpoints": [],
-        "hearts": [],
-        "masterypoints": [],
-        "poi": []
-      };
 
     for (let map of Object.values(region.maps)) {
 
@@ -88,10 +51,12 @@ async function generate() {
         if (skillpoint.id === "")
           continue;
 
-        labels[region.name]["skillpoints"].push({
+        labels.push({
           id: skillpoint.id,
           coordinates: skillpoint.coord,
-          type: "skillpoint"
+          type: "skillpoint",
+          map: map.name,
+          continent: region.name
         });
       }
 
@@ -100,10 +65,12 @@ async function generate() {
         if (heart.id === 0)
           continue;
 
-        labels[region.name]["hearts"].push({
+        labels.push({
           id: heart.id,
           coordinates: heart.coord,
           type: "heart",
+          map: map.name,
+          continent: region.name,
           data: {
             "tooltip": heart.objective,
             "chat_link": heart.chat_link,
@@ -117,10 +84,12 @@ async function generate() {
         if (mastery.id === 0)
           continue;
 
-        labels[region.name]["masterypoints"].push({
+        labels.push({
           id: mastery.id,
           coordinates: mastery.coord,
           type: "mastery",
+          map: map.name,
+          continent: region.name,
           data: {
             "type": mastery.region
           }
@@ -135,10 +104,12 @@ async function generate() {
         if (poi.id in overrides)
           poi.name = overrides[poi.id].Name;
 
-        labels[region.name]["poi"].push({
+        labels.push({
           id: poi.id,
           coordinates: poi.coord,
           type: poi.type,
+          map: map.name,
+          continent: region.name,
           data: {
             "icon": poi.icon,
             "tooltip": poi.name,
@@ -146,10 +117,27 @@ async function generate() {
           }
         })
       }
+
+      for (let sector of Object.values(map.sectors)) {
+        labels.push({
+          id: sector.id,
+          coordinates: sector.coord,
+          type: "sector",
+          map: map.name,
+          continent: region.name,
+          data: {
+            "tooltip": sector.name,
+            "level": sector.level,
+            "bounds": sector.bounds,
+            "chat_link": sector.chat_link,
+          }
+        })
+      }
     }
   }
 
   fs.writeFileSync("./src/assets/data/poi_labels.json", JSON.stringify(labels));
+  console.log("updated poi_labels.json in assets")
   return true;
 }
 
