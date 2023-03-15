@@ -243,7 +243,6 @@ export class LayerService {
 
         if (label.data.bounds) {
           marker.on("mouseover", (_: LeafletMouseEvent) => {
-            console.log("created polygon for " + label.data.tooltip);
             const bounds: Polygon = this.createHeartBounds(label, leaflet)
               .addTo(leaflet)
 
