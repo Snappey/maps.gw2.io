@@ -208,6 +208,10 @@ export class LayerService {
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label =>
         this.labelService.createCanvasMarker(leaflet, label.coordinates, "/assets/vista.png", 0, [32, 32], 16)
+          .bindTooltip("Vista", {
+            className: "tooltip",
+            offset: new Point(25, 0)
+          })
           .addTo(layer)
       )),
       map(([_, layer]) => layer)
@@ -263,6 +267,10 @@ export class LayerService {
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label =>
         this.labelService.createCanvasMarker(leaflet, label.coordinates as PointTuple, "/assets/heropoint.png")
+          .bindTooltip("Skillpoint", {
+            className: "tooltip",
+            offset: new Point(25, 0)
+          })
           .addTo(layer))),
       map(([_, layer]) => layer)
     )
