@@ -426,13 +426,6 @@ export class LayerService {
   }
 
   private interpolateCoords(start: PointTuple, end: PointTuple, percentage: number): number[] {
-    console.log([
-      start, end,
-      [
-        start[0] + (end[0] - start[0]) * percentage,
-        start[1] + (end[1] - start[1]) * percentage
-      ]
-    ])
     return [
       start[0] + (end[0] - start[0]) * percentage,
       start[1] + (end[1] - start[1]) * percentage
@@ -446,7 +439,6 @@ export class LayerService {
         l.map !== "Edge of the Mists" &&
         l.id !== 1031)),
       combineLatestWith(this.getFeatureGroup()),
-      tap(labels => console.log(labels)),
       tap(([labels, layer]) => labels.forEach(label =>
         new Polygon(
           label.data.bounds
