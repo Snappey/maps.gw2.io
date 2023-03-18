@@ -410,6 +410,54 @@ export class LayerService {
     return svgOverlay(mapLabelsLayer, new LatLngBounds(leaflet.unproject([0, 0], leaflet.getMaxZoom()), leaflet.unproject(this.mistsDimensions, leaflet.getMaxZoom())))
   }
 
+  private teamColours: { [teamName: string]: string } = {
+    green: "#43D071",
+    red: "#DC3939",
+    blue: "#24A2E7",
+    not_captured: "#DDD"
+  }
+
+  private getTeamColour(teamName: string | undefined): string {
+    if (teamName) {
+      return this.teamColours[teamName.toLowerCase()]
+    } else {
+      return this.teamColours["not_captured"]
+    }
+  }
+
+  private interpolateCoords(start: PointTuple, end: PointTuple, percentage: number): number[] {
+    console.log([
+      start, end,
+      [
+        start[0] + (end[0] - start[0]) * percentage,
+        start[1] + (end[1] - start[1]) * percentage
+      ]
+    ])
+    return [
+      start[0] + (end[0] - start[0]) * percentage,
+      start[1] + (end[1] - start[1]) * percentage
+    ];
+  }
+
+  createMistsObjectivesSectorLayer(leaflet: Map, match: Match): Observable<FeatureGroup> {
+    return this.getPoiLabels(2, 1).pipe(
+      map(labels => labels.filter(l => l.coordinates && l.type === "sector" &&
+        l.continent === "World vs. World" &&
+        l.map !== "Edge of the Mists" &&
+        l.id !== 1031)),
+      combineLatestWith(this.getFeatureGroup()),
+      tap(labels => console.log(labels)),
+      tap(([labels, layer]) => labels.forEach(label =>
+        new Polygon(
+          label.data.bounds
+            .map((coords: PointTuple) => this.interpolateCoords(label.coordinates, coords, .99))
+            .map((coords: PointTuple) => leaflet.unproject(coords, leaflet.getMaxZoom())),
+          {color: this.getTeamColour(match.objectives.filter(m => m.sector_id === label.id).pop()?.owner), fillOpacity: 0 })
+          .addTo(layer))),
+      map(([_, layer]) => layer)
+    )
+  }
+
   createMistsObjectivesLayer(leaflet: Map, match: Match): FeatureGroup {
     const layer = new FeatureGroup();
     const objectives = match.objectives;
