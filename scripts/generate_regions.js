@@ -10,6 +10,11 @@ const regionBlacklist = {
   "Labyrinthine Cliffs":                        true,
 }
 
+const continentFilter = {
+  1: (map) => map.data.type === "Public",
+  2: (map) => true
+}
+
 async function getContinent(id, floor) {
   return axios.get(`https://api.guildwars2.com/v2/continents/${id}/floors/${floor}`)
 }
@@ -18,7 +23,7 @@ async function getMap(id) {
   return axios.get(`https://api.guildwars2.com/v2/maps/${id}`);
 }
 
-async function getInitLabels() {
+async function getStaticTyriaLabels() {
   const seedData = JSON.parse(fs.readFileSync("./scripts/static/map_text.json"));
   const labels = [];
 
@@ -35,10 +40,15 @@ async function getInitLabels() {
   return labels;
 }
 
-async function generate() {
+async function generate(continentId, floorId) {
   // Fetch Continent Details
-  const details = await getContinent(1, 1);
-  const labels = await getInitLabels()
+  const details = await getContinent(continentId, floorId);
+  let labels = []
+
+  if (continentId === 1 && floorId === 1) {
+    labels = await getStaticTyriaLabels()
+  }
+
 
   if (details.status !== 200)
     throw `non 200 staus from continents api: ${details.status}`
@@ -61,7 +71,7 @@ async function generate() {
       const mapDetails = await getMap(map.id);
       console.log("| " + mapDetails.data.name);
 
-      if (mapDetails.data.type === "Public") {
+      if (continentFilter[continentId](mapDetails)) {
         let subheading
         if (mapDetails.data.min_level === 0 || mapDetails.data.min_level === mapDetails.data.max_level) {
           subheading = `${mapDetails.data.max_level}`;
@@ -71,6 +81,7 @@ async function generate() {
             ""
         }
 
+        console.log("|  added " + mapDetails.data.name);
         if (!regionBlacklist[mapDetails.data.name]) {
           labels.push({
             type: "Map",
@@ -85,11 +96,16 @@ async function generate() {
     }
   }
 
-  fs.writeFileSync("./src/assets/data/region_labels.json", JSON.stringify(labels));
+  fs.writeFileSync(`./src/assets/data/region_labels_${continentId}_${floorId}.json`, JSON.stringify(labels));
   return true;
 }
 
-generate()
+generate(1, 1)
   .then(res => console.log(res))
   .catch(err => console.error(err))
-  .finally(() => console.log("Finished Regions"));
+  .finally(() => console.log("Finished Tyria Regions"));
+
+generate(2, 1)
+  .then(res => console.log(res))
+  .catch(err => console.error(err))
+  .finally(() => console.log("Finished Mists Regions"));

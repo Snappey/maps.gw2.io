@@ -33,13 +33,17 @@ function hasKey(obj, key) {
   return key in obj;
 }
 
-function getStaticLabels () {
+function getStaticTyriaLabels () {
   return JSON.parse(fs.readFileSync("./scripts/static/poi_labels.json").toString())
 }
 
-async function generate() {
-  const details = await getContinent(1, 1);
-  const labels = await getStaticLabels()
+async function generate(continentId, floorId) {
+  const details = await getContinent(continentId, floorId);
+  let labels = []
+
+  if (continentId === 1 && floorId === 1) {
+    labels = await getStaticTyriaLabels()
+  }
 
   for (let region of Object.values(details.data.regions)) {
     console.log(region.name)
@@ -136,11 +140,15 @@ async function generate() {
     }
   }
 
-  fs.writeFileSync("./src/assets/data/poi_labels.json", JSON.stringify(labels));
-  console.log("updated poi_labels.json in assets")
+  fs.writeFileSync(`./src/assets/data/poi_labels_${continentId}_${floorId}.json`, JSON.stringify(labels));
+  console.log(`updated ./src/assets/data/poi_labels_${continentId}_${floorId}.json in assets`)
   return true;
 }
 
-generate()
+generate(1, 1)
   .catch(err => console.error(err))
-  .finally(() => console.log("Finished POIs"));
+  .finally(() => console.log("Finished Tyria POIs"));
+
+generate(2, 1)
+  .catch(err => console.error(err))
+  .finally(() => console.log("Finished Mists POIs"));
