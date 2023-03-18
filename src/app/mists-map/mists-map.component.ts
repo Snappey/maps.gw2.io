@@ -2,7 +2,7 @@ import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {
   FeatureGroup,
   latLng,
-  LatLngBounds, LayerGroup,
+  LatLngBounds, LayerGroup, LeafletEvent,
   Map,
 } from 'leaflet';
 import * as L from "leaflet";
@@ -11,10 +11,10 @@ import {ToastrService} from "ngx-toastr";
 import {Match, MergedObjective, World, WvwService} from "../../services/wvw.service";
 import {
   combineLatestWith,
-  debounceTime, first,
+  debounceTime, filter, first,
   fromEvent, interval,
   map,
-  Observable, Subject, switchMap, takeUntil, tap,
+  Observable, Subject, switchMap, take, takeUntil, tap,
 } from "rxjs";
 import {BaseMap} from "../../lib/base-map";
 import {Store} from "@ngrx/store";
@@ -35,8 +35,10 @@ import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 })
 export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   private OBJECTIVE_LAYER = "mists_objective" as const;
+  private OBJECTIVE_SECTOR_LAYER = "mists_sector_objective" as const;
   private HEADINGS_LAYER = "mists_headings" as const;
   private CONTINENT_ID = 2 as const;
+  private FLOOR_ID = 1 as const;
 
   worlds$: Observable<World[]>;
   selectedWorld: World | undefined;
@@ -148,6 +150,7 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
 
     this.layerService.getMistsLayer().addTo(leaflet)
     this.registerLayer(this.OBJECTIVE_LAYER, {Layer: new LayerGroup(), MinZoomLevel: 0, Hidden: false});
+    this.registerLayer(this.OBJECTIVE_SECTOR_LAYER, {Layer: new FeatureGroup(), MinZoomLevel: 0, Hidden: false})
     this.registerLayer(this.HEADINGS_LAYER, {Layer: this.layerService.getMistsMapHeadings(leaflet), MinZoomLevel: 0, Hidden: false})
 
     this.layerService.getMistsObjectivesLayer(leaflet).pipe(
@@ -165,6 +168,12 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       ).subscribe(objectiveLayer => this.updateLayer(this.OBJECTIVE_LAYER, objectiveLayer))
 
+    this.activeMatch$.pipe(
+      filter(activeMatch => !!this.Map && !!activeMatch),
+      switchMap(activeMatch => this.layerService.createMistsObjectivesSectorLayer(this.Map, activeMatch!)),
+      takeUntil(this.unsubscribe$)
+    ).subscribe(objectiveSectorLayer => this.updateLayer(this.OBJECTIVE_SECTOR_LAYER, objectiveSectorLayer))
+
     interval(20000)
       .pipe(
         switchMap(_ => this.store.select(state => state.mists.activeMatchId)),
@@ -175,6 +184,35 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
         }),
         takeUntil(this.unsubscribe$)
       ).subscribe(_ => _)
+
+
+    this.layerService.getWaypointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
+      take(1)
+    ).subscribe(layer => this.registerLayer("waypoints", { Layer: layer, MinZoomLevel: 5, Hidden: false}))
+
+    this.layerService.getLandmarkLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
+      take(1)
+    ).subscribe(layer => this.registerLayer("landmarks", { Layer: layer, MinZoomLevel: 6, Hidden: false}))
+
+    this.layerService.getVistaLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
+      take(1)
+    ).subscribe(layer => this.registerLayer("vista", { Layer: layer, MinZoomLevel: 6, Hidden: false }))
+
+    this.layerService.getUnlockLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
+      take(1)
+    ).subscribe(layer => this.registerLayer("unlocks", { Layer: layer, MinZoomLevel: 5, Hidden: false }))
+
+    this.layerService.getHeartLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
+      take(1)
+    ).subscribe(layer => this.registerLayer("heart_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
+
+    this.layerService.getSkillPointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
+      take(1)
+    ).subscribe(layer => this.registerLayer("heropoint_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
+
+    this.layerService.getMasteryPointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
+      take(1)
+    ).subscribe(layer => this.registerLayer("masteries_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
 
     super.onMapInitialised(leaflet);
   }
@@ -193,5 +231,13 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   openObjectiveDetails(objective: MergedObjective) {
     this.showObjectiveDetails = true;
     this.selectedObjective = objective;
+  }
+
+  onMapZoomFinished(_: LeafletEvent) {
+    if (this.Map) {
+      const zoomLevel = this.Map.getZoom();
+
+      this.updateLayerVisibility(zoomLevel);
+    }
   }
 }

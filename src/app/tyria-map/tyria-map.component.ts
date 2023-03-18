@@ -41,6 +41,7 @@ import {AppState} from "../../state/appState";
 })
 export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   private CONTINENT_ID = 1 as const;
+  private FLOOR_ID = 1 as const
 
   smallScreen: boolean = document.body.offsetWidth < 1024;
   showEvents: boolean = false;
@@ -265,35 +266,35 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       Hidden: false,
     });
 
-    this.layerService.getWaypointLayer(leaflet).pipe(
+    this.layerService.getWaypointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => this.registerLayer("waypoints", { Layer: layer, MinZoomLevel: 5, Hidden: false}))
 
-    this.layerService.getLandmarkLayer(leaflet).pipe(
+    this.layerService.getLandmarkLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => this.registerLayer("landmarks", { Layer: layer, MinZoomLevel: 6, Hidden: false}))
 
-    this.layerService.getVistaLayer(leaflet).pipe(
+    this.layerService.getVistaLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => this.registerLayer("vista", { Layer: layer, MinZoomLevel: 6, Hidden: false }))
 
-    this.layerService.getUnlockLayer(leaflet).pipe(
+    this.layerService.getUnlockLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => this.registerLayer("unlocks", { Layer: layer, MinZoomLevel: 4, Hidden: false }))
 
-    this.layerService.getHeartLayer(leaflet).pipe(
+    this.layerService.getHeartLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => this.registerLayer("heart_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
 
-    this.layerService.getSkillPointLayer(leaflet).pipe(
+    this.layerService.getSkillPointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => this.registerLayer("heropoint_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
 
-    this.layerService.getMasteryPointLayer(leaflet).pipe(
+    this.layerService.getMasteryPointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => this.registerLayer("masteries_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
 
-    this.layerService.getRegionLayer(leaflet).pipe(
+    this.layerService.getRegionLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => {
         this.registerLayer("region_labels",
@@ -301,7 +302,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
         layer.bringToFront();
       });
 
-    this.layerService.getMapLayer(leaflet).pipe(
+    this.layerService.getMapLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => {
         this.registerLayer("map_labels",
@@ -313,7 +314,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       take(1)
     ).subscribe(layer => this.registerLayer("adventure_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
 
-    this.layerService.getSectorTextLayer(leaflet).pipe(
+    this.layerService.getSectorTextLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => this.registerLayer("sector_headings", { Layer: layer, MinZoomLevel: 7, Hidden: false }))
 /*

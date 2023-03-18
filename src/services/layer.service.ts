@@ -38,18 +38,13 @@ interface RegionLabel {
   subheading: string;
 }
 
-interface MapData {
-  hearts: MarkerLabel[];
-  masterypoints: MarkerLabel[];
-  poi: MarkerLabel[];
-  skillpoints: MarkerLabel[];
-}
-
 interface MarkerLabel {
-  id: string;
+  id: number;
   coordinates: PointTuple,
   type: string;
   data: any;
+  continent: string;
+  map: string;
 }
 
 @Injectable({
@@ -94,8 +89,8 @@ export class LayerService {
     })
   }
 
-  getRegionLabels(): Observable<RegionLabel[]> {
-    return this.http.get<RegionLabel[]>("/assets/data/region_labels.json");
+  getRegionLabels(continentId: number, floorId: number): Observable<RegionLabel[]> {
+    return this.http.get<RegionLabel[]>(`/assets/data/region_labels_${continentId}_${floorId}.json`);
   }
 
   private getSvgLayer(dimensions: PointTuple): Observable<SVGSVGElement> {
@@ -104,8 +99,8 @@ export class LayerService {
     return of(layer);
   }
 
-  getRegionLayer(leaflet: Map): Observable<SVGOverlay> {
-    return this.getRegionLabels()
+  getRegionLayer(leaflet: Map, continentId: number, floorId: number): Observable<SVGOverlay> {
+    return this.getRegionLabels(continentId, floorId)
       .pipe(
         map(labels => labels.filter(l => l.label_coordinates && l.type.toLowerCase() === "region")),
         map((labels) => labels.reduce((prev, label) => prev +=
@@ -118,8 +113,8 @@ export class LayerService {
       );
   }
 
-  getMapLayer(leaflet: Map): Observable<SVGOverlay> {
-    return this.getRegionLabels()
+  getMapLayer(leaflet: Map, continentId: number, floorId: number): Observable<SVGOverlay> {
+    return this.getRegionLabels(continentId, floorId)
       .pipe(
         map(labels => labels.filter(l => l.label_coordinates && l.type.toLowerCase() === "map")),
         map((labels) => labels.reduce((prev, label) => prev +=
@@ -137,8 +132,8 @@ export class LayerService {
     return of(new FeatureGroup());
   }
 
-  getPoiLabels(): Observable<MarkerLabel[]> {
-    return this.http.get<MarkerLabel[]>(`/assets/data/poi_labels.json`);
+  getPoiLabels(continentId: number, floorId: number): Observable<MarkerLabel[]> {
+    return this.http.get<MarkerLabel[]>(`/assets/data/poi_labels_${continentId}_${floorId}.json`);
   }
 
   getIcon(type: string): string {
@@ -184,8 +179,8 @@ export class LayerService {
       .addTo(layer)
   }
 
-  getLandmarkLayer(leaflet: Map): Observable<FeatureGroup> {
-    return this.getPoiLabels().pipe(
+  getLandmarkLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
+    return this.getPoiLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "landmark")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label => this.createStandardCanvasMarker(leaflet, label, layer))),
@@ -193,17 +188,18 @@ export class LayerService {
     )
   }
 
-  getWaypointLayer(leaflet: Map): Observable<FeatureGroup> {
-    return this.getPoiLabels().pipe(
+  getWaypointLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
+    return this.getPoiLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "waypoint")),
+      tap(labels => console.log(labels)),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label => this.createStandardCanvasMarker(leaflet, label, layer))),
       map(([_, layer]) => layer)
     )
   }
 
-  getVistaLayer(leaflet: Map): Observable<FeatureGroup> {
-    return this.getPoiLabels().pipe(
+  getVistaLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
+    return this.getPoiLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "vista")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label =>
@@ -218,8 +214,8 @@ export class LayerService {
     )
   }
 
-  getUnlockLayer(leaflet: Map): Observable<FeatureGroup> {
-    return this.getPoiLabels().pipe(
+  getUnlockLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
+    return this.getPoiLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "unlock")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label => this.createStandardCanvasMarker(leaflet, label, layer))),
@@ -234,8 +230,8 @@ export class LayerService {
     );
   }
 
-  getHeartLayer(leaflet: Map): Observable<FeatureGroup> {
-    return this.getPoiLabels().pipe(
+  getHeartLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
+    return this.getPoiLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "heart")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label => {
@@ -261,8 +257,8 @@ export class LayerService {
     )
   }
 
-  getSkillPointLayer(leaflet: Map): Observable<FeatureGroup> {
-    return this.getPoiLabels().pipe(
+  getSkillPointLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
+    return this.getPoiLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "skillpoint")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label =>
@@ -276,8 +272,8 @@ export class LayerService {
     )
   }
 
-  getSectorLayer(leaflet: Map): Observable<FeatureGroup> {
-    return this.getPoiLabels().pipe(
+  getSectorLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
+    return this.getPoiLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "sector")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label =>
@@ -300,8 +296,8 @@ export class LayerService {
     )
   }
 
-  getSectorTextLayer(leaflet: Map): Observable<SVGOverlay> {
-    return this.getPoiLabels().pipe(
+  getSectorTextLayer(leaflet: Map, continentId: number, floorId: number): Observable<SVGOverlay> {
+    return this.getPoiLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "sector")),
       map((labels) => labels.reduce((prev, label) => prev +=
           `<text x="${label.coordinates[0]}" y="${label.coordinates[1]}" dominant-baseline="middle" text-anchor="middle" class="sector-heading">${label.data.tooltip}</text>`,
@@ -329,8 +325,8 @@ export class LayerService {
     return "assets/core_mastery.png";
   }
 
-  getMasteryPointLayer(leaflet: Map): Observable<LayerGroup> {
-    return this.getPoiLabels().pipe(
+  getMasteryPointLayer(leaflet: Map, continentId: number, floorId: number): Observable<LayerGroup> {
+    return this.getPoiLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "mastery")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label =>
@@ -348,7 +344,7 @@ export class LayerService {
     return this.getAdventureLabels().pipe(
       combineLatestWith(of(new FeatureGroup())),
       tap(([labels, layer]) => labels.forEach(label => this.labelService.createCanvasMarker(leaflet, label.coordinates as PointTuple, "/assets/adventure_icon.png")
-        .bindTooltip(label.id, { className: "tooltip", offset: new Point(25, 0) } )
+        .bindTooltip(label.id.toString(), { className: "tooltip", offset: new Point(25, 0) } )
         .addTo(layer)
         .on("dblclick", (_: any) => {
           window.open(label.data.url)
