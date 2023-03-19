@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, map, tap, of, iif, combineLatestWith, from, withLatestFrom, switchMap} from "rxjs";
+import {Observable, map, tap, of, iif, combineLatestWith, withLatestFrom, take} from "rxjs";
 import {
-  Canvas,
   FeatureGroup,
-  LatLngBounds, Layer,
-  LayerGroup, LeafletEvent, LeafletMouseEvent,
+  LatLngBounds,
+  LayerGroup, LeafletMouseEvent,
   Map, Marker, Point,
   PointExpression,
   PointTuple, Polygon, svg,
@@ -21,14 +20,6 @@ import {SearchService} from "./search.service";
 import {MergedObjective, WvwService, Match} from "./wvw.service";
 import {Guild, GuildService} from "./guild.service";
 import moment from "moment";
-
-export interface GroupedLayer {
-  [id: string]: FeatureGroup;
-}
-
-interface GroupedLabels<T> {
-  [map: string]: T;
-}
 
 interface RegionLabel {
   type: string;
@@ -191,7 +182,6 @@ export class LayerService {
   getWaypointLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
     return this.getPoiLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "waypoint")),
-      tap(labels => console.log(labels)),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label => this.createStandardCanvasMarker(leaflet, label, layer))),
       map(([_, layer]) => layer)
@@ -444,7 +434,7 @@ export class LayerService {
           label.data.bounds
             .map((coords: PointTuple) => this.interpolateCoords(label.coordinates, coords, .99))
             .map((coords: PointTuple) => leaflet.unproject(coords, leaflet.getMaxZoom())),
-          {color: this.getTeamColour(match.objectives.filter(m => m.sector_id === label.id).pop()?.owner), fillOpacity: 0 })
+          {color: this.getTeamColour(match.objectives.filter(m => m.sector_id === label.id).pop()?.owner), fillOpacity: 0, interactive: false })
           .addTo(layer))),
       map(([_, layer]) => layer)
     )
@@ -492,8 +482,9 @@ export class LayerService {
           .on("click", (event: any) => event.data = data)
           .addTo(layer);
 
-        this.updateObjectiveTooltip(marker, data, match.friendly_names)
-          .subscribe(content => marker.setTooltipContent(content));
+        this.updateObjectiveTooltip(marker, data, match.friendly_names).pipe(
+          take(1)
+        ).subscribe(content => marker.setTooltipContent(content));
       }
     }
 
