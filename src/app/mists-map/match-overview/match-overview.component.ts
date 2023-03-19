@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Match, WvwService} from "../../../services/wvw.service";
-import {map, Observable, tap} from "rxjs";
+import {map, Observable, retry, take, tap} from "rxjs";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../../state/appState";
 
@@ -21,7 +21,10 @@ export class MatchOverviewComponent {
   clickedMatch = new EventEmitter<Match>();
 
   constructor(private readonly store: Store<AppState>) {
-    this.matches$.subscribe(matches => {
+    this.matches$.pipe(
+      retry(3),
+      take(1)
+    ).subscribe(matches => {
       this.euMatches = Object.values(matches).filter(m => m.region === "eu");
       this.usMatches = Object.values(matches).filter(m => m.region === "us");
     });
