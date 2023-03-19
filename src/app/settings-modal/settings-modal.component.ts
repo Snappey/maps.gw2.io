@@ -46,7 +46,7 @@ export class SettingsModalComponent implements OnDestroy {
   )
 
   constructor(private wvwService: WvwService, private store: Store<AppState>, private accountService: AccountService) {
-    this.settings$ = this.store.select(s => s).subscribe(s => this.settingsForm.patchValue(s.settings));
+    this.settings$ = this.store.select(s => s.settings).subscribe(s => this.settingsForm.patchValue(s));
   }
 
   ngOnDestroy() {
