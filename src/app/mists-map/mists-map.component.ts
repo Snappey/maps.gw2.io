@@ -154,7 +154,7 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
     this.registerLayer(this.HEADINGS_LAYER, {Layer: this.layerService.getMistsMapHeadings(leaflet), MinZoomLevel: 0, Hidden: false})
 
     this.layerService.getMistsObjectivesLayer(leaflet).pipe(
-      first(),
+      take(1),
     ).subscribe((layer) => this.updateLayer(this.OBJECTIVE_LAYER, layer))
 
     this.activeMatch$.pipe(
@@ -189,30 +189,6 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
     this.layerService.getWaypointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => this.registerLayer("waypoints", { Layer: layer, MinZoomLevel: 5, Hidden: false}))
-
-    this.layerService.getLandmarkLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
-      take(1)
-    ).subscribe(layer => this.registerLayer("landmarks", { Layer: layer, MinZoomLevel: 6, Hidden: false}))
-
-    this.layerService.getVistaLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
-      take(1)
-    ).subscribe(layer => this.registerLayer("vista", { Layer: layer, MinZoomLevel: 6, Hidden: false }))
-
-    this.layerService.getUnlockLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
-      take(1)
-    ).subscribe(layer => this.registerLayer("unlocks", { Layer: layer, MinZoomLevel: 5, Hidden: false }))
-
-    this.layerService.getHeartLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
-      take(1)
-    ).subscribe(layer => this.registerLayer("heart_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
-
-    this.layerService.getSkillPointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
-      take(1)
-    ).subscribe(layer => this.registerLayer("heropoint_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
-
-    this.layerService.getMasteryPointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
-      take(1)
-    ).subscribe(layer => this.registerLayer("masteries_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
 
     super.onMapInitialised(leaflet);
   }
