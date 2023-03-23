@@ -57,7 +57,8 @@ export class LayerService {
   }
 
   getTyriaLayer(): TileLayer {
-    return tileLayer('https://tiles.gw2.io/1/1/{z}/{x}/{y}.jpg', {
+    return tileLayer('https://tiles{s}.gw2.io/1/1/{z}/{x}/{y}.jpg', {
+      subdomains: ["1", "2", "3", "4"],
       maxNativeZoom: 9,
       minNativeZoom: 1,
       maxZoom: 7,
