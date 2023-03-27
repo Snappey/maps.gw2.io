@@ -64,6 +64,7 @@ import {UserEffects} from "../state/user/user.effects";
 import { LetModule } from '@ngrx/component';
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {SelectButtonModule} from "primeng/selectbutton";
+import {NgcCookieConsentModule} from "ngx-cookieconsent";
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   connectOnCreate: false
@@ -100,6 +101,22 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     ReactiveFormsModule,
 
     MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
+    NgcCookieConsentModule.forRoot({
+      cookie: {
+        domain: 'maps.gw2.io'
+      },
+      palette: {
+        popup: {
+          background: '#000'
+        },
+        button: {
+          background: '#f1d600'
+        }
+      },
+      theme: 'edgeless',
+      position: "top-right",
+      type: 'info'
+    }),
 
     DialogModule,
     DynamicDialogModule,
