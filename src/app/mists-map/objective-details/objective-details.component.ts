@@ -42,7 +42,7 @@ export class ObjectiveDetailsComponent implements OnChanges {
   }
 
   get guildEmblem(): string {
-    return `https://guilds.gw2w2w.com/${this.objective.claimed_by}.svg`
+    return `https://emblem.werdes.net/emblem/${this.objective.claimed_by}`
   }
 
   get Math() {
