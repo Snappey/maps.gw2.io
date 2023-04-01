@@ -318,6 +318,10 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     this.layerService.getSectorTextLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => this.registerLayer("sector_headings", { Layer: layer, MinZoomLevel: 7, Hidden: false }))
+
+    this.layerService.getCityMarkersLayer(leaflet).pipe(
+      take(1)
+    ).subscribe(layer => this.registerLayer("city_markers", {Layer: layer, MinZoomLevel: 7, Hidden: false}))
 /*
     this.layerService.getSectorLayer(leaflet).pipe(
       tap(layer => console.log(layer)),

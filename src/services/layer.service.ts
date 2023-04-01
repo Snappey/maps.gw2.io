@@ -38,6 +38,13 @@ export interface MarkerLabel {
   map: string;
 }
 
+export interface WikiMarkerLabel {
+  coord: PointTuple,
+  name: string;
+  text: string;
+  icon: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -340,6 +347,24 @@ export class LayerService {
         .on("dblclick", (_: any) => {
           window.open(label.data.url)
         }))),
+      map(([_, layer]) => {
+        return layer;
+      }),
+    )
+  }
+
+  getCityMarkerLabels(): Observable<WikiMarkerLabel[]> {
+    return this.http.get<WikiMarkerLabel[]>("/assets/data/city_markers.json");
+  }
+
+  getCityMarkersLayer(leaflet: Map): Observable<FeatureGroup> {
+    return this.getCityMarkerLabels().pipe(
+      tap(labels => console.log(labels)),
+      combineLatestWith(of(new FeatureGroup())),
+      tap(([labels, layer]) => labels.forEach(label => this.labelService.createCanvasMarker(leaflet, label.coord as PointTuple, label.icon, 0, [24, 24])
+        .bindTooltip(`${label.text.replaceAll("[", "").replaceAll("]", "")}`, { className: "tooltip", offset: new Point(15, 0) } )
+        .addTo(layer)
+        .on("dblclick", (_: any) => window.open(`https://wiki.guildwars2.com/wiki/?search=${label.text.replaceAll("[", "").replaceAll("]", "")}&ns0=1`)))),
       map(([_, layer]) => {
         return layer;
       }),
