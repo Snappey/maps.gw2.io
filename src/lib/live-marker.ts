@@ -114,6 +114,10 @@ export class LiveMarker {
     this.updateMarkerRotation$.unsubscribe();
   }
 
+  updateLastUpdate() {
+    this.lastUpdate = Date.now();
+  }
+
   checkExpiry() {
     if (Date.now() - this.lastUpdate > this.expiryMs) {
       this.remove();

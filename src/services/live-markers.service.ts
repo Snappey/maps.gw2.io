@@ -4,7 +4,7 @@ import {environment} from '../environments/environment';
 import {FeatureGroup, LatLngBounds, Layer, LayerGroup, Map, Point} from 'leaflet';
 import {
   catchError, combineLatestWith,
-  filter,
+  filter, interval,
   map, merge,
   Observable, skip, Subject,
   switchMap, tap,
@@ -100,6 +100,7 @@ export class LiveMarkersService {
         console.warn("failed to parse incoming message, missing account name: " + message.topic);
         return;
       }
+
       switch (data.Type) {
         case "UpsertCharacterMovement":
           const msg = { ...data as CharacterPositionUpdate, AccountName: accountName };
@@ -108,26 +109,31 @@ export class LiveMarkersService {
               return this.markers[accountName].updatePosition(msg)
             }
             return;
-          } else {
-            return this.markers[accountName] = new LiveMarker(
-              map,
-              layer,
-              this.store,
-              this.labelService,
-              msg,
-              accountName === userAccount)
           }
+          return this.markers[accountName] = new LiveMarker(
+            map,
+            layer,
+            this.store,
+            this.labelService,
+            msg,
+            accountName === userAccount)
         case "UpdateCharacterState":
           return this.markers[accountName].updateState({ ...data as CharacterStateUpdate, AccountName: accountName })
         case "DeleteCharacterData":
           this.markers[accountName].remove();
           return delete this.markers[accountName];
         case "UpdateCharacterKeepAlive":
-          return this.markers[accountName].checkExpiry();
+          return this.markers[accountName].updateLastUpdate()
         default:
-          console.warn("received unimplemented packet type: " + data.Type);
+          console.warn("received unimplemented packet type from " + accountName + ": " + data.Type);
       }
     });
+
+    interval(30000).subscribe(_ => {
+      for (let markersKey in this.markers) {
+        this.markers[markersKey].checkExpiry()
+      }
+    })
   }
 
   getAuthToken(apiKey: string, customChannels: string[] = []): Observable<string> {
