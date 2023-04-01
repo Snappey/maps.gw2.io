@@ -6,12 +6,13 @@ import {
   PointTuple,
   Polyline, svg,
 } from 'leaflet';
-import {filter, interval, map, Subscription, take} from "rxjs";
+import {combineLatestWith, filter, interval, map, Subscription, take, takeUntil} from "rxjs";
 import {MqttConnectionState, MqttService} from "ngx-mqtt";
 import {LabelService} from "../services/label.service";
 import {LiveMarkersService} from "../services/live-markers.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {NgZone} from "@angular/core";
+import {LayerService, MarkerLabel} from "../services/layer.service";
 
 export interface LayerOptions {
   Layer: Layer;
@@ -22,6 +23,8 @@ export interface LayerOptions {
 }
 
 export class BaseMap {
+  CONTINENT_ID: number = 1 as const;
+
   Map!: Map;
   Layers: {[key: string]: LayerOptions} = {};
 
@@ -45,6 +48,8 @@ export class BaseMap {
     private mqttService: MqttService,
     private labelService: LabelService,
     private liveMarkersService: LiveMarkersService,
+    protected layerService: LayerService,
+    protected route: ActivatedRoute,
     private router: Router) {
   }
 
@@ -62,6 +67,20 @@ export class BaseMap {
       map(fragment => fragment!.split(",").map(f => parseInt(f))),
       map(([lat, lng, zoom]): [LatLng, number] => [new LatLng(lat, lng), zoom])
     ).subscribe(([latLng, zoom]) => this.Map.setView(latLng, zoom));
+
+    // Direct link to Markers
+    this.route.params.pipe(
+      map(params=> params["chatLink"] as string),
+      combineLatestWith(this.layerService.getPoiLabels(this.CONTINENT_ID, 1)),
+      map(([chatLink, poiLabels]) =>
+        poiLabels.filter(l => !!l.data && !!l.data.chat_link).filter(l => l.data.chat_link.includes(chatLink)).pop()
+      ),
+      take(1)
+    ).subscribe((label: MarkerLabel | undefined) => {
+      if (label && this.Map) {
+        this.Map.setView(this.Map.unproject(label.coordinates, this.Map.getMaxZoom()), this.Map.getMaxZoom())
+      }
+    })
 
     this.Map.on("zoomend", () => this.ngZone.run(() => this.router.navigate([], { replaceUrl: true, fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") })));
     this.Map.on("moveend", () => this.ngZone.run(() => this.router.navigate([], { replaceUrl: true, fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") })));

@@ -29,7 +29,7 @@ interface RegionLabel {
   subheading: string;
 }
 
-interface MarkerLabel {
+export interface MarkerLabel {
   id: number;
   coordinates: PointTuple,
   type: string;

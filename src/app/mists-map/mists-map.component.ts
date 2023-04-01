@@ -34,11 +34,11 @@ import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
   providers: [DialogService]
 })
 export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
-  private OBJECTIVE_LAYER = "mists_objective" as const;
-  private OBJECTIVE_SECTOR_LAYER = "mists_sector_objective" as const;
-  private HEADINGS_LAYER = "mists_headings" as const;
-  private CONTINENT_ID = 2 as const;
-  private FLOOR_ID = 1 as const;
+  OBJECTIVE_LAYER = "mists_objective" as const;
+  OBJECTIVE_SECTOR_LAYER = "mists_sector_objective" as const;
+  HEADINGS_LAYER = "mists_headings" as const;
+  override CONTINENT_ID = 2 as const;
+  FLOOR_ID = 1 as const;
 
   worlds$: Observable<World[]>;
   selectedWorld: World | undefined;
@@ -63,18 +63,18 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   showObjectiveDetails: boolean = false;
 
   constructor(
-    private layerService: LayerService,
     private wvwService: WvwService,
     private toastr: ToastrService,
     private readonly store: Store<AppState>,
-    private route: ActivatedRoute,
+    route: ActivatedRoute,
     ngZone: NgZone,
     mqttService: MqttService,
     labelService: LabelService,
     liveMarkerService: LiveMarkersService,
+    layerService: LayerService,
     router: Router
   ) {
-    super(ngZone, mqttService, labelService, liveMarkerService, router)
+    super(ngZone, mqttService, labelService, liveMarkerService, layerService, route, router)
 
     this.worlds$ = wvwService.getAllWorlds();
     this.store.dispatch(mistsActions.loadMatches())

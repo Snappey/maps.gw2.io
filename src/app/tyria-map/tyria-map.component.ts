@@ -40,8 +40,8 @@ import {AppState} from "../../state/appState";
   providers: [DialogService]
 })
 export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
-  private CONTINENT_ID = 1 as const;
-  private FLOOR_ID = 1 as const
+  override CONTINENT_ID = 1 as const;
+  FLOOR_ID = 1 as const
 
   smallScreen: boolean = document.body.offsetWidth < 1024;
   showEvents: boolean = false;
@@ -58,11 +58,10 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   constructor(
     private dialogService: DialogService,
     private toastr: ToastrService,
-    private layerService: LayerService,
+
     private editorService: EditorService,
     private clipboardService: ClipboardService,
     private eventTimerService: EventTimerService,
-    private route: ActivatedRoute,
     private searchService: SearchService,
     private store: Store<AppState>,
     ngZone: NgZone,
@@ -70,8 +69,10 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     labelService: LabelService,
     liveMarkerService: LiveMarkersService,
     router: Router,
+    route: ActivatedRoute,
+    layerService: LayerService,
   ) {
-    super(ngZone, mqttService, labelService, liveMarkerService, router)
+    super(ngZone, mqttService, labelService, liveMarkerService, layerService, route, router)
     // Setup Shortcuts
     fromEvent(document, "keydown").pipe(
       takeUntil(this.unsubscribe$)
