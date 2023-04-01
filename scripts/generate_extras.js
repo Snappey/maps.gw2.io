@@ -23,7 +23,7 @@ axios.get(adventuresQueryUrl)
 
 const templatePagesUrl = "https://wiki.guildwars2.com/api.php?action=query&format=json&list=embeddedin&eititle=Template:Interactive%20map&einamespace=0&eilimit=500"
 const wikiTextQueryUrl = (pageTitle) => `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&rvprop=content&titles=${pageTitle}`;
-const includedPages = ["Lion's Arch", "Arborstone", "Lion%27s_Arch_Aerodrome"] //, "Divinity's Reach", "Black Citadel", "Hoelbrak", "Rata Sum", "The Grove", "Eye of the North", "Arborstone"]
+const includedPages = ["Lion's Arch", "Arborstone", "Lion%27s_Arch_Aerodrome", "Black Citadel", "Eye of the North", "Labyrinthine Cliffs"] //, "Divinity's Reach", "Black Citadel", "Hoelbrak", "Rata Sum", "The Grove", "Eye of the North", "Arborstone"]
 
 function extractMarkers(text) {
   const startMarker = "{{interactive map";
