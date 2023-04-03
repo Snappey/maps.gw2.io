@@ -323,12 +323,29 @@ export class LayerService {
     return "assets/core_mastery.png";
   }
 
+  getMasteryPointFriendlyName(type: string): string {
+    switch (type) {
+      case "Tyria":
+        return "Core";
+      case "Maguuma":
+        return "HoT";
+      case "Desert":
+        return "PoF";
+      case "Tundra":
+        return "IBS";
+      case "Unknown":
+        return "EoD";
+    }
+    return "Core";
+  }
+
   getMasteryPointLayer(leaflet: Map, continentId: number, floorId: number): Observable<LayerGroup> {
     return this.getPoiLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "mastery")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label =>
         this.labelService.createCanvasMarker(leaflet, label.coordinates as PointTuple, this.getMasteryPointIcon(label.data.type))
+          .bindTooltip(this.getMasteryPointFriendlyName(label.data.type) + " Mastery", { className: "tooltip", offset: new Point(25, 0) } )
           .addTo(layer))),
       map(([_, layer]) => layer)
     )
