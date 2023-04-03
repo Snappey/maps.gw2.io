@@ -190,7 +190,7 @@ export class BaseMap {
 
   private RIGHT_MB = 2
   private createLine() {
-    const line = new Polyline([], { color: "#DDD", opacity: 0.9, renderer: svg() }).addTo(this.Map)
+    const line = new Polyline([], { color: "#DDD", opacity: 0.9, renderer: svg(), interactive: false }).addTo(this.Map)
     let isDrawing = true;
     let trimLine: Subscription;
 
