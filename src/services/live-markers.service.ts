@@ -3,6 +3,7 @@ import {IMqttMessage, IMqttServiceOptions, MqttConnectionState, MqttService} fro
 import {environment} from '../environments/environment';
 import {FeatureGroup, LatLngBounds, Layer, LayerGroup, Map, Point} from 'leaflet';
 import {
+  BehaviorSubject,
   catchError, combineLatestWith,
   filter, interval,
   map, merge,
@@ -31,6 +32,9 @@ import {ToastrService} from "ngx-toastr";
 })
 export class LiveMarkersService {
   private markers: { [accountId: string]: LiveMarker } = {};
+
+  activeMarkers: BehaviorSubject<LiveMarker[]> = new BehaviorSubject<LiveMarker[]>(Object.values(this.markers));
+  activeMarkers$: Observable<LiveMarker[]> = this.activeMarkers.asObservable();
 
   onConnected$: Observable<boolean> = this.mqttService.state.pipe(
     map(state => state === MqttConnectionState.CONNECTED),
@@ -110,18 +114,21 @@ export class LiveMarkersService {
             }
             return;
           }
-          return this.markers[accountName] = new LiveMarker(
+          this.markers[accountName] = new LiveMarker(
             map,
             layer,
             this.store,
             this.labelService,
             msg,
             accountName === userAccount)
+          return this.updateActiveMarkers();
         case "UpdateCharacterState":
-          return this.markers[accountName].updateState({ ...data as CharacterStateUpdate, AccountName: accountName })
+          this.markers[accountName].updateState({ ...data as CharacterStateUpdate, AccountName: accountName })
+          return this.updateActiveMarkers();
         case "DeleteCharacterData":
           this.markers[accountName].remove();
-          return delete this.markers[accountName];
+          delete this.markers[accountName];
+          return this.updateActiveMarkers();
         case "UpdateCharacterKeepAlive":
           return this.markers[accountName].updateLastUpdate()
         default:
@@ -131,7 +138,9 @@ export class LiveMarkersService {
 
     interval(30000).subscribe(_ => {
       for (let markersKey in this.markers) {
-        this.markers[markersKey].checkExpiry()
+        if (this.markers[markersKey].checkExpiry()) {
+          this.updateActiveMarkers();
+        }
       }
     })
   }
@@ -153,5 +162,11 @@ export class LiveMarkersService {
 
   setActiveMapLayer(map: Map, layer: FeatureGroup) {
     this.activeMapLayer.next([map, layer]);
+  }
+
+  updateActiveMarkers() {
+    this.activeMarkers.next(
+      Object.values(this.markers)
+    );
   }
 }

@@ -41,3 +41,5 @@
   <div class="clickable compass-button-player" style="position: absolute; z-index: 1000; bottom: 114px; right: 101px;"
        [pTooltip]="(liveMapState$ | async | titlecase) || 'failed to get connection info'" tooltipPosition="left" tooltipStyleClass="tooltip"></div>
 </ng-container>
+
+<app-live-marker-sidebar style="position: absolute; left: 15px; top: 5%; z-index: 999" />

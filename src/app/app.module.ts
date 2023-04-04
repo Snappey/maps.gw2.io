@@ -65,6 +65,7 @@ import { LetModule } from '@ngrx/component';
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {NgcCookieConsentModule} from "ngx-cookieconsent";
+import { LiveMarkerSidebarComponent } from './live-marker-sidebar/live-marker-sidebar.component';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   connectOnCreate: false
@@ -89,6 +90,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MatchOverviewComponent,
     ObjectiveDetailsComponent,
     SettingsModalComponent,
+    LiveMarkerSidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -114,7 +116,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         }
       },
       theme: 'edgeless',
-      position: "top-right",
+      position: "top",
       type: 'info'
     }),
 

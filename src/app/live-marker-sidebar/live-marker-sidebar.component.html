@@ -1,0 +1,6 @@
+<ng-container  *ngFor="let marker of activeMarkers$ | async">
+  <div class="green-background p-1 my-1 border-1 border-white-alpha-80 clickable text-center w-10rem"
+       (click)="marker.panTo()">
+    <span>{{marker.accountName}}</span>
+  </div>
+</ng-container>

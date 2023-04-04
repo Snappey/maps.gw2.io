@@ -376,7 +376,6 @@ export class LayerService {
 
   getCityMarkersLayer(leaflet: Map): Observable<FeatureGroup> {
     return this.getCityMarkerLabels().pipe(
-      tap(labels => console.log(labels)),
       combineLatestWith(of(new FeatureGroup())),
       tap(([labels, layer]) => labels.forEach(label => this.labelService.createCanvasMarker(leaflet, label.coord as PointTuple, label.icon, 0, [24, 24])
         .bindTooltip(`${label.text.replaceAll("[", "").replaceAll("]", "")}`, { className: "tooltip", offset: new Point(15, 0) } )

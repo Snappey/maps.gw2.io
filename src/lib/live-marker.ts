@@ -39,8 +39,8 @@ export class LiveMarker {
 
   private marker: Marker;
   private readonly forwardVector: Vector3 = { X: 1, Y: 0, Z: 0 }
-  private readonly accountName: string;
-  private readonly isSelf: boolean;
+  readonly accountName: string;
+  readonly isSelf: boolean;
   private lastUpdate: number;
   private readonly expiryMs: number = 40_000;
 
@@ -118,10 +118,17 @@ export class LiveMarker {
     this.lastUpdate = Date.now();
   }
 
-  checkExpiry() {
+  checkExpiry(): boolean {
     if (Date.now() - this.lastUpdate > this.expiryMs) {
       this.remove();
+      return true;
     }
+    return false;
+  }
+
+  panTo() {
+    this.leaflet.panTo(this.marker.getLatLng())
+    this.leaflet.setZoom(this.leaflet.getMaxZoom())
   }
 
   private getMarkerCoords(): Vector2 {
