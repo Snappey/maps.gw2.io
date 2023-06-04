@@ -26,6 +26,10 @@ Hosted at [maps.gw2.io](maps.gw2.io), with two major maps implemented for Tyria 
 
 ![WvW Overview](/images/wvw_overview.jpg)
 
+
+https://github.com/Snappey/maps.gw2.io/assets/4106212/e67b4751-3b95-4673-94e5-16a14b10ff24
+
+
 ## Sources
 Tiles are provided by [ThatShaman](https://twitter.com/that_shaman) and [ArenaNet](https://www.arena.net/en) and hosted by myself for Tyria.
 
