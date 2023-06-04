@@ -1,27 +1,32 @@
-# MapGw2Io
+# Interactive Guild Wars 2 Map
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.5.
+Hosted at [maps.gw2.io](maps.gw2.io), with two major maps implemented for Tyria and WvW.
 
-## Development server
+- Waypoints, Points of Interest, Vistas, Hearts, Adventures and Masteries
+  - Single click to copy Chat Link
+  - Double click to link to wiki
+- World Boss Markers
+  - Single click to copy the closest waypoint Chat Link
+  - See upcoming events using the sidebar
+- Dailies sidebar
+- Live Markers support integrating with [BlishHud](https://blishhud.com/) addon 
+  - Track yourself on the map with other users using Solo, Guild, Global and custom channels.
+  - _Addon is not published, maybe one day_
+- Major Cities have merchant and NPC markers e.g. Lion's Arch and Arborstone
+  - Double click to link to Wiki
+- Right click to draw on Map
+  - Fades after you finish drawing
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tyria
 
-## Code scaffolding
+![Tyria Overview](/images/tyria_overview.jpg)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## WvW
 
-## Build
+![WvW Overview](/images/wvw_overview.jpg)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Sources
+Tiles are provided by [ThatShaman](https://twitter.com/that_shaman) and [ArenaNet](https://www.arena.net/en).
 
-## Running unit tests
+The [Official Guild Wars 2 API](https://wiki.guildwars2.com/wiki/API:Main) and [Wiki](https://wiki.guildwars2.com/wiki/Main_Page) is used for label and marker data. 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
