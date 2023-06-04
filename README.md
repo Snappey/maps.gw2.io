@@ -2,6 +2,8 @@
 
 Hosted at [maps.gw2.io](maps.gw2.io), with two major maps implemented for Tyria and WvW.
 
+## Some of the Features
+
 - Waypoints, Points of Interest, Vistas, Hearts, Adventures and Masteries
   - Single click to copy Chat Link
   - Double click to link to wiki
@@ -11,17 +13,16 @@ Hosted at [maps.gw2.io](maps.gw2.io), with two major maps implemented for Tyria 
 - Dailies sidebar
 - Live Markers support integrating with [BlishHud](https://blishhud.com/) addon 
   - Track yourself on the map with other users using Solo, Guild, Global and custom channels.
+  - API Key is required to ensure Location is only published in the right channels.
   - _Addon is not published, maybe one day_
 - Major Cities have merchant and NPC markers e.g. Lion's Arch and Arborstone
   - Double click to link to Wiki
 - Right click to draw on Map
   - Fades after you finish drawing
 
-## Tyria
+## What does it look Like
 
 ![Tyria Overview](/images/tyria_overview.jpg)
-
-## WvW
 
 ![WvW Overview](/images/wvw_overview.jpg)
 
