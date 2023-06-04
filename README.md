@@ -27,7 +27,7 @@ Hosted at [maps.gw2.io](maps.gw2.io), with two major maps implemented for Tyria 
 ![WvW Overview](/images/wvw_overview.jpg)
 
 ## Sources
-Tiles are provided by [ThatShaman](https://twitter.com/that_shaman) and [ArenaNet](https://www.arena.net/en).
+Tiles are provided by [ThatShaman](https://twitter.com/that_shaman) and [ArenaNet](https://www.arena.net/en) and hosted by myself for Tyria.
 
 The [Official Guild Wars 2 API](https://wiki.guildwars2.com/wiki/API:Main) and [Wiki](https://wiki.guildwars2.com/wiki/Main_Page) is used for label and marker data. 
 
