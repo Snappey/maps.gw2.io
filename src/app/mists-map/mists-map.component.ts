@@ -129,6 +129,9 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
         id.toString().includes("-") ?
           this.store.dispatch(mistsActions.setActiveMatch({ matchId: id })) :
           this.store.dispatch(mistsActions.setActiveWorld({ worldId: id }))
+      } else {
+        this.toastr.warning("Failed to find your home world, check your settings.", "Missing Home World", { timeOut: 10000 });
+        this.showMatches = true;
       }
     })
   }
