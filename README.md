@@ -11,7 +11,7 @@ Hosted at [maps.gw2.io](maps.gw2.io), with two major maps implemented for Tyria 
   - Single click to copy the closest waypoint Chat Link
   - See upcoming events using the sidebar
 - Dailies sidebar
-- Live Markers support integrating with [BlishHud](https://blishhud.com/) addon 
+- Live Markers support integrating with [BlishHud](https://blishhud.com/) addon using Mumble Link
   - Track yourself on the map with other users using Solo, Guild, Global and custom channels.
   - API Key is required to ensure Location is only published in the right channels.
   - _Addon is not published, maybe one day_
