@@ -47,6 +47,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   showEvents: boolean = false;
   showDailies: boolean = false;
   showSettings: boolean = false;
+  showAbout: boolean = false;
 
   upcomingEvents: EventMap = {};
 

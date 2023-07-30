@@ -22,9 +22,11 @@
   <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showScore = !showScore" icon="pi pi-chart-bar"></button>
   <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showMatches = !showMatches" icon="pi pi-list"></button>
   <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showSettings = !showSettings" icon="pi pi-cog"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showAbout = !showAbout" icon="pi pi-question-circle"></button>
 </div>
 
 <app-settings-modal [(visible)]="showSettings"></app-settings-modal>
+<app-about-modal [(visible)]="showAbout"></app-about-modal>
 
 <div *ngIf="showScore" style="position: absolute; z-index: 999; left: 15%; top: 25%; width: 75vw; height: 50vh;">
   <ng-container *ngIf="activeMatch$ | async as activeMatch">

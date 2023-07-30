@@ -16,9 +16,11 @@
   <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showEvents = true" icon="pi pi-clock"></button>
   <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showDailies = true" icon="pi pi-calendar"></button>
   <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showSettings = true" icon="pi pi-cog"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showAbout = true" icon="pi pi-question-circle"></button>
 </div>
 
 <app-settings-modal [(visible)]="showSettings"></app-settings-modal>
+<app-about-modal [(visible)]="showAbout"></app-about-modal>
 
 <p-sidebar [(visible)]="showEvents" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">
   <app-event-grid [upcomingEvents]="this.upcomingEvents" (eventClicked)="panToEvent($event)"></app-event-grid>

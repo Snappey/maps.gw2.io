@@ -61,6 +61,7 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   showSettings: boolean = false;
   showMatches: boolean = false;
   showObjectiveDetails: boolean = false;
+  showAbout: boolean = true;
 
   constructor(
     private wvwService: WvwService,
