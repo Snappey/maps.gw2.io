@@ -66,6 +66,8 @@ import {ToggleButtonModule} from "primeng/togglebutton";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {NgcCookieConsentModule} from "ngx-cookieconsent";
 import { LiveMarkerSidebarComponent } from './live-marker-sidebar/live-marker-sidebar.component';
+import {AboutModalComponent} from "./about-modal/about-modal.component";
+import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from "ngx-google-analytics";
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   connectOnCreate: false
@@ -91,6 +93,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     ObjectiveDetailsComponent,
     SettingsModalComponent,
     LiveMarkerSidebarComponent,
+    AboutModalComponent
   ],
   imports: [
     BrowserModule,
@@ -171,6 +174,9 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     PasswordModule,
     ToggleButtonModule,
     SelectButtonModule,
+
+    NgxGoogleAnalyticsModule.forRoot('G-ZF8RV8P3LT'),
+    NgxGoogleAnalyticsRouterModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
