@@ -317,8 +317,10 @@ export class LayerService {
         return "assets/pof_mastery.png";
       case "Tundra":
         return "assets/ibs_mastery.png";
-      case "Unknown":
+      case "Cantha":
         return "assets/eod_mastery.png";
+      case "Skies of Tyria":
+        return "assets/soto_mastery.png"
     }
     return "assets/core_mastery.png";
   }
@@ -333,8 +335,10 @@ export class LayerService {
         return "PoF";
       case "Tundra":
         return "IBS";
-      case "Unknown":
+      case "Cantha":
         return "EoD";
+      case "Skies of Tyria":
+        return "SoTO";
     }
     return "Core";
   }

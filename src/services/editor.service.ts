@@ -87,6 +87,8 @@ export class EditorService {
             return "assets/ibs_mastery.png";
           case "eod":
             return "assets/eod_mastery.png";
+          case "soto":
+            return "assets/soto_mastery.png";
         }
       case MarkerType.Unlock:
         if ("icon" in metadata && typeof(metadata["icon"]) === "string")
