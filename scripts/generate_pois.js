@@ -25,6 +25,10 @@ const overrides = {
   }
 };
 
+const mapOverrides = {
+
+}
+
 async function getContinent(id, floor) {
   return axios.get(`https://api.guildwars2.com/v2/continents/${id}/floors/${floor}`)
 }
@@ -95,7 +99,7 @@ async function generate(continentId, floorId) {
           map: map.name,
           continent: region.name,
           data: {
-            "type": mastery.region
+            "type": mastery.region !== "Unknown" ? mastery.region : region.name
           }
         });
       }
