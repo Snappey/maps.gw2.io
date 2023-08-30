@@ -1,6 +1,6 @@
 # Interactive Guild Wars 2 Map
 
-Hosted at [maps.gw2.io](maps.gw2.io), with two major maps implemented for Tyria and WvW.
+Hosted at [maps.gw2.io](https://maps.gw2.io/), with two major maps implemented for Tyria and WvW.
 
 ## Some of the Features
 
