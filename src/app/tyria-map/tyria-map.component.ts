@@ -1,4 +1,4 @@
-import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
+import {Component, isDevMode, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {
   debounceTime, first,
@@ -143,7 +143,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     zoom: 3,
     zoomControl: false,
     center: latLng(-260, 365),
-    contextmenu: false,
+    contextmenu: isDevMode(),
     contextmenuWidth: 140,
     contextmenuItems: [{
       text: "Place Waypoint",
