@@ -4,6 +4,11 @@
   height: 48px;
 }
 
+.compass-button-corner {
+  width: 36px;
+  height: 36px;
+}
+
 .compass-button.core {
   background-image: url("/assets/compass_core_pointer.png");
 }
@@ -34,6 +39,14 @@
 
 .compass-button.eod:hover {
   background-image: url("/assets/compass_eod_pointer_activated.png");
+}
+
+.compass-button-corner.soto {
+  background-image: url("/assets/compass_soto_pointer.png");
+}
+
+.compass-button-corner.soto:hover {
+  background-image: url("/assets/compass_soto_pointer_activated.png");
 }
 
 .compass-button-player {
