@@ -13,10 +13,9 @@
 </div>
 
 <div class="flex flex-row align-items-center justify-content-center" style="position: absolute;  z-index: 999; width: 100%; bottom: 5px;">
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showEvents = true" icon="pi pi-clock"></button>
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showDailies = true" icon="pi pi-calendar"></button>
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showSettings = true" icon="pi pi-cog"></button>
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showAbout = true" icon="pi pi-question-circle"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showEvents = !showEvents" icon="pi pi-clock"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showSettings = !showSettings" icon="pi pi-cog"></button>
+  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showAbout = !showAbout" icon="pi pi-question-circle"></button>
 </div>
 
 <app-settings-modal [(visible)]="showSettings"></app-settings-modal>
@@ -24,10 +23,6 @@
 
 <p-sidebar [(visible)]="showEvents" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">
   <app-event-grid [upcomingEvents]="this.upcomingEvents" (eventClicked)="panToEvent($event)"></app-event-grid>
-</p-sidebar>
-
-<p-sidebar [(visible)]="showDailies" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">
-  <app-daily-grid></app-daily-grid>
 </p-sidebar>
 
 <ng-container *ngIf="!smallScreen">

@@ -26,8 +26,6 @@ import {PanelModule} from "primeng/panel";
 import {DividerModule} from "primeng/divider";
 import {StyleClassModule} from "primeng/styleclass";
 import {SearchBarComponent} from './tyria-map/search-bar/search-bar.component';
-import {DailyPanelComponent} from './tyria-map/daily-panel/daily-panel.component';
-import {DailyGridComponent} from './tyria-map/daily-grid/daily-grid.component';
 import {MistsMapComponent} from './mists-map/mists-map.component';
 import {ArraySortPipe} from "../pipes/orderBy.pipe";
 import {SpinnerModule} from "primeng/spinner";
@@ -80,8 +78,6 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     EventPanelComponent,
     EventGridComponent,
     SearchBarComponent,
-    DailyPanelComponent,
-    DailyGridComponent,
     MistsMapComponent,
     ArraySortPipe,
     ObjectiveTooltipComponent,

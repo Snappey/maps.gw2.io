@@ -45,7 +45,6 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
 
   smallScreen: boolean = document.body.offsetWidth < 1024;
   showEvents: boolean = false;
-  showDailies: boolean = false;
   showSettings: boolean = false;
   showAbout: boolean = false;
 
@@ -83,9 +82,6 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       switch (keyEvent.code) {
         case "Digit1":
           this.showEvents = !this.showEvents;
-          break;
-        case "Digit2":
-          this.showDailies = !this.showDailies;
           break;
       }
     });
