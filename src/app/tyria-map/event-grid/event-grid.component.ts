@@ -15,7 +15,8 @@ export class EventGridComponent implements OnInit {
     "hot": "Heart of Thorns",
     "pof": "Path of Fire",
     "ibs": "Icebrood Saga",
-    "eod": "End of Dragons"
+    "eod": "End of Dragons",
+    "soto": "Shadows of the Obscure"
   }
 
   @Output()

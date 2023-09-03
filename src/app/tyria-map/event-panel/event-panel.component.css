@@ -47,6 +47,14 @@
   background-color: #44DDDD;
 }
 
+.soto {
+  background-color: #FFBD5A;
+}
+
+.soto:hover {
+  background-color: #FACE85;
+}
+
 .pi.clickable:hover {
   color: lightskyblue;
 }

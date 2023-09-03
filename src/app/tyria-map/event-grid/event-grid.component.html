@@ -29,4 +29,10 @@
       <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
     </div>
   </div>
+  <div class="lg:col md:col-12">
+    <h1 class="my-2">{{this.friendlyXpacNames["soto"]}}</h1>
+    <div *ngFor="let event of this.upcomingEvents['soto']">
+      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
+    </div>
+  </div>
 </div>
