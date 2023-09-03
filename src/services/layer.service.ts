@@ -382,9 +382,9 @@ export class LayerService {
     return this.getCityMarkerLabels().pipe(
       combineLatestWith(of(new FeatureGroup())),
       tap(([labels, layer]) => labels.forEach(label => this.labelService.createCanvasMarker(leaflet, label.coord as PointTuple, label.icon, 0, [24, 24])
-        .bindTooltip(`${label.text.replaceAll("[", "").replaceAll("]", "")}`, { className: "tooltip", offset: new Point(15, 0) } )
+        .bindTooltip(`${label.text?.replaceAll(/([\[\]])*/g, "")?? label.name.replaceAll(/([\[\]])*/g, "")}`, { className: "tooltip", offset: new Point(15, 0) } )
         .addTo(layer)
-        .on("dblclick", (_: any) => window.open(`https://wiki.guildwars2.com/wiki/?search=${label.text.replaceAll("[", "").replaceAll("]", "")}&ns0=1`)))),
+        .on("dblclick", (_: any) => window.open(`https://wiki.guildwars2.com/wiki/?search=${label.text?.replaceAll(/([\[\]])*/g, "") ?? label.name.replaceAll(/([\[\]])*/g, "")}&ns0=1`)))),
       map(([_, layer]) => {
         return layer;
       }),

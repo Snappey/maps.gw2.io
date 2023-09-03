@@ -1,7 +1,7 @@
 const axios = require("axios");
 const fs = require("fs");
 
-/*
+
 const adventuresQueryUrl = "https://wiki.guildwars2.com/api.php?action=ask&format=json&query=[[Category:Adventures]]|[[Has%20x%20coordinate::%3E0]]|?Has%20x%20coordinate|?Has%20y%20coordinate|?Has game description|limit=500"
 
 axios.get(adventuresQueryUrl)
@@ -19,11 +19,11 @@ axios.get(adventuresQueryUrl)
   })))
   .then(data => fs.writeFileSync("./src/assets/data/adventure_labels.json", JSON.stringify(data)))
   .finally(_ => console.log("finished adventures written to assets.."))
-*/
+
 
 const templatePagesUrl = "https://wiki.guildwars2.com/api.php?action=query&format=json&list=embeddedin&eititle=Template:Interactive%20map&einamespace=0&eilimit=500"
 const wikiTextQueryUrl = (pageTitle) => `https://wiki.guildwars2.com/api.php?action=query&format=json&prop=revisions&rvprop=content&titles=${pageTitle}`;
-const includedPages = ["Lion's Arch", "Arborstone", "Lion%27s_Arch_Aerodrome", "Black Citadel", "Eye of the North", "Labyrinthine Cliffs"] //, "Divinity's Reach", "Black Citadel", "Hoelbrak", "Rata Sum", "The Grove", "Eye of the North", "Arborstone"]
+const includedPages = ["Lion's Arch", "Arborstone", "Lion's_Arch_Aerodrome", "Black Citadel", "Hoelbrak", "Rata Sum", "Divinity's Reach", "The Grove", "Eye of the North", "Labyrinthine Cliffs", "The Wizard's Tower", "Thousand Seas Pavilion"]
 
 function extractMarkers(text) {
   const startMarker = "{{interactive map";
@@ -65,9 +65,8 @@ async function getGuildWars2WikiImageUrl(filename) {
   const data = response.data;
   const pages = data.query.pages;
   const pageId = Object.keys(pages)[0];
-  const imageUrl = pages[pageId].imageinfo[0].url;
 
-  return imageUrl;
+  return pages[pageId].imageinfo[0].url;
 }
 
 async function writeCityMarkers(pageTitles) {
