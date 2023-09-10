@@ -11,14 +11,17 @@ import {AppState} from "../../../state/appState";
 })
 export class MatchOverviewComponent {
 
-  matches$ = this.store.select(state => state.mists.matches);
+  matches$ = this.store.select(state => state.mists.matches).pipe(
+    map(matches =>
+      Object.values(matches).reduce((prev: { [region: string]: Match[] }, cur) => {
+        if (!(cur.region in prev))
+          prev[cur.region] = [cur]
+        else
+          prev[cur.region].push(cur)
 
-  euMatches$ = this.matches$.pipe(
-    map(matches => Object.values(matches).filter(m => m.region === "eu"))
-  );
-
-  usMatches$ = this.matches$.pipe(
-    map(matches => Object.values(matches).filter(m => m.region === "us"))
+        return prev;
+      }, {})
+    )
   );
 
   matchesLoading$ = this.store.select(state => state.mists.loading);
@@ -28,7 +31,7 @@ export class MatchOverviewComponent {
 
   constructor(private readonly store: Store<AppState>) {}
 
-  selectedMatch(match: Match) {
+  selectedMatch = (match: Match) =>
     this.clickedMatch.emit(match);
-  }
+
 }

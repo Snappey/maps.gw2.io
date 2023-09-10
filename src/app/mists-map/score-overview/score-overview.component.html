@@ -1,11 +1,7 @@
 <div class="flex flex-column">
-  <div *ngIf="loading" class="flex align-items-center h-2rem tooltip">
-    <span class="text-left ml-2 mr-1 my-1 mists-score" >Loading..</span>
-  </div>
-
-  <ng-container *ngIf="!loading">
-    <div class="flex align-items-center h-2rem lg:w-30rem md:w-auto tooltip scalein animation-duration-200" [ngClass]="'overlay-' + team.name" *ngFor="let team of sortedScores">
-      <ng-container *ngIf="!small">
+  <ng-container *ngIf="!loading; else loadingTemplate">
+    <div class="flex align-items-center h-2rem w-30rem tooltip scalein animation-duration-200" [ngClass]="'overlay-' + team.name" *ngFor="let team of sortedScores">
+      <ng-container *ngIf="!small; else smallOverview">
         <span class="text-left ml-2 mr-2 my-1 mists-score w-6 white-space-nowrap flex-grow-1" >{{match.all_worlds_names[team.name].join(", ")}}</span>
         <span class="text-right mists-score w-auto ml-4 mr-0 flex-1" style="float: right">
             {{match.victory_points[team.name] | number}}
@@ -18,14 +14,20 @@
         </ng-container>
 
       </ng-container>
-      <ng-container *ngIf="small">
+      <ng-template #smallOverview>
         <h1 class="text-left mx-2 my-0 mists-score flex-shrink-1" [ngClass]="team.name"
             [pTooltip]="match.all_worlds_names[team.name].join(', ')" tooltipPosition="right">{{match.victory_points[team.name] | number}}</h1>
         <ng-container *ngIf="skirmishStats">
           <span class="text-left mists-score w-auto ml-0 mr-2 flex-shrink-1" style="float: right">{{skirmishStats.Scores[team.name] | number}}</span>
           <span class="text-right mists-score w-auto ml-0 mr-2 flex-shrink-1" style="float: right">+{{skirmishStats.Tick[team.name] | number}}</span>
         </ng-container>
-      </ng-container>
+      </ng-template>
     </div>
   </ng-container>
 </div>
+
+<ng-template #loadingTemplate>
+  <div class="flex align-items-center h-2rem tooltip">
+    <span class="text-left ml-2 mr-1 my-1 mists-score" >Loading..</span>
+  </div>
+</ng-template>

@@ -1,32 +1,18 @@
-<div class="grid grid-nogutter" *ngrxLet="matchesLoading$; let loading">
-  <div class="col-12 md:col-6">
-    <div class="flex align-items-end flex-column flex-wrap px-6">
-      <div class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem lg:w-30rem md:w-auto tooltip scalein animation-duration-200">
-        <h2 class="my-1 text-center">EU Matches</h2>
+<div class="grid grid-nogutter" *ngrxLet="{loading: matchesLoading$, matches: matches$}; let vm">
+  <div class="col-12 lg:col-6" *ngFor="let regionMatches of vm.matches | keyvalue">
+    <div class="flex align-items-center flex-column flex-wrap px-6">
+      <div class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem w-30rem tooltip">
+        <h2 class="my-1 text-center">{{regionMatches.key | uppercase}} Matches</h2>
       </div>
-      <div *ngIf="loading" class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem lg:w-30rem md:w-auto tooltip scalein animation-duration-200">
-        <h3 class="ml-4 my-2">Loading...</h3>
+      <div class="my-2 flex-1 flex-grow-1 clickable hover" *ngFor="let match of regionMatches.value">
+        <app-score-overview  (click)="selectedMatch(match)" [match]="match" [loading]="false"></app-score-overview>
       </div>
-      <ng-container *ngIf="!loading">
-        <div class="my-2 flex-1 flex-grow-1 clickable hover" *ngFor="let match of euMatches$ | async">
-          <app-score-overview (click)="selectedMatch(match)" [match]="match" [loading]="false"></app-score-overview>
-        </div>
-      </ng-container>
-    </div>
-  </div>
-  <div class="col-12 md:col-6">
-    <div class="flex align-items-start flex-column flex-wrap px-6">
-      <div class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem lg:w-30rem md:w-auto tooltip scalein animation-duration-200">
-        <h2 class="my-1 text-center">US Matches</h2>
-      </div>
-      <div *ngIf="loading" class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem lg:w-30rem md:w-auto tooltip scalein animation-duration-200">
-        <h3 class="ml-4 my-2">Loading...</h3>
-      </div>
-      <ng-container *ngIf="!loading">
-        <div class="my-2 flex-1 flex-grow-1 clickable hover" *ngFor="let match of usMatches$ | async">
-          <app-score-overview (click)="selectedMatch(match)" [match]="match" [loading]="false"></app-score-overview>
-        </div>
-      </ng-container>
     </div>
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <div class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem lg:w-30rem md:w-auto tooltip scalein animation-duration-200">
+    <h3 class="ml-4 my-2">Loading...</h3>
+  </div>
+</ng-template>
