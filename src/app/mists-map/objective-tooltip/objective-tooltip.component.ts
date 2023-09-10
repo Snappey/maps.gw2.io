@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MergedObjective, WvwService} from "../../../services/wvw.service";
+import {FullMatchObjective, WvwService} from "../../../services/wvw.service";
 import {Guild, GuildService} from "../../../services/guild.service";
 
 @Component({
@@ -10,7 +10,7 @@ import {Guild, GuildService} from "../../../services/guild.service";
 export class ObjectiveTooltipComponent implements OnInit {
 
   @Input()
-  obj: MergedObjective | undefined;
+  obj: FullMatchObjective | undefined;
 
   @Input()
   teams: {[team: string]: string} = {};

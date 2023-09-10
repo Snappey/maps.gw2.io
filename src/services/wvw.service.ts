@@ -9,6 +9,7 @@ import {
   switchMap,
 } from "rxjs";
 import {GuildService} from "./guild.service";
+import {PointTuple} from "leaflet";
 
 export interface Objective {
   id: string;
@@ -18,8 +19,8 @@ export interface Objective {
   map_type: string;
   map_id: number;
   upgrade_id: number;
-  coord: number[];
-  label_coord: number[];
+  coord: PointTuple;
+  label_coord: PointTuple;
   marker: string;
   chat_link: string;
 }
@@ -103,7 +104,7 @@ export interface Match {
   all_worlds: WorldNames;
   all_worlds_names: WorldNames
   friendly_names: FriendlyWorldNames
-  objectives: MergedObjective[]
+  objectives: FullMatchObjective[]
 }
 
 export interface MatchOverview {
@@ -141,7 +142,7 @@ export interface ObjectiveTiers {
   tiers: Tier[];
 }
 
-export interface MergedObjective extends MatchObjective, Objective {}
+export interface FullMatchObjective extends MatchObjective, Objective {}
 
 @Injectable({
   providedIn: 'root'
@@ -214,7 +215,7 @@ export class WvwService {
       map(src => {
         const objectives = src[0]
         const matchObj = match.maps.map(m => m.objectives).flat();
-        match.objectives = matchObj.reduce((res: MergedObjective[], matchObj) => {
+        match.objectives = matchObj.reduce((res: FullMatchObjective[], matchObj) => {
           const obj = objectives.find(o => matchObj.id === o.id);
           if (obj) {
             res.push({...obj, ...matchObj, friendlyOwner: match.friendly_names[matchObj.owner.toLowerCase()]})

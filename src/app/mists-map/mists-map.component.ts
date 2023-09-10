@@ -8,13 +8,13 @@ import {
 import * as L from "leaflet";
 import {LayerService} from "../../services/layer.service";
 import {ToastrService} from "ngx-toastr";
-import {Match, MergedObjective, World, WvwService} from "../../services/wvw.service";
+import {Match, FullMatchObjective, World, WvwService} from "../../services/wvw.service";
 import {
   combineLatestWith,
   debounceTime, filter, first,
   fromEvent, interval,
   map,
-  Observable, Subject, switchMap, take, takeUntil, tap,
+  Observable, of, Subject, switchMap, take, takeUntil, tap,
 } from "rxjs";
 import {BaseMap} from "../../lib/base-map";
 import {Store} from "@ngrx/store";
@@ -35,14 +35,15 @@ import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 })
 export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   OBJECTIVE_LAYER = "mists_objective" as const;
+  OBJECTIVE_SPAWN_HEADINGS_LAYER = "mists_spawn_headings" as const;
   OBJECTIVE_SECTOR_LAYER = "mists_sector_objective" as const;
-  HEADINGS_LAYER = "mists_headings" as const;
+  MAP_HEADINGS_LAYER = "mists_map_headings" as const;
   override CONTINENT_ID = 2 as const;
   FLOOR_ID = 1 as const;
 
   worlds$: Observable<World[]>;
   selectedWorld: World | undefined;
-  selectedObjective: MergedObjective | undefined;
+  selectedObjective: FullMatchObjective | undefined;
 
   activeMatch$ = this.store.select(state => state.mists.activeMatch);
 
@@ -152,29 +153,41 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
       [-48, 256]
     ));
 
-    this.layerService.getMistsLayer().addTo(leaflet)
-    this.registerLayer(this.OBJECTIVE_LAYER, {Layer: new LayerGroup(), MinZoomLevel: 0, Hidden: false});
-    this.registerLayer(this.OBJECTIVE_SECTOR_LAYER, {Layer: new FeatureGroup(), MinZoomLevel: 0, Hidden: false})
-    this.registerLayer(this.HEADINGS_LAYER, {Layer: this.layerService.getMistsMapHeadings(leaflet), MinZoomLevel: 0, Hidden: false})
+    this.layerService.getMistsTiles().addTo(leaflet)
+    this.registerLayer(this.OBJECTIVE_LAYER, {Layer: new LayerGroup(), MinZoomLevel: 0, Hidden: false});;
+    this.registerLayer(this.OBJECTIVE_SECTOR_LAYER, {Layer: new FeatureGroup(), MinZoomLevel: 0, Hidden: false});
+    this.registerLayer(this.OBJECTIVE_SPAWN_HEADINGS_LAYER, { Layer: new FeatureGroup(), MinZoomLevel: 0, Hidden: false });
 
-    this.layerService.getMistsObjectivesLayer(leaflet).pipe(
+    this.layerService.getMistsHeadings(leaflet).pipe(
+      take(1)
+    ).subscribe(layer =>
+      this.registerLayer(this.MAP_HEADINGS_LAYER, {Layer: layer, MinZoomLevel: 0, Hidden: false})
+    )
+
+    this.layerService.getMistsObjectives(leaflet).pipe(
       take(1),
     ).subscribe((layer) => this.updateLayer(this.OBJECTIVE_LAYER, layer))
 
     this.activeMatch$.pipe(
-        map(activeMatch => {
-          if (this.Map && activeMatch) {
-            return this.layerService.createMistsObjectivesLayer(this.Map, activeMatch)
-          }
-          return new FeatureGroup();
-        }),
-        tap(layer => layer.on("click", (data: any) => this.openObjectiveDetails(data.data as MergedObjective))),
+        switchMap(activeMatch => activeMatch ?
+          this.layerService.createMistsMatchObjectives(leaflet, activeMatch) :
+          of(new FeatureGroup())
+        ),
+        tap(layer => layer.on("click", (objective: any) => this.openObjectiveDetails(objective.data as FullMatchObjective))),
         takeUntil(this.unsubscribe$)
       ).subscribe(objectiveLayer => this.updateLayer(this.OBJECTIVE_LAYER, objectiveLayer))
 
     this.activeMatch$.pipe(
+      switchMap(activeMatch => activeMatch ?
+          this.layerService.createMistsMatchSpawnHeadings(leaflet, activeMatch) :
+          of(new FeatureGroup())
+      ),
+      takeUntil(this.unsubscribe$)
+    ).subscribe(spawnHeadingsLayer => this.updateLayer(this.OBJECTIVE_SPAWN_HEADINGS_LAYER, spawnHeadingsLayer))
+
+    this.activeMatch$.pipe(
       filter(activeMatch => !!this.Map && !!activeMatch),
-      switchMap(activeMatch => this.layerService.createMistsObjectivesSectorLayer(this.Map, activeMatch!)),
+      switchMap(activeMatch => this.layerService.createMistsObjectivesSectors(this.Map, activeMatch!)),
       takeUntil(this.unsubscribe$)
     ).subscribe(objectiveSectorLayer => this.updateLayer(this.OBJECTIVE_SECTOR_LAYER, objectiveSectorLayer))
 
@@ -199,7 +212,7 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
 
   overviewMatchClicked($event: Match) {
     if (this.Map) {
-      this.layerService.getMistsObjectivesLayer(this.Map).pipe(
+      this.layerService.getMistsObjectives(this.Map).pipe(
         first()
       ).subscribe((layer) => this.updateLayer(this.OBJECTIVE_LAYER, layer))
     }
@@ -208,7 +221,7 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
     this.showMatches = false;
   }
 
-  openObjectiveDetails(objective: MergedObjective) {
+  openObjectiveDetails(objective: FullMatchObjective) {
     this.showObjectiveDetails = true;
     this.selectedObjective = objective;
   }

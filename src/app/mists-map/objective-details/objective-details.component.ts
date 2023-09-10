@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
-import {MergedObjective, ObjectiveTiers, WvwService} from "../../../services/wvw.service";
+import {FullMatchObjective, ObjectiveTiers, WvwService} from "../../../services/wvw.service";
 import {Guild, GuildService} from "../../../services/guild.service";
 import {interval, map, Observable, timer} from "rxjs";
 import moment from "moment";
@@ -13,7 +13,7 @@ import {Menu} from "primeng/menu";
 })
 export class ObjectiveDetailsComponent implements OnChanges {
   @Input()
-  objective!: MergedObjective;
+  objective!: FullMatchObjective;
 
   guildDetails$: Observable<Guild> | undefined;
   upgradeDetails$: Observable<ObjectiveTiers> | undefined;

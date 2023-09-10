@@ -260,7 +260,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     ));
 
     this.registerLayer("core", {
-      Layer: this.layerService.getTyriaLayer(),
+      Layer: this.layerService.getTyriaTiles(),
       Hidden: false,
     });
 
@@ -292,7 +292,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       take(1)
     ).subscribe(layer => this.registerLayer("masteries_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
 
-    this.layerService.getRegionLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
+    this.layerService.getRegionLabels(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => {
         this.registerLayer("region_labels",
@@ -300,7 +300,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
         layer.bringToFront();
       });
 
-    this.layerService.getMapLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
+    this.layerService.getMapLabels(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => {
         this.registerLayer("map_labels",
@@ -320,7 +320,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       take(1)
     ).subscribe(layer => this.registerLayer("city_markers", {Layer: layer, MinZoomLevel: 7, Hidden: false}))
 /*
-    this.layerService.getSectorLayer(leaflet).pipe(
+    this.layerService.getSectorLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       tap(layer => console.log(layer)),
       take(1)
     ).subscribe(layer => this.registerLayer("sector_polygons", { Layer: layer, MinZoomLevel: 7, Hidden: false }))

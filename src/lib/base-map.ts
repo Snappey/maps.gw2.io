@@ -71,7 +71,7 @@ export class BaseMap {
     // Direct link to Markers
     this.route.params.pipe(
       map(params=> params["chatLink"] as string),
-      combineLatestWith(this.layerService.getPoiLabels(this.CONTINENT_ID, 1)),
+      combineLatestWith(this.layerService.fetchPointOfInterestLabels(this.CONTINENT_ID, 1)),
       map(([chatLink, poiLabels]) =>
         poiLabels.filter(l => !!l.data && !!l.data.chat_link).filter(l => l.data.chat_link.includes(chatLink)).pop()
       ),
@@ -100,10 +100,10 @@ export class BaseMap {
 
   updateLayer(id: string, layer: Layer) {
     if (this.hasLayer(id)) {
+      this.Map.addLayer(layer);
       this.Map.removeLayer(this.Layers[id].Layer);
 
       this.Layers[id].Layer = layer;
-      this.Map.addLayer(layer);
     }
   }
 

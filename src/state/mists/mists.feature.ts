@@ -1,5 +1,5 @@
 import {createFeature, createReducer, createSelector, on} from '@ngrx/store';
-import {Match, MergedObjective, Objective} from "../../services/wvw.service";
+import {Match, FullMatchObjective, Objective} from "../../services/wvw.service";
 import {mistsActions} from "./mists.action";
 import {FeatureGroup,Map} from "leaflet";
 
