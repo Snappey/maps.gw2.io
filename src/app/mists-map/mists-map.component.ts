@@ -26,6 +26,7 @@ import {MqttService} from "ngx-mqtt";
 import {LabelService} from "../../services/label.service";
 import {LiveMarkersService} from "../../services/live-markers.service";
 import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
+import {ToolbarButton} from "../toolbar/toolbar.component";
 
 @Component({
   selector: 'mists-map',
@@ -63,6 +64,41 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   showMatches: boolean = false;
   showObjectiveDetails: boolean = false;
   showAbout: boolean = false;
+
+  toolbarButtons: ToolbarButton[] = [
+    {
+      Tooltip: "Info",
+      Icon: "/assets/about_icon.png",
+      IconHover: "/assets/about_hovered_icon.png",
+      OnClick: () => this.showAbout = !this.showAbout
+    },
+    {
+      Tooltip: "Settings",
+      Icon: "/assets/settings_icon.png",
+      IconHover: "/assets/settings_hovered_icon.png",
+      OnClick: () => this.showSettings = !this.showSettings
+    },
+    {
+      Tooltip: "Matches",
+      Icon: "/assets/matches_icon.png",
+      IconHover: "/assets/matches_hovered_icon.png",
+      OnClick: () => this.showMatches = !this.showMatches,
+      Keybindings: ["Digit1"]
+    },
+    {
+      Tooltip: "Match Stats",
+      Icon: "/assets/stats_icon.png",
+      IconHover: "/assets/stats_hovered_icon.png",
+      OnClick: () => this.showScore = !this.showScore,
+      Keybindings: ["Digit1"]
+    },
+    {
+      Tooltip: "Tyria Map",
+      Icon: "/assets/tyria_icon.png",
+      IconHover: "/assets/tyria_hovered_icon.png",
+      OnClick: () => this.router.navigate(["/tyria"])
+    }
+  ]
 
   constructor(
     private wvwService: WvwService,

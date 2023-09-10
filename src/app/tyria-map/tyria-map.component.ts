@@ -32,6 +32,7 @@ import {LiveMarkersService} from "../../services/live-markers.service";
 import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../state/appState";
+import {ToolbarButton} from "../toolbar/toolbar.component";
 
 @Component({
   selector: 'tyria-map',
@@ -55,6 +56,34 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
+  toolbarButtons: ToolbarButton[] = [
+    {
+      Tooltip: "Info",
+      Icon: "/assets/about_icon.png",
+      IconHover: "/assets/about_hovered_icon.png",
+      OnClick: () => this.showAbout = !this.showAbout
+    },
+    {
+      Tooltip: "Settings",
+      Icon: "/assets/settings_icon.png",
+      IconHover: "/assets/settings_hovered_icon.png",
+      OnClick: () => this.showSettings = !this.showSettings
+    },
+    {
+      Tooltip: "World Bosses",
+      Icon: "/assets/event_icon.png",
+      IconHover: "/assets/event_hovered_icon.png",
+      OnClick: () => this.showEvents = !this.showEvents,
+      Keybindings: ["Digit1"]
+    },
+    {
+      Tooltip: "WvW Map",
+      Icon: "/assets/mists_icon.png",
+      IconHover: "/assets/mists_hovered_icon.png",
+      OnClick: () => this.router.navigate(["/wvw"])
+    }
+  ]
+
   constructor(
     private dialogService: DialogService,
     private toastr: ToastrService,
@@ -73,18 +102,6 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     layerService: LayerService,
   ) {
     super(ngZone, mqttService, labelService, liveMarkerService, layerService, route, router)
-    // Setup Shortcuts
-    fromEvent(document, "keydown").pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(event => {
-      const keyEvent = event as KeyboardEvent;
-
-      switch (keyEvent.code) {
-        case "Digit1":
-          this.showEvents = !this.showEvents;
-          break;
-      }
-    });
 
     // Setup Searchbox debouncing
     this.searchUnfocused.pipe(

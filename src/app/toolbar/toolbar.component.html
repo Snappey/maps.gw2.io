@@ -1,0 +1,8 @@
+<div class="flex flex-row align-items-center justify-content-start">
+  <img *ngFor="let button of _buttons" alt="toolbar button"
+       class="clickable" width="32" height="32"
+       (click)="button.OnClick()"
+       [src]="button.isActive ? button.IconHover : button.Icon"
+       (mouseenter)="button.isActive = true" (mouseleave)="button.isActive = false"
+       [pTooltip]="button.Tooltip" tooltipStyleClass="tooltip" tooltipPosition="bottom">
+</div>

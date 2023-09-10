@@ -66,6 +66,8 @@ import {NgcCookieConsentModule} from "ngx-cookieconsent";
 import { LiveMarkerSidebarComponent } from './live-marker-sidebar/live-marker-sidebar.component';
 import {AboutModalComponent} from "./about-modal/about-modal.component";
 import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from "ngx-google-analytics";
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import {NgOptimizedImage} from "@angular/common";
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   connectOnCreate: false
@@ -89,7 +91,8 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     ObjectiveDetailsComponent,
     SettingsModalComponent,
     LiveMarkerSidebarComponent,
-    AboutModalComponent
+    AboutModalComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +118,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         }
       },
       theme: 'edgeless',
-      position: "top",
+      position: "bottom",
       type: 'info'
     }),
 
@@ -172,7 +175,8 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     SelectButtonModule,
 
     NgxGoogleAnalyticsModule.forRoot('G-ZF8RV8P3LT'),
-    NgxGoogleAnalyticsRouterModule
+    NgxGoogleAnalyticsRouterModule,
+    NgOptimizedImage
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

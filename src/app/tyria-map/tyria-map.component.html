@@ -1,6 +1,3 @@
-<button pButton style="position: absolute; right: 15px; top: 15px; z-index: 999" type="button" class="p-button-rounded" routerLink="/wvw">
-  <img src="assets/wvw-icon.png"/>
-</button>
 
 <div style="height: 100vh; background: #000;"
      leaflet
@@ -12,11 +9,7 @@
      tabindex="0">
 </div>
 
-<div class="flex flex-row align-items-center justify-content-center" style="position: absolute;  z-index: 999; width: 100%; bottom: 5px;">
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showEvents = !showEvents" icon="pi pi-clock"></button>
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showSettings = !showSettings" icon="pi pi-cog"></button>
-  <button pButton tabindex="-1" class="p-button-raised p-button-rounded mx-1 clickable" (click)="showAbout = !showAbout" icon="pi pi-question-circle"></button>
-</div>
+<app-toolbar [buttons]="toolbarButtons" style="position: absolute;  z-index: 999; width: 25vw; left: 10px; top: 5px;"></app-toolbar>
 
 <app-settings-modal [(visible)]="showSettings"></app-settings-modal>
 <app-about-modal [(visible)]="showAbout"></app-about-modal>
@@ -26,7 +19,7 @@
 </p-sidebar>
 
 <ng-container *ngIf="!smallScreen">
-  <img src="assets/compass.png" style="scale: 1.25; position: absolute; z-index: 999; bottom: 65px; right: 55px" />
+  <img src="assets/compass.png" width="128" height="128" alt="map compass" style="scale: 1.25; position: absolute; z-index: 999; bottom: 65px; right: 55px" />
   <div class="clickable compass-button core" style="position: absolute; z-index: 1000; bottom: 165px; right: 95px" (click)="this.panTo([49024,31272])"
        pTooltip="Core Tyria" tooltipPosition="left" tooltipStyleClass="tooltip"></div>
   <div class="clickable compass-button eod" style="position: absolute; z-index: 1000; bottom: 45px; right: 95px" (click)="this.panTo([28832,101176])"

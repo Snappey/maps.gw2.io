@@ -50,7 +50,7 @@ export class BaseMap {
     private liveMarkersService: LiveMarkersService,
     protected layerService: LayerService,
     protected route: ActivatedRoute,
-    private router: Router) {
+    protected router: Router) {
   }
 
   onMapInitialised(leaflet: Map) {
