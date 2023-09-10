@@ -41,5 +41,6 @@ export class ToolbarComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
