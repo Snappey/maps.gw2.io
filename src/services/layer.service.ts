@@ -20,35 +20,9 @@ import {SearchService} from "./search.service";
 import {FullMatchObjective, WvwService, Match, Objective} from "./wvw.service";
 import {Guild, GuildService} from "./guild.service";
 import moment from "moment";
+import {AssetService, MarkerLabel, MarkerType, MasteryType} from "./asset.service";
 
-type BoundsTuple = [[number, number], [number, number]]
-type MarkerType = "waypoint" | "poi" | "vista" | "unlock" | string;
-type RegionLabelType = "Map" | "Region";
-type MasteryType = "Tyria" | "Maguuma" | "Desert" | "Tundra" | "Cantha" | "Skies of Tyria";
 
-interface RegionLabel {
-  type: RegionLabelType;
-  label_coordinates: PointTuple;
-  coordinates: BoundsTuple;
-  heading: string;
-  subheading: string;
-}
-
-export interface MarkerLabel {
-  id: number;
-  coordinates: PointTuple,
-  type: MarkerType;
-  data: any;
-  continent: string;
-  map: string;
-}
-
-export interface WikiMarkerLabel {
-  coord: PointTuple,
-  name: string;
-  text: string;
-  icon: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -58,11 +32,10 @@ export class LayerService {
   public mistsDimensions: PointTuple = [16384, 16384];
 
   constructor(
-    private http: HttpClient,
+    private assetService: AssetService,
     private labelService: LabelService,
     private clipboard: ClipboardService,
     private toastr: ToastrService,
-    private searchService: SearchService,
     private wvwService: WvwService,
     private guildService: GuildService,
   ) {
@@ -147,25 +120,8 @@ export class LayerService {
     }
   }
 
-
   private getFeatureGroup = (): Observable<FeatureGroup> =>
     of(new FeatureGroup());
-
-  fetchRegionLabels(continentId: number, floorId: number): Observable<RegionLabel[]> {
-    return this.http.get<RegionLabel[]>(`/assets/data/region_labels_${continentId}_${floorId}.json`);
-  }
-
-  fetchPointOfInterestLabels(continentId: number, floorId: number): Observable<MarkerLabel[]> {
-    return this.http.get<MarkerLabel[]>(`/assets/data/poi_labels_${continentId}_${floorId}.json`);
-  }
-
-  fetchAdventureLabels(): Observable<MarkerLabel[]> {
-    return this.http.get<MarkerLabel[]>("/assets/data/adventure_labels.json")
-  }
-
-  fetchCityLabels(): Observable<WikiMarkerLabel[]> {
-    return this.http.get<WikiMarkerLabel[]>("/assets/data/city_markers.json");
-  }
 
   private createSvgLabel = (text: string, coordinates: PointTuple, cssClasses: string[], xOffset: number = 0, yOffset: number = 0): string =>
     `<text x="${coordinates[0] + xOffset}" y="${coordinates[1] + yOffset}" dominant-baseline="middle" text-anchor="middle" class="${cssClasses.join(" ")}">${text}</text>`
@@ -214,7 +170,7 @@ export class LayerService {
     text.replaceAll(/([\[\]])*/g, "");
 
   getRegionLabels(leaflet: Map, continentId: number, floorId: number): Observable<SVGOverlay> {
-    return this.fetchRegionLabels(continentId, floorId)
+    return this.assetService.fetchRegionLabels(continentId, floorId)
       .pipe(
         map(labels => labels.filter(l => l.label_coordinates && l.type.toLowerCase() === "region")),
         map(labels => labels.reduce((prev, label) =>
@@ -225,7 +181,7 @@ export class LayerService {
   }
 
   getMapLabels(leaflet: Map, continentId: number, floorId: number): Observable<SVGOverlay> {
-    return this.fetchRegionLabels(continentId, floorId)
+    return this.assetService.fetchRegionLabels(continentId, floorId)
       .pipe(
         map(labels => labels.filter(l => l.label_coordinates && l.type.toLowerCase() === "map")),
         map(labels => labels.reduce((prev, label) =>
@@ -236,7 +192,7 @@ export class LayerService {
   }
 
   getLandmarkLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
-    return this.fetchPointOfInterestLabels(continentId, floorId).pipe(
+    return this.assetService.fetchPointOfInterestLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "landmark")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label => this.createCanvasMarker(leaflet, label, layer))),
@@ -245,7 +201,7 @@ export class LayerService {
   }
 
   getWaypointLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
-    return this.fetchPointOfInterestLabels(continentId, floorId).pipe(
+    return this.assetService.fetchPointOfInterestLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "waypoint")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label => this.createCanvasMarker(leaflet, label, layer))),
@@ -254,7 +210,7 @@ export class LayerService {
   }
 
   getVistaLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
-    return this.fetchPointOfInterestLabels(continentId, floorId).pipe(
+    return this.assetService.fetchPointOfInterestLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "vista")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label =>
@@ -270,7 +226,7 @@ export class LayerService {
   }
 
   getUnlockLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
-    return this.fetchPointOfInterestLabels(continentId, floorId).pipe(
+    return this.assetService.fetchPointOfInterestLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "unlock")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label => this.createCanvasMarker(leaflet, label, layer))),
@@ -279,7 +235,7 @@ export class LayerService {
   }
 
   getHeartLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
-    return this.fetchPointOfInterestLabels(continentId, floorId).pipe(
+    return this.assetService.fetchPointOfInterestLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "heart")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label => {
@@ -305,7 +261,7 @@ export class LayerService {
   }
 
   getSkillPointLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
-    return this.fetchPointOfInterestLabels(continentId, floorId).pipe(
+    return this.assetService.fetchPointOfInterestLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "skillpoint")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label =>
@@ -320,7 +276,7 @@ export class LayerService {
   }
 
   getSectorLayer(leaflet: Map, continentId: number, floorId: number): Observable<FeatureGroup> {
-    return this.fetchPointOfInterestLabels(continentId, floorId).pipe(
+    return this.assetService.fetchPointOfInterestLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "sector")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label =>
@@ -343,7 +299,7 @@ export class LayerService {
   }
 
   getSectorTextLayer(leaflet: Map, continentId: number, floorId: number): Observable<SVGOverlay> {
-    return this.fetchPointOfInterestLabels(continentId, floorId).pipe(
+    return this.assetService.fetchPointOfInterestLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "sector")),
       map(labels => labels.reduce((prev, label) => prev
         += this.createSvgLabel(label.data.tooltip, label.coordinates, ["sector-heading"]), "")),
@@ -353,7 +309,7 @@ export class LayerService {
   }
 
   getMasteryPointLayer(leaflet: Map, continentId: number, floorId: number): Observable<LayerGroup> {
-    return this.fetchPointOfInterestLabels(continentId, floorId).pipe(
+    return this.assetService.fetchPointOfInterestLabels(continentId, floorId).pipe(
       map(labels => labels.filter(l => l.coordinates && l.type === "mastery")),
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) => labels.forEach(label =>
@@ -365,7 +321,7 @@ export class LayerService {
   }
 
   getAdventuresLayer(leaflet: Map): Observable<FeatureGroup> {
-    return this.fetchAdventureLabels().pipe(
+    return this.assetService.fetchAdventureLabels().pipe(
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) =>
         labels.forEach(label =>
@@ -381,7 +337,7 @@ export class LayerService {
   }
 
   getCityMarkersLayer(leaflet: Map): Observable<FeatureGroup> {
-    return this.fetchCityLabels().pipe(
+    return this.assetService.fetchCityLabels().pipe(
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) =>
         labels.forEach(label =>
@@ -399,7 +355,7 @@ export class LayerService {
   getMistsObjectives(leaflet: Map): Observable<FeatureGroup> {
     return this.wvwService.getAllObjectives()
       .pipe(
-        map(objectives => objectives.filter(obj => obj.coord && obj.map_id !== this.EDGE_OF_THE_MISTS_MAP_ID)),
+        map(objectives => objectives.filter(obj => obj.coord && obj.map_id.toString() !== this.EDGE_OF_THE_MISTS_MAP_ID)),
         combineLatestWith(this.getFeatureGroup()),
         tap(([objectives, layer]) =>
           objectives.forEach(obj =>
@@ -435,8 +391,8 @@ export class LayerService {
     not_captured: "#DDD"
   }
 
-  private OBSIDIAN_SANCTUM_MAP_ID = 1031 as const;
-  private EDGE_OF_THE_MISTS_MAP_ID = 968 as const;
+  private OBSIDIAN_SANCTUM_MAP_ID = "1031" as const;
+  private EDGE_OF_THE_MISTS_MAP_ID = "968" as const;
 
   private getTeamColour(teamName: string | undefined): string {
     if (teamName) {
@@ -464,7 +420,7 @@ export class LayerService {
   }
 
   createMistsObjectivesSectors(leaflet: Map, match: Match): Observable<FeatureGroup> {
-    return this.fetchPointOfInterestLabels(2, 1).pipe(
+    return this.assetService.fetchPointOfInterestLabels(2, 1).pipe(
       map(labels => labels.filter(l => {
           return l.coordinates && l.type === "sector" &&
               l.continent === "World vs. World" &&
@@ -481,7 +437,7 @@ export class LayerService {
               .map((coords: PointTuple) => this.interpolateCoords(label.coordinates, coords, .99)),
             {
               color: this.getTeamColour(
-                match.objectives.find(m => m.sector_id === label.id)?.owner
+                match.objectives.find(m => m.sector_id.toString() === label.id)?.owner
               ),
               fillOpacity: 0,
               interactive: false
@@ -542,7 +498,7 @@ export class LayerService {
 
   createMistsMatchSpawnHeadings(leaflet: Map, match: Match): Observable<SVGOverlay> {
     return of(match.objectives).pipe(
-      map(objectives => objectives.filter(obj => obj.label_coord && obj.type === "Spawn" && obj.map_id !== this.EDGE_OF_THE_MISTS_MAP_ID)),
+      map(objectives => objectives.filter(obj => obj.label_coord && obj.type === "Spawn" && obj.map_id.toString() !== this.EDGE_OF_THE_MISTS_MAP_ID)),
       map(objectives => objectives.reduce((prev, cur) =>
         prev += this.createSvgLabel(match.friendly_names[cur.owner.toLowerCase()], cur.label_coord, ["mists-spawn", "mists", cur.owner.toLowerCase()]) , "")),
       map(overlayContent => this.getSvgLayer(this.mistsDimensions, overlayContent)),

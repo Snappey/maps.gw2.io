@@ -33,6 +33,7 @@ import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../state/appState";
 import {ToolbarButton} from "../toolbar/toolbar.component";
+import {AssetService} from "../../services/asset.service";
 
 @Component({
   selector: 'tyria-map',
@@ -93,15 +94,16 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     private eventTimerService: EventTimerService,
     private searchService: SearchService,
     private store: Store<AppState>,
+    private layerService: LayerService,
     ngZone: NgZone,
     mqttService: MqttService,
     labelService: LabelService,
     liveMarkerService: LiveMarkersService,
     router: Router,
     route: ActivatedRoute,
-    layerService: LayerService,
+    assetService: AssetService,
   ) {
-    super(ngZone, mqttService, labelService, liveMarkerService, layerService, route, router)
+    super(ngZone, mqttService, labelService, liveMarkerService, assetService, route, router)
 
     // Setup Searchbox debouncing
     this.searchUnfocused.pipe(

@@ -27,6 +27,7 @@ import {LabelService} from "../../services/label.service";
 import {LiveMarkersService} from "../../services/live-markers.service";
 import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 import {ToolbarButton} from "../toolbar/toolbar.component";
+import {AssetService} from "../../services/asset.service";
 
 @Component({
   selector: 'mists-map',
@@ -109,15 +110,16 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
     private wvwService: WvwService,
     private toastr: ToastrService,
     private readonly store: Store<AppState>,
+    private layerService: LayerService,
     route: ActivatedRoute,
     ngZone: NgZone,
     mqttService: MqttService,
     labelService: LabelService,
     liveMarkerService: LiveMarkersService,
-    layerService: LayerService,
+    assetService: AssetService,
     router: Router
   ) {
-    super(ngZone, mqttService, labelService, liveMarkerService, layerService, route, router)
+    super(ngZone, mqttService, labelService, liveMarkerService, assetService, route, router)
 
     fromEvent(window, 'resize')
       .pipe(

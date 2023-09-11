@@ -12,7 +12,7 @@ import {LabelService} from "../services/label.service";
 import {LiveMarkersService} from "../services/live-markers.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgZone} from "@angular/core";
-import {LayerService, MarkerLabel} from "../services/layer.service";
+import {AssetService, MarkerLabel} from "../services/asset.service";
 
 export interface LayerOptions {
   Layer: Layer;
@@ -48,7 +48,7 @@ export class BaseMap {
     private mqttService: MqttService,
     private labelService: LabelService,
     private liveMarkersService: LiveMarkersService,
-    protected layerService: LayerService,
+    protected assetService: AssetService,
     protected route: ActivatedRoute,
     protected router: Router) {
   }
@@ -71,7 +71,7 @@ export class BaseMap {
     // Direct link to Markers
     this.route.params.pipe(
       map(params=> params["chatLink"] as string),
-      combineLatestWith(this.layerService.fetchPointOfInterestLabels(this.CONTINENT_ID, 1)),
+      combineLatestWith(this.assetService.fetchPointOfInterestLabels(this.CONTINENT_ID, 1)),
       map(([chatLink, poiLabels]) =>
         poiLabels.filter(l => !!l.data && !!l.data.chat_link).filter(l => l.data.chat_link.includes(chatLink)).pop()
       ),
