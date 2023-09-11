@@ -434,7 +434,7 @@ export class LayerService {
         labels.forEach(label =>
           this.createPolygon(leaflet,
             label.data.bounds
-              .map((coords: PointTuple) => this.interpolateCoords(label.coordinates, coords, .99)),
+              .map((coords: PointTuple) => this.interpolateCoords(label.coordinates, coords, .97)),
             {
               color: this.getTeamColour(
                 match.objectives.find(m => m.sector_id === label.id)?.owner
