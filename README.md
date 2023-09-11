@@ -7,15 +7,15 @@ Hosted at [maps.gw2.io](https://maps.gw2.io/), with two major maps implemented f
 - Waypoints, Points of Interest, Vistas, Hearts, Adventures and Masteries
   - Single click to copy Chat Link
   - Double click to link to wiki
+  - Filter them out, only see what you'd like.
 - World Boss Markers
   - Single click to copy the closest waypoint Chat Link
-  - See upcoming events using the sidebar
-- Dailies sidebar
+  - See upcoming events using the overlay
 - Live Markers support integrating with [BlishHud](https://blishhud.com/) addon using Mumble Link
   - Track yourself on the map with other users using Solo, Guild, Global and custom channels.
   - API Key is required to ensure Location is only published in the right channels.
   - _Addon is not published, maybe one day_
-- Major Cities have merchant and NPC markers e.g. Lion's Arch and Arborstone
+- Major Cities have merchant and NPC markers e.g. Lion's Arch, Wizards Tower and Arborstone
   - Double click to link to Wiki
 - Right click to draw on Map
   - Fades after you finish drawing
