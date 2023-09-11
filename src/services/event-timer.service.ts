@@ -82,7 +82,7 @@ export class EventTimerService {
     for (let key in events) {
       const labels = events[key];
       labels
-        .filter(label => label.timeUntil < 15)
+        .filter(label => label.timeUntil < 30)
         .forEach(label => this.createMarker(leaflet, label).addTo(markers))
     }
 
