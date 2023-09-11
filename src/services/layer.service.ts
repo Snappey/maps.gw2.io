@@ -369,7 +369,7 @@ export class LayerService {
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) =>
         labels.forEach(label =>
-          this.labelService.createCanvasMarker(leaflet, label.coordinates as PointTuple, "/assets/adventure_icon.png")
+          this.labelService.createCanvasMarker(leaflet, label.coordinates, "/assets/adventure_icon.png")
             .bindTooltip(label.id.toString(), { className: "tooltip", offset: new Point(25, 0) } )
             .on("dblclick", (_: any) =>
               window.open(label.data.url)
@@ -385,7 +385,7 @@ export class LayerService {
       combineLatestWith(this.getFeatureGroup()),
       tap(([labels, layer]) =>
         labels.forEach(label =>
-          this.labelService.createCanvasMarker(leaflet, label.coord as PointTuple, label.icon, 0, [24, 24])
+          this.labelService.createCanvasMarker(leaflet, label.coord, label.icon, 0, [24, 24])
             .bindTooltip(`${this.trimBrackets(label.text ?? label.name)}`, { className: "tooltip", offset: new Point(15, 0) } )
             .on("dblclick", (_: any) =>
               window.open(`https://wiki.guildwars2.com/wiki/?search=${this.trimBrackets(label.text ?? label.name)}&ns0=1`)
@@ -501,7 +501,6 @@ export class LayerService {
           const markerUrl = data.claimed_by === "" ? data.marker : `/assets/${data.type}_${data.owner}.png`.toLowerCase()
           const icons: CanvasIcon[] = [];
 
-
           if (data.type !== "Ruins") {
             icons.push(...Array.from({length: this.wvwService.calculateUpgradeLevel(data.yaks_delivered)},
               (_, i): CanvasIcon => ({ url: "assets/upgrade_pip.png", position: "top", offset: [0, i % 2 === 1 ? 0 : 5], size: [10, 10] })));
@@ -527,7 +526,7 @@ export class LayerService {
             }
           }
 
-          const marker = this.labelService.createCanvasMarker(leaflet, data.coord as PointTuple, markerUrl, 0, data.type === "Ruins" ? [24, 24] : [32, 32], 16, icons)
+          const marker = this.labelService.createCanvasMarker(leaflet, data.coord, markerUrl, 0, data.type === "Ruins" ? [24, 24] : [32, 32], 16, icons)
             .bindTooltip("Loading...", {className: "tooltip-overlay", offset: new Point(15, 0)})
             .on("click", (event: any) => event.data = data)
             .addTo(layer);
