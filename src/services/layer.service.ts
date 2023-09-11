@@ -355,7 +355,7 @@ export class LayerService {
   getMistsObjectives(leaflet: Map): Observable<FeatureGroup> {
     return this.wvwService.getAllObjectives()
       .pipe(
-        map(objectives => objectives.filter(obj => obj.coord && obj.map_id.toString() !== this.EDGE_OF_THE_MISTS_MAP_ID)),
+        map(objectives => objectives.filter(obj => obj.coord && obj.map_id !== this.EDGE_OF_THE_MISTS_MAP_ID)),
         combineLatestWith(this.getFeatureGroup()),
         tap(([objectives, layer]) =>
           objectives.forEach(obj =>
@@ -391,8 +391,8 @@ export class LayerService {
     not_captured: "#DDD"
   }
 
-  private OBSIDIAN_SANCTUM_MAP_ID = "1031" as const;
-  private EDGE_OF_THE_MISTS_MAP_ID = "968" as const;
+  private OBSIDIAN_SANCTUM_MAP_ID = 1031 as const;
+  private EDGE_OF_THE_MISTS_MAP_ID = 968 as const;
 
   private getTeamColour(teamName: string | undefined): string {
     if (teamName) {
@@ -437,7 +437,7 @@ export class LayerService {
               .map((coords: PointTuple) => this.interpolateCoords(label.coordinates, coords, .99)),
             {
               color: this.getTeamColour(
-                match.objectives.find(m => m.sector_id.toString() === label.id)?.owner
+                match.objectives.find(m => m.sector_id === label.id)?.owner
               ),
               fillOpacity: 0,
               interactive: false
@@ -498,7 +498,7 @@ export class LayerService {
 
   createMistsMatchSpawnHeadings(leaflet: Map, match: Match): Observable<SVGOverlay> {
     return of(match.objectives).pipe(
-      map(objectives => objectives.filter(obj => obj.label_coord && obj.type === "Spawn" && obj.map_id.toString() !== this.EDGE_OF_THE_MISTS_MAP_ID)),
+      map(objectives => objectives.filter(obj => obj.label_coord && obj.type === "Spawn" && obj.map_id !== this.EDGE_OF_THE_MISTS_MAP_ID)),
       map(objectives => objectives.reduce((prev, cur) =>
         prev += this.createSvgLabel(match.friendly_names[cur.owner.toLowerCase()], cur.label_coord, ["mists-spawn", "mists", cur.owner.toLowerCase()]) , "")),
       map(overlayContent => this.getSvgLayer(this.mistsDimensions, overlayContent)),

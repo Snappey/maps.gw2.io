@@ -17,12 +17,19 @@ export interface RegionLabel {
 }
 
 export interface MarkerLabel {
+  id: number;
+  coordinates: PointTuple,
+  type: MarkerType;
+  data: any;
+  continent: string;
+  map: string;
+}
+
+export interface AdventureLabel {
   id: string;
   coordinates: PointTuple,
   type: MarkerType;
   data: any;
-  continent?: string;
-  map?: string;
 }
 
 export interface WikiMarkerLabel {
@@ -52,10 +59,10 @@ export class AssetService {
     )
   }
 
-  fetchAdventureLabels(): Observable<MarkerLabel[]> {
+  fetchAdventureLabels(): Observable<AdventureLabel[]> {
     return from(import("../assets/data/adventure_labels.json")).pipe(
       map(data => data.default),
-      map(data => data as MarkerLabel[]) // TODO: Remove this awful type casting
+      map(data => data as AdventureLabel[]) // TODO: Fix this awful type casting from dynamic imports assuming types
     );
   }
 
