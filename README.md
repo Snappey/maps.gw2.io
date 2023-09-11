@@ -22,7 +22,11 @@ Hosted at [maps.gw2.io](https://maps.gw2.io/), with two major maps implemented f
 
 ## What does it look Like
 
-![Tyria Overview](/images/tyria_overview.jpg)
+![Tyria Overview](/images/tyria_overview.png)
+
+![Tyria World Bosses Table](/images/tyria_world_bosses.png)
+
+![WvW Match Table](/images/wvw_matches.png)
 
 ![WvW Overview](/images/wvw_overview.jpg)
 
