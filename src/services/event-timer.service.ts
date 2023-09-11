@@ -110,7 +110,7 @@ export class EventTimerService {
         for (let xpacKey in eventMap) {
           eventMap[xpacKey] = eventMap[xpacKey]
             .sort((a,b) => {
-              if (a.timeUntil == b.timeUntil) {
+              if (a.nextEvent === b.nextEvent) {
                return a.name.charCodeAt(0) - b.name.charCodeAt(0);
               }
               return a.timeUntil - b.timeUntil
