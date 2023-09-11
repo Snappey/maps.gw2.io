@@ -3,7 +3,7 @@ import {ToastrService} from 'ngx-toastr';
 import {
   debounceTime, first,
   fromEvent,
-  map,
+  map, Observable,
   Subject, take, takeUntil, tap
 } from 'rxjs';
 import {
@@ -44,19 +44,16 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   override CONTINENT_ID = 1 as const;
   FLOOR_ID = 1 as const
 
-  smallScreen: boolean = document.body.offsetWidth < 1024;
   showEvents: boolean = false;
   showSettings: boolean = false;
   showAbout: boolean = false;
-
-  upcomingEvents: EventMap = {};
 
   private searchUnfocused: Subject<any> = new Subject<any>();
   showSearchResults: boolean = false;
 
   private unsubscribe$ = new Subject<void>();
 
-  toolbarButtons: ToolbarButton[] = [
+  leftToolbar: ToolbarButton[] = [
     {
       Tooltip: "Info",
       Icon: "/assets/about_icon.png",
@@ -75,9 +72,12 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       IconHover: "/assets/event_hovered_icon.png",
       OnClick: () => this.showEvents = !this.showEvents,
       Keybindings: ["Digit1"]
-    },
+    }
+  ]
+
+  rightToolbar: ToolbarButton[] = [
     {
-      Tooltip: "WvW Map",
+      Tooltip: "WvW",
       Icon: "/assets/mists_icon.png",
       IconHover: "/assets/mists_hovered_icon.png",
       OnClick: () => this.router.navigate(["/wvw"])
@@ -111,32 +111,19 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       this.showSearchResults = false
     })
 
-    this.eventTimerService.getNextEventsTimer(5).pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe((events) => {
-      if (this.Map) {
-        const layer = this.eventTimerService.createEventsLayer(this.Map, events);
-        if (!this.hasLayer("events_layer")) {
-          this.registerLayer("events_layer", {Layer: layer, Hidden: false})
-        } else {
-          this.updateLayer("events_layer", layer);
-        }
-
-        this.upcomingEvents = events;
-      }
-    });
-  }
-
-  ngOnInit() {
-    this.store.dispatch(liveMarkersActions.setActiveContinent({ continentId: this.CONTINENT_ID }))
-
-    const checkScreenSize = () => document.body.offsetWidth < 1024;
     fromEvent(window, 'resize')
       .pipe(
         debounceTime(200),
-        map(checkScreenSize),
+        map(this.checkScreenSize),
         takeUntil(this.unsubscribe$)
       ).subscribe((small) => this.smallScreen = small);
+  }
+
+  checkScreenSize = () => document.body.offsetWidth < 1024;
+  smallScreen: boolean = document.body.offsetWidth < 1024;
+
+  ngOnInit() {
+    this.store.dispatch(liveMarkersActions.setActiveContinent({ continentId: this.CONTINENT_ID }))
   }
 
   ngOnDestroy() {
@@ -144,12 +131,25 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
+  upcomingEvents$: Observable<EventMap> =
+    this.eventTimerService.getNextEventsTimer(8).pipe(
+      tap((events) => {
+        const layer = this.eventTimerService.createEventsLayer(this.Map, events);
+        if (!this.hasLayer("events_layer")) {
+          this.registerLayer("events_layer", {Layer: layer, Hidden: false})
+        } else {
+          this.updateLayer("events_layer", layer);
+        }
+      }),
+      takeUntil(this.unsubscribe$)
+    );
+
   getCoords(latlng: LatLng): PointTuple {
     if (this.Map) {
       const coords = this.Map.project(latlng, this.Map.getMaxZoom());
       return [coords.x, coords.y] as PointTuple;
     }
-    return [0,0] as PointTuple;
+    return [0,0];
   }
 
   //layersControls: LeafletControlLayersConfig = {baseLayers: {}, overlays: {}}
@@ -363,10 +363,11 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     });
 
     this.route.params.pipe(
-      map(params=> params["chat_link"] as string),
+      map(params=> params["chat_link"]),
       takeUntil(this.unsubscribe$)
-    ).subscribe(chatLink => {
+    ).subscribe((chatLink: string) => {
       if (chatLink) {
+
         // TODO: Sort out search state, so we can link directly to places in the world without a weird race condition waiting for data to be filled
       }
     })

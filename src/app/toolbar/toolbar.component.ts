@@ -28,6 +28,9 @@ export class ToolbarComponent implements OnDestroy {
     }));
   }
 
+  @Input()
+  leftToRight: boolean = true;
+
   private unsubscribe$ = new Subject<void>();
 
   constructor() {
@@ -42,5 +45,9 @@ export class ToolbarComponent implements OnDestroy {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  toolbarClasses(): string[] {
+    return this.leftToRight ? ["flex-row", "justify-content-start"] : ["flex-row", "justify-content-end"]
   }
 }

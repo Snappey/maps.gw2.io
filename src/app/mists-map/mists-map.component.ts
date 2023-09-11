@@ -42,7 +42,7 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   override CONTINENT_ID = 2 as const;
   FLOOR_ID = 1 as const;
 
-  worlds$: Observable<World[]>;
+  worlds$: Observable<World[]> = this.wvwService.getAllWorlds();
   selectedWorld: World | undefined;
   selectedObjective: FullMatchObjective | undefined;
 
@@ -65,7 +65,9 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   showObjectiveDetails: boolean = false;
   showAbout: boolean = false;
 
-  toolbarButtons: ToolbarButton[] = [
+  unsubscribe$ = new Subject<void>();
+
+  leftToolbar: ToolbarButton[] = [
     {
       Tooltip: "Info",
       Icon: "/assets/about_icon.png",
@@ -90,10 +92,13 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
       Icon: "/assets/stats_icon.png",
       IconHover: "/assets/stats_hovered_icon.png",
       OnClick: () => this.showScore = !this.showScore,
-      Keybindings: ["Digit1"]
-    },
+      Keybindings: ["Digit2"]
+    }
+  ]
+
+  rightToolbar: ToolbarButton[] = [
     {
-      Tooltip: "Tyria Map",
+      Tooltip: "Tyria",
       Icon: "/assets/tyria_icon.png",
       IconHover: "/assets/tyria_hovered_icon.png",
       OnClick: () => this.router.navigate(["/tyria"])
@@ -114,24 +119,6 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   ) {
     super(ngZone, mqttService, labelService, liveMarkerService, layerService, route, router)
 
-    this.worlds$ = wvwService.getAllWorlds();
-    this.store.dispatch(mistsActions.loadMatches())
-
-    fromEvent(document, "keydown").pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(event => {
-      const keyEvent = event as KeyboardEvent;
-
-      switch (keyEvent.code) {
-        case "Digit1":
-          this.showScore = !this.showScore;
-          break;
-        case "Digit2":
-          this.showMatches = !this.showMatches;
-          break;
-      }
-    });
-
     fromEvent(window, 'resize')
       .pipe(
         debounceTime(200),
@@ -143,8 +130,8 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   checkScreenSize = () => document.body.offsetWidth < 1024;
   smallScreen: boolean = this.checkScreenSize();
 
-  unsubscribe$ = new Subject<void>();
   ngOnInit(): void {
+    this.store.dispatch(mistsActions.loadMatches())
     this.store.dispatch(liveMarkersActions.setActiveContinent({ continentId: this.CONTINENT_ID }))
 
     this.route.params.pipe(

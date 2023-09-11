@@ -43,7 +43,7 @@ export class EventPanelComponent implements OnInit {
     $click.stopPropagation();
   }
 
-  onClick() {
-    this.clickedEvent.emit(this.event)
+  onClick(event: Event) {
+    this.clickedEvent.emit(event)
   }
 }

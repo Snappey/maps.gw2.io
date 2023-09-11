@@ -1,25 +1,31 @@
-<div *ngIf="event" class="event-panel w-full" [ngClass]="[event.xpac]"
+<div *ngIf="event" class="tooltip w-full" [ngClass]="[event.xpac]"
+     (click)="onClick(event)"
      (mouseenter)="this.hovering = true"
      (mouseleave)="this.hovering = false">
-  <div>
-
-  </div>
-  <div class="pt-2 pr-1">
-    <i class="pi pi-external-link clickable px-1" style="float: right" (click)="openWiki($event, event)"></i>
-    <i class="pi pi-link clickable px-1" style="float: right" (click)="copyToClipboard($event, event)"></i>
-    <i class="pi pi-search clickable px-1" style="float: right" (click)="onClick()"></i>
-  </div>
   <div class="p-1">
-    <h2 class="text-overflow-ellipsis overflow-hidden white-space-nowrap m-0">
+    <h4 class="text-overflow-ellipsis overflow-hidden white-space-nowrap m-0">
       {{event.name}}
-    </h2>
+    </h4>
   </div>
   <div class="px-2 pb-1">
-    <div class="grid grid-nogutter">
-      <p class="col-6 text-left font-italic m-0">{{event.map}}</p>
-      <p *ngIf="hovering" class="col-6 text-right font-bold font-italic m-0">{{event.timeUntil | number: '1.0-0'}} Minutes</p>
-      <p *ngIf="!hovering" class="col-6 text-right font-italic m-0">{{event.nextEvent | date : 'HH:mm'}}</p>
+    <div class="flex flex-auto flex-nowrap">
+      <ng-container *ngIf="!hovering; else hoveringDetails">
+        <p class="flex-auto text-left font-italic m-0 text-overflow-ellipsis">{{event.map}}</p>
+        <p class="flex-grow-1 flex-shrink-0 text-right font-italic m-0">{{event.nextEvent | date : 'HH:mm'}}</p>
+      </ng-container>
+      <ng-template #hoveringDetails>
+        <p class="flex-auto text-left font-italic m-0 text-overflow-ellipsis">{{event.map}}</p>
+        <p class="flex-auto text-right font-bold font-italic m-0">{{event.timeUntil | number: '1.0-0'}} Minutes</p>
+      </ng-template>
     </div>
   </div>
+<!--  <hr>-->
+<!--  <div class="my-1 pb-1">-->
+<!--    <div class="flex justify-content-evenly flex-row-reverse flex-auto">-->
+<!--      <i class="pi pi-external-link clickable px-1" (click)="openWiki($event, event)"></i>-->
+<!--      <i class="pi pi-link clickable px-1" (click)="copyToClipboard($event, event)"></i>-->
+<!--      <i class="pi pi-search clickable px-1" (click)="onClick()"></i>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>
 

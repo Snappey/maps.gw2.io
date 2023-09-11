@@ -1,4 +1,4 @@
-<div class="grid grid-nogutter" *ngrxLet="{loading: matchesLoading$, matches: matches$}; let vm">
+<div class="grid grid-nogutter" *ngrxLet="{loading: matchesLoading$, matches: matches$}; let vm" style="max-height: 90vh; overflow-y: hidden">
   <div class="col-12 lg:col-6" *ngFor="let regionMatches of vm.matches | keyvalue">
     <div class="flex align-items-center flex-column flex-wrap px-6">
       <div class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem w-30rem tooltip">

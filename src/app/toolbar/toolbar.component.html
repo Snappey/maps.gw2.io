@@ -1,4 +1,5 @@
-<div class="flex flex-row align-items-center justify-content-start">
+<div class="flex align-items-center"
+  [ngClass]="toolbarClasses()">
   <img *ngFor="let button of _buttons" alt="toolbar button"
        class="clickable" width="32" height="32"
        (click)="button.OnClick()"

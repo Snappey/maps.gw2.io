@@ -1,38 +1,14 @@
-<div class="grid my-0">
-  <div class="lg:col md:col-12">
-    <h1 class="my-2">{{this.friendlyXpacNames["core"]}}</h1>
-    <div *ngFor="let event of this.upcomingEvents['core']">
-      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
+<div class="flex justify-content-evenly flex-wrap px-6 fadein animation-duration-300" style="max-height: 90vh; overflow-y: hidden">
+  <ng-container *ngFor="let region of upcomingEvents | keyvalue">
+    <div class="flex  flex-1 flex-column mx-3">
+      <div class="mb-1 align-items-center h-2rem tooltip">
+        <h3 class="my-1 text-center">{{friendlyXpacName(region.key)}}</h3>
+      </div>
+      <ng-container *ngFor="let event of region.value">
+        <div class="my-2 clickable hover">
+          <app-event-panel [event]="event" (clickedEvent)="forwardsEvent($event)"></app-event-panel>
+        </div>
+      </ng-container>
     </div>
-  </div>
-  <div class="lg:col md:col-12">
-    <h1 class="my-2">{{this.friendlyXpacNames["hot"]}}</h1>
-    <div *ngFor="let event of this.upcomingEvents['hot']">
-      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
-    </div>
-  </div>
-  <div class="lg:col md:col-12">
-    <h1 class="my-2">{{this.friendlyXpacNames["pof"]}}</h1>
-    <div *ngFor="let event of this.upcomingEvents['pof']">
-      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
-    </div>
-  </div>
-  <div class="lg:col md:col-12">
-    <h1 class="my-2">{{this.friendlyXpacNames["ibs"]}}</h1>
-    <div *ngFor="let event of this.upcomingEvents['ibs']">
-      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
-    </div>
-  </div>
-  <div class="lg:col md:col-12">
-    <h1 class="my-2">{{this.friendlyXpacNames["eod"]}}</h1>
-    <div *ngFor="let event of this.upcomingEvents['eod']">
-      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
-    </div>
-  </div>
-  <div class="lg:col md:col-12">
-    <h1 class="my-2">{{this.friendlyXpacNames["soto"]}}</h1>
-    <div *ngFor="let event of this.upcomingEvents['soto']">
-      <app-event-panel [event]="event" (clickedEvent)="this.forwardsEvent($event)"></app-event-panel>
-    </div>
-  </div>
+  </ng-container>
 </div>

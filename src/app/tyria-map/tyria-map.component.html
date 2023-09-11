@@ -9,14 +9,22 @@
      tabindex="0">
 </div>
 
-<app-toolbar [buttons]="toolbarButtons" style="position: absolute;  z-index: 999; width: 25vw; left: 10px; top: 5px;"></app-toolbar>
+<app-toolbar [buttons]="leftToolbar" style="position: absolute;  z-index: 999; width: 25vw; left: 10px; top: 5px;"></app-toolbar>
+<app-toolbar [buttons]="rightToolbar" [leftToRight]="false" style="position: absolute;  z-index: 999; width: 25vw; right: 10px; top: 5px;"></app-toolbar>
 
 <app-settings-modal [(visible)]="showSettings"></app-settings-modal>
 <app-about-modal [(visible)]="showAbout"></app-about-modal>
 
-<p-sidebar [(visible)]="showEvents" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">
-  <app-event-grid [upcomingEvents]="this.upcomingEvents" (eventClicked)="panToEvent($event)"></app-event-grid>
-</p-sidebar>
+<!--<p-sidebar [(visible)]="showEvents" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">-->
+<!--  <app-event-grid [upcomingEvents]="this.upcomingEvents$ | async" (eventClicked)="panToEvent($event)"></app-event-grid>-->
+<!--</p-sidebar>-->
+
+<ng-container *ngrxLet="upcomingEvents$; let upcomingEvents">
+  <ng-container *ngIf="showEvents">
+    <app-event-grid [upcomingEvents]="upcomingEvents" (eventClicked)="panToEvent($event)" style="position: absolute; z-index: 999; width: 95vw; left:2.5vw; top: 5vw;"></app-event-grid>
+  </ng-container>
+</ng-container>
+
 
 <ng-container *ngIf="!smallScreen">
   <img src="assets/compass.png" width="128" height="128" alt="map compass" style="scale: 1.25; position: absolute; z-index: 999; bottom: 65px; right: 55px" />

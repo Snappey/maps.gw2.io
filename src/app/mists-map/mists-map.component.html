@@ -14,7 +14,8 @@
   </ng-container>
 </div>
 
-<app-toolbar [buttons]="toolbarButtons" style="position: absolute;  z-index: 999; width: 25vw; left: 10px; top: 5px;"></app-toolbar>
+<app-toolbar [buttons]="leftToolbar" style="position: absolute;  z-index: 999; width: 25vw; left: 10px; top: 5px;"></app-toolbar>
+<app-toolbar [buttons]="rightToolbar" [leftToRight]="false" style="position: absolute;  z-index: 999; width: 25vw; right: 10px; top: 5px;"></app-toolbar>
 
 <app-settings-modal [(visible)]="showSettings"></app-settings-modal>
 <app-about-modal [(visible)]="showAbout"></app-about-modal>
@@ -27,25 +28,9 @@
   </ng-container>
 </div>
 
-<!--
-<p-sidebar [(visible)]="showScore" [showCloseIcon]="false" position="bottom" styleClass="p-sidebar-lg">
-  <div class="grid my-0" *ngIf="selectedMatch">
-    <div class="lg:col-4 col-12">
-      <h1 class="my-2 text-center">Fight Stats</h1>
-      <app-fight-stats-chart height="24rem" [match]="selectedMatch"></app-fight-stats-chart>
-    </div>
-    <div class="lg:col-8 col-12">
-      <h1 class="my-2 text-center">Skirmish Stats</h1>
-      <app-skirmish-stats-chart height="24rem" [match]="selectedMatch"></app-skirmish-stats-chart>
-    </div>
-  </div>
-</p-sidebar>
--->
-
 <div [hidden]="!showMatches" class="overflow-auto h-auto w-auto my-5" style="position: absolute; z-index: 999; left: 0; right: 0; top: 25px; margin-left: auto; margin-right: auto">
     <app-match-overview (clickedMatch)="overviewMatchClicked($event)"></app-match-overview>
 </div>
-
 
 <p-dialog header="Objective Upgrades" [(visible)]="showObjectiveDetails" [style]="{width: '50vw'}"
           [draggable]="true" [resizable]="false">

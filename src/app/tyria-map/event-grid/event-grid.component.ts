@@ -1,15 +1,26 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Event, EventMap} from "../../../services/event-timer.service";
+import * as events from "events";
 
 @Component({
   selector: 'app-event-grid',
   templateUrl: './event-grid.component.html',
   styleUrls: ['./event-grid.component.css']
 })
-export class EventGridComponent implements OnInit {
+export class EventGridComponent {
 
   @Input()
   upcomingEvents: EventMap = {};
+
+  @Output()
+  eventClicked: EventEmitter<Event> = new EventEmitter<Event>();
+
+  constructor() { }
+
+  forwardsEvent($event: Event) {
+    this.eventClicked.emit($event);
+  }
+
   friendlyXpacNames: any = {
     "core": "Core",
     "hot": "Heart of Thorns",
@@ -19,16 +30,9 @@ export class EventGridComponent implements OnInit {
     "soto": "Shadows of the Obscure"
   }
 
-  @Output()
-  eventClicked: EventEmitter<Event> = new EventEmitter<Event>();
-
-
-  constructor() { }
-
-  ngOnInit(): void {
+  friendlyXpacName(key: string): string {
+    return this.friendlyXpacNames[key] ?? "Unknown";
   }
 
-  forwardsEvent($event: Event) {
-    this.eventClicked.emit($event);
-  }
+  protected readonly events = events;
 }
