@@ -34,6 +34,7 @@ import {Store} from "@ngrx/store";
 import {AppState} from "../../state/appState";
 import {ToolbarButton} from "../toolbar/toolbar.component";
 import {AssetService} from "../../services/asset.service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'tyria-map',
@@ -45,6 +46,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   override CONTINENT_ID = 1 as const;
   FLOOR_ID = 1 as const
 
+  showLayers: boolean = false;
   showEvents: boolean = false;
   showSettings: boolean = false;
   showAbout: boolean = false;
@@ -68,11 +70,18 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       OnClick: () => this.showSettings = !this.showSettings
     },
     {
+      Tooltip: "Layers",
+      Icon: "/assets/layer_icon.png",
+      IconHover: "/assets/layer_hovered_icon.png",
+      OnClick: () => this.showLayers = !this.showLayers,
+      Keybindings: ["Digit1"]
+    },
+    {
       Tooltip: "World Bosses",
       Icon: "/assets/event_icon.png",
       IconHover: "/assets/event_hovered_icon.png",
       OnClick: () => this.showEvents = !this.showEvents,
-      Keybindings: ["Digit1"]
+      Keybindings: ["Digit2"]
     }
   ]
 
@@ -138,7 +147,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       tap((events) => {
         const layer = this.eventTimerService.createEventsLayer(this.Map, events);
         if (!this.hasLayer("events_layer")) {
-          this.registerLayer("events_layer", {Layer: layer, Hidden: false})
+          this.registerLayer("events_layer", {layer: layer, friendlyName: "World Bosses", icon: "/assets/event-boss.png", isHidden: false})
         } else {
           this.updateLayer("events_layer", layer);
         }
@@ -279,43 +288,45 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     ));
 
     this.registerLayer("core", {
-      Layer: this.layerService.getTyriaTiles(),
-      Hidden: false,
+      layer: this.layerService.getTyriaTiles(),
+      friendlyName: "Tyria",
+      icon: "/assets/tyria_icon.png",
+      isHidden: false,
     });
 
     this.layerService.getWaypointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("waypoints", { Layer: layer, MinZoomLevel: 5, Hidden: false}))
+    ).subscribe(layer => this.registerLayer("waypoints", { layer: layer, minZoomLevel: 5, friendlyName: "Waypoints", icon: "/assets/waypoint.png", isHidden: false}))
 
     this.layerService.getLandmarkLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("landmarks", { Layer: layer, MinZoomLevel: 6, Hidden: false}))
+    ).subscribe(layer => this.registerLayer("landmarks", { layer: layer, minZoomLevel: 6, friendlyName: "Points of Interest", icon: "/assets/poi.png", isHidden: false}))
 
     this.layerService.getVistaLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("vista", { Layer: layer, MinZoomLevel: 6, Hidden: false }))
+    ).subscribe(layer => this.registerLayer("vista", { layer: layer, minZoomLevel: 6, friendlyName: "Vistas", icon: "/assets/vista.png", isHidden: false }))
 
     this.layerService.getUnlockLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("unlocks", { Layer: layer, MinZoomLevel: 4, Hidden: false }))
+    ).subscribe(layer => this.registerLayer("unlocks", { layer: layer, minZoomLevel: 4, friendlyName: "Instanced Content", icon: "/assets/commander_blue.png", isHidden: false }))
 
     this.layerService.getHeartLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("heart_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
+    ).subscribe(layer => this.registerLayer("heart_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Hearts", icon: "/assets/hearts.png", isHidden: false}))
 
     this.layerService.getSkillPointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("heropoint_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
+    ).subscribe(layer => this.registerLayer("heropoint_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Hero Points", icon: "/assets/heropoint.png", isHidden: false}))
 
     this.layerService.getMasteryPointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("masteries_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
+    ).subscribe(layer => this.registerLayer("masteries_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Masteries", icon: "/assets/core_mastery.png", isHidden: false}))
 
     this.layerService.getRegionLabels(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => {
         this.registerLayer("region_labels",
-          {Layer: layer, MaxZoomLevel: 5, MinZoomLevel: 2, Hidden: false, OpacityLevels: {5: .2, 4: .6}})
+          {layer: layer, maxZoomLevel: 5, minZoomLevel: 2, friendlyName: "Region Headings", icon: "/assets/list_icon.png", isHidden: false, opacityLevels: {5: .2, 4: .6}})
         layer.bringToFront();
       });
 
@@ -323,46 +334,48 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       take(1)
     ).subscribe(layer => {
         this.registerLayer("map_labels",
-          {Layer: layer, MaxZoomLevel: 5, MinZoomLevel: 3, Hidden: false, OpacityLevels: {5: .7}})
+          {layer: layer, maxZoomLevel: 5, minZoomLevel: 3, friendlyName: "Map Headings", icon: "/assets/list_icon.png", isHidden: false, opacityLevels: {5: .7}})
         layer.bringToFront();
       });
 
     this.layerService.getAdventuresLayer(leaflet).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("adventure_labels", {Layer: layer, MinZoomLevel: 6, Hidden: false}))
+    ).subscribe(layer => this.registerLayer("adventure_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Adventures", icon: "/assets/adventure_icon.png", isHidden: false}))
 
     this.layerService.getSectorTextLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("sector_headings", { Layer: layer, MinZoomLevel: 7, Hidden: false }))
+    ).subscribe(layer => this.registerLayer("sector_headings", { layer: layer, minZoomLevel: 7, friendlyName: "Sector Headings", icon: "/assets/list_icon.png", isHidden: false }))
 
     this.layerService.getCityMarkersLayer(leaflet).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("city_markers", {Layer: layer, MinZoomLevel: 7, Hidden: false}))
-/*
-    this.layerService.getSectorLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
-      tap(layer => console.log(layer)),
-      take(1)
-    ).subscribe(layer => this.registerLayer("sector_polygons", { Layer: layer, MinZoomLevel: 7, Hidden: false }))
-*/
-    this.editorService.getMarkerLayerEvents().pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(layer => {
+    ).subscribe(layer => this.registerLayer("city_markers", {layer: layer, minZoomLevel: 7, friendlyName: "City Markers", icon: "/assets/portal_icon.png", isHidden: false}))
+
+    // this.layerService.getSectorLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
+    //   tap(layer => console.log(layer)),
+    //   take(1)
+    // ).subscribe(layer => this.registerLayer("sector_polygons", { layer: layer, minZoomLevel: 7, friendlyName: "Sector Outlines", isEnabled: false, isHidden: false }))
+
+    if (!environment.production) {
+      this.editorService.getMarkerLayerEvents().pipe(
+          takeUntil(this.unsubscribe$)
+      ).subscribe(layer => {
         if (!this.hasLayer("editable_markers")) {
-          this.registerLayer("editable_markers", {Layer: layer, MinZoomLevel: 3, Hidden: false})
+          this.registerLayer("editable_markers", {layer: layer, minZoomLevel: 3, isHidden: false})
         } else {
           this.updateLayer("editable_markers", layer);
         }
       });
 
-    this.editorService.getTextLayerEvents().pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe(layer => {
-      if (!this.hasLayer("editable_text")) {
-        this.registerLayer("editable_text", {Layer: layer, MaxZoomLevel: 6, MinZoomLevel: 2, Hidden: false, OpacityLevels: {5: .8, 6: .5}})
-      } else {
-        this.updateLayer("editable_text", layer);
-      }
-    });
+      this.editorService.getTextLayerEvents().pipe(
+          takeUntil(this.unsubscribe$)
+      ).subscribe(layer => {
+        if (!this.hasLayer("editable_text")) {
+          this.registerLayer("editable_text", {layer: layer, maxZoomLevel: 6, minZoomLevel: 2, isHidden: false, opacityLevels: {5: .8, 6: .5}})
+        } else {
+          this.updateLayer("editable_text", layer);
+        }
+      });
+    }
 
     this.route.params.pipe(
       map(params=> params["chat_link"]),

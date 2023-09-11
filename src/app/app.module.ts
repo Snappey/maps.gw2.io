@@ -68,6 +68,8 @@ import {AboutModalComponent} from "./about-modal/about-modal.component";
 import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from "ngx-google-analytics";
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import {NgOptimizedImage} from "@angular/common";
+import { LayerOptionsComponent } from './layer-options/layer-options.component';
+import {InputSwitchModule} from "primeng/inputswitch";
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   connectOnCreate: false
@@ -92,92 +94,94 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     SettingsModalComponent,
     LiveMarkerSidebarComponent,
     AboutModalComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    LayerOptionsComponent
   ],
-  imports: [
-    BrowserModule,
-    LeafletModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    CookieModule.withOptions(),
-    HttpClientModule,
-    ClipboardModule,
-    ReactiveFormsModule,
+    imports: [
+        BrowserModule,
+        LeafletModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        CookieModule.withOptions(),
+        HttpClientModule,
+        ClipboardModule,
+        ReactiveFormsModule,
 
-    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
-    NgcCookieConsentModule.forRoot({
-      cookie: {
-        domain: 'maps.gw2.io'
-      },
-      palette: {
-        popup: {
-          background: '#000'
-        },
-        button: {
-          background: '#f1d600'
-        }
-      },
-      theme: 'edgeless',
-      position: "bottom",
-      type: 'info'
-    }),
+        MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
+        NgcCookieConsentModule.forRoot({
+            cookie: {
+                domain: 'maps.gw2.io'
+            },
+            palette: {
+                popup: {
+                    background: '#000'
+                },
+                button: {
+                    background: '#f1d600'
+                }
+            },
+            theme: 'edgeless',
+            position: "bottom",
+            type: 'info'
+        }),
 
-    DialogModule,
-    DynamicDialogModule,
-    DropdownModule,
-    FormsModule,
-    ButtonModule,
-    SidebarModule,
-    CardModule,
-    InputTextModule,
-    TooltipModule,
-    OverlayPanelModule,
-    PanelModule,
-    DividerModule,
-    StyleClassModule,
-    SpinnerModule,
-    ProgressSpinnerModule,
-    ChartModule,
-    SkeletonModule,
-    TabMenuModule,
-    RouterTestingModule,
-    RouterModule.forRoot([
-      {path: "tyria", component: TyriaMapComponent},
-      {path: "tyria/:chatLink", component: TyriaMapComponent},
-      {path: "wvw", component: MistsMapComponent},
-      {path: "wvw/:id", component: MistsMapComponent},
-      {path: "wvw/:id/:chatLink", component: MistsMapComponent},
-      {path: "**", redirectTo: "/tyria", pathMatch: "full"}
-    ]),
+        DialogModule,
+        DynamicDialogModule,
+        DropdownModule,
+        FormsModule,
+        ButtonModule,
+        SidebarModule,
+        CardModule,
+        InputTextModule,
+        TooltipModule,
+        OverlayPanelModule,
+        PanelModule,
+        DividerModule,
+        StyleClassModule,
+        SpinnerModule,
+        ProgressSpinnerModule,
+        ChartModule,
+        SkeletonModule,
+        TabMenuModule,
+        RouterTestingModule,
+        RouterModule.forRoot([
+            {path: "tyria", component: TyriaMapComponent},
+            {path: "tyria/:chatLink", component: TyriaMapComponent},
+            {path: "wvw", component: MistsMapComponent},
+            {path: "wvw/:id", component: MistsMapComponent},
+            {path: "wvw/:id/:chatLink", component: MistsMapComponent},
+            {path: "**", redirectTo: "/tyria", pathMatch: "full"}
+        ]),
 
-    LetModule,
-    StoreModule.forRoot(),
-    StoreModule.forFeature(settingsFeature),
-    StoreModule.forFeature(userFeature),
-    StoreModule.forFeature(mistsFeature),
-    StoreModule.forFeature(guildFeature),
-    StoreModule.forFeature(liveMarkersFeature),
+        LetModule,
+        StoreModule.forRoot(),
+        StoreModule.forFeature(settingsFeature),
+        StoreModule.forFeature(userFeature),
+        StoreModule.forFeature(mistsFeature),
+        StoreModule.forFeature(guildFeature),
+        StoreModule.forFeature(liveMarkersFeature),
 
-    EffectsModule.forRoot([
-      SettingsEffects,
-      UserEffects,
-      MistsEffects,
-      GuildEffects,
-      LiveMarkersEffects
-    ]),
+        EffectsModule.forRoot([
+            SettingsEffects,
+            UserEffects,
+            MistsEffects,
+            GuildEffects,
+            LiveMarkersEffects
+        ]),
 
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: false,
-    }),
-    PasswordModule,
-    ToggleButtonModule,
-    SelectButtonModule,
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: false,
+        }),
+        PasswordModule,
+        ToggleButtonModule,
+        SelectButtonModule,
 
-    NgxGoogleAnalyticsModule.forRoot('G-ZF8RV8P3LT'),
-    NgxGoogleAnalyticsRouterModule,
-    NgOptimizedImage
-  ],
+        NgxGoogleAnalyticsModule.forRoot('G-ZF8RV8P3LT'),
+        NgxGoogleAnalyticsRouterModule,
+        NgOptimizedImage,
+        InputSwitchModule
+    ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [HomeComponent],

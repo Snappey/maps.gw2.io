@@ -63,6 +63,7 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   showScore: boolean = false;
   showSettings: boolean = false;
   showMatches: boolean = false;
+  showLayers: boolean = false;
   showObjectiveDetails: boolean = false;
   showAbout: boolean = false;
 
@@ -82,18 +83,25 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
       OnClick: () => this.showSettings = !this.showSettings
     },
     {
+      Tooltip: "Layers",
+      Icon: "/assets/layer_icon.png",
+      IconHover: "/assets/layer_hovered_icon.png",
+      OnClick: () => this.showLayers = !this.showLayers,
+      Keybindings: ["Digit1"]
+    },
+    {
       Tooltip: "Matches",
       Icon: "/assets/matches_icon.png",
       IconHover: "/assets/matches_hovered_icon.png",
       OnClick: () => this.showMatches = !this.showMatches,
-      Keybindings: ["Digit1"]
+      Keybindings: ["Digit2"]
     },
     {
       Tooltip: "Match Stats",
       Icon: "/assets/stats_icon.png",
       IconHover: "/assets/stats_hovered_icon.png",
       OnClick: () => this.showScore = !this.showScore,
-      Keybindings: ["Digit2"]
+      Keybindings: ["Digit3"]
     }
   ]
 
@@ -179,14 +187,14 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
     ));
 
     this.layerService.getMistsTiles().addTo(leaflet)
-    this.registerLayer(this.OBJECTIVE_LAYER, {Layer: new LayerGroup(), MinZoomLevel: 0, Hidden: false});;
-    this.registerLayer(this.OBJECTIVE_SECTOR_LAYER, {Layer: new FeatureGroup(), MinZoomLevel: 0, Hidden: false});
-    this.registerLayer(this.OBJECTIVE_SPAWN_HEADINGS_LAYER, { Layer: new FeatureGroup(), MinZoomLevel: 0, Hidden: false });
+    this.registerLayer(this.OBJECTIVE_LAYER, {layer: new LayerGroup(), minZoomLevel: 0, friendlyName: "Objectives", icon: "/assets/keep_icon.png", isHidden: false});
+    this.registerLayer(this.OBJECTIVE_SECTOR_LAYER, {layer: new FeatureGroup(), minZoomLevel: 0, friendlyName: "Objective Sectors", icon: "/assets/sector_icon.png", isHidden: false});
+    this.registerLayer(this.OBJECTIVE_SPAWN_HEADINGS_LAYER, { layer: new FeatureGroup(), minZoomLevel: 0, friendlyName: "Spawn Headings", icon: "/assets/list_icon.png", isHidden: false });
 
     this.layerService.getMistsHeadings(leaflet).pipe(
       take(1)
     ).subscribe(layer =>
-      this.registerLayer(this.MAP_HEADINGS_LAYER, {Layer: layer, MinZoomLevel: 0, Hidden: false})
+      this.registerLayer(this.MAP_HEADINGS_LAYER, {layer: layer, minZoomLevel: 0, friendlyName: "Map Headings", icon: "/assets/list_icon.png", isHidden: false})
     )
 
     this.layerService.getMistsObjectives(leaflet).pipe(
@@ -230,7 +238,7 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
 
     this.layerService.getWaypointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("waypoints", { Layer: layer, MinZoomLevel: 5, Hidden: false}))
+    ).subscribe(layer => this.registerLayer("waypoints", { layer: layer, minZoomLevel: 5, friendlyName: "Waypoints", icon: "/assets/waypoint.png", isHidden: false}))
 
     super.onMapInitialised(leaflet);
   }

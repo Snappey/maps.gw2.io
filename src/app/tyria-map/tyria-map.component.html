@@ -25,6 +25,9 @@
   </ng-container>
 </ng-container>
 
+<ng-container *ngIf="showLayers">
+  <app-layer-options [layers]="mapLayers" (layerUpdated)="layerUpdated($event)" style="position: absolute; z-index: 999; min-width: 15vw; left: 1.5vw; top: 5vw;"></app-layer-options>
+</ng-container>
 
 <ng-container *ngIf="!smallScreen">
   <img src="assets/compass.png" width="128" height="128" alt="map compass" style="scale: 1.25; position: absolute; z-index: 999; bottom: 65px; right: 55px" />

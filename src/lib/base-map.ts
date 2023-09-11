@@ -15,18 +15,22 @@ import {NgZone} from "@angular/core";
 import {AssetService, MarkerLabel} from "../services/asset.service";
 
 export interface LayerOptions {
-  Layer: Layer;
-  MinZoomLevel?: number;
-  MaxZoomLevel?: number;
-  OpacityLevels?: {[zoomLevel: number]: number};
-  Hidden: boolean;
+  layer: Layer;
+  minZoomLevel?: number;
+  maxZoomLevel?: number;
+  opacityLevels?: {[zoomLevel: number]: number};
+  isHidden: boolean;
+
+  friendlyName?: string;
+  icon?: string;
+  isEnabled?: boolean;
 }
 
 export class BaseMap {
   CONTINENT_ID: number = 1 as const;
 
   Map!: Map;
-  Layers: {[key: string]: LayerOptions} = {};
+  mapLayers: {[key: string]: LayerOptions} = {};
 
   liveMapState$ = this.liveMarkersService.stateChange.pipe(
     map(s => {
@@ -57,7 +61,7 @@ export class BaseMap {
 
     // Live Markers
     const liveLayer = new FeatureGroup();
-    this.registerLayer("LIVE_MAP", {Hidden: false, Layer: liveLayer});
+    this.registerLayer("LIVE_MAP", { friendlyName: "Live Map", icon: "/assets/player_marker.png", isHidden: false, layer: liveLayer});
     this.liveMarkersService.setActiveMapLayer(leaflet, liveLayer);
 
     // LatLng Url
@@ -101,14 +105,14 @@ export class BaseMap {
   updateLayer(id: string, layer: Layer) {
     if (this.hasLayer(id)) {
       this.Map.addLayer(layer);
-      this.Map.removeLayer(this.Layers[id].Layer);
+      this.Map.removeLayer(this.mapLayers[id].layer);
 
-      this.Layers[id].Layer = layer;
+      this.mapLayers[id].layer = layer;
     }
   }
 
   hasLayer(id: string): boolean {
-    return id in this.Layers;
+    return id in this.mapLayers;
   }
 
   registerLayer(id: string, options: LayerOptions) {
@@ -117,46 +121,46 @@ export class BaseMap {
       return;
     }
 
-    this.Layers[id] = options;
+    this.mapLayers[id] = {
+      ...options,
+      isEnabled: true,
+      friendlyName: options.friendlyName ?? id
+    };
 
     if (this.Map) {
-      if (!options.Hidden) {
-        this.Map.addLayer(options.Layer);
+      if (!options.isHidden) {
+        this.Map.addLayer(options.layer);
       }
 
       this.updateLayerVisibility(this.Map.getZoom())
     }
-
-    if (id !== "core") {
-      //this.layersControls.overlays[this.friendlyLayerNames[id] ?? id] = options.Layer
-    }
   }
 
   unregisterLayer(id: string) {
-    if (this.Layers[id]) {
-      this.Map.removeLayer(this.Layers[id].Layer);
-      delete this.Layers[id];
+    if (this.mapLayers[id]) {
+      this.Map.removeLayer(this.mapLayers[id].layer);
+      delete this.mapLayers[id];
     }
   }
 
   showLayer(id: string) {
-    if (this.Layers[id]) {
-      const options = this.Layers[id];
+    if (this.mapLayers[id]) {
+      const options = this.mapLayers[id];
 
-      if (!this.Map.hasLayer(options.Layer)) {
-        this.Map.addLayer(options.Layer);
-        options.Hidden = false;
+      if (!this.Map.hasLayer(options.layer)) {
+        this.Map.addLayer(options.layer);
+        options.isHidden = false;
       }
     }
   }
 
   hideLayer(id: string) {
-    if (this.Layers[id]) {
-      const options = this.Layers[id];
+    if (this.mapLayers[id]) {
+      const options = this.mapLayers[id];
 
-      if (this.Map.hasLayer(options.Layer)) {
-        this.Map.removeLayer(options.Layer);
-        options.Hidden = true;
+      if (this.Map.hasLayer(options.layer)) {
+        this.Map.removeLayer(options.layer);
+        options.isHidden = true;
       }
     }
   }
@@ -166,26 +170,29 @@ export class BaseMap {
       return;
     }
 
-    for (let layersKey in this.Layers) {
-      const layerOptions = this.Layers[layersKey];
-      const minZoom = layerOptions.MinZoomLevel ?? this.Map.getMinZoom();
-      const maxZoom = layerOptions.MaxZoomLevel ?? this.Map.getMaxZoom();
+    for (let layersKey in this.mapLayers) {
+      const layerOptions = this.mapLayers[layersKey];
+      const minZoom = layerOptions.minZoomLevel ?? this.Map.getMinZoom();
+      const maxZoom = layerOptions.maxZoomLevel ?? this.Map.getMaxZoom();
 
-      if (zoomLevel >= minZoom && zoomLevel <= maxZoom) {
+      if (zoomLevel >= minZoom && zoomLevel <= maxZoom && layerOptions.isEnabled) {
         this.showLayer(layersKey);
 
-        if (layerOptions.OpacityLevels) {
-          if (zoomLevel in layerOptions.OpacityLevels) {
-            (layerOptions.Layer as ImageOverlay).setOpacity(layerOptions.OpacityLevels[zoomLevel]);
+        if (layerOptions.opacityLevels) {
+          if (zoomLevel in layerOptions.opacityLevels) {
+            (layerOptions.layer as ImageOverlay).setOpacity(layerOptions.opacityLevels[zoomLevel]);
           } else {
-            (layerOptions.Layer as ImageOverlay).setOpacity(1);
+            (layerOptions.layer as ImageOverlay).setOpacity(1);
           }
         }
       } else {
         this.hideLayer(layersKey);
       }
-
     }
+  }
+
+  layerUpdated($event: boolean) {
+    this.updateLayerVisibility(this.Map.getZoom())
   }
 
   private RIGHT_MB = 2

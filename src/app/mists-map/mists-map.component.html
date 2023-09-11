@@ -20,6 +20,10 @@
 <app-settings-modal [(visible)]="showSettings"></app-settings-modal>
 <app-about-modal [(visible)]="showAbout"></app-about-modal>
 
+<ng-container *ngIf="showLayers">
+  <app-layer-options [layers]="mapLayers" (layerUpdated)="layerUpdated($event)" style="position: absolute; z-index: 999; min-width: 15vw; left: 1.5vw; top: 10vw;"></app-layer-options>
+</ng-container>
+
 <div *ngIf="showScore" style="position: absolute; z-index: 999; left: 15%; top: 25%; width: 75vw; height: 50vh;">
   <ng-container *ngIf="activeMatch$ | async as activeMatch">
     <div class="tooltip p-3" *ngIf="activeMatch">
