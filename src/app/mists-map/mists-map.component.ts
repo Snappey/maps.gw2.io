@@ -224,16 +224,16 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe$)
     ).subscribe(objectiveSectorLayer => this.updateLayer(this.OBJECTIVE_SECTOR_LAYER, objectiveSectorLayer))
 
-    interval(20000)
-      .pipe(
-        switchMap(_ => this.store.select(state => state.mists.activeMatchId)),
-        map(activeMatchId => {
-          if (activeMatchId) {
-            this.store.dispatch(mistsActions.updateMatch({ matchId: activeMatchId }))
-          }
-        }),
-        takeUntil(this.unsubscribe$)
-      ).subscribe(_ => _)
+    // interval(20000)
+    //   .pipe(
+    //     switchMap(_ => this.store.select(state => state.mists.activeMatchId)),
+    //     map(activeMatchId => {
+    //       if (activeMatchId) {
+    //         this.store.dispatch(mistsActions.updateMatch({ matchId: activeMatchId }))
+    //       }
+    //     }),
+    //     takeUntil(this.unsubscribe$)
+    //   ).subscribe(_ => _)
 
 
     this.layerService.getWaypointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(

@@ -1,10 +1,10 @@
-<div class="grid grid-nogutter" *ngrxLet="{loading: matchesLoading$, matches: matches$}; let vm" style="max-height: 90vh; overflow-y: hidden">
+<div class="grid grid-nogutter overflow-y-auto" *ngrxLet="{loading: matchesLoading$, matches: matches$}; let vm" style="max-height: 80vh">
   <div class="col-12 lg:col-6" *ngFor="let regionMatches of vm.matches | keyvalue">
-    <div class="flex align-items-center flex-column flex-wrap px-6">
-      <div class="mb-1 flex-1 flex-grow-1 align-items-center h-2rem w-30rem tooltip">
+    <div class="flex align-items-center flex-column flex-auto flex-wrap px-6">
+      <div class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-30rem w-25rem h-2rem tooltip">
         <h2 class="my-1 text-center">{{regionMatches.key | uppercase}} Matches</h2>
       </div>
-      <div class="my-2 flex-1 flex-grow-1 clickable hover" *ngFor="let match of regionMatches.value">
+      <div class="my-2 flex-1 flex-grow-1 lg:w-30rem w-25rem clickable hover" *ngFor="let match of regionMatches.value">
         <app-score-overview  (click)="selectedMatch(match)" [match]="match" [loading]="false"></app-score-overview>
       </div>
     </div>
