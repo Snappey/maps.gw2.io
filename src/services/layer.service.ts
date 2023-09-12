@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable, map, tap, of, iif, combineLatestWith, take} from "rxjs";
 import {
-  FeatureGroup,
+  FeatureGroup, ImageOverlay, imageOverlay,
   LatLngBounds,
   LayerGroup, LeafletMouseEvent,
   Map, Marker, Point,
@@ -547,6 +547,25 @@ export class LayerService {
 
         return content;
       })
+    )
+  }
+
+  getMarkerByChatLink(continentId: number, floorId: number, chatLink: string): Observable<MarkerLabel | undefined> {
+    console.log(chatLink);
+    return this.assetService.fetchPointOfInterestLabels(continentId, floorId).pipe(
+      tap(console.log),
+      map(labels => labels.filter((l: MarkerLabel) => l.coordinates && l.data?.chat_link &&
+        l.data?.chat_link.includes(chatLink))),
+      map(labels => labels.at(0)),
+    )
+  }
+
+  createImageOverlay(leaflet: Map, coordinates: PointTuple, icon: string, width: number = 256, height: number = 256): ImageOverlay {
+    return imageOverlay(icon,
+      new LatLngBounds(
+        leaflet.unproject([coordinates[0] - width*.5, coordinates[1] - height*.5], leaflet.getMaxZoom()),
+        leaflet.unproject([coordinates[0] + width*.5, coordinates[1] + height*.5], leaflet.getMaxZoom())
+      )
     )
   }
 }

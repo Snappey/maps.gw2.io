@@ -137,7 +137,7 @@ async function generate(continentId, floorId) {
             "tooltip": sector.name,
             "level": sector.level,
             "bounds": sector.bounds,
-            "chat_link": sector.chat_link,
+            //"chat_link": sector.chat_link, These clash with actual points of interest
           }
         })
       }

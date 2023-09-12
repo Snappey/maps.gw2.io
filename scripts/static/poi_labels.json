@@ -7,7 +7,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BGsKAAA=]",
+      "chat_link": "[&BGsKAAA=]",
       "tooltip": "Makali Outpost Waypoint"
     }
   },
@@ -42,7 +42,7 @@
     "type": "landmark",
     "data": {
       "tooltip": "Makali Outpost",
-      "chatLink": "[&BFcKAAA=]"
+      "chat_link": "[&BFcKAAA=]"
     }
   },
   {
@@ -64,7 +64,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHgKAAA=]",
+      "chat_link": "[&BHgKAAA=]",
       "tooltip": "Glint's Lair"
     }
   },
@@ -98,7 +98,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJIKAAA=]",
+      "chat_link": "[&BJIKAAA=]",
       "tooltip": "Craggip Kraal"
     }
   },
@@ -122,7 +122,7 @@
     "type": "landmark",
     "data": {
       "tooltip": "The Portal",
-      "chatLink": "[&BIoKAAA=]"
+      "chat_link": "[&BIoKAAA=]"
     }
   },
   {
@@ -156,7 +156,7 @@
     "type": "landmark",
     "data": {
       "tooltip": "The Watchtower",
-      "chatLink": "[&BFoKAAA=]"
+      "chat_link": "[&BFoKAAA=]"
     }
   },
   {
@@ -190,7 +190,7 @@
     "type": "landmark",
     "data": {
       "tooltip": "Lifeblood Falls",
-      "chatLink": "[&BGUKAAA=]"
+      "chat_link": "[&BGUKAAA=]"
     }
   },
   {
@@ -212,7 +212,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBkKAAA=]",
+      "chat_link": "[&BBkKAAA=]",
       "tooltip": "Closed Passage"
     }
   },
@@ -235,7 +235,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD8KAAA=]",
+      "chat_link": "[&BD8KAAA=]",
       "tooltip": "Lommuld Kraal"
     }
   },
@@ -247,7 +247,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BGoKAAA=]",
+      "chat_link": "[&BGoKAAA=]",
       "tooltip": "Lommuld Kraal Waypoint"
     }
   },
@@ -282,7 +282,7 @@
     "type": "landmark",
     "data": {
       "tooltip": "Radiant Falls",
-      "chatLink": "[&BHEKAAA=]"
+      "chat_link": "[&BHEKAAA=]"
     }
   },
   {
@@ -294,7 +294,7 @@
     "type": "landmark",
     "data": {
       "tooltip": "Highjump Gap",
-      "chatLink": "[&BLUKAAA=]"
+      "chat_link": "[&BLUKAAA=]"
     }
   },
   {
@@ -316,7 +316,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCMKAAA=]",
+      "chat_link": "[&BCMKAAA=]",
       "tooltip": "Highjump Reach"
     }
   },
@@ -350,7 +350,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCUKAAA=]",
+      "chat_link": "[&BCUKAAA=]",
       "tooltip": "Wayment Seep"
     }
   },
@@ -362,7 +362,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD4KAAA=]",
+      "chat_link": "[&BD4KAAA=]",
       "tooltip": "Giant's Steps"
     }
   },
@@ -385,7 +385,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEEKAAA=]",
+      "chat_link": "[&BEEKAAA=]",
       "tooltip": "Vantage Scree"
     }
   },
@@ -397,7 +397,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEMKAAA=]",
+      "chat_link": "[&BEMKAAA=]",
       "tooltip": "Pricklepatch Hollow"
     }
   },
@@ -420,7 +420,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BM0KAAA=]",
+      "chat_link": "[&BM0KAAA=]",
       "tooltip": "Nimbose Butte"
     }
   },
@@ -432,7 +432,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BJEKAAA=]",
+      "chat_link": "[&BJEKAAA=]",
       "tooltip": "Brightwater Waypoint"
     }
   },
@@ -444,7 +444,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BJ0KAAA=]",
+      "chat_link": "[&BJ0KAAA=]",
       "tooltip": "Highjump Reach Waypoint"
     }
   },
@@ -489,7 +489,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNUKAAA=]",
+      "chat_link": "[&BNUKAAA=]",
       "tooltip": "Discarded Vessels"
     }
   },
@@ -523,7 +523,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHIKAAA=]",
+      "chat_link": "[&BHIKAAA=]",
       "tooltip": "Transcendent Falls"
     }
   },
@@ -535,7 +535,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BKoKAAA=]",
+      "chat_link": "[&BKoKAAA=]",
       "tooltip": "Palace of Aban"
     }
   },
@@ -558,7 +558,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMoKAAA=]",
+      "chat_link": "[&BMoKAAA=]",
       "tooltip": "Jinx Hollow"
     }
   },
@@ -581,7 +581,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCsKAAA=]",
+      "chat_link": "[&BCsKAAA=]",
       "tooltip": "Altar of Dakhma"
     }
   },
@@ -615,7 +615,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BO8KAAA=]",
+      "chat_link": "[&BO8KAAA=]",
       "tooltip": "Overreach Chasm"
     }
   },
@@ -638,7 +638,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BKQKAAA=]",
+      "chat_link": "[&BKQKAAA=]",
       "tooltip": "Derelict Delve Waypoint"
     }
   },
@@ -650,7 +650,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNkKAAA=]",
+      "chat_link": "[&BNkKAAA=]",
       "tooltip": "Derelict Delve"
     }
   },
@@ -673,7 +673,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BA0KAAA=]",
+      "chat_link": "[&BA0KAAA=]",
       "tooltip": "Standstill Lake"
     }
   },
@@ -696,7 +696,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDUKAAA=]",
+      "chat_link": "[&BDUKAAA=]",
       "tooltip": "Windchill Pass"
     }
   },
@@ -708,7 +708,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCIKAAA=]",
+      "chat_link": "[&BCIKAAA=]",
       "tooltip": "Awakened Garrison"
     }
   },
@@ -720,7 +720,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BP0JAAA=]",
+      "chat_link": "[&BP0JAAA=]",
       "tooltip": "Wabkha Watchpost"
     }
   },
@@ -732,7 +732,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDcKAAA=]",
+      "chat_link": "[&BDcKAAA=]",
       "tooltip": "Lifeblood Waterhole"
     }
   },
@@ -744,7 +744,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BK4KAAA=]",
+      "chat_link": "[&BK4KAAA=]",
       "tooltip": "Giant's Tea Table"
     }
   },
@@ -778,7 +778,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BPAKAAA=]",
+      "chat_link": "[&BPAKAAA=]",
       "tooltip": "Godfall Tower"
     }
   },
@@ -790,7 +790,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BI8KAAA=]",
+      "chat_link": "[&BI8KAAA=]",
       "tooltip": "Kanuz Cache"
     }
   },
@@ -857,7 +857,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCYKAAA=]",
+      "chat_link": "[&BCYKAAA=]",
       "tooltip": "The Teratohedron"
     }
   },
@@ -880,7 +880,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOUKAAA=]",
+      "chat_link": "[&BOUKAAA=]",
       "tooltip": "Village of Kweli"
     }
   },
@@ -892,7 +892,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BEAKAAA=]",
+      "chat_link": "[&BEAKAAA=]",
       "tooltip": "Temple of Kormir Waypoint"
     }
   },
@@ -904,7 +904,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHUKAAA=]",
+      "chat_link": "[&BHUKAAA=]",
       "tooltip": "Temple of Kormir"
     }
   },
@@ -971,7 +971,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFsKAAA=]",
+      "chat_link": "[&BFsKAAA=]",
       "tooltip": "Altar of Silence"
     }
   },
@@ -983,7 +983,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDgKAAA=]",
+      "chat_link": "[&BDgKAAA=]",
       "tooltip": "Temple of Atar"
     }
   },
@@ -1017,7 +1017,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOkKAAA=]",
+      "chat_link": "[&BOkKAAA=]",
       "tooltip": "Talatat Quarry"
     }
   },
@@ -1040,7 +1040,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFwKAAA=]",
+      "chat_link": "[&BFwKAAA=]",
       "tooltip": "Shattered Templar"
     }
   },
@@ -1063,7 +1063,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCEKAAA=]",
+      "chat_link": "[&BCEKAAA=]",
       "tooltip": "Tomb of the Abandoned"
     }
   },
@@ -1075,7 +1075,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEYKAAA=]",
+      "chat_link": "[&BEYKAAA=]",
       "tooltip": "Seeker's Village"
     }
   },
@@ -1098,7 +1098,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCcKAAA=]",
+      "chat_link": "[&BCcKAAA=]",
       "tooltip": "Tawla Rock"
     }
   },
@@ -1110,7 +1110,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCAKAAA=]",
+      "chat_link": "[&BCAKAAA=]",
       "tooltip": "Old Amnoon"
     }
   },
@@ -1144,7 +1144,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BB8KAAA=]",
+      "chat_link": "[&BB8KAAA=]",
       "tooltip": "Amnoon Water Authority"
     }
   },
@@ -1167,7 +1167,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDIKAAA=]",
+      "chat_link": "[&BDIKAAA=]",
       "tooltip": "Kusini Water Hole"
     }
   },
@@ -1179,7 +1179,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BPgJAAA=]",
+      "chat_link": "[&BPgJAAA=]",
       "tooltip": "Sanctum of Nabkha"
     }
   },
@@ -1202,7 +1202,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BKwKAAA=]",
+      "chat_link": "[&BKwKAAA=]",
       "tooltip": "Southern Way Station"
     }
   },
@@ -1214,7 +1214,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BJMKAAA=]",
+      "chat_link": "[&BJMKAAA=]",
       "tooltip": "Destiny's Gorge Waypoint"
     }
   },
@@ -1237,7 +1237,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFEKAAA=]",
+      "chat_link": "[&BFEKAAA=]",
       "tooltip": "Zephyr's Trace"
     }
   },
@@ -1260,7 +1260,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEUKAAA=]",
+      "chat_link": "[&BEUKAAA=]",
       "tooltip": "Fortunate Strike"
     }
   },
@@ -1283,7 +1283,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBgKAAA=]",
+      "chat_link": "[&BBgKAAA=]",
       "tooltip": "Squaross Kraal"
     }
   },
@@ -1295,7 +1295,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGAKAAA=]",
+      "chat_link": "[&BGAKAAA=]",
       "tooltip": "Crucible of Consecration"
     }
   },
@@ -1307,7 +1307,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJQKAAA=]",
+      "chat_link": "[&BJQKAAA=]",
       "tooltip": "Northern Way Station"
     }
   },
@@ -1341,7 +1341,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOMKAAA=]",
+      "chat_link": "[&BOMKAAA=]",
       "tooltip": "Retreat of the Resolute"
     }
   },
@@ -1353,7 +1353,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BAQKAAA=]",
+      "chat_link": "[&BAQKAAA=]",
       "tooltip": "Marifa Refugee Camp"
     }
   },
@@ -1376,7 +1376,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BL8KAAA=]",
+      "chat_link": "[&BL8KAAA=]",
       "tooltip": "Amnoon Bazaar"
     }
   },
@@ -1410,7 +1410,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIAKAAA=]",
+      "chat_link": "[&BIAKAAA=]",
       "tooltip": "Amnoon Civic Center"
     }
   },
@@ -1422,7 +1422,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJcKAAA=]",
+      "chat_link": "[&BJcKAAA=]",
       "tooltip": "Amnoon Harbor"
     }
   },
@@ -1434,7 +1434,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOAKAAA=]",
+      "chat_link": "[&BOAKAAA=]",
       "tooltip": "Amnoon Emporium"
     }
   },
@@ -1446,7 +1446,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BLYKAAA=]",
+      "chat_link": "[&BLYKAAA=]",
       "tooltip": "The Empty Quarter"
     }
   },
@@ -1458,7 +1458,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BLsKAAA=]",
+      "chat_link": "[&BLsKAAA=]",
       "tooltip": "Amnoon Waypoint"
     }
   },
@@ -1470,7 +1470,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHwKAAA=]",
+      "chat_link": "[&BHwKAAA=]",
       "tooltip": "Amnooon Cavalier Station"
     }
   },
@@ -1493,7 +1493,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEcKAAA=]",
+      "chat_link": "[&BEcKAAA=]",
       "tooltip": "Grand Sahil Casino"
     }
   },
@@ -1505,7 +1505,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBQKAAA=]",
+      "chat_link": "[&BBQKAAA=]",
       "tooltip": "Altar of the Six Gods"
     }
   },
@@ -1539,7 +1539,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNEKAAA=]",
+      "chat_link": "[&BNEKAAA=]",
       "tooltip": "Ossa's Defeat"
     }
   },
@@ -1551,7 +1551,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBMKAAA=]",
+      "chat_link": "[&BBMKAAA=]",
       "tooltip": "Syrtic Impasse"
     }
   },
@@ -1607,7 +1607,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDYKAAA=]",
+      "chat_link": "[&BDYKAAA=]",
       "tooltip": "Giant's Rise"
     }
   },
@@ -1630,7 +1630,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFAKAAA=]",
+      "chat_link": "[&BFAKAAA=]",
       "tooltip": "Godslost Sandfalls"
     }
   },
@@ -1642,7 +1642,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDAKAAA=]",
+      "chat_link": "[&BDAKAAA=]",
       "tooltip": "Heroes' Overlook"
     }
   },
@@ -1665,7 +1665,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BLcKAAA=]",
+      "chat_link": "[&BLcKAAA=]",
       "tooltip": "Scattered Remnants"
     }
   },
@@ -1688,7 +1688,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BG8KAAA=]",
+      "chat_link": "[&BG8KAAA=]",
       "tooltip": "Threefold Waylay"
     }
   },
@@ -1711,7 +1711,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BFMKAAA=]",
+      "chat_link": "[&BFMKAAA=]",
       "tooltip": "Augury's Shadow Waypoint"
     }
   },
@@ -1723,7 +1723,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDwKAAA=]",
+      "chat_link": "[&BDwKAAA=]",
       "tooltip": "First Camp"
     }
   },
@@ -1735,7 +1735,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEsKAAA=]",
+      "chat_link": "[&BEsKAAA=]",
       "tooltip": "Second Camp"
     }
   },
@@ -1758,7 +1758,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BLgKAAA=]",
+      "chat_link": "[&BLgKAAA=]",
       "tooltip": "Hall of Ascension"
     }
   },
@@ -1814,7 +1814,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BAoKAAA=]",
+      "chat_link": "[&BAoKAAA=]",
       "tooltip": "Decimation Bend"
     }
   },
@@ -1826,7 +1826,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BE0KAAA=]",
+      "chat_link": "[&BE0KAAA=]",
       "tooltip": "Dragoon Hearth"
     }
   },
@@ -1860,7 +1860,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOgKAAA=]",
+      "chat_link": "[&BOgKAAA=]",
       "tooltip": "Lonely Vigil"
     }
   },
@@ -1872,7 +1872,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BAcKAAA=]",
+      "chat_link": "[&BAcKAAA=]",
       "tooltip": "Stoneyard Rest"
     }
   },
@@ -1895,7 +1895,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BP4JAAA=]",
+      "chat_link": "[&BP4JAAA=]",
       "tooltip": "The Sepulcher"
     }
   },
@@ -1907,7 +1907,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BKIKAAA=]",
+      "chat_link": "[&BKIKAAA=]",
       "tooltip": "The Joko Gate"
     }
   },
@@ -1930,7 +1930,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJkKAAA=]",
+      "chat_link": "[&BJkKAAA=]",
       "tooltip": "The Triumph of Palawa Joko"
     }
   },
@@ -1953,7 +1953,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJAKAAA=]",
+      "chat_link": "[&BJAKAAA=]",
       "tooltip": "Palawa's Grace"
     }
   },
@@ -1998,7 +1998,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BCgKAAA=]",
+      "chat_link": "[&BCgKAAA=]",
       "tooltip": "Olishar's Oasis Camp Waypoint"
     }
   },
@@ -2010,7 +2010,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNQKAAA=]",
+      "chat_link": "[&BNQKAAA=]",
       "tooltip": "Sandbound Towers"
     }
   },
@@ -2055,7 +2055,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BG4KAAA=]",
+      "chat_link": "[&BG4KAAA=]",
       "tooltip": "Leviathan's Gullet"
     }
   },
@@ -2067,7 +2067,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BPkJAAA=]",
+      "chat_link": "[&BPkJAAA=]",
       "tooltip": "Fallback Fissure"
     }
   },
@@ -2090,7 +2090,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIkKAAA=]",
+      "chat_link": "[&BIkKAAA=]",
       "tooltip": "Sandwallow Retreat"
     }
   },
@@ -2113,7 +2113,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOcKAAA=]",
+      "chat_link": "[&BOcKAAA=]",
       "tooltip": "Skritt's Audience"
     }
   },
@@ -2136,7 +2136,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BGcKAAA=]",
+      "chat_link": "[&BGcKAAA=]",
       "tooltip": "Skimmer's Ranch Waypoint"
     }
   },
@@ -2170,7 +2170,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGMKAAA=]",
+      "chat_link": "[&BGMKAAA=]",
       "tooltip": "Pillars of Supremacy"
     }
   },
@@ -2182,7 +2182,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJgKAAA=]",
+      "chat_link": "[&BJgKAAA=]",
       "tooltip": "Bahdaj Vigil"
     }
   },
@@ -2194,7 +2194,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIYKAAA=]",
+      "chat_link": "[&BIYKAAA=]",
       "tooltip": "Throne of Pellentia"
     }
   },
@@ -2250,7 +2250,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BKYKAAA=]",
+      "chat_link": "[&BKYKAAA=]",
       "tooltip": "Pilgrims' Folly"
     }
   },
@@ -2273,7 +2273,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BLAKAAA=]",
+      "chat_link": "[&BLAKAAA=]",
       "tooltip": "Exile's Rest"
     }
   },
@@ -2285,7 +2285,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BLQKAAA=]",
+      "chat_link": "[&BLQKAAA=]",
       "tooltip": "Garden of the Chosen"
     }
   },
@@ -2308,7 +2308,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BC0KAAA=]",
+      "chat_link": "[&BC0KAAA=]",
       "tooltip": "Elon Falls"
     }
   },
@@ -2320,7 +2320,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BNwKAAA=]",
+      "chat_link": "[&BNwKAAA=]",
       "tooltip": "Bonestrand Waypoint"
     }
   },
@@ -2343,7 +2343,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMgKAAA=]",
+      "chat_link": "[&BMgKAAA=]",
       "tooltip": "Village of Purity"
     }
   },
@@ -2366,7 +2366,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BKcKAAA=]",
+      "chat_link": "[&BKcKAAA=]",
       "tooltip": "Bonestrand Garrison"
     }
   },
@@ -2378,7 +2378,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNIKAAA=]",
+      "chat_link": "[&BNIKAAA=]",
       "tooltip": "Bonecage Paddock"
     }
   },
@@ -2423,7 +2423,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBcKAAA=]",
+      "chat_link": "[&BBcKAAA=]",
       "tooltip": "Imperial Sulfurworks"
     }
   },
@@ -2435,7 +2435,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBEKAAA=]",
+      "chat_link": "[&BBEKAAA=]",
       "tooltip": "Acrid Sink"
     }
   },
@@ -2447,7 +2447,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOQKAAA=]",
+      "chat_link": "[&BOQKAAA=]",
       "tooltip": "Sandstrewn Shrine"
     }
   },
@@ -2481,7 +2481,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BKgKAAA=]",
+      "chat_link": "[&BKgKAAA=]",
       "tooltip": "Chantry of Shadows"
     }
   },
@@ -2493,7 +2493,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BKMKAAA=]",
+      "chat_link": "[&BKMKAAA=]",
       "tooltip": "The Darklands Waypoint"
     }
   },
@@ -2516,7 +2516,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFIKAAA=]",
+      "chat_link": "[&BFIKAAA=]",
       "tooltip": "Clanmarshal's Pergola"
     }
   },
@@ -2528,7 +2528,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJ4KAAA=]",
+      "chat_link": "[&BJ4KAAA=]",
       "tooltip": "Sandfall Sanctum"
     }
   },
@@ -2551,7 +2551,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHoKAAA=]",
+      "chat_link": "[&BHoKAAA=]",
       "tooltip": "Scourge's Threshold"
     }
   },
@@ -2563,7 +2563,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMcKAAA=]",
+      "chat_link": "[&BMcKAAA=]",
       "tooltip": "Blind Faith"
     }
   },
@@ -2586,7 +2586,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBYKAAA=]",
+      "chat_link": "[&BBYKAAA=]",
       "tooltip": "Matriarch's View"
     }
   },
@@ -2631,7 +2631,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGkKAAA=]",
+      "chat_link": "[&BGkKAAA=]",
       "tooltip": "Ember Heights"
     }
   },
@@ -2643,7 +2643,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBsKAAA=]",
+      "chat_link": "[&BBsKAAA=]",
       "tooltip": "Springer's Ladder"
     }
   },
@@ -2655,7 +2655,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIEKAAA=]",
+      "chat_link": "[&BIEKAAA=]",
       "tooltip": "Shadow Arcade"
     }
   },
@@ -2667,7 +2667,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BI4KAAA=]",
+      "chat_link": "[&BI4KAAA=]",
       "tooltip": "Toxic Pools"
     }
   },
@@ -2679,7 +2679,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BMEKAAA=]",
+      "chat_link": "[&BMEKAAA=]",
       "tooltip": "Lair of the Forgotten Waypoint"
     }
   },
@@ -2724,7 +2724,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHAKAAA=]",
+      "chat_link": "[&BHAKAAA=]",
       "tooltip": "Wayward Watch"
     }
   },
@@ -2736,7 +2736,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BF0KAAA=]",
+      "chat_link": "[&BF0KAAA=]",
       "tooltip": "Vabbian Corridor"
     }
   },
@@ -2759,7 +2759,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BC8KAAA=]",
+      "chat_link": "[&BC8KAAA=]",
       "tooltip": "Uhiwi's Bones"
     }
   },
@@ -2771,7 +2771,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFQKAAA=]",
+      "chat_link": "[&BFQKAAA=]",
       "tooltip": "Forbidden Vault"
     }
   },
@@ -2783,7 +2783,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOIKAAA=]",
+      "chat_link": "[&BOIKAAA=]",
       "tooltip": "Tarstone Weeps"
     }
   },
@@ -2806,7 +2806,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHsKAAA=]",
+      "chat_link": "[&BHsKAAA=]",
       "tooltip": "Lupicus Boneyard"
     }
   },
@@ -2818,7 +2818,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BK8KAAA=]",
+      "chat_link": "[&BK8KAAA=]",
       "tooltip": "Junundu Hatchery"
     }
   },
@@ -2830,7 +2830,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMwKAAA=]",
+      "chat_link": "[&BMwKAAA=]",
       "tooltip": "Bitumen Reserve"
     }
   },
@@ -2842,7 +2842,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BAIKAAA=]",
+      "chat_link": "[&BAIKAAA=]",
       "tooltip": "The Bone Palace"
     }
   },
@@ -2865,7 +2865,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BAsKAAA=]",
+      "chat_link": "[&BAsKAAA=]",
       "tooltip": "Joko's Domain Waypoint"
     }
   },
@@ -2888,7 +2888,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFgKAAA=]",
+      "chat_link": "[&BFgKAAA=]",
       "tooltip": "Fort Huduh"
     }
   },
@@ -2900,7 +2900,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBoKAAA=]",
+      "chat_link": "[&BBoKAAA=]",
       "tooltip": "Forged Firebase"
     }
   },
@@ -2912,7 +2912,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBwKAAA=]",
+      "chat_link": "[&BBwKAAA=]",
       "tooltip": "Zayan Gate"
     }
   },
@@ -2924,7 +2924,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BHMKAAA=]",
+      "chat_link": "[&BHMKAAA=]",
       "tooltip": "The Scourgeway Waypoint"
     }
   },
@@ -2936,7 +2936,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEIKAAA=]",
+      "chat_link": "[&BEIKAAA=]",
       "tooltip": "Towering Links"
     }
   },
@@ -2948,7 +2948,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDEKAAA=]",
+      "chat_link": "[&BDEKAAA=]",
       "tooltip": "Chukeht Overlook"
     }
   },
@@ -2971,7 +2971,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BE4KAAA=]",
+      "chat_link": "[&BE4KAAA=]",
       "tooltip": "Torment's Watch"
     }
   },
@@ -3005,7 +3005,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMkKAAA=]",
+      "chat_link": "[&BMkKAAA=]",
       "tooltip": "Revealer Vantage"
     }
   },
@@ -3017,7 +3017,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDsKAAA=]",
+      "chat_link": "[&BDsKAAA=]",
       "tooltip": "Conquest Overlook"
     }
   },
@@ -3029,7 +3029,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BI0KAAA=]",
+      "chat_link": "[&BI0KAAA=]",
       "tooltip": "Eastern Maw"
     }
   },
@@ -3041,7 +3041,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BPoJAAA=]",
+      "chat_link": "[&BPoJAAA=]",
       "tooltip": "Northern Maw"
     }
   },
@@ -3053,7 +3053,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMIKAAA=]",
+      "chat_link": "[&BMIKAAA=]",
       "tooltip": "Western Maw"
     }
   },
@@ -3065,7 +3065,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGQKAAA=]",
+      "chat_link": "[&BGQKAAA=]",
       "tooltip": "The Mouth of Torment"
     }
   },
@@ -3110,7 +3110,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BB0KAAA=]",
+      "chat_link": "[&BB0KAAA=]",
       "tooltip": "Bleached Pillars"
     }
   },
@@ -3133,7 +3133,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDMKAAA=]",
+      "chat_link": "[&BDMKAAA=]",
       "tooltip": "The Vermitheater"
     }
   },
@@ -3145,7 +3145,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BHcKAAA=]",
+      "chat_link": "[&BHcKAAA=]",
       "tooltip": "Sand Jackal Run Waypoint"
     }
   },
@@ -3168,7 +3168,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOYKAAA=]",
+      "chat_link": "[&BOYKAAA=]",
       "tooltip": "Djinn Enclave"
     }
   },
@@ -3202,7 +3202,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBIKAAA=]",
+      "chat_link": "[&BBIKAAA=]",
       "tooltip": "Junundu Lookout"
     }
   },
@@ -3214,7 +3214,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFYKAAA=]",
+      "chat_link": "[&BFYKAAA=]",
       "tooltip": "Lone-Tree Hill"
     }
   },
@@ -3226,7 +3226,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BM4KAAA=]",
+      "chat_link": "[&BM4KAAA=]",
       "tooltip": "Henge of Joko"
     }
   },
@@ -3249,7 +3249,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BKUKAAA=]",
+      "chat_link": "[&BKUKAAA=]",
       "tooltip": "Cragged Vale Waypoint"
     }
   },
@@ -3261,7 +3261,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BO0KAAA=]",
+      "chat_link": "[&BO0KAAA=]",
       "tooltip": "Vehjin Palace Waypoint"
     }
   },
@@ -3273,7 +3273,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BA4KAAA=]",
+      "chat_link": "[&BA4KAAA=]",
       "tooltip": "Vehjin Royal Rotunda"
     }
   },
@@ -3307,7 +3307,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BLwKAAA=]",
+      "chat_link": "[&BLwKAAA=]",
       "tooltip": "Excavation Site"
     }
   },
@@ -3341,7 +3341,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDQKAAA=]",
+      "chat_link": "[&BDQKAAA=]",
       "tooltip": "Troopmarshal's Encampment"
     }
   },
@@ -3353,7 +3353,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BG0KAAA=]",
+      "chat_link": "[&BG0KAAA=]",
       "tooltip": "The Hearth"
     }
   },
@@ -3376,7 +3376,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMAKAAA=]",
+      "chat_link": "[&BMAKAAA=]",
       "tooltip": "The Boneyard"
     }
   },
@@ -3410,7 +3410,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOsKAAA=]",
+      "chat_link": "[&BOsKAAA=]",
       "tooltip": "The Crypts"
     }
   },
@@ -3433,7 +3433,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMsKAAA=]",
+      "chat_link": "[&BMsKAAA=]",
       "tooltip": "Court of the Dead"
     }
   },
@@ -3467,7 +3467,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BEoKAAA=]",
+      "chat_link": "[&BEoKAAA=]",
       "tooltip": "Necropolis Waypoint"
     }
   },
@@ -3479,7 +3479,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BN8KAAA=]",
+      "chat_link": "[&BN8KAAA=]",
       "tooltip": "Ruins of Jennur's Horde"
     }
   },
@@ -3491,7 +3491,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOwKAAA=]",
+      "chat_link": "[&BOwKAAA=]",
       "tooltip": "Lair of Zommoros"
     }
   },
@@ -3514,7 +3514,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BP8JAAA=]",
+      "chat_link": "[&BP8JAAA=]",
       "tooltip": "Ruins of Mihanu Township"
     }
   },
@@ -3570,7 +3570,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BPIKAAA=]",
+      "chat_link": "[&BPIKAAA=]",
       "tooltip": "Ruins of the Mirror of Lyss"
     }
   },
@@ -3626,7 +3626,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJYKAAA=]",
+      "chat_link": "[&BJYKAAA=]",
       "tooltip": "Hanging Gardens"
     }
   },
@@ -3649,7 +3649,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BAEKAAA=]",
+      "chat_link": "[&BAEKAAA=]",
       "tooltip": "Spearmarshal's Lament"
     }
   },
@@ -3683,7 +3683,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMMKAAA=]",
+      "chat_link": "[&BMMKAAA=]",
       "tooltip": "Vehtendi Vineyard"
     }
   },
@@ -3706,7 +3706,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BKsKAAA=]",
+      "chat_link": "[&BKsKAAA=]",
       "tooltip": "House Ventura Dormitory"
     }
   },
@@ -3718,7 +3718,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJoKAAA=]",
+      "chat_link": "[&BJoKAAA=]",
       "tooltip": "House Ingene Dormitory"
     }
   },
@@ -3730,7 +3730,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNsKAAA=]",
+      "chat_link": "[&BNsKAAA=]",
       "tooltip": "House Rolic Dormitory"
     }
   },
@@ -3742,7 +3742,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNgKAAA=]",
+      "chat_link": "[&BNgKAAA=]",
       "tooltip": "Headmaster's Office"
     }
   },
@@ -3754,7 +3754,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BBUKAAA=]",
+      "chat_link": "[&BBUKAAA=]",
       "tooltip": "The Warehouse"
     }
   },
@@ -3777,7 +3777,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BA8KAAA=]",
+      "chat_link": "[&BA8KAAA=]",
       "tooltip": "Vehtendi Academy Waypoint"
     }
   },
@@ -3789,7 +3789,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJsKAAA=]",
+      "chat_link": "[&BJsKAAA=]",
       "tooltip": "Great Palawa Joko Monument"
     }
   },
@@ -3812,7 +3812,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCoKAAA=]",
+      "chat_link": "[&BCoKAAA=]",
       "tooltip": "Junundu Nests"
     }
   },
@@ -3824,7 +3824,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCwKAAA=]",
+      "chat_link": "[&BCwKAAA=]",
       "tooltip": "Beastmarshal's Encampment"
     }
   },
@@ -3858,7 +3858,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BPsJAAA=]",
+      "chat_link": "[&BPsJAAA=]",
       "tooltip": "The Promenade"
     }
   },
@@ -3881,7 +3881,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD0KAAA=]",
+      "chat_link": "[&BD0KAAA=]",
       "tooltip": "Seborhin Circle"
     }
   },
@@ -3893,7 +3893,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BAMKAAA=]",
+      "chat_link": "[&BAMKAAA=]",
       "tooltip": "Spa"
     }
   },
@@ -3905,7 +3905,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGYKAAA=]",
+      "chat_link": "[&BGYKAAA=]",
       "tooltip": "Merchant's Row"
     }
   },
@@ -3917,7 +3917,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMYKAAA=]",
+      "chat_link": "[&BMYKAAA=]",
       "tooltip": "Lyssan Fools Theater"
     }
   },
@@ -3940,7 +3940,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BNAKAAA=]",
+      "chat_link": "[&BNAKAAA=]",
       "tooltip": "Seborhin Waypoint"
     }
   },
@@ -3952,7 +3952,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BPYJAAA=]",
+      "chat_link": "[&BPYJAAA=]",
       "tooltip": "The Menagerie"
     }
   },
@@ -3964,7 +3964,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGIKAAA=]",
+      "chat_link": "[&BGIKAAA=]",
       "tooltip": "Tihark Orchard"
     }
   },
@@ -3976,7 +3976,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BKAKAAA=]",
+      "chat_link": "[&BKAKAAA=]",
       "tooltip": "Tournament Battlegrounds"
     }
   },
@@ -3999,7 +3999,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BHQKAAA=]",
+      "chat_link": "[&BHQKAAA=]",
       "tooltip": "Market Ruins Waypoints"
     }
   },
@@ -4011,7 +4011,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOoKAAA=]",
+      "chat_link": "[&BOoKAAA=]",
       "tooltip": "King Joko's Sky Garden"
     }
   },
@@ -4034,7 +4034,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIgKAAA=]",
+      "chat_link": "[&BIgKAAA=]",
       "tooltip": "Market Ruins"
     }
   },
@@ -4057,7 +4057,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BEMLAAA=]",
+      "chat_link": "[&BEMLAAA=]",
       "tooltip": "Althomla Waypoint"
     }
   },
@@ -4069,7 +4069,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCcLAAA=]",
+      "chat_link": "[&BCcLAAA=]",
       "tooltip": "The Iron Whale"
     }
   },
@@ -4081,7 +4081,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCQLAAA=]",
+      "chat_link": "[&BCQLAAA=]",
       "tooltip": "Jemandi Market"
     }
   },
@@ -4093,7 +4093,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCsLAAA=]",
+      "chat_link": "[&BCsLAAA=]",
       "tooltip": "Ritual Grounds"
     }
   },
@@ -4105,7 +4105,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDULAAA=]",
+      "chat_link": "[&BDULAAA=]",
       "tooltip": "Althomla Docks"
     }
   },
@@ -4139,7 +4139,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD0LAAA=]",
+      "chat_link": "[&BD0LAAA=]",
       "tooltip": "Olma's Legacy"
     }
   },
@@ -4173,7 +4173,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "Ewyn's Retreat",
+      "chat_link": "Ewyn's Retreat",
       "tooltip": "[&BCwLAAA=]"
     }
   },
@@ -4196,7 +4196,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDYLAAA=]",
+      "chat_link": "[&BDYLAAA=]",
       "tooltip": "Malor's Ranch"
     }
   },
@@ -4208,7 +4208,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDMLAAA=]",
+      "chat_link": "[&BDMLAAA=]",
       "tooltip": "Driftwood Jetty"
     }
   },
@@ -4220,7 +4220,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDILAAA=]",
+      "chat_link": "[&BDILAAA=]",
       "tooltip": "Skycavern Burial Grounds"
     }
   },
@@ -4243,7 +4243,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD4LAAA=]",
+      "chat_link": "[&BD4LAAA=]",
       "tooltip": "Greytear Falls"
     }
   },
@@ -4255,7 +4255,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCYLAAA=]",
+      "chat_link": "[&BCYLAAA=]",
       "tooltip": "Lab Sigma-05"
     }
   },
@@ -4267,7 +4267,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEILAAA=]",
+      "chat_link": "[&BEILAAA=]",
       "tooltip": "Anniogel Landing"
     }
   },
@@ -4279,7 +4279,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BCULAAA=]",
+      "chat_link": "[&BCULAAA=]",
       "tooltip": "Anniogel Encampment Waypoint"
     }
   },
@@ -4313,7 +4313,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDALAAA=]",
+      "chat_link": "[&BDALAAA=]",
       "tooltip": "Reserve Power Core"
     }
   },
@@ -4325,7 +4325,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD8LAAA=]",
+      "chat_link": "[&BD8LAAA=]",
       "tooltip": "Tunnel Access Gamma"
     }
   },
@@ -4337,7 +4337,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCgLAAA=]",
+      "chat_link": "[&BCgLAAA=]",
       "tooltip": "Magistorm Gallery"
     }
   },
@@ -4349,7 +4349,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDQLAAA=]",
+      "chat_link": "[&BDQLAAA=]",
       "tooltip": "Necrobrand Emulation Lab"
     }
   },
@@ -4361,7 +4361,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEQLAAA=]",
+      "chat_link": "[&BEQLAAA=]",
       "tooltip": "Portalforge Lab"
     }
   },
@@ -4373,7 +4373,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BC0LAAA=]",
+      "chat_link": "[&BC0LAAA=]",
       "tooltip": "Magnetics Lab"
     }
   },
@@ -4407,7 +4407,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDkLAAA=]",
+      "chat_link": "[&BDkLAAA=]",
       "tooltip": "Leyfinder Research Facility"
     }
   },
@@ -4419,7 +4419,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDsLAAA=]",
+      "chat_link": "[&BDsLAAA=]",
       "tooltip": "Effluent Outflow Network"
     }
   },
@@ -4431,7 +4431,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEcLAAA=]",
+      "chat_link": "[&BEcLAAA=]",
       "tooltip": "Rata Primus Canal"
     }
   },
@@ -4454,7 +4454,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDELAAA=]",
+      "chat_link": "[&BDELAAA=]",
       "tooltip": "Deepwater Cooling Sink"
     }
   },
@@ -4466,7 +4466,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCoLAAA=]",
+      "chat_link": "[&BCoLAAA=]",
       "tooltip": "Tunnel Access Beta"
     }
   },
@@ -4478,7 +4478,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDgLAAA=]",
+      "chat_link": "[&BDgLAAA=]",
       "tooltip": "Tunnel Access Alpha"
     }
   },
@@ -4490,7 +4490,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEYLAAA=]",
+      "chat_link": "[&BEYLAAA=]",
       "tooltip": "Specimen Chamber"
     }
   },
@@ -4502,7 +4502,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCkLAAA=]",
+      "chat_link": "[&BCkLAAA=]",
       "tooltip": "Tunnel Access Epsilon"
     }
   },
@@ -4514,7 +4514,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCMLAAA=]",
+      "chat_link": "[&BCMLAAA=]",
       "tooltip": "Communications Control"
     }
   },
@@ -4526,7 +4526,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEALAAA=]",
+      "chat_link": "[&BEALAAA=]",
       "tooltip": "Cerberus Watchtowers"
     }
   },
@@ -4549,7 +4549,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDcLAAA=]",
+      "chat_link": "[&BDcLAAA=]",
       "tooltip": "Communications Array"
     }
   },
@@ -4561,7 +4561,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BC4LAAA=]",
+      "chat_link": "[&BC4LAAA=]",
       "tooltip": "Tunnel Access Delta"
     }
   },
@@ -4573,7 +4573,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BEMLAAA=]",
+      "chat_link": "[&BEMLAAA=]",
       "tooltip": "Althomla Waypoint"
     }
   },
@@ -4585,7 +4585,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCcLAAA=]",
+      "chat_link": "[&BCcLAAA=]",
       "tooltip": "The Iron Whale"
     }
   },
@@ -4597,7 +4597,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCQLAAA=]",
+      "chat_link": "[&BCQLAAA=]",
       "tooltip": "Jemandi Market"
     }
   },
@@ -4609,7 +4609,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCsLAAA=]",
+      "chat_link": "[&BCsLAAA=]",
       "tooltip": "Ritual Grounds"
     }
   },
@@ -4621,7 +4621,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDULAAA=]",
+      "chat_link": "[&BDULAAA=]",
       "tooltip": "Althomla Docks"
     }
   },
@@ -4655,7 +4655,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD0LAAA=]",
+      "chat_link": "[&BD0LAAA=]",
       "tooltip": "Olma's Legacy"
     }
   },
@@ -4689,7 +4689,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "Ewyn's Retreat",
+      "chat_link": "Ewyn's Retreat",
       "tooltip": "[&BCwLAAA=]"
     }
   },
@@ -4712,7 +4712,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDYLAAA=]",
+      "chat_link": "[&BDYLAAA=]",
       "tooltip": "Malor's Ranch"
     }
   },
@@ -4724,7 +4724,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDMLAAA=]",
+      "chat_link": "[&BDMLAAA=]",
       "tooltip": "Driftwood Jetty"
     }
   },
@@ -4736,7 +4736,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDILAAA=]",
+      "chat_link": "[&BDILAAA=]",
       "tooltip": "Skycavern Burial Grounds"
     }
   },
@@ -4759,7 +4759,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD4LAAA=]",
+      "chat_link": "[&BD4LAAA=]",
       "tooltip": "Greytear Falls"
     }
   },
@@ -4771,7 +4771,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCYLAAA=]",
+      "chat_link": "[&BCYLAAA=]",
       "tooltip": "Lab Sigma-05"
     }
   },
@@ -4783,7 +4783,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEILAAA=]",
+      "chat_link": "[&BEILAAA=]",
       "tooltip": "Anniogel Landing"
     }
   },
@@ -4795,7 +4795,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BCULAAA=]",
+      "chat_link": "[&BCULAAA=]",
       "tooltip": "Anniogel Encampment Waypoint"
     }
   },
@@ -4829,7 +4829,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDALAAA=]",
+      "chat_link": "[&BDALAAA=]",
       "tooltip": "Reserve Power Core"
     }
   },
@@ -4841,7 +4841,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD8LAAA=]",
+      "chat_link": "[&BD8LAAA=]",
       "tooltip": "Tunnel Access Gamma"
     }
   },
@@ -4853,7 +4853,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCgLAAA=]",
+      "chat_link": "[&BCgLAAA=]",
       "tooltip": "Magistorm Gallery"
     }
   },
@@ -4865,7 +4865,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDQLAAA=]",
+      "chat_link": "[&BDQLAAA=]",
       "tooltip": "Necrobrand Emulation Lab"
     }
   },
@@ -4877,7 +4877,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEQLAAA=]",
+      "chat_link": "[&BEQLAAA=]",
       "tooltip": "Portalforge Lab"
     }
   },
@@ -4889,7 +4889,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BC0LAAA=]",
+      "chat_link": "[&BC0LAAA=]",
       "tooltip": "Magnetics Lab"
     }
   },
@@ -4923,7 +4923,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDkLAAA=]",
+      "chat_link": "[&BDkLAAA=]",
       "tooltip": "Leyfinder Research Facility"
     }
   },
@@ -4935,7 +4935,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDsLAAA=]",
+      "chat_link": "[&BDsLAAA=]",
       "tooltip": "Effluent Outflow Network"
     }
   },
@@ -4947,7 +4947,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEcLAAA=]",
+      "chat_link": "[&BEcLAAA=]",
       "tooltip": "Rata Primus Canal"
     }
   },
@@ -4970,7 +4970,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDELAAA=]",
+      "chat_link": "[&BDELAAA=]",
       "tooltip": "Deepwater Cooling Sink"
     }
   },
@@ -4982,7 +4982,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCoLAAA=]",
+      "chat_link": "[&BCoLAAA=]",
       "tooltip": "Tunnel Access Beta"
     }
   },
@@ -4994,7 +4994,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDgLAAA=]",
+      "chat_link": "[&BDgLAAA=]",
       "tooltip": "Tunnel Access Alpha"
     }
   },
@@ -5006,7 +5006,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEYLAAA=]",
+      "chat_link": "[&BEYLAAA=]",
       "tooltip": "Specimen Chamber"
     }
   },
@@ -5018,7 +5018,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCkLAAA=]",
+      "chat_link": "[&BCkLAAA=]",
       "tooltip": "Tunnel Access Epsilon"
     }
   },
@@ -5030,7 +5030,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCMLAAA=]",
+      "chat_link": "[&BCMLAAA=]",
       "tooltip": "Communications Control"
     }
   },
@@ -5042,7 +5042,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEALAAA=]",
+      "chat_link": "[&BEALAAA=]",
       "tooltip": "Cerberus Watchtowers"
     }
   },
@@ -5065,7 +5065,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDcLAAA=]",
+      "chat_link": "[&BDcLAAA=]",
       "tooltip": "Communications Array"
     }
   },
@@ -5077,7 +5077,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BC4LAAA=]",
+      "chat_link": "[&BC4LAAA=]",
       "tooltip": "Tunnel Access Delta"
     }
   },
@@ -5089,7 +5089,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOQLAAA=]",
+      "chat_link": "[&BOQLAAA=]",
       "tooltip": "Aidrome Port"
     }
   },
@@ -5101,7 +5101,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BN4LAAA=]",
+      "chat_link": "[&BN4LAAA=]",
       "tooltip": "Pact Command Waypoint"
     }
   },
@@ -5113,7 +5113,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNkLAAA=]",
+      "chat_link": "[&BNkLAAA=]",
       "tooltip": "Pact Outpost"
     }
   },
@@ -5125,7 +5125,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOoLAAA=]",
+      "chat_link": "[&BOoLAAA=]",
       "tooltip": "Ember Gate"
     }
   },
@@ -5148,7 +5148,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNMLAAA=]",
+      "chat_link": "[&BNMLAAA=]",
       "tooltip": "Charnel Gate"
     }
   },
@@ -5160,7 +5160,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOgLAAA=]",
+      "chat_link": "[&BOgLAAA=]",
       "tooltip": "Verdant Gate"
     }
   },
@@ -5194,7 +5194,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOALAAA=]",
+      "chat_link": "[&BOALAAA=]",
       "tooltip": "Verdance Falls"
     }
   },
@@ -5217,7 +5217,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BM0LAAA=]",
+      "chat_link": "[&BM0LAAA=]",
       "tooltip": "Tower of the Third"
     }
   },
@@ -5229,7 +5229,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BNILAAA=]",
+      "chat_link": "[&BNILAAA=]",
       "tooltip": "Melandru's Lost Domain Waypoint"
     }
   },
@@ -5241,7 +5241,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMkLAAA=]",
+      "chat_link": "[&BMkLAAA=]",
       "tooltip": "Mist Warden Outpost"
     }
   },
@@ -5264,7 +5264,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNALAAA=]",
+      "chat_link": "[&BNALAAA=]",
       "tooltip": "Grenth's Respite"
     }
   },
@@ -5276,7 +5276,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BM8LAAA=]",
+      "chat_link": "[&BM8LAAA=]",
       "tooltip": "Skyscale Eyrie"
     }
   },
@@ -5321,7 +5321,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNsLAAA=]",
+      "chat_link": "[&BNsLAAA=]",
       "tooltip": "Loathsome Pulpit"
     }
   },
@@ -5333,7 +5333,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BNELAAA=]",
+      "chat_link": "[&BNELAAA=]",
       "tooltip": "The Underworld Waypoint"
     }
   },
@@ -5345,7 +5345,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMsLAAA=]",
+      "chat_link": "[&BMsLAAA=]",
       "tooltip": "Olmakhan Outpost"
     }
   },
@@ -5357,7 +5357,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BN0LAAA=]",
+      "chat_link": "[&BN0LAAA=]",
       "tooltip": "Wailing Basin"
     }
   },
@@ -5369,7 +5369,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BM4LAAA=]",
+      "chat_link": "[&BM4LAAA=]",
       "tooltip": "Shackled Grasp"
     }
   },
@@ -5392,7 +5392,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNQLAAA=]",
+      "chat_link": "[&BNQLAAA=]",
       "tooltip": "Chaos Gate"
     }
   },
@@ -5415,7 +5415,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOILAAA=]",
+      "chat_link": "[&BOILAAA=]",
       "tooltip": "Fire God's Precipice"
     }
   },
@@ -5427,7 +5427,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNgLAAA=]",
+      "chat_link": "[&BNgLAAA=]",
       "tooltip": "Balthazar's Folly"
     }
   },
@@ -5450,7 +5450,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BOYLAAA=]",
+      "chat_link": "[&BOYLAAA=]",
       "tooltip": "Burning Forest Waypoint"
     }
   },
@@ -5462,7 +5462,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNoLAAA=]",
+      "chat_link": "[&BNoLAAA=]",
       "tooltip": "Crystal Bloom Outpost"
     }
   },
@@ -5474,7 +5474,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNwLAAA=]",
+      "chat_link": "[&BNwLAAA=]",
       "tooltip": "Ashen Steppes"
     }
   },
@@ -5519,7 +5519,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOELAAA=]",
+      "chat_link": "[&BOELAAA=]",
       "tooltip": "Trail of Cinder"
     }
   },
@@ -5531,7 +5531,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMoLAAA=]",
+      "chat_link": "[&BMoLAAA=]",
       "tooltip": "Crystal Cudgel"
     }
   },
@@ -5543,7 +5543,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BEMLAAA=]",
+      "chat_link": "[&BEMLAAA=]",
       "tooltip": "Althomla Waypoint"
     }
   },
@@ -5555,7 +5555,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCcLAAA=]",
+      "chat_link": "[&BCcLAAA=]",
       "tooltip": "The Iron Whale"
     }
   },
@@ -5567,7 +5567,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCQLAAA=]",
+      "chat_link": "[&BCQLAAA=]",
       "tooltip": "Jemandi Market"
     }
   },
@@ -5579,7 +5579,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCsLAAA=]",
+      "chat_link": "[&BCsLAAA=]",
       "tooltip": "Ritual Grounds"
     }
   },
@@ -5591,7 +5591,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDULAAA=]",
+      "chat_link": "[&BDULAAA=]",
       "tooltip": "Althomla Docks"
     }
   },
@@ -5625,7 +5625,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD0LAAA=]",
+      "chat_link": "[&BD0LAAA=]",
       "tooltip": "Olma's Legacy"
     }
   },
@@ -5659,7 +5659,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "Ewyn's Retreat",
+      "chat_link": "Ewyn's Retreat",
       "tooltip": "[&BCwLAAA=]"
     }
   },
@@ -5682,7 +5682,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDYLAAA=]",
+      "chat_link": "[&BDYLAAA=]",
       "tooltip": "Malor's Ranch"
     }
   },
@@ -5694,7 +5694,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDMLAAA=]",
+      "chat_link": "[&BDMLAAA=]",
       "tooltip": "Driftwood Jetty"
     }
   },
@@ -5706,7 +5706,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDILAAA=]",
+      "chat_link": "[&BDILAAA=]",
       "tooltip": "Skycavern Burial Grounds"
     }
   },
@@ -5729,7 +5729,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD4LAAA=]",
+      "chat_link": "[&BD4LAAA=]",
       "tooltip": "Greytear Falls"
     }
   },
@@ -5741,7 +5741,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCYLAAA=]",
+      "chat_link": "[&BCYLAAA=]",
       "tooltip": "Lab Sigma-05"
     }
   },
@@ -5753,7 +5753,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEILAAA=]",
+      "chat_link": "[&BEILAAA=]",
       "tooltip": "Anniogel Landing"
     }
   },
@@ -5765,7 +5765,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BCULAAA=]",
+      "chat_link": "[&BCULAAA=]",
       "tooltip": "Anniogel Encampment Waypoint"
     }
   },
@@ -5799,7 +5799,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDALAAA=]",
+      "chat_link": "[&BDALAAA=]",
       "tooltip": "Reserve Power Core"
     }
   },
@@ -5811,7 +5811,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BD8LAAA=]",
+      "chat_link": "[&BD8LAAA=]",
       "tooltip": "Tunnel Access Gamma"
     }
   },
@@ -5823,7 +5823,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCgLAAA=]",
+      "chat_link": "[&BCgLAAA=]",
       "tooltip": "Magistorm Gallery"
     }
   },
@@ -5835,7 +5835,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDQLAAA=]",
+      "chat_link": "[&BDQLAAA=]",
       "tooltip": "Necrobrand Emulation Lab"
     }
   },
@@ -5847,7 +5847,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEQLAAA=]",
+      "chat_link": "[&BEQLAAA=]",
       "tooltip": "Portalforge Lab"
     }
   },
@@ -5859,7 +5859,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BC0LAAA=]",
+      "chat_link": "[&BC0LAAA=]",
       "tooltip": "Magnetics Lab"
     }
   },
@@ -5893,7 +5893,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDkLAAA=]",
+      "chat_link": "[&BDkLAAA=]",
       "tooltip": "Leyfinder Research Facility"
     }
   },
@@ -5905,7 +5905,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDsLAAA=]",
+      "chat_link": "[&BDsLAAA=]",
       "tooltip": "Effluent Outflow Network"
     }
   },
@@ -5917,7 +5917,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEcLAAA=]",
+      "chat_link": "[&BEcLAAA=]",
       "tooltip": "Rata Primus Canal"
     }
   },
@@ -5940,7 +5940,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDELAAA=]",
+      "chat_link": "[&BDELAAA=]",
       "tooltip": "Deepwater Cooling Sink"
     }
   },
@@ -5952,7 +5952,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCoLAAA=]",
+      "chat_link": "[&BCoLAAA=]",
       "tooltip": "Tunnel Access Beta"
     }
   },
@@ -5964,7 +5964,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDgLAAA=]",
+      "chat_link": "[&BDgLAAA=]",
       "tooltip": "Tunnel Access Alpha"
     }
   },
@@ -5976,7 +5976,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEYLAAA=]",
+      "chat_link": "[&BEYLAAA=]",
       "tooltip": "Specimen Chamber"
     }
   },
@@ -5988,7 +5988,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCkLAAA=]",
+      "chat_link": "[&BCkLAAA=]",
       "tooltip": "Tunnel Access Epsilon"
     }
   },
@@ -6000,7 +6000,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BCMLAAA=]",
+      "chat_link": "[&BCMLAAA=]",
       "tooltip": "Communications Control"
     }
   },
@@ -6012,7 +6012,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEALAAA=]",
+      "chat_link": "[&BEALAAA=]",
       "tooltip": "Cerberus Watchtowers"
     }
   },
@@ -6035,7 +6035,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BDcLAAA=]",
+      "chat_link": "[&BDcLAAA=]",
       "tooltip": "Communications Array"
     }
   },
@@ -6047,7 +6047,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BC4LAAA=]",
+      "chat_link": "[&BC4LAAA=]",
       "tooltip": "Tunnel Access Delta"
     }
   },
@@ -6059,7 +6059,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOQLAAA=]",
+      "chat_link": "[&BOQLAAA=]",
       "tooltip": "Aidrome Port"
     }
   },
@@ -6071,7 +6071,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BN4LAAA=]",
+      "chat_link": "[&BN4LAAA=]",
       "tooltip": "Pact Command Waypoint"
     }
   },
@@ -6083,7 +6083,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNkLAAA=]",
+      "chat_link": "[&BNkLAAA=]",
       "tooltip": "Pact Outpost"
     }
   },
@@ -6095,7 +6095,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOoLAAA=]",
+      "chat_link": "[&BOoLAAA=]",
       "tooltip": "Ember Gate"
     }
   },
@@ -6118,7 +6118,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNMLAAA=]",
+      "chat_link": "[&BNMLAAA=]",
       "tooltip": "Charnel Gate"
     }
   },
@@ -6130,7 +6130,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOgLAAA=]",
+      "chat_link": "[&BOgLAAA=]",
       "tooltip": "Verdant Gate"
     }
   },
@@ -6164,7 +6164,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOALAAA=]",
+      "chat_link": "[&BOALAAA=]",
       "tooltip": "Verdance Falls"
     }
   },
@@ -6187,7 +6187,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BM0LAAA=]",
+      "chat_link": "[&BM0LAAA=]",
       "tooltip": "Tower of the Third"
     }
   },
@@ -6199,7 +6199,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BNILAAA=]",
+      "chat_link": "[&BNILAAA=]",
       "tooltip": "Melandru's Lost Domain Waypoint"
     }
   },
@@ -6211,7 +6211,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMkLAAA=]",
+      "chat_link": "[&BMkLAAA=]",
       "tooltip": "Mist Warden Outpost"
     }
   },
@@ -6234,7 +6234,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNALAAA=]",
+      "chat_link": "[&BNALAAA=]",
       "tooltip": "Grenth's Respite"
     }
   },
@@ -6246,7 +6246,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BM8LAAA=]",
+      "chat_link": "[&BM8LAAA=]",
       "tooltip": "Skyscale Eyrie"
     }
   },
@@ -6291,7 +6291,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNsLAAA=]",
+      "chat_link": "[&BNsLAAA=]",
       "tooltip": "Loathsome Pulpit"
     }
   },
@@ -6303,7 +6303,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BNELAAA=]",
+      "chat_link": "[&BNELAAA=]",
       "tooltip": "The Underworld Waypoint"
     }
   },
@@ -6315,7 +6315,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMsLAAA=]",
+      "chat_link": "[&BMsLAAA=]",
       "tooltip": "Olmakhan Outpost"
     }
   },
@@ -6327,7 +6327,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BN0LAAA=]",
+      "chat_link": "[&BN0LAAA=]",
       "tooltip": "Wailing Basin"
     }
   },
@@ -6339,7 +6339,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BM4LAAA=]",
+      "chat_link": "[&BM4LAAA=]",
       "tooltip": "Shackled Grasp"
     }
   },
@@ -6362,7 +6362,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNQLAAA=]",
+      "chat_link": "[&BNQLAAA=]",
       "tooltip": "Chaos Gate"
     }
   },
@@ -6385,7 +6385,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOILAAA=]",
+      "chat_link": "[&BOILAAA=]",
       "tooltip": "Fire God's Precipice"
     }
   },
@@ -6397,7 +6397,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNgLAAA=]",
+      "chat_link": "[&BNgLAAA=]",
       "tooltip": "Balthazar's Folly"
     }
   },
@@ -6420,7 +6420,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BOYLAAA=]",
+      "chat_link": "[&BOYLAAA=]",
       "tooltip": "Burning Forest Waypoint"
     }
   },
@@ -6432,7 +6432,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNoLAAA=]",
+      "chat_link": "[&BNoLAAA=]",
       "tooltip": "Crystal Bloom Outpost"
     }
   },
@@ -6444,7 +6444,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BNwLAAA=]",
+      "chat_link": "[&BNwLAAA=]",
       "tooltip": "Ashen Steppes"
     }
   },
@@ -6489,7 +6489,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BOELAAA=]",
+      "chat_link": "[&BOELAAA=]",
       "tooltip": "Trail of Cinder"
     }
   },
@@ -6501,7 +6501,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BMoLAAA=]",
+      "chat_link": "[&BMoLAAA=]",
       "tooltip": "Crystal Cudgel"
     }
   },
@@ -6513,7 +6513,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BJkLAAA=]",
+      "chat_link": "[&BJkLAAA=]",
       "tooltip": "Reclaimed Chantry Waypoint"
     }
   },
@@ -6525,7 +6525,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BI4LAAA=]",
+      "chat_link": "[&BI4LAAA=]",
       "tooltip": "Kormir's Reverence"
     }
   },
@@ -6548,7 +6548,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGsLAAA=]",
+      "chat_link": "[&BGsLAAA=]",
       "tooltip": "Gaze of the Ancients"
     }
   },
@@ -6571,7 +6571,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHYLAAA=]",
+      "chat_link": "[&BHYLAAA=]",
       "tooltip": "Riyid's Post"
     }
   },
@@ -6594,7 +6594,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIoLAAA=]",
+      "chat_link": "[&BIoLAAA=]",
       "tooltip": "Archon's Retreat"
     }
   },
@@ -6606,7 +6606,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHELAAA=]",
+      "chat_link": "[&BHELAAA=]",
       "tooltip": "Jahai Great Hall"
     }
   },
@@ -6618,7 +6618,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHMLAAA=]",
+      "chat_link": "[&BHMLAAA=]",
       "tooltip": "Ring of Judgment"
     }
   },
@@ -6630,7 +6630,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHgLAAA=]",
+      "chat_link": "[&BHgLAAA=]",
       "tooltip": "Fortress Courtyard"
     }
   },
@@ -6664,7 +6664,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHQLAAA=]",
+      "chat_link": "[&BHQLAAA=]",
       "tooltip": "Claw Den"
     }
   },
@@ -6676,7 +6676,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIkLAAA=]",
+      "chat_link": "[&BIkLAAA=]",
       "tooltip": "Confluence of the Elements"
     }
   },
@@ -6688,7 +6688,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BH4LAAA=]",
+      "chat_link": "[&BH4LAAA=]",
       "tooltip": "Yatendi Village Waypoint"
     }
   },
@@ -6700,7 +6700,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJILAAA=]",
+      "chat_link": "[&BJILAAA=]",
       "tooltip": "Yatendi Farm"
     }
   },
@@ -6712,7 +6712,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIgLAAA=]",
+      "chat_link": "[&BIgLAAA=]",
       "tooltip": "Rilohn Falls"
     }
   },
@@ -6724,7 +6724,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIALAAA=]",
+      "chat_link": "[&BIALAAA=]",
       "tooltip": "Noble's Walk"
     }
   },
@@ -6736,7 +6736,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHkLAAA=]",
+      "chat_link": "[&BHkLAAA=]",
       "tooltip": "Sleepless Beacon"
     }
   },
@@ -6759,7 +6759,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIILAAA=]",
+      "chat_link": "[&BIILAAA=]",
       "tooltip": "Wurmmarshal's Encampment"
     }
   },
@@ -6782,7 +6782,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIsLAAA=]",
+      "chat_link": "[&BIsLAAA=]",
       "tooltip": "Garrison Command"
     }
   },
@@ -6794,7 +6794,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BIwLAAA=]",
+      "chat_link": "[&BIwLAAA=]",
       "tooltip": "Garrison Access Tower"
     }
   },
@@ -6806,7 +6806,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BI0LAAA=]",
+      "chat_link": "[&BI0LAAA=]",
       "tooltip": "Vanguard Ordinance"
     }
   },
@@ -6818,7 +6818,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BIMLAAA=]",
+      "chat_link": "[&BIMLAAA=]",
       "tooltip": "Soul's Vendetta Waypoint"
     }
   },
@@ -6841,7 +6841,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJALAAA=]",
+      "chat_link": "[&BJALAAA=]",
       "tooltip": "Vanguard Salvage Yard"
     }
   },
@@ -6865,7 +6865,7 @@
     "type": "landmark",
     "data": {
       "tooltip": "[&BH8LAAA=]",
-      "chatLink": "Garrison Relay Tower"
+      "chat_link": "Garrison Relay Tower"
     }
   },
   {
@@ -6876,7 +6876,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BJMLAAA=]",
+      "chat_link": "[&BJMLAAA=]",
       "tooltip": "Venta Pass Waypoint"
     }
   },
@@ -6888,7 +6888,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BI8LAAA=]",
+      "chat_link": "[&BI8LAAA=]",
       "tooltip": "Mirza's Rest"
     }
   },
@@ -6911,7 +6911,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHoLAAA=]",
+      "chat_link": "[&BHoLAAA=]",
       "tooltip": "Ancestor Tree"
     }
   },
@@ -6923,7 +6923,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHALAAA=]",
+      "chat_link": "[&BHALAAA=]",
       "tooltip": "Staging Platform"
     }
   },
@@ -6935,7 +6935,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BHwLAAA=]",
+      "chat_link": "[&BHwLAAA=]",
       "tooltip": "Battleground Ramparts"
     }
   },
@@ -6958,7 +6958,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJQLAAA=]",
+      "chat_link": "[&BJQLAAA=]",
       "tooltip": "Crystal Cavern"
     }
   },
@@ -6970,7 +6970,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJcLAAA=]",
+      "chat_link": "[&BJcLAAA=]",
       "tooltip": "Wyvern Roost"
     }
   },
@@ -7004,7 +7004,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BG0LAAA=]",
+      "chat_link": "[&BG0LAAA=]",
       "tooltip": "Displaced Vizier's Tower"
     }
   },
@@ -7016,7 +7016,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJELAAA=]",
+      "chat_link": "[&BJELAAA=]",
       "tooltip": "Monument to the Return of Palawa Joko"
     }
   },
@@ -7028,7 +7028,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BJgLAAA=]",
+      "chat_link": "[&BJgLAAA=]",
       "tooltip": "Crescent's Town Hall"
     }
   },
@@ -7040,7 +7040,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEwLAAA=]",
+      "chat_link": "[&BEwLAAA=]",
       "tooltip": "Deeprift Brood"
     }
   },
@@ -7063,7 +7063,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGILAAA=]",
+      "chat_link": "[&BGILAAA=]",
       "tooltip": "Secret Throughway"
     }
   },
@@ -7075,7 +7075,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFMLAAA=]",
+      "chat_link": "[&BFMLAAA=]",
       "tooltip": "Loyalist Warren"
     }
   },
@@ -7109,7 +7109,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGMLAAA=]",
+      "chat_link": "[&BGMLAAA=]",
       "tooltip": "Palawa's Benevolence"
     }
   },
@@ -7121,7 +7121,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGULAAA=]",
+      "chat_link": "[&BGULAAA=]",
       "tooltip": "Arkjok Kennels"
     }
   },
@@ -7133,7 +7133,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGgLAAA=]",
+      "chat_link": "[&BGgLAAA=]",
       "tooltip": "Crocuta Vantage"
     }
   },
@@ -7145,7 +7145,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFgLAAA=]",
+      "chat_link": "[&BFgLAAA=]",
       "tooltip": "Dunion Springs"
     }
   },
@@ -7168,7 +7168,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BF4LAAA=]",
+      "chat_link": "[&BF4LAAA=]",
       "tooltip": "Idol of the Choya"
     }
   },
@@ -7180,7 +7180,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BF8LAAA=]",
+      "chat_link": "[&BF8LAAA=]",
       "tooltip": "Barbellate Crater"
     }
   },
@@ -7192,7 +7192,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFkLAAA=]",
+      "chat_link": "[&BFkLAAA=]",
       "tooltip": "Dejarin Ruins"
     }
   },
@@ -7204,7 +7204,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEkLAAA=]",
+      "chat_link": "[&BEkLAAA=]",
       "tooltip": "Apizmic Grounds"
     }
   },
@@ -7216,7 +7216,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BFALAAA=]",
+      "chat_link": "[&BFALAAA=]",
       "tooltip": "Apizmic Grounds Waypoint"
     }
   },
@@ -7239,7 +7239,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFwLAAA=]",
+      "chat_link": "[&BFwLAAA=]",
       "tooltip": "Pogahn Bluffs Proving Ground"
     }
   },
@@ -7251,7 +7251,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGYLAAA=]",
+      "chat_link": "[&BGYLAAA=]",
       "tooltip": "Research Vault Alpha"
     }
   },
@@ -7263,7 +7263,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFoLAAA=]",
+      "chat_link": "[&BFoLAAA=]",
       "tooltip": "Research Vault Beta"
     }
   },
@@ -7275,7 +7275,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEsLAAA=]",
+      "chat_link": "[&BEsLAAA=]",
       "tooltip": "Research Mainframe Access"
     }
   },
@@ -7309,7 +7309,7 @@
     ],
     "type": "waypoint",
     "data": {
-      "chatLink": "[&BFcLAAA=]",
+      "chat_link": "[&BFcLAAA=]",
       "tooltip": "Allied Encampment Waypoint"
     }
   },
@@ -7321,7 +7321,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BEgLAAA=]",
+      "chat_link": "[&BEgLAAA=]",
       "tooltip": "Zelbahn Garrison"
     }
   },
@@ -7355,7 +7355,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFILAAA=]",
+      "chat_link": "[&BFILAAA=]",
       "tooltip": "Army Landing & Entry Portal"
     }
   },
@@ -7367,7 +7367,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFELAAA=]",
+      "chat_link": "[&BFELAAA=]",
       "tooltip": "Eastern Allied Access"
     }
   },
@@ -7379,7 +7379,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BE4LAAA=]",
+      "chat_link": "[&BE4LAAA=]",
       "tooltip": "Western Allied Access"
     }
   },
@@ -7391,7 +7391,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFQLAAA=]",
+      "chat_link": "[&BFQLAAA=]",
       "tooltip": "Corsair Cannons"
     }
   },
@@ -7414,7 +7414,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BF0LAAA=]",
+      "chat_link": "[&BF0LAAA=]",
       "tooltip": "Wreck of the Scimitar"
     }
   },
@@ -7426,7 +7426,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGELAAA=]",
+      "chat_link": "[&BGELAAA=]",
       "tooltip": "Gandara Western Approach"
     }
   },
@@ -7460,7 +7460,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGALAAA=]",
+      "chat_link": "[&BGALAAA=]",
       "tooltip": "Gandara Main Approach"
     }
   },
@@ -7472,7 +7472,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BGcLAAA=]",
+      "chat_link": "[&BGcLAAA=]",
       "tooltip": "Imperial Center for Applied Pestilence"
     }
   },
@@ -7506,7 +7506,7 @@
     ],
     "type": "landmark",
     "data": {
-      "chatLink": "[&BFYLAAA=]",
+      "chat_link": "[&BFYLAAA=]",
       "tooltip": "Bokoss Prison Ruins"
     }
   }

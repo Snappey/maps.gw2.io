@@ -6,7 +6,7 @@
      tabindex="0">
 </div>
 
-<div [hidden]="showMatches" style="position: absolute; z-index: 999; left: 10px; top: 50px">
+<div [hidden]="showMatches" class="w-30rem" style="position: absolute; z-index: 999; left: 10px; top: 50px">
   <ng-container *ngIf="activeMatch$ | async as activeMatch">
     <ng-container *ngIf="activeMatch">
       <app-score-overview [loading]="false" [small]="smallScreen" [match]="activeMatch"></app-score-overview>

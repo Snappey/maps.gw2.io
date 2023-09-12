@@ -116,18 +116,18 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
 
   constructor(
     private wvwService: WvwService,
-    private toastr: ToastrService,
+    toastr: ToastrService,
+
     private readonly store: Store<AppState>,
-    private layerService: LayerService,
+    layerService: LayerService,
     route: ActivatedRoute,
     ngZone: NgZone,
     mqttService: MqttService,
     labelService: LabelService,
     liveMarkerService: LiveMarkersService,
-    assetService: AssetService,
     router: Router
   ) {
-    super(ngZone, mqttService, labelService, liveMarkerService, assetService, route, router)
+    super(ngZone, mqttService, labelService, liveMarkerService, toastr, layerService, route, router)
 
     fromEvent(window, 'resize')
       .pipe(
@@ -165,7 +165,7 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
           this.store.dispatch(mistsActions.setActiveMatch({ matchId: id })) :
           this.store.dispatch(mistsActions.setActiveWorld({ worldId: id }))
       } else {
-        this.toastr.warning("Failed to find your home world, check your settings.", "Missing Home World", { timeOut: 10000 });
+        this.toastr.warning("Failed to find your home world, check your settings.", "Missing Home World", { timeOut: 10000, toastClass: "custom-toastr", positionClass: "toast-top-right" });
         this.showMatches = true;
       }
     })
@@ -224,16 +224,16 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe$)
     ).subscribe(objectiveSectorLayer => this.updateLayer(this.OBJECTIVE_SECTOR_LAYER, objectiveSectorLayer))
 
-    // interval(20000)
-    //   .pipe(
-    //     switchMap(_ => this.store.select(state => state.mists.activeMatchId)),
-    //     map(activeMatchId => {
-    //       if (activeMatchId) {
-    //         this.store.dispatch(mistsActions.updateMatch({ matchId: activeMatchId }))
-    //       }
-    //     }),
-    //     takeUntil(this.unsubscribe$)
-    //   ).subscribe(_ => _)
+    interval(20000)
+      .pipe(
+        switchMap(_ => this.store.select(state => state.mists.activeMatchId)),
+        map(activeMatchId => {
+          if (activeMatchId) {
+            this.store.dispatch(mistsActions.updateMatch({ matchId: activeMatchId }))
+          }
+        }),
+        takeUntil(this.unsubscribe$)
+      ).subscribe(_ => _)
 
 
     this.layerService.getWaypointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(

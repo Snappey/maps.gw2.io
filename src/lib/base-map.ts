@@ -6,13 +6,15 @@ import {
   PointTuple,
   Polyline, svg,
 } from 'leaflet';
-import {combineLatestWith, filter, interval, map, Subscription, take, takeUntil} from "rxjs";
+import {combineLatestWith, filter, interval, map, Subscription, switchMap, take, takeUntil, tap} from "rxjs";
 import {MqttConnectionState, MqttService} from "ngx-mqtt";
 import {LabelService} from "../services/label.service";
 import {LiveMarkersService} from "../services/live-markers.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgZone} from "@angular/core";
 import {AssetService, MarkerLabel} from "../services/asset.service";
+import {LayerService} from "../services/layer.service";
+import {ToastrService} from "ngx-toastr";
 
 export interface LayerOptions {
   layer: Layer;
@@ -52,7 +54,8 @@ export class BaseMap {
     private mqttService: MqttService,
     private labelService: LabelService,
     private liveMarkersService: LiveMarkersService,
-    protected assetService: AssetService,
+    protected toastr: ToastrService,
+    protected layerService: LayerService,
     protected route: ActivatedRoute,
     protected router: Router) {
   }
@@ -66,24 +69,34 @@ export class BaseMap {
 
     // LatLng Url
     this.router.routerState.root.fragment.pipe(
-      filter(fragment => !!fragment),
+      combineLatestWith(this.route.params),
+      filter(([fragment, params]) => !!fragment && !("chatLink" in params)),
       take(1),
-      map(fragment => fragment!.split(",").map(f => parseInt(f))),
+      map(([fragment, _]) => fragment!.split(",").map(f => parseInt(f))),
       map(([lat, lng, zoom]): [LatLng, number] => [new LatLng(lat, lng), zoom])
     ).subscribe(([latLng, zoom]) => this.Map.setView(latLng, zoom));
 
     // Direct link to Markers
     this.route.params.pipe(
-      map(params=> params["chatLink"] as string),
-      combineLatestWith(this.assetService.fetchPointOfInterestLabels(this.CONTINENT_ID, 1)),
-      map(([chatLink, poiLabels]) =>
-        poiLabels.filter(l => !!l.data && !!l.data.chat_link).filter(l => l.data.chat_link.includes(chatLink)).pop()
-      ),
-      take(1)
-    ).subscribe((label: MarkerLabel | undefined) => {
-      if (label && this.Map) {
-        this.Map.setView(this.Map.unproject(label.coordinates, this.Map.getMaxZoom()), this.Map.getMaxZoom())
+      map(params=> params["chatLink"]),
+      take(1),
+      filter(chatLink => !!chatLink),
+      switchMap(chatLink => this.layerService.getMarkerByChatLink(this.CONTINENT_ID, 1, chatLink)),
+      tap(console.log)
+    ).subscribe((marker: MarkerLabel | undefined) => {
+      if (!marker) {
+        this.toastr.warning("Failed to find marker from url", "", {
+          toastClass: "custom-toastr",
+          positionClass: "toast-top-right"
+        });
+        return;
       }
+
+      this.layerService.createImageOverlay(leaflet, marker.coordinates, "/assets/small_drawn_circle.png")
+        .addTo(leaflet).bringToFront();
+
+      console.log(marker);
+      this.panTo(marker.coordinates, 7);
     })
 
     this.Map.on("zoomend", () => this.ngZone.run(() => this.router.navigate([], { replaceUrl: true, fragment: [this.Map.getCenter().lat, this.Map.getCenter().lng, this.Map.getZoom()].join(",") })));
@@ -99,6 +112,7 @@ export class BaseMap {
 
   public panTo(coords: PointTuple, zoom: number = 4) {
     const latLng = this.Map.unproject(coords, this.Map.getMaxZoom());
+    console.trace();
     this.Map.setView(latLng, zoom);
   }
 

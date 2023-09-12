@@ -1,10 +1,10 @@
 import {Component, isDevMode, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {
-  debounceTime, first,
+  debounceTime, filter, first,
   fromEvent,
   map, Observable,
-  Subject, take, takeUntil, tap
+  Subject, switchMap, take, takeUntil, tap
 } from 'rxjs';
 import {
   CRS,
@@ -33,7 +33,7 @@ import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../state/appState";
 import {ToolbarButton} from "../toolbar/toolbar.component";
-import {AssetService} from "../../services/asset.service";
+import {AssetService, MarkerLabel} from "../../services/asset.service";
 import {environment} from "../../environments/environment";
 
 @Component({
@@ -96,23 +96,21 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
 
   constructor(
     private dialogService: DialogService,
-    private toastr: ToastrService,
+    toastr: ToastrService,
 
     private editorService: EditorService,
     private clipboardService: ClipboardService,
     private eventTimerService: EventTimerService,
-    private searchService: SearchService,
     private store: Store<AppState>,
-    private layerService: LayerService,
+    layerService: LayerService,
     ngZone: NgZone,
     mqttService: MqttService,
     labelService: LabelService,
     liveMarkerService: LiveMarkersService,
     router: Router,
     route: ActivatedRoute,
-    assetService: AssetService,
   ) {
-    super(ngZone, mqttService, labelService, liveMarkerService, assetService, route, router)
+    super(ngZone, mqttService, labelService, liveMarkerService, toastr, layerService, route, router)
 
     // Setup Searchbox debouncing
     this.searchUnfocused.pipe(
@@ -377,16 +375,6 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       });
     }
 
-    this.route.params.pipe(
-      map(params=> params["chat_link"]),
-      takeUntil(this.unsubscribe$)
-    ).subscribe((chatLink: string) => {
-      if (chatLink) {
-
-        // TODO: Sort out search state, so we can link directly to places in the world without a weird race condition waiting for data to be filled
-      }
-    })
-
     super.onMapInitialised(leaflet);
   }
 
@@ -403,8 +391,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
 
   panToEvent(event: Event) {
     if (this.Map) {
-      const latLng = this.Map.unproject(event.coordinates, this.Map.getMaxZoom());
-      this.Map.setView(latLng, 5);
+      this.panTo(event.coordinates, 5)
 
       this.clipboardService.copy(event.chatLink);
       this.toastr.info("Copied closest waypoint to clipboard!", event.name, {
@@ -414,10 +401,6 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
 
       this.showEvents = false;
     }
-  }
-
-  panToSearchResult($event: SearchEntry) {
-    this.panTo($event.coords, 7);
   }
 
   closeSearchResults() {
