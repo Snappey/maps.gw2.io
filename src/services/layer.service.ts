@@ -78,7 +78,7 @@ export class LayerService {
         return "assets/ibs_mastery.png";
       case "Cantha":
         return "assets/eod_mastery.png";
-      case "Skies of Tyria":
+      case "Horn of Maguuma":
         return "assets/soto_mastery.png"
       default:
         console.warn(type, "mastery is not implemented");
@@ -98,8 +98,8 @@ export class LayerService {
         return "IBS";
       case "Cantha":
         return "EoD";
-      case "Skies of Tyria":
-        return "SoTO";
+      case "Horn of Maguuma":
+        return "SOTO";
       default:
         return "Unknown";
     }
