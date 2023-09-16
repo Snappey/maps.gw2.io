@@ -13,7 +13,7 @@
              [ngClass]="{'border-green-500': isFollowing$ | async}"
              *ngFor="let marker of activeMarkers$ | async"
              (click)="clickedMarker$.next(marker)">
-          <img alt="player profession icon" [ngSrc]="marker.getProfessionIcon()" width="24" height="24">
+          <img alt="player profession icon" [src]="marker.getProfessionIcon()" width="24" height="24">
           <span class="px-1 font-light" [ngStyle]="{'color': marker.isSelf ? '#FFCC77' : 'white'}">{{marker.accountName}}</span>
           <img alt="player active mount" class="ml-auto" *ngIf="marker.isMounted()" [ngSrc]="marker.getMountIcon()" width="24" height="24">
         </div>
