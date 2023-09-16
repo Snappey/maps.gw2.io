@@ -1,6 +1,10 @@
-<ng-container  *ngFor="let marker of activeMarkers$ | async">
-  <div class="green-background p-1 my-1 border-1 border-white-alpha-80 clickable text-center w-10rem"
-       (click)="marker.panTo()">
-    <span>{{marker.accountName}}</span>
-  </div>
-</ng-container>
+<div class="flex flex-auto flex-column overflow-y-auto" style="max-height: 80vh;">
+    <div class="flex flex-row align-items-center justify-content-evenly tooltip p-1 pr-2 my-1 clickable text-center w-auto"
+         [ngStyle]="{'background-color': marker.getProfessionColour()}"
+         *ngFor="let marker of activeMarkers$ | async"
+         (click)="marker.panTo()">
+      <img alt="player profession icon" [src]="marker.getProfessionIcon()" width="24" height="24">
+      <span class="px-1 font-light" [ngStyle]="{'color': marker.isSelf ? '#FFCC77' : 'white'}">{{marker.accountName}}</span>
+      <img alt="player active mount" *ngIf="marker.isMounted()" [ngSrc]="marker.getMountIcon()" width="24" height="24">
+    </div>
+</div>

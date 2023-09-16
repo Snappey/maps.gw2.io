@@ -105,6 +105,32 @@ export interface CharacterDeleteUpdate {
   AccountName: string;
 }
 
+export enum Mount {
+  None,
+  Jackal,
+  Griffon,
+  Springer,
+  Skimmer,
+  Raptor,
+  RollerBeetle,
+  Warclaw,
+  Skyscale,
+  Skiff,
+  SiegeTurtle
+}
+
+export enum Profession {
+  Guardian = 1,
+  Warrior,
+  Engineer,
+  Ranger,
+  Thief,
+  Elementalist,
+  Mesmer,
+  Necromancer,
+  Revenant
+}
+
 export interface CharacterStateUpdate {
   Type: MqttPayloadType;
   AccountName: string;
@@ -115,8 +141,8 @@ export interface CharacterStateUpdate {
   ServerConnectionInfo: string;
   BuildId: number;
   IsCommander: boolean;
-  Mount: number;
-  Profession: number;
+  Mount: Mount;
+  Profession: Profession;
   Specialisation: number;
 }
 
@@ -137,17 +163,4 @@ export interface Vector3 {
   X: number;
   Y: number;
   Z: number;
-}
-
-const mountIcons: {[i: number]: string} = {
-  1: "/assets/jackal_icon.png",
-  2: "/assets/griffon_icon.png",
-  3: "/assets/springer_icon.png",
-  4: "/assets/skimmer_icon.png",
-  5: "/assets/raptor_icon.png",
-  6: "/assets/beetle_icon.png",
-  7: "/assets/warclaw_icon.png",
-  8: "/assets/skyscale_icon.png",
-  9: "/assets/skiff_icon.png",
-  10: "/assets/turtle_icon.png"
 }
