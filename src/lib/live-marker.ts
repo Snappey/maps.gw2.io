@@ -10,7 +10,7 @@ import {
   Vector2,
   Vector3
 } from "../state/live-markers/live-markers.feature";
-import {delay, filter, map, of, Subject, switchMap, take, tap, timer} from "rxjs";
+import {delay, filter, map, Observable, of, Subject, Subscription, switchMap, take, takeUntil, tap, timer} from "rxjs";
 
 export class LiveMarker {
   private marker: Marker;
@@ -196,9 +196,17 @@ export class LiveMarker {
     return Date.now() - this.lastModified > this.expiryMs;
   }
 
-  panTo() {
-    this.leaflet.setZoom(this.leaflet.getMaxZoom())
+  panTo(setZoom: boolean = true) {
+    if (setZoom)
+      this.leaflet.setZoom(this.leaflet.getMaxZoom())
+
     this.leaflet.panTo(this.marker.getLatLng())
+  }
+
+  follow(setZoom: boolean = true): Observable<number> {
+    return timer(0, 250).pipe(
+      tap(_ => this.panTo(setZoom))
+    );
   }
 
   getProfessionIcon(): string {

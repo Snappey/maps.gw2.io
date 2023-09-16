@@ -1,10 +1,35 @@
-<div class="flex flex-auto flex-column overflow-y-auto" style="max-height: 80vh;">
-    <div class="flex flex-row align-items-center justify-content-evenly tooltip p-1 pr-2 my-1 clickable text-center w-auto"
-         [ngStyle]="{'background-color': marker.getProfessionColour()}"
-         *ngFor="let marker of activeMarkers$ | async"
-         (click)="marker.panTo()">
-      <img alt="player profession icon" [src]="marker.getProfessionIcon()" width="24" height="24">
-      <span class="px-1 font-light" [ngStyle]="{'color': marker.isSelf ? '#FFCC77' : 'white'}">{{marker.accountName}}</span>
-      <img alt="player active mount" *ngIf="marker.isMounted()" [ngSrc]="marker.getMountIcon()" width="24" height="24">
-    </div>
+<div class="flex flex-auto flex-column overflow-y-auto fadein animation-duration-300" style="max-height: 80vh;">
+  <ng-container *ngIf="isEnabled$ | async; else notEnabled">
+      <div *ngIf="channelDetails$ | async as channelDetails" class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
+        <h4 class="my-1 text-center">{{channelDetails[0]}}</h4>
+      </div>
+      <ng-container *ngIf="liveMapState$ | async | titlecase; else notConnected">
+        <div *ngIf="!(activeMarkers$ | async)?.length" class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
+          <div class="my-1 text-center text-white">There is no one here.. :(</div>
+        </div>
+
+        <div class="flex flex-row align-items-center justify-content-start tooltip p-1 pr-2 my-1 clickable text-center w-auto border-1 hover:border-green-200"
+             [ngStyle]="{'background-color': marker.getProfessionColour()}"
+             [ngClass]="{'border-green-500': isFollowing$ | async}"
+             *ngFor="let marker of activeMarkers$ | async"
+             (click)="clickedMarker$.next(marker)">
+          <img alt="player profession icon" [ngSrc]="marker.getProfessionIcon()" width="24" height="24">
+          <span class="px-1 font-light" [ngStyle]="{'color': marker.isSelf ? '#FFCC77' : 'white'}">{{marker.accountName}}</span>
+          <img alt="player active mount" class="ml-auto" *ngIf="marker.isMounted()" [ngSrc]="marker.getMountIcon()" width="24" height="24">
+        </div>
+      </ng-container>
+  </ng-container>
 </div>
+
+
+<ng-template #notEnabled>
+  <div class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
+    <div class="my-1 text-center text-white">Live Markers are not enabled.. (check your settings)</div>
+  </div>
+</ng-template>
+
+<ng-template #notConnected>
+  <div class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
+    <div class="my-1 text-center text-white">Disconnected from Live Markers.. (will reconnect automatically)</div>
+  </div>
+</ng-template>

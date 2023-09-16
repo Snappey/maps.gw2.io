@@ -34,21 +34,6 @@ export class BaseMap {
   Map!: Map;
   mapLayers: {[key: string]: LayerOptions} = {};
 
-  liveMapState$ = this.liveMarkersService.stateChange.pipe(
-    map(s => {
-      switch (s) {
-        case MqttConnectionState.CONNECTED:
-          return "connected";
-        case MqttConnectionState.CONNECTING:
-          return "connecting";
-        case MqttConnectionState.CLOSED:
-          return "disconnected";
-        default:
-          return "unknown";
-      }
-    })
-  )
-
   constructor(
     private ngZone: NgZone,
     private mqttService: MqttService,

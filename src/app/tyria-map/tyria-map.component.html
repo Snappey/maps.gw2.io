@@ -26,7 +26,11 @@
 </ng-container>
 
 <ng-container *ngIf="showLayers">
-  <app-layer-options [layers]="mapLayers" (layerUpdated)="layerUpdated($event)" style="position: absolute; z-index: 999; min-width: 15vw; left: 1.5vw; top: 5vw;"></app-layer-options>
+  <app-layer-options [layers]="mapLayers" (layerUpdated)="layerUpdated($event)" style="position: absolute; z-index: 999; min-width: 15vw; left: 1.5vw; top: 5vh;"></app-layer-options>
+</ng-container>
+
+<ng-container *ngIf="showLiveMarkers">
+  <app-live-marker-sidebar style="position: absolute; left: 15px; top: 5vh; z-index: 999" />
 </ng-container>
 
 <ng-container *ngIf="!smallScreen">
@@ -41,8 +45,5 @@
        pTooltip="Heart of Thorns" tooltipPosition="left" tooltipStyleClass="tooltip"></div>
   <div class="clickable compass-button-corner soto" style="position: absolute; z-index: 1000; bottom: 163px; right: 152px" (click)="this.panTo([26407,21800])"
        pTooltip="Secrets of the Obscure" tooltipPosition="left" tooltipStyleClass="tooltip"></div>
-  <div class="clickable compass-button-player" style="position: absolute; z-index: 1000; bottom: 114px; right: 101px;"
-       [pTooltip]="(liveMapState$ | async | titlecase) || 'failed to get connection info'" tooltipPosition="left" tooltipStyleClass="tooltip"></div>
+  <div class="clickable compass-button-player" style="position: absolute; z-index: 1000; bottom: 114px; right: 101px;"></div>
 </ng-container>
-
-<app-live-marker-sidebar style="position: absolute; left: 15px; top: 5%; z-index: 999" />

@@ -50,6 +50,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   showEvents: boolean = false;
   showSettings: boolean = false;
   showAbout: boolean = false;
+  showLiveMarkers: boolean = false;
 
   private searchUnfocused: Subject<any> = new Subject<any>();
   showSearchResults: boolean = false;
@@ -77,11 +78,18 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       Keybindings: ["Digit1"]
     },
     {
+      Tooltip: "Live Markers",
+      Icon: "/assets/friends_icon.png",
+      IconHover: "/assets/friends_hovered_icon.png",
+      OnClick: () => this.showLiveMarkers = !this.showLiveMarkers,
+      Keybindings: ["Digit2"]
+    },
+    {
       Tooltip: "World Bosses",
       Icon: "/assets/event_icon.png",
       IconHover: "/assets/event_hovered_icon.png",
       OnClick: () => this.showEvents = !this.showEvents,
-      Keybindings: ["Digit2"]
+      Keybindings: ["Digit3"]
     }
   ]
 
