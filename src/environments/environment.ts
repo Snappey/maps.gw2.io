@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   liveMarkers: {
-    authUrl: "https://post.gw2.io/auth"
+    brokerUrl: "leyline.gw2.io",
+    authUrl: "https://auth-leyline.gw2.io/auth"
   }
 };
 

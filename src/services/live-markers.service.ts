@@ -7,8 +7,8 @@ import {
   catchError, combineLatestWith,
   filter, interval,
   map, merge,
-  Observable, skip, Subject,
-  switchMap, tap,
+  Observable, share, skip, Subject,
+  switchMap, takeUntil, tap,
   withLatestFrom
 } from "rxjs";
 import {HttpClient} from "@angular/common/http";
@@ -20,7 +20,7 @@ import {
   CharacterDeleteUpdate,
   CharacterPositionUpdate,
   selectUserTopic,
-  selectUserWithAuthToken, CharacterStateUpdate, selectLiveMapEnabled
+  selectUserWithAuthToken, CharacterStateUpdate, selectLiveMapEnabled, MqttPayloadType
 } from "../state/live-markers/live-markers.feature";
 import {LiveMarker} from "../lib/live-marker";
 import {selectUserAccountName} from "../state/user/user.feature";
@@ -48,10 +48,10 @@ export class LiveMarkersService {
 
   stateChange: Observable<MqttConnectionState> = this.mqttService.state;
   private mqttOptions: IMqttServiceOptions = {
-    hostname: 'post.gw2.io',
+    hostname: environment.liveMarkers.brokerUrl,
     protocol: "wss",
-    port: 8084,
-    path: '/ws'
+    port: 443,
+    path: '/mqtt'
   };
 
   private activeMapLayer: Subject<[Map, FeatureGroup]> = new Subject<[Map, FeatureGroup]>();
@@ -96,32 +96,41 @@ export class LiveMarkersService {
     // Update Player Data Store from Broker
     this.onConnected$.pipe(
       switchMap(_ => this.subscribeToChannel()),
-      combineLatestWith(this.activeMapLayer$, this.store.select(selectUserAccountName)),
+      combineLatestWith(this.activeMapLayer$.pipe(
+        tap(() => this.clearMarkers()), // Clear markers when switching maps
+        share()
+      ), this.store.select(selectUserAccountName)),
     ).subscribe(([message, [map, layer], userAccount]) => {
-      const data = JSON.parse(message.payload.toString()) as { Type: string };
+      const data = JSON.parse(message.payload.toString()) as { Type: MqttPayloadType };
       const accountName = message.topic.split("/").pop()
-      if (!accountName) {
-        console.warn("failed to parse incoming message, missing account name: " + message.topic);
-        return;
-      }
+      if (!accountName)
+        return console.warn("failed to parse incoming message, missing account name: " + message.topic);
+
+      const markerExists = accountName in this.markers;
+      if (data.Type !== "UpsertCharacterMovement" && !markerExists)
+        return; // Ignore messages until first movement
 
       switch (data.Type) {
         case "UpsertCharacterMovement":
-          const msg = { ...data as CharacterPositionUpdate, AccountName: accountName };
-          if (accountName in this.markers) {
-            if (map.getBounds().contains(map.unproject(new Point(msg.MapPosition.X, msg.MapPosition.Y), map.getMaxZoom()))) {
-              return this.markers[accountName].updatePosition(msg)
+          const msg: CharacterPositionUpdate = { ...data as CharacterPositionUpdate, AccountName: accountName };
+          if (!markerExists) { // Create New Marker
+            this.markers[accountName] = new LiveMarker(
+              map,
+              layer,
+              this.store,
+              this.labelService,
+              msg,
+              accountName === userAccount
+            );
+
+            return this.updateActiveMarkers();
+          } else { // Update Marker Position when in view
+            const markerLatLng = map.unproject(new Point(msg.MapPosition.X, msg.MapPosition.Y), map.getMaxZoom());
+            if (map.getBounds().contains(markerLatLng)) {
+              return this.markers[accountName].updatePosition(msg);
             }
             return;
           }
-          this.markers[accountName] = new LiveMarker(
-            map,
-            layer,
-            this.store,
-            this.labelService,
-            msg,
-            accountName === userAccount)
-          return this.updateActiveMarkers();
         case "UpdateCharacterState":
           this.markers[accountName].updateState({ ...data as CharacterStateUpdate, AccountName: accountName })
           return this.updateActiveMarkers();
@@ -130,7 +139,7 @@ export class LiveMarkersService {
           delete this.markers[accountName];
           return this.updateActiveMarkers();
         case "UpdateCharacterKeepAlive":
-          return this.markers[accountName].updateLastUpdate()
+          return this.markers[accountName].refreshLastModified()
         default:
           console.warn("received unimplemented packet type from " + accountName + ": " + data.Type);
       }
@@ -138,7 +147,8 @@ export class LiveMarkersService {
 
     interval(30000).subscribe(_ => {
       for (let markersKey in this.markers) {
-        if (this.markers[markersKey].checkExpiry()) {
+        if (this.markers[markersKey].shouldExpire()) {
+          this.markers[markersKey].remove()
           this.updateActiveMarkers();
         }
       }
@@ -168,5 +178,10 @@ export class LiveMarkersService {
     this.activeMarkers.next(
       Object.values(this.markers)
     );
+  }
+
+  clearMarkers() {
+    Object.values(this.markers).forEach(m => m.remove());
+    this.markers = {};
   }
 }

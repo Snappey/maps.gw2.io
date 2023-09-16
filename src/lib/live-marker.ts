@@ -41,7 +41,7 @@ export class LiveMarker {
   private readonly forwardVector: Vector3 = { X: 1, Y: 0, Z: 0 }
   readonly accountName: string;
   readonly isSelf: boolean;
-  private lastUpdate: number;
+  private lastModified: number;
   private readonly expiryMs: number = 40_000;
 
   constructor(private leaflet: Map, private layer: FeatureGroup, private store: Store<AppState>, private labelService: LabelService, data: CharacterPositionUpdate, isSelf: boolean) {
@@ -54,7 +54,7 @@ export class LiveMarker {
       data.CharacterName,
       []
     );
-    this.lastUpdate = Date.now()
+    this.lastModified = Date.now()
   }
 
   createMarker(coords: [number, number], rotation: number, characterName: string, icons: CanvasIcon[]): Marker {
@@ -79,7 +79,7 @@ export class LiveMarker {
     this.marker.remove();
     this.marker = newMarker;
 
-    this.lastUpdate = Date.now();
+    this.lastModified = Date.now();
   }
 
   updatePosition(data: CharacterPositionUpdate) {
@@ -88,7 +88,7 @@ export class LiveMarker {
     this.marker.setLatLng(
       this.leaflet.unproject([data.MapPosition.X, data.MapPosition.Y], this.leaflet.getMaxZoom()));
 
-    this.lastUpdate = Date.now();
+    this.lastModified = Date.now();
     //this.updateMarkerRotation.next(this.degreesBetweenVectors(data.CharacterForward, this.forwardVector))
     //this.updateMarkerPosition.next(data.MapPosition);
   }
@@ -114,16 +114,12 @@ export class LiveMarker {
     this.updateMarkerRotation$.unsubscribe();
   }
 
-  updateLastUpdate() {
-    this.lastUpdate = Date.now();
+  refreshLastModified() {
+    this.lastModified = Date.now();
   }
 
-  checkExpiry(): boolean {
-    if (Date.now() - this.lastUpdate > this.expiryMs) {
-      this.remove();
-      return true;
-    }
-    return false;
+  shouldExpire(): boolean {
+    return Date.now() - this.lastModified > this.expiryMs;
   }
 
   panTo() {

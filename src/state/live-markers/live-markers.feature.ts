@@ -87,8 +87,10 @@ export const {
 
 export interface LivePlayerData extends CharacterPositionUpdate, CharacterStateUpdate, CharacterMarkerInfo {}
 
+export type MqttPayloadType = "UpsertCharacterMovement" | "UpdateCharacterState" | "DeleteCharacterData" | "UpdateCharacterKeepAlive";
+
 export interface CharacterPositionUpdate {
-  Type: string;
+  Type: MqttPayloadType;
   CharacterName: string;
   AccountName: string;
   ContinentId: number;
@@ -98,13 +100,13 @@ export interface CharacterPositionUpdate {
 }
 
 export interface CharacterDeleteUpdate {
-  Type: string;
+  Type: MqttPayloadType;
   CharacterName: string;
   AccountName: string;
 }
 
 export interface CharacterStateUpdate {
-  Type: string;
+  Type: MqttPayloadType;
   AccountName: string;
   CharacterName: string;
   ContinentId: number;
