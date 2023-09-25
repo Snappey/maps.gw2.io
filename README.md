@@ -30,9 +30,8 @@ Hosted at [maps.gw2.io](https://maps.gw2.io/), with two major maps implemented f
 
 ![WvW Overview](/images/wvw_overview.jpg)
 
-https://github.com/Snappey/maps.gw2.io/assets/4106212/9e700b2b-a9e6-4d46-952a-d69e04ceabf6
+https://github.com/Snappey/maps.gw2.io/assets/4106212/068d7b4d-78cf-4098-8b98-7c1b69c5973e
 
-## Sources
 Tiles are provided by [ThatShaman](https://twitter.com/that_shaman) and [ArenaNet](https://www.arena.net/en) and hosted by myself for Tyria.
 
 The [Official Guild Wars 2 API](https://wiki.guildwars2.com/wiki/API:Main) and [Wiki](https://wiki.guildwars2.com/wiki/Main_Page) is used for label and marker data. 
