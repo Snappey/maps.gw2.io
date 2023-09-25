@@ -23,7 +23,6 @@ import {DialogService} from "primeng/dynamicdialog";
 import {EditorModalComponent} from "./editor-modal/editor-modal.component";
 import {ClipboardService} from "ngx-clipboard";
 import {EventMap, Event, EventTimerService} from "../../services/event-timer.service";
-import {SearchEntry, SearchService} from "../../services/search.service";
 import {BaseMap} from "../../lib/base-map";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MqttService} from "ngx-mqtt";

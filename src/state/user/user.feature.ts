@@ -69,7 +69,7 @@ export const userFeature = createFeature({
         guild_details: guilds
       }
     }),
-    on(userActions.addWvwMatchOverview, (state, props) => {
+    on(userActions.addWvWMatchOverview, (state, props) => {
       return {
         ...state,
         match_details: props.matchDetails

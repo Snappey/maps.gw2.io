@@ -38,8 +38,6 @@
               "./node_modules/leaflet-contextmenu/dist/leaflet.contextmenu.css",
               "./node_modules/ngx-toastr/toastr.css",
               "./node_modules/cookieconsent/build/cookieconsent.min.css",
-              "./node_modules/instantsearch.css/themes/reset.css",
-              "./node_modules/instantsearch.css/themes/satellite.css"
             ],
             "scripts": [
               "./node_modules/cookieconsent/build/cookieconsent.min.js"

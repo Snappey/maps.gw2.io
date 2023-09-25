@@ -16,7 +16,6 @@ import {
 import {ClipboardService} from "ngx-clipboard";
 import {ToastrService} from "ngx-toastr";
 import {CanvasIcon, LabelService} from "./label.service";
-import {SearchService} from "./search.service";
 import {FullMatchObjective, WvwService, Match, Objective} from "./wvw.service";
 import {Guild, GuildService} from "./guild.service";
 import moment from "moment";

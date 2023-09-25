@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Event, EventMap} from "../../../services/event-timer.service";
-import * as events from "events";
 
 @Component({
   selector: 'app-event-grid',
@@ -33,6 +32,4 @@ export class EventGridComponent {
   friendlyXpacName(key: string): string {
     return this.friendlyXpacNames[key] ?? "Unknown";
   }
-
-  protected readonly events = events;
 }

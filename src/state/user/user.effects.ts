@@ -31,7 +31,7 @@ export class UserEffects {
   loadMatch$ = createEffect(() => this.actions$.pipe(
     ofType(userActions.setUserData),
     switchMap(s => this.wvwService.getMatchOverviewByWorldId(s.accountInfo.world)),
-    map(matchDetails => userActions.addWvwMatchOverview({ matchDetails }))
+    map(matchDetails => userActions.addWvWMatchOverview({ matchDetails }))
   ))
 
   constructor(private actions$: Actions, private store: Store<AppState>, private accountService: AccountService, private guildService: GuildService, private wvwService: WvwService) {}

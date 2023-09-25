@@ -25,7 +25,6 @@ import {OverlayPanelModule} from "primeng/overlaypanel";
 import {PanelModule} from "primeng/panel";
 import {DividerModule} from "primeng/divider";
 import {StyleClassModule} from "primeng/styleclass";
-import {SearchBarComponent} from './tyria-map/search-bar/search-bar.component';
 import {MistsMapComponent} from './mists-map/mists-map.component';
 import {ArraySortPipe} from "../pipes/orderBy.pipe";
 import {SpinnerModule} from "primeng/spinner";
@@ -72,7 +71,7 @@ import { LayerOptionsComponent } from './layer-options/layer-options.component';
 import {InputSwitchModule} from "primeng/inputswitch";
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-  connectOnCreate: false
+  connectOnCreate: false,
 };
 
 @NgModule({
@@ -81,7 +80,6 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     EditorModalComponent,
     EventPanelComponent,
     EventGridComponent,
-    SearchBarComponent,
     MistsMapComponent,
     ArraySortPipe,
     ObjectiveTooltipComponent,

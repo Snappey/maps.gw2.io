@@ -1,4 +1,4 @@
-import {FeatureGroup, Map, Marker, Point, PointTuple} from "leaflet";
+import {FeatureGroup, Map, Marker, Point} from "leaflet";
 import {Store} from "@ngrx/store";
 import {AppState} from "../state/appState";
 import {CanvasIcon, LabelService} from "../services/label.service";
@@ -10,7 +10,7 @@ import {
   Vector2,
   Vector3
 } from "../state/live-markers/live-markers.feature";
-import {delay, filter, map, Observable, of, Subject, Subscription, switchMap, take, takeUntil, tap, timer} from "rxjs";
+import {delay, map, Observable, of, Subject, switchMap, take, tap, timer} from "rxjs";
 
 export class LiveMarker {
   private marker: Marker;
@@ -20,9 +20,9 @@ export class LiveMarker {
   private lastModified: number;
   private readonly expiryMs: number = 40_000;
 
-  private profession: Profession = 0;
+  private profession: Profession = Profession.Unknown;
   private specialisation: number = 0; // TODO: Implement Specialisations
-  private mount: Mount = 0;
+  private mount: Mount = Mount.None;
 
   constructor(private leaflet: Map, private layer: FeatureGroup, private store: Store<AppState>, private labelService: LabelService, data: CharacterPositionUpdate, isSelf: boolean) {
     this.accountName = data.AccountName;

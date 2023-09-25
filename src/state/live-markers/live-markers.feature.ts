@@ -120,7 +120,8 @@ export enum Mount {
 }
 
 export enum Profession {
-  Guardian = 1,
+  Unknown,
+  Guardian,
   Warrior,
   Engineer,
   Ranger,
