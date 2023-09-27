@@ -35,18 +35,7 @@ export class LiveMarkerSidebarComponent implements OnDestroy {
   ).subscribe();
 
   liveMapState$ = this.liveMarkerService.stateChange.pipe(
-    map(s => {
-      switch (s) {
-        case MqttConnectionState.CONNECTED:
-          return "connected";
-        case MqttConnectionState.CONNECTING:
-          return "connecting";
-        case MqttConnectionState.CLOSED:
-          return "disconnected";
-        default:
-          return "unknown";
-      }
-    })
+    map(s => this.liveMarkerService.toFriendlyState(s))
   )
 
   isEnabled$ = this.store.select(s => s.settings.liveMapEnabled);

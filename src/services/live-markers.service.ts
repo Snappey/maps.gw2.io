@@ -91,7 +91,7 @@ export class LiveMarkersService {
     // Notify connections
     this.mqttService.state.pipe(
       skip(1),
-    ).subscribe(state => this.toastr.info(MqttConnectionState[state].toString(), "Live Markers", {
+    ).subscribe(state => this.toastr.info(this.toFriendlyState(state), "Live Markers", {
       toastClass: "custom-toastr",
       positionClass: "toast-bottom-left"
     }));
@@ -187,5 +187,18 @@ export class LiveMarkersService {
   clearMarkers() {
     Object.values(this.markers).forEach(m => m.remove());
     this.markers = {};
+  }
+
+  toFriendlyState(state: MqttConnectionState): string {
+    switch (state) {
+      case MqttConnectionState.CONNECTED:
+        return "Connected";
+      case MqttConnectionState.CONNECTING:
+        return "Connecting";
+      case MqttConnectionState.CLOSED:
+        return "Disconnected";
+      default:
+        return "Unknown";
+    }
   }
 }
