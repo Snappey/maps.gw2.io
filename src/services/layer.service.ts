@@ -356,6 +356,45 @@ export class LayerService {
     );
   }
 
+  getBaseCloudLayer(leaflet: Map): ImageOverlay {
+    return new ImageOverlay("assets/sky00.png",
+      new LatLngBounds(
+        leaflet.unproject([0, 0], leaflet.getMaxZoom()),
+        leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())
+      ),
+      {opacity: 1, interactive: false, zIndex: 9999}
+    );
+  }
+
+  getExtraCloudLayer(leaflet: Map): ImageOverlay {
+    return new ImageOverlay("assets/sky01.png",
+      new LatLngBounds(
+        leaflet.unproject([0, 0], leaflet.getMaxZoom()),
+        leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())
+      ),
+      {opacity: 1, interactive: false, zIndex: 9999}
+    )
+  }
+
+  getCloudLayer(leaflet: Map): FeatureGroup {
+    return new FeatureGroup<ImageOverlay>([
+      new ImageOverlay("assets/sky00.png",
+          new LatLngBounds(
+              leaflet.unproject([0, 0], leaflet.getMaxZoom()),
+              leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())
+          ),
+          {opacity: .8, interactive: false, zIndex: 9999}
+      ),
+      new ImageOverlay("assets/sky01.png",
+          new LatLngBounds(
+              leaflet.unproject([0, 0], leaflet.getMaxZoom()),
+              leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())
+          ),
+          {opacity: .8, interactive: false, zIndex: 9999}
+      ),
+    ]);
+  }
+
   getMistsObjectives(leaflet: Map): Observable<FeatureGroup> {
     return this.wvwService.getAllObjectives()
       .pipe(

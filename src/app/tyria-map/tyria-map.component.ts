@@ -340,6 +340,10 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       take(1)
     ).subscribe(layer => this.registerLayer("city_markers", {layer: layer, minZoomLevel: 7, friendlyName: "City Markers", icon: "/assets/portal_icon.png", isHidden: false}))
 
+
+    // this.registerLayer("base_clouds", { layer: this.layerService.getBaseCloudLayer(leaflet), maxZoomLevel: 5, friendlyName: "Clouds", icon: "/assets/sky00.png", isHidden: false, opacityLevels: {5: .2, 4: .6, 3: .8, 2: 1} })
+    // this.registerLayer("extra_clouds", { layer: this.layerService.getExtraCloudLayer(leaflet), maxZoomLevel: 5, friendlyName: "Clouds", icon: "/assets/sky01.png", isHidden: false, opacityLevels: {5: .2, 4: .6, 3: .8, 2: 1} })
+
     // this.layerService.getSectorLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
     //   tap(layer => console.log(layer)),
     //   take(1)
