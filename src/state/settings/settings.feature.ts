@@ -1,9 +1,5 @@
-import {createFeature, createReducer, createSelector, on} from '@ngrx/store';
-import {Guild, GuildUpgrade} from "../../services/guild.service";
+import {createFeature, createReducer, on} from '@ngrx/store';
 import {settingsAction} from "./settings.action";
-import {World} from "../../services/wvw.service";
-import {UserState} from "../user/user.feature";
-import {AppState} from "../appState";
 
 export enum ChannelType {
   Global = "Global",

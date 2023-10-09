@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {Store} from "@ngrx/store";
 import {AppState} from "../appState";
 import {settingsAction} from "../settings/settings.action";
-import {catchError, concatMap, filter, map, mergeMap, of, switchMap, tap} from "rxjs";
+import {catchError, filter, map, mergeMap, of, switchMap} from "rxjs";
 import {AccountService} from "../../services/account.service";
 import {userActions} from "./user.action";
 import {GuildService} from "../../services/guild.service";

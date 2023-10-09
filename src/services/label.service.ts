@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import {Marker, Map, PointTuple} from "leaflet";
-import * as L from 'leaflet';
+import {Injectable} from '@angular/core';
+import * as L from "leaflet";
+import {Map, Marker, PointTuple} from "leaflet";
 import "../lib/leafet-canvas-markers";
 
 export interface CanvasIcon {

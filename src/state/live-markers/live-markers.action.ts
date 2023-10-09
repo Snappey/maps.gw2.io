@@ -1,5 +1,4 @@
 import {createActionGroup, emptyProps, props} from "@ngrx/store";
-import {CharacterPositionUpdate, CharacterStateUpdate} from "./live-markers.feature";
 
 export const liveMarkersActions = createActionGroup({
   source: 'liveMarkers',

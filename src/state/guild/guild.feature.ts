@@ -1,4 +1,4 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
+import {createFeature, createReducer, on} from '@ngrx/store';
 import {Guild, GuildUpgrade} from "../../services/guild.service";
 import {guildActions} from "./guild.action";
 

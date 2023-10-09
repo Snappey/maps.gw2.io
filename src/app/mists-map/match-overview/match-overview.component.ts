@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Match, WvwService} from "../../../services/wvw.service";
-import {map, Observable, retry, take, tap} from "rxjs";
+import {Component, EventEmitter, Output} from '@angular/core';
+import {Match} from "../../../services/wvw.service";
+import {map} from "rxjs";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../../state/appState";
 

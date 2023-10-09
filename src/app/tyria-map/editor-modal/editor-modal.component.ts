@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {SelectItem} from "primeng/api";
-import {EditorService, MarkerType} from "../../../services/editor.service";
+import {Component, OnInit} from '@angular/core';
+import {MarkerType} from "../../../services/editor.service";
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {PointTuple} from "leaflet";
 

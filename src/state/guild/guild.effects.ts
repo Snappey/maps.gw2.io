@@ -1,7 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import {catchError, concatMap, exhaustMap, map, mergeMap, of, tap} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {catchError, map, mergeMap, of} from 'rxjs';
 import {GuildService} from "../../services/guild.service";
 import {guildActions} from "./guild.action";
 

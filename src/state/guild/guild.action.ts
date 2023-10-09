@@ -1,5 +1,4 @@
 import {createActionGroup, emptyProps, props} from "@ngrx/store";
-import {Match, FullMatchObjective} from "../../services/wvw.service";
 import {Guild, GuildUpgrade} from "../../services/guild.service";
 
 export const guildActions = createActionGroup({

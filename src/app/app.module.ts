@@ -1,5 +1,5 @@
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet'
 import {DialogModule} from 'primeng/dialog';
@@ -13,7 +13,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {ClipboardModule} from "ngx-clipboard";
 import {EditorModalComponent} from './tyria-map/editor-modal/editor-modal.component';
 import {DropdownModule} from "primeng/dropdown";
-import {FormsModule} from "@angular/forms";
 import {ButtonModule} from "primeng/button";
 import {SidebarModule} from "primeng/sidebar";
 import {CardModule} from "primeng/card";
@@ -41,7 +40,7 @@ import {ObjectiveDetailsComponent} from './mists-map/objective-details/objective
 import {SkeletonModule} from "primeng/skeleton";
 import {TabMenuModule} from "primeng/tabmenu";
 import {RouterTestingModule} from "@angular/router/testing";
-import {Store, StoreModule} from "@ngrx/store";
+import {StoreModule} from "@ngrx/store";
 import {mistsFeature} from "../state/mists/mists.feature";
 import {EffectsModule} from "@ngrx/effects";
 import {MistsEffects} from "../state/mists/mists.effects";
@@ -50,7 +49,7 @@ import {guildFeature} from "../state/guild/guild.feature";
 import {GuildEffects} from "../state/guild/guild.effects";
 import {RouterModule} from "@angular/router";
 import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
-import { SettingsModalComponent } from './settings-modal/settings-modal.component';
+import {SettingsModalComponent} from './settings-modal/settings-modal.component';
 import {settingsFeature} from "../state/settings/settings.feature";
 import {liveMarkersFeature} from "../state/live-markers/live-markers.feature";
 import {LiveMarkersEffects} from "../state/live-markers/live-markers.effects";
@@ -58,16 +57,16 @@ import {SettingsEffects} from "../state/settings/settings.effects";
 import {PasswordModule} from "primeng/password";
 import {userFeature} from "../state/user/user.feature";
 import {UserEffects} from "../state/user/user.effects";
-import { LetModule } from '@ngrx/component';
+import {LetModule} from '@ngrx/component';
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {NgcCookieConsentModule} from "ngx-cookieconsent";
-import { LiveMarkerSidebarComponent } from './live-marker-sidebar/live-marker-sidebar.component';
+import {LiveMarkerSidebarComponent} from './live-marker-sidebar/live-marker-sidebar.component';
 import {AboutModalComponent} from "./about-modal/about-modal.component";
 import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from "ngx-google-analytics";
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import {ToolbarComponent} from './toolbar/toolbar.component';
 import {NgOptimizedImage} from "@angular/common";
-import { LayerOptionsComponent } from './layer-options/layer-options.component';
+import {LayerOptionsComponent} from './layer-options/layer-options.component';
 import {InputSwitchModule} from "primeng/inputswitch";
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {

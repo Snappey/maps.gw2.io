@@ -1,10 +1,8 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import {FullMatchObjective, ObjectiveTiers, WvwService} from "../../../services/wvw.service";
 import {Guild, GuildService} from "../../../services/guild.service";
-import {interval, map, Observable, timer} from "rxjs";
+import {map, Observable, timer} from "rxjs";
 import moment from "moment";
-import {MenuItem} from "primeng/api";
-import {Menu} from "primeng/menu";
 
 @Component({
   selector: 'app-objective-details',

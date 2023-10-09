@@ -2,9 +2,7 @@ import {Component} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {settingsAction} from "../../state/settings/settings.action";
 import {environment} from "../../environments/environment";
-import {ToastrService} from "ngx-toastr";
 import {NgcCookieConsentService} from "ngx-cookieconsent";
-import {take} from "rxjs";
 
 @Component({
   selector: 'app-home',

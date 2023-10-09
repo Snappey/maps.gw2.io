@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FullMatchObjective, WvwService} from "../../../services/wvw.service";
-import {Guild, GuildService} from "../../../services/guild.service";
+import {GuildService} from "../../../services/guild.service";
 
 @Component({
   selector: 'app-objective-tooltip',

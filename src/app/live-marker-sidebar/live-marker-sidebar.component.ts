@@ -1,11 +1,8 @@
-import {ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {LiveMarkersService} from "../../services/live-markers.service";
 import {LiveMarker} from "../../lib/live-marker";
-import {map, of, scan, share, Subject, switchMap, takeUntil, tap} from "rxjs";
-import {MqttConnectionState} from "ngx-mqtt";
-import {LiveMarkersState} from "../../state/live-markers/live-markers.feature";
+import {map, of, scan, share, Subject, switchMap, takeUntil} from "rxjs";
 import {Store} from "@ngrx/store";
-import {SettingsState} from "../../state/settings/settings.feature";
 import {AppState} from "../../state/appState";
 
 @Component({

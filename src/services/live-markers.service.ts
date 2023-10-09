@@ -1,14 +1,19 @@
 import {Injectable} from '@angular/core';
 import {IMqttMessage, IMqttServiceOptions, MqttConnectionState, MqttService} from "ngx-mqtt";
 import {environment} from '../environments/environment';
-import {FeatureGroup, LatLngBounds, Layer, LayerGroup, Map, Point} from 'leaflet';
+import {FeatureGroup, Map, Point} from 'leaflet';
 import {
   BehaviorSubject,
-  catchError, combineLatestWith,
-  filter, interval,
-  map, merge,
-  Observable, share, skip, Subject,
-  switchMap, takeUntil, tap,
+  combineLatestWith,
+  filter,
+  interval,
+  map,
+  Observable,
+  share,
+  skip,
+  Subject,
+  switchMap,
+  tap,
   withLatestFrom
 } from "rxjs";
 import {HttpClient} from "@angular/common/http";
@@ -16,11 +21,12 @@ import {AppState} from "../state/appState";
 import {Store} from "@ngrx/store";
 import {liveMarkersActions} from "../state/live-markers/live-markers.action";
 import {
-  LivePlayerData,
-  CharacterDeleteUpdate,
   CharacterPositionUpdate,
+  CharacterStateUpdate,
+  MqttPayloadType,
+  selectLiveMapEnabled,
   selectUserTopic,
-  selectUserWithAuthToken, CharacterStateUpdate, selectLiveMapEnabled, MqttPayloadType
+  selectUserWithAuthToken
 } from "../state/live-markers/live-markers.feature";
 import {LiveMarker} from "../lib/live-marker";
 import {selectUserAccountName} from "../state/user/user.feature";

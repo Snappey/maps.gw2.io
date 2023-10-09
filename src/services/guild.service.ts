@@ -1,21 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {
-  forkJoin,
-  concatMap,
-  exhaustMap,
-  map,
-  mergeAll,
-  mergeMap,
-  Observable,
-  zip,
-  reduce,
-  switchMap,
-  tap,
-  of
-} from "rxjs";
-import {combineLatest} from "rxjs/internal/operators/combineLatest";
-
+import {Observable, of, tap} from "rxjs";
 
 export interface Layer {
   id: number;

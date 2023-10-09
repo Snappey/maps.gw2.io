@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Match} from "../../../services/wvw.service";
-import {Chart} from "chart.js";
 
 interface ChartData {
   labels: string[]

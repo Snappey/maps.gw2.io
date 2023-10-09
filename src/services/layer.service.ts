@@ -1,13 +1,19 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable, map, tap, of, iif, combineLatestWith, take} from "rxjs";
+import {combineLatestWith, iif, map, Observable, of, take, tap} from "rxjs";
 import {
-  FeatureGroup, ImageOverlay, imageOverlay,
+  FeatureGroup,
+  ImageOverlay,
+  imageOverlay,
   LatLngBounds,
-  LayerGroup, LeafletMouseEvent,
-  Map, Marker, Point,
+  LayerGroup,
+  LeafletMouseEvent,
+  Map,
+  Point,
   PointExpression,
-  PointTuple, Polygon, PolylineOptions, svg,
+  PointTuple,
+  Polygon,
+  PolylineOptions,
+  svg,
   svgOverlay,
   SVGOverlay,
   tileLayer,
@@ -16,11 +22,10 @@ import {
 import {ClipboardService} from "ngx-clipboard";
 import {ToastrService} from "ngx-toastr";
 import {CanvasIcon, LabelService} from "./label.service";
-import {FullMatchObjective, WvwService, Match, Objective} from "./wvw.service";
+import {FullMatchObjective, Match, WvwService} from "./wvw.service";
 import {Guild, GuildService} from "./guild.service";
 import moment from "moment";
 import {AssetService, MarkerLabel, MarkerType, MasteryType} from "./asset.service";
-
 
 
 @Injectable({
@@ -486,7 +491,7 @@ export class LayerService {
             .on("click", (event: any) => event.data = data)
             .addTo(layer);
 
-          this.updateObjectiveTooltip(marker, data, match.friendly_names).pipe(
+          this.updateObjectiveTooltip(data, match.friendly_names).pipe(
             take(1)
           ).subscribe(content => marker.setTooltipContent(content));
         })
@@ -505,7 +510,7 @@ export class LayerService {
     )
   }
 
-  updateObjectiveTooltip(marker: Marker, obj: FullMatchObjective, teamNames: {[team: string]: string}): Observable<string> {
+  private updateObjectiveTooltip(obj: FullMatchObjective, teamNames: {[team: string]: string}): Observable<string> {
     return iif(() => !!obj.claimed_by,
       this.guildService.getGuild(obj.claimed_by),
       of<Guild>({emblem: undefined, id: "", name: "Unknown", tag: "[]"})
@@ -522,12 +527,12 @@ export class LayerService {
         }
 
         for (let i = 0; i < upgradeLevel; i++) {
-          content += `<img style='padding-left: 1px' src='assets/upgrade_pip.png'/>`
+          content += `<img alt="Upgrade Pip" style='padding-left: 1px' src="assets/upgrade_pip.png"/>`
         }
         content += "</p>"
 
 
-        content += `<p class="m-0 pl-2 vertical-align-middle"><img src="assets/capture_icon.png" width="16" height="16" class="vertical-align-middle"> +${obj.points_capture} Capture</p>`
+        content += `<p class="m-0 pl-2 vertical-align-middle"><img alt="Capture Icon" src="assets/capture_icon.png" width="16" height="16" class="vertical-align-middle"> +${obj.points_capture} Capture</p>`
         content += "<hr>"
 
         content += "<p class='m-0'>Controlled By:</p>"

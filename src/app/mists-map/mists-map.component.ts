@@ -1,20 +1,24 @@
 import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
-import {
-  FeatureGroup,
-  latLng,
-  LatLngBounds, LayerGroup, LeafletEvent,
-  Map,
-} from 'leaflet';
-import * as L from "leaflet";
+import * as L from 'leaflet';
+import {FeatureGroup, latLng, LatLngBounds, LayerGroup, LeafletEvent, Map,} from 'leaflet';
 import {LayerService} from "../../services/layer.service";
 import {ToastrService} from "ngx-toastr";
-import {Match, FullMatchObjective, World, WvwService} from "../../services/wvw.service";
+import {FullMatchObjective, Match, World, WvwService} from "../../services/wvw.service";
 import {
   combineLatestWith,
-  debounceTime, filter, first,
-  fromEvent, interval,
+  debounceTime,
+  filter,
+  first,
+  fromEvent,
+  interval,
   map,
-  Observable, of, Subject, switchMap, take, takeUntil, tap,
+  Observable,
+  of,
+  Subject,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
 } from "rxjs";
 import {BaseMap} from "../../lib/base-map";
 import {Store} from "@ngrx/store";
@@ -27,7 +31,6 @@ import {LabelService} from "../../services/label.service";
 import {LiveMarkersService} from "../../services/live-markers.service";
 import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 import {ToolbarButton} from "../toolbar/toolbar.component";
-import {AssetService} from "../../services/asset.service";
 
 @Component({
   selector: 'mists-map',

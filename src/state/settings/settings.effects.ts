@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CookieService} from "ngx-cookie";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {mistsActions} from "../mists/mists.action";
-import {catchError, combineLatestWith, EMPTY, map, of, switchMap} from "rxjs";
+import {combineLatestWith, map} from "rxjs";
 import {settingsAction} from "./settings.action";
-import {World} from "../../services/wvw.service";
 import {SettingsState} from "./settings.feature";
 import {Store} from "@ngrx/store";
 import {AppState} from "../appState";

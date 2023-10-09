@@ -1,28 +1,14 @@
 import {Component, isDevMode, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
-import {
-  debounceTime, filter, first,
-  fromEvent,
-  map, Observable,
-  Subject, switchMap, take, takeUntil, tap
-} from 'rxjs';
-import {
-  CRS,
-  LatLng,
-  latLng,
-  LatLngBounds,
-  LeafletEvent,
-  LeafletMouseEvent,
-  Map,
-  PointTuple,
-} from 'leaflet';
+import {debounceTime, fromEvent, map, Observable, Subject, take, takeUntil, tap} from 'rxjs';
+import {CRS, LatLng, latLng, LatLngBounds, LeafletEvent, LeafletMouseEvent, Map, PointTuple,} from 'leaflet';
 import "leaflet-contextmenu"
 import {LayerService} from "../../services/layer.service";
 import {EditorService, MarkerType} from "../../services/editor.service";
 import {DialogService} from "primeng/dynamicdialog";
 import {EditorModalComponent} from "./editor-modal/editor-modal.component";
 import {ClipboardService} from "ngx-clipboard";
-import {EventMap, Event, EventTimerService} from "../../services/event-timer.service";
+import {Event, EventMap, EventTimerService} from "../../services/event-timer.service";
 import {BaseMap} from "../../lib/base-map";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MqttService} from "ngx-mqtt";
@@ -32,7 +18,6 @@ import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../state/appState";
 import {ToolbarButton} from "../toolbar/toolbar.component";
-import {AssetService, MarkerLabel} from "../../services/asset.service";
 import {environment} from "../../environments/environment";
 
 @Component({

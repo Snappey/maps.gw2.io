@@ -1,7 +1,6 @@
-import {createFeature, createReducer, createSelector, on} from '@ngrx/store';
-import {Match, FullMatchObjective, Objective} from "../../services/wvw.service";
+import {createFeature, createReducer, on} from '@ngrx/store';
+import {Match, Objective} from "../../services/wvw.service";
 import {mistsActions} from "./mists.action";
-import {FeatureGroup,Map} from "leaflet";
 
 export interface MistsState {
   loading: boolean

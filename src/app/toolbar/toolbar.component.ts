@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy} from '@angular/core';
-import {fromEvent, map, Observable, Subject, takeUntil} from "rxjs";
+import {fromEvent, map, Subject, takeUntil} from "rxjs";
 
 export interface ToolbarButton {
   Tooltip: string;

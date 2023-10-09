@@ -1,5 +1,4 @@
-import {createActionGroup, emptyProps, props} from "@ngrx/store";
-import {UserState} from "./user.feature";
+import {createActionGroup, props} from "@ngrx/store";
 import {AccountInfo} from "../../services/account.service";
 import {Guild} from "../../services/guild.service";
 import {MatchOverview} from "../../services/wvw.service";

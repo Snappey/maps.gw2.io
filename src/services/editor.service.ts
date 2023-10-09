@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Map, FeatureGroup, PointTuple, SVGOverlay, Point, svgOverlay, LatLngBounds} from "leaflet";
+import {FeatureGroup, LatLngBounds, Map, Point, PointTuple, svgOverlay, SVGOverlay} from "leaflet";
 import {LabelService} from "./label.service";
 import {ClipboardService} from "ngx-clipboard";
 import {ToastrService} from "ngx-toastr";

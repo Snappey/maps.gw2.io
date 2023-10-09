@@ -1,18 +1,11 @@
-import {
-  FeatureGroup, ImageOverlay,
-  LatLng,
-  Layer,
-  Map,
-  PointTuple,
-  Polyline, svg,
-} from 'leaflet';
-import {combineLatestWith, filter, interval, map, Subscription, switchMap, take, takeUntil, tap} from "rxjs";
-import {MqttConnectionState, MqttService} from "ngx-mqtt";
+import {FeatureGroup, ImageOverlay, LatLng, Layer, Map, PointTuple, Polyline, svg,} from 'leaflet';
+import {combineLatestWith, filter, interval, map, Subscription, switchMap, take, tap} from "rxjs";
+import {MqttService} from "ngx-mqtt";
 import {LabelService} from "../services/label.service";
 import {LiveMarkersService} from "../services/live-markers.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgZone} from "@angular/core";
-import {AssetService, MarkerLabel} from "../services/asset.service";
+import {MarkerLabel} from "../services/asset.service";
 import {LayerService} from "../services/layer.service";
 import {ToastrService} from "ngx-toastr";
 

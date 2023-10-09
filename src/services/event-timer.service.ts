@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, timer, Observable, switchMap, tap, shareReplay, of, from} from "rxjs";
+import {map, Observable, of, switchMap, timer} from "rxjs";
 import {LayerGroup, Map, Marker, Point, PointTuple} from "leaflet";
 import {LabelService} from "./label.service";
 import * as moment from "moment";

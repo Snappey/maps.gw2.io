@@ -1,13 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {
-  forkJoin,
-  map,
-  Observable,
-  tap,
-  combineLatest,
-  switchMap,
-} from "rxjs";
+import {combineLatest, forkJoin, map, Observable, switchMap,} from "rxjs";
 import {GuildService} from "./guild.service";
 import {PointTuple} from "leaflet";
 
