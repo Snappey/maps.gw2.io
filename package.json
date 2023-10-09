@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --aot --build-optimizer",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "cache-regions": "node scripts/generate_regions.js",
