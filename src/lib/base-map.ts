@@ -60,7 +60,6 @@ export class BaseMap {
       take(1),
       filter(chatLink => !!chatLink),
       switchMap(chatLink => this.layerService.getMarkerByChatLink(this.CONTINENT_ID, 1, chatLink)),
-      tap(console.log)
     ).subscribe((marker: MarkerLabel | undefined) => {
       if (!marker) {
         this.toastr.warning("Failed to find marker from url", "", {
@@ -73,7 +72,6 @@ export class BaseMap {
       this.layerService.createImageOverlay(leaflet, marker.coordinates, "/assets/small_drawn_circle.png")
         .addTo(leaflet).bringToFront();
 
-      console.log(marker);
       this.panTo(marker.coordinates, 7);
     })
 

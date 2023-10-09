@@ -594,9 +594,7 @@ export class LayerService {
   }
 
   getMarkerByChatLink(continentId: number, floorId: number, chatLink: string): Observable<MarkerLabel | undefined> {
-    console.log(chatLink);
     return this.assetService.fetchPointOfInterestLabels(continentId, floorId).pipe(
-      tap(console.log),
       map(labels => labels.filter((l: MarkerLabel) => l.coordinates && l.data?.chat_link &&
         l.data?.chat_link.includes(chatLink))),
       map(labels => labels.at(0)),

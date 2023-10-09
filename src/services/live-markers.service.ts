@@ -70,7 +70,6 @@ export class LiveMarkersService {
       filter(([enabled, _]) => enabled),
       map(([_, apiKey]) => apiKey ? apiKey : "buff_reaper"),
       switchMap((apiKey) => this.getAuthToken(apiKey)),
-      tap((authToken) => console.log("Updating AuthToken", authToken))
     ).subscribe(authToken => this.store.dispatch(liveMarkersActions.setAuthToken({ authToken })))
 
     // When a users authToken changes try and connect to the MQTT Broker
@@ -78,7 +77,6 @@ export class LiveMarkersService {
       filter((data) => !!data.authToken),
       withLatestFrom(this.stateChange, this.store.select(selectLiveMapEnabled)),
       filter(([_, state, isEnabled]) => isEnabled && state !== MqttConnectionState.CONNECTED),
-      tap(() => console.log("Connecting to broker, authToken update"))
     ).subscribe(([data, _, __]) => this.mqttService.connect({
       ...this.mqttOptions,
       clientId: data.user ? data.user : "anonymous-" + (Math.random() + 1).toString(36).substring(7),
@@ -91,7 +89,6 @@ export class LiveMarkersService {
       filter(enabled => !enabled),
       withLatestFrom(this.mqttService.state),
       filter(([_, state]) => state === MqttConnectionState.CONNECTED),
-      tap(() => console.log("Disconnecting from LiveMarker"))
     ).subscribe(_ => this.mqttService.disconnect(true));
 
     // Notify connections
