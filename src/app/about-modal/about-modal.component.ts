@@ -14,8 +14,9 @@ export class AboutModalComponent {
   constructor() {
   }
 
-  openDiscord = () => window.open("https://discord.gg/NxKdHsF", "_blank");
-  openGithub = () => window.open("https://github.com/Snappey/maps.gw2.io", "_blank");
+  openDiscord = () => window.open("https://discord.gg/8vCN5RBz75", "_blank");
+  openGithub = () => window.open("https://github.com/Snappey/maps.gw2.io/", "_blank");
+  openGithubIssues = () => window.open("https://github.com/Snappey/maps.gw2.io/issues/new", "_blank");
 
   close() {
     this.visible = false;

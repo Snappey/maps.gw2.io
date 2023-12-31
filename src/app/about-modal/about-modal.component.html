@@ -18,11 +18,11 @@
   </div>
   <div>
     <h4 class="mb-1">Live Map</h4>
-    There is support for a "Live Map" (requires an API key), allowing you to see yourself, guild, everyone or a special mix of all the above as markers on the map including in WvW. This includes segmentation to prevent leaking your position to anyone who shouldn't know about it. Currently it's a private BlishHud module that has not been released, if you're interested in trying it out let me know.
+    There is support for a "Live Map" (requires an API key), allowing you to see yourself, guild, everyone or a special mix of all the above as markers on the map including in WvW. This includes segmentation to prevent leaking your position to anyone who shouldn't know about it. Currently it's a private BlishHud module that has not been released, if you're interested in trying it out reach out on the Gw2 Developer Discord below.
   </div>
   <div>
     <h4 class="mb-1">Finally</h4>
-    Any suggestions, issues, or feedback feel free to open an issue on GitHub, find me in my guilds Discord below or send me a mail in-game.
+    Any suggestions, issues, or feedback feel free to open an issue on GitHub, find me in my Gw2 Dev Discord below or send me a mail in-game.
   </div>
   <div>
     <h4 class="mb-1">Contact Me</h4>
@@ -36,7 +36,8 @@
   <ng-template pTemplate="footer">
     <div class="flex justify-content-around px-8">
       <p-button icon="pi pi-discord" (click)="openDiscord()" label="Discord" styleClass="p-button p-button-info" class="flex"></p-button>
-      <p-button icon="pi pi-exclamation-triangle" (click)="openGithub()" label="Report an Issue" styleClass="p-button p-button-danger" class="flex"></p-button>
+      <p-button icon="pi pi-github" (click)="openGithub()" label="GitHub" styleClass="p-button p-button-info" class="flex"></p-button>
+      <p-button icon="pi pi-exclamation-triangle" (click)="openGithubIssues()" label="Report an Issue" styleClass="p-button p-button-danger" class="flex"></p-button>
     </div>
   </ng-template>
 </p-dialog>
