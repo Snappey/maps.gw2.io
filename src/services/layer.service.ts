@@ -356,24 +356,20 @@ export class LayerService {
     );
   }
 
-  getBaseCloudLayer(leaflet: Map): ImageOverlay {
-    return new ImageOverlay("assets/sky00.png",
-      new LatLngBounds(
-        leaflet.unproject([0, 0], leaflet.getMaxZoom()),
-        leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())
-      ),
-      {opacity: 1, interactive: false, zIndex: 9999}
-    );
+  getBaseCloudLayer(leaflet: Map): SVGOverlay {
+    const overlayContent = `<image href="assets/sky00.png" x="-${this.tyriaDimensions[0]*2.5}" y="-${this.tyriaDimensions[1]*2}" width="${this.tyriaDimensions[0]*4}" height="${this.tyriaDimensions[1]*4}">
+  <animateTransform attributeName="transform" type="translate" from="0 0" to="${this.tyriaDimensions[0]} 0" dur="60s" repeatCount="indefinite" />
+</image>`
+    const cloudLayer = this.getSvgLayer(this.tyriaDimensions, overlayContent);
+    return svgOverlay(cloudLayer, new LatLngBounds(leaflet.unproject([0, 0], leaflet.getMaxZoom()), leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())));
   }
 
-  getExtraCloudLayer(leaflet: Map): ImageOverlay {
-    return new ImageOverlay("assets/sky01.png",
-      new LatLngBounds(
-        leaflet.unproject([0, 0], leaflet.getMaxZoom()),
-        leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())
-      ),
-      {opacity: 1, interactive: false, zIndex: 9999}
-    )
+  getExtraCloudLayer(leaflet: Map): SVGOverlay {
+    const overlayContent = `<image href="assets/sky01.png" x="-${this.tyriaDimensions[0]*2.5}" y="-${this.tyriaDimensions[1]*2}" width="${this.tyriaDimensions[0]*4}" height="${this.tyriaDimensions[1]*4}">
+  <animateTransform attributeName="transform" type="translate" from="0 0" to="${this.tyriaDimensions[0]} 0" dur="45s" repeatCount="indefinite" />
+</image>`
+    const cloudLayer = this.getSvgLayer(this.tyriaDimensions, overlayContent);
+    return svgOverlay(cloudLayer, new LatLngBounds(leaflet.unproject([0, 0], leaflet.getMaxZoom()), leaflet.unproject(this.tyriaDimensions, leaflet.getMaxZoom())));
   }
 
   getCloudLayer(leaflet: Map): FeatureGroup {
