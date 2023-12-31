@@ -65,6 +65,16 @@ export class BaseMap {
       map(params=> params["chatLink"]),
       take(1),
       filter(chatLink => !!chatLink),
+      map((chatLink: string) => {
+        if (chatLink.startsWith("[")) // Clean up the chat link
+          chatLink = chatLink.substring(1);
+        if (chatLink.endsWith("]"))
+          chatLink = chatLink.substring(0, chatLink.length - 1);
+        if (chatLink.endsWith("="))
+          chatLink = chatLink.substring(0, chatLink.length - 1);
+
+        return chatLink;
+      }),
       switchMap(chatLink => this.layerService.getMarkerByChatLink(this.CONTINENT_ID, 1, chatLink)),
     ).subscribe((marker: MarkerLabel | undefined) => {
       if (!marker) {

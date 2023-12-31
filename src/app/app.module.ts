@@ -148,6 +148,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
       {path: "wvw", component: MistsMapComponent},
       {path: "wvw/:id", component: MistsMapComponent},
       {path: "wvw/:id/:chatLink", component: MistsMapComponent},
+      {path: ":chatLink", redirectTo: "/tyria/:chatLink", pathMatch: "full"},
       {path: "**", redirectTo: "/tyria", pathMatch: "full"}
     ]),
 
