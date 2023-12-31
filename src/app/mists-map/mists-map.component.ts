@@ -20,7 +20,7 @@ import {
   takeUntil,
   tap,
 } from "rxjs";
-import {BaseMap} from "../../lib/base-map";
+import {BaseMap, LayerState} from "../../lib/base-map";
 import {Store} from "@ngrx/store";
 import {mistsActions} from "../../state/mists/mists.action";
 import {AppState} from "../../state/appState";
@@ -190,14 +190,14 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
     ));
 
     this.layerService.getMistsTiles().addTo(leaflet)
-    this.registerLayer(this.OBJECTIVE_LAYER, {layer: new LayerGroup(), minZoomLevel: 0, friendlyName: "Objectives", icon: "/assets/keep_icon.png", isHidden: false});
-    this.registerLayer(this.OBJECTIVE_SECTOR_LAYER, {layer: new FeatureGroup(), minZoomLevel: 0, friendlyName: "Objective Sectors", icon: "/assets/sector_icon.png", isHidden: false});
-    this.registerLayer(this.OBJECTIVE_SPAWN_HEADINGS_LAYER, { layer: new FeatureGroup(), minZoomLevel: 0, friendlyName: "Spawn Headings", icon: "/assets/list_icon.png", isHidden: false });
+    this.registerLayer(this.OBJECTIVE_LAYER, {layer: new LayerGroup(), minZoomLevel: 0, friendlyName: "Objectives", icon: "/assets/keep_icon.png", state: LayerState.Enabled });
+    this.registerLayer(this.OBJECTIVE_SECTOR_LAYER, {layer: new FeatureGroup(), minZoomLevel: 0, friendlyName: "Objective Sectors", icon: "/assets/sector_icon.png", state: LayerState.Enabled });
+    this.registerLayer(this.OBJECTIVE_SPAWN_HEADINGS_LAYER, { layer: new FeatureGroup(), minZoomLevel: 0, friendlyName: "Spawn Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled });
 
     this.layerService.getMistsHeadings(leaflet).pipe(
       take(1)
     ).subscribe(layer =>
-      this.registerLayer(this.MAP_HEADINGS_LAYER, {layer: layer, minZoomLevel: 0, friendlyName: "Map Headings", icon: "/assets/list_icon.png", isHidden: false})
+      this.registerLayer(this.MAP_HEADINGS_LAYER, {layer: layer, minZoomLevel: 0, friendlyName: "Map Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled })
     )
 
     this.layerService.getMistsObjectives(leaflet).pipe(
@@ -241,7 +241,7 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
 
     this.layerService.getWaypointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("waypoints", { layer: layer, minZoomLevel: 5, friendlyName: "Waypoints", icon: "/assets/waypoint.png", isHidden: false}))
+    ).subscribe(layer => this.registerLayer("waypoints", { layer: layer, minZoomLevel: 5, friendlyName: "Waypoints", icon: "/assets/waypoint.png", state: LayerState.Enabled }))
 
     super.onMapInitialised(leaflet);
   }

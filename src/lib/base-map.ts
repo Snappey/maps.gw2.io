@@ -14,11 +14,17 @@ export interface LayerOptions {
   minZoomLevel?: number;
   maxZoomLevel?: number;
   opacityLevels?: {[zoomLevel: number]: number};
-  isHidden: boolean;
 
   friendlyName?: string;
   icon?: string;
-  isEnabled?: boolean;
+  state: LayerState;
+}
+
+export enum LayerState {
+  Enabled,
+  Disabled,
+  Hidden,
+  Pinned,
 }
 
 export class BaseMap {
@@ -42,7 +48,7 @@ export class BaseMap {
 
     // Live Markers
     const liveLayer = new FeatureGroup();
-    this.registerLayer("LIVE_MAP", { friendlyName: "Live Map", icon: "/assets/player_marker.png", isHidden: false, layer: liveLayer});
+    this.registerLayer("LIVE_MAP", { friendlyName: "Live Map", icon: "/assets/player_marker.png", state: LayerState.Enabled, layer: liveLayer});
     this.liveMarkersService.setActiveMapLayer(leaflet, liveLayer);
 
     // LatLng Url
@@ -113,12 +119,11 @@ export class BaseMap {
 
     this.mapLayers[id] = {
       ...options,
-      isEnabled: true,
       friendlyName: options.friendlyName ?? id
     };
 
     if (this.Map) {
-      if (!options.isHidden) {
+      if (options.state != LayerState.Disabled) {
         this.Map.addLayer(options.layer);
       }
 
@@ -139,7 +144,6 @@ export class BaseMap {
 
       if (!this.Map.hasLayer(options.layer)) {
         this.Map.addLayer(options.layer);
-        options.isHidden = false;
       }
     }
   }
@@ -150,7 +154,20 @@ export class BaseMap {
 
       if (this.Map.hasLayer(options.layer)) {
         this.Map.removeLayer(options.layer);
-        options.isHidden = true;
+      }
+    }
+  }
+
+  updateLayerOpacity(id: string, zoomLevel: number) {
+    if (this.mapLayers[id]) {
+      const options = this.mapLayers[id];
+
+      if (options.opacityLevels) {
+        if (zoomLevel in options.opacityLevels) {
+          (options.layer as ImageOverlay).setOpacity(options.opacityLevels[zoomLevel]);
+        } else {
+          (options.layer as ImageOverlay).setOpacity(1);
+        }
       }
     }
   }
@@ -162,27 +179,65 @@ export class BaseMap {
 
     for (let layersKey in this.mapLayers) {
       const layerOptions = this.mapLayers[layersKey];
-      const minZoom = layerOptions.minZoomLevel ?? this.Map.getMinZoom();
-      const maxZoom = layerOptions.maxZoomLevel ?? this.Map.getMaxZoom();
+      let newState: LayerState = layerOptions.state;
 
-      if (zoomLevel >= minZoom && zoomLevel <= maxZoom && layerOptions.isEnabled) {
-        this.showLayer(layersKey);
+      const withinZoom = this.withinZoomRange(layersKey, zoomLevel);
+      const disabledOrPinned = layerOptions.state == LayerState.Disabled || layerOptions.state == LayerState.Pinned;
 
-        if (layerOptions.opacityLevels) {
-          if (zoomLevel in layerOptions.opacityLevels) {
-            (layerOptions.layer as ImageOverlay).setOpacity(layerOptions.opacityLevels[zoomLevel]);
-          } else {
-            (layerOptions.layer as ImageOverlay).setOpacity(1);
-          }
+      // If the layer is disabled or pinned, we don't want to change the state
+      if (!disabledOrPinned) {
+        if (withinZoom) {
+          console.log("Showing layer " + layersKey + " because it is within zoom range");
+          newState = LayerState.Enabled;
+        } else {
+          console.log("Hiding layer " + layersKey + " because it is not within zoom range");
+          newState = LayerState.Hidden;
         }
-      } else {
-        this.hideLayer(layersKey);
+      }
+
+      layerOptions.state = newState;
+      this.processLayer(layersKey, zoomLevel);
+    }
+  }
+
+  withinZoomRange(id: string, zoomLevel: number): boolean {
+    if (this.mapLayers[id]) {
+      const options = this.mapLayers[id];
+      const minZoom = options.minZoomLevel ?? this.Map.getMinZoom();
+      const maxZoom = options.maxZoomLevel ?? this.Map.getMaxZoom();
+
+      return zoomLevel >= minZoom && zoomLevel <= maxZoom;
+    }
+
+    return false;
+  }
+
+  processLayer(id: string, zoomLevel: number = this.Map.getZoom()) {
+    if (this.mapLayers[id]) {
+      const state = this.mapLayers[id].state;
+      switch (state as LayerState) {
+        case LayerState.Enabled:
+          if (this.withinZoomRange(id, zoomLevel)) {
+            this.showLayer(id);
+            this.updateLayerOpacity(id, zoomLevel);
+          }
+          break;
+        case LayerState.Disabled:
+          this.hideLayer(id);
+          break;
+        case LayerState.Hidden:
+          this.hideLayer(id);
+          break;
+        case LayerState.Pinned:
+          this.showLayer(id);
+          break;
       }
     }
   }
 
-  layerUpdated($event: boolean) {
-    this.updateLayerVisibility(this.Map.getZoom())
+  layerUpdated([$layer, $state]: [string, LayerState]) {
+    this.mapLayers[$layer].state = $state;
+    this.processLayer($layer, this.Map.getZoom());
   }
 
   private RIGHT_MB = 2

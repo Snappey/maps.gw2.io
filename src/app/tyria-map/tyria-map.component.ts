@@ -9,7 +9,7 @@ import {DialogService} from "primeng/dynamicdialog";
 import {EditorModalComponent} from "./editor-modal/editor-modal.component";
 import {ClipboardService} from "ngx-clipboard";
 import {Event, EventMap, EventTimerService} from "../../services/event-timer.service";
-import {BaseMap} from "../../lib/base-map";
+import {BaseMap, LayerState} from "../../lib/base-map";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MqttService} from "ngx-mqtt";
 import {LabelService} from "../../services/label.service";
@@ -137,7 +137,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       tap((events) => {
         const layer = this.eventTimerService.createEventsLayer(this.Map, events);
         if (!this.hasLayer("events_layer")) {
-          this.registerLayer("events_layer", {layer: layer, friendlyName: "World Bosses", icon: "/assets/event-boss.png", isHidden: false})
+          this.registerLayer("events_layer", {layer: layer, friendlyName: "World Bosses", icon: "/assets/event-boss.png", state: LayerState.Enabled})
         } else {
           this.updateLayer("events_layer", layer);
         }
@@ -281,42 +281,42 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       layer: this.layerService.getTyriaTiles(),
       friendlyName: "Tyria",
       icon: "/assets/tyria_icon.png",
-      isHidden: false,
+      state: LayerState.Enabled,
     });
 
     this.layerService.getWaypointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("waypoints", { layer: layer, minZoomLevel: 5, friendlyName: "Waypoints", icon: "/assets/waypoint.png", isHidden: false}))
+    ).subscribe(layer => this.registerLayer("waypoints", { layer: layer, minZoomLevel: 5, friendlyName: "Waypoints", icon: "/assets/waypoint.png", state: LayerState.Enabled}))
 
     this.layerService.getLandmarkLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("landmarks", { layer: layer, minZoomLevel: 6, friendlyName: "Points of Interest", icon: "/assets/poi.png", isHidden: false}))
+    ).subscribe(layer => this.registerLayer("landmarks", { layer: layer, minZoomLevel: 6, friendlyName: "Points of Interest", icon: "/assets/poi.png", state: LayerState.Enabled}))
 
     this.layerService.getVistaLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("vista", { layer: layer, minZoomLevel: 6, friendlyName: "Vistas", icon: "/assets/vista.png", isHidden: false }))
+    ).subscribe(layer => this.registerLayer("vista", { layer: layer, minZoomLevel: 6, friendlyName: "Vistas", icon: "/assets/vista.png", state: LayerState.Enabled }))
 
     this.layerService.getUnlockLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("unlocks", { layer: layer, minZoomLevel: 4, friendlyName: "Instanced Content", icon: "/assets/commander_blue.png", isHidden: false }))
+    ).subscribe(layer => this.registerLayer("unlocks", { layer: layer, minZoomLevel: 4, friendlyName: "Instanced Content", icon: "/assets/commander_blue.png", state: LayerState.Enabled }))
 
     this.layerService.getHeartLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("heart_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Hearts", icon: "/assets/hearts.png", isHidden: false}))
+    ).subscribe(layer => this.registerLayer("heart_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Hearts", icon: "/assets/hearts.png", state: LayerState.Enabled}))
 
     this.layerService.getSkillPointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("heropoint_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Hero Points", icon: "/assets/heropoint.png", isHidden: false}))
+    ).subscribe(layer => this.registerLayer("heropoint_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Hero Points", icon: "/assets/heropoint.png", state: LayerState.Enabled}))
 
     this.layerService.getMasteryPointLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("masteries_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Masteries", icon: "/assets/core_mastery.png", isHidden: false}))
+    ).subscribe(layer => this.registerLayer("masteries_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Masteries", icon: "/assets/core_mastery.png", state: LayerState.Enabled}))
 
     this.layerService.getRegionLabels(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
     ).subscribe(layer => {
         this.registerLayer("region_labels",
-          {layer: layer, maxZoomLevel: 5, minZoomLevel: 2, friendlyName: "Region Headings", icon: "/assets/list_icon.png", isHidden: false, opacityLevels: {5: .2, 4: .6}})
+          {layer: layer, maxZoomLevel: 5, minZoomLevel: 2, friendlyName: "Region Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, opacityLevels: {5: .2, 4: .6}})
         layer.bringToFront();
       });
 
@@ -324,36 +324,36 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       take(1)
     ).subscribe(layer => {
         this.registerLayer("map_labels",
-          {layer: layer, maxZoomLevel: 5, minZoomLevel: 3, friendlyName: "Map Headings", icon: "/assets/list_icon.png", isHidden: false, opacityLevels: {5: .7}})
+          {layer: layer, maxZoomLevel: 5, minZoomLevel: 3, friendlyName: "Map Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, opacityLevels: {5: .7}})
         layer.bringToFront();
       });
 
     this.layerService.getAdventuresLayer(leaflet).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("adventure_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Adventures", icon: "/assets/adventure_icon.png", isHidden: false}))
+    ).subscribe(layer => this.registerLayer("adventure_labels", {layer: layer, minZoomLevel: 6, friendlyName: "Adventures", icon: "/assets/adventure_icon.png", state: LayerState.Enabled}))
 
     this.layerService.getSectorTextLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("sector_headings", { layer: layer, minZoomLevel: 7, friendlyName: "Sector Headings", icon: "/assets/list_icon.png", isHidden: false }))
+    ).subscribe(layer => this.registerLayer("sector_headings", { layer: layer, minZoomLevel: 7, friendlyName: "Sector Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled }))
 
     this.layerService.getCityMarkersLayer(leaflet).pipe(
       take(1)
-    ).subscribe(layer => this.registerLayer("city_markers", {layer: layer, minZoomLevel: 7, friendlyName: "City Markers", icon: "/assets/portal_icon.png", isHidden: false}))
+    ).subscribe(layer => this.registerLayer("city_markers", {layer: layer, minZoomLevel: 7, friendlyName: "City Markers", icon: "/assets/portal_icon.png", state: LayerState.Enabled}))
 
 
-    // this.registerLayer("base_clouds", { layer: this.layerService.getBaseCloudLayer(leaflet), maxZoomLevel: 5, friendlyName: "Clouds", icon: "/assets/sky00.png", isHidden: false, opacityLevels: {5: .2, 4: .6, 3: .8, 2: 1} })
-    // this.registerLayer("extra_clouds", { layer: this.layerService.getExtraCloudLayer(leaflet), maxZoomLevel: 5, friendlyName: "Clouds", icon: "/assets/sky01.png", isHidden: false, opacityLevels: {5: .2, 4: .6, 3: .8, 2: 1} })
+    // this.registerLayer("base_clouds", { layer: this.layerService.getBaseCloudLayer(leaflet), maxZoomLevel: 5, friendlyName: "Clouds", icon: "/assets/sky00.png", state: LayerState.Enabled, opacityLevels: {5: .2, 4: .6, 3: .8, 2: 1} })
+    // this.registerLayer("extra_clouds", { layer: this.layerService.getExtraCloudLayer(leaflet), maxZoomLevel: 5, friendlyName: "Clouds", icon: "/assets/sky01.png", state: LayerState.Enabled, opacityLevels: {5: .2, 4: .6, 3: .8, 2: 1} })
 
     // this.layerService.getSectorLayer(leaflet, this.CONTINENT_ID, this.FLOOR_ID).pipe(
     //   take(1)
-    // ).subscribe(layer => this.registerLayer("sector_polygons", { layer: layer, minZoomLevel: 7, friendlyName: "Sector Outlines", isEnabled: false, isHidden: false }))
+    // ).subscribe(layer => this.registerLayer("sector_polygons", { layer: layer, minZoomLevel: 7, friendlyName: "Sector Outlines", isEnabled: false, state: LayerState.Enabled }))
 
     if (!environment.production) {
       this.editorService.getMarkerLayerEvents().pipe(
           takeUntil(this.unsubscribe$)
       ).subscribe(layer => {
         if (!this.hasLayer("editable_markers")) {
-          this.registerLayer("editable_markers", {layer: layer, minZoomLevel: 3, isHidden: false})
+          this.registerLayer("editable_markers", {layer: layer, minZoomLevel: 3, state: LayerState.Enabled})
         } else {
           this.updateLayer("editable_markers", layer);
         }
@@ -363,7 +363,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
           takeUntil(this.unsubscribe$)
       ).subscribe(layer => {
         if (!this.hasLayer("editable_text")) {
-          this.registerLayer("editable_text", {layer: layer, maxZoomLevel: 6, minZoomLevel: 2, isHidden: false, opacityLevels: {5: .8, 6: .5}})
+          this.registerLayer("editable_text", {layer: layer, maxZoomLevel: 6, minZoomLevel: 2, state: LayerState.Enabled, opacityLevels: {5: .8, 6: .5}})
         } else {
           this.updateLayer("editable_text", layer);
         }

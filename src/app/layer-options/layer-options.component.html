@@ -5,7 +5,12 @@
             {{layer.friendlyName}}:
         </span>
         <span class="align-self-end">
-            <p-inputSwitch class="small-input-switch" [(ngModel)]="layer.isEnabled" (onChange)="onChange($event)"></p-inputSwitch>
+            <p-triStateCheckbox class="small-input-switch"
+                                [ngModel]="mapState(layer)"
+                                (onChange)="onLayerToggle($event, layer)"
+                                checkboxTrueIcon="pi pi-lock-open"
+                                checkboxFalseIcon="pi pi-lock">
+            </p-triStateCheckbox>
         </span>
     </div>
 </div>
