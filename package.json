@@ -28,7 +28,7 @@
     "@ngrx/store-devtools": "^16.2.0",
     "chart.js": "^4.1.1",
     "cookieconsent": "^3.1.1",
-    "leaflet": "^1.9.3",
+    "leaflet": "^1.9.4",
     "leaflet-canvas-markers": "^1.0.7",
     "leaflet-contextmenu": "^1.4.0",
     "moment": "^2.29.4",
