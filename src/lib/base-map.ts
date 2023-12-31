@@ -197,10 +197,8 @@ export class BaseMap {
       // If the layer is disabled or pinned, we don't want to change the state
       if (!disabledOrPinned) {
         if (withinZoom) {
-          console.log("Showing layer " + layersKey + " because it is within zoom range");
           newState = LayerState.Enabled;
         } else {
-          console.log("Hiding layer " + layersKey + " because it is not within zoom range");
           newState = LayerState.Hidden;
         }
       }

@@ -52,7 +52,6 @@ export class LayerOptionsComponent {
         layer.state = LayerState.Disabled;
         break;
     }
-    console.log($event.value, layer.id, layer.state);
     this.layerUpdated.emit([layer.id, layer.state]);
   }
 }
