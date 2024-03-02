@@ -153,7 +153,6 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
     return [0,0];
   }
 
-  //layersControls: LeafletControlLayersConfig = {baseLayers: {}, overlays: {}}
   options = {
     preferCanvas: true,
     maxNativeZoom: 9,
@@ -236,14 +235,6 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
         text: "Copy Coordinates",
         callback: (e: LeafletMouseEvent) => this.clipboardService.copy(JSON.stringify(this.getCoords(e.latlng)))
       }]
-  }
-
-  friendlyLayerNames: {[key: string]: string} = {
-    "region_labels": "Regions",
-    "landmark": "Points of Interest",
-    "waypoint": "Waypoints",
-    "vista": "Vistas",
-    "unlock": "Instanced Content",
   }
 
   placeMarker(header: string, type: MarkerType, coords: PointTuple) {
