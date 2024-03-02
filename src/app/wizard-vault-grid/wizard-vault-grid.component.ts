@@ -11,9 +11,7 @@ import {exhaustMap, filter, tap} from "rxjs";
 })
 export class WizardVaultGridComponent {
 
-  apiKey$ = this.store.select(s => s.settings.apiKey).pipe(
-    tap(apiKey => console.log("API Key: ", apiKey))
-  );
+  apiKey$ = this.store.select(s => s.settings.apiKey);
 
   dailyTrack$ = this.apiKey$.pipe(
     filter(apiKey => !!apiKey),
