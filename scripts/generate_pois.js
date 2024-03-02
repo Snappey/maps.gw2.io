@@ -25,134 +25,134 @@ const overrides = {
   }
 };
 
-const mapOverrides = {
-
-}
-
 async function getContinent(id, floor) {
   return axios.get(`https://api.guildwars2.com/v2/continents/${id}/floors/${floor}`)
-}
-
-function hasKey(obj, key) {
-  return key in obj;
 }
 
 function getStaticTyriaLabels () {
   return JSON.parse(fs.readFileSync("./scripts/static/poi_labels.json").toString())
 }
 
-async function generate(continentId, floorId) {
-  const details = await getContinent(continentId, floorId);
-  let labels = []
-
-  if (continentId === 1 && floorId === 1) {
-    labels = await getStaticTyriaLabels()
+async function generate(continentId, floorIds) {
+  if (floorIds.length === 0) {
+    console.error("No floor ids provided");
+    return false;
   }
 
-  for (let region of Object.values(details.data.regions)) {
-    console.log(region.name)
+  const labels = [];
+  for (let floorId of floorIds) {
+    const details = await getContinent(continentId, floorId);
 
-    for (let map of Object.values(region.maps)) {
+    if (continentId === 1 && floorId === 1) {
+      //labels.concat( await getStaticTyriaLabels());
+    }
 
-      // skillpoints
-      for (let skillpoint of map.skill_challenges) {
-        if (skillpoint.id === "")
-          continue;
+    for (let region of Object.values(details.data.regions)) {
+      console.log(region.name)
 
-        labels.push({
-          id: skillpoint.id,
-          coordinates: skillpoint.coord,
-          type: "skillpoint",
-          map: map.name,
-          continent: region.name
-        });
-      }
+      for (let map of Object.values(region.maps)) {
 
-      // hearts
-      for (let heart of Object.values(map.tasks)) {
-        if (heart.id === 0)
-          continue;
+        // skillpoints
+        for (let skillpoint of map.skill_challenges) {
+          if (skillpoint.id === "")
+            continue;
 
-        labels.push({
-          id: heart.id,
-          coordinates: heart.coord,
-          type: "heart",
-          map: map.name,
-          continent: region.name,
-          data: {
-            "tooltip": heart.objective,
-            "chat_link": heart.chat_link,
-            "bounds": heart.bounds
-          }
-        });
-      }
+          labels.push({
+            id: skillpoint.id,
+            coordinates: skillpoint.coord,
+            type: "skillpoint",
+            map: map.name,
+            continent: region.name
+          });
+        }
 
-      // masteries
-      for (let mastery of Object.values(map.mastery_points)) {
-        if (mastery.id === 0)
-          continue;
+        // hearts
+        for (let heart of Object.values(map.tasks)) {
+          if (heart.id === 0)
+            continue;
 
-        labels.push({
-          id: mastery.id,
-          coordinates: mastery.coord,
-          type: "mastery",
-          map: map.name,
-          continent: region.name,
-          data: {
-            "type": mastery.region !== "Unknown" ? mastery.region : region.name
-          }
-        });
-      }
+          labels.push({
+            id: heart.id,
+            coordinates: heart.coord,
+            type: "heart",
+            map: map.name,
+            continent: region.name,
+            data: {
+              "tooltip": heart.objective,
+              "chat_link": heart.chat_link,
+              "bounds": heart.bounds
+            }
+          });
+        }
 
-      // pois
-      for (let poi of Object.values(map.points_of_interest)) {
-        if (poi.id === 0)
-          continue;
+        // masteries
+        for (let mastery of Object.values(map.mastery_points)) {
+          if (mastery.id === 0)
+            continue;
 
-        if (poi.id in overrides)
-          poi.name = overrides[poi.id].Name;
+          labels.push({
+            id: mastery.id,
+            coordinates: mastery.coord,
+            type: "mastery",
+            map: map.name,
+            continent: region.name,
+            data: {
+              "type": mastery.region !== "Unknown" ? mastery.region : region.name
+            }
+          });
+        }
 
-        labels.push({
-          id: poi.id,
-          coordinates: poi.coord,
-          type: poi.type,
-          map: map.name,
-          continent: region.name,
-          data: {
-            "icon": poi.icon,
-            "tooltip": poi.name,
-            "chat_link": poi.chat_link,
-          }
-        })
-      }
+        // pois
+        for (let poi of Object.values(map.points_of_interest)) {
+          if (poi.id === 0)
+            continue;
 
-      for (let sector of Object.values(map.sectors)) {
-        labels.push({
-          id: sector.id,
-          coordinates: sector.coord,
-          type: "sector",
-          map: map.name,
-          continent: region.name,
-          data: {
-            "tooltip": sector.name,
-            "level": sector.level,
-            "bounds": sector.bounds,
-            //"chat_link": sector.chat_link, These clash with actual points of interest
-          }
-        })
+          if (poi.id in overrides)
+            poi.name = overrides[poi.id].Name;
+
+          labels.push({
+            id: poi.id,
+            coordinates: poi.coord,
+            type: poi.type,
+            map: map.name,
+            continent: region.name,
+            data: {
+              "icon": poi.icon,
+              "tooltip": poi.name,
+              "chat_link": poi.chat_link,
+            }
+          })
+        }
+
+        for (let sector of Object.values(map.sectors)) {
+          labels.push({
+            id: sector.id,
+            coordinates: sector.coord,
+            type: "sector",
+            map: map.name,
+            continent: region.name,
+            data: {
+              "tooltip": sector.name,
+              "level": sector.level,
+              "bounds": sector.bounds,
+              //"chat_link": sector.chat_link, These clash with actual points of interest
+            }
+          })
+        }
       }
     }
   }
 
-  fs.writeFileSync(`./src/assets/data/poi_labels_${continentId}_${floorId}.json`, JSON.stringify(labels));
-  console.log(`updated ./src/assets/data/poi_labels_${continentId}_${floorId}.json in assets`)
+
+  fs.writeFileSync(`./src/assets/data/poi_labels_${continentId}_${floorIds[0]}.json`, JSON.stringify(labels));
+  console.log(`updated ./src/assets/data/poi_labels_${continentId}_${floorIds[0]}.json in assets`)
   return true;
 }
 
-generate(1, 1)
+generate(1, [1, 49, 80])
   .catch(err => console.error(err))
   .finally(() => console.log("Finished Tyria POIs"));
 
-generate(2, 1)
+generate(2, [1])
   .catch(err => console.error(err))
   .finally(() => console.log("Finished Mists POIs"));
