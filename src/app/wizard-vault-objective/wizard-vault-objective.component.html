@@ -1,0 +1,19 @@
+<div class="my-2 hover" [ngClass]="{
+  'claimed': objective.claimed,
+  'complete': objective.progress_current >= objective.progress_complete && !objective.claimed,
+  'incomplete': objective.progress_current < objective.progress_complete
+}">
+  <div class="tooltip w-full">
+    <div class="py-1 px-2">
+      <h4 class="text-overflow-ellipsis overflow-hidden m-0">
+        {{objective.title}}
+      </h4>
+    </div>
+    <div class="px-2 pb-1">
+      <div class="flex flex-auto flex-nowrap">
+        <p class="flex-auto text-left font-italic m-0 text-overflow-ellipsis">{{objective.progress_current}} / {{objective.progress_complete}}</p>
+        <p class="flex-grow-1 flex-shrink-0 text-right font-italic m-0">{{ objective.track }}</p>
+      </div>
+    </div>
+  </div>
+</div>

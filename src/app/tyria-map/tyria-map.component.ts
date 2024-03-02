@@ -35,6 +35,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   showSettings: boolean = false;
   showAbout: boolean = false;
   showLiveMarkers: boolean = false;
+  showWizardsVault: boolean = false;
 
   private searchUnfocused: Subject<any> = new Subject<any>();
   showSearchResults: boolean = false;
@@ -74,6 +75,13 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
       IconHover: "/assets/event_hovered_icon.png",
       OnClick: () => this.showEvents = !this.showEvents,
       Keybindings: ["Digit3"]
+    },
+    {
+      Tooltip: "Wizards Vault",
+      Icon: "/assets/wizard_vault_icon.png",
+      IconHover: "/assets/wizard_vault_hovered_icon.png",
+      OnClick: () => this.showWizardsVault = !this.showWizardsVault,
+      Keybindings: ["Digit4"]
     }
   ]
 

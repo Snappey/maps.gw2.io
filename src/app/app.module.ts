@@ -69,6 +69,8 @@ import {NgOptimizedImage} from "@angular/common";
 import {LayerOptionsComponent} from './layer-options/layer-options.component';
 import {InputSwitchModule} from "primeng/inputswitch";
 import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
+import { WizardVaultGridComponent } from './wizard-vault-grid/wizard-vault-grid.component';
+import { WizardVaultObjectiveComponent } from './wizard-vault-objective/wizard-vault-objective.component';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   connectOnCreate: false,
@@ -93,7 +95,9 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     LiveMarkerSidebarComponent,
     AboutModalComponent,
     ToolbarComponent,
-    LayerOptionsComponent
+    LayerOptionsComponent,
+    WizardVaultGridComponent,
+    WizardVaultObjectiveComponent
   ],
   imports: [
     BrowserModule,

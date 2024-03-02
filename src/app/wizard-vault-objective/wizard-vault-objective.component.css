@@ -1,0 +1,33 @@
+.objective-panel {
+  margin-top: 3px;
+  color: #222;
+
+  min-height: 60px;
+  min-width: 100%;
+}
+
+
+.incomplete {
+  background-color: #ec6e6a;
+}
+
+.incomplete:hover {
+  background-color: #ff847f;
+}
+
+.complete {
+  background-color: #6699CC;
+}
+
+.complete:hover {
+  background-color: #77AADD;
+}
+
+.claimed {
+  background-color: #99CC33;
+}
+
+.claimed:hover {
+
+  background-color: #AADD44;
+}
