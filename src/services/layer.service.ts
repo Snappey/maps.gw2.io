@@ -80,9 +80,9 @@ export class LayerService {
         return "assets/pof_mastery.png";
       case "Tundra":
         return "assets/ibs_mastery.png";
-      case "Cantha":
+      case "Jade":
         return "assets/eod_mastery.png";
-      case "Horn of Maguuma":
+      case "Sky":
         return "assets/soto_mastery.png"
       default:
         console.warn(type, "mastery is not implemented");
@@ -100,9 +100,9 @@ export class LayerService {
         return "PoF";
       case "Tundra":
         return "IBS";
-      case "Cantha":
+      case "Jade":
         return "EoD";
-      case "Horn of Maguuma":
+      case "Sky":
         return "SOTO";
       default:
         return "Unknown";
