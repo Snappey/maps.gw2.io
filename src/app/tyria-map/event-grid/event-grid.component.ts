@@ -26,7 +26,7 @@ export class EventGridComponent {
     "pof": "Path of Fire",
     "ibs": "Icebrood Saga",
     "eod": "End of Dragons",
-    "soto": "Shadows of the Obscure"
+    "soto": "Secrets of the Obscure"
   }
 
   friendlyXpacName(key: string): string {
