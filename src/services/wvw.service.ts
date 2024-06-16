@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {combineLatest, forkJoin, map, Observable, switchMap,} from "rxjs";
+import {combineLatest, forkJoin, map, Observable, of, switchMap,} from "rxjs";
 import {GuildService} from "./guild.service";
 import {PointTuple} from "leaflet";
 
@@ -137,6 +137,93 @@ export interface ObjectiveTiers {
 
 export interface FullMatchObjective extends MatchObjective, Objective {}
 
+const staticWorldNames: WorldDictionary = {
+  "12001": { id: "12001", name: "Skrittsburgh", population: "N/A" },
+  "2001": { id: "2001", name: "Skrittsburgh", population: "N/A" },
+  "12002": { id: "12002", name: "Fotune's Vale", population: "N/A" },
+  "2002": { id: "2002", name: "Fotune's Vale", population: "N/A" },
+  "12003": { id: "12003", name: "Silent Woods", population: "N/A" },
+  "2003": { id: "2003", name: "Silent Woods", population: "N/A" },
+  "12004": { id: "12004", name: "Ettin's Back", population: "N/A" },
+  "2004": { id: "2004", name: "Ettin's Back", population: "N/A" },
+  "12005": { id: "12005", name: "Domain of Anguish", population: "N/A" },
+  "2005": { id: "2005", name: "Domain of Anguish", population: "N/A" },
+  "12006": { id: "12006", name: "Palawadan", population: "N/A" },
+  "2006": { id: "2006", name: "Palawadan", population: "N/A" },
+  "12007": { id: "12007", name: "Bloodstone Gulch", population: "N/A" },
+  "2007": { id: "2007", name: "Bloodstone Gulch", population: "N/A" },
+  "12008": { id: "12008", name: "Frost Citadel", population: "N/A" },
+  "2008": { id: "2008", name: "Frost Citadel", population: "N/A" },
+  "12009": { id: "12009", name: "Dragrimmar", population: "N/A" },
+  "2009": { id: "2009", name: "Dragrimmar", population: "N/A" },
+  "12010": { id: "12010", name: "Grenth's Door", population: "N/A" },
+  "2010": { id: "2010", name: "Grenth's Door", population: "N/A" },
+  "12011": { id: "12011", name: "Mirror of Lyssa", population: "N/A" },
+  "2011": { id: "2011", name: "Mirror of Lyssa", population: "N/A" },
+  "12012": { id: "12012", name: "Melandru's Dome", population: "N/A" },
+  "2012": { id: "2012", name: "Melandru's Dome", population: "N/A" },
+  "12013": { id: "12013", name: "Kormir's Library", population: "N/A" },
+  "2013": { id: "2013", name: "Kormir's Library", population: "N/A" },
+  "12014": { id: "12014", name: "Great House Aviary", population: "N/A" },
+  "2014": { id: "2014", name: "Great House Aviary", population: "N/A" },
+  "12015": { id: "12015", name: "Bava Nisos", population: "N/A" },
+  "2101": { id: "2101", name: "Bava Nisos", population: "N/A" },
+  "12016": { id: "12016", name: "Temple of Febe", population: "N/A" },
+  "2102": { id: "2102", name: "Temple of Febe", population: "N/A" },
+  "12017": { id: "12017", name: "Gyala Hatchery", population: "N/A" },
+  "2103": { id: "2103", name: "Gyala Hatchery", population: "N/A" },
+  "12018": { id: "12018", name: "Grekvelnn Burrows", population: "N/A" },
+  "2104": { id: "2104", name: "Grekvelnn Burrows", population: "N/A" },
+  "11001": { id: "11001", name: "Moogooloo", population: "N/A" },
+  "1001": { id: "1001", name: "Moogooloo", population: "N/A" },
+  "11002": { id: "11002", name: "Rall's Rest", population: "N/A" },
+  "1002": { id: "1002", name: "Rall's Rest", population: "N/A" },
+  "11003": { id: "11003", name: "Domain of Torment", population: "N/A" },
+  "1003": { id: "1003", name: "Domain of Torment", population: "N/A" },
+  "11004": { id: "11004", name: "Yohlon Haven", population: "N/A" },
+  "1004": { id: "1004", name: "Yohlon Haven", population: "N/A" },
+  "11005": { id: "11005", name: "Tombs of Drascir", population: "N/A" },
+  "1005": { id: "1005", name: "Tombs of Drascir", population: "N/A" },
+  "11006": { id: "11006", name: "Hall of Judgment", population: "N/A" },
+  "1006": { id: "1006", name: "Hall of Judgment", population: "N/A" },
+  "11007": { id: "11007", name: "Throne of Balthazar", population: "N/A" },
+  "1007": { id: "1007", name: "Throne of Balthazar", population: "N/A" },
+  "11008": { id: "11008", name: "Dwayna's Temple", population: "N/A" },
+  "1008": { id: "1008", name: "Dwayna's Temple", population: "N/A" },
+  "11009": { id: "11009", name: "Abbaddon's Prison", population: "N/A" },
+  "1009": { id: "1009", name: "Abbaddon's Prison", population: "N/A" },
+  "11010": { id: "11010", name: "Ruined Cathedral of Blood", population: "N/A" },
+  "1010": { id: "1010", name: "Ruined Cathedral of Blood", population: "N/A" },
+  "11011": { id: "11011", name: "Lutgardis Conservatory", population: "N/A" },
+  "1011": { id: "1011", name: "Lutgardis Conservatory", population: "N/A" },
+  "11012": { id: "11012", name: "Mosswood", population: "N/A" },
+  "1012": { id: "1012", name: "Mosswood", population: "N/A" },
+  "11013": { id: "11013", name: "Mithric Cliffs", population: "N/A" },
+  "1013": { id: "1013", name: "Mithric Cliffs", population: "N/A" },
+  "11014": { id: "11014", name: "Lagula's Kraal", population: "N/A" },
+  "1014": { id: "1014", name: "Lagula's Kraal", population: "N/A" },
+  "11015": { id: "11015", name: "De Molish Post", population: "N/A" },
+  "1015": { id: "1015", name: "De Molish Post", population: "N/A" },
+  "1016": { id: "1016", name: "Sea of Sorrows", population: "VeryHigh" },
+  "1017": { id: "1017", name: "Tarnished Coast", population: "VeryHigh" },
+  "1018": { id: "1018", name: "Northern Shiverpeaks", population: "Medium" },
+  "1019": { id: "1019", name: "Blackgate", population: "Full" },
+  "1020": { id: "1020", name: "Ferguson's Crossing", population: "Medium" },
+  "1021": { id: "1021", name: "Dragonbrand", population: "High" },
+  "1022": { id: "1022", name: "Kaineng", population: "Medium" },
+  "1023": { id: "1023", name: "Devona's Rest", population: "VeryHigh" },
+  "1024": { id: "1024", name: "Eredon Terrace", population: "High" },
+  "2105": { id: "2105", name: "Arborstone [FR]", population: "Medium" },
+  "2201": { id: "2201", name: "Kodash [DE]", population: "Medium" },
+  "2202": { id: "2202", name: "Riverside [DE]", population: "VeryHigh" },
+  "2203": { id: "2203", name: "Elona Reach [DE]", population: "Medium" },
+  "2204": { id: "2204", name: "Abaddon's Mouth [DE]", population: "Medium" },
+  "2205": { id: "2205", name: "Drakkar Lake [DE]", population: "VeryHigh" },
+  "2206": { id: "2206", name: "Miller's Sound [DE]", population: "Medium" },
+  "2207": { id: "2207", name: "Dzagonur [DE]", population: "Medium" },
+  "2301": { id: "2301", name: "Baruch Bay [SP]", population: "VeryHigh" }
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -174,16 +261,18 @@ export class WvwService {
   }
 
   private mapWorldNames(match: Match): Observable<Match> {
-    const worldNames = this.getWorldNames(Object.values(match.all_worlds).flat());
+    const worldNames = of(staticWorldNames);
+
     return forkJoin([worldNames]).pipe(
       map(src => {
         const names = src[0]
-        const mapNames = (ids: string[]) => ids.map(id => {
+        const mapNames = (ids: string[]) => [...new Set(ids.map(id => {
           if (id in names) {
             return names[id].name;
           }
-          return "unknown"
-        });
+          return "Unknown"
+        }))];
+
 
         match.all_worlds_names = {
           red: mapNames(match.all_worlds.red),
