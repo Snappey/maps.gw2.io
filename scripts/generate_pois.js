@@ -39,7 +39,7 @@ async function generate(continentId, floorIds) {
     return false;
   }
 
-  const labels = [];
+  const labels = getStaticTyriaLabels();
   for (let floorId of floorIds) {
     const details = await getContinent(continentId, floorId);
 
