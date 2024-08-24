@@ -84,6 +84,8 @@ export class LayerService {
         return "assets/eod_mastery.png";
       case "Sky":
         return "assets/soto_mastery.png"
+      case "Janthir":
+        return "assets/janthir_mastery.png";
       default:
         console.warn(type, "mastery is not implemented");
         return "assets/core_mastery.png";
@@ -104,6 +106,8 @@ export class LayerService {
         return "EoD";
       case "Sky":
         return "SOTO";
+      case "Janthir":
+        return "JW"
       default:
         return "Unknown";
     }
