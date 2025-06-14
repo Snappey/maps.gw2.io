@@ -140,8 +140,8 @@ export interface FullMatchObjective extends MatchObjective, Objective {}
 const staticWorldNames: WorldDictionary = {
   "12001": { id: "12001", name: "Skrittsburgh", population: "N/A" },
   "2001": { id: "2001", name: "Skrittsburgh", population: "N/A" },
-  "12002": { id: "12002", name: "Fotune's Vale", population: "N/A" },
-  "2002": { id: "2002", name: "Fotune's Vale", population: "N/A" },
+  "12002": { id: "12002", name: "Fortune's Vale", population: "N/A" },
+  "2002": { id: "2002", name: "Fortune's Vale", population: "N/A" },
   "12003": { id: "12003", name: "Silent Woods", population: "N/A" },
   "2003": { id: "2003", name: "Silent Woods", population: "N/A" },
   "12004": { id: "12004", name: "Ettin's Back", population: "N/A" },
@@ -275,9 +275,9 @@ export class WvwService {
 
 
         match.all_worlds_names = {
-          red: mapNames(match.all_worlds.red),
-          green: mapNames(match.all_worlds.green),
-          blue: mapNames(match.all_worlds.blue)
+          red: mapNames(match.worlds.red),
+          green: mapNames(match.worlds.green),
+          blue: mapNames(match.worlds.blue)
         }
         match.friendly_names = {
           red: match.all_worlds_names.red.join(", "),
