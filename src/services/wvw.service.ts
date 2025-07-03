@@ -138,71 +138,38 @@ export interface ObjectiveTiers {
 export interface FullMatchObjective extends MatchObjective, Objective {}
 
 const staticWorldNames: WorldDictionary = {
-  "12001": { id: "12001", name: "Skrittsburgh", population: "N/A" },
   "2001": { id: "2001", name: "Skrittsburgh", population: "N/A" },
-  "12002": { id: "12002", name: "Fortune's Vale", population: "N/A" },
   "2002": { id: "2002", name: "Fortune's Vale", population: "N/A" },
-  "12003": { id: "12003", name: "Silent Woods", population: "N/A" },
   "2003": { id: "2003", name: "Silent Woods", population: "N/A" },
-  "12004": { id: "12004", name: "Ettin's Back", population: "N/A" },
   "2004": { id: "2004", name: "Ettin's Back", population: "N/A" },
-  "12005": { id: "12005", name: "Domain of Anguish", population: "N/A" },
   "2005": { id: "2005", name: "Domain of Anguish", population: "N/A" },
-  "12006": { id: "12006", name: "Palawadan", population: "N/A" },
   "2006": { id: "2006", name: "Palawadan", population: "N/A" },
-  "12007": { id: "12007", name: "Bloodstone Gulch", population: "N/A" },
   "2007": { id: "2007", name: "Bloodstone Gulch", population: "N/A" },
-  "12008": { id: "12008", name: "Frost Citadel", population: "N/A" },
   "2008": { id: "2008", name: "Frost Citadel", population: "N/A" },
-  "12009": { id: "12009", name: "Dragrimmar", population: "N/A" },
   "2009": { id: "2009", name: "Dragrimmar", population: "N/A" },
-  "12010": { id: "12010", name: "Grenth's Door", population: "N/A" },
   "2010": { id: "2010", name: "Grenth's Door", population: "N/A" },
-  "12011": { id: "12011", name: "Mirror of Lyssa", population: "N/A" },
   "2011": { id: "2011", name: "Mirror of Lyssa", population: "N/A" },
-  "12012": { id: "12012", name: "Melandru's Dome", population: "N/A" },
   "2012": { id: "2012", name: "Melandru's Dome", population: "N/A" },
-  "12013": { id: "12013", name: "Kormir's Library", population: "N/A" },
   "2013": { id: "2013", name: "Kormir's Library", population: "N/A" },
-  "12014": { id: "12014", name: "Great House Aviary", population: "N/A" },
   "2014": { id: "2014", name: "Great House Aviary", population: "N/A" },
-  "12015": { id: "12015", name: "Bava Nisos", population: "N/A" },
   "2101": { id: "2101", name: "Bava Nisos", population: "N/A" },
-  "12016": { id: "12016", name: "Temple of Febe", population: "N/A" },
   "2102": { id: "2102", name: "Temple of Febe", population: "N/A" },
-  "12017": { id: "12017", name: "Gyala Hatchery", population: "N/A" },
   "2103": { id: "2103", name: "Gyala Hatchery", population: "N/A" },
-  "12018": { id: "12018", name: "Grekvelnn Burrows", population: "N/A" },
   "2104": { id: "2104", name: "Grekvelnn Burrows", population: "N/A" },
-  "11001": { id: "11001", name: "Moogooloo", population: "N/A" },
   "1001": { id: "1001", name: "Moogooloo", population: "N/A" },
-  "11002": { id: "11002", name: "Rall's Rest", population: "N/A" },
   "1002": { id: "1002", name: "Rall's Rest", population: "N/A" },
-  "11003": { id: "11003", name: "Domain of Torment", population: "N/A" },
   "1003": { id: "1003", name: "Domain of Torment", population: "N/A" },
-  "11004": { id: "11004", name: "Yohlon Haven", population: "N/A" },
   "1004": { id: "1004", name: "Yohlon Haven", population: "N/A" },
-  "11005": { id: "11005", name: "Tombs of Drascir", population: "N/A" },
   "1005": { id: "1005", name: "Tombs of Drascir", population: "N/A" },
-  "11006": { id: "11006", name: "Hall of Judgment", population: "N/A" },
   "1006": { id: "1006", name: "Hall of Judgment", population: "N/A" },
-  "11007": { id: "11007", name: "Throne of Balthazar", population: "N/A" },
   "1007": { id: "1007", name: "Throne of Balthazar", population: "N/A" },
-  "11008": { id: "11008", name: "Dwayna's Temple", population: "N/A" },
   "1008": { id: "1008", name: "Dwayna's Temple", population: "N/A" },
-  "11009": { id: "11009", name: "Abaddon's Prison", population: "N/A" },
   "1009": { id: "1009", name: "Abaddon's Prison", population: "N/A" },
-  "11010": { id: "11010", name: "Ruined Cathedral of Blood", population: "N/A" },
   "1010": { id: "1010", name: "Ruined Cathedral of Blood", population: "N/A" },
-  "11011": { id: "11011", name: "Lutgardis Conservatory", population: "N/A" },
   "1011": { id: "1011", name: "Lutgardis Conservatory", population: "N/A" },
-  "11012": { id: "11012", name: "Mosswood", population: "N/A" },
   "1012": { id: "1012", name: "Mosswood", population: "N/A" },
-  "11013": { id: "11013", name: "Mithric Cliffs", population: "N/A" },
   "1013": { id: "1013", name: "Mithric Cliffs", population: "N/A" },
-  "11014": { id: "11014", name: "Lagula's Kraal", population: "N/A" },
   "1014": { id: "1014", name: "Lagula's Kraal", population: "N/A" },
-  "11015": { id: "11015", name: "De Molish Post", population: "N/A" },
   "1015": { id: "1015", name: "De Molish Post", population: "N/A" },
   "1016": { id: "1016", name: "Sea of Sorrows", population: "VeryHigh" },
   "1017": { id: "1017", name: "Tarnished Coast", population: "VeryHigh" },
@@ -264,20 +231,19 @@ export class WvwService {
     const worldNames = of(staticWorldNames);
 
     return forkJoin([worldNames]).pipe(
-      map(src => {
-        const names = src[0]
-        const mapNames = (ids: string[]) => [...new Set(ids.map(id => {
-          if (id in names) {
-            return names[id].name;
+      map(([worlds]) => {
+        const getWorldName = (id: string) => {
+          if (id in worlds) {
+            return worlds[id].name;
           }
-          return "Unknown"
-        }))];
+          return "Unknown";
+        }
 
 
         match.all_worlds_names = {
-          red: mapNames(match.worlds.red),
-          green: mapNames(match.worlds.green),
-          blue: mapNames(match.worlds.blue)
+          red: [getWorldName(match.worlds.red.toString())],
+          green: [getWorldName(match.worlds.green.toString())],
+          blue: [getWorldName(match.worlds.blue.toString())]
         }
         match.friendly_names = {
           red: match.all_worlds_names.red.join(", "),
