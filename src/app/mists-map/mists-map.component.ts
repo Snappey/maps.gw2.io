@@ -54,12 +54,12 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
 
   options = {
     preferCanvas: true,
-    maxZoom: 6,
-    minZoom: 3.25,
+    maxZoom: 7,
+    minZoom: 4,
     zoomSnap: 0.25,
-    zoom: 4,
+    zoom: 4.5,
     zoomControl: false,
-    center: latLng(-65, 50),
+    center: latLng(-80, 50),
     contextmenu: false,
   }
 
@@ -185,8 +185,8 @@ export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
     leaflet.options.crs = L.CRS.Simple;
     leaflet.options.maxBoundsViscosity = 1;
     leaflet.setMaxBounds(new LatLngBounds(
-      [-256, 0],
-      [-48, 256]
+      [-128, 0],
+      [-24, 128]
     ));
 
     this.layerService.getMistsTiles().addTo(leaflet)

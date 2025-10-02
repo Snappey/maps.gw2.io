@@ -62,7 +62,7 @@ export class LayerService {
     return tileLayer('https://tiles.guildwars2.com/2/1/{z}/{x}/{y}.jpg', {
       maxNativeZoom: 6,
       minNativeZoom: 3,
-      maxZoom: 6,
+      maxZoom: 7,
       noWrap: true,
       tileSize: 256,
       attribution: `<a href="https://www.arena.net/">ArenaNet</a> / <a href="https://gw2timer.com/wvw">Gw2Timer</a>`,
