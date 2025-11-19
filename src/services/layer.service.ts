@@ -46,14 +46,14 @@ export class LayerService {
   }
 
   getTyriaTiles(): TileLayer {
-    return tileLayer('https://tiles{s}.gw2.io/1/1/{z}/{x}/{y}.jpg', {
+    return tileLayer('https://tiles{s}.guildwars2.com/1/1/{z}/{x}/{y}.jpg', {
       subdomains: ["1", "2", "3", "4"],
       maxNativeZoom: 17,
       minNativeZoom: 1,
       maxZoom: 7,
       noWrap: true,
       tileSize: 256,
-      attribution: `<a href="https://www.arena.net/">ArenaNet</a> / <a href="https://twitter.com/that_shaman">ThatShaman</a>`,
+      attribution: `<a href="https://www.arena.net/">ArenaNet</a>`,
       minZoom: 2,
     });
   }
