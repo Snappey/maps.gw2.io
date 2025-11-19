@@ -67,7 +67,10 @@ async function generate(continentId, floorId) {
     }
 
 
+    const snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
+
     for (let map of Object.values(region.maps)) {
+      await snooze(500);
       const mapDetails = await getMap(map.id);
       console.log("| " + mapDetails.data.name);
 

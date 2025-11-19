@@ -6,7 +6,7 @@ import {PointTuple} from "leaflet";
 export type BoundsTuple = [[number, number], [number, number]]
 export type MarkerType = "waypoint" | "poi" | "vista" | "unlock" | string;
 export type RegionLabelType = "Map" | "Region";
-export type MasteryType = "Tyria" | "Maguuma" | "Desert" | "Tundra" | "Jade" | "Sky" | "Janthir";
+export type MasteryType = "Tyria" | "Maguuma" | "Desert" | "Tundra" | "Jade" | "Sky" | "Wild" | "Magic";
 
 export interface RegionLabel {
   type: RegionLabelType;

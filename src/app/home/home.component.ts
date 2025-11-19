@@ -29,7 +29,8 @@ export class HomeComponent {
     "/assets/compass_eod_pointer_activated.png",
     "/assets/compass_hot_pointer_activated.png",
     "/assets/compass_pof_pointer_activated.png",
-    "/assets/compass_soto_pointer_activated.png"
+    "/assets/compass_soto_pointer_activated.png",
+    "/assets/compass_castora_pointer_activated.png"
   ]
 
   preloadAssets = () => this.preloadAssetUrls.forEach(url => new Image(0, 0).src = url);

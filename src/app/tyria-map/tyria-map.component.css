@@ -49,6 +49,14 @@
   background-image: url("/assets/compass_soto_pointer_activated.png");
 }
 
+.compass-button-corner.voe {
+  background-image: url("/assets/compass_castora_pointer.png");
+}
+
+.compass-button-corner.voe:hover {
+  background-image: url("/assets/compass_castora_pointer_activated.png");
+}
+
 .compass-button-player {
   width: 32px;
   height: 32px;
