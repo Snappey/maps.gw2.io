@@ -1,8 +1,12 @@
+import {Feature} from "ol";
 import {FeatureLike} from "ol/Feature";
+import Point from "ol/geom/Point";
+import VectorSource from "ol/source/Vector";
 import VectorTile from "ol/source/VectorTile";
 import {Fill, Stroke, Style} from "ol/style";
 import {StyleLike} from "ol/style/Style";
 import {LayerState} from "../layer-state";
+import {gw2ToOl} from "./gw2-projection";
 import {LayerDefinition} from "./layer-registry";
 import {iconStyle, labelStyle, masteryFriendlyName, masteryIcon} from "./marker-styles";
 
@@ -102,6 +106,52 @@ export const HEART_BOUNDS_STYLE = new Style({
   fill: new Fill({color: "rgba(255, 255, 0, 0.2)"}),
 });
 
+/** Structural subset of EventTimerService's Event, kept Leaflet-free. */
+interface TimedEvent {
+  timeUntil: number;
+  name: string;
+  chatLink: string;
+  coordinates: [number, number];
+}
+
+/**
+ * Upserts world-boss markers in place from a 15s timer tick; only events
+ * starting within `showWithinMinutes` are shown (matches createEventsLayer).
+ */
+export function syncEventFeatures(
+  source: VectorSource,
+  events: {[xpac: string]: TimedEvent[]},
+  showWithinMinutes: number = 30,
+) {
+  const seen = new Set<string>();
+  for (const xpac of Object.keys(events)) {
+    for (const event of events[xpac]) {
+      if (event.timeUntil >= showWithinMinutes || !event.coordinates) {
+        continue;
+      }
+      const id = `${xpac}|${event.name}`;
+      seen.add(id);
+      let feature = source.getFeatureById(id) as Feature<Point> | null;
+      if (!feature) {
+        feature = new Feature({geometry: new Point(gw2ToOl(event.coordinates))});
+        feature.setId(id);
+        source.addFeature(feature);
+      }
+      feature.setProperties({
+        layer: "event",
+        name: event.name,
+        chat_link: event.chatLink,
+        tooltip: `${event.name} - ${Math.round(event.timeUntil)} Minutes`,
+      });
+    }
+  }
+  for (const feature of source.getFeatures()) {
+    if (!seen.has(feature.getId() as string)) {
+      source.removeFeature(feature);
+    }
+  }
+}
+
 /** Hover tooltip text per source-layer, mirroring the old Leaflet bindTooltip calls. */
 export function tooltipFor(feature: FeatureLike): string | undefined {
   switch (feature.get("layer")) {
@@ -110,6 +160,7 @@ export function tooltipFor(feature: FeatureLike): string | undefined {
     case "unlock":
     case "heart":
     case "label_sector":
+    case "event":
       return feature.get("tooltip") || feature.get("chat_link") || undefined;
     case "vista":
       return "Vista";
@@ -157,6 +208,7 @@ export function chatLinkFor(feature: FeatureLike): string | undefined {
     case "heart":
     case "vista":
     case "label_sector":
+    case "event": // closest waypoint to the boss
       return feature.get("chat_link") || undefined;
     default:
       return undefined;

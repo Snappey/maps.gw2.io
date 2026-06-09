@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ClipboardService} from "ngx-clipboard";
 import {ToastrService} from "ngx-toastr";
-import {filter, map, take} from "rxjs";
+import {filter, map, Subject, take, takeUntil} from "rxjs";
 
 import OlMap from "ol/Map";
 import Overlay from "ol/Overlay";
@@ -11,14 +11,17 @@ import {MapBrowserEvent} from "ol";
 import {FeatureLike} from "ol/Feature";
 import Layer from "ol/layer/Base";
 import VectorTileLayer from "ol/layer/VectorTile";
+import VectorSource from "ol/source/Vector";
 import {defaults as defaultControls} from "ol/control/defaults";
 import {PMTilesVectorSource} from "ol-pmtiles";
 import {MVT} from "ol/format";
 
 import {BaseOlMap} from "../../lib/ol/base-ol-map";
 import {LayerState} from "../../lib/layer-state";
+import {EventTimerService} from "../../services/event-timer.service";
 import {createVectorTileGrid, getProjection, gw2ToOl, TYRIA_MAP_CONFIG} from "../../lib/ol/gw2-projection";
-import {chatLinkFor, createTyriaOverlayDefinitions, HEART_BOUNDS_STYLE, tooltipFor, wikiUrlFor} from "../../lib/ol/tyria-layers";
+import {chatLinkFor, createTyriaOverlayDefinitions, HEART_BOUNDS_STYLE, syncEventFeatures, tooltipFor, wikiUrlFor} from "../../lib/ol/tyria-layers";
+import {iconStyle} from "../../lib/ol/marker-styles";
 import {LayerOptionsComponent} from "../layer-options/layer-options.component";
 
 interface ChatLinkIndexEntry {
@@ -44,6 +47,8 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
   private heartBoundsLayer?: VectorTileLayer;
   private highlightedHeartId?: number;
   private interactiveLayers = new Set<Layer>();
+  private eventsSource = new VectorSource();
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     ngZone: NgZone,
@@ -52,6 +57,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
     private http: HttpClient,
     private clipboard: ClipboardService,
     private toastr: ToastrService,
+    private eventTimerService: EventTimerService,
   ) {
     super(ngZone, route, router, TYRIA_MAP_CONFIG);
   }
@@ -61,6 +67,8 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
   }
 
   ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
     this.Map?.setTarget(undefined);
   }
 
@@ -101,6 +109,23 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
         this.interactiveLayers.add(layer);
       }
     }
+
+    // World bosses: 15s timer upserts markers for events within 30 minutes.
+    const eventsLayer = this.registerLayer({
+      kind: "vector",
+      id: "events_layer",
+      source: this.eventsSource,
+      style: () => iconStyle("assets/event-boss.png"),
+      friendlyName: "World Bosses",
+      icon: "/assets/event-boss.png",
+      state: LayerState.Enabled,
+      zIndex: 4,
+    });
+    this.interactiveLayers.add(eventsLayer as Layer);
+
+    this.eventTimerService.getNextEventsTimer(8).pipe(
+      takeUntil(this.unsubscribe$),
+    ).subscribe(events => syncEventFeatures(this.eventsSource, events as never));
 
     // Always-on hover highlight for heart bounds; not part of the layer panel.
     this.heartBoundsLayer = new VectorTileLayer({
@@ -182,10 +207,13 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
     const tooltip = tooltipFor(feature);
     this.ngZone.run(() => {
       this.clipboard.copy(chatLink);
-      const msg = tooltip && tooltip !== chatLink ?
-        `Copied [${tooltip}] to clipboard!` :
-        `Copied ${chatLink} to clipboard!`;
-      this.toastr.info(msg, "", {
+      // World bosses copy their closest waypoint, like the old event markers.
+      const msg = feature.get("layer") === "event" ?
+        "Copied closest waypoint to clipboard!" :
+        tooltip && tooltip !== chatLink ?
+          `Copied [${tooltip}] to clipboard!` :
+          `Copied ${chatLink} to clipboard!`;
+      this.toastr.info(msg, feature.get("layer") === "event" ? feature.get("name") : "", {
         toastClass: "custom-toastr",
         positionClass: "toast-top-right",
       });
