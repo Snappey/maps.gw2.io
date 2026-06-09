@@ -1,0 +1,7 @@
+<div class="map-host" #mapHost></div>
+
+<div #tooltipEl class="tooltip-overlay ol-marker-tooltip"></div>
+
+<div class="layer-panel tooltip">
+  <app-layer-options [layers]="mapLayers" (layerUpdated)="layerUpdated($event)"></app-layer-options>
+</div>

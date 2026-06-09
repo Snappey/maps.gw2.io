@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.map-host {
+  position: absolute;
+  inset: 0;
+  background: #1A2D33;
+}
+
+.ol-marker-tooltip {
+  display: none;
+  white-space: nowrap;
+  pointer-events: none;
+  padding: 4px 8px;
+}
+
+.layer-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  max-width: 280px;
+  padding: 8px;
+}

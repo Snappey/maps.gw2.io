@@ -20,7 +20,7 @@ export class MistsEffects {
   updateActiveMatch$ = createEffect(() => this.actions$.pipe(
     ofType(mistsActions.updateMatch, mistsActions.setActiveMatch),
     switchMap(props => this.wvwService.getMatchDetails(props.matchId).pipe(
-      tap(match => this.router.navigate(["wvw", match.id], {skipLocationChange: true})),
+      tap(match => this.syncLegacyRoute(match.id)),
       map(match => mistsActions.updateMatchSuccess({ match })),
       catchError(error => of(mistsActions.updateMatchFailed({ error })))
     ))
@@ -29,11 +29,21 @@ export class MistsEffects {
   setActiveMatchByWorld$ = createEffect(() => this.actions$.pipe(
     ofType(mistsActions.setActiveWorld),
     switchMap(props => this.wvwService.getMatchDetailsByWorldId(props.worldId).pipe(
-      tap(match => this.router.navigate(["wvw", match.id], {skipLocationChange: true})),
+      tap(match => this.syncLegacyRoute(match.id)),
       map(match => mistsActions.setActiveMatch({ matchId: match.id })),
       catchError(error => of(mistsActions.setActiveWorldFailed({ error })))
     ))
   ))
+
+  // The Leaflet map reads the active match from route params, so historically
+  // every match update silently re-activated /wvw/:id. The OL map subscribes
+  // to the store instead — re-activating the legacy route there would tear the
+  // component down mid-session, so skip it on /wvw-next.
+  private syncLegacyRoute(matchId: string) {
+    if (!this.router.url.startsWith("/wvw-next")) {
+      this.router.navigate(["wvw", matchId], {skipLocationChange: true});
+    }
+  }
 
   constructor(private actions$: Actions, private wvwService: WvwService, private readonly store: Store, private router: Router) {}
 }

@@ -31,15 +31,15 @@ export abstract class BaseOlMap {
   ) {
   }
 
-  createView(): View {
+  createView(options?: {center?: [number, number], zoom?: number, constrainResolution?: boolean}): View {
     return new View({
       projection: getProjection(this.config),
       resolutions: getResolutions(this.config),
       extent: getExtent(this.config),
-      center: gw2ToOl([this.config.width / 2, this.config.height / 2]),
-      zoom: 3,
+      center: gw2ToOl(options?.center ?? [this.config.width / 2, this.config.height / 2]),
+      zoom: options?.zoom ?? 3,
       minZoom: this.config.minZoom,
-      constrainResolution: true,
+      constrainResolution: options?.constrainResolution ?? true,
       enableRotation: false,
       showFullExtent: true,
     });

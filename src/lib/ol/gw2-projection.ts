@@ -137,5 +137,6 @@ export const fragmentToView = (fragment: string, config: Gw2MapConfig): {center:
 export const viewToFragment = (center: Coordinate, zoom: number, config: Gw2MapConfig): string => {
   const [x, y] = olToGw2(center);
   const scale = 2 ** config.maxZoom;
-  return [Math.round(-y / scale), Math.round(x / scale), Math.round(zoom)].join(",");
+  // Zoom may be fractional on maps without resolution constraint (Mists).
+  return [Math.round(-y / scale), Math.round(x / scale), Math.round(zoom * 100) / 100].join(",");
 };

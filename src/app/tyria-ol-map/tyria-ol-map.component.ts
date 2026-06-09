@@ -67,7 +67,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
   private initMap() {
     const olMap = new OlMap({
       target: this.mapHost.nativeElement,
-      view: this.createView(),
+      view: this.createView({center: [46720, 33280], zoom: 3}),
       controls: defaultControls({zoom: false, rotate: false}),
     });
 
