@@ -22,10 +22,10 @@
     "@angular/platform-browser-dynamic": "^18.2.14",
     "@angular/router": "^18.2.14",
     "@asymmetrik/ngx-leaflet": "^16.0.0",
-    "@ngrx/component": "^17.2.0",
-    "@ngrx/effects": "^17.2.0",
-    "@ngrx/store": "^17.2.0",
-    "@ngrx/store-devtools": "^17.2.0",
+    "@ngrx/component": "^18.1.1",
+    "@ngrx/effects": "^18.1.1",
+    "@ngrx/store": "^18.1.1",
+    "@ngrx/store-devtools": "^18.1.1",
     "chart.js": "^4.1.1",
     "cookieconsent": "^3.1.1",
     "leaflet": "^1.9.4",
@@ -43,7 +43,8 @@
     "primeng": "^16.0.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.10"
+    "zone.js": "~0.14.10",
+    "@ngrx/operators": "^18.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.21",
