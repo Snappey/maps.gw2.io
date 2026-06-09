@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {LayerOptions, LayerState} from "../../lib/base-map";
+import {LayerState, PanelLayerOptions} from "../../lib/layer-state";
 
-interface LayerOptionsWithId extends LayerOptions {
+interface LayerOptionsWithId extends PanelLayerOptions {
   id: string;
 }
 
@@ -15,7 +15,7 @@ export class LayerOptionsComponent {
   _layers!: LayerOptionsWithId[];
 
   @Input()
-  set layers(value: {[key: string]: LayerOptions}) {
+  set layers(value: {[key: string]: PanelLayerOptions}) {
     this._layers = Object.entries(value)
         .map(([id, layer]) => ({...layer, id}))
         .sort((a, b) =>

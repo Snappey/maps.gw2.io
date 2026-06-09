@@ -9,6 +9,8 @@ import {MarkerLabel} from "../services/asset.service";
 import {LayerService} from "../services/layer.service";
 import {ToastrService} from "ngx-toastr";
 
+import {LayerState} from "./layer-state";
+
 export interface LayerOptions {
   layer: Layer;
   minZoomLevel?: number;
@@ -20,12 +22,7 @@ export interface LayerOptions {
   state: LayerState;
 }
 
-export enum LayerState {
-  Enabled,
-  Disabled,
-  Hidden,
-  Pinned,
-}
+export {LayerState} from "./layer-state";
 
 export class BaseMap {
   CONTINENT_ID: number = 1 as const;
