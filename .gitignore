@@ -43,3 +43,7 @@ Thumbs.db
 
 # Claude Code local tooling
 .claude/
+
+# go-pmtiles CLI binary (see README) + tiler intermediates
+scripts/bin/
+scripts/out/
