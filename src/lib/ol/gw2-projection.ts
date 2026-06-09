@@ -13,12 +13,18 @@ export interface Gw2MapConfig {
   code: string;
   continentId: number;
   floorId: number;
-  /** World size in continent pixels at maxNativeZoom. */
+  /** World size in continent pixels (continent px == screen px at maxZoom). */
   width: number;
   height: number;
-  /** Maximum zoom with native tiles; continent px == screen px at this zoom. */
+  /**
+   * Deepest zoom with native raster tiles. For Tyria this equals maxZoom; for
+   * the Mists the tile pyramid stops at 6 (32x32 tiles of 512 continent px)
+   * while coordinates and the view are scaled to zoom 7 — tiles overzoom 2x at
+   * maxZoom, exactly like the old Leaflet maxNativeZoom setup.
+   */
   maxNativeZoom: number;
   minZoom: number;
+  /** Max view zoom; also the coordinate/fragment scale (2^maxZoom). */
   maxZoom: number;
   /** XYZ template, {z}/{x}/{y}; subdomain list expanded by the raster source. */
   tileUrl: string;
@@ -45,7 +51,7 @@ export const MISTS_MAP_CONFIG: Gw2MapConfig = {
   width: 16384,
   height: 16384,
   maxNativeZoom: 6,
-  minZoom: 3,
+  minZoom: 4,
   maxZoom: 7,
   tileUrl: "https://tiles.guildwars2.com/2/1/{z}/{x}/{y}.jpg",
   attribution: '<a href="https://www.arena.net/">ArenaNet</a> / <a href="https://gw2timer.com/wvw">Gw2Timer</a>',
@@ -60,9 +66,9 @@ export const olToGw2 = (coords: Coordinate): [number, number] =>
 export const getExtent = (config: Gw2MapConfig): Extent =>
   [0, -config.height, config.width, 0];
 
-/** resolutions[z] = 2^(maxNativeZoom - z), so OL view zoom N == Leaflet zoom N. */
+/** resolutions[z] = 2^(maxZoom - z), so OL view zoom N == Leaflet zoom N. */
 export const getResolutions = (config: Gw2MapConfig): number[] =>
-  Array.from({length: config.maxNativeZoom + 1}, (_, z) => 2 ** (config.maxNativeZoom - z));
+  Array.from({length: config.maxZoom + 1}, (_, z) => 2 ** (config.maxZoom - z));
 
 const projectionCache = new Map<string, Projection>();
 
@@ -89,7 +95,8 @@ export const createTileGrid = (config: Gw2MapConfig): TileGrid =>
   new TileGrid({
     extent: getExtent(config),
     origin: [0, 0], // top-left; OL tile y increases downwards, matching GW2's scheme
-    resolutions: getResolutions(config),
+    // Native raster tiles only exist down to maxNativeZoom; OL overzooms beyond.
+    resolutions: getResolutions(config).slice(0, config.maxNativeZoom + 1),
     tileSize: 256,
   });
 
@@ -107,8 +114,8 @@ export const createVectorTileGrid = (config: Gw2MapConfig): TileGrid =>
     extent: getExtent(config),
     origin: [0, 0],
     resolutions: Array.from(
-      {length: config.maxNativeZoom + VECTOR_TILE_ZOOM_OFFSET + 1},
-      (_, z) => 2 ** (config.maxNativeZoom + VECTOR_TILE_ZOOM_OFFSET - z)),
+      {length: config.maxZoom + VECTOR_TILE_ZOOM_OFFSET + 1},
+      (_, z) => 2 ** (config.maxZoom + VECTOR_TILE_ZOOM_OFFSET - z)),
     tileSize: 256,
     minZoom: VECTOR_TILE_ZOOM_OFFSET,
   });
@@ -123,12 +130,12 @@ export const fragmentToView = (fragment: string, config: Gw2MapConfig): {center:
     return undefined;
   }
   const [lat, lng, zoom] = parts;
-  const scale = 2 ** config.maxNativeZoom;
+  const scale = 2 ** config.maxZoom;
   return {center: gw2ToOl([lng * scale, -lat * scale]), zoom};
 };
 
 export const viewToFragment = (center: Coordinate, zoom: number, config: Gw2MapConfig): string => {
   const [x, y] = olToGw2(center);
-  const scale = 2 ** config.maxNativeZoom;
+  const scale = 2 ** config.maxZoom;
   return [Math.round(-y / scale), Math.round(x / scale), Math.round(zoom)].join(",");
 };

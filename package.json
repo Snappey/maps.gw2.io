@@ -10,7 +10,7 @@
     "cache-regions": "node scripts/generate_regions.js",
     "cache-poi": "node scripts/generate_pois.js",
     "cache-extras": "node scripts/generate_extras.js",
-    "build-tiles": "node scripts/generate_tiles.mjs && scripts/bin/pmtiles convert scripts/out/tyria_1_1.mbtiles src/assets/tiles/tyria_1_1.pmtiles"
+    "build-tiles": "node scripts/generate_tiles.mjs && scripts/bin/pmtiles convert scripts/out/tyria_1_1.mbtiles src/assets/tiles/tyria_1_1.pmtiles && scripts/bin/pmtiles convert scripts/out/mists_2_1.mbtiles src/assets/tiles/mists_2_1.pmtiles"
   },
   "private": true,
   "dependencies": {

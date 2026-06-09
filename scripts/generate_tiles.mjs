@@ -28,23 +28,12 @@ const TILE_SIZE = 256;
 // maxZoom+OFFSET+1 entries (see createVectorTileGrid in gw2-projection.ts).
 const ZOOM_OFFSET = 2;
 
-const CONTINENTS = [
-  {
-    name: "tyria",
-    continentId: 1,
-    floorId: 1,
-    width: 81920,
-    height: 114688,
-    maxZoom: 7,
-  },
-];
-
 // [minZoom, maxZoom] a layer's features are written into; mirrors the display
-// thresholds registered in tyria-map.component.ts so low-zoom tiles stay tiny.
+// thresholds registered in the map components so low-zoom tiles stay tiny.
 // bufferPx is the inclusion buffer in *screen* pixels around each tile, so
 // icons/labels straddling a tile border render on both sides (declutter
 // collapses the duplicates).
-const LAYERS = {
+const TYRIA_LAYERS = {
   waypoint:      {zoom: [5, 7], bufferPx: 32},
   poi:           {zoom: [6, 7], bufferPx: 32},
   vista:         {zoom: [6, 7], bufferPx: 32},
@@ -60,6 +49,38 @@ const LAYERS = {
   label_region:  {zoom: [2, 5], bufferPx: 1024},
   label_map:     {zoom: [3, 5], bufferPx: 512},
 };
+
+// The old Leaflet mists map registers everything with minZoomLevel 0 except
+// waypoints; the view never goes below zoom 4 anyway.
+const MISTS_LAYERS = {
+  waypoint:      {zoom: [4, 7], bufferPx: 32},
+  objective:     {zoom: [4, 7], bufferPx: 48},
+  sector_bounds: {zoom: [4, 7], bufferPx: 32},
+  label_map:     {zoom: [4, 7], bufferPx: 512},
+};
+
+const CONTINENTS = [
+  {
+    name: "tyria",
+    continentId: 1,
+    floorId: 1,
+    width: 81920,
+    height: 114688,
+    maxZoom: 7, // coordinate scale; matches Gw2MapConfig.maxZoom
+    layers: TYRIA_LAYERS,
+    collect: collectTyriaFeatures,
+  },
+  {
+    name: "mists",
+    continentId: 2,
+    floorId: 1,
+    width: 16384,
+    height: 16384,
+    maxZoom: 7, // mists coords are zoom-7 scaled even though raster stops at 6
+    layers: MISTS_LAYERS,
+    collect: collectMistsFeatures,
+  },
+];
 
 const trimChatLink = (link) => link?.replace(/^\[/, "").replace(/\]$/, "").replace(/=+$/, "");
 
@@ -143,6 +164,71 @@ function collectTyriaFeatures(continent) {
   return {features, chatLinkIndex};
 }
 
+const EDGE_OF_THE_MISTS_MAP_ID = 968;
+const OBSIDIAN_SANCTUM_SECTOR_ID = 1031;
+
+// Mirrors layer.service.ts mistsMatchHeadings (hardcoded in the Leaflet app).
+const MISTS_HEADINGS = [
+  {coord: [10600, 12750], heading: "Eternal Battlegrounds"},
+  {coord: [10800, 8700], heading: "Red Desert Borderlands"},
+  {coord: [14100, 10700], heading: "Blue Alpine Borderlands"},
+  {coord: [6900, 11450], heading: "Green Alpine Borderlands"},
+];
+
+const interpolate = (start, end, t) =>
+  [start[0] + (end[0] - start[0]) * t, start[1] + (end[1] - start[1]) * t];
+
+function collectMistsFeatures(continent) {
+  const features = [];
+  const point = (layer, coords, props) => features.push({layer, geomType: 1, coords, props});
+  const polygon = (layer, ring, props) => features.push({layer, geomType: 3, coords: ring, props});
+  const chatLinkIndex = {};
+
+  for (const label of DATA(`poi_labels_${continent.continentId}_${continent.floorId}.json`)) {
+    if (!label.coordinates) continue;
+    const d = label.data ?? {};
+    if (label.type === "waypoint") {
+      point("waypoint", label.coordinates, {id: label.id, tooltip: d.tooltip ?? "", chat_link: d.chat_link ?? ""});
+      const key = trimChatLink(d.chat_link);
+      if (key) {
+        chatLinkIndex[key] = {coord: label.coordinates, tooltip: d.tooltip ?? "", type: "waypoint"};
+      }
+    } else if (label.type === "sector"
+      && label.continent === "World vs. World"
+      && label.map !== "Edge of the Mists"
+      && label.id !== OBSIDIAN_SANCTUM_SECTOR_ID
+      && Array.isArray(d.bounds) && d.bounds.length > 2) {
+      // Shrink 3% toward the sector label like the Leaflet map, so adjacent
+      // sector outlines don't sit on top of each other.
+      const ring = d.bounds.map(coords => interpolate(label.coordinates, coords, .97));
+      polygon("sector_bounds", ring, {id: label.id, tooltip: d.tooltip ?? ""});
+    }
+  }
+
+  for (const obj of DATA("mists_objectives.json")) {
+    if (!obj.coord || obj.map_id === EDGE_OF_THE_MISTS_MAP_ID) continue;
+    point("objective", obj.coord, {
+      id: obj.id,
+      name: obj.name ?? "",
+      type: obj.type ?? "",
+      sector_id: obj.sector_id ?? 0,
+      map_id: obj.map_id ?? 0,
+      marker: obj.marker ?? "",
+      chat_link: obj.chat_link ?? "",
+    });
+    const key = trimChatLink(obj.chat_link);
+    if (key) {
+      chatLinkIndex[key] = {coord: obj.coord, tooltip: obj.name ?? "", type: "objective"};
+    }
+  }
+
+  for (const label of MISTS_HEADINGS) {
+    point("label_map", label.coord, {heading: label.heading, subheading: ""});
+  }
+
+  return {features, chatLinkIndex};
+}
+
 // --- Tiling ------------------------------------------------------------------
 
 // MVT spec: exterior rings clockwise in y-down tile space.
@@ -175,7 +261,7 @@ function buildTiles(continent, features) {
       [Math.round((x - tx * span) * EXTENT / span), Math.round((y - ty * span) * EXTENT / span)];
 
     for (const f of features) {
-      const def = LAYERS[f.layer];
+      const def = continent.layers[f.layer];
       if (z < def.zoom[0] || z > def.zoom[1]) continue;
       const buf = def.bufferPx * res;
 
@@ -234,7 +320,8 @@ function writeMbtiles(continent, tiles, outFile) {
     CREATE UNIQUE INDEX tile_index ON tiles (zoom_level, tile_column, tile_row);
   `);
 
-  const vectorLayers = Object.keys(LAYERS).map(id => ({id, fields: {}, minzoom: LAYERS[id].zoom[0], maxzoom: LAYERS[id].zoom[1]}));
+  const vectorLayers = Object.keys(continent.layers).map(id =>
+    ({id, fields: {}, minzoom: continent.layers[id].zoom[0], maxzoom: continent.layers[id].zoom[1]}));
   const metadata = {
     name: `gw2-${continent.name}`,
     format: "pbf",
@@ -273,7 +360,7 @@ function writeMbtiles(continent, tiles, outFile) {
 // --- Main ---------------------------------------------------------------------
 
 for (const continent of CONTINENTS) {
-  const {features, chatLinkIndex} = collectTyriaFeatures(continent);
+  const {features, chatLinkIndex} = continent.collect(continent);
   const counts = {};
   for (const f of features) {
     counts[f.layer] = (counts[f.layer] ?? 0) + 1;

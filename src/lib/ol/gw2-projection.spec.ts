@@ -19,7 +19,16 @@ describe("gw2-projection", () => {
 
   it("uses resolutions 2^(maxZoom-z) so OL zoom == Leaflet zoom", () => {
     expect(getResolutions(TYRIA_MAP_CONFIG)).toEqual([128, 64, 32, 16, 8, 4, 2, 1]);
-    expect(getResolutions(MISTS_MAP_CONFIG)).toEqual([64, 32, 16, 8, 4, 2, 1]);
+    // Mists coordinates are scaled to zoom 7 even though native tiles stop at 6.
+    expect(getResolutions(MISTS_MAP_CONFIG)).toEqual([128, 64, 32, 16, 8, 4, 2, 1]);
+  });
+
+  it("stops the mists raster grid at the native zoom 6 pyramid (32x32 tiles)", () => {
+    const grid = createTileGrid(MISTS_MAP_CONFIG);
+    expect(grid.getResolutions().length).toBe(7); // z0..6
+    // EB center pixel (10600, 12750): tile span at z6 = 512 px -> (20, 24),
+    // verified against live tiles.guildwars2.com/2/1/6/20/24.jpg.
+    expect(grid.getTileCoordForCoordAndZ(gw2ToOl([10600, 12750]), 6)).toEqual([6, 20, 24]);
   });
 
   it("matches the Leaflet CRS.Simple fragment math (lat=-y/128, lng=x/128)", () => {
