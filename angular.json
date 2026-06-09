@@ -80,10 +80,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "map-gw2-io:build:production"
+              "buildTarget": "map-gw2-io:build:production"
             },
             "development": {
-              "browserTarget": "map-gw2-io:build:development"
+              "buildTarget": "map-gw2-io:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "map-gw2-io:build"
+            "buildTarget": "map-gw2-io:build"
           }
         },
         "test": {
