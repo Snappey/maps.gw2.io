@@ -1,0 +1,8 @@
+<div class="map-host" #mapHost></div>
+
+<div #tooltipEl class="tooltip ol-marker-tooltip"></div>
+<img #highlightEl class="ol-marker-highlight" src="/assets/small_drawn_circle.png" alt=""/>
+
+<div class="layer-panel tooltip">
+  <app-layer-options [layers]="mapLayers" (layerUpdated)="layerUpdated($event)"></app-layer-options>
+</div>

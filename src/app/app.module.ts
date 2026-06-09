@@ -89,7 +89,6 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         LiveMarkerSidebarComponent,
         AboutModalComponent,
         ToolbarComponent,
-        LayerOptionsComponent,
         WizardVaultGridComponent,
         WizardVaultObjectiveComponent
     ],
@@ -132,9 +131,12 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         ProgressSpinnerModule,
         ChartModule,
         SkeletonModule,
+        LayerOptionsComponent,
         RouterModule.forRoot([
             { path: "tyria", component: TyriaMapComponent },
             { path: "tyria/:chatLink", component: TyriaMapComponent },
+            { path: "tyria-next", loadComponent: () => import("./tyria-ol-map/tyria-ol-map.component").then(c => c.TyriaOlMapComponent) },
+            { path: "tyria-next/:chatLink", loadComponent: () => import("./tyria-ol-map/tyria-ol-map.component").then(c => c.TyriaOlMapComponent) },
             { path: "wvw", component: MistsMapComponent },
             { path: "wvw/:id", component: MistsMapComponent },
             { path: "wvw/:id/:chatLink", component: MistsMapComponent },

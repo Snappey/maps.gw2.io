@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ButtonModule} from "primeng/button";
+import {TooltipModule} from "primeng/tooltip";
 import {LayerState, PanelLayerOptions} from "../../lib/layer-state";
 
 interface LayerOptionsWithId extends PanelLayerOptions {
@@ -9,7 +11,8 @@ interface LayerOptionsWithId extends PanelLayerOptions {
     selector: 'app-layer-options',
     templateUrl: './layer-options.component.html',
     styleUrls: ['./layer-options.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [ButtonModule, TooltipModule]
 })
 export class LayerOptionsComponent {
   _layers!: LayerOptionsWithId[];

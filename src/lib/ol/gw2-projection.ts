@@ -1,4 +1,4 @@
-import {Projection} from "ol/proj";
+import {addProjection, Projection} from "ol/proj";
 import TileGrid from "ol/tilegrid/TileGrid";
 import {Extent} from "ol/extent";
 import {Coordinate} from "ol/coordinate";
@@ -64,12 +64,26 @@ export const getExtent = (config: Gw2MapConfig): Extent =>
 export const getResolutions = (config: Gw2MapConfig): number[] =>
   Array.from({length: config.maxNativeZoom + 1}, (_, z) => 2 ** (config.maxNativeZoom - z));
 
-export const createProjection = (config: Gw2MapConfig): Projection =>
-  new Projection({
-    code: config.code,
-    units: "pixels",
-    extent: getExtent(config),
-  });
+const projectionCache = new Map<string, Projection>();
+
+/**
+ * One shared, registered Projection instance per map config — OL treats two
+ * instances with the same code as different projections, so view and sources
+ * must reference the same object.
+ */
+export const getProjection = (config: Gw2MapConfig): Projection => {
+  let projection = projectionCache.get(config.code);
+  if (!projection) {
+    projection = new Projection({
+      code: config.code,
+      units: "pixels",
+      extent: getExtent(config),
+    });
+    addProjection(projection);
+    projectionCache.set(config.code, projection);
+  }
+  return projection;
+};
 
 export const createTileGrid = (config: Gw2MapConfig): TileGrid =>
   new TileGrid({
