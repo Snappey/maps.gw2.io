@@ -39,7 +39,6 @@ import {MatchOverviewComponent} from './mists-map/match-overview/match-overview.
 import {ObjectiveDetailsComponent} from './mists-map/objective-details/objective-details.component';
 import {SkeletonModule} from "primeng/skeleton";
 import {TabMenuModule} from "primeng/tabmenu";
-import {RouterTestingModule} from "@angular/router/testing";
 import {StoreModule} from "@ngrx/store";
 import {mistsFeature} from "../state/mists/mists.feature";
 import {EffectsModule} from "@ngrx/effects";
@@ -57,7 +56,7 @@ import {SettingsEffects} from "../state/settings/settings.effects";
 import {PasswordModule} from "primeng/password";
 import {userFeature} from "../state/user/user.feature";
 import {UserEffects} from "../state/user/user.effects";
-import {LetModule} from '@ngrx/component';
+import {LetDirective} from '@ngrx/component';
 import {ToggleButtonModule} from "primeng/togglebutton";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {NgcCookieConsentModule} from "ngx-cookieconsent";
@@ -145,7 +144,6 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     ChartModule,
     SkeletonModule,
     TabMenuModule,
-    RouterTestingModule,
     RouterModule.forRoot([
       {path: "tyria", component: TyriaMapComponent},
       {path: "tyria/:chatLink", component: TyriaMapComponent},
@@ -156,7 +154,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
       {path: "**", redirectTo: "/tyria", pathMatch: "full"}
     ]),
 
-    LetModule,
+    LetDirective,
     StoreModule.forRoot(),
     StoreModule.forFeature(settingsFeature),
     StoreModule.forFeature(userFeature),
@@ -175,7 +173,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: false,
-    }),
+    connectInZone: true}),
     PasswordModule,
     ToggleButtonModule,
     SelectButtonModule,
