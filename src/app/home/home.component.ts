@@ -5,9 +5,10 @@ import {environment} from "../../environments/environment";
 import {NgcCookieConsentService} from "ngx-cookieconsent";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css'],
+    standalone: false
 })
 export class HomeComponent {
   constructor(private store: Store, private ccService: NgcCookieConsentService) {

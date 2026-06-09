@@ -33,10 +33,11 @@ import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 import {ToolbarButton} from "../toolbar/toolbar.component";
 
 @Component({
-  selector: 'mists-map',
-  templateUrl: './mists-map.component.html',
-  styleUrls: ['./mists-map.component.css'],
-  providers: [DialogService]
+    selector: 'mists-map',
+    templateUrl: './mists-map.component.html',
+    styleUrls: ['./mists-map.component.css'],
+    providers: [DialogService],
+    standalone: false
 })
 export class MistsMapComponent extends BaseMap implements OnInit, OnDestroy {
   OBJECTIVE_LAYER = "mists_objective" as const;

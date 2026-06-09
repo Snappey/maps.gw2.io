@@ -7,9 +7,10 @@ interface LayerOptionsWithId extends LayerOptions {
 }
 
 @Component({
-  selector: 'app-layer-options',
-  templateUrl: './layer-options.component.html',
-  styleUrls: ['./layer-options.component.css']
+    selector: 'app-layer-options',
+    templateUrl: './layer-options.component.html',
+    styleUrls: ['./layer-options.component.css'],
+    standalone: false
 })
 export class LayerOptionsComponent {
   _layers!: LayerOptionsWithId[];

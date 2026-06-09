@@ -4,9 +4,10 @@ import {ClipboardService} from "ngx-clipboard";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
-  selector: 'app-event-panel',
-  templateUrl: './event-panel.component.html',
-  styleUrls: ['./event-panel.component.css']
+    selector: 'app-event-panel',
+    templateUrl: './event-panel.component.html',
+    styleUrls: ['./event-panel.component.css'],
+    standalone: false
 })
 export class EventPanelComponent implements OnInit {
   @Input()

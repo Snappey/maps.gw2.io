@@ -7,9 +7,10 @@ interface ChartData {
 }
 
 @Component({
-  selector: 'app-fight-stats-chart',
-  templateUrl: './fight-stats-chart.component.html',
-  styleUrls: ['./fight-stats-chart.component.css']
+    selector: 'app-fight-stats-chart',
+    templateUrl: './fight-stats-chart.component.html',
+    styleUrls: ['./fight-stats-chart.component.css'],
+    standalone: false
 })
 export class FightStatsChartComponent implements OnInit {
   @Input()

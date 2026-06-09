@@ -9,9 +9,10 @@ import {AppState} from "../../state/appState";
 import {AccountService} from "../../services/account.service";
 
 @Component({
-  selector: 'app-settings-modal',
-  templateUrl: './settings-modal.component.html',
-  styleUrls: ['./settings-modal.component.css']
+    selector: 'app-settings-modal',
+    templateUrl: './settings-modal.component.html',
+    styleUrls: ['./settings-modal.component.css'],
+    standalone: false
 })
 export class SettingsModalComponent implements OnDestroy {
   @Input()

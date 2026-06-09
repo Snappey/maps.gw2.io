@@ -5,9 +5,10 @@ import {AppState} from "../../state/appState";
 import {exhaustMap, filter, tap} from "rxjs";
 
 @Component({
-  selector: 'app-wizard-vault-grid',
-  templateUrl: './wizard-vault-grid.component.html',
-  styleUrls: ['./wizard-vault-grid.component.css']
+    selector: 'app-wizard-vault-grid',
+    templateUrl: './wizard-vault-grid.component.html',
+    styleUrls: ['./wizard-vault-grid.component.css'],
+    standalone: false
 })
 export class WizardVaultGridComponent {
 

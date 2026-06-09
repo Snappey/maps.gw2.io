@@ -21,10 +21,11 @@ import {ToolbarButton} from "../toolbar/toolbar.component";
 import {environment} from "../../environments/environment";
 
 @Component({
-  selector: 'tyria-map',
-  templateUrl: './tyria-map.component.html',
-  styleUrls: ['./tyria-map.component.css'],
-  providers: [DialogService]
+    selector: 'tyria-map',
+    templateUrl: './tyria-map.component.html',
+    styleUrls: ['./tyria-map.component.css'],
+    providers: [DialogService],
+    standalone: false
 })
 export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
   override CONTINENT_ID = 1 as const;

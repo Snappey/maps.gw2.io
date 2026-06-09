@@ -6,9 +6,10 @@ import {Store} from "@ngrx/store";
 import {AppState} from "../../state/appState";
 
 @Component({
-  selector: 'app-live-marker-sidebar',
-  templateUrl: './live-marker-sidebar.component.html',
-  styleUrls: ['./live-marker-sidebar.component.css']
+    selector: 'app-live-marker-sidebar',
+    templateUrl: './live-marker-sidebar.component.html',
+    styleUrls: ['./live-marker-sidebar.component.css'],
+    standalone: false
 })
 export class LiveMarkerSidebarComponent implements OnDestroy {
   onDestroy$: Subject<void> = new Subject<void>();

@@ -4,9 +4,10 @@ import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {PointTuple} from "leaflet";
 
 @Component({
-  selector: 'app-editor-modal',
-  templateUrl: './editor-modal.component.html',
-  styleUrls: ['./editor-modal.component.css']
+    selector: 'app-editor-modal',
+    templateUrl: './editor-modal.component.html',
+    styleUrls: ['./editor-modal.component.css'],
+    standalone: false
 })
 export class EditorModalComponent implements OnInit {
   coords: PointTuple = [0,0];

@@ -5,9 +5,10 @@ import {map, Observable, timer} from "rxjs";
 import moment from "moment";
 
 @Component({
-  selector: 'app-objective-details',
-  templateUrl: './objective-details.component.html',
-  styleUrls: ['./objective-details.component.css']
+    selector: 'app-objective-details',
+    templateUrl: './objective-details.component.html',
+    styleUrls: ['./objective-details.component.css'],
+    standalone: false
 })
 export class ObjectiveDetailsComponent implements OnChanges {
   @Input()

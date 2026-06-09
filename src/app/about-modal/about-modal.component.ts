@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-about-modal',
-  templateUrl: './about-modal.component.html',
-  styleUrls: ['./about-modal.component.css']
+    selector: 'app-about-modal',
+    templateUrl: './about-modal.component.html',
+    styleUrls: ['./about-modal.component.css'],
+    standalone: false
 })
 export class AboutModalComponent {
   @Input()

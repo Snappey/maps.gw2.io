@@ -8,9 +8,10 @@ interface ChartData {
 }
 
 @Component({
-  selector: 'app-skirmish-stats-chart',
-  templateUrl: './skirmish-stats-chart.component.html',
-  styleUrls: ['./skirmish-stats-chart.component.css']
+    selector: 'app-skirmish-stats-chart',
+    templateUrl: './skirmish-stats-chart.component.html',
+    styleUrls: ['./skirmish-stats-chart.component.css'],
+    standalone: false
 })
 export class SkirmishStatsChartComponent implements OnInit {
   @Input()

@@ -2,9 +2,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Event, EventMap} from "../../../services/event-timer.service";
 
 @Component({
-  selector: 'app-event-grid',
-  templateUrl: './event-grid.component.html',
-  styleUrls: ['./event-grid.component.css']
+    selector: 'app-event-grid',
+    templateUrl: './event-grid.component.html',
+    styleUrls: ['./event-grid.component.css'],
+    standalone: false
 })
 export class EventGridComponent {
 

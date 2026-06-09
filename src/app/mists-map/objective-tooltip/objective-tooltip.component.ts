@@ -3,9 +3,10 @@ import {FullMatchObjective, WvwService} from "../../../services/wvw.service";
 import {GuildService} from "../../../services/guild.service";
 
 @Component({
-  selector: 'app-objective-tooltip',
-  templateUrl: './objective-tooltip.component.html',
-  styleUrls: ['./objective-tooltip.component.css']
+    selector: 'app-objective-tooltip',
+    templateUrl: './objective-tooltip.component.html',
+    styleUrls: ['./objective-tooltip.component.css'],
+    standalone: false
 })
 export class ObjectiveTooltipComponent implements OnInit {
 

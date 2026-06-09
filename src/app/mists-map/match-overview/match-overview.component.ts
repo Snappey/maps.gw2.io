@@ -5,9 +5,10 @@ import {Store} from "@ngrx/store";
 import {AppState} from "../../../state/appState";
 
 @Component({
-  selector: 'app-match-overview',
-  templateUrl: './match-overview.component.html',
-  styleUrls: ['./match-overview.component.css']
+    selector: 'app-match-overview',
+    templateUrl: './match-overview.component.html',
+    styleUrls: ['./match-overview.component.css'],
+    standalone: false
 })
 export class MatchOverviewComponent {
 

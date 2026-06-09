@@ -7,9 +7,10 @@ interface SkirmishSummary {
 }
 
 @Component({
-  selector: 'app-score-overview',
-  templateUrl: './score-overview.component.html',
-  styleUrls: ['./score-overview.component.css']
+    selector: 'app-score-overview',
+    templateUrl: './score-overview.component.html',
+    styleUrls: ['./score-overview.component.css'],
+    standalone: false
 })
 export class ScoreOverviewComponent implements OnInit {
   @Input()
