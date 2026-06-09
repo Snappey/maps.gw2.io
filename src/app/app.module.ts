@@ -12,21 +12,20 @@ import {ToastrModule} from "ngx-toastr";
 import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {ClipboardModule} from "ngx-clipboard";
 import {EditorModalComponent} from './tyria-map/editor-modal/editor-modal.component';
-import {DropdownModule} from "primeng/dropdown";
+import {SelectModule} from "primeng/select";
+import {providePrimeNG} from "primeng/config";
+import Lara from "@primeuix/themes/lara";
 import {ButtonModule} from "primeng/button";
-import {SidebarModule} from "primeng/sidebar";
 import {CardModule} from "primeng/card";
 import {EventPanelComponent} from './tyria-map/event-panel/event-panel.component';
 import {EventGridComponent} from './tyria-map/event-grid/event-grid.component';
 import {InputTextModule} from "primeng/inputtext";
 import {TooltipModule} from "primeng/tooltip";
-import {OverlayPanelModule} from "primeng/overlaypanel";
 import {PanelModule} from "primeng/panel";
 import {DividerModule} from "primeng/divider";
 import {StyleClassModule} from "primeng/styleclass";
 import {MistsMapComponent} from './mists-map/mists-map.component';
 import {ArraySortPipe} from "../pipes/orderBy.pipe";
-import {SpinnerModule} from "primeng/spinner";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {CookieModule} from "ngx-cookie";
 import {ChartModule} from "primeng/chart";
@@ -38,7 +37,6 @@ import {SkirmishStatsChartComponent} from './mists-map/skirmish-stats-chart/skir
 import {MatchOverviewComponent} from './mists-map/match-overview/match-overview.component';
 import {ObjectiveDetailsComponent} from './mists-map/objective-details/objective-details.component';
 import {SkeletonModule} from "primeng/skeleton";
-import {TabMenuModule} from "primeng/tabmenu";
 import {StoreModule} from "@ngrx/store";
 import {mistsFeature} from "../state/mists/mists.feature";
 import {EffectsModule} from "@ngrx/effects";
@@ -66,8 +64,6 @@ import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from "ngx-goog
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {NgOptimizedImage} from "@angular/common";
 import {LayerOptionsComponent} from './layer-options/layer-options.component';
-import {InputSwitchModule} from "primeng/inputswitch";
-import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
 import { WizardVaultGridComponent } from './wizard-vault-grid/wizard-vault-grid.component';
 import { WizardVaultObjectiveComponent } from './wizard-vault-objective/wizard-vault-objective.component';
 
@@ -124,22 +120,18 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         }),
         DialogModule,
         DynamicDialogModule,
-        DropdownModule,
+        SelectModule,
         FormsModule,
         ButtonModule,
-        SidebarModule,
         CardModule,
         InputTextModule,
         TooltipModule,
-        OverlayPanelModule,
         PanelModule,
         DividerModule,
         StyleClassModule,
-        SpinnerModule,
         ProgressSpinnerModule,
         ChartModule,
         SkeletonModule,
-        TabMenuModule,
         RouterModule.forRoot([
             { path: "tyria", component: TyriaMapComponent },
             { path: "tyria/:chatLink", component: TyriaMapComponent },
@@ -173,8 +165,16 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         SelectButtonModule,
         NgxGoogleAnalyticsModule.forRoot('G-ZF8RV8P3LT'),
         NgxGoogleAnalyticsRouterModule,
-        NgOptimizedImage,
-        InputSwitchModule,
-        TriStateCheckboxModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        NgOptimizedImage], providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        providePrimeNG({
+            theme: {
+                preset: Lara,
+                options: {
+                    darkModeSelector: false
+                }
+            }
+        })
+    ] })
 export class AppModule {
 }

@@ -254,7 +254,7 @@ export class TyriaMapComponent extends BaseMap implements OnInit, OnDestroy {
           type: type,
           coords: coords,
         }
-      }).onClose.pipe(
+      })?.onClose.pipe(
         takeUntil(this.unsubscribe$),
       ).subscribe(res => {
         if (this.Map)

@@ -6,12 +6,12 @@
         {{layer.friendlyName}}:
       </span>
       <span class="align-self-end">
-        <p-triStateCheckbox class="small-input-switch"
-          [ngModel]="mapState(layer)"
-          (onChange)="onLayerToggle($event, layer)"
-          checkboxTrueIcon="pi pi-lock-open"
-          checkboxFalseIcon="pi pi-lock">
-        </p-triStateCheckbox>
+        <p-button class="small-input-switch"
+          [text]="true" size="small"
+          [icon]="stateIcon(layer)"
+          [pTooltip]="stateLabel(layer)" tooltipPosition="left" tooltipStyleClass="tooltip"
+          (onClick)="onLayerToggle(layer)">
+        </p-button>
       </span>
     </div>
   }

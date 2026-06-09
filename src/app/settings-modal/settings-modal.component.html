@@ -1,4 +1,4 @@
-<p-dialog header="Settings" [(visible)]="this.visible" [style]="{width: '50vw'}">
+﻿<p-dialog header="Settings" [(visible)]="this.visible" [style]="{width: '50vw'}">
   <form id="settings-form" [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
     <div class="field">
       <label for="api-key" class="block">API Key:</label>
@@ -17,7 +17,7 @@
     <div class="field">
       <label for="home-world" class="block">Home World:</label>
       @if (worlds$ | async; as worlds) {
-        <p-dropdown
+        <p-select
           id="home-world"
           appendTo="body"
           [style]="{width: '100%'}"
@@ -25,7 +25,7 @@
           optionLabel="name" optionValue="id"
           formControlName="homeWorld"
           [filter]="true" filterBy="name">
-        </p-dropdown>
+        </p-select>
       }
       <small id="home-world-help" class="block">Default WvW world to use.</small>
     </div>
@@ -40,18 +40,18 @@
     @if (settingsForm.get('liveMapEnabled')?.value) {
       <div class="field">
         <label for="selectedChannel" class="block">Channel:</label>
-        <p-dropdown id="selectedChannel"
+        <p-select id="selectedChannel"
           appendTo="body"
           [style]="{width: '100%'}"
           [options]="settingsForm.get('apiKey')?.value ? authChannelTypes : unauthChannelTypes"
           formControlName="selectedChannel">
-        </p-dropdown>
+        </p-select>
         <small id="selectedChannel-help" class="block">Channel type to subscribe to.</small>
       </div>
       @if (settingsForm.get('selectedChannel')?.value === ChannelType.Guild) {
         <div class="field">
           <label for="guild" class="block">Guild:</label>
-          <p-dropdown *ngrxLet="userGuilds$ as userGuilds"
+          <p-select *ngrxLet="userGuilds$ as userGuilds"
             id="guild"
             appendTo="body"
             [style]="{width: '100%'}"
@@ -61,7 +61,7 @@
             <ng-template let-guild pTemplate="item">
               [{{guild.tag}}] {{guild.name}}
             </ng-template>
-          </p-dropdown>
+          </p-select>
           <small id="guild-help" class="block">Guild you want to subscribe to.</small>
         </div>
       }

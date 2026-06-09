@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LayerOptions, LayerState} from "../../lib/base-map";
-import {TriStateCheckboxChangeEvent} from "primeng/tristatecheckbox";
 
 interface LayerOptionsWithId extends LayerOptions {
   id: string;
@@ -26,31 +25,42 @@ export class LayerOptionsComponent {
   @Output()
   layerUpdated: EventEmitter<[string, LayerState]> = new EventEmitter<[string, LayerState]>();
 
-  mapState(layer: LayerOptionsWithId): boolean | null {
+  stateIcon(layer: LayerOptionsWithId): string {
     switch (layer.state) {
       case LayerState.Enabled:
-        return true;
-      case LayerState.Pinned:
-        return false;
-      case LayerState.Disabled:
-        return null;
       case LayerState.Hidden:
-        return true;
+        return "pi pi-lock-open";
+      case LayerState.Pinned:
+        return "pi pi-lock";
       default:
-        return null;
+        return "pi pi-eye-slash";
     }
   }
 
-  onLayerToggle($event: TriStateCheckboxChangeEvent, layer: LayerOptionsWithId) {
-    switch ($event.value) {
-      case true:
-        layer.state = LayerState.Enabled;
-        break;
-      case false:
+  stateLabel(layer: LayerOptionsWithId): string {
+    switch (layer.state) {
+      case LayerState.Enabled:
+      case LayerState.Hidden:
+        return "Shown";
+      case LayerState.Pinned:
+        return "Pinned";
+      default:
+        return "Hidden";
+    }
+  }
+
+  // Cycles Shown -> Pinned -> Hidden, matching the old tri-state checkbox order.
+  onLayerToggle(layer: LayerOptionsWithId) {
+    switch (layer.state) {
+      case LayerState.Enabled:
+      case LayerState.Hidden:
         layer.state = LayerState.Pinned;
         break;
-      case null:
+      case LayerState.Pinned:
         layer.state = LayerState.Disabled;
+        break;
+      default:
+        layer.state = LayerState.Enabled;
         break;
     }
     this.layerUpdated.emit([layer.id, layer.state]);
