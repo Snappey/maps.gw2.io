@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {combineLatest, forkJoin, map, Observable, of, switchMap,} from "rxjs";
 import {GuildService} from "./guild.service";
 import {PointTuple} from "leaflet";

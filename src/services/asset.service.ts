@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {from, map, Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {PointTuple} from "leaflet";
 
 export type BoundsTuple = [[number, number], [number, number]]

@@ -16,7 +16,7 @@ import {
   tap,
   withLatestFrom
 } from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {AppState} from "../state/appState";
 import {Store} from "@ngrx/store";
 import {liveMarkersActions} from "../state/live-markers/live-markers.action";

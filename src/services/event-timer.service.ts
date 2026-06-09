@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {map, Observable, of, switchMap, timer} from "rxjs";
 import {LayerGroup, Map, Marker, Point, PointTuple} from "leaflet";
 import {LabelService} from "./label.service";

@@ -9,7 +9,7 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {TyriaMapComponent} from './tyria-map/tyria-map.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
-import {HttpClientModule} from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {ClipboardModule} from "ngx-clipboard";
 import {EditorModalComponent} from './tyria-map/editor-modal/editor-modal.component';
 import {DropdownModule} from "primeng/dropdown";
@@ -75,118 +75,106 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   connectOnCreate: false,
 };
 
-@NgModule({
-  declarations: [
-    TyriaMapComponent,
-    EditorModalComponent,
-    EventPanelComponent,
-    EventGridComponent,
-    MistsMapComponent,
-    ArraySortPipe,
-    ObjectiveTooltipComponent,
-    HomeComponent,
-    ScoreOverviewComponent,
-    FightStatsChartComponent,
-    SkirmishStatsChartComponent,
-    MatchOverviewComponent,
-    ObjectiveDetailsComponent,
-    SettingsModalComponent,
-    LiveMarkerSidebarComponent,
-    AboutModalComponent,
-    ToolbarComponent,
-    LayerOptionsComponent,
-    WizardVaultGridComponent,
-    WizardVaultObjectiveComponent
-  ],
-  imports: [
-    BrowserModule,
-    LeafletModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    CookieModule.withOptions(),
-    HttpClientModule,
-    ClipboardModule,
-    ReactiveFormsModule,
-
-    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
-    NgcCookieConsentModule.forRoot({
-      cookie: {
-        domain: 'maps.gw2.io'
-      },
-      palette: {
-        popup: {
-          background: '#000'
-        },
-        button: {
-          background: '#f1d600'
-        }
-      },
-      theme: 'edgeless',
-      position: "bottom",
-      type: 'info'
-    }),
-
-    DialogModule,
-    DynamicDialogModule,
-    DropdownModule,
-    FormsModule,
-    ButtonModule,
-    SidebarModule,
-    CardModule,
-    InputTextModule,
-    TooltipModule,
-    OverlayPanelModule,
-    PanelModule,
-    DividerModule,
-    StyleClassModule,
-    SpinnerModule,
-    ProgressSpinnerModule,
-    ChartModule,
-    SkeletonModule,
-    TabMenuModule,
-    RouterModule.forRoot([
-      {path: "tyria", component: TyriaMapComponent},
-      {path: "tyria/:chatLink", component: TyriaMapComponent},
-      {path: "wvw", component: MistsMapComponent},
-      {path: "wvw/:id", component: MistsMapComponent},
-      {path: "wvw/:id/:chatLink", component: MistsMapComponent},
-      {path: ":chatLink", redirectTo: "/tyria/:chatLink", pathMatch: "full"},
-      {path: "**", redirectTo: "/tyria", pathMatch: "full"}
-    ]),
-
-    LetDirective,
-    StoreModule.forRoot(),
-    StoreModule.forFeature(settingsFeature),
-    StoreModule.forFeature(userFeature),
-    StoreModule.forFeature(mistsFeature),
-    StoreModule.forFeature(guildFeature),
-    StoreModule.forFeature(liveMarkersFeature),
-
-    EffectsModule.forRoot([
-      SettingsEffects,
-      UserEffects,
-      MistsEffects,
-      GuildEffects,
-      LiveMarkersEffects
-    ]),
-
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: false,
-    connectInZone: true}),
-    PasswordModule,
-    ToggleButtonModule,
-    SelectButtonModule,
-
-    NgxGoogleAnalyticsModule.forRoot('G-ZF8RV8P3LT'),
-    NgxGoogleAnalyticsRouterModule,
-    NgOptimizedImage,
-    InputSwitchModule,
-    TriStateCheckboxModule,
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
-  bootstrap: [HomeComponent],
-})
+@NgModule({ declarations: [
+        TyriaMapComponent,
+        EditorModalComponent,
+        EventPanelComponent,
+        EventGridComponent,
+        MistsMapComponent,
+        ArraySortPipe,
+        ObjectiveTooltipComponent,
+        HomeComponent,
+        ScoreOverviewComponent,
+        FightStatsChartComponent,
+        SkirmishStatsChartComponent,
+        MatchOverviewComponent,
+        ObjectiveDetailsComponent,
+        SettingsModalComponent,
+        LiveMarkerSidebarComponent,
+        AboutModalComponent,
+        ToolbarComponent,
+        LayerOptionsComponent,
+        WizardVaultGridComponent,
+        WizardVaultObjectiveComponent
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    bootstrap: [HomeComponent], imports: [BrowserModule,
+        LeafletModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        CookieModule.withOptions(),
+        ClipboardModule,
+        ReactiveFormsModule,
+        MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
+        NgcCookieConsentModule.forRoot({
+            cookie: {
+                domain: 'maps.gw2.io'
+            },
+            palette: {
+                popup: {
+                    background: '#000'
+                },
+                button: {
+                    background: '#f1d600'
+                }
+            },
+            theme: 'edgeless',
+            position: "bottom",
+            type: 'info'
+        }),
+        DialogModule,
+        DynamicDialogModule,
+        DropdownModule,
+        FormsModule,
+        ButtonModule,
+        SidebarModule,
+        CardModule,
+        InputTextModule,
+        TooltipModule,
+        OverlayPanelModule,
+        PanelModule,
+        DividerModule,
+        StyleClassModule,
+        SpinnerModule,
+        ProgressSpinnerModule,
+        ChartModule,
+        SkeletonModule,
+        TabMenuModule,
+        RouterModule.forRoot([
+            { path: "tyria", component: TyriaMapComponent },
+            { path: "tyria/:chatLink", component: TyriaMapComponent },
+            { path: "wvw", component: MistsMapComponent },
+            { path: "wvw/:id", component: MistsMapComponent },
+            { path: "wvw/:id/:chatLink", component: MistsMapComponent },
+            { path: ":chatLink", redirectTo: "/tyria/:chatLink", pathMatch: "full" },
+            { path: "**", redirectTo: "/tyria", pathMatch: "full" }
+        ]),
+        LetDirective,
+        StoreModule.forRoot(),
+        StoreModule.forFeature(settingsFeature),
+        StoreModule.forFeature(userFeature),
+        StoreModule.forFeature(mistsFeature),
+        StoreModule.forFeature(guildFeature),
+        StoreModule.forFeature(liveMarkersFeature),
+        EffectsModule.forRoot([
+            SettingsEffects,
+            UserEffects,
+            MistsEffects,
+            GuildEffects,
+            LiveMarkersEffects
+        ]),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: false,
+            connectInZone: true
+        }),
+        PasswordModule,
+        ToggleButtonModule,
+        SelectButtonModule,
+        NgxGoogleAnalyticsModule.forRoot('G-ZF8RV8P3LT'),
+        NgxGoogleAnalyticsRouterModule,
+        NgOptimizedImage,
+        InputSwitchModule,
+        TriStateCheckboxModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
 }
