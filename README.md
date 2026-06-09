@@ -36,3 +36,33 @@ Tiles are provided by [ThatShaman](https://twitter.com/that_shaman) and [ArenaNe
 
 The [Official Guild Wars 2 API](https://wiki.guildwars2.com/wiki/API:Main) and [Wiki](https://wiki.guildwars2.com/wiki/Main_Page) is used for label and marker data. 
 
+
+## Development
+
+Requires Node.js 20+ and npm.
+
+```sh
+npm install
+npm start          # dev server on http://localhost:4200
+npm run build      # production build
+```
+
+### Data generation scripts
+
+```sh
+npm run cache-poi      # POI/label data from the GW2 API
+npm run cache-regions  # region/map heading data from the GW2 API
+npm run cache-extras   # adventures + city markers scraped from the GW2 wiki
+```
+
+### Vector tiles (OpenLayers migration)
+
+Overlay data is being migrated to pre-generated vector tiles (PMTiles) rendered
+with OpenLayers. Building the tile archives requires the
+[go-pmtiles](https://github.com/protomaps/go-pmtiles) CLI (`pmtiles`) on PATH to
+convert the intermediate MBTiles output:
+
+```sh
+# Windows: download the release binary, or
+go install github.com/protomaps/go-pmtiles/main@latest
+```
