@@ -1,37 +1,43 @@
 <ng-container class="flex flex-row justify-content-evenly px-6 fadein animation-duration-300" style="max-height: 90vh; overflow-y: auto">
   <ng-container *ngrxLet="apiKey$ as apiKey">
     <div class="flex flex-1">
-      <ng-container *ngIf="apiKey">
-        <div class="flex flex-column flex-1 mx-3" *ngIf="dailyTrack$ | async as dailyTrack">
-          <div class="mb-1 align-items-center h-2rem tooltip">
-            <h3 class="my-1 text-center">Daily</h3>
+      @if (apiKey) {
+        @if (dailyTrack$ | async; as dailyTrack) {
+          <div class="flex flex-column flex-1 mx-3">
+            <div class="mb-1 align-items-center h-2rem tooltip">
+              <h3 class="my-1 text-center">Daily</h3>
+            </div>
+            @for (objective of dailyTrack.objectives; track objective) {
+              <app-wizard-vault-objective [objective]="objective"></app-wizard-vault-objective>
+            }
           </div>
-          <ng-container *ngFor="let objective of dailyTrack.objectives">
-            <app-wizard-vault-objective [objective]="objective"></app-wizard-vault-objective>
-          </ng-container>
-        </div>
-        <div class="flex flex-column flex-1 mx-3" *ngIf="weeklyTrack$ | async as weeklyTrack">
-          <div class="mb-1 align-items-center h-2rem tooltip">
-            <h3 class="my-1 text-center">Weekly</h3>
+        }
+        @if (weeklyTrack$ | async; as weeklyTrack) {
+          <div class="flex flex-column flex-1 mx-3">
+            <div class="mb-1 align-items-center h-2rem tooltip">
+              <h3 class="my-1 text-center">Weekly</h3>
+            </div>
+            @for (objective of weeklyTrack.objectives; track objective) {
+              <app-wizard-vault-objective [objective]="objective"></app-wizard-vault-objective>
+            }
           </div>
-          <ng-container *ngFor="let objective of weeklyTrack.objectives">
-            <app-wizard-vault-objective [objective]="objective"></app-wizard-vault-objective>
-          </ng-container>
-        </div>
-        <div class="flex flex-column flex-1 mx-3" *ngIf="specialTrack$ | async as specialTrack">
-          <div class="mb-1 align-items-center h-2rem tooltip">
-            <h3 class="my-1 text-center">Special</h3>
+        }
+        @if (specialTrack$ | async; as specialTrack) {
+          <div class="flex flex-column flex-1 mx-3">
+            <div class="mb-1 align-items-center h-2rem tooltip">
+              <h3 class="my-1 text-center">Special</h3>
+            </div>
+            @for (objective of specialTrack.objectives; track objective) {
+              <app-wizard-vault-objective [objective]="objective"></app-wizard-vault-objective>
+            }
           </div>
-          <ng-container *ngFor="let objective of specialTrack.objectives">
-            <app-wizard-vault-objective [objective]="objective"></app-wizard-vault-objective>
-          </ng-container>
-        </div>
-      </ng-container>
+        }
+      }
     </div>
-    <ng-container *ngIf="!apiKey">
+    @if (!apiKey) {
       <div class="mb-1 align-items-center h-2rem tooltip">
         <h3 class="my-1 text-center">Wizards Vault: API Key Required, check Settings..</h3>
       </div>
-    </ng-container>
+    }
   </ng-container>
 </ng-container>

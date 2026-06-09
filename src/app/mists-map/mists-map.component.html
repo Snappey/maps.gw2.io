@@ -1,17 +1,17 @@
 <div style="height: 100vh; background: #000;"
-     leaflet
-     [leafletOptions]="options"
-     (leafletMapReady)="onMapReady($event)"
-     (leafletMapZoomEnd)="onMapZoomFinished($event)"
-     tabindex="0">
+  leaflet
+  [leafletOptions]="options"
+  (leafletMapReady)="onMapReady($event)"
+  (leafletMapZoomEnd)="onMapZoomFinished($event)"
+  tabindex="0">
 </div>
 
 <div [hidden]="showMatches" class="w-30rem" style="position: absolute; z-index: 999; left: 10px; top: 50px">
-  <ng-container *ngIf="activeMatch$ | async as activeMatch">
-    <ng-container *ngIf="activeMatch">
+  @if (activeMatch$ | async; as activeMatch) {
+    @if (activeMatch) {
       <app-score-overview [loading]="false" [small]="smallScreen" [match]="activeMatch"></app-score-overview>
-    </ng-container>
-  </ng-container>
+    }
+  }
 </div>
 
 <app-toolbar [buttons]="leftToolbar" style="position: absolute;  z-index: 999; width: 25vw; left: 10px; top: 5px;"></app-toolbar>
@@ -20,23 +20,29 @@
 <app-settings-modal [(visible)]="showSettings"></app-settings-modal>
 <app-about-modal [(visible)]="showAbout"></app-about-modal>
 
-<ng-container *ngIf="showLayers">
+@if (showLayers) {
   <app-layer-options [layers]="mapLayers" (layerUpdated)="layerUpdated($event)" style="position: absolute; z-index: 999; min-width: 15vw; left: 1.5vw; top: 10vw;"></app-layer-options>
-</ng-container>
+}
 
-<div *ngIf="showScore" style="position: absolute; z-index: 999; left: 15%; top: 25%; width: 75vw; height: 50vh;">
-  <ng-container *ngIf="activeMatch$ | async as activeMatch">
-    <div class="tooltip p-3" *ngIf="activeMatch">
-      <app-skirmish-stats-chart [match]="activeMatch" height="50vh"></app-skirmish-stats-chart>
-    </div>
-  </ng-container>
-</div>
+@if (showScore) {
+  <div style="position: absolute; z-index: 999; left: 15%; top: 25%; width: 75vw; height: 50vh;">
+    @if (activeMatch$ | async; as activeMatch) {
+      @if (activeMatch) {
+        <div class="tooltip p-3">
+          <app-skirmish-stats-chart [match]="activeMatch" height="50vh"></app-skirmish-stats-chart>
+        </div>
+      }
+    }
+  </div>
+}
 
 <div [hidden]="!showMatches" class="overflow-auto h-auto w-auto my-5" style="position: absolute; z-index: 999; left: 0; right: 0; top: 25px; margin-left: auto; margin-right: auto">
-    <app-match-overview (clickedMatch)="overviewMatchClicked($event)"></app-match-overview>
+  <app-match-overview (clickedMatch)="overviewMatchClicked($event)"></app-match-overview>
 </div>
 
 <p-dialog header="Objective Upgrades" [(visible)]="showObjectiveDetails" [style]="{width: '50vw'}"
-          [draggable]="true" [resizable]="false">
-  <app-objective-details *ngIf="selectedObjective" [objective]="selectedObjective"></app-objective-details>
+  [draggable]="true" [resizable]="false">
+  @if (selectedObjective) {
+    <app-objective-details [objective]="selectedObjective"></app-objective-details>
+  }
 </p-dialog>
