@@ -35,7 +35,6 @@
     "ngx-clipboard": "^16.0.0",
     "ngx-cookie": "^6.0.1",
     "ngx-cookieconsent": "^8.0.0",
-    "ngx-google-analytics": "^14.0.1",
     "ngx-mqtt": "^17.0.0",
     "ngx-toastr": "^20.0.5",
     "ol": "^10.9.0",

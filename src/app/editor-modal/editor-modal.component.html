@@ -1,7 +1,7 @@
-<div class="card">
+﻿<div class="card">
   @if (markerType != 0) {
     <div class="formgrid">
-      @for (field of fields | keyvalue; track field) {
+      @for (field of fields | keyvalue; track field.key) {
         <div class="field">
           <label [for]="field">{{field.key}}</label>
           @if (field.value === 'string') {

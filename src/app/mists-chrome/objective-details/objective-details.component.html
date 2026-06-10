@@ -1,4 +1,4 @@
-<div class="grid grid-nogutter">
+﻿<div class="grid grid-nogutter">
   <div class="col-12">
     <h3 class="mb-2 mt-0">{{objective.name}}</h3>
   </div>
@@ -36,9 +36,9 @@
     <div class="lg:col-8 md:col-12 mt-2">
       @if ((upgradeDetails$) && upgradeDetails$ | async; as upgradeDetails) {
         <div class="flex flex-wrap flex-column min-w-0">
-          @for (tier of upgradeDetails.tiers; track tier) {
+          @for (tier of upgradeDetails.tiers; track tier.name) {
             <div class="flex flex-row justify-content-evenly">
-              @for (upgrade of tier.upgrades; track upgrade) {
+              @for (upgrade of tier.upgrades; track upgrade.name) {
                 <div>
                   <div class="flex flex-wrap flex-column">
                     <img class="clickable p-2 max-w-full" [ngClass]="{'grayscale': !this.wvwService.hasUpgradeLevel(objective.yaks_delivered, tier.name) }" [src]="upgrade.icon" [pTooltip]="upgrade.name">

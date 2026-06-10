@@ -1,4 +1,4 @@
-<ng-container class="flex flex-row justify-content-evenly px-6 fadein animation-duration-300" style="max-height: 90vh; overflow-y: auto">
+﻿<ng-container class="flex flex-row justify-content-evenly px-6 fadein animation-duration-300" style="max-height: 90vh; overflow-y: auto">
   <ng-container *ngrxLet="apiKey$ as apiKey">
     <div class="flex flex-1">
       @if (apiKey) {
@@ -7,7 +7,7 @@
             <div class="mb-1 align-items-center h-2rem tooltip">
               <h3 class="my-1 text-center">Daily</h3>
             </div>
-            @for (objective of dailyTrack.objectives; track objective) {
+            @for (objective of dailyTrack.objectives; track objective.id) {
               <app-wizard-vault-objective [objective]="objective"></app-wizard-vault-objective>
             }
           </div>
@@ -17,7 +17,7 @@
             <div class="mb-1 align-items-center h-2rem tooltip">
               <h3 class="my-1 text-center">Weekly</h3>
             </div>
-            @for (objective of weeklyTrack.objectives; track objective) {
+            @for (objective of weeklyTrack.objectives; track objective.id) {
               <app-wizard-vault-objective [objective]="objective"></app-wizard-vault-objective>
             }
           </div>
@@ -27,7 +27,7 @@
             <div class="mb-1 align-items-center h-2rem tooltip">
               <h3 class="my-1 text-center">Special</h3>
             </div>
-            @for (objective of specialTrack.objectives; track objective) {
+            @for (objective of specialTrack.objectives; track objective.id) {
               <app-wizard-vault-objective [objective]="objective"></app-wizard-vault-objective>
             }
           </div>

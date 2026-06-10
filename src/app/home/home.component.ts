@@ -1,8 +1,12 @@
 import {Component} from '@angular/core';
+import {NavigationEnd, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
+import {distinctUntilChanged, filter, map} from "rxjs";
 import {settingsAction} from "../../state/settings/settings.action";
 import {environment} from "../../environments/environment";
 import {NgcCookieConsentService} from "ngx-cookieconsent";
+
+declare const gtag: ((...args: unknown[]) => void) | undefined;
 
 @Component({
     selector: 'app-home',
@@ -11,7 +15,7 @@ import {NgcCookieConsentService} from "ngx-cookieconsent";
     standalone: false
 })
 export class HomeComponent {
-  constructor(private store: Store, private ccService: NgcCookieConsentService) {
+  constructor(private store: Store, private ccService: NgcCookieConsentService, router: Router) {
     this.store.dispatch(settingsAction.loadCookie());
     this.preloadAssets();
 
@@ -20,6 +24,17 @@ export class HomeComponent {
 
     }
 
+    // SPA page views for the gtag snippet in index.html (replaces ngx-google-analytics).
+    // The maps write "#lat,lng,zoom" fragments on every pan — only the path counts.
+    router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map(event => event.urlAfterRedirects.split("#")[0]),
+      distinctUntilChanged(),
+    ).subscribe(pagePath => {
+      if (typeof gtag === "function") {
+        gtag("event", "page_view", {page_path: pagePath});
+      }
+    });
 
     this.ccService.initialized$.pipe(
     ).subscribe(_ => ccService.open())

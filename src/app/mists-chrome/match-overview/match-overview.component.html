@@ -1,11 +1,11 @@
-<div class="grid grid-nogutter overflow-y-auto" *ngrxLet="{loading: matchesLoading$, matches: matches$}; let vm" style="max-height: 80vh">
-  @for (regionMatches of vm.matches | keyvalue; track regionMatches) {
+﻿<div class="grid grid-nogutter overflow-y-auto" *ngrxLet="{loading: matchesLoading$, matches: matches$}; let vm" style="max-height: 80vh">
+  @for (regionMatches of vm.matches | keyvalue; track regionMatches.key) {
     <div class="col-12 lg:col-6">
       <div class="flex align-items-center flex-column flex-auto flex-wrap px-6">
         <div class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-30rem w-25rem h-2rem tooltip">
           <h2 class="my-1 text-center">{{regionMatches.key | uppercase}} Matches</h2>
         </div>
-        @for (match of regionMatches.value; track match) {
+        @for (match of regionMatches.value; track match.id) {
           <div class="my-2 flex-1 flex-grow-1 lg:w-30rem w-25rem clickable hover">
             <app-score-overview  (click)="selectedMatch(match)" [match]="match" [loading]="false"></app-score-overview>
           </div>

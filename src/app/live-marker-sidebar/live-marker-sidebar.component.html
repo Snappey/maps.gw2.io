@@ -1,4 +1,4 @@
-<div class="flex flex-auto flex-column overflow-y-auto fadein animation-duration-300" style="max-height: 80vh;">
+﻿<div class="flex flex-auto flex-column overflow-y-auto fadein animation-duration-300" style="max-height: 80vh;">
   @if (isEnabled$ | async) {
     @if (channelDetails$ | async; as channelDetails) {
       <div class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
@@ -13,7 +13,7 @@
           <div class="my-1 text-center text-white">There is no one here.. :(</div>
         </div>
       }
-      @for (marker of activeMarkers$ | async; track marker) {
+      @for (marker of activeMarkers$ | async; track marker.accountName) {
         <div class="flex flex-row align-items-center justify-content-start tooltip p-1 pr-2 my-1 clickable text-center w-auto border-1 hover:border-green-200"
           [ngStyle]="{'background-color': marker.getProfessionColour()}"
           [ngClass]="{'border-green-500': isFollowing$ | async}"

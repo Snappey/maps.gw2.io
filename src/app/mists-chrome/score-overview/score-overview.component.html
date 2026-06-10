@@ -1,6 +1,6 @@
-<div class="flex flex-column">
+﻿<div class="flex flex-column">
   @if (!loading) {
-    @for (team of sortedScores; track team) {
+    @for (team of sortedScores; track team.name) {
       <div class="flex align-items-center flex-auto h-2rem p-1 min-w-full tooltip scalein animation-duration-200" [ngClass]="'overlay-' + team.name">
         @if (!small) {
           <span class="text-left mists-score white-space-nowrap flex-grow-1 text-overflow-ellipsis" >{{match.all_worlds_names[team.name].join(", ")}}</span>

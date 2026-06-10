@@ -8,7 +8,6 @@ import {ClipboardModule} from "ngx-clipboard";
 import {CookieModule} from "ngx-cookie";
 import {NgcCookieConsentModule} from "ngx-cookieconsent";
 import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
-import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from "ngx-google-analytics";
 import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
@@ -104,8 +103,6 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
       connectInZone: true
     }),
 
-    NgxGoogleAnalyticsModule.forRoot('G-ZF8RV8P3LT'),
-    NgxGoogleAnalyticsRouterModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
