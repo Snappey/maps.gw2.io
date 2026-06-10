@@ -19,7 +19,11 @@ import {MVT} from "ol/format";
 
 import {AppState} from "../../state/appState";
 import {mistsActions} from "../../state/mists/mists.action";
+import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
+import {selectUserAccountName} from "../../state/user/user.feature";
 import {WvwService} from "../../services/wvw.service";
+import {LiveMarkersService} from "../../services/live-markers.service";
+import {OlLiveMarkersController} from "../../lib/ol/live-markers-layer";
 import {BaseOlMap} from "../../lib/ol/base-ol-map";
 import {LayerState} from "../../lib/layer-state";
 import {createVectorTileGrid, getProjection, gw2ToOl, MISTS_MAP_CONFIG} from "../../lib/ol/gw2-projection";
@@ -54,6 +58,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   private objectivesSource = new VectorSource();
   private spawnSource = new VectorSource();
   private sectorOwnership = new Map<number, string>();
+  private liveMarkers?: OlLiveMarkersController;
 
   private activeMatch$ = this.store.select(state => state.mists.activeMatch);
 
@@ -63,6 +68,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     router: Router,
     private store: Store<AppState>,
     private wvwService: WvwService,
+    private liveMarkersService: LiveMarkersService,
     private http: HttpClient,
     private clipboard: ClipboardService,
     private toastr: ToastrService,
@@ -72,6 +78,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
 
   ngOnInit() {
     this.store.dispatch(mistsActions.loadMatches());
+    this.store.dispatch(liveMarkersActions.setActiveContinent({continentId: this.config.continentId as 1 | 2}));
 
     // Match selection: explicit :id (match or world id) or the settings home world.
     this.route.params.pipe(
@@ -107,6 +114,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.liveMarkers?.destroy();
     this.Map?.setTarget(undefined);
   }
 
@@ -159,6 +167,23 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       zIndex: 4,
     });
     this.interactiveLayers.add(objectivesLayer);
+
+    this.liveMarkers = new OlLiveMarkersController(
+      olMap,
+      this.config.continentId,
+      this.liveMarkersService.messages$,
+      this.store.select(selectUserAccountName),
+    );
+    const liveLayer = this.registerLayer({
+      kind: "vector",
+      id: "LIVE_MAP",
+      source: this.liveMarkers.source,
+      friendlyName: "Live Map",
+      icon: "/assets/player_marker.png",
+      state: LayerState.Enabled,
+      zIndex: 6,
+    });
+    this.interactiveLayers.add(liveLayer);
 
     this.registerLayer({
       kind: "vector",
@@ -225,7 +250,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     const feature = this.featureAt(e.pixel);
     const tooltipEl = this.tooltipEl.nativeElement;
 
-    if (feature && feature.get("layer") === "waypoint") {
+    if (feature && (feature.get("layer") === "waypoint" || feature.get("layer") === "live")) {
       tooltipEl.innerText = tooltipFor(feature) ?? "";
       tooltipEl.style.display = "block";
       this.tooltipOverlay?.setPosition(e.coordinate);

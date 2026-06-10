@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, ElementRef, isDevMode, NgZone, OnDestroy, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {Store} from "@ngrx/store";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ClipboardService} from "ngx-clipboard";
@@ -18,7 +19,12 @@ import {MVT} from "ol/format";
 
 import {BaseOlMap} from "../../lib/ol/base-ol-map";
 import {LayerState} from "../../lib/layer-state";
+import {AppState} from "../../state/appState";
+import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
+import {selectUserAccountName} from "../../state/user/user.feature";
 import {EventTimerService} from "../../services/event-timer.service";
+import {LiveMarkersService} from "../../services/live-markers.service";
+import {OlLiveMarkersController} from "../../lib/ol/live-markers-layer";
 import {createVectorTileGrid, getProjection, gw2ToOl, TYRIA_MAP_CONFIG} from "../../lib/ol/gw2-projection";
 import {chatLinkFor, createTyriaOverlayDefinitions, HEART_BOUNDS_STYLE, syncEventFeatures, tooltipFor, wikiUrlFor} from "../../lib/ol/tyria-layers";
 import {iconStyle} from "../../lib/ol/marker-styles";
@@ -49,6 +55,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
   private interactiveLayers = new Set<Layer>();
   private eventsSource = new VectorSource();
   private unsubscribe$ = new Subject<void>();
+  private liveMarkers?: OlLiveMarkersController;
 
   constructor(
     ngZone: NgZone,
@@ -58,8 +65,14 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
     private clipboard: ClipboardService,
     private toastr: ToastrService,
     private eventTimerService: EventTimerService,
+    private liveMarkersService: LiveMarkersService,
+    private store: Store<AppState>,
   ) {
     super(ngZone, route, router, TYRIA_MAP_CONFIG);
+  }
+
+  ngOnInit() {
+    this.store.dispatch(liveMarkersActions.setActiveContinent({continentId: this.config.continentId as 1 | 2}));
   }
 
   ngAfterViewInit() {
@@ -69,6 +82,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.liveMarkers?.destroy();
     this.Map?.setTarget(undefined);
   }
 
@@ -109,6 +123,27 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
         this.interactiveLayers.add(layer);
       }
     }
+
+    // Live players via MQTT; the controller animates features in place.
+    this.liveMarkers = new OlLiveMarkersController(
+      olMap,
+      this.config.continentId,
+      this.liveMarkersService.messages$,
+      this.store.select(selectUserAccountName),
+    );
+    if (isDevMode()) {
+      (window as {liveMarkers?: unknown}).liveMarkers = this.liveMarkers;
+    }
+    const liveLayer = this.registerLayer({
+      kind: "vector",
+      id: "LIVE_MAP",
+      source: this.liveMarkers.source,
+      friendlyName: "Live Map",
+      icon: "/assets/player_marker.png",
+      state: LayerState.Enabled,
+      zIndex: 6,
+    });
+    this.interactiveLayers.add(liveLayer as Layer);
 
     // World bosses: 15s timer upserts markers for events within 30 minutes.
     const eventsLayer = this.registerLayer({

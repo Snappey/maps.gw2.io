@@ -1,9 +1,14 @@
 import {NgZone} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {combineLatestWith, filter, map, take} from "rxjs";
+import {Feature} from "ol";
 import OlMap from "ol/Map";
 import View from "ol/View";
 import BaseLayer from "ol/layer/Base";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import LineString from "ol/geom/LineString";
+import {Stroke, Style} from "ol/style";
 import {Coordinate} from "ol/coordinate";
 import {LayerState} from "../layer-state";
 import {fragmentToView, getExtent, getProjection, getResolutions, gw2ToOl, Gw2MapConfig, viewToFragment} from "./gw2-projection";
@@ -79,6 +84,60 @@ export abstract class BaseOlMap {
 
     olMap.getView().on("change:resolution", () => this.applyOpacityLevels());
     this.applyOpacityLevels();
+
+    this.enableRightClickDrawing(olMap);
+  }
+
+  /**
+   * Right-button drag draws a line that fades out over ~10s after release —
+   * port of the Leaflet createLine in base-map.ts. Not a panel layer.
+   */
+  private enableRightClickDrawing(olMap: OlMap) {
+    const drawSource = new VectorSource();
+    olMap.addLayer(new VectorLayer({
+      source: drawSource,
+      zIndex: 99,
+      style: feature => new Style({
+        stroke: new Stroke({
+          color: `rgba(221, 221, 221, ${feature.get("opacity") ?? 0.9})`,
+          width: 3,
+        }),
+      }),
+      updateWhileAnimating: true,
+      updateWhileInteracting: true,
+    }));
+
+    const viewport = olMap.getViewport();
+    viewport.addEventListener("contextmenu", e => e.preventDefault());
+
+    viewport.addEventListener("pointerdown", (downEvent: PointerEvent) => {
+      if (downEvent.button !== 2) {
+        return;
+      }
+      const line = new Feature({geometry: new LineString([olMap.getEventCoordinate(downEvent)])});
+      line.set("opacity", 0.9);
+      drawSource.addFeature(line);
+
+      const onMove = (moveEvent: PointerEvent) =>
+        line.getGeometry()!.appendCoordinate(olMap.getEventCoordinate(moveEvent));
+
+      const onUp = () => {
+        viewport.removeEventListener("pointermove", onMove);
+        // 100 ticks of 100ms, fading from .9 to 0, then gone.
+        const fade = setInterval(() => {
+          const opacity = (line.get("opacity") as number) - 0.009;
+          if (opacity <= 0) {
+            clearInterval(fade);
+            drawSource.removeFeature(line);
+          } else {
+            line.set("opacity", opacity);
+          }
+        }, 100);
+      };
+
+      viewport.addEventListener("pointermove", onMove);
+      viewport.addEventListener("pointerup", onUp, {once: true});
+    });
   }
 
   panTo(coords: [number, number], zoom: number = 4) {

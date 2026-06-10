@@ -63,6 +63,24 @@ export class LiveMarkersService {
   private activeMapLayer: Subject<[Map, FeatureGroup]> = new Subject<[Map, FeatureGroup]>();
   activeMapLayer$: Observable<[Map, FeatureGroup]> = this.activeMapLayer.asObservable();
 
+  /**
+   * Raw decoded broker messages, shared and map-library-agnostic — the
+   * OpenLayers stack consumes this instead of the Leaflet pipeline below.
+   */
+  messages$: Observable<{accountName: string, data: {Type: MqttPayloadType}}> = this.onConnected$.pipe(
+    switchMap(() => this.subscribeToChannel()),
+    map(message => {
+      const accountName = message.topic.split("/").pop();
+      if (!accountName) {
+        console.warn("failed to parse incoming message, missing account name: " + message.topic);
+        return undefined;
+      }
+      return {accountName, data: JSON.parse(message.payload.toString()) as {Type: MqttPayloadType}};
+    }),
+    filter((msg): msg is {accountName: string, data: {Type: MqttPayloadType}} => !!msg),
+    share(),
+  );
+
   constructor(private mqttService: MqttService, private http: HttpClient, private store: Store<AppState>, private labelService: LabelService, private toastr: ToastrService) {
     // Update AuthToken when a user changes their API Key
     store.select(s => s.settings.liveMapEnabled).pipe(

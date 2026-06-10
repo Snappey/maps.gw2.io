@@ -17,7 +17,8 @@ import {createTileGrid, getProjection, Gw2MapConfig} from "./gw2-projection";
 export type LayerDefinition =
   | {kind: "raster"; config: Gw2MapConfig} & CommonLayerOptions
   | {kind: "vector-tile"; source: VectorTile; sourceLayer: string; style: StyleLike; declutter?: string | boolean; renderBuffer?: number} & CommonLayerOptions
-  | {kind: "vector"; source: VectorSource; style: StyleLike} & CommonLayerOptions;
+  // style omitted -> features carry their own styles (e.g. live player markers)
+  | {kind: "vector"; source: VectorSource; style?: StyleLike} & CommonLayerOptions;
 
 export interface CommonLayerOptions {
   id: string;
@@ -55,8 +56,10 @@ export function buildLayer(def: LayerDefinition): BaseLayer {
     case "vector":
       return new VectorLayer({
         source: def.source,
-        style: def.style,
+        ...(def.style ? {style: def.style} : {}),
         zIndex: def.zIndex ?? 5,
+        updateWhileAnimating: true,
+        updateWhileInteracting: true,
       });
   }
 }
