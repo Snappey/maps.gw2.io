@@ -162,6 +162,8 @@ export function tooltipFor(feature: FeatureLike): string | undefined {
     case "label_sector":
     case "event":
     case "live":
+    case "user":
+    case "editor":
       return feature.get("tooltip") || feature.get("chat_link") || undefined;
     case "vista":
       return "Vista";

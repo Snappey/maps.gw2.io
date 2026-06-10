@@ -5,4 +5,11 @@
 
 <div class="layer-panel tooltip">
   <app-layer-options [layers]="mapLayers" (layerUpdated)="layerUpdated($event)"></app-layer-options>
+  <p-button class="block mt-1" label="Custom Layers" icon="pi pi-plus" size="small" [text]="true"
+    (onClick)="showUserLayers = true"></p-button>
 </div>
+
+<app-user-layer-manager [(visible)]="showUserLayers" [continentId]="1"></app-user-layer-manager>
+
+<app-map-context-menu [items]="contextMenuItems" [position]="contextMenuPosition"
+  (closed)="contextMenuPosition = undefined"></app-map-context-menu>

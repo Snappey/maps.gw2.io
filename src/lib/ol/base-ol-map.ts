@@ -28,6 +28,9 @@ export abstract class BaseOlMap {
   Map?: OlMap;
   mapLayers: {[key: string]: OlLayerOptions} = {};
 
+  /** Set by subclasses to handle a clean right-click (no drag) — e.g. the dev editor menu. */
+  protected onRightClick?: (event: PointerEvent) => void;
+
   protected constructor(
     protected ngZone: NgZone,
     protected route: ActivatedRoute,
@@ -110,27 +113,45 @@ export abstract class BaseOlMap {
     const viewport = olMap.getViewport();
     viewport.addEventListener("contextmenu", e => e.preventDefault());
 
+    const DRAG_THRESHOLD_PX = 4;
+
     viewport.addEventListener("pointerdown", (downEvent: PointerEvent) => {
       if (downEvent.button !== 2) {
         return;
       }
-      const line = new Feature({geometry: new LineString([olMap.getEventCoordinate(downEvent)])});
-      line.set("opacity", 0.9);
-      drawSource.addFeature(line);
+      // The line only starts once the pointer actually moves, so a clean
+      // right-click can open the editor context menu instead.
+      let line: Feature<LineString> | undefined;
 
-      const onMove = (moveEvent: PointerEvent) =>
+      const onMove = (moveEvent: PointerEvent) => {
+        if (!line) {
+          const dx = moveEvent.clientX - downEvent.clientX;
+          const dy = moveEvent.clientY - downEvent.clientY;
+          if (dx * dx + dy * dy < DRAG_THRESHOLD_PX * DRAG_THRESHOLD_PX) {
+            return;
+          }
+          line = new Feature({geometry: new LineString([olMap.getEventCoordinate(downEvent)])});
+          line.set("opacity", 0.9);
+          drawSource.addFeature(line);
+        }
         line.getGeometry()!.appendCoordinate(olMap.getEventCoordinate(moveEvent));
+      };
 
       const onUp = () => {
         viewport.removeEventListener("pointermove", onMove);
+        if (!line) {
+          this.onRightClick?.(downEvent);
+          return;
+        }
+        const drawn = line;
         // 100 ticks of 100ms, fading from .9 to 0, then gone.
         const fade = setInterval(() => {
-          const opacity = (line.get("opacity") as number) - 0.009;
+          const opacity = (drawn.get("opacity") as number) - 0.009;
           if (opacity <= 0) {
             clearInterval(fade);
-            drawSource.removeFeature(line);
+            drawSource.removeFeature(drawn);
           } else {
-            line.set("opacity", opacity);
+            drawn.set("opacity", opacity);
           }
         }, 100);
       };
@@ -168,6 +189,14 @@ export abstract class BaseOlMap {
 
   hasLayer(id: string): boolean {
     return id in this.mapLayers;
+  }
+
+  unregisterLayer(id: string) {
+    const options = this.mapLayers[id];
+    if (options) {
+      this.Map?.removeLayer(options.layer);
+      delete this.mapLayers[id];
+    }
   }
 
   layerUpdated([id, state]: [string, LayerState]) {

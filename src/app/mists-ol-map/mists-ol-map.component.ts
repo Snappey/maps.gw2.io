@@ -35,7 +35,11 @@ import {
   syncObjectiveFeatures,
 } from "../../lib/ol/mists-layers";
 import {tooltipFor} from "../../lib/ol/tyria-layers";
+import {buildUserLayerSource, userLayerStyle, USER_LAYER_ID_PREFIX} from "../../lib/ol/user-layers";
+import {UserLayer, UserLayerService} from "../../services/user-layer.service";
+import {ButtonModule} from "primeng/button";
 import {LayerOptionsComponent} from "../layer-options/layer-options.component";
+import {UserLayerManagerComponent} from "../user-layer-manager/user-layer-manager.component";
 
 const EDGE_OF_THE_MISTS_MAP_ID = 968;
 const MATCH_POLL_MS = 20_000;
@@ -43,7 +47,7 @@ const MATCH_POLL_MS = 20_000;
 @Component({
   selector: "app-mists-ol-map",
   standalone: true,
-  imports: [LayerOptionsComponent],
+  imports: [LayerOptionsComponent, UserLayerManagerComponent, ButtonModule],
   templateUrl: "./mists-ol-map.component.html",
   styleUrls: ["./mists-ol-map.component.css"],
 })
@@ -54,6 +58,8 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   private tooltipOverlay?: Overlay;
   private interactiveLayers = new Set<Layer>();
   private unsubscribe$ = new Subject<void>();
+
+  showUserLayers = false;
 
   private objectivesSource = new VectorSource();
   private spawnSource = new VectorSource();
@@ -69,6 +75,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     private store: Store<AppState>,
     private wvwService: WvwService,
     private liveMarkersService: LiveMarkersService,
+    private userLayerService: UserLayerService,
     private http: HttpClient,
     private clipboard: ClipboardService,
     private toastr: ToastrService,
@@ -220,6 +227,10 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       this.mapLayers["mists_sector_objective"]?.layer.changed();
     });
 
+    this.userLayerService.layersFor(this.config.continentId).pipe(
+      takeUntil(this.unsubscribe$),
+    ).subscribe(layers => this.ngZone.run(() => this.syncUserLayers(layers)));
+
     this.tooltipOverlay = new Overlay({
       element: this.tooltipEl.nativeElement,
       offset: [20, 0],
@@ -236,6 +247,28 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     this.handleChatLinkRoute();
   }
 
+  /** Registers/refreshes user layers; runs inside the zone so the panel updates. */
+  private syncUserLayers(layers: UserLayer[]) {
+    for (const id of Object.keys(this.mapLayers).filter(id => id.startsWith(USER_LAYER_ID_PREFIX))) {
+      this.interactiveLayers.delete(this.mapLayers[id].layer as Layer);
+      this.unregisterLayer(id);
+    }
+    for (const userLayer of layers) {
+      const layer = this.registerLayer({
+        kind: "vector",
+        id: userLayer.id,
+        source: buildUserLayerSource(userLayer),
+        style: userLayerStyle(userLayer.color),
+        friendlyName: userLayer.name,
+        icon: "/assets/list_icon.png",
+        state: LayerState.Enabled,
+        zIndex: 5,
+      });
+      this.interactiveLayers.add(layer as Layer);
+    }
+    this.mapLayers = {...this.mapLayers};
+  }
+
   private featureAt(pixel: number[]): FeatureLike | undefined {
     return this.Map?.forEachFeatureAtPixel(pixel, f => f, {
       hitTolerance: 4,
@@ -250,7 +283,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     const feature = this.featureAt(e.pixel);
     const tooltipEl = this.tooltipEl.nativeElement;
 
-    if (feature && (feature.get("layer") === "waypoint" || feature.get("layer") === "live")) {
+    if (feature && ["waypoint", "live", "user"].includes(feature.get("layer"))) {
       tooltipEl.innerText = tooltipFor(feature) ?? "";
       tooltipEl.style.display = "block";
       this.tooltipOverlay?.setPosition(e.coordinate);

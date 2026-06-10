@@ -28,7 +28,16 @@ import {OlLiveMarkersController} from "../../lib/ol/live-markers-layer";
 import {createVectorTileGrid, getProjection, gw2ToOl, TYRIA_MAP_CONFIG} from "../../lib/ol/gw2-projection";
 import {chatLinkFor, createTyriaOverlayDefinitions, HEART_BOUNDS_STYLE, syncEventFeatures, tooltipFor, wikiUrlFor} from "../../lib/ol/tyria-layers";
 import {iconStyle} from "../../lib/ol/marker-styles";
+import {buildUserLayerSource, userLayerStyle, USER_LAYER_ID_PREFIX} from "../../lib/ol/user-layers";
+import {UserLayer, UserLayerService} from "../../services/user-layer.service";
+import {OlEditor} from "../../lib/ol/editor";
+import {MarkerType} from "../../services/editor.service";
+import {ButtonModule} from "primeng/button";
+import {DialogService} from "primeng/dynamicdialog";
 import {LayerOptionsComponent} from "../layer-options/layer-options.component";
+import {UserLayerManagerComponent} from "../user-layer-manager/user-layer-manager.component";
+import {MapContextMenuComponent, MapContextMenuItem} from "../map-context-menu/map-context-menu.component";
+import {EditorModalComponent} from "../tyria-map/editor-modal/editor-modal.component";
 
 interface ChatLinkIndexEntry {
   coord: [number, number];
@@ -39,14 +48,22 @@ interface ChatLinkIndexEntry {
 @Component({
   selector: "app-tyria-ol-map",
   standalone: true,
-  imports: [LayerOptionsComponent],
+  imports: [LayerOptionsComponent, UserLayerManagerComponent, ButtonModule, MapContextMenuComponent],
+  providers: [DialogService],
   templateUrl: "./tyria-ol-map.component.html",
   styleUrls: ["./tyria-ol-map.component.css"],
 })
-export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnDestroy {
+export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("mapHost") mapHost!: ElementRef<HTMLDivElement>;
   @ViewChild("tooltipEl") tooltipEl!: ElementRef<HTMLDivElement>;
   @ViewChild("highlightEl") highlightEl!: ElementRef<HTMLImageElement>;
+
+  showUserLayers = false;
+
+  // Dev editor (replaces the leaflet-contextmenu flow)
+  contextMenuItems: MapContextMenuItem[] = [];
+  contextMenuPosition?: {x: number, y: number};
+  private editor = new OlEditor();
 
   private tooltipOverlay?: Overlay;
   private highlightOverlay?: Overlay;
@@ -66,9 +83,111 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
     private toastr: ToastrService,
     private eventTimerService: EventTimerService,
     private liveMarkersService: LiveMarkersService,
+    private userLayerService: UserLayerService,
+    private dialogService: DialogService,
     private store: Store<AppState>,
   ) {
     super(ngZone, route, router, TYRIA_MAP_CONFIG);
+  }
+
+  /** Dev-only marker/text placement via right-click context menu. */
+  private initEditor(olMap: OlMap) {
+    const markersLayer = this.registerLayer({
+      kind: "vector", id: "editable_markers", source: this.editor.markersSource,
+      minZoomLevel: 3, friendlyName: "Editor Markers", icon: "/assets/poi.png",
+      state: LayerState.Enabled, zIndex: 7,
+    });
+    this.registerLayer({
+      kind: "vector", id: "editable_text", source: this.editor.textSource,
+      minZoomLevel: 2, maxZoomLevel: 6, opacityLevels: {5: .8, 6: .5},
+      friendlyName: "Editor Text", icon: "/assets/list_icon.png",
+      state: LayerState.Enabled, zIndex: 7,
+    });
+    this.interactiveLayers.add(markersLayer as Layer);
+
+    this.onRightClick = (event: PointerEvent) => {
+      const pixel = olMap.getEventPixel(event);
+      // Right-clicking a placed editor feature deletes it, like the old editor.
+      const editorHit = olMap.forEachFeatureAtPixel(pixel, f => f, {
+        hitTolerance: 4,
+        layerFilter: l => l === markersLayer,
+      });
+      if (editorHit && this.editor.removeFeature(editorHit)) {
+        return;
+      }
+
+      const coords = this.getCoords(olMap.getEventCoordinate(event));
+      this.ngZone.run(() => {
+        this.contextMenuItems = this.buildContextMenu(coords);
+        this.contextMenuPosition = {x: pixel[0], y: pixel[1]};
+      });
+    };
+  }
+
+  private buildContextMenu(coords: [number, number]): MapContextMenuItem[] {
+    const place = (header: string, type: MarkerType): MapContextMenuItem =>
+      ({label: header, action: () => this.placeMarker(header, type, coords)});
+
+    return [
+      {...place("Place Waypoint", MarkerType.Waypoint), icon: "assets/waypoint.png"},
+      {...place("Place PoI", MarkerType.Poi), icon: "assets/poi.png"},
+      {...place("Place Vista", MarkerType.Vista), icon: "assets/vista.png"},
+      {...place("Place Heart", MarkerType.Heart), icon: "assets/hearts.png"},
+      {...place("Place Mastery", MarkerType.Mastery), icon: "assets/core_mastery.png"},
+      {...place("Place Hero Point", MarkerType.SkillPoint), icon: "assets/heropoint.png"},
+      place("Place Unlock", MarkerType.Unlock),
+      {label: "-1", separator: true},
+      place("Place Region Text", MarkerType.Region),
+      place("Place Map Text", MarkerType.Map),
+      {label: "-2", separator: true},
+      {label: "Copy Marker JSON", action: () => this.clipboard.copy(this.editor.exportMarkers())},
+      {label: "Copy Text JSON", action: () => this.clipboard.copy(this.editor.exportText())},
+      {label: "-3", separator: true},
+      {label: "Center On", icon: "assets/zoom-in.png", action: () => this.panTo(coords, this.Map?.getView().getZoom() ?? 4)},
+      {label: "Copy Coordinates", action: () => this.clipboard.copy(JSON.stringify(coords))},
+    ];
+  }
+
+  private placeMarker(header: string, type: MarkerType, coords: [number, number]) {
+    this.ngZone.run(() => {
+      this.dialogService.open(EditorModalComponent, {
+        header,
+        data: {type, coords},
+      })?.onClose.pipe(take(1)).subscribe(metadata => {
+        if (!metadata) {
+          return;
+        }
+        this.ngZone.runOutsideAngular(() => {
+          if (type === MarkerType.Map || type === MarkerType.Region) {
+            this.editor.addText(type, coords, metadata);
+          } else {
+            this.editor.addMarker(type, coords, metadata);
+          }
+        });
+      });
+    });
+  }
+
+  /** Registers/refreshes user layers; runs inside the zone so the panel updates. */
+  private syncUserLayers(layers: UserLayer[]) {
+    for (const id of Object.keys(this.mapLayers).filter(id => id.startsWith(USER_LAYER_ID_PREFIX))) {
+      this.interactiveLayers.delete(this.mapLayers[id].layer as Layer);
+      this.unregisterLayer(id);
+    }
+    for (const userLayer of layers) {
+      const layer = this.registerLayer({
+        kind: "vector",
+        id: userLayer.id,
+        source: buildUserLayerSource(userLayer),
+        style: userLayerStyle(userLayer.color),
+        friendlyName: userLayer.name,
+        icon: "/assets/list_icon.png",
+        state: LayerState.Enabled,
+        zIndex: 5,
+      });
+      this.interactiveLayers.add(layer as Layer);
+    }
+    this.mapLayers = {...this.mapLayers};
   }
 
   ngOnInit() {
@@ -161,6 +280,15 @@ export class TyriaOlMapComponent extends BaseOlMap implements AfterViewInit, OnD
     this.eventTimerService.getNextEventsTimer(8).pipe(
       takeUntil(this.unsubscribe$),
     ).subscribe(events => syncEventFeatures(this.eventsSource, events as never));
+
+    // User-made layers from localStorage; re-synced on every import/delete.
+    this.userLayerService.layersFor(this.config.continentId).pipe(
+      takeUntil(this.unsubscribe$),
+    ).subscribe(layers => this.ngZone.run(() => this.syncUserLayers(layers)));
+
+    if (isDevMode()) {
+      this.initEditor(olMap);
+    }
 
     // Always-on hover highlight for heart bounds; not part of the layer panel.
     this.heartBoundsLayer = new VectorTileLayer({
