@@ -3,7 +3,7 @@ import {liveMarkersActions} from "./live-markers.action";
 import {AppState} from "../appState";
 import {selectUserAccountName, selectUserRegion, selectUserWvwTeam} from "../user/user.feature";
 import {ChannelType} from "../settings/settings.feature";
-import {PointTuple} from "leaflet";
+import {PointTuple} from "../../lib/types";
 
 export interface LiveMarkersState {
   authToken: string;

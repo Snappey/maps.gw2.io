@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {from, map, Observable} from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import {PointTuple} from "leaflet";
+import {PointTuple} from "../lib/types";
 
 export type BoundsTuple = [[number, number], [number, number]]
 export type MarkerType = "waypoint" | "poi" | "vista" | "unlock" | string;

@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [ "leaflet", "moment", "mqtt-browser", "xtend" ],
+            "allowedCommonJsDependencies": [ "moment", "mqtt-browser", "xtend" ],
             "outputPath": "dist/map-gw2-io",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -21,20 +21,13 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/leaflet/dist/images",
-                "output": "assets/"
-              }
+              "src/assets"
             ],
             "styles": [
               "src/styles.css",
               "./node_modules/primeicons/primeicons.css",
               "./node_modules/primeflex/primeflex.css",
-              "./node_modules/leaflet/dist/leaflet.css",
               "./node_modules/ol/ol.css",
-              "./node_modules/leaflet-contextmenu/dist/leaflet.contextmenu.css",
               "./node_modules/ngx-toastr/toastr.css",
               "./node_modules/cookieconsent/build/cookieconsent.min.css",
             ],

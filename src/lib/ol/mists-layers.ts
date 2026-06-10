@@ -189,6 +189,8 @@ export function syncObjectiveFeatures(
         claimed_by: obj.claimed_by ?? "",
         yaks_delivered: obj.yaks_delivered,
         last_flipped: obj.last_flipped,
+        // Full source object for the objective-details dialog (match mode only).
+        objective_data: obj,
       });
     }
 

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {MarkerType} from "../../../services/editor.service";
+﻿import {Component, OnInit} from '@angular/core';
+import {MarkerType} from "../../lib/editor-types";
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
-import {PointTuple} from "leaflet";
+import {PointTuple} from "../../lib/types";
 
 @Component({
     selector: 'app-editor-modal',

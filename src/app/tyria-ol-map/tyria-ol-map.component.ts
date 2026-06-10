@@ -4,7 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ClipboardService} from "ngx-clipboard";
 import {ToastrService} from "ngx-toastr";
-import {filter, map, Subject, take, takeUntil} from "rxjs";
+import {AsyncPipe} from "@angular/common";
+import {BehaviorSubject, debounceTime, filter, fromEvent, map, Observable, Subject, take, takeUntil} from "rxjs";
 
 import OlMap from "ol/Map";
 import Overlay from "ol/Overlay";
@@ -22,8 +23,12 @@ import {LayerState} from "../../lib/layer-state";
 import {AppState} from "../../state/appState";
 import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 import {selectUserAccountName} from "../../state/user/user.feature";
-import {EventTimerService} from "../../services/event-timer.service";
+import {Event, EventMap, EventTimerService} from "../../services/event-timer.service";
 import {LiveMarkersService} from "../../services/live-markers.service";
+import {SidebarLiveMarker} from "../../lib/live-marker-types";
+import {ChromeModule} from "../chrome.module";
+import {ToolbarButton} from "../toolbar/toolbar.component";
+import {TooltipModule} from "primeng/tooltip";
 import {OlLiveMarkersController} from "../../lib/ol/live-markers-layer";
 import {createVectorTileGrid, getProjection, gw2ToOl, TYRIA_MAP_CONFIG} from "../../lib/ol/gw2-projection";
 import {chatLinkFor, createTyriaOverlayDefinitions, HEART_BOUNDS_STYLE, syncEventFeatures, tooltipFor, wikiUrlFor} from "../../lib/ol/tyria-layers";
@@ -31,13 +36,13 @@ import {iconStyle} from "../../lib/ol/marker-styles";
 import {buildUserLayerSource, userLayerStyle, USER_LAYER_ID_PREFIX} from "../../lib/ol/user-layers";
 import {UserLayer, UserLayerService} from "../../services/user-layer.service";
 import {OlEditor} from "../../lib/ol/editor";
-import {MarkerType} from "../../services/editor.service";
+import {MarkerType} from "../../lib/editor-types";
 import {ButtonModule} from "primeng/button";
 import {DialogService} from "primeng/dynamicdialog";
 import {LayerOptionsComponent} from "../layer-options/layer-options.component";
 import {UserLayerManagerComponent} from "../user-layer-manager/user-layer-manager.component";
 import {MapContextMenuComponent, MapContextMenuItem} from "../map-context-menu/map-context-menu.component";
-import {EditorModalComponent} from "../tyria-map/editor-modal/editor-modal.component";
+import {EditorModalComponent} from "../editor-modal/editor-modal.component";
 
 interface ChatLinkIndexEntry {
   coord: [number, number];
@@ -48,7 +53,8 @@ interface ChatLinkIndexEntry {
 @Component({
   selector: "app-tyria-ol-map",
   standalone: true,
-  imports: [LayerOptionsComponent, UserLayerManagerComponent, ButtonModule, MapContextMenuComponent],
+  imports: [LayerOptionsComponent, UserLayerManagerComponent, ButtonModule, TooltipModule,
+    MapContextMenuComponent, ChromeModule, AsyncPipe],
   providers: [DialogService],
   templateUrl: "./tyria-ol-map.component.html",
   styleUrls: ["./tyria-ol-map.component.css"],
@@ -59,6 +65,70 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   @ViewChild("highlightEl") highlightEl!: ElementRef<HTMLImageElement>;
 
   showUserLayers = false;
+  showSettings = false;
+  showAbout = false;
+  showLayers = false;
+  showEvents = false;
+  showWizardsVault = false;
+  showLiveMarkers = false;
+
+  checkScreenSize = () => document.body.offsetWidth < 1024;
+  smallScreen: boolean = this.checkScreenSize();
+
+  upcomingEvents$: Observable<EventMap> = this.eventTimerService.getNextEventsTimer(8);
+  liveMarkerList$ = new BehaviorSubject<SidebarLiveMarker[]>([]);
+
+  leftToolbar: ToolbarButton[] = [
+    {
+      Tooltip: "Info",
+      Icon: "/assets/about_icon.png",
+      IconHover: "/assets/about_hovered_icon.png",
+      OnClick: () => this.showAbout = !this.showAbout
+    },
+    {
+      Tooltip: "Settings",
+      Icon: "/assets/settings_icon.png",
+      IconHover: "/assets/settings_hovered_icon.png",
+      OnClick: () => this.showSettings = !this.showSettings
+    },
+    {
+      Tooltip: "Layers",
+      Icon: "/assets/layer_icon.png",
+      IconHover: "/assets/layer_hovered_icon.png",
+      OnClick: () => this.showLayers = !this.showLayers,
+      Keybindings: ["Digit1"]
+    },
+    {
+      Tooltip: "Live Markers",
+      Icon: "/assets/friends_icon.png",
+      IconHover: "/assets/friends_hovered_icon.png",
+      OnClick: () => this.showLiveMarkers = !this.showLiveMarkers,
+      Keybindings: ["Digit2"]
+    },
+    {
+      Tooltip: "World Bosses",
+      Icon: "/assets/event_icon.png",
+      IconHover: "/assets/event_hovered_icon.png",
+      OnClick: () => this.showEvents = !this.showEvents,
+      Keybindings: ["Digit3"]
+    },
+    {
+      Tooltip: "Wizards Vault",
+      Icon: "/assets/wizard_vault_icon.png",
+      IconHover: "/assets/wizard_vault_hovered_icon.png",
+      OnClick: () => this.showWizardsVault = !this.showWizardsVault,
+      Keybindings: ["Digit4"]
+    }
+  ];
+
+  rightToolbar: ToolbarButton[] = [
+    {
+      Tooltip: "WvW",
+      Icon: "/assets/mists_icon.png",
+      IconHover: "/assets/mists_hovered_icon.png",
+      OnClick: () => this.ngZone.run(() => this.router.navigate(["/wvw"]))
+    }
+  ];
 
   // Dev editor (replaces the leaflet-contextmenu flow)
   contextMenuItems: MapContextMenuItem[] = [];
@@ -192,6 +262,22 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
 
   ngOnInit() {
     this.store.dispatch(liveMarkersActions.setActiveContinent({continentId: this.config.continentId as 1 | 2}));
+
+    fromEvent(window, "resize").pipe(
+      debounceTime(200),
+      map(this.checkScreenSize),
+      takeUntil(this.unsubscribe$),
+    ).subscribe(small => this.smallScreen = small);
+  }
+
+  panToEvent(event: Event) {
+    this.panTo(event.coordinates, 5);
+    this.clipboard.copy(event.chatLink);
+    this.toastr.info("Copied closest waypoint to clipboard!", event.name, {
+      toastClass: "custom-toastr",
+      positionClass: "toast-top-right"
+    });
+    this.showEvents = false;
   }
 
   ngAfterViewInit() {
@@ -253,6 +339,9 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     if (isDevMode()) {
       (window as {liveMarkers?: unknown}).liveMarkers = this.liveMarkers;
     }
+    this.liveMarkers.activeMarkers$.pipe(
+      takeUntil(this.unsubscribe$),
+    ).subscribe(markers => this.ngZone.run(() => this.liveMarkerList$.next(markers)));
     const liveLayer = this.registerLayer({
       kind: "vector",
       id: "LIVE_MAP",

@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Event, EventMap} from "../../../services/event-timer.service";
+﻿import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Event, EventMap} from "../../services/event-timer.service";
 
 @Component({
     selector: 'app-event-grid',

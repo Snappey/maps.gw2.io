@@ -1,10 +1,11 @@
 import {AfterViewInit, Component, ElementRef, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {AsyncPipe} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {ClipboardService} from "ngx-clipboard";
 import {ToastrService} from "ngx-toastr";
-import {combineLatestWith, filter, interval, map, Subject, switchMap, take, takeUntil} from "rxjs";
+import {combineLatestWith, debounceTime, filter, fromEvent, interval, map, Subject, switchMap, take, takeUntil} from "rxjs";
 
 import OlMap from "ol/Map";
 import Overlay from "ol/Overlay";
@@ -21,8 +22,11 @@ import {AppState} from "../../state/appState";
 import {mistsActions} from "../../state/mists/mists.action";
 import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 import {selectUserAccountName} from "../../state/user/user.feature";
-import {WvwService} from "../../services/wvw.service";
+import {FullMatchObjective, Match, WvwService} from "../../services/wvw.service";
 import {LiveMarkersService} from "../../services/live-markers.service";
+import {ChromeModule} from "../chrome.module";
+import {ToolbarButton} from "../toolbar/toolbar.component";
+import {DialogModule} from "primeng/dialog";
 import {OlLiveMarkersController} from "../../lib/ol/live-markers-layer";
 import {BaseOlMap} from "../../lib/ol/base-ol-map";
 import {LayerState} from "../../lib/layer-state";
@@ -47,7 +51,7 @@ const MATCH_POLL_MS = 20_000;
 @Component({
   selector: "app-mists-ol-map",
   standalone: true,
-  imports: [LayerOptionsComponent, UserLayerManagerComponent, ButtonModule],
+  imports: [LayerOptionsComponent, UserLayerManagerComponent, ButtonModule, DialogModule, ChromeModule, AsyncPipe],
   templateUrl: "./mists-ol-map.component.html",
   styleUrls: ["./mists-ol-map.component.css"],
 })
@@ -60,13 +64,68 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   private unsubscribe$ = new Subject<void>();
 
   showUserLayers = false;
+  showSettings = false;
+  showAbout = false;
+  showLayers = false;
+  showScore = false;
+  showMatches = false;
+  showObjectiveDetails = false;
+  selectedObjective?: FullMatchObjective;
+
+  checkScreenSize = () => document.body.offsetWidth < 1024;
+  smallScreen: boolean = this.checkScreenSize();
 
   private objectivesSource = new VectorSource();
   private spawnSource = new VectorSource();
   private sectorOwnership = new Map<number, string>();
   private liveMarkers?: OlLiveMarkersController;
 
-  private activeMatch$ = this.store.select(state => state.mists.activeMatch);
+  activeMatch$ = this.store.select(state => state.mists.activeMatch);
+
+  leftToolbar: ToolbarButton[] = [
+    {
+      Tooltip: "Info",
+      Icon: "/assets/about_icon.png",
+      IconHover: "/assets/about_hovered_icon.png",
+      OnClick: () => this.showAbout = !this.showAbout
+    },
+    {
+      Tooltip: "Settings",
+      Icon: "/assets/settings_icon.png",
+      IconHover: "/assets/settings_hovered_icon.png",
+      OnClick: () => this.showSettings = !this.showSettings
+    },
+    {
+      Tooltip: "Layers",
+      Icon: "/assets/layer_icon.png",
+      IconHover: "/assets/layer_hovered_icon.png",
+      OnClick: () => this.showLayers = !this.showLayers,
+      Keybindings: ["Digit1"]
+    },
+    {
+      Tooltip: "Matches",
+      Icon: "/assets/matches_icon.png",
+      IconHover: "/assets/matches_hovered_icon.png",
+      OnClick: () => this.showMatches = !this.showMatches,
+      Keybindings: ["Digit2"]
+    },
+    {
+      Tooltip: "Match Stats",
+      Icon: "/assets/stats_icon.png",
+      IconHover: "/assets/stats_hovered_icon.png",
+      OnClick: () => this.showScore = !this.showScore,
+      Keybindings: ["Digit3"]
+    }
+  ];
+
+  rightToolbar: ToolbarButton[] = [
+    {
+      Tooltip: "Tyria",
+      Icon: "/assets/tyria_icon.png",
+      IconHover: "/assets/tyria_hovered_icon.png",
+      OnClick: () => this.ngZone.run(() => this.router.navigate(["/tyria"]))
+    }
+  ];
 
   constructor(
     ngZone: NgZone,
@@ -101,8 +160,15 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       } else {
         this.toastr.warning("Failed to find your home world, check your settings.", "Missing Home World",
           {timeOut: 10000, toastClass: "custom-toastr", positionClass: "toast-top-right"});
+        this.showMatches = true;
       }
     });
+
+    fromEvent(window, "resize").pipe(
+      debounceTime(200),
+      map(this.checkScreenSize),
+      takeUntil(this.unsubscribe$),
+    ).subscribe(small => this.smallScreen = small);
 
     interval(MATCH_POLL_MS).pipe(
       switchMap(() => this.store.select(state => state.mists.activeMatchId).pipe(take(1))),
@@ -298,13 +364,33 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     this.Map!.getTargetElement().style.cursor = feature ? "pointer" : "";
   }
 
+  overviewMatchClicked(match: Match) {
+    this.store.dispatch(mistsActions.setActiveMatch({matchId: match.id}));
+    this.showMatches = false;
+  }
+
   private onClick(e: MapBrowserEvent) {
     const feature = this.featureAt(e.pixel);
-    const chatLink = feature?.get("chat_link");
+    if (!feature) {
+      return;
+    }
+
+    // Match objectives open the upgrade details dialog (like the old map);
+    // everything else copies its chat link.
+    const objective = feature.get("objective_data") as FullMatchObjective | undefined;
+    if (objective && objective.owner !== undefined) {
+      this.ngZone.run(() => {
+        this.selectedObjective = objective;
+        this.showObjectiveDetails = true;
+      });
+      return;
+    }
+
+    const chatLink = feature.get("chat_link");
     if (!chatLink) {
       return;
     }
-    const name = feature!.get("name") || feature!.get("tooltip") || chatLink;
+    const name = feature.get("name") || feature.get("tooltip") || chatLink;
     this.ngZone.run(() => {
       this.clipboard.copy(chatLink);
       this.toastr.info(`Copied [${name}] to clipboard!`, "", {

@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Event} from "../../../services/event-timer.service";
+﻿import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Event} from "../../services/event-timer.service";
 import {ClipboardService} from "ngx-clipboard";
 import {ToastrService} from "ngx-toastr";
 

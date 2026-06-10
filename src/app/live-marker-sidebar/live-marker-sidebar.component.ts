@@ -1,7 +1,7 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, Input, OnDestroy} from '@angular/core';
 import {LiveMarkersService} from "../../services/live-markers.service";
-import {LiveMarker} from "../../lib/live-marker";
-import {map, of, scan, share, Subject, switchMap, takeUntil} from "rxjs";
+import {SidebarLiveMarker} from "../../lib/live-marker-types";
+import {map, Observable, of, scan, share, Subject, switchMap, takeUntil} from "rxjs";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../state/appState";
 
@@ -12,13 +12,18 @@ import {AppState} from "../../state/appState";
     standalone: false
 })
 export class LiveMarkerSidebarComponent implements OnDestroy {
+  /** Marker list from the hosting map's live-marker controller. */
+  @Input() set markers(value: Observable<SidebarLiveMarker[]> | undefined) {
+    this.activeMarkers$ = value ?? of([]);
+  }
+  activeMarkers$: Observable<SidebarLiveMarker[]> = of([]);
+
   onDestroy$: Subject<void> = new Subject<void>();
-  activeMarkers$ = this.liveMarkerService.activeMarkers$;
-  clickedMarker$: Subject<LiveMarker | undefined> = new Subject<LiveMarker | undefined>();
+  clickedMarker$: Subject<SidebarLiveMarker | undefined> = new Subject<SidebarLiveMarker | undefined>();
 
   isFollowing$ = this.clickedMarker$.pipe(
     takeUntil(this.onDestroy$),
-    scan((current: LiveMarker | undefined, clicked) =>
+    scan((current: SidebarLiveMarker | undefined, clicked) =>
       current !== clicked ? clicked : undefined, undefined),
     share()
   );

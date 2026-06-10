@@ -2,7 +2,7 @@ import {Feature} from "ol";
 import {FeatureLike} from "ol/Feature";
 import Point from "ol/geom/Point";
 import VectorSource from "ol/source/Vector";
-import {MarkerType} from "../../services/editor.service";
+import {MarkerType} from "../editor-types";
 import {gw2ToOl} from "./gw2-projection";
 import {iconStyle, labelStyle} from "./marker-styles";
 
