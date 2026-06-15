@@ -1,6 +1,9 @@
 {
   "name": "map-gw2-io",
   "version": "1.0.0",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
