@@ -3,7 +3,6 @@ import {liveMarkersActions} from "./live-markers.action";
 import {AppState} from "../appState";
 import {selectUserAccountName, selectUserRegion, selectUserWvwTeam} from "../user/user.feature";
 import {ChannelType} from "../settings/settings.feature";
-import {PointTuple} from "../../lib/types";
 
 export interface LiveMarkersState {
   authToken: string;
@@ -84,84 +83,3 @@ export const selectLiveMapEnabled = createSelector(
 export const {
   name, // feature name
 } = liveMarkersFeature;
-
-export interface LivePlayerData extends CharacterPositionUpdate, CharacterStateUpdate, CharacterMarkerInfo {}
-
-export type MqttPayloadType = "UpsertCharacterMovement" | "UpdateCharacterState" | "DeleteCharacterData" | "UpdateCharacterKeepAlive";
-
-export interface CharacterPositionUpdate {
-  Type: MqttPayloadType;
-  CharacterName: string;
-  AccountName: string;
-  ContinentId: number;
-  MapId: number;
-  MapPosition: Vector2;
-  CharacterForward: Vector3;
-}
-
-export interface CharacterDeleteUpdate {
-  Type: MqttPayloadType;
-  CharacterName: string;
-  AccountName: string;
-}
-
-export enum Mount {
-  None,
-  Jackal,
-  Griffon,
-  Springer,
-  Skimmer,
-  Raptor,
-  RollerBeetle,
-  Warclaw,
-  Skyscale,
-  Skiff,
-  SiegeTurtle
-}
-
-export enum Profession {
-  Unknown,
-  Guardian,
-  Warrior,
-  Engineer,
-  Ranger,
-  Thief,
-  Elementalist,
-  Mesmer,
-  Necromancer,
-  Revenant
-}
-
-export interface CharacterStateUpdate {
-  Type: MqttPayloadType;
-  AccountName: string;
-  CharacterName: string;
-  ContinentId: number;
-  MapId: number;
-  ShardId: number;
-  ServerConnectionInfo: string;
-  BuildId: number;
-  IsCommander: boolean;
-  Mount: Mount;
-  Profession: Profession;
-  Specialisation: number;
-}
-
-export interface CharacterMarkerInfo {
-  ReDraw: boolean | undefined;
-  DeleteMarker: boolean | undefined;
-  LastMessageTimestamp: number;
-  Rotation: number;
-  LatLng: PointTuple;
-}
-
-export interface Vector2 {
-  X: number;
-  Y: number;
-}
-
-export interface Vector3 {
-  X: number;
-  Y: number;
-  Z: number;
-}

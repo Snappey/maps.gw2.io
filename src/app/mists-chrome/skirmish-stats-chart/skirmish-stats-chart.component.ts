@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Match, WvwService} from "../../../services/wvw.service";
-import moment from "moment/moment";
+import {TEAM_COLORS} from "../../../lib/ol/mists-layers";
+import { Bind } from 'primeng/bind';
+import { UIChart } from 'primeng/chart';
 
 interface ChartData {
   labels: string[]
@@ -11,7 +13,7 @@ interface ChartData {
     selector: 'app-skirmish-stats-chart',
     templateUrl: './skirmish-stats-chart.component.html',
     styleUrls: ['./skirmish-stats-chart.component.css'],
-    standalone: false
+    imports: [Bind, UIChart]
 })
 export class SkirmishStatsChartComponent implements OnInit {
   @Input()
@@ -72,20 +74,20 @@ export class SkirmishStatsChartComponent implements OnInit {
     const skirmishIntervalHours = 2;
     this.skirmishStats = {
       labels: Object.keys(this.match.skirmishes).map((_, i) => {
-        if (lastReset) {
-          const skirmishInterval = moment(lastReset).add(2 * i, "hours");
-          return skirmishInterval.format("ddd, HH:mm A")
-          //lastReset.setTime(lastReset.getTime() + (skirmishIntervalHours * 60 * 60 * 1000));
-          //return lastReset.toLocaleDateString() + " " + lastReset.toLocaleTimeString();
+        if (!lastReset) {
+          return _;
         }
-        return _;
+        const d = new Date(lastReset.getTime() + skirmishIntervalHours * i * 60 * 60 * 1000);
+        const pad = (n: number) => n.toString().padStart(2, "0");
+        // "ddd, HH:mm A" e.g. "Fri, 18:00 PM"
+        return `${d.toLocaleDateString("en-US", {weekday: "short"})}, ${pad(d.getHours())}:${pad(d.getMinutes())} ${d.getHours() < 12 ? "AM" : "PM"}`;
       }),
       datasets: [
         {
           type: 'line',
           label: this.match.all_worlds_names.red.join(", "),
           data: this.runningTotal(this.match.skirmishes.map(s => s.scores.red)),
-          borderColor: "#DC3939",
+          borderColor: TEAM_COLORS["red"],
           yAxisID: "RunningTotal",
           xAxisID: "xAxis"
         },
@@ -93,7 +95,7 @@ export class SkirmishStatsChartComponent implements OnInit {
           type: 'line',
           label: this.match.all_worlds_names.blue.join(", "),
           data: this.runningTotal(this.match.skirmishes.map(s => s.scores.blue)),
-          borderColor: "#24A2E7",
+          borderColor: TEAM_COLORS["blue"],
           yAxisID: "RunningTotal",
           xAxisID: "xAxis"
         },
@@ -101,7 +103,7 @@ export class SkirmishStatsChartComponent implements OnInit {
           type: 'line',
           label: this.match.all_worlds_names.green.join(", "),
           data: this.runningTotal(this.match.skirmishes.map(s => s.scores.green)),
-          borderColor: "#43D071",
+          borderColor: TEAM_COLORS["green"],
           yAxisID: "RunningTotal",
           xAxisID: "xAxis"
         },
@@ -109,7 +111,7 @@ export class SkirmishStatsChartComponent implements OnInit {
           type: 'bar',
           label: this.match.all_worlds_names.red.join(", "),
           data: this.match.skirmishes.map(s => s.scores.red),
-          backgroundColor: "#DC3939",
+          backgroundColor: TEAM_COLORS["red"],
           yAxisID: "PerSkirmish",
           xAxisID: "xAxis"
         },
@@ -117,7 +119,7 @@ export class SkirmishStatsChartComponent implements OnInit {
           type: 'bar',
           label: this.match.all_worlds_names.blue.join(", "),
           data: this.match.skirmishes.map(s => s.scores.blue),
-          backgroundColor: "#24A2E7",
+          backgroundColor: TEAM_COLORS["blue"],
           yAxisID: "PerSkirmish",
           xAxisID: "xAxis"
         },
@@ -125,7 +127,7 @@ export class SkirmishStatsChartComponent implements OnInit {
           type: 'bar',
           label: this.match.all_worlds_names.green.join(", "),
           data: this.match.skirmishes.map(s => s.scores.green),
-          backgroundColor: "#43D071",
+          backgroundColor: TEAM_COLORS["green"],
           yAxisID: "PerSkirmish",
           xAxisID: "xAxis"
         },

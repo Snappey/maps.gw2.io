@@ -2,29 +2,85 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>GW2 Map - Interactive Map for Tyria and WvW</title>
+    <title>GW2 Interactive Map &ndash; Tyria, WvW &amp; Live Map | gw2.io</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#030303">
+    <link rel="canonical" href="https://maps.gw2.io/">
+
+    <meta name="description" content="Interactive Guild Wars 2 map for Tyria and WvW &ndash; waypoints, vistas, points of interest, hearts, events, live WvW match overviews, drawing tools and shareable location links.">
+
+    <!-- Icons & web app manifest -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
 
-    <meta name="description" content="Interactive Guild Wars 2 Map. Now updated for Secrets of the Obscure; hearts, waypoints, vistas, points of interest, skill points, mastery points, active / upcoming events and more,  real-time WvW match overviews, and a drawing tool mimicking the ingame experience. Experience the convenience of direct location linking to share with friends and support for a live map to track your realtime position.">
-    <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://maps.gw2.io">
+    <!-- Resource hints: warm up the connections the map opens on first paint -->
+    <link rel="preconnect" href="https://api.guildwars2.com">
+    <link rel="preconnect" href="https://tiles.guildwars2.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    <!-- Fonts: moved out of styles.css @import so they don't sit on a render-blocking chain -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+
+    <!-- Open Graph (defaults; SeoService refines og:title/description per route at runtime) -->
+    <meta property="og:url" content="https://maps.gw2.io/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="maps.gw2.io">
-    <meta property="og:description" content="Interactive Guild Wars 2 Map. Now updated for Secrets of the Obscure; hearts, waypoints, vistas, points of interest, skill points, mastery points, active / upcoming events and more,  real-time WvW match overviews, and a drawing tool mimicking the ingame experience. Experience the convenience of direct location linking to share with friends and support for a live map to track your realtime position.">
-    <meta property="og:image" content="https://github.com/Snappey/maps.gw2.io/raw/master/images/tyria_overview.jpg">
+    <meta property="og:site_name" content="GW2 Map">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="GW2 Interactive Map &ndash; Tyria, WvW &amp; Live Map">
+    <meta property="og:description" content="Interactive Guild Wars 2 map for Tyria and WvW &ndash; waypoints, vistas, points of interest, hearts, events, live WvW match overviews, drawing tools and shareable location links.">
+    <meta property="og:image" content="https://maps.gw2.io/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Guild Wars 2 interactive map of Tyria">
 
-    <!-- Twitter Meta Tags -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="maps.gw2.io">
-    <meta property="twitter:url" content="https://maps.gw2.io">
-    <meta name="twitter:title" content="maps.gw2.io">
-    <meta name="twitter:description" content="Interactive Guild Wars 2 Map. Now updated for Secrets of the Obscure; hearts, waypoints, vistas, points of interest, skill points, mastery points, active / upcoming events and more,  real-time WvW match overviews, and a drawing tool mimicking the ingame experience. Experience the convenience of direct location linking to share with friends and support for a live map to track your realtime position.">
-    <meta name="twitter:image" content="https://github.com/Snappey/maps.gw2.io/raw/master/images/tyria_overview.jpg">
+    <meta property="twitter:url" content="https://maps.gw2.io/">
+    <meta name="twitter:title" content="GW2 Interactive Map &ndash; Tyria, WvW &amp; Live Map">
+    <meta name="twitter:description" content="Interactive Guild Wars 2 map for Tyria and WvW &ndash; waypoints, vistas, points of interest, hearts, events, live WvW match overviews, drawing tools and shareable location links.">
+    <meta name="twitter:image" content="https://maps.gw2.io/og-image.jpg">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "GW2 Interactive Map",
+      "alternateName": "gw2.io Map",
+      "url": "https://maps.gw2.io/",
+      "applicationCategory": "Game",
+      "operatingSystem": "Web",
+      "browserRequirements": "Requires JavaScript",
+      "description": "Interactive Guild Wars 2 map for Tyria and WvW with waypoints, vistas, points of interest, hearts, events, live WvW match overviews, drawing tools and shareable location links.",
+      "screenshot": "https://maps.gw2.io/og-image.jpg",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "author": {"@type": "Organization", "name": "gw2.io", "url": "https://maps.gw2.io/"}
+    }
+    </script>
   </head>
   <body>
     <app-home></app-home>
+    <noscript>
+      <h1>GW2 Interactive Map</h1>
+      <p>
+        An interactive Guild Wars 2 map for Tyria and the Mists (WvW): waypoints, vistas,
+        points of interest, hearts, mastery and skill points, active and upcoming events,
+        real-time WvW match overviews, a drawing tool and a live position tracker.
+        This map is interactive and requires JavaScript &ndash; please enable it to explore.
+      </p>
+      <ul>
+        <li><a href="/tyria">Tyria world map</a></li>
+        <li><a href="/wvw">WvW (Mists) live match map</a></li>
+      </ul>
+    </noscript>
   </body>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF8RV8P3LT"></script>
   <script>

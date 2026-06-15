@@ -4,8 +4,22 @@ import {Fill, Icon, Stroke, Style, Text} from "ol/style";
 // Style instance is returned for every feature using a given icon/text config.
 const styleCache = new Map<string, Style>();
 
-export const iconStyle = (src: string, sizePx: number = 32): Style => {
-  const key = `icon|${src}|${sizePx}`;
+const WIKI_IMAGE_PREFIX = "https://wiki.guildwars2.com/images/";
+
+/**
+ * The GW2 wiki serves /images/ without CORS headers, so the renderer — which
+ * must load icons with crossOrigin for canvas hit detection — can never fetch
+ * them. Feature data still carries wiki URLs; map them to the local copies
+ * cached by scripts/download_city_icons.mjs (same name sanitisation).
+ */
+export const localIconSrc = (src: string): string =>
+  src.startsWith(WIKI_IMAGE_PREFIX)
+    ? "assets/city_icons/" + decodeURIComponent(src.split("/").pop()!).replace(/[^A-Za-z0-9._-]/g, "_")
+    : src;
+
+/** zIndex orders features within a single layer (e.g. the merged marker layer). */
+export const iconStyle = (src: string, sizePx: number = 32, zIndex?: number): Style => {
+  const key = `icon|${src}|${sizePx}|${zIndex ?? ""}`;
   let style = styleCache.get(key);
   if (!style) {
     style = new Style({
@@ -15,6 +29,7 @@ export const iconStyle = (src: string, sizePx: number = 32): Style => {
         height: sizePx,
         crossOrigin: "anonymous",
       }),
+      zIndex,
     });
     styleCache.set(key, style);
   }
@@ -52,34 +67,33 @@ export const masteryFriendlyName = (region: MasteryRegion): string => {
 };
 
 export interface LabelStyleConfig {
-  /** Font size in world (continent) pixels — like the old SVG overlays, the
-   * label visually scales with the map instead of staying screen-constant. */
-  worldSizePx: number;
+  /** Font size in CSS pixels — constant regardless of zoom level. */
+  screenPx: number;
   color: string;
-  offsetYWorldPx?: number;
+  offsetYPx?: number;
 }
 
+// Fixed CSS pixel sizes calibrated to the old SVG overlays at zoom 4
+// (region 320 / map 128 / sub 121.6 world px, all divided by 2^(7-4)).
 export const LABEL_STYLES: {[kind: string]: LabelStyleConfig} = {
-  region: {worldSizePx: 320, color: "#FFCC66"},
-  map: {worldSizePx: 128, color: "#FFCC66"},
-  map_sub: {worldSizePx: 121, color: "#DDD", offsetYWorldPx: 120},
-  sector: {worldSizePx: 14.4, color: "#DDD"},
+  region: {screenPx: 40, color: "#FFCC66"},
+  map: {screenPx: 16, color: "#FFCC66"},
+  map_sub: {screenPx: 15, color: "#DDD", offsetYPx: 15},
+  sector: {screenPx: 14, color: "#DDD"},
 };
 
-export const labelStyle = (kind: string, text: string, resolution: number): Style => {
+export const labelStyle = (kind: string, text: string): Style => {
   const config = LABEL_STYLES[kind];
-  const screenPx = config.worldSizePx / resolution;
-  // Text instances are cheap but Style identity still helps; cache by rendered size bucket.
-  const key = `label|${kind}|${text}|${Math.round(screenPx)}`;
+  const key = `label|${kind}|${text}`;
   let style = styleCache.get(key);
   if (!style) {
     style = new Style({
       text: new Text({
         text,
-        font: `italic ${Math.round(screenPx)}px 'PT Serif', serif`,
+        font: `italic ${config.screenPx}px 'PT Serif', serif`,
         fill: new Fill({color: config.color}),
-        stroke: new Stroke({color: "rgba(0, 0, 0, 0.9)", width: Math.max(1, screenPx / 12)}),
-        offsetY: config.offsetYWorldPx ? config.offsetYWorldPx / resolution : 0,
+        stroke: new Stroke({color: "rgba(0, 0, 0, 0.9)", width: Math.max(1, config.screenPx / 12)}),
+        offsetY: config.offsetYPx ?? 0,
         overflow: true,
       }),
     });

@@ -1,0 +1,46 @@
+:host {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.1;
+}
+
+/* Each layer is its own parchment chip (the `tooltip` class), spaced apart so
+   they read as individual rows with no outer container box. */
+.layer-row {
+  padding: 1px 5px;
+  margin-bottom: 3px;
+}
+
+/* Group headers (pack / map) read as foldable section titles. */
+.group-header {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.group-header .chevron {
+  font-size: 0.7rem;
+}
+
+.group-name,
+.leaf-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 120px;
+}
+
+.count {
+  opacity: 0.6;
+  font-size: 0.7rem;
+}
+
+/* Shrink the tri-state toggle so it drives a tight row height. */
+:host ::ng-deep .p-button.p-button-sm {
+  width: 1.55rem;
+  height: 1.55rem;
+  padding: 0;
+}
+
+:host ::ng-deep .p-button.p-button-sm .p-button-icon {
+  font-size: 0.85rem;
+}

@@ -2,13 +2,14 @@ import {Component, Input, OnChanges} from '@angular/core';
 import {FullMatchObjective, ObjectiveTiers, WvwService} from "../../../services/wvw.service";
 import {Guild, GuildService} from "../../../services/guild.service";
 import {map, Observable, timer} from "rxjs";
-import moment from "moment";
+import { NgClass, AsyncPipe } from '@angular/common';
+import { Tooltip } from 'primeng/tooltip';
 
 @Component({
     selector: 'app-objective-details',
     templateUrl: './objective-details.component.html',
     styleUrls: ['./objective-details.component.css'],
-    standalone: false
+    imports: [NgClass, Tooltip, AsyncPipe]
 })
 export class ObjectiveDetailsComponent implements OnChanges {
   @Input()
@@ -26,11 +27,8 @@ export class ObjectiveDetailsComponent implements OnChanges {
     this.emblemLoaded = false;
 
     this.heldFor$ = timer(0, 1000).pipe(
-      map(() => moment.utc(
-        moment.duration(
-          moment().diff(this.objective.last_flipped)).asMilliseconds()
-        ).format("HH [h], mm [m], ss [s]")
-      )
+      map(() => ObjectiveDetailsComponent.formatHeldFor(
+        Date.now() - new Date(this.objective.last_flipped).getTime()))
     );
 
     this.upgradeDetails$ = this.wvwService.getObjectiveTiers(this.objective.upgrade_id);
@@ -44,7 +42,10 @@ export class ObjectiveDetailsComponent implements OnChanges {
     return `https://emblem.werdes.net/emblem/${this.objective.claimed_by}`
   }
 
-  get Math() {
-    return Math;
+  /** Elapsed time as "HH h, mm m, ss s", wrapping at 24h (as moment.utc did). */
+  private static formatHeldFor(elapsedMs: number): string {
+    const totalSeconds = Math.floor(elapsedMs / 1000);
+    const pad = (n: number) => n.toString().padStart(2, "0");
+    return `${pad(Math.floor(totalSeconds / 3600) % 24)} h, ${pad(Math.floor((totalSeconds % 3600) / 60))} m, ${pad(totalSeconds % 60)} s`;
   }
 }

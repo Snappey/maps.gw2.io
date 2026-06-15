@@ -1,18 +1,12 @@
-import {AfterViewInit, Component, ElementRef, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, HostListener, inject, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {AsyncPipe} from "@angular/common";
-import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {ClipboardService} from "ngx-clipboard";
-import {ToastrService} from "ngx-toastr";
-import {combineLatestWith, debounceTime, filter, fromEvent, interval, map, Subject, switchMap, take, takeUntil} from "rxjs";
+import {catchError, combineLatestWith, filter, interval, map, of, switchMap, take, takeUntil} from "rxjs";
 
 import OlMap from "ol/Map";
 import Overlay from "ol/Overlay";
 import {MapBrowserEvent} from "ol";
-import {FeatureLike} from "ol/Feature";
-import Layer from "ol/layer/Base";
-import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import {defaults as defaultControls} from "ol/control/defaults";
 import {PMTilesVectorSource} from "ol-pmtiles";
@@ -20,30 +14,45 @@ import {MVT} from "ol/format";
 
 import {AppState} from "../../state/appState";
 import {mistsActions} from "../../state/mists/mists.action";
+import {selectActiveMatch} from "../../state/mists/mists.feature";
 import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
 import {selectUserAccountName} from "../../state/user/user.feature";
 import {FullMatchObjective, Match, WvwService} from "../../services/wvw.service";
 import {LiveMarkersService} from "../../services/live-markers.service";
-import {ChromeModule} from "../chrome.module";
-import {ToolbarButton} from "../toolbar/toolbar.component";
+import {ToolbarButton, ToolbarComponent} from "../toolbar/toolbar.component";
+import {sharedLeftToolbarButtons} from "../toolbar/toolbar-buttons";
+import {AboutModalComponent} from "../about-modal/about-modal.component";
+import {SettingsModalComponent} from "../settings-modal/settings-modal.component";
+import {MatchOverviewComponent} from "../mists-chrome/match-overview/match-overview.component";
+import {ObjectiveDetailsComponent} from "../mists-chrome/objective-details/objective-details.component";
+import {ObjectiveTooltipComponent} from "../mists-chrome/objective-tooltip/objective-tooltip.component";
+import {SkirmishStatsChartComponent} from "../mists-chrome/skirmish-stats-chart/skirmish-stats-chart.component";
 import {DialogModule} from "primeng/dialog";
 import {OlLiveMarkersController} from "../../lib/ol/live-markers-layer";
-import {BaseOlMap} from "../../lib/ol/base-ol-map";
+import {BaseOlMap} from "../base-ol-map";
 import {LayerState} from "../../lib/layer-state";
 import {createVectorTileGrid, getProjection, gw2ToOl, MISTS_MAP_CONFIG} from "../../lib/ol/gw2-projection";
 import {
   createMistsStaticDefinitions,
   objectiveStyle,
-  objectiveTooltipHtml,
+  RECENT_FLIP_WINDOW_MS,
   spawnHeadingStyle,
   syncObjectiveFeatures,
 } from "../../lib/ol/mists-layers";
-import {tooltipFor} from "../../lib/ol/tyria-layers";
-import {buildUserLayerSource, userLayerStyle, USER_LAYER_ID_PREFIX} from "../../lib/ol/user-layers";
-import {UserLayer, UserLayerService} from "../../services/user-layer.service";
+import {tooltipFor} from "../../lib/ol/feature-meta";
+import {LabelOverlays} from "../../lib/ol/label-overlay";
+import {throttleVectorTileParsing} from "../../lib/ol/vt-parse-queue";
 import {ButtonModule} from "primeng/button";
 import {LayerOptionsComponent} from "../layer-options/layer-options.component";
 import {UserLayerManagerComponent} from "../user-layer-manager/user-layer-manager.component";
+import {WarScoreBarComponent} from "../mists-chrome/war-score-bar/war-score-bar.component";
+import {SkirmishDetailsComponent} from "../mists-chrome/skirmish-details/skirmish-details.component";
+import {MatchHistoryComponent} from "../mists-chrome/match-history/match-history.component";
+import {FloorPickerComponent} from "../floor-picker/floor-picker.component";
+import {MapService} from "../../services/map.service";
+import {MenuPanelService} from "../../services/menu-panel.service";
+import {WidgetService} from "../../services/widget.service";
+import {TacoDropDirective} from "../taco-drop/taco-drop.directive";
 
 const EDGE_OF_THE_MISTS_MAP_ID = 968;
 const MATCH_POLL_MS = 20_000;
@@ -51,69 +60,53 @@ const MATCH_POLL_MS = 20_000;
 @Component({
   selector: "app-mists-ol-map",
   standalone: true,
-  imports: [LayerOptionsComponent, UserLayerManagerComponent, ButtonModule, DialogModule, ChromeModule, AsyncPipe],
+  imports: [LayerOptionsComponent, UserLayerManagerComponent, ButtonModule, DialogModule, AsyncPipe,
+    WarScoreBarComponent, SkirmishDetailsComponent, MatchHistoryComponent, FloorPickerComponent, TacoDropDirective,
+    ToolbarComponent, AboutModalComponent, SettingsModalComponent, MatchOverviewComponent,
+    ObjectiveDetailsComponent, ObjectiveTooltipComponent, SkirmishStatsChartComponent],
+  providers: [MenuPanelService, WidgetService],
   templateUrl: "./mists-ol-map.component.html",
   styleUrls: ["./mists-ol-map.component.css"],
 })
 export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("mapHost") mapHost!: ElementRef<HTMLDivElement>;
   @ViewChild("tooltipEl") tooltipEl!: ElementRef<HTMLDivElement>;
+  @ViewChild("tooltipTextEl") tooltipTextEl!: ElementRef<HTMLSpanElement>;
 
   private tooltipOverlay?: Overlay;
-  private interactiveLayers = new Set<Layer>();
-  private unsubscribe$ = new Subject<void>();
 
-  showUserLayers = false;
-  showSettings = false;
-  showAbout = false;
-  showLayers = false;
-  showScore = false;
-  showMatches = false;
-  showObjectiveDetails = false;
+  /** Tracks which single overlay is open so opening one closes the others. */
+  protected readonly menu = inject(MenuPanelService);
+  statsTab: "details" | "history" | "chart" = "details";
   selectedObjective?: FullMatchObjective;
-
-  checkScreenSize = () => document.body.offsetWidth < 1024;
-  smallScreen: boolean = this.checkScreenSize();
+  hoveredObjective?: FullMatchObjective;
+  private hoveredObjectiveId: string | null = null;
 
   private objectivesSource = new VectorSource();
   private spawnSource = new VectorSource();
+  private headingLabels?: LabelOverlays;
   private sectorOwnership = new Map<number, string>();
   private liveMarkers?: OlLiveMarkersController;
+  private latestRiExpiry = 0;
 
-  activeMatch$ = this.store.select(state => state.mists.activeMatch);
+  activeMatch$ = this.store.select(selectActiveMatch);
 
   leftToolbar: ToolbarButton[] = [
-    {
-      Tooltip: "Info",
-      Icon: "/assets/about_icon.png",
-      IconHover: "/assets/about_hovered_icon.png",
-      OnClick: () => this.showAbout = !this.showAbout
-    },
-    {
-      Tooltip: "Settings",
-      Icon: "/assets/settings_icon.png",
-      IconHover: "/assets/settings_hovered_icon.png",
-      OnClick: () => this.showSettings = !this.showSettings
-    },
-    {
-      Tooltip: "Layers",
-      Icon: "/assets/layer_icon.png",
-      IconHover: "/assets/layer_hovered_icon.png",
-      OnClick: () => this.showLayers = !this.showLayers,
-      Keybindings: ["Digit1"]
-    },
+    ...sharedLeftToolbarButtons(this.menu),
     {
       Tooltip: "Matches",
       Icon: "/assets/matches_icon.png",
       IconHover: "/assets/matches_hovered_icon.png",
-      OnClick: () => this.showMatches = !this.showMatches,
+      OnClick: () => this.menu.toggle("matches"),
+      PanelId: "matches",
       Keybindings: ["Digit2"]
     },
     {
       Tooltip: "Match Stats",
       Icon: "/assets/stats_icon.png",
       IconHover: "/assets/stats_hovered_icon.png",
-      OnClick: () => this.showScore = !this.showScore,
+      OnClick: () => this.menu.toggle("score"),
+      PanelId: "score",
       Keybindings: ["Digit3"]
     }
   ];
@@ -134,23 +127,28 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     private store: Store<AppState>,
     private wvwService: WvwService,
     private liveMarkersService: LiveMarkersService,
-    private userLayerService: UserLayerService,
-    private http: HttpClient,
-    private clipboard: ClipboardService,
-    private toastr: ToastrService,
+    private mapService: MapService,
   ) {
     super(ngZone, route, router, MISTS_MAP_CONFIG);
   }
 
+  /** Escape closes whichever overlay is open (PrimeNG dialogs also self-close). */
+  @HostListener("document:keydown.escape")
+  onEscape() {
+    this.menu.close();
+  }
+
   ngOnInit() {
     this.store.dispatch(mistsActions.loadMatches());
-    this.store.dispatch(liveMarkersActions.setActiveContinent({continentId: this.config.continentId as 1 | 2}));
+    this.store.dispatch(liveMarkersActions.setActiveContinent({continentId: this.config.continentId}));
 
-    // Match selection: explicit :id (match or world id) or the settings home world.
+    // Match selection: explicit :id (match or legacy world id), else the last
+    // viewed match. take(1): picking a match updates lastMatchId, and re-firing
+    // here would double-dispatch setActiveMatch.
     this.route.params.pipe(
       map(params => params["id"] as string | undefined),
-      combineLatestWith(this.store.select(s => s.settings.homeWorld)),
-      map(([id, homeWorldId]) => id ?? homeWorldId),
+      combineLatestWith(this.store.select(s => s.settings.lastMatchId).pipe(take(1))),
+      map(([id, lastMatchId]) => id ?? lastMatchId),
       takeUntil(this.unsubscribe$),
     ).subscribe(id => {
       if (id) {
@@ -158,17 +156,11 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
           this.store.dispatch(mistsActions.setActiveMatch({matchId: id})) :
           this.store.dispatch(mistsActions.setActiveWorld({worldId: id}));
       } else {
-        this.toastr.warning("Failed to find your home world, check your settings.", "Missing Home World",
-          {timeOut: 10000, toastClass: "custom-toastr", positionClass: "toast-top-right"});
-        this.showMatches = true;
+        this.menu.open("matches");
       }
     });
 
-    fromEvent(window, "resize").pipe(
-      debounceTime(200),
-      map(this.checkScreenSize),
-      takeUntil(this.unsubscribe$),
-    ).subscribe(small => this.smallScreen = small);
+    this.initScreenSizeTracking();
 
     interval(MATCH_POLL_MS).pipe(
       switchMap(() => this.store.select(state => state.mists.activeMatchId).pipe(take(1))),
@@ -188,7 +180,8 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
     this.liveMarkers?.destroy();
-    this.Map?.setTarget(undefined);
+    this.headingLabels?.destroy();
+    this.destroyMap();
   }
 
   private initMap() {
@@ -218,9 +211,14 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       url: "assets/tiles/mists_2_1.pmtiles",
       projection: getProjection(this.config),
       tileGrid: createVectorTileGrid(this.config),
-      format: new MVT(),
+      // Only these source-layers are styled (map headings come from the SVG
+      // overlay); skipping the rest avoids MVT decode cost on the main thread.
+      format: new MVT({layers: ["waypoint", "sector_bounds"]}),
       wrapX: false,
+      cacheSize: 512,
     });
+    throttleVectorTileParsing(vtSource,
+      () => olMap.getView().getAnimating() || olMap.getView().getInteracting());
 
     for (const def of createMistsStaticDefinitions(vtSource, id => this.sectorOwnership.get(id))) {
       const layer = this.registerLayer(def);
@@ -228,6 +226,24 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
         this.interactiveLayers.add(layer);
       }
     }
+
+    this.http.get<any[]>("assets/data/region_labels_2_1.json").pipe(take(1)).subscribe(raw => {
+      const entries = raw
+        .filter(l => l.label_coordinates != null)
+        .map(l => ({
+          coord: gw2ToOl(l.label_coordinates),
+          heading: l.heading,
+          subheading: l.subheading || undefined,
+          kind: "map" as const,
+        }));
+      this.headingLabels = new LabelOverlays(olMap, [{
+        entries,
+        layer: this.mapLayers["mists_map_headings"].layer,
+        minZoom: -Infinity, maxZoom: Infinity, opacityLevels: {},
+        // Headings are overview chrome: fade away while zooming in.
+        fadeOut: {start: 4.5, end: 5},
+      }]);
+    });
 
     const objectivesLayer = this.registerLayer({
       kind: "vector",
@@ -276,7 +292,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     ).subscribe(objectives => {
       if (this.objectivesSource.isEmpty()) {
         syncObjectiveFeatures(this.objectivesSource, this.spawnSource,
-          objectives as never, EDGE_OF_THE_MISTS_MAP_ID);
+          objectives, EDGE_OF_THE_MISTS_MAP_ID);
       }
     });
 
@@ -288,58 +304,34 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       this.sectorOwnership = new Map(
         match!.objectives.map(obj => [obj.sector_id, obj.owner] as [number, string]));
       syncObjectiveFeatures(this.objectivesSource, this.spawnSource,
-        match!.objectives as never, EDGE_OF_THE_MISTS_MAP_ID);
+        match!.objectives, EDGE_OF_THE_MISTS_MAP_ID);
       // Sector colours live in a style closure over sectorOwnership; force re-render.
       this.mapLayers["mists_sector_objective"]?.layer.changed();
+      this.latestRiExpiry = match!.objectives.reduce((latest, obj) =>
+        obj.last_flipped ? Math.max(latest, new Date(obj.last_flipped).getTime() + RECENT_FLIP_WINDOW_MS) : latest, 0);
     });
 
-    this.userLayerService.layersFor(this.config.continentId).pipe(
-      takeUntil(this.unsubscribe$),
-    ).subscribe(layers => this.ngZone.run(() => this.syncUserLayers(layers)));
-
-    this.tooltipOverlay = new Overlay({
-      element: this.tooltipEl.nativeElement,
-      offset: [20, 0],
-      positioning: "center-left",
-      stopEvent: false,
+    // RI countdowns tick once a second, but only invalidate the layer while
+    // one is live (+2s grace so the final 0:01 render clears).
+    interval(1000).pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+      if (Date.now() < this.latestRiExpiry + 2_000) {
+        this.mapLayers["mists_objective"]?.layer.changed();
+      }
     });
-    olMap.addOverlay(this.tooltipOverlay);
+
+    this.initUserLayers();
+
+    this.tooltipOverlay = this.createTooltipOverlay(olMap, this.tooltipEl.nativeElement, [20, 0]);
 
     olMap.on("pointermove", e => this.onPointerMove(e));
     olMap.on("singleclick", e => this.onClick(e));
 
-    this.ngZone.run(() => this.mapLayers = {...this.mapLayers});
+    // Dynamic raster floors: once the map list loads, watch the view and offer
+    // the floors available where the user is looking. Failure hides the picker.
+    this.mapService.getAllMaps().pipe(take(1), catchError(() => of([]))).subscribe(
+      maps => this.ngZone.runOutsideAngular(() => this.initFloorPicker("mists_tiles", maps)));
 
-    this.handleChatLinkRoute();
-  }
-
-  /** Registers/refreshes user layers; runs inside the zone so the panel updates. */
-  private syncUserLayers(layers: UserLayer[]) {
-    for (const id of Object.keys(this.mapLayers).filter(id => id.startsWith(USER_LAYER_ID_PREFIX))) {
-      this.interactiveLayers.delete(this.mapLayers[id].layer as Layer);
-      this.unregisterLayer(id);
-    }
-    for (const userLayer of layers) {
-      const layer = this.registerLayer({
-        kind: "vector",
-        id: userLayer.id,
-        source: buildUserLayerSource(userLayer),
-        style: userLayerStyle(userLayer.color),
-        friendlyName: userLayer.name,
-        icon: "/assets/list_icon.png",
-        state: LayerState.Enabled,
-        zIndex: 5,
-      });
-      this.interactiveLayers.add(layer as Layer);
-    }
-    this.mapLayers = {...this.mapLayers};
-  }
-
-  private featureAt(pixel: number[]): FeatureLike | undefined {
-    return this.Map?.forEachFeatureAtPixel(pixel, f => f, {
-      hitTolerance: 4,
-      layerFilter: l => this.interactiveLayers.has(l),
-    });
+    this.handleChatLinkRoute(coord => this.panTo(coord, 6));
   }
 
   private onPointerMove(e: MapBrowserEvent) {
@@ -349,12 +341,19 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     const feature = this.featureAt(e.pixel);
     const tooltipEl = this.tooltipEl.nativeElement;
 
-    if (feature && ["waypoint", "live", "user"].includes(feature.get("layer"))) {
-      tooltipEl.innerText = tooltipFor(feature) ?? "";
-      tooltipEl.style.display = "block";
-      this.tooltipOverlay?.setPosition(e.coordinate);
-    } else if (feature && feature.get("name") !== undefined) {
-      tooltipEl.innerHTML = objectiveTooltipHtml(feature);
+    const isPlain = feature && ["waypoint", "live", "user"].includes(feature.get("layer"));
+    const objective = !isPlain ? feature?.get("objective_data") as FullMatchObjective | undefined : undefined;
+    this.setHoveredObjective(objective);
+
+    if (isPlain) {
+      this.tooltipTextEl.nativeElement.innerText = tooltipFor(feature) ?? "";
+    } else if (!objective && feature?.get("name") !== undefined) {
+      this.tooltipTextEl.nativeElement.innerText = feature.get("name");
+    } else {
+      this.tooltipTextEl.nativeElement.innerText = "";
+    }
+
+    if (isPlain || objective || feature?.get("name") !== undefined) {
       tooltipEl.style.display = "block";
       this.tooltipOverlay?.setPosition(e.coordinate);
     } else {
@@ -364,9 +363,23 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     this.Map!.getTargetElement().style.cursor = feature ? "pointer" : "";
   }
 
+  /** Pointermove runs outside the zone; only objective changes enter it. */
+  private setHoveredObjective(objective?: FullMatchObjective) {
+    const id = objective?.id ?? null;
+    if (id === this.hoveredObjectiveId) {
+      return;
+    }
+    this.hoveredObjectiveId = id;
+    // Warm the dialog's images while hovering so they don't pop in on click.
+    if (objective && objective.owner !== undefined) {
+      this.wvwService.prefetchObjectiveAssets(objective);
+    }
+    this.ngZone.run(() => this.hoveredObjective = objective);
+  }
+
   overviewMatchClicked(match: Match) {
     this.store.dispatch(mistsActions.setActiveMatch({matchId: match.id}));
-    this.showMatches = false;
+    this.menu.close("matches");
   }
 
   private onClick(e: MapBrowserEvent) {
@@ -381,7 +394,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     if (objective && objective.owner !== undefined) {
       this.ngZone.run(() => {
         this.selectedObjective = objective;
-        this.showObjectiveDetails = true;
+        this.menu.open("objectiveDetails");
       });
       return;
     }
@@ -391,33 +404,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       return;
     }
     const name = feature.get("name") || feature.get("tooltip") || chatLink;
-    this.ngZone.run(() => {
-      this.clipboard.copy(chatLink);
-      this.toastr.info(`Copied [${name}] to clipboard!`, "", {
-        toastClass: "custom-toastr",
-        positionClass: "toast-top-right",
-      });
-    });
+    this.ngZone.run(() => this.copyToClipboard(chatLink, `Copied [${name}] to clipboard!`));
   }
 
-  private handleChatLinkRoute() {
-    this.route.params.pipe(
-      map(params => params["chatLink"] as string | undefined),
-      take(1),
-      filter((chatLink): chatLink is string => !!chatLink),
-      map(chatLink => chatLink.replace(/^\[/, "").replace(/\]$/, "").replace(/=+$/, "")),
-      switchMap(chatLink => this.http
-        .get<{[key: string]: {coord: [number, number]}}>(`assets/tiles/mists_${this.config.continentId}_${this.config.floorId}.index.json`)
-        .pipe(map(index => index[chatLink]))),
-    ).subscribe(entry => {
-      if (entry) {
-        this.panTo(entry.coord, 6);
-      } else {
-        this.toastr.warning("Failed to find marker from url", "", {
-          toastClass: "custom-toastr",
-          positionClass: "toast-top-right",
-        });
-      }
-    });
-  }
 }

@@ -2,12 +2,13 @@
 import {Event} from "../../services/event-timer.service";
 import {ClipboardService} from "ngx-clipboard";
 import {ToastrService} from "ngx-toastr";
+import { NgClass, DecimalPipe, DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-event-panel',
     templateUrl: './event-panel.component.html',
     styleUrls: ['./event-panel.component.css'],
-    standalone: false
+    imports: [NgClass, DecimalPipe, DatePipe]
 })
 export class EventPanelComponent implements OnInit {
   @Input()

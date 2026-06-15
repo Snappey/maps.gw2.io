@@ -1,18 +1,9 @@
 import {Injectable} from '@angular/core';
 import {IMqttServiceOptions, MqttConnectionState, MqttService} from "ngx-mqtt";
 import {environment} from '../environments/environment';
-import {filter, map, Observable, share, skip, Subject, switchMap, tap, withLatestFrom} from "rxjs";
+import {BehaviorSubject, filter, map, Observable, share, switchMap} from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import {AppState} from "../state/appState";
-import {Store} from "@ngrx/store";
-import {liveMarkersActions} from "../state/live-markers/live-markers.action";
-import {
-  MqttPayloadType,
-  selectLiveMapEnabled,
-  selectUserTopic,
-  selectUserWithAuthToken
-} from "../state/live-markers/live-markers.feature";
-import {ToastrService} from "ngx-toastr";
+import {MqttPayloadType} from "../lib/live-marker-types";
 
 export interface LiveMarkerMessage {
   accountName: string;
@@ -20,13 +11,19 @@ export interface LiveMarkerMessage {
 }
 
 /**
- * Broker connection lifecycle + the decoded message stream. Marker rendering
- * lives in the maps (OlLiveMarkersController in src/lib/ol/live-markers-layer.ts).
+ * Broker connection primitives + the decoded message stream. Marker rendering
+ * lives in the maps (OlLiveMarkersController in src/lib/ol/live-markers-layer.ts);
+ * the store-reactive lifecycle lives in LiveMarkersEffects, which drives
+ * connect()/disconnect() and pushes the current channel via setTopic(). The
+ * service itself stays store-agnostic — it only knows the topic it was told.
  */
-@Injectable({
-  providedIn: 'root'
-})
+// Provided by the map shell route (map-shell.routes.ts), not the root injector:
+// it depends on MqttService, which is scoped there to keep mqtt-browser out of
+// the initial bundle. Both maps share this one instance via that route scope.
+@Injectable()
 export class LiveMarkersService {
+  /** Current MQTT topic to observe; fed by LiveMarkersEffects from the store. */
+  private readonly topic$ = new BehaviorSubject<string | undefined>(undefined);
   onConnected$: Observable<boolean> = this.mqttService.state.pipe(
     map(state => state === MqttConnectionState.CONNECTED),
     filter(state => state)
@@ -55,41 +52,11 @@ export class LiveMarkersService {
     share(),
   );
 
-  constructor(private mqttService: MqttService, private http: HttpClient, private store: Store<AppState>, private toastr: ToastrService) {
-    // Update AuthToken when a user changes their API Key
-    store.select(s => s.settings.liveMapEnabled).pipe(
-      withLatestFrom(this.store.select(s => s.settings.apiKey)),
-      filter(([enabled, _]) => enabled),
-      map(([_, apiKey]) => apiKey ? apiKey : "buff_reaper"),
-      switchMap((apiKey) => this.getAuthToken(apiKey)),
-    ).subscribe(authToken => this.store.dispatch(liveMarkersActions.setAuthToken({ authToken })))
+  constructor(private mqttService: MqttService, private http: HttpClient) {}
 
-    // When a users authToken changes try and connect to the MQTT Broker
-    store.select(selectUserWithAuthToken).pipe(
-      filter((data) => !!data.authToken),
-      withLatestFrom(this.stateChange, this.store.select(selectLiveMapEnabled)),
-      filter(([_, state, isEnabled]) => isEnabled && state !== MqttConnectionState.CONNECTED),
-    ).subscribe(([data, _, __]) => this.mqttService.connect({
-      ...this.mqttOptions,
-      clientId: data.user ? data.user : "anonymous-" + (Math.random() + 1).toString(36).substring(7),
-      username: data.user ? data.user : "anonymous",
-      password: data.authToken!
-    }));
-
-    // Disconnect from broker if liveMapDisabled
-    store.select(s => s.settings.liveMapEnabled).pipe(
-      filter(enabled => !enabled),
-      withLatestFrom(this.mqttService.state),
-      filter(([_, state]) => state === MqttConnectionState.CONNECTED),
-    ).subscribe(_ => this.mqttService.disconnect(true));
-
-    // Notify connections
-    this.mqttService.state.pipe(
-      skip(1),
-    ).subscribe(state => this.toastr.info(this.toFriendlyState(state), "Live Markers", {
-      toastClass: "custom-toastr",
-      positionClass: "toast-bottom-left"
-    }));
+  /** Set the channel to observe; driven by LiveMarkersEffects from the store. */
+  setTopic(topic: string | undefined): void {
+    this.topic$.next(topic);
   }
 
   getAuthToken(apiKey: string, customChannels: string[] = []): Observable<string> {
@@ -99,11 +66,24 @@ export class LiveMarkersService {
     }, { responseType: 'text'})
   }
 
+  /** Open the broker connection for `user` with a freshly-issued auth token. */
+  connect(user: string | undefined, authToken: string): void {
+    this.mqttService.connect({
+      ...this.mqttOptions,
+      clientId: user ? user : "anonymous-" + (Math.random() + 1).toString(36).substring(7),
+      username: user ? user : "anonymous",
+      password: authToken,
+    });
+  }
+
+  disconnect(): void {
+    this.mqttService.disconnect(true);
+  }
+
   private subscribeToChannel() {
-    return this.store.select(selectUserTopic).pipe(
-      filter(topic => !!topic),
-      tap(topic => console.log("subscribed to " + topic)),
-      switchMap(topic => this.mqttService.observe(topic!, { qos: 0 }))
+    return this.topic$.pipe(
+      filter((topic): topic is string => !!topic),
+      switchMap(topic => this.mqttService.observe(topic, { qos: 0 }))
     )
   }
 

@@ -1,0 +1,6 @@
+# The seeding scripts write generated JSON with LF newlines (scripts/lib/io.mjs).
+# Force LF in the repo and working tree so regeneration produces byte-identical
+# output on every platform (Windows dev + Linux CI) and a no-op re-run is an
+# empty diff — the basis of the pipeline's "consistent updates" guarantee.
+src/assets/data/*.json        text eol=lf
+src/assets/tiles/*.index.json text eol=lf

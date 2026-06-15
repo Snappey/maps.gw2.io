@@ -8,6 +8,7 @@ import {AccountService} from "../../services/account.service";
 import {userActions} from "./user.action";
 import {GuildService} from "../../services/guild.service";
 import {WvwService} from "../../services/wvw.service";
+import {errorMessage} from "../../lib/errors";
 
 @Injectable()
 export class UserEffects {
@@ -18,7 +19,7 @@ export class UserEffects {
     map(props => props.settings.apiKey!),
     switchMap((apiKey: string) => this.accountService.getAccountInfo(apiKey)),
     map(accountInfo => userActions.setUserData({ accountInfo })),
-    catchError(async (error) => userActions.setUserDataError({ error }))
+    catchError(async (error) => userActions.setUserDataError({ error: errorMessage(error) }))
   ))
 
   loadGuilds$ = createEffect(() => this.actions$.pipe(

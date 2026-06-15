@@ -3,12 +3,15 @@ import {Match} from "../../../services/wvw.service";
 import {map} from "rxjs";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../../state/appState";
+import { LetDirective } from '@ngrx/component';
+import { ScoreOverviewComponent } from '../score-overview/score-overview.component';
+import { UpperCasePipe, KeyValuePipe } from '@angular/common';
 
 @Component({
     selector: 'app-match-overview',
     templateUrl: './match-overview.component.html',
     styleUrls: ['./match-overview.component.css'],
-    standalone: false
+    imports: [LetDirective, ScoreOverviewComponent, UpperCasePipe, KeyValuePipe]
 })
 export class MatchOverviewComponent {
 

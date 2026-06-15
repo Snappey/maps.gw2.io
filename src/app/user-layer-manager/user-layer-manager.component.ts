@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {AsyncPipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {ClipboardService} from "ngx-clipboard";
@@ -9,6 +9,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {TooltipModule} from "primeng/tooltip";
 import {Observable} from "rxjs";
 import {UserLayer, UserLayerService} from "../../services/user-layer.service";
+import {ToggleableDialog} from "../shared/toggleable-dialog";
 
 @Component({
   selector: "app-user-layer-manager",
@@ -17,19 +18,8 @@ import {UserLayer, UserLayerService} from "../../services/user-layer.service";
   templateUrl: "./user-layer-manager.component.html",
   styleUrls: ["./user-layer-manager.component.css"],
 })
-export class UserLayerManagerComponent {
+export class UserLayerManagerComponent extends ToggleableDialog {
   @Input() continentId: 1 | 2 = 1;
-
-  private _visible = false;
-  @Input()
-  get visible(): boolean {
-    return this._visible;
-  }
-  set visible(value: boolean) {
-    this._visible = value;
-    this.visibleChange.emit(value);
-  }
-  @Output() visibleChange = new EventEmitter<boolean>();
 
   layers$: Observable<UserLayer[]> | undefined;
 
@@ -43,6 +33,7 @@ export class UserLayerManagerComponent {
     private clipboard: ClipboardService,
     private toastr: ToastrService,
   ) {
+    super();
   }
 
   ngOnInit() {

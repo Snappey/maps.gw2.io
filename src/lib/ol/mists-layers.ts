@@ -7,7 +7,8 @@ import {Fill, Icon, Stroke, Style, Text} from "ol/style";
 import {LayerState} from "../layer-state";
 import {gw2ToOl} from "./gw2-projection";
 import {LayerDefinition} from "./layer-registry";
-import {iconStyle, labelStyle} from "./marker-styles";
+import {iconStyle} from "./marker-styles";
+import {forSourceLayer} from "./feature-meta";
 
 export const TEAM_COLORS: {[team: string]: string} = {
   green: "#43D071",
@@ -19,8 +20,8 @@ export const TEAM_COLORS: {[team: string]: string} = {
 export const teamColor = (owner: string | undefined): string =>
   TEAM_COLORS[owner?.toLowerCase() ?? ""] ?? TEAM_COLORS["neutral"];
 
-const forSourceLayer = (sourceLayer: string, style: (feature: FeatureLike, resolution: number) => Style | Style[] | undefined) =>
-  (feature: FeatureLike, resolution: number) => feature.get("layer") === sourceLayer ? style(feature, resolution) : undefined;
+/** Canonical team order for the WvW charts/HUD (red, blue, green). */
+export const TEAM_ORDER = ["red", "blue", "green"] as const;
 
 /**
  * Static mists overlays from PMTiles. Objectives/spawn texts are realtime
@@ -35,28 +36,37 @@ export function createMistsStaticDefinitions(
   return [
     {
       kind: "vector-tile", id: "mists_sector_objective", source, sourceLayer: "sector_bounds",
-      style: forSourceLayer("sector_bounds", f => sectorStrokeStyle(teamColor(sectorOwner(f.get("id"))))),
+      style: forSourceLayer("sector_bounds", (f, resolution) =>
+        sectorStrokeStyle(teamColor(sectorOwner(f.get("id"))), resolution)),
       friendlyName: "Objective Sectors", icon: "/assets/sector_icon.png", state: LayerState.Enabled, zIndex: 1,
     },
+    // Visibility stub for the layer panel: the heading text is drawn by the
+    // LabelOverlays SVG, which follows this layer's visibility.
     {
-      kind: "vector-tile", id: "mists_map_headings", source, sourceLayer: "label_map", declutter: "labels",
-      style: forSourceLayer("label_map", (f, res) => labelStyle("map", f.get("heading") ?? "", res)),
+      kind: "vector", id: "mists_map_headings", source: new VectorSource(),
       friendlyName: "Map Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, zIndex: 3,
     },
     {
       kind: "vector-tile", id: "waypoints", source, sourceLayer: "waypoint",
       style: forSourceLayer("waypoint", () => iconStyle("assets/waypoint.png")),
-      minZoomLevel: 5, friendlyName: "Waypoints", icon: "/assets/waypoint.png", state: LayerState.Enabled, zIndex: 2,
+      minZoomLevel: 6, friendlyName: "Waypoints", icon: "/assets/waypoint.png", state: LayerState.Enabled, zIndex: 2,
     },
   ];
 }
 
+// Sector bounds as a solid team-coloured line, no interior fill. The stroke
+// width tapers with zoom: the sector polygons are shrunk 3%, so when zoomed
+// out only a few screen px separate neighbouring borders and a fixed 5px
+// stroke would blend them into one. Widths are bucketed to 0.5px so the
+// style cache stays small.
 const sectorStyleCache = new Map<string, Style>();
-const sectorStrokeStyle = (color: string): Style => {
-  let style = sectorStyleCache.get(color);
+const sectorStrokeStyle = (color: string, resolution: number): Style => {
+  const width = Math.round(Math.max(1.5, Math.min(5, 16 / resolution)) * 2) / 2;
+  const key = `${color}|${width}`;
+  let style = sectorStyleCache.get(key);
   if (!style) {
-    style = new Style({stroke: new Stroke({color, width: 3})});
-    sectorStyleCache.set(color, style);
+    style = new Style({stroke: new Stroke({color, width})});
+    sectorStyleCache.set(key, style);
   }
   return style;
 };
@@ -72,22 +82,48 @@ export interface ObjectiveProperties {
   friendlyOwner?: string;
   claimed_by?: string;
   yaks_delivered?: number;
+  /** Upgrade tier (0–3), resolved against the objective's tier schedule upstream. */
+  upgrade_tier?: number;
   last_flipped?: Date | string;
 }
 
-/** Mirrors WvwService.calculateUpgradeLevel (kept here so styles stay pure). */
-export const upgradeLevel = (yaksDelivered: number | undefined): number => {
-  if (yaksDelivered === undefined) return 0;
-  if (yaksDelivered >= 140) return 3;
-  if (yaksDelivered >= 60) return 2;
-  if (yaksDelivered >= 20) return 1;
-  return 0;
+/** Righteous Indignation: objective guards are invulnerable for 5 min after a flip. */
+export const RECENT_FLIP_WINDOW_MS = 300_000;
+
+/** Objective types whose guards get Righteous Indignation after a flip. */
+export const RI_TYPES = new Set(["Camp", "Tower", "Keep", "Castle", "Mercenary"]);
+
+/** Remaining Righteous Indignation time, 0 when expired or not applicable. */
+export const riRemainingMs = (feature: FeatureLike, now: number): number => {
+  if (!RI_TYPES.has(feature.get("type"))) {
+    return 0;
+  }
+  const lastFlipped = feature.get("last_flipped");
+  if (!lastFlipped) {
+    return 0;
+  }
+  const remaining = RECENT_FLIP_WINDOW_MS - (now - new Date(lastFlipped).getTime());
+  return remaining > 0 ? remaining : 0;
 };
 
-export const friendlyUpgradeLevel = (level: number): string =>
-  ["N/A", "Secured", "Reinforced", "Fortified"][level] ?? "N/A";
-
-const RECENT_FLIP_WINDOW_MS = 300_000;
+// One cached style per mm:ss string — naturally bounded by the 5-minute window.
+const riTextCache = new Map<string, Style>();
+const riCountdownStyle = (mmss: string): Style => {
+  let style = riTextCache.get(mmss);
+  if (!style) {
+    style = new Style({
+      text: new Text({
+        text: mmss,
+        offsetY: 30,
+        font: "bold 11px sans-serif",
+        fill: new Fill({color: "#FFF"}),
+        stroke: new Stroke({color: "rgba(0, 0, 0, 0.9)", width: 3}),
+      }),
+    });
+    riTextCache.set(mmss, style);
+  }
+  return style;
+};
 
 const badgeCache = new Map<string, Style>();
 const badge = (src: string, size: number, displacement: [number, number]): Style => {
@@ -102,10 +138,28 @@ const badge = (src: string, size: number, displacement: [number, number]): Style
   return style;
 };
 
+/** Objective types with hand-made team-coloured icons in src/assets. */
+const TEAM_ICON_TYPES = new Set(["camp", "castle", "keep", "tower", "ruins"]);
+const TEAMS = new Set<string>(TEAM_ORDER);
+
 /**
- * Property-driven objective marker: team icon when claimed, upgrade pips,
- * guild-claim badge, recent-flip no-entry badge — the OL replacement for the
- * canvas-marker overlayIcons in the old createMistsMatchObjectives.
+ * Icon for an objective: the hand-made team-coloured PNG when owned, else the
+ * local copy of the neutral render-API marker (cached into assets/wvw/ by
+ * `npm run cache-wvw-icons` — never hotlink render.guildwars2.com).
+ */
+export const wvwMarkerSrc = (markerUrl: string, owner?: string, type?: string): string => {
+  const team = owner?.toLowerCase() ?? "";
+  if (TEAMS.has(team) && TEAM_ICON_TYPES.has(type?.toLowerCase() ?? "")) {
+    return `assets/${type!.toLowerCase()}_${team}.png`;
+  }
+  const fileId = markerUrl.split("/").pop()?.replace(/\.png$/i, "") ?? "";
+  return `assets/wvw/${fileId}.png`;
+};
+
+/**
+ * Property-driven objective marker mirroring the in-game map: team-tinted
+ * render-API icon, tier pips arced above, gold guild-claim shield, waypoint
+ * diamond on fortified keeps, and an RI countdown after a flip.
  */
 export function objectiveStyle(feature: FeatureLike): Style | Style[] {
   const type: string = feature.get("type") ?? "";
@@ -113,23 +167,36 @@ export function objectiveStyle(feature: FeatureLike): Style | Style[] {
   const claimedBy: string = feature.get("claimed_by") ?? "";
   const size = type === "Ruins" ? 24 : 32;
 
-  const src = claimedBy === "" || !owner
-    ? feature.get("marker") || "assets/keep_icon.png"
-    : `assets/${type}_${owner}.png`.toLowerCase();
+  const marker: string = feature.get("marker") ?? "";
+  const src = marker ? wvwMarkerSrc(marker, owner, type) : "assets/keep_icon.png";
 
   const styles: Style[] = [iconStyle(src, size)];
 
   if (type !== "Ruins") {
-    const pips = upgradeLevel(feature.get("yaks_delivered"));
-    for (let i = 0; i < pips; i++) {
-      styles.push(badge("assets/upgrade_pip.png", 10, [(i - (pips - 1) / 2) * 11, 23]));
+    // Upgrade tier as pips sitting flush on the icon's top rim like in-game:
+    // each pip centre lies on the rim circle, so the outer pips of a
+    // Fortified row drop with the curve. The team icons' visible disc is
+    // 25px inside the 32px asset, hence the 0.78 factor; +4 = pip
+    // half-height (5) minus 1px overlap so they touch the edge.
+    const tier = (feature.get("upgrade_tier") as number | undefined) ?? 0;
+    const rimRadius = (size / 2) * 0.78 + 4;
+    for (let i = 0; i < tier; i++) {
+      const dx = (i - (tier - 1) / 2) * 11;
+      const dy = Math.round(Math.sqrt(rimRadius * rimRadius - dx * dx));
+      styles.push(badge("assets/upgrade_pip.png", 10, [dx, dy]));
     }
     if (claimedBy) {
       styles.push(badge("assets/guild_claimed.png", 13, [13, -13]));
     }
-    const lastFlipped = feature.get("last_flipped");
-    if (lastFlipped && Date.now() - new Date(lastFlipped).getTime() <= RECENT_FLIP_WINDOW_MS) {
+    // The in-game map marks keeps whose waypoint exists (built at Fortified).
+    if (tier === 3 && (type === "Keep" || type === "Castle")) {
+      styles.push(badge("assets/waypoint.png", 14, [-(size / 2 + 6), 0]));
+    }
+    const riMs = riRemainingMs(feature, Date.now());
+    if (riMs > 0) {
       styles.push(badge("assets/no_entry.png", 13, [-13, -13]));
+      const totalSeconds = Math.ceil(riMs / 1000);
+      styles.push(riCountdownStyle(`${Math.floor(totalSeconds / 60)}:${String(totalSeconds % 60).padStart(2, "0")}`));
     }
   }
 
@@ -188,6 +255,7 @@ export function syncObjectiveFeatures(
         friendlyOwner: obj.friendlyOwner,
         claimed_by: obj.claimed_by ?? "",
         yaks_delivered: obj.yaks_delivered,
+        upgrade_tier: obj.upgrade_tier ?? 0,
         last_flipped: obj.last_flipped,
         // Full source object for the objective-details dialog (match mode only).
         objective_data: obj,
@@ -217,28 +285,4 @@ export function syncObjectiveFeatures(
       spawnSource.removeFeature(feature);
     }
   }
-}
-
-/** Hover tooltip HTML for an objective, close to the old bindTooltip content. */
-export function objectiveTooltipHtml(feature: FeatureLike): string {
-  const name = feature.get("name") ?? "";
-  const type = feature.get("type") ?? "";
-  const owner: string | undefined = feature.get("owner");
-  const friendlyOwner = feature.get("friendlyOwner");
-  const tier = upgradeLevel(feature.get("yaks_delivered"));
-
-  let html = `<p class="m-0 pl-1 text-base">${name}</p>`;
-  html += `<p class="m-0 pl-1"><span class="mx-1">${type}</span>`;
-  if (tier > 0) {
-    html += `<span class="mx-1">- Tier ${tier} ${friendlyUpgradeLevel(tier)}</span>`;
-  }
-  html += "</p>";
-  if (owner && friendlyOwner) {
-    html += "<hr><p class='m-0'>Controlled By:</p>";
-    html += `<p class="m-0 pl-1 mists ${owner.toLowerCase()}">${friendlyOwner}</p>`;
-  }
-  if (feature.get("claimed_by")) {
-    html += "<p class='m-0'>Claimed by a guild</p>";
-  }
-  return html;
 }

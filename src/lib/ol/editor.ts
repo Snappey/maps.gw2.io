@@ -18,9 +18,8 @@ interface EditorEntry {
 }
 
 /**
- * Dev-only marker/text placement state for the OL map — replaces the
- * Leaflet-coupled EditorService internals while keeping the same exported
- * JSON shape (id/coordinates/type/data) the data scripts expect.
+ * Dev-only marker/text placement state for the OL map. Keeps the exported
+ * JSON shape (id/coordinates/type/data) the data scripts consume.
  */
 export class OlEditor {
   readonly markersSource = new VectorSource();
@@ -55,7 +54,7 @@ export class OlEditor {
     const feature = new Feature({geometry: new Point(gw2ToOl(coordinates))});
     feature.setId(this.entryId(coordinates));
     feature.set("layer", "editor_text");
-    feature.setStyle((_, resolution) => labelStyle(kind, heading, resolution));
+    feature.setStyle(() => labelStyle(kind, heading));
     this.textSource.addFeature(feature);
 
     this.text.push({

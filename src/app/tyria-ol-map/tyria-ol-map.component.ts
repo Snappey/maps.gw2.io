@@ -1,16 +1,12 @@
-import {AfterViewInit, Component, ElementRef, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, HostListener, inject, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {Store} from "@ngrx/store";
-import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ClipboardService} from "ngx-clipboard";
-import {ToastrService} from "ngx-toastr";
 import {AsyncPipe} from "@angular/common";
-import {BehaviorSubject, debounceTime, filter, fromEvent, map, Observable, Subject, take, takeUntil} from "rxjs";
+import {BehaviorSubject, catchError, Observable, of, take, takeUntil} from "rxjs";
 
 import OlMap from "ol/Map";
 import Overlay from "ol/Overlay";
 import {MapBrowserEvent} from "ol";
-import {FeatureLike} from "ol/Feature";
 import Layer from "ol/layer/Base";
 import VectorTileLayer from "ol/layer/VectorTile";
 import VectorSource from "ol/source/Vector";
@@ -18,7 +14,7 @@ import {defaults as defaultControls} from "ol/control/defaults";
 import {PMTilesVectorSource} from "ol-pmtiles";
 import {MVT} from "ol/format";
 
-import {BaseOlMap} from "../../lib/ol/base-ol-map";
+import {BaseOlMap} from "../base-ol-map";
 import {LayerState} from "../../lib/layer-state";
 import {AppState} from "../../state/appState";
 import {liveMarkersActions} from "../../state/live-markers/live-markers.action";
@@ -26,15 +22,26 @@ import {selectUserAccountName} from "../../state/user/user.feature";
 import {Event, EventMap, EventTimerService} from "../../services/event-timer.service";
 import {LiveMarkersService} from "../../services/live-markers.service";
 import {SidebarLiveMarker} from "../../lib/live-marker-types";
-import {ChromeModule} from "../chrome.module";
-import {ToolbarButton} from "../toolbar/toolbar.component";
+import {ToolbarButton, ToolbarComponent} from "../toolbar/toolbar.component";
+import {sharedLeftToolbarButtons} from "../toolbar/toolbar-buttons";
+import {AboutModalComponent} from "../about-modal/about-modal.component";
+import {EventGridComponent} from "../event-grid/event-grid.component";
+import {LiveMarkerSidebarComponent} from "../live-marker-sidebar/live-marker-sidebar.component";
+import {SettingsModalComponent} from "../settings-modal/settings-modal.component";
+import {WizardVaultGridComponent} from "../wizard-vault-grid/wizard-vault-grid.component";
 import {TooltipModule} from "primeng/tooltip";
 import {OlLiveMarkersController} from "../../lib/ol/live-markers-layer";
 import {createVectorTileGrid, getProjection, gw2ToOl, TYRIA_MAP_CONFIG} from "../../lib/ol/gw2-projection";
-import {chatLinkFor, createTyriaOverlayDefinitions, HEART_BOUNDS_STYLE, syncEventFeatures, tooltipFor, wikiUrlFor} from "../../lib/ol/tyria-layers";
+import {
+  createTyriaOverlayDefinitions, HEART_BOUNDS_STYLE, mergedMarkerStyle, sublayerVisible,
+  syncEventFeatures, TYRIA_MARKER_SUBLAYERS,
+} from "../../lib/ol/tyria-layers";
+import {PinOverlays} from "../../lib/ol/pin-overlays";
+import {chatLinkFor, tooltipFor, wikiUrlFor} from "../../lib/ol/feature-meta";
 import {iconStyle} from "../../lib/ol/marker-styles";
-import {buildUserLayerSource, userLayerStyle, USER_LAYER_ID_PREFIX} from "../../lib/ol/user-layers";
-import {UserLayer, UserLayerService} from "../../services/user-layer.service";
+import {LabelEntry, LabelOverlays} from "../../lib/ol/label-overlay";
+import {CloudOverlay} from "../../lib/ol/cloud-overlay";
+import {throttleVectorTileParsing} from "../../lib/ol/vt-parse-queue";
 import {OlEditor} from "../../lib/ol/editor";
 import {MarkerType} from "../../lib/editor-types";
 import {ButtonModule} from "primeng/button";
@@ -43,19 +50,20 @@ import {LayerOptionsComponent} from "../layer-options/layer-options.component";
 import {UserLayerManagerComponent} from "../user-layer-manager/user-layer-manager.component";
 import {MapContextMenuComponent, MapContextMenuItem} from "../map-context-menu/map-context-menu.component";
 import {EditorModalComponent} from "../editor-modal/editor-modal.component";
-
-interface ChatLinkIndexEntry {
-  coord: [number, number];
-  tooltip: string;
-  type: string;
-}
+import {FloorPickerComponent} from "../floor-picker/floor-picker.component";
+import {MapService} from "../../services/map.service";
+import {MenuPanelService} from "../../services/menu-panel.service";
+import {WidgetService} from "../../services/widget.service";
+import {TacoDropDirective} from "../taco-drop/taco-drop.directive";
 
 @Component({
   selector: "app-tyria-ol-map",
   standalone: true,
   imports: [LayerOptionsComponent, UserLayerManagerComponent, ButtonModule, TooltipModule,
-    MapContextMenuComponent, ChromeModule, AsyncPipe],
-  providers: [DialogService],
+    MapContextMenuComponent, AsyncPipe, FloorPickerComponent, TacoDropDirective,
+    ToolbarComponent, AboutModalComponent, EventGridComponent, LiveMarkerSidebarComponent,
+    SettingsModalComponent, WizardVaultGridComponent],
+  providers: [DialogService, MenuPanelService, WidgetService],
   templateUrl: "./tyria-ol-map.component.html",
   styleUrls: ["./tyria-ol-map.component.css"],
 })
@@ -64,59 +72,36 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   @ViewChild("tooltipEl") tooltipEl!: ElementRef<HTMLDivElement>;
   @ViewChild("highlightEl") highlightEl!: ElementRef<HTMLImageElement>;
 
-  showUserLayers = false;
-  showSettings = false;
-  showAbout = false;
-  showLayers = false;
-  showEvents = false;
-  showWizardsVault = false;
-  showLiveMarkers = false;
-
-  checkScreenSize = () => document.body.offsetWidth < 1024;
-  smallScreen: boolean = this.checkScreenSize();
+  /** Tracks which single overlay is open so opening one closes the others. */
+  protected readonly menu = inject(MenuPanelService);
 
   upcomingEvents$: Observable<EventMap> = this.eventTimerService.getNextEventsTimer(8);
   liveMarkerList$ = new BehaviorSubject<SidebarLiveMarker[]>([]);
 
   leftToolbar: ToolbarButton[] = [
-    {
-      Tooltip: "Info",
-      Icon: "/assets/about_icon.png",
-      IconHover: "/assets/about_hovered_icon.png",
-      OnClick: () => this.showAbout = !this.showAbout
-    },
-    {
-      Tooltip: "Settings",
-      Icon: "/assets/settings_icon.png",
-      IconHover: "/assets/settings_hovered_icon.png",
-      OnClick: () => this.showSettings = !this.showSettings
-    },
-    {
-      Tooltip: "Layers",
-      Icon: "/assets/layer_icon.png",
-      IconHover: "/assets/layer_hovered_icon.png",
-      OnClick: () => this.showLayers = !this.showLayers,
-      Keybindings: ["Digit1"]
-    },
+    ...sharedLeftToolbarButtons(this.menu),
     {
       Tooltip: "Live Markers",
       Icon: "/assets/friends_icon.png",
       IconHover: "/assets/friends_hovered_icon.png",
-      OnClick: () => this.showLiveMarkers = !this.showLiveMarkers,
+      OnClick: () => this.menu.toggle("liveMarkers"),
+      PanelId: "liveMarkers",
       Keybindings: ["Digit2"]
     },
     {
-      Tooltip: "World Bosses",
+      Tooltip: "Events",
       Icon: "/assets/event_icon.png",
       IconHover: "/assets/event_hovered_icon.png",
-      OnClick: () => this.showEvents = !this.showEvents,
+      OnClick: () => this.menu.toggle("events"),
+      PanelId: "events",
       Keybindings: ["Digit3"]
     },
     {
       Tooltip: "Wizards Vault",
       Icon: "/assets/wizard_vault_icon.png",
       IconHover: "/assets/wizard_vault_hovered_icon.png",
-      OnClick: () => this.showWizardsVault = !this.showWizardsVault,
+      OnClick: () => this.menu.toggle("wizardsVault"),
+      PanelId: "wizardsVault",
       Keybindings: ["Digit4"]
     }
   ];
@@ -137,27 +122,35 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
 
   private tooltipOverlay?: Overlay;
   private highlightOverlay?: Overlay;
+  private headingLabels?: LabelOverlays;
+  private clouds?: CloudOverlay;
   private heartBoundsLayer?: VectorTileLayer;
+  private markersLayer?: VectorTileLayer;
+  private markerVisibilitySignature = "";
+  // Pinned marker kinds render at every zoom from a full, non-tiled overlay;
+  // the controller owns the lazy load + per-kind cache (see PinOverlays).
+  private pins?: PinOverlays;
   private highlightedHeartId?: number;
-  private interactiveLayers = new Set<Layer>();
   private eventsSource = new VectorSource();
-  private unsubscribe$ = new Subject<void>();
   private liveMarkers?: OlLiveMarkersController;
 
   constructor(
     ngZone: NgZone,
     route: ActivatedRoute,
     router: Router,
-    private http: HttpClient,
-    private clipboard: ClipboardService,
-    private toastr: ToastrService,
     private eventTimerService: EventTimerService,
     private liveMarkersService: LiveMarkersService,
-    private userLayerService: UserLayerService,
     private dialogService: DialogService,
     private store: Store<AppState>,
+    private mapService: MapService,
   ) {
     super(ngZone, route, router, TYRIA_MAP_CONFIG);
+  }
+
+  /** Escape closes whichever overlay is open (PrimeNG dialogs also self-close). */
+  @HostListener("document:keydown.escape")
+  onEscape() {
+    this.menu.close();
   }
 
   /** Dev-only marker/text placement via right-click context menu. */
@@ -188,6 +181,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
 
       const coords = this.getCoords(olMap.getEventCoordinate(event));
       this.ngZone.run(() => {
+        this.menu.close();
         this.contextMenuItems = this.buildContextMenu(coords);
         this.contextMenuPosition = {x: pixel[0], y: pixel[1]};
       });
@@ -238,46 +232,17 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     });
   }
 
-  /** Registers/refreshes user layers; runs inside the zone so the panel updates. */
-  private syncUserLayers(layers: UserLayer[]) {
-    for (const id of Object.keys(this.mapLayers).filter(id => id.startsWith(USER_LAYER_ID_PREFIX))) {
-      this.interactiveLayers.delete(this.mapLayers[id].layer as Layer);
-      this.unregisterLayer(id);
-    }
-    for (const userLayer of layers) {
-      const layer = this.registerLayer({
-        kind: "vector",
-        id: userLayer.id,
-        source: buildUserLayerSource(userLayer),
-        style: userLayerStyle(userLayer.color),
-        friendlyName: userLayer.name,
-        icon: "/assets/list_icon.png",
-        state: LayerState.Enabled,
-        zIndex: 5,
-      });
-      this.interactiveLayers.add(layer as Layer);
-    }
-    this.mapLayers = {...this.mapLayers};
-  }
-
   ngOnInit() {
-    this.store.dispatch(liveMarkersActions.setActiveContinent({continentId: this.config.continentId as 1 | 2}));
-
-    fromEvent(window, "resize").pipe(
-      debounceTime(200),
-      map(this.checkScreenSize),
-      takeUntil(this.unsubscribe$),
-    ).subscribe(small => this.smallScreen = small);
+    this.store.dispatch(liveMarkersActions.setActiveContinent({continentId: this.config.continentId}));
+    this.initScreenSizeTracking();
   }
 
   panToEvent(event: Event) {
     this.panTo(event.coordinates, 5);
-    this.clipboard.copy(event.chatLink);
-    this.toastr.info("Copied closest waypoint to clipboard!", event.name, {
-      toastClass: "custom-toastr",
-      positionClass: "toast-top-right"
-    });
-    this.showEvents = false;
+    if (event.chatLink) {
+      this.copyToClipboard(event.chatLink, "Copied closest waypoint to clipboard!", event.name);
+    }
+    this.menu.close("events");
   }
 
   ngAfterViewInit() {
@@ -288,7 +253,10 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
     this.liveMarkers?.destroy();
-    this.Map?.setTarget(undefined);
+    this.headingLabels?.destroy();
+    this.clouds?.destroy();
+    this.pins?.destroy();
+    this.destroyMap();
   }
 
   private initMap() {
@@ -304,6 +272,40 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       (window as {olMap?: OlMap}).olMap = olMap;
     }
 
+    this.initBaseRaster();
+    this.initClouds(olMap);
+    const vtSource = this.initMarkerLayer(olMap);
+    this.initHeadingLabels(olMap);
+    this.initLiveMarkers(olMap);
+    this.initEvents();
+    // User-made layers from localStorage; re-synced on every import/delete.
+    this.initUserLayers();
+    if (isDevMode()) {
+      this.initEditor(olMap);
+    }
+    this.initHeartHighlight(olMap, vtSource);
+    this.initInteractionOverlays(olMap);
+
+    this.pins = new PinOverlays(
+      olMap, this.interactiveLayers,
+      url => this.http.get<any[]>(url).pipe(take(1)),
+      id => this.mapLayers[id]?.state === LayerState.Pinned,
+    );
+
+    // Dynamic raster floors: once the map list loads, watch the view and offer
+    // the floors available where the user is looking. Failure hides the picker.
+    this.mapService.getAllMaps().pipe(take(1), catchError(() => of([]))).subscribe(
+      maps => this.ngZone.runOutsideAngular(() => this.initFloorPicker("core", maps)));
+
+    this.handleChatLinkRoute(coord => {
+      this.highlightEl.nativeElement.style.display = "block";
+      this.highlightOverlay?.setPosition(gw2ToOl(coord));
+      this.panTo(coord, 7);
+    });
+  }
+
+  /** The Tyria raster base layer (floor-swappable). */
+  private initBaseRaster(): void {
     this.registerLayer({
       kind: "raster",
       id: "core",
@@ -313,23 +315,107 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       state: LayerState.Enabled,
       zIndex: 0,
     });
+  }
 
+  /**
+   * "Above the clouds" sheet for the zoomed-out world view. The OL layer is a
+   * panel-toggle stub (empty source); the visible effect is a CSS-driven DOM
+   * overlay that follows this layer's visibility and fades out as you zoom in
+   * (see CloudOverlay).
+   */
+  private initClouds(olMap: OlMap): void {
+    this.registerLayer({
+      kind: "vector",
+      id: "clouds",
+      source: new VectorSource(),
+      friendlyName: "Clouds",
+      icon: "/assets/skyscale_icon.png",
+      state: LayerState.Enabled,
+      zIndex: 0,
+    });
+    this.clouds = new CloudOverlay(olMap, {
+      textures: ["/assets/sky00.png", "/assets/sky01.png"],
+      fadeStartZoom: this.config.minZoom,
+      fadeEndZoom: 4,
+      maxOpacity: 0.85,
+      layer: this.mapLayers["clouds"].layer,
+    });
+  }
+
+  /**
+   * Builds the shared PMTiles vector source and the merged marker layer that
+   * renders every icon kind (the panel stubs from createTyriaOverlayDefinitions
+   * carry per-kind state the style function consults). Returns the source so the
+   * heart-bounds highlight layer can reuse it.
+   */
+  private initMarkerLayer(olMap: OlMap): PMTilesVectorSource {
     const vtSource = new PMTilesVectorSource({
       url: "assets/tiles/tyria_1_1.pmtiles",
       projection: getProjection(this.config),
       tileGrid: createVectorTileGrid(this.config),
-      format: new MVT(),
+      // Parse only the source-layers something actually styles: the heading
+      // text layers (label_region/label_map) are drawn by the SVG overlay,
+      // and MVT geometry decoding is the dominant pan-spike cost.
+      format: new MVT({
+        layers: [...TYRIA_MARKER_SUBLAYERS.map(s => s.sourceLayer), "label_sector", "sector_bounds", "heart_bounds"],
+      }),
       wrapX: false,
+      // Parsed source tiles are shared by the marker/sector/heart layers and
+      // cost real main-thread time to decode — keep enough of them that
+      // panning back over a visited area never re-parses.
+      cacheSize: 512,
     });
+    throttleVectorTileParsing(vtSource,
+      () => olMap.getView().getAnimating() || olMap.getView().getInteracting());
 
     for (const def of createTyriaOverlayDefinitions(vtSource)) {
-      const layer = this.registerLayer(def);
-      if (def.kind === "vector-tile" && !def.sourceLayer.startsWith("label_") && def.sourceLayer !== "sector_bounds") {
-        this.interactiveLayers.add(layer);
-      }
+      this.registerLayer(def);
     }
 
-    // Live players via MQTT; the controller animates features in place.
+    this.markersLayer = new VectorTileLayer({
+      source: vtSource,
+      style: mergedMarkerStyle(this.config.maxZoom, id => this.mapLayers[id]?.state ?? LayerState.Enabled),
+      renderBuffer: 256,
+      preload: 1,
+      cacheSize: 128,
+      zIndex: 2,
+    });
+    olMap.addLayer(this.markersLayer);
+    this.interactiveLayers.add(this.markersLayer);
+    olMap.getView().on("change:resolution", () => this.syncMarkerVisibility());
+    this.syncMarkerVisibility();
+
+    return vtSource;
+  }
+
+  /** Region/map heading text drawn by the SVG label overlay. */
+  private initHeadingLabels(olMap: OlMap): void {
+    this.http.get<any[]>("assets/data/region_labels_1_1.json").pipe(take(1)).subscribe(raw => {
+      const entries: LabelEntry[] = raw
+        .filter(l => l.label_coordinates != null)
+        .map(l => ({
+          coord: gw2ToOl(l.label_coordinates),
+          heading: l.heading,
+          subheading: l.subheading || undefined,
+          kind: (l.type as string).toLowerCase() as "region" | "map",
+        }));
+      this.headingLabels = new LabelOverlays(olMap, [
+        {
+          entries: entries.filter(e => e.kind === "region"),
+          layer: this.mapLayers["region_labels"].layer,
+          minZoom: 2, maxZoom: 5, opacityLevels: {5: .2, 4: .6},
+        },
+        {
+          entries: entries.filter(e => e.kind === "map"),
+          layer: this.mapLayers["map_labels"].layer,
+          minZoom: 3, maxZoom: 5, opacityLevels: {5: .7},
+        },
+      ]);
+    });
+  }
+
+  /** Live players via MQTT; the controller animates features in place. */
+  private initLiveMarkers(olMap: OlMap): void {
     this.liveMarkers = new OlLiveMarkersController(
       olMap,
       this.config.continentId,
@@ -352,14 +438,16 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       zIndex: 6,
     });
     this.interactiveLayers.add(liveLayer as Layer);
+  }
 
-    // World bosses: 15s timer upserts markers for events within 30 minutes.
+  /** Events: 15s timer upserts markers for meta events within 30 minutes. */
+  private initEvents(): void {
     const eventsLayer = this.registerLayer({
       kind: "vector",
       id: "events_layer",
       source: this.eventsSource,
       style: () => iconStyle("assets/event-boss.png"),
-      friendlyName: "World Bosses",
+      friendlyName: "Events",
       icon: "/assets/event-boss.png",
       state: LayerState.Enabled,
       zIndex: 4,
@@ -368,35 +456,30 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
 
     this.eventTimerService.getNextEventsTimer(8).pipe(
       takeUntil(this.unsubscribe$),
-    ).subscribe(events => syncEventFeatures(this.eventsSource, events as never));
+    ).subscribe(events => syncEventFeatures(this.eventsSource, events));
+  }
 
-    // User-made layers from localStorage; re-synced on every import/delete.
-    this.userLayerService.layersFor(this.config.continentId).pipe(
-      takeUntil(this.unsubscribe$),
-    ).subscribe(layers => this.ngZone.run(() => this.syncUserLayers(layers)));
-
-    if (isDevMode()) {
-      this.initEditor(olMap);
-    }
-
-    // Always-on hover highlight for heart bounds; not part of the layer panel.
+  /**
+   * Hover highlight for heart bounds; not part of the layer panel. Hidden until
+   * a heart is hovered — while visible it re-processes every tile of the shared
+   * source on every rendered frame.
+   */
+  private initHeartHighlight(olMap: OlMap, vtSource: PMTilesVectorSource): void {
     this.heartBoundsLayer = new VectorTileLayer({
       source: vtSource,
       zIndex: 1,
+      visible: false,
       style: feature =>
         feature.get("layer") === "heart_bounds" && feature.get("heart_id") === this.highlightedHeartId
           ? HEART_BOUNDS_STYLE
           : undefined,
     });
     olMap.addLayer(this.heartBoundsLayer);
+  }
 
-    this.tooltipOverlay = new Overlay({
-      element: this.tooltipEl.nativeElement,
-      offset: [25, 0],
-      positioning: "center-left",
-      stopEvent: false,
-    });
-    olMap.addOverlay(this.tooltipOverlay);
+  /** Tooltip + highlight overlays and the pointer interaction handlers. */
+  private initInteractionOverlays(olMap: OlMap): void {
+    this.tooltipOverlay = this.createTooltipOverlay(olMap, this.tooltipEl.nativeElement, [25, 0]);
 
     this.highlightOverlay = new Overlay({
       element: this.highlightEl.nativeElement,
@@ -408,18 +491,33 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     olMap.on("pointermove", e => this.onPointerMove(e));
     olMap.on("singleclick", e => this.onClick(e));
     olMap.on("dblclick", e => this.onDoubleClick(e));
-
-    // Notify Angular about the registered layers so the panel renders.
-    this.ngZone.run(() => this.mapLayers = {...this.mapLayers});
-
-    this.handleChatLinkRoute();
   }
 
-  private featureAt(pixel: number[]): FeatureLike | undefined {
-    return this.Map?.forEachFeatureAtPixel(pixel, f => f, {
-      hitTolerance: 4,
-      layerFilter: l => this.interactiveLayers.has(l),
-    });
+  /**
+   * Marker styles are baked into the merged layer's render tiles, so a state
+   * toggle or a zoom crossing a sublayer threshold needs a rebuild — OL's own
+   * per-layer min/max zoom no longer applies to individual icon kinds.
+   */
+  private syncMarkerVisibility(force = false): void {
+    const zoom = this.Map?.getView().getZoom();
+    if (zoom === undefined) {
+      return;
+    }
+    const signature = TYRIA_MARKER_SUBLAYERS
+      .map(sub => sublayerVisible(sub, this.mapLayers[sub.id]?.state ?? sub.state, zoom) ? "1" : "0")
+      .join("");
+    if (force || signature !== this.markerVisibilitySignature) {
+      this.markerVisibilitySignature = signature;
+      this.markersLayer?.changed();
+    }
+  }
+
+  override layerUpdated(event: [string, LayerState]) {
+    super.layerUpdated(event);
+    if (TYRIA_MARKER_SUBLAYERS.some(sub => sub.id === event[0])) {
+      this.syncMarkerVisibility(true);
+      this.pins?.sync(event[0], event[1] === LayerState.Pinned);
+    }
   }
 
   private onPointerMove(e: MapBrowserEvent) {
@@ -443,6 +541,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     const heartId = feature?.get("layer") === "heart" ? feature.get("id") : undefined;
     if (heartId !== this.highlightedHeartId) {
       this.highlightedHeartId = heartId;
+      this.heartBoundsLayer?.setVisible(heartId !== undefined);
       this.heartBoundsLayer?.changed();
     }
   }
@@ -457,19 +556,14 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       return;
     }
     const tooltip = tooltipFor(feature);
-    this.ngZone.run(() => {
-      this.clipboard.copy(chatLink);
-      // World bosses copy their closest waypoint, like the old event markers.
-      const msg = feature.get("layer") === "event" ?
-        "Copied closest waypoint to clipboard!" :
-        tooltip && tooltip !== chatLink ?
-          `Copied [${tooltip}] to clipboard!` :
-          `Copied ${chatLink} to clipboard!`;
-      this.toastr.info(msg, feature.get("layer") === "event" ? feature.get("name") : "", {
-        toastClass: "custom-toastr",
-        positionClass: "toast-top-right",
-      });
-    });
+    // World bosses copy their closest waypoint, like the old event markers.
+    const isEvent = feature.get("layer") === "event";
+    const msg = isEvent ?
+      "Copied closest waypoint to clipboard!" :
+      tooltip && tooltip !== chatLink ?
+        `Copied [${tooltip}] to clipboard!` :
+        `Copied ${chatLink} to clipboard!`;
+    this.ngZone.run(() => this.copyToClipboard(chatLink, msg, isEvent ? feature.get("name") : ""));
   }
 
   private onDoubleClick(e: MapBrowserEvent): boolean | void {
@@ -481,29 +575,4 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     }
   }
 
-  private handleChatLinkRoute() {
-    this.route.params.pipe(
-      map(params => params["chatLink"] as string | undefined),
-      take(1),
-      filter((chatLink): chatLink is string => !!chatLink),
-      map(chatLink => chatLink
-        .replace(/^\[/, "")
-        .replace(/\]$/, "")
-        .replace(/=+$/, "")),
-    ).subscribe(chatLink =>
-      this.http.get<{[key: string]: ChatLinkIndexEntry}>(`assets/tiles/tyria_${this.config.continentId}_${this.config.floorId}.index.json`)
-        .subscribe(index => {
-          const entry = index[chatLink];
-          if (!entry) {
-            this.toastr.warning("Failed to find marker from url", "", {
-              toastClass: "custom-toastr",
-              positionClass: "toast-top-right",
-            });
-            return;
-          }
-          this.highlightEl.nativeElement.style.display = "block";
-          this.highlightOverlay?.setPosition(gw2ToOl(entry.coord));
-          this.panTo(entry.coord, 7);
-        }));
-  }
 }

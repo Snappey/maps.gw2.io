@@ -1,4 +1,4 @@
-﻿<p-dialog header="Settings" [(visible)]="this.visible" [style]="{width: '50vw'}">
+﻿<p-dialog header="Settings" [(visible)]="this.visible" [style]="{width: '50vw'}" [breakpoints]="{'1200px': '75vw', '768px': '95vw'}">
   <form id="settings-form" [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
     <div class="field">
       <label for="api-key" class="block">API Key:</label>
@@ -12,22 +12,6 @@
         }
       </ng-container>
       <small id="api-key-help" class="block">Requires account permission.</small>
-    </div>
-
-    <div class="field">
-      <label for="home-world" class="block">Home World:</label>
-      @if (worlds$ | async; as worlds) {
-        <p-select
-          id="home-world"
-          appendTo="body"
-          [style]="{width: '100%'}"
-          [options]="worlds | orderBy:'id'"
-          optionLabel="name" optionValue="id"
-          formControlName="homeWorld"
-          [filter]="true" filterBy="name">
-        </p-select>
-      }
-      <small id="home-world-help" class="block">Default WvW world to use.</small>
     </div>
 
     <h3>Live Map</h3>

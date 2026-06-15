@@ -1,1 +1,1686 @@
-{"&BBYEAAA":{"coord":[5350.55,6925.49],"tooltip":"PvP Lobby Waypoint","type":"waypoint"},"&BEkFAAA":{"coord":[5562.98,7106.84],"tooltip":"Portal to Lion's Arch","type":"waypoint"},"&BEoFAAA":{"coord":[5756.61,6737.69],"tooltip":"Combat Training Waypoint","type":"waypoint"},"&BNgJAAA":{"coord":[5540.46,6742.55],"tooltip":"Market Waypoint","type":"waypoint"},"&BNkJAAA":{"coord":[5786.27,7214.86],"tooltip":"Siege Training Waypoint","type":"waypoint"},"&BNoJAAA":{"coord":[5097.78,7180.97],"tooltip":"Arena Waypoint","type":"waypoint"},"&BEwEAAA":{"coord":[3907.24,5932.69],"tooltip":"Blue Team Rally Point","type":"waypoint"},"&BE0EAAA":{"coord":[3508.69,5614.63],"tooltip":"Red Team Rally Point","type":"waypoint"},"&BE4EAAA":{"coord":[7446.2,5307.14],"tooltip":"Blue Team Rally Point","type":"waypoint"},"&BE8EAAA":{"coord":[7623.86,5309.97],"tooltip":"Red Team Rally Point","type":"waypoint"},"&BPAEAAA":{"coord":[3285.69,8587.37],"tooltip":"Blue Team Rally Point","type":"waypoint"},"&BPEEAAA":{"coord":[2838.1,8931.83],"tooltip":"Red Team Rally Point","type":"waypoint"},"&BNEGAAA":{"coord":[4334.22,9744.68],"tooltip":"Blue Team Rally Point","type":"waypoint"},"&BNMGAAA":{"coord":[4698.75,9778.31],"tooltip":"Red Team Rally Point","type":"waypoint"},"&BPYGAAA":{"coord":[2523.2,5937.65],"tooltip":"Blue Team Rally Point","type":"waypoint"},"&BPcGAAA":{"coord":[2413.93,5930.11],"tooltip":"Red Team Rally Point","type":"waypoint"},"&BAUHAAA":{"coord":[7595.29,7882.28],"tooltip":"Blue Team Rally Point","type":"waypoint"},"&BAYHAAA":{"coord":[7595.8,7586.38],"tooltip":"Red Team Rally Point","type":"waypoint"},"&BGYHAAA":{"coord":[2470.2,7676.69],"tooltip":"Blue Team Rally Point","type":"waypoint"},"&BGcHAAA":{"coord":[2729.1,7676.14],"tooltip":"Red Team Rally Point","type":"waypoint"},"&BJsHAAA":{"coord":[9199.74,8156.37],"tooltip":"Red Team Rally Point","type":"waypoint"},"&BJ0HAAA":{"coord":[8702.53,7857.22],"tooltip":"Blue Team Rally Point","type":"waypoint"},"&BEMJAAA":{"coord":[8574.96,7105.89],"tooltip":"Blue Team Rally Point","type":"waypoint"},"&BEcJAAA":{"coord":[8109.55,7113.19],"tooltip":"Red Team Rally Point","type":"waypoint"},"&BFoJAAA":{"coord":[10542.7,7061.04],"tooltip":"Blue Team Rally Point","type":"waypoint"},"&BGcJAAA":{"coord":[11008.9,7333.18],"tooltip":"Red Team Rally Point","type":"waypoint"},"&BJwLAAA":{"coord":[12845.9,6159.29],"tooltip":"Red Team Rally Point","type":"waypoint"},"&BJ0LAAA":{"coord":[12693.3,6158.78],"tooltip":"Blue Team Rally Point","type":"waypoint"},"&BPoDAAA":{"coord":[11889.6,15719.6],"tooltip":" Hill Waypoint","type":"waypoint"},"&BPsDAAA":{"coord":[10562.3,13020.3],"tooltip":" Hill Waypoint","type":"waypoint"},"&BPwDAAA":{"coord":[9081.58,15652.5],"tooltip":" Hill Waypoint","type":"waypoint"},"&BL0EAAA":{"coord":[10621.7,14619.2],"tooltip":"Stonemist Waypoint","type":"waypoint"},"&BL4EAAA":{"coord":[10836.5,13669.2],"tooltip":"Overlook Waypoint","type":"waypoint"},"&BL8EAAA":{"coord":[11554.7,15223.9],"tooltip":"Valley Waypoint","type":"waypoint"},"&BMAEAAA":{"coord":[9648.42,15184.7],"tooltip":"Lowlands Waypoint","type":"waypoint"},"&BDcIAAA":{"coord":[11368.1,15484.8],"tooltip":"Langor Gulch Emergency Waypoint","type":"waypoint"},"&BD0IAAA":{"coord":[9387.45,14900.3],"tooltip":"Aldon's Ledge Emergency Waypoint","type":"waypoint"},"&BFYIAAA":{"coord":[10181.7,14047.1],"tooltip":"Anzalias Pass Emergency Waypoint","type":"waypoint"},"&BGEIAAA":{"coord":[10273.5,15074.3],"tooltip":"Klovan Gully Emergency Waypoint","type":"waypoint"},"&BGQIAAA":{"coord":[11016.3,14073.3],"tooltip":"Ogrewatch Cut Emergency Waypoint","type":"waypoint"},"&BGoIAAA":{"coord":[11710,14825.7],"tooltip":"Bravost Escarpment Emergency Waypoint","type":"waypoint"},"&BKkIAAA":{"coord":[11063.2,13506.2],"tooltip":"Veloka Slope Emergency Waypoint","type":"waypoint"},"&BLQIAAA":{"coord":[10615,14533.8],"tooltip":"Stonemist Castle Emergency Waypoint A","type":"waypoint"},"&BMMIAAA":{"coord":[10836.3,13695.8],"tooltip":"Overlook Emergency Waypoint A","type":"waypoint"},"&BMwIAAA":{"coord":[9619.78,15205],"tooltip":"Lowlands Emergency Waypoint A","type":"waypoint"},"&BM0IAAA":{"coord":[10906.7,15178.6],"tooltip":"Quentin Lake Emergency Waypoint","type":"waypoint"},"&BNcIAAA":{"coord":[9815.85,15379.6],"tooltip":"Jerrifer's Slough Emergency Waypoint","type":"waypoint"},"&BNsIAAA":{"coord":[11257.5,14523.3],"tooltip":"Durios Gulch Emergency Waypoint","type":"waypoint"},"&BOMIAAA":{"coord":[10235.3,13387],"tooltip":"Mendon's Gap Emergency Waypoint","type":"waypoint"},"&BOgIAAA":{"coord":[9984.85,14583.5],"tooltip":"Wildcreek Run Emergency Waypoint","type":"waypoint"},"&BPUIAAA":{"coord":[11587.2,15145.7],"tooltip":"Valley Emergency Waypoint A","type":"waypoint"},"&BJQOAAA":{"coord":[10813.5,13569.9],"tooltip":"Overlook Emergency Waypoint C","type":"waypoint"},"&BJgOAAA":{"coord":[10594,14655.4],"tooltip":"Stonemist Castle Emergency Waypoint C","type":"waypoint"},"&BJkOAAA":{"coord":[11539.9,15074.3],"tooltip":"Valley Emergency Waypoint C","type":"waypoint"},"&BJsOAAA":{"coord":[10552.1,14704.3],"tooltip":"Stonemist Castle Emergency Waypoint B","type":"waypoint"},"&BJ4OAAA":{"coord":[11458.2,15170.9],"tooltip":"Valley Emergency Waypoint B","type":"waypoint"},"&BJ8OAAA":{"coord":[9478.28,15174.9],"tooltip":"Lowlands Emergency Waypoint B","type":"waypoint"},"&BKQOAAA":{"coord":[9697.96,15161.6],"tooltip":"Lowlands Emergency Waypoint C","type":"waypoint"},"&BKsOAAA":{"coord":[10676.3,13700.9],"tooltip":"Overlook Emergency Waypoint B","type":"waypoint"},"&BNkEAAA":{"coord":[5914.98,13561.3],"tooltip":"Dreadfall Bay Waypoint","type":"waypoint"},"&BNoEAAA":{"coord":[5982.5,14787.3],"tooltip":"Border Waypoint","type":"waypoint"},"&BNsEAAA":{"coord":[6845.84,13105.6],"tooltip":"Garrison Waypoint","type":"waypoint"},"&BNwEAAA":{"coord":[6918.62,12519],"tooltip":"Citadel Waypoint","type":"waypoint"},"&BN0EAAA":{"coord":[8005.86,13509.5],"tooltip":"Shadaran Hills Waypoint","type":"waypoint"},"&BN4EAAA":{"coord":[7810.08,14728.8],"tooltip":"Border Waypoint","type":"waypoint"},"&BBUJAAA":{"coord":[7435.65,12754.4],"tooltip":"Emergency Waypoint","type":"waypoint"},"&BCEJAAA":{"coord":[7884.35,13487.6],"tooltip":"Shadaran Hills Emergency Waypoint A","type":"waypoint"},"&BCIJAAA":{"coord":[7358.2,14031.9],"tooltip":"Emergency Waypoint","type":"waypoint"},"&BCcJAAA":{"coord":[6359.44,12700.6],"tooltip":"Emergency Waypoint","type":"waypoint"},"&BCkJAAA":{"coord":[6598.35,14017.6],"tooltip":"Emergency Waypoint","type":"waypoint"},"&BCsJAAA":{"coord":[6857.34,12985.5],"tooltip":"Garrison Emergency Waypoint A","type":"waypoint"},"&BC4JAAA":{"coord":[5943.38,13516],"tooltip":"Dreadfall Bay Emergency Waypoint A","type":"waypoint"},"&BJoOAAA":{"coord":[5907.66,13719.7],"tooltip":"Dreadfall Bay Emergency Waypoint B","type":"waypoint"},"&BKAOAAA":{"coord":[6936,12931.4],"tooltip":"Garrison Emergency Waypoint B","type":"waypoint"},"&BKYOAAA":{"coord":[8042.55,13569],"tooltip":"Shadaran Hills Emergency Waypoint B","type":"waypoint"},"&BKgOAAA":{"coord":[6780.56,13110.9],"tooltip":"Garrison Emergency Waypoint C","type":"waypoint"},"&BKkOAAA":{"coord":[5839.52,13489.9],"tooltip":"Dreadfall Bay Emergency Waypoint C","type":"waypoint"},"&BK0OAAA":{"coord":[7841.34,13572.8],"tooltip":"Shadaran Hills Emergency Waypoint C","type":"waypoint"},"&BNMEAAA":{"coord":[13083,12921.3],"tooltip":"Ascension Bay Waypoint","type":"waypoint"},"&BNQEAAA":{"coord":[13150.5,14147.3],"tooltip":"Border Waypoint","type":"waypoint"},"&BNUEAAA":{"coord":[14013.8,12465.6],"tooltip":"Garrison Waypoint","type":"waypoint"},"&BNYEAAA":{"coord":[14086.6,11879],"tooltip":"Citadel Waypoint","type":"waypoint"},"&BNcEAAA":{"coord":[15173.9,12869.5],"tooltip":"Askalion Hills Waypoint","type":"waypoint"},"&BNgEAAA":{"coord":[14978.1,14088.8],"tooltip":"Border Waypoint","type":"waypoint"},"&BBIJAAA":{"coord":[14025.3,12345.5],"tooltip":"Garrison Emergency Waypoint A","type":"waypoint"},"&BBQJAAA":{"coord":[14603.7,12114.4],"tooltip":"Emergency Waypoint","type":"waypoint"},"&BBgJAAA":{"coord":[15052.3,12847.6],"tooltip":"Askalion Hills Emergency Waypoint A","type":"waypoint"},"&BCMJAAA":{"coord":[13527.4,12060.6],"tooltip":"Emergency Waypoint","type":"waypoint"},"&BCUJAAA":{"coord":[13766.3,13377.6],"tooltip":"Emergency Waypoint","type":"waypoint"},"&BCwJAAA":{"coord":[14526.2,13391.9],"tooltip":"Emergency Waypoint","type":"waypoint"},"&BC8JAAA":{"coord":[13111.4,12876],"tooltip":"Ascension Bay Emergency Waypoint A","type":"waypoint"},"&BJUOAAA":{"coord":[14104,12291.4],"tooltip":"Garrison Emergency Waypoint B","type":"waypoint"},"&BJ0OAAA":{"coord":[15210.6,12929],"tooltip":"Askalion Hills Emergency Waypoint B","type":"waypoint"},"&BKEOAAA":{"coord":[13075.7,13079.7],"tooltip":"Ascension Bay Emergency Waypoint B","type":"waypoint"},"&BKMOAAA":{"coord":[15009.3,12932.8],"tooltip":"Askalion Hills Emergency Waypoint C","type":"waypoint"},"&BKcOAAA":{"coord":[13948.6,12470.9],"tooltip":"Garrison Emergency Waypoint C","type":"waypoint"},"&BKoOAAA":{"coord":[13007.5,12849.9],"tooltip":"Ascension Bay Emergency Waypoint C","type":"waypoint"},"&BEMHAAA":{"coord":[7929.77,8550.1],"tooltip":"Overgrowth Safe Zone Waypoint","type":"waypoint"},"&BEkHAAA":{"coord":[8467.17,11177.8],"tooltip":"Frostreach Safe Zone Waypoint","type":"waypoint"},"&BEoHAAA":{"coord":[6463.9,11289.6],"tooltip":"Badlands Safe Zone Waypoint","type":"waypoint"},"&BEsHAAA":{"coord":[6364.52,10662.9],"tooltip":"Arid Fortress Waypoint","type":"waypoint"},"&BEwHAAA":{"coord":[8675.3,10669.2],"tooltip":"Thunder Hollow Waypoint","type":"waypoint"},"&BE0HAAA":{"coord":[7513.14,8671.58],"tooltip":"Overgrown Fane Waypoint","type":"waypoint"},"&BIQMAAA":{"coord":[6224.46,8496.38],"tooltip":"Mists Arena Spectator Rally Point","type":"waypoint"},"&BIUMAAA":{"coord":[6431.45,9067.42],"tooltip":"Mists Arena Red Team Rally Point","type":"waypoint"},"&BIYMAAA":{"coord":[6940.95,8743.26],"tooltip":"Mists Arena Blue Team Rally Point","type":"waypoint"},"&BCsIAAA":{"coord":[10781.9,10036.5],"tooltip":"Stoic Rampart Emergency Waypoint A","type":"waypoint"},"&BDQIAAA":{"coord":[10339.5,11434.2],"tooltip":"Parched Outpost Emergency Waypoint","type":"waypoint"},"&BGYIAAA":{"coord":[12032.4,10704.6],"tooltip":"Osprey's Palace Waypoint","type":"waypoint"},"&BIsIAAA":{"coord":[12111.4,11893.5],"tooltip":"Border Waypoint","type":"waypoint"},"&BJMIAAA":{"coord":[12002.6,10706.7],"tooltip":"Osprey's Palace Emergency Waypoint A","type":"waypoint"},"&BJ8IAAA":{"coord":[9844.3,9617.31],"tooltip":"O'del Academy Emergency Waypoint","type":"waypoint"},"&BKEIAAA":{"coord":[11891.2,9634.44],"tooltip":"Eternal Necropolis Emergency Waypoint","type":"waypoint"},"&BK0IAAA":{"coord":[9492.81,10632.5],"tooltip":"Blistering Undercroft Waypoint","type":"waypoint"},"&BMQIAAA":{"coord":[11388.3,11563.5],"tooltip":"Crankshaft Depot Emergency Waypoint","type":"waypoint"},"&BMcIAAA":{"coord":[9518.5,11814.3],"tooltip":"Border Waypoint","type":"waypoint"},"&BMgIAAA":{"coord":[9504.06,10695],"tooltip":"Blistering Undercroft Emergency Waypoint A","type":"waypoint"},"&BOQIAAA":{"coord":[10757.3,9181.29],"tooltip":"Citadel Waypoint","type":"waypoint"},"&BP0IAAA":{"coord":[10774.6,10071.3],"tooltip":"Stoic Rampart Waypoint","type":"waypoint"},"&BJYOAAA":{"coord":[9446.7,10520.3],"tooltip":"Blistering Undercroft Emergency Waypoint B","type":"waypoint"},"&BJcOAAA":{"coord":[10637.7,10130.6],"tooltip":"Stoic Rampart Emergency Waypoint C","type":"waypoint"},"&BJwOAAA":{"coord":[12067.4,10567.6],"tooltip":"Osprey's Palace Emergency Waypoint C","type":"waypoint"},"&BKIOAAA":{"coord":[10910.1,10124.3],"tooltip":"Stoic Rampart Emergency Waypoint B","type":"waypoint"},"&BKUOAAA":{"coord":[12161.2,10821.8],"tooltip":"Osprey's Palace Emergency Waypoint B","type":"waypoint"},"&BKwOAAA":{"coord":[9280.3,10789.5],"tooltip":"Blistering Undercroft Emergency Waypoint C","type":"waypoint"},"&DGMAAABLBAAA":{"coord":[10743.8,9492.51,-2955],"tooltip":"Hamm's Lab","type":"objective"},"&DGQAAABLBAAA":{"coord":[11888.6,11290.8,-4733.89],"tooltip":"Bauer Farmstead","type":"objective"},"&DGUAAABLBAAA":{"coord":[9584.12,11295,-3857.78],"tooltip":"McLain's Encampment","type":"objective"},"&DGYAAABLBAAA":{"coord":[9831.82,9507.67,-2897.5],"tooltip":"O'del Academy","type":"objective"},"&DGgAAABLBAAA":{"coord":[11739.2,9654.33,-4452.81],"tooltip":"Eternal Necropolis","type":"objective"},"&DGkAAABLBAAA":{"coord":[11256.9,11551.1,-5219.09],"tooltip":"Crankshaft Depot","type":"objective"},"&DGoAAABLBAAA":{"coord":[9327.72,10634.1,-3714.37],"tooltip":"Blistering Undercroft","type":"objective"},"&DHYAAABLBAAA":{"coord":[10913.3,11198.2,-992.897],"tooltip":"Higgins's Ascent","type":"objective"},"&DHcAAABLBAAA":{"coord":[10446.7,10761.6,-620.871],"tooltip":"Bearce's Dwelling","type":"objective"},"&DG0AAABLBAAA":{"coord":[12100.2,10019.4,-1025.05],"tooltip":"Roy's Refuge","type":"objective"},"&DHgAAABLBAAA":{"coord":[10989.5,10778.3,-941.543],"tooltip":"Zak's Overlook","type":"objective"},"&DG4AAABLBAAA":{"coord":[10243.9,11331.3,-5557.72],"tooltip":"Parched Outpost","type":"objective"},"&DHEAAABLBAAA":{"coord":[10776.6,10120.4,-4120.01],"tooltip":"Stoic Rampart","type":"objective"},"&DHIAAABLBAAA":{"coord":[12203,10706.2,-4254.64],"tooltip":"Osprey's Palace","type":"objective"},"&DHkAAABLBAAA":{"coord":[10399.4,11059.5,-1255.37],"tooltip":"Darra's Maze","type":"objective"},"&DHMAAABLBAAA":{"coord":[9312.65,9994.26,-1283.43],"tooltip":"Boettiger's Hideaway","type":"objective"},"&DHoAAABLBAAA":{"coord":[10725.3,10453.5,-235.954],"tooltip":"Tilly's Encampment","type":"objective"},"&DHQAAABLBAAA":{"coord":[10747.3,11853.9,-2880.79],"tooltip":"Dustwhisper Well","type":"objective"},"&DAsAAAAmAAAA":{"coord":[9413.84,14792.8,-1313.37],"tooltip":"Aldon's Ledge","type":"objective"},"&DAEAAAAmAAAA":{"coord":[10763.6,13655.8,-2464.89],"tooltip":"Overlook","type":"objective"},"&DA8AAAAmAAAA":{"coord":[11452.7,15490.7,-2246.3],"tooltip":"Langor Gulch","type":"objective"},"&DAMAAAAmAAAA":{"coord":[9604.47,15129.9,-906.09],"tooltip":"Lowlands","type":"objective"},"&DBEAAAAmAAAA":{"coord":[10256.6,13514.4,-2015.34],"tooltip":"Mendon's Gap","type":"objective"},"&DAcAAAAmAAAA":{"coord":[11037.9,15556.2,-483.931],"tooltip":"Danelon Passage","type":"objective"},"&DAkAAAAmAAAA":{"coord":[10605.8,14576.2,-1533.9],"tooltip":"Stonemist Castle","type":"objective"},"&DAUAAAAmAAAA":{"coord":[11279.8,13736.8,-835.691],"tooltip":"Pangloss Rise","type":"objective"},"&DBUAAAAmAAAA":{"coord":[11156.4,14527.8,-1622.95],"tooltip":"Durios Gulch","type":"objective"},"&DBQAAAAmAAAA":{"coord":[11090.4,13488.2,-2569.23],"tooltip":"Veloka Slope","type":"objective"},"&DA4AAAAmAAAA":{"coord":[10171.8,15081.8,-495.673],"tooltip":"Klovan Gully","type":"objective"},"&DA0AAAAmAAAA":{"coord":[9805.96,15406.4,-1659.98],"tooltip":"Jerrifer's Slough","type":"objective"},"&DAYAAAAmAAAA":{"coord":[9841.05,13545.8,-508.295],"tooltip":"Speldan Clearcut","type":"objective"},"&DAIAAAAmAAAA":{"coord":[11489.7,15121.6,-1786.97],"tooltip":"Valley","type":"objective"},"&DAwAAAAmAAAA":{"coord":[9906.21,14624.6,-1014.99],"tooltip":"Wildcreek Run","type":"objective"},"&DBAAAAAmAAAA":{"coord":[10850.1,15224.4,-1052.29],"tooltip":"Quentin Lake","type":"objective"},"&DBYAAAAmAAAA":{"coord":[11766.3,14793.5,-2133.39],"tooltip":"Bravost Escarpment","type":"objective"},"&DBMAAAAmAAAA":{"coord":[10965.2,14054.6,-1847.47],"tooltip":"Ogrewatch Cut","type":"objective"},"&DAQAAAAmAAAA":{"coord":[10202.6,15437.1,-79.961],"tooltip":"Golanta Clearing","type":"objective"},"&DAgAAAAmAAAA":{"coord":[11562.3,14470.3,-302.91],"tooltip":"Umberglade Woods","type":"objective"},"&DAoAAAAmAAAA":{"coord":[9570.97,14423.2,-700],"tooltip":"Rogue's Quarry","type":"objective"},"&DBIAAAAmAAAA":{"coord":[10188.8,14082.3,-1657.95],"tooltip":"Anzalias Pass","type":"objective"},"&DD4AAABgAAAA":{"coord":[14065.1,13339.5,-1168],"tooltip":"Temple of Lost Prayers","type":"objective"},"&DD4AAABfAAAA":{"coord":[6897.13,13979.5,-1168],"tooltip":"Temple of the Fallen","type":"objective"},"&DCMAAABgAAAA":{"coord":[13688.9,13339,-1892.9],"tooltip":"Redbriar","type":"objective"},"&DCMAAABfAAAA":{"coord":[6520.89,13979,-1892.9],"tooltip":"Bluebriar","type":"objective"},"&DCAAAABgAAAA":{"coord":[15254.6,12880.8,-3107.98],"tooltip":"Askalion Hills","type":"objective"},"&DCAAAABfAAAA":{"coord":[8086.65,13520.8,-3107.98],"tooltip":"Shadaran Hills","type":"objective"},"&DCEAAABgAAAA":{"coord":[13035.1,12956.6,-300.694],"tooltip":"Ascension Bay","type":"objective"},"&DCEAAABfAAAA":{"coord":[5867.06,13596.6,-300.694],"tooltip":"Dreadfall Bay","type":"objective"},"&DEEAAABgAAAA":{"coord":[14327.1,12757,-711],"tooltip":"Orchard Overlook","type":"objective"},"&DEEAAABfAAAA":{"coord":[7159.09,13397,-711],"tooltip":"Cohen's Overlook","type":"objective"},"&DCYAAABgAAAA":{"coord":[13444.8,12078.2,-3758.65],"tooltip":"Woodhaven","type":"objective"},"&DCYAAABfAAAA":{"coord":[6276.77,12718.2,-3758.65],"tooltip":"Sunnyhill","type":"objective"},"&DCcAAABgAAAA":{"coord":[14082.6,11228.3,-3677.6],"tooltip":"The Spiritholme","type":"objective"},"&DCcAAABfAAAA":{"coord":[6914.61,11868.3,-3677.6],"tooltip":"The Titanpaw","type":"objective"},"&DEAAAABgAAAA":{"coord":[13859.2,12703.1,-393],"tooltip":"Bauer's Estate","type":"objective"},"&DEAAAABfAAAA":{"coord":[6691.21,13343.1,-393],"tooltip":"Gertzz's Estate","type":"objective"},"&DCUAAABgAAAA":{"coord":[14054.3,12435.6,-2800.76],"tooltip":"Garrison","type":"objective"},"&DCUAAABfAAAA":{"coord":[6886.26,13075.6,-2800.76],"tooltip":"Garrison","type":"objective"},"&DDUAAABgAAAA":{"coord":[13258.4,13453.9,-687.909],"tooltip":"Redvale Refuge","type":"objective"},"&DDUAAABfAAAA":{"coord":[6090.42,14093.9,-687.909],"tooltip":"Bluevale Refuge","type":"objective"},"&DDQAAABgAAAA":{"coord":[13220.6,12199.2,-35.3346],"tooltip":"Godslore","type":"objective"},"&DDQAAABfAAAA":{"coord":[6052.58,12839.2,-35.3346],"tooltip":"Faithleap","type":"objective"},"&DDMAAABgAAAA":{"coord":[15031.9,12135.5,-1533.33],"tooltip":"Stargrove","type":"objective"},"&DDMAAABfAAAA":{"coord":[7863.85,12775.5,-1533.33],"tooltip":"Foghaven","type":"objective"},"&DEIAAABgAAAA":{"coord":[14362.3,13112.1,-2742],"tooltip":"Carver's Ascent","type":"objective"},"&DEIAAABfAAAA":{"coord":[7194.27,13752.1,-2742],"tooltip":"Patrick's Ascent","type":"objective"},"&DCIAAABgAAAA":{"coord":[14081,14020,-307.1],"tooltip":"Champion's Demesne","type":"objective"},"&DCIAAABfAAAA":{"coord":[6913,14660,-307.1],"tooltip":"Hero's Lodge","type":"objective"},"&DCQAAABgAAAA":{"coord":[14581,13409.9,-1821.91],"tooltip":"Greenlake","type":"objective"},"&DCQAAABfAAAA":{"coord":[7413.05,14049.9,-1821.91],"tooltip":"Redlake","type":"objective"},"&DDIAAABgAAAA":{"coord":[15020.9,13500.9,-10.3619],"tooltip":"Greenwater Lowlands","type":"objective"},"&DDIAAABfAAAA":{"coord":[7852.9,14140.9,-10.3619],"tooltip":"Redwater Lowlands","type":"objective"},"&DD8AAABgAAAA":{"coord":[13761,13074.7,-0.649902],"tooltip":"Battle's Hollow","type":"objective"},"&DD8AAABfAAAA":{"coord":[6593,13714.7,-0.649902],"tooltip":"Norfolk's Hollow","type":"objective"},"&DCgAAABgAAAA":{"coord":[14683.4,12030.3,-4839.9],"tooltip":"Dawn's Eyrie","type":"objective"},"&DCgAAABfAAAA":{"coord":[7515.42,12670.3,-4839.9],"tooltip":"Cragtop","type":"objective"}}
+{
+  "&BAUHAAA": {
+    "coord": [
+      7595.29,
+      7882.28
+    ],
+    "tooltip": "Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BAYHAAA": {
+    "coord": [
+      7595.8,
+      7586.38
+    ],
+    "tooltip": "Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BBIJAAA": {
+    "coord": [
+      14025.3,
+      12345.5
+    ],
+    "tooltip": "Garrison Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BBQJAAA": {
+    "coord": [
+      14603.7,
+      12114.4
+    ],
+    "tooltip": "Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BBUJAAA": {
+    "coord": [
+      7435.65,
+      12754.4
+    ],
+    "tooltip": "Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BBYEAAA": {
+    "coord": [
+      5350.55,
+      6925.49
+    ],
+    "tooltip": "PvP Lobby Waypoint",
+    "type": "waypoint"
+  },
+  "&BBgJAAA": {
+    "coord": [
+      15052.3,
+      12847.6
+    ],
+    "tooltip": "Askalion Hills Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BC4JAAA": {
+    "coord": [
+      5943.38,
+      13516
+    ],
+    "tooltip": "Dreadfall Bay Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BC8JAAA": {
+    "coord": [
+      13111.4,
+      12876
+    ],
+    "tooltip": "Ascension Bay Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BCEJAAA": {
+    "coord": [
+      7884.35,
+      13487.6
+    ],
+    "tooltip": "Shadaran Hills Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BCIJAAA": {
+    "coord": [
+      7358.2,
+      14031.9
+    ],
+    "tooltip": "Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BCMJAAA": {
+    "coord": [
+      13527.4,
+      12060.6
+    ],
+    "tooltip": "Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BCUJAAA": {
+    "coord": [
+      13766.3,
+      13377.6
+    ],
+    "tooltip": "Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BCcJAAA": {
+    "coord": [
+      6359.44,
+      12700.6
+    ],
+    "tooltip": "Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BCkJAAA": {
+    "coord": [
+      6598.35,
+      14017.6
+    ],
+    "tooltip": "Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BCsIAAA": {
+    "coord": [
+      10781.9,
+      10036.5
+    ],
+    "tooltip": "Stoic Rampart Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BCsJAAA": {
+    "coord": [
+      6857.34,
+      12985.5
+    ],
+    "tooltip": "Garrison Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BCwJAAA": {
+    "coord": [
+      14526.2,
+      13391.9
+    ],
+    "tooltip": "Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BD0IAAA": {
+    "coord": [
+      9387.45,
+      14900.3
+    ],
+    "tooltip": "Aldon's Ledge Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BDQIAAA": {
+    "coord": [
+      10339.5,
+      11434.2
+    ],
+    "tooltip": "Parched Outpost Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BDcIAAA": {
+    "coord": [
+      11368.1,
+      15484.8
+    ],
+    "tooltip": "Langor Gulch Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BE0EAAA": {
+    "coord": [
+      3508.69,
+      5614.63
+    ],
+    "tooltip": "Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BE0HAAA": {
+    "coord": [
+      7513.14,
+      8671.58
+    ],
+    "tooltip": "Overgrown Fane Waypoint",
+    "type": "waypoint"
+  },
+  "&BE4EAAA": {
+    "coord": [
+      7446.2,
+      5307.14
+    ],
+    "tooltip": "Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BE8EAAA": {
+    "coord": [
+      7623.86,
+      5309.97
+    ],
+    "tooltip": "Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BEMHAAA": {
+    "coord": [
+      7929.77,
+      8550.1
+    ],
+    "tooltip": "Overgrowth Safe Zone Waypoint",
+    "type": "waypoint"
+  },
+  "&BEMJAAA": {
+    "coord": [
+      8574.96,
+      7105.89
+    ],
+    "tooltip": "Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BEcJAAA": {
+    "coord": [
+      8109.55,
+      7113.19
+    ],
+    "tooltip": "Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BEkFAAA": {
+    "coord": [
+      5562.98,
+      7106.84
+    ],
+    "tooltip": "Portal to Lion's Arch",
+    "type": "waypoint"
+  },
+  "&BEkHAAA": {
+    "coord": [
+      8467.17,
+      11177.8
+    ],
+    "tooltip": "Frostreach Safe Zone Waypoint",
+    "type": "waypoint"
+  },
+  "&BEoFAAA": {
+    "coord": [
+      5756.61,
+      6737.69
+    ],
+    "tooltip": "Combat Training Waypoint",
+    "type": "waypoint"
+  },
+  "&BEoHAAA": {
+    "coord": [
+      6463.9,
+      11289.6
+    ],
+    "tooltip": "Badlands Safe Zone Waypoint",
+    "type": "waypoint"
+  },
+  "&BEsHAAA": {
+    "coord": [
+      6364.52,
+      10662.9
+    ],
+    "tooltip": "Arid Fortress Waypoint",
+    "type": "waypoint"
+  },
+  "&BEwEAAA": {
+    "coord": [
+      3907.24,
+      5932.69
+    ],
+    "tooltip": "Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BEwHAAA": {
+    "coord": [
+      8675.3,
+      10669.2
+    ],
+    "tooltip": "Thunder Hollow Waypoint",
+    "type": "waypoint"
+  },
+  "&BFYIAAA": {
+    "coord": [
+      10181.7,
+      14047.1
+    ],
+    "tooltip": "Anzalias Pass Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BFoJAAA": {
+    "coord": [
+      10542.7,
+      7061.04
+    ],
+    "tooltip": "Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BGEIAAA": {
+    "coord": [
+      10273.5,
+      15074.3
+    ],
+    "tooltip": "Klovan Gully Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BGQIAAA": {
+    "coord": [
+      11016.3,
+      14073.3
+    ],
+    "tooltip": "Ogrewatch Cut Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BGYHAAA": {
+    "coord": [
+      2470.2,
+      7676.69
+    ],
+    "tooltip": "Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BGYIAAA": {
+    "coord": [
+      12032.4,
+      10704.6
+    ],
+    "tooltip": "Osprey's Palace Waypoint",
+    "type": "waypoint"
+  },
+  "&BGcHAAA": {
+    "coord": [
+      2729.1,
+      7676.14
+    ],
+    "tooltip": "Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BGcJAAA": {
+    "coord": [
+      11008.9,
+      7333.18
+    ],
+    "tooltip": "Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BGoIAAA": {
+    "coord": [
+      11710,
+      14825.7
+    ],
+    "tooltip": "Bravost Escarpment Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BIQMAAA": {
+    "coord": [
+      6224.46,
+      8496.38
+    ],
+    "tooltip": "Mists Arena Spectator Rally Point",
+    "type": "waypoint"
+  },
+  "&BIUMAAA": {
+    "coord": [
+      6431.45,
+      9067.42
+    ],
+    "tooltip": "Mists Arena Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BIYMAAA": {
+    "coord": [
+      6940.95,
+      8743.26
+    ],
+    "tooltip": "Mists Arena Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BIsIAAA": {
+    "coord": [
+      12111.4,
+      11893.5
+    ],
+    "tooltip": "Border Waypoint",
+    "type": "waypoint"
+  },
+  "&BJ0HAAA": {
+    "coord": [
+      8702.53,
+      7857.22
+    ],
+    "tooltip": "Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BJ0LAAA": {
+    "coord": [
+      12693.3,
+      6158.78
+    ],
+    "tooltip": "Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BJ0OAAA": {
+    "coord": [
+      15210.6,
+      12929
+    ],
+    "tooltip": "Askalion Hills Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BJ4OAAA": {
+    "coord": [
+      11458.2,
+      15170.9
+    ],
+    "tooltip": "Valley Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BJ8IAAA": {
+    "coord": [
+      9844.3,
+      9617.31
+    ],
+    "tooltip": "O'del Academy Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BJ8OAAA": {
+    "coord": [
+      9478.28,
+      15174.9
+    ],
+    "tooltip": "Lowlands Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BJMIAAA": {
+    "coord": [
+      12002.6,
+      10706.7
+    ],
+    "tooltip": "Osprey's Palace Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BJQOAAA": {
+    "coord": [
+      10813.5,
+      13569.9
+    ],
+    "tooltip": "Overlook Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BJUOAAA": {
+    "coord": [
+      14104,
+      12291.4
+    ],
+    "tooltip": "Garrison Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BJYOAAA": {
+    "coord": [
+      9446.7,
+      10520.3
+    ],
+    "tooltip": "Blistering Undercroft Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BJcOAAA": {
+    "coord": [
+      10637.7,
+      10130.6
+    ],
+    "tooltip": "Stoic Rampart Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BJgOAAA": {
+    "coord": [
+      10594,
+      14655.4
+    ],
+    "tooltip": "Stonemist Castle Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BJkOAAA": {
+    "coord": [
+      11539.9,
+      15074.3
+    ],
+    "tooltip": "Valley Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BJoOAAA": {
+    "coord": [
+      5907.66,
+      13719.7
+    ],
+    "tooltip": "Dreadfall Bay Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BJsHAAA": {
+    "coord": [
+      9199.74,
+      8156.37
+    ],
+    "tooltip": "Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BJsOAAA": {
+    "coord": [
+      10552.1,
+      14704.3
+    ],
+    "tooltip": "Stonemist Castle Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BJwLAAA": {
+    "coord": [
+      12845.9,
+      6159.29
+    ],
+    "tooltip": "Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BJwOAAA": {
+    "coord": [
+      12067.4,
+      10567.6
+    ],
+    "tooltip": "Osprey's Palace Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BK0IAAA": {
+    "coord": [
+      9492.81,
+      10632.5
+    ],
+    "tooltip": "Blistering Undercroft Waypoint",
+    "type": "waypoint"
+  },
+  "&BK0OAAA": {
+    "coord": [
+      7841.34,
+      13572.8
+    ],
+    "tooltip": "Shadaran Hills Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BKAOAAA": {
+    "coord": [
+      6936,
+      12931.4
+    ],
+    "tooltip": "Garrison Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BKEIAAA": {
+    "coord": [
+      11891.2,
+      9634.44
+    ],
+    "tooltip": "Eternal Necropolis Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BKEOAAA": {
+    "coord": [
+      13075.7,
+      13079.7
+    ],
+    "tooltip": "Ascension Bay Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BKIOAAA": {
+    "coord": [
+      10910.1,
+      10124.3
+    ],
+    "tooltip": "Stoic Rampart Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BKMOAAA": {
+    "coord": [
+      15009.3,
+      12932.8
+    ],
+    "tooltip": "Askalion Hills Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BKQOAAA": {
+    "coord": [
+      9697.96,
+      15161.6
+    ],
+    "tooltip": "Lowlands Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BKUOAAA": {
+    "coord": [
+      12161.2,
+      10821.8
+    ],
+    "tooltip": "Osprey's Palace Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BKYOAAA": {
+    "coord": [
+      8042.55,
+      13569
+    ],
+    "tooltip": "Shadaran Hills Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BKcOAAA": {
+    "coord": [
+      13948.6,
+      12470.9
+    ],
+    "tooltip": "Garrison Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BKgOAAA": {
+    "coord": [
+      6780.56,
+      13110.9
+    ],
+    "tooltip": "Garrison Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BKkIAAA": {
+    "coord": [
+      11063.2,
+      13506.2
+    ],
+    "tooltip": "Veloka Slope Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BKkOAAA": {
+    "coord": [
+      5839.52,
+      13489.9
+    ],
+    "tooltip": "Dreadfall Bay Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BKoOAAA": {
+    "coord": [
+      13007.5,
+      12849.9
+    ],
+    "tooltip": "Ascension Bay Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BKsOAAA": {
+    "coord": [
+      10676.3,
+      13700.9
+    ],
+    "tooltip": "Overlook Emergency Waypoint B",
+    "type": "waypoint"
+  },
+  "&BKwOAAA": {
+    "coord": [
+      9280.3,
+      10789.5
+    ],
+    "tooltip": "Blistering Undercroft Emergency Waypoint C",
+    "type": "waypoint"
+  },
+  "&BL0EAAA": {
+    "coord": [
+      10621.7,
+      14619.2
+    ],
+    "tooltip": "Stonemist Waypoint",
+    "type": "waypoint"
+  },
+  "&BL4EAAA": {
+    "coord": [
+      10836.5,
+      13669.2
+    ],
+    "tooltip": "Overlook Waypoint",
+    "type": "waypoint"
+  },
+  "&BL8EAAA": {
+    "coord": [
+      11554.7,
+      15223.9
+    ],
+    "tooltip": "Valley Waypoint",
+    "type": "waypoint"
+  },
+  "&BLQIAAA": {
+    "coord": [
+      10615,
+      14533.8
+    ],
+    "tooltip": "Stonemist Castle Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BM0IAAA": {
+    "coord": [
+      10906.7,
+      15178.6
+    ],
+    "tooltip": "Quentin Lake Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BMAEAAA": {
+    "coord": [
+      9648.42,
+      15184.7
+    ],
+    "tooltip": "Lowlands Waypoint",
+    "type": "waypoint"
+  },
+  "&BMMIAAA": {
+    "coord": [
+      10836.3,
+      13695.8
+    ],
+    "tooltip": "Overlook Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BMQIAAA": {
+    "coord": [
+      11388.3,
+      11563.5
+    ],
+    "tooltip": "Crankshaft Depot Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BMcIAAA": {
+    "coord": [
+      9518.5,
+      11814.3
+    ],
+    "tooltip": "Border Waypoint",
+    "type": "waypoint"
+  },
+  "&BMgIAAA": {
+    "coord": [
+      9504.06,
+      10695
+    ],
+    "tooltip": "Blistering Undercroft Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BMwIAAA": {
+    "coord": [
+      9619.78,
+      15205
+    ],
+    "tooltip": "Lowlands Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BN0EAAA": {
+    "coord": [
+      8005.86,
+      13509.5
+    ],
+    "tooltip": "Shadaran Hills Waypoint",
+    "type": "waypoint"
+  },
+  "&BN4EAAA": {
+    "coord": [
+      7810.08,
+      14728.8
+    ],
+    "tooltip": "Border Waypoint",
+    "type": "waypoint"
+  },
+  "&BNEGAAA": {
+    "coord": [
+      4334.22,
+      9744.68
+    ],
+    "tooltip": "Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BNMEAAA": {
+    "coord": [
+      13083,
+      12921.3
+    ],
+    "tooltip": "Ascension Bay Waypoint",
+    "type": "waypoint"
+  },
+  "&BNMGAAA": {
+    "coord": [
+      4698.75,
+      9778.31
+    ],
+    "tooltip": "Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BNQEAAA": {
+    "coord": [
+      13150.5,
+      14147.3
+    ],
+    "tooltip": "Border Waypoint",
+    "type": "waypoint"
+  },
+  "&BNUEAAA": {
+    "coord": [
+      14013.8,
+      12465.6
+    ],
+    "tooltip": "Garrison Waypoint",
+    "type": "waypoint"
+  },
+  "&BNYEAAA": {
+    "coord": [
+      14086.6,
+      11879
+    ],
+    "tooltip": "Citadel Waypoint",
+    "type": "waypoint"
+  },
+  "&BNcEAAA": {
+    "coord": [
+      15173.9,
+      12869.5
+    ],
+    "tooltip": "Askalion Hills Waypoint",
+    "type": "waypoint"
+  },
+  "&BNcIAAA": {
+    "coord": [
+      9815.85,
+      15379.6
+    ],
+    "tooltip": "Jerrifer's Slough Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BNgEAAA": {
+    "coord": [
+      14978.1,
+      14088.8
+    ],
+    "tooltip": "Border Waypoint",
+    "type": "waypoint"
+  },
+  "&BNgJAAA": {
+    "coord": [
+      5540.46,
+      6742.55
+    ],
+    "tooltip": "Market Waypoint",
+    "type": "waypoint"
+  },
+  "&BNkEAAA": {
+    "coord": [
+      5914.98,
+      13561.3
+    ],
+    "tooltip": "Dreadfall Bay Waypoint",
+    "type": "waypoint"
+  },
+  "&BNkJAAA": {
+    "coord": [
+      5786.27,
+      7214.86
+    ],
+    "tooltip": "Siege Training Waypoint",
+    "type": "waypoint"
+  },
+  "&BNoEAAA": {
+    "coord": [
+      5982.5,
+      14787.3
+    ],
+    "tooltip": "Border Waypoint",
+    "type": "waypoint"
+  },
+  "&BNoJAAA": {
+    "coord": [
+      5097.78,
+      7180.97
+    ],
+    "tooltip": "Arena Waypoint",
+    "type": "waypoint"
+  },
+  "&BNsEAAA": {
+    "coord": [
+      6845.84,
+      13105.6
+    ],
+    "tooltip": "Garrison Waypoint",
+    "type": "waypoint"
+  },
+  "&BNsIAAA": {
+    "coord": [
+      11257.5,
+      14523.3
+    ],
+    "tooltip": "Durios Gulch Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BNwEAAA": {
+    "coord": [
+      6918.62,
+      12519
+    ],
+    "tooltip": "Citadel Waypoint",
+    "type": "waypoint"
+  },
+  "&BOMIAAA": {
+    "coord": [
+      10235.3,
+      13387
+    ],
+    "tooltip": "Mendon's Gap Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BOQIAAA": {
+    "coord": [
+      10757.3,
+      9181.29
+    ],
+    "tooltip": "Citadel Waypoint",
+    "type": "waypoint"
+  },
+  "&BOgIAAA": {
+    "coord": [
+      9984.85,
+      14583.5
+    ],
+    "tooltip": "Wildcreek Run Emergency Waypoint",
+    "type": "waypoint"
+  },
+  "&BP0IAAA": {
+    "coord": [
+      10774.6,
+      10071.3
+    ],
+    "tooltip": "Stoic Rampart Waypoint",
+    "type": "waypoint"
+  },
+  "&BPAEAAA": {
+    "coord": [
+      3285.69,
+      8587.37
+    ],
+    "tooltip": "Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BPEEAAA": {
+    "coord": [
+      2838.1,
+      8931.83
+    ],
+    "tooltip": "Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BPUIAAA": {
+    "coord": [
+      11587.2,
+      15145.7
+    ],
+    "tooltip": "Valley Emergency Waypoint A",
+    "type": "waypoint"
+  },
+  "&BPYGAAA": {
+    "coord": [
+      2523.2,
+      5937.65
+    ],
+    "tooltip": "Blue Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BPcGAAA": {
+    "coord": [
+      2413.93,
+      5930.11
+    ],
+    "tooltip": "Red Team Rally Point",
+    "type": "waypoint"
+  },
+  "&BPoDAAA": {
+    "coord": [
+      11889.6,
+      15719.6
+    ],
+    "tooltip": " Hill Waypoint",
+    "type": "waypoint"
+  },
+  "&BPsDAAA": {
+    "coord": [
+      10562.3,
+      13020.3
+    ],
+    "tooltip": " Hill Waypoint",
+    "type": "waypoint"
+  },
+  "&BPwDAAA": {
+    "coord": [
+      9081.58,
+      15652.5
+    ],
+    "tooltip": " Hill Waypoint",
+    "type": "waypoint"
+  },
+  "&DA0AAAAmAAAA": {
+    "coord": [
+      9805.96,
+      15406.4,
+      -1659.98
+    ],
+    "tooltip": "Jerrifer's Slough",
+    "type": "objective"
+  },
+  "&DA4AAAAmAAAA": {
+    "coord": [
+      10171.8,
+      15081.8,
+      -495.673
+    ],
+    "tooltip": "Klovan Gully",
+    "type": "objective"
+  },
+  "&DA8AAAAmAAAA": {
+    "coord": [
+      11452.7,
+      15490.7,
+      -2246.3
+    ],
+    "tooltip": "Langor Gulch",
+    "type": "objective"
+  },
+  "&DAEAAAAmAAAA": {
+    "coord": [
+      10763.6,
+      13655.8,
+      -2464.89
+    ],
+    "tooltip": "Overlook",
+    "type": "objective"
+  },
+  "&DAIAAAAmAAAA": {
+    "coord": [
+      11489.7,
+      15121.6,
+      -1786.97
+    ],
+    "tooltip": "Valley",
+    "type": "objective"
+  },
+  "&DAMAAAAmAAAA": {
+    "coord": [
+      9604.47,
+      15129.9,
+      -906.09
+    ],
+    "tooltip": "Lowlands",
+    "type": "objective"
+  },
+  "&DAQAAAAmAAAA": {
+    "coord": [
+      10202.6,
+      15437.1,
+      -79.961
+    ],
+    "tooltip": "Golanta Clearing",
+    "type": "objective"
+  },
+  "&DAUAAAAmAAAA": {
+    "coord": [
+      11279.8,
+      13736.8,
+      -835.691
+    ],
+    "tooltip": "Pangloss Rise",
+    "type": "objective"
+  },
+  "&DAYAAAAmAAAA": {
+    "coord": [
+      9841.05,
+      13545.8,
+      -508.295
+    ],
+    "tooltip": "Speldan Clearcut",
+    "type": "objective"
+  },
+  "&DAcAAAAmAAAA": {
+    "coord": [
+      11037.9,
+      15556.2,
+      -483.931
+    ],
+    "tooltip": "Danelon Passage",
+    "type": "objective"
+  },
+  "&DAgAAAAmAAAA": {
+    "coord": [
+      11562.3,
+      14470.3,
+      -302.91
+    ],
+    "tooltip": "Umberglade Woods",
+    "type": "objective"
+  },
+  "&DAkAAAAmAAAA": {
+    "coord": [
+      10605.8,
+      14576.2,
+      -1533.9
+    ],
+    "tooltip": "Stonemist Castle",
+    "type": "objective"
+  },
+  "&DAoAAAAmAAAA": {
+    "coord": [
+      9570.97,
+      14423.2,
+      -700
+    ],
+    "tooltip": "Rogue's Quarry",
+    "type": "objective"
+  },
+  "&DAsAAAAmAAAA": {
+    "coord": [
+      9413.84,
+      14792.8,
+      -1313.37
+    ],
+    "tooltip": "Aldon's Ledge",
+    "type": "objective"
+  },
+  "&DAwAAAAmAAAA": {
+    "coord": [
+      9906.21,
+      14624.6,
+      -1014.99
+    ],
+    "tooltip": "Wildcreek Run",
+    "type": "objective"
+  },
+  "&DBAAAAAmAAAA": {
+    "coord": [
+      10850.1,
+      15224.4,
+      -1052.29
+    ],
+    "tooltip": "Quentin Lake",
+    "type": "objective"
+  },
+  "&DBEAAAAmAAAA": {
+    "coord": [
+      10256.6,
+      13514.4,
+      -2015.34
+    ],
+    "tooltip": "Mendon's Gap",
+    "type": "objective"
+  },
+  "&DBIAAAAmAAAA": {
+    "coord": [
+      10188.8,
+      14082.3,
+      -1657.95
+    ],
+    "tooltip": "Anzalias Pass",
+    "type": "objective"
+  },
+  "&DBMAAAAmAAAA": {
+    "coord": [
+      10965.2,
+      14054.6,
+      -1847.47
+    ],
+    "tooltip": "Ogrewatch Cut",
+    "type": "objective"
+  },
+  "&DBQAAAAmAAAA": {
+    "coord": [
+      11090.4,
+      13488.2,
+      -2569.23
+    ],
+    "tooltip": "Veloka Slope",
+    "type": "objective"
+  },
+  "&DBUAAAAmAAAA": {
+    "coord": [
+      11156.4,
+      14527.8,
+      -1622.95
+    ],
+    "tooltip": "Durios Gulch",
+    "type": "objective"
+  },
+  "&DBYAAAAmAAAA": {
+    "coord": [
+      11766.3,
+      14793.5,
+      -2133.39
+    ],
+    "tooltip": "Bravost Escarpment",
+    "type": "objective"
+  },
+  "&DCAAAABfAAAA": {
+    "coord": [
+      8086.65,
+      13520.8,
+      -3107.98
+    ],
+    "tooltip": "Shadaran Hills",
+    "type": "objective"
+  },
+  "&DCAAAABgAAAA": {
+    "coord": [
+      15254.6,
+      12880.8,
+      -3107.98
+    ],
+    "tooltip": "Askalion Hills",
+    "type": "objective"
+  },
+  "&DCEAAABfAAAA": {
+    "coord": [
+      5867.06,
+      13596.6,
+      -300.694
+    ],
+    "tooltip": "Dreadfall Bay",
+    "type": "objective"
+  },
+  "&DCEAAABgAAAA": {
+    "coord": [
+      13035.1,
+      12956.6,
+      -300.694
+    ],
+    "tooltip": "Ascension Bay",
+    "type": "objective"
+  },
+  "&DCIAAABfAAAA": {
+    "coord": [
+      6913,
+      14660,
+      -307.1
+    ],
+    "tooltip": "Hero's Lodge",
+    "type": "objective"
+  },
+  "&DCIAAABgAAAA": {
+    "coord": [
+      14081,
+      14020,
+      -307.1
+    ],
+    "tooltip": "Champion's Demesne",
+    "type": "objective"
+  },
+  "&DCMAAABfAAAA": {
+    "coord": [
+      6520.89,
+      13979,
+      -1892.9
+    ],
+    "tooltip": "Bluebriar",
+    "type": "objective"
+  },
+  "&DCMAAABgAAAA": {
+    "coord": [
+      13688.9,
+      13339,
+      -1892.9
+    ],
+    "tooltip": "Redbriar",
+    "type": "objective"
+  },
+  "&DCQAAABfAAAA": {
+    "coord": [
+      7413.05,
+      14049.9,
+      -1821.91
+    ],
+    "tooltip": "Redlake",
+    "type": "objective"
+  },
+  "&DCQAAABgAAAA": {
+    "coord": [
+      14581,
+      13409.9,
+      -1821.91
+    ],
+    "tooltip": "Greenlake",
+    "type": "objective"
+  },
+  "&DCUAAABfAAAA": {
+    "coord": [
+      6886.26,
+      13075.6,
+      -2800.76
+    ],
+    "tooltip": "Garrison",
+    "type": "objective"
+  },
+  "&DCUAAABgAAAA": {
+    "coord": [
+      14054.3,
+      12435.6,
+      -2800.76
+    ],
+    "tooltip": "Garrison",
+    "type": "objective"
+  },
+  "&DCYAAABfAAAA": {
+    "coord": [
+      6276.77,
+      12718.2,
+      -3758.65
+    ],
+    "tooltip": "Sunnyhill",
+    "type": "objective"
+  },
+  "&DCYAAABgAAAA": {
+    "coord": [
+      13444.8,
+      12078.2,
+      -3758.65
+    ],
+    "tooltip": "Woodhaven",
+    "type": "objective"
+  },
+  "&DCcAAABfAAAA": {
+    "coord": [
+      6914.61,
+      11868.3,
+      -3677.6
+    ],
+    "tooltip": "The Titanpaw",
+    "type": "objective"
+  },
+  "&DCcAAABgAAAA": {
+    "coord": [
+      14082.6,
+      11228.3,
+      -3677.6
+    ],
+    "tooltip": "The Spiritholme",
+    "type": "objective"
+  },
+  "&DCgAAABfAAAA": {
+    "coord": [
+      7515.42,
+      12670.3,
+      -4839.9
+    ],
+    "tooltip": "Cragtop",
+    "type": "objective"
+  },
+  "&DCgAAABgAAAA": {
+    "coord": [
+      14683.4,
+      12030.3,
+      -4839.9
+    ],
+    "tooltip": "Dawn's Eyrie",
+    "type": "objective"
+  },
+  "&DD4AAABfAAAA": {
+    "coord": [
+      6897.13,
+      13979.5,
+      -1168
+    ],
+    "tooltip": "Temple of the Fallen",
+    "type": "objective"
+  },
+  "&DD4AAABgAAAA": {
+    "coord": [
+      14065.1,
+      13339.5,
+      -1168
+    ],
+    "tooltip": "Temple of Lost Prayers",
+    "type": "objective"
+  },
+  "&DD8AAABfAAAA": {
+    "coord": [
+      6593,
+      13714.7,
+      -0.649902
+    ],
+    "tooltip": "Norfolk's Hollow",
+    "type": "objective"
+  },
+  "&DD8AAABgAAAA": {
+    "coord": [
+      13761,
+      13074.7,
+      -0.649902
+    ],
+    "tooltip": "Battle's Hollow",
+    "type": "objective"
+  },
+  "&DDIAAABfAAAA": {
+    "coord": [
+      7852.9,
+      14140.9,
+      -10.3619
+    ],
+    "tooltip": "Redwater Lowlands",
+    "type": "objective"
+  },
+  "&DDIAAABgAAAA": {
+    "coord": [
+      15020.9,
+      13500.9,
+      -10.3619
+    ],
+    "tooltip": "Greenwater Lowlands",
+    "type": "objective"
+  },
+  "&DDMAAABfAAAA": {
+    "coord": [
+      7863.85,
+      12775.5,
+      -1533.33
+    ],
+    "tooltip": "Foghaven",
+    "type": "objective"
+  },
+  "&DDMAAABgAAAA": {
+    "coord": [
+      15031.9,
+      12135.5,
+      -1533.33
+    ],
+    "tooltip": "Stargrove",
+    "type": "objective"
+  },
+  "&DDQAAABfAAAA": {
+    "coord": [
+      6052.58,
+      12839.2,
+      -35.3346
+    ],
+    "tooltip": "Faithleap",
+    "type": "objective"
+  },
+  "&DDQAAABgAAAA": {
+    "coord": [
+      13220.6,
+      12199.2,
+      -35.3346
+    ],
+    "tooltip": "Godslore",
+    "type": "objective"
+  },
+  "&DDUAAABfAAAA": {
+    "coord": [
+      6090.42,
+      14093.9,
+      -687.909
+    ],
+    "tooltip": "Bluevale Refuge",
+    "type": "objective"
+  },
+  "&DDUAAABgAAAA": {
+    "coord": [
+      13258.4,
+      13453.9,
+      -687.909
+    ],
+    "tooltip": "Redvale Refuge",
+    "type": "objective"
+  },
+  "&DEAAAABfAAAA": {
+    "coord": [
+      6691.21,
+      13343.1,
+      -393
+    ],
+    "tooltip": "Gertzz's Estate",
+    "type": "objective"
+  },
+  "&DEAAAABgAAAA": {
+    "coord": [
+      13859.2,
+      12703.1,
+      -393
+    ],
+    "tooltip": "Bauer's Estate",
+    "type": "objective"
+  },
+  "&DEEAAABfAAAA": {
+    "coord": [
+      7159.09,
+      13397,
+      -711
+    ],
+    "tooltip": "Cohen's Overlook",
+    "type": "objective"
+  },
+  "&DEEAAABgAAAA": {
+    "coord": [
+      14327.1,
+      12757,
+      -711
+    ],
+    "tooltip": "Orchard Overlook",
+    "type": "objective"
+  },
+  "&DEIAAABfAAAA": {
+    "coord": [
+      7194.27,
+      13752.1,
+      -2742
+    ],
+    "tooltip": "Patrick's Ascent",
+    "type": "objective"
+  },
+  "&DEIAAABgAAAA": {
+    "coord": [
+      14362.3,
+      13112.1,
+      -2742
+    ],
+    "tooltip": "Carver's Ascent",
+    "type": "objective"
+  },
+  "&DG0AAABLBAAA": {
+    "coord": [
+      12100.2,
+      10019.4,
+      -1025.05
+    ],
+    "tooltip": "Roy's Refuge",
+    "type": "objective"
+  },
+  "&DG4AAABLBAAA": {
+    "coord": [
+      10243.9,
+      11331.3,
+      -5557.72
+    ],
+    "tooltip": "Parched Outpost",
+    "type": "objective"
+  },
+  "&DGMAAABLBAAA": {
+    "coord": [
+      10743.8,
+      9492.51,
+      -2955
+    ],
+    "tooltip": "Hamm's Lab",
+    "type": "objective"
+  },
+  "&DGQAAABLBAAA": {
+    "coord": [
+      11888.6,
+      11290.8,
+      -4733.89
+    ],
+    "tooltip": "Bauer Farmstead",
+    "type": "objective"
+  },
+  "&DGUAAABLBAAA": {
+    "coord": [
+      9584.12,
+      11295,
+      -3857.78
+    ],
+    "tooltip": "McLain's Encampment",
+    "type": "objective"
+  },
+  "&DGYAAABLBAAA": {
+    "coord": [
+      9831.82,
+      9507.67,
+      -2897.5
+    ],
+    "tooltip": "O'del Academy",
+    "type": "objective"
+  },
+  "&DGgAAABLBAAA": {
+    "coord": [
+      11739.2,
+      9654.33,
+      -4452.81
+    ],
+    "tooltip": "Eternal Necropolis",
+    "type": "objective"
+  },
+  "&DGkAAABLBAAA": {
+    "coord": [
+      11256.9,
+      11551.1,
+      -5219.09
+    ],
+    "tooltip": "Crankshaft Depot",
+    "type": "objective"
+  },
+  "&DGoAAABLBAAA": {
+    "coord": [
+      9327.72,
+      10634.1,
+      -3714.37
+    ],
+    "tooltip": "Blistering Undercroft",
+    "type": "objective"
+  },
+  "&DHEAAABLBAAA": {
+    "coord": [
+      10776.6,
+      10120.4,
+      -4120.01
+    ],
+    "tooltip": "Stoic Rampart",
+    "type": "objective"
+  },
+  "&DHIAAABLBAAA": {
+    "coord": [
+      12203,
+      10706.2,
+      -4254.64
+    ],
+    "tooltip": "Osprey's Palace",
+    "type": "objective"
+  },
+  "&DHMAAABLBAAA": {
+    "coord": [
+      9312.65,
+      9994.26,
+      -1283.43
+    ],
+    "tooltip": "Boettiger's Hideaway",
+    "type": "objective"
+  },
+  "&DHQAAABLBAAA": {
+    "coord": [
+      10747.3,
+      11853.9,
+      -2880.79
+    ],
+    "tooltip": "Dustwhisper Well",
+    "type": "objective"
+  },
+  "&DHYAAABLBAAA": {
+    "coord": [
+      10913.3,
+      11198.2,
+      -992.897
+    ],
+    "tooltip": "Higgins's Ascent",
+    "type": "objective"
+  },
+  "&DHcAAABLBAAA": {
+    "coord": [
+      10446.7,
+      10761.6,
+      -620.871
+    ],
+    "tooltip": "Bearce's Dwelling",
+    "type": "objective"
+  },
+  "&DHgAAABLBAAA": {
+    "coord": [
+      10989.5,
+      10778.3,
+      -941.543
+    ],
+    "tooltip": "Zak's Overlook",
+    "type": "objective"
+  },
+  "&DHkAAABLBAAA": {
+    "coord": [
+      10399.4,
+      11059.5,
+      -1255.37
+    ],
+    "tooltip": "Darra's Maze",
+    "type": "objective"
+  },
+  "&DHoAAABLBAAA": {
+    "coord": [
+      10725.3,
+      10453.5,
+      -235.954
+    ],
+    "tooltip": "Tilly's Encampment",
+    "type": "objective"
+  }
+}

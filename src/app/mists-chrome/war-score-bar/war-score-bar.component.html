@@ -1,0 +1,19 @@
+<div class="war-score" [class.small]="small">
+  <div class="bar">
+    @for (s of segments; track s.team) {
+      <div class="seg" [ngClass]="s.team + '-background'" [style.width.%]="s.pct"></div>
+    }
+  </div>
+  <div class="plates">
+    @for (p of plates; track p.team) {
+      <div class="plate tooltip" [ngClass]="'overlay-' + p.team" [title]="p.name">
+        <span class="diamond" [ngClass]="p.team + '-background'"></span>
+        <span class="mists-score score">{{p.score | number}}</span>
+        <span class="ppt">+{{p.ppt}}</span>
+        @for (mapId of p.bloodlust; track mapId) {
+          <img class="bl" src="assets/wvw/bloodlust.png" width="14" height="14" title="Borderlands Bloodlust" alt="Bloodlust"/>
+        }
+      </div>
+    }
+  </div>
+</div>

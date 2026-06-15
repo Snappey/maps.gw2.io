@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+/* Up to five equal columns; remaining expansion groups wrap onto further rows
+   and the whole grid scrolls vertically. minmax(0,1fr) lets columns shrink
+   instead of being forced wide by their content. max-height caps the panel so
+   it stays on screen (it sits at top:5vw) and a scrollbar appears past it. */
+.event-grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 1.5rem;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding-bottom: 1rem;
+}
+
+/* Fewer columns on narrower screens so panels stay readable. */
+@media (max-width: 1400px) {
+  .event-grid-container { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 1100px) {
+  .event-grid-container { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 800px) {
+  .event-grid-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

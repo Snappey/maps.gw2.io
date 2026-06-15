@@ -1,0 +1,164 @@
+.team-cards {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.team-card {
+  flex: 1 1 0;
+  text-align: center;
+  padding: 8px 6px;
+}
+
+.world {
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+hr.chev {
+  border: 0;
+  height: 2px;
+  width: 60%;
+  margin: 4px auto;
+  opacity: 0.7;
+}
+
+.big-score {
+  font-size: 1.6rem;
+  color: var(--p-gw2-gold-bright);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.vp {
+  color: var(--p-gw2-gold-label);
+  font-size: 0.8rem;
+}
+
+.diamond {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  flex-shrink: 0;
+}
+
+.body {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  min-width: 14rem;
+}
+
+.filters-head {
+  color: var(--p-primary-color);
+  font-weight: 600;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--p-gw2-separator);
+  margin-bottom: 4px;
+}
+
+.filter {
+  background: transparent;
+  border: 0;
+  color: var(--p-gw2-gold-label);
+  text-align: left;
+  padding: 5px 8px;
+  cursor: pointer;
+  font: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.filter:hover {
+  color: var(--p-primary-hover-color);
+  background: var(--p-gw2-hover-bg);
+}
+
+.filter.active {
+  color: var(--p-primary-color);
+  background: var(--p-gw2-active-bg);
+}
+
+.pie {
+  flex-shrink: 0;
+}
+
+.contested {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.contested .head {
+  display: flex;
+  justify-content: space-between;
+  color: var(--p-primary-color);
+  font-weight: 600;
+  border-bottom: 1px solid var(--p-gw2-separator);
+  padding: 4px 0;
+  margin-bottom: 6px;
+  gap: 16px;
+}
+
+.contested .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  gap: 16px;
+}
+
+.objectives {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.cnt {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--p-primary-color);
+}
+
+.cnt img {
+  vertical-align: middle;
+}
+
+.cnt.zero {
+  opacity: 0.35;
+}
+
+.ppt {
+  color: var(--p-gw2-gold-bright);
+  font-weight: 700;
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+  .body {
+    flex-wrap: wrap;
+  }
+
+  .filters {
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+}

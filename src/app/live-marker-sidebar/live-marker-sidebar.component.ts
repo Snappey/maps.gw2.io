@@ -4,12 +4,13 @@ import {SidebarLiveMarker} from "../../lib/live-marker-types";
 import {map, Observable, of, scan, share, Subject, switchMap, takeUntil} from "rxjs";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../state/appState";
+import { NgStyle, NgClass, NgOptimizedImage, AsyncPipe, TitleCasePipe } from '@angular/common';
 
 @Component({
     selector: 'app-live-marker-sidebar',
     templateUrl: './live-marker-sidebar.component.html',
     styleUrls: ['./live-marker-sidebar.component.css'],
-    standalone: false
+    imports: [NgStyle, NgClass, NgOptimizedImage, AsyncPipe, TitleCasePipe]
 })
 export class LiveMarkerSidebarComponent implements OnDestroy {
   /** Marker list from the hosting map's live-marker controller. */

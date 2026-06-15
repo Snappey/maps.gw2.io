@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Match, Scores, WvwService} from "../../../services/wvw.service";
+import { NgClass, DecimalPipe } from '@angular/common';
+import { Tooltip } from 'primeng/tooltip';
 
 interface SkirmishSummary {
   Scores: Scores
@@ -10,7 +12,7 @@ interface SkirmishSummary {
     selector: 'app-score-overview',
     templateUrl: './score-overview.component.html',
     styleUrls: ['./score-overview.component.css'],
-    standalone: false
+    imports: [NgClass, Tooltip, DecimalPipe]
 })
 export class ScoreOverviewComponent implements OnInit {
   @Input()

@@ -1,7 +1,7 @@
 import {createActionGroup, props} from "@ngrx/store";
 import {AccountInfo} from "../../services/account.service";
 import {Guild} from "../../services/guild.service";
-import {MatchOverview} from "../../services/wvw.service";
+import {MatchOverview} from "../../services/wvw.model";
 
 export const userActions = createActionGroup({
   source: 'userActions',

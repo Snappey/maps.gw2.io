@@ -1,6 +1,7 @@
 import {
   createTileGrid,
   fragmentToView,
+  getClampedExtent,
   getExtent,
   getResolutions,
   gw2ToOl,
@@ -18,9 +19,11 @@ describe("gw2-projection", () => {
   });
 
   it("uses resolutions 2^(maxZoom-z) so OL zoom == Leaflet zoom", () => {
-    expect(getResolutions(TYRIA_MAP_CONFIG)).toEqual([128, 64, 32, 16, 8, 4, 2, 1]);
+    // The trailing 0.5 is zoom 8: an overzoom level (maxViewZoom 8) past the
+    // crisp scale base of 7, where OL upscales the deepest native tiles.
+    expect(getResolutions(TYRIA_MAP_CONFIG)).toEqual([128, 64, 32, 16, 8, 4, 2, 1, 0.5]);
     // Mists coordinates are scaled to zoom 7 even though native tiles stop at 6.
-    expect(getResolutions(MISTS_MAP_CONFIG)).toEqual([128, 64, 32, 16, 8, 4, 2, 1]);
+    expect(getResolutions(MISTS_MAP_CONFIG)).toEqual([128, 64, 32, 16, 8, 4, 2, 1, 0.5]);
   });
 
   it("stops the mists raster grid at the native zoom 6 pyramid (32x32 tiles)", () => {
@@ -78,5 +81,25 @@ describe("gw2-projection", () => {
     expect(range.maxX).toBe(319);
     expect(range.minY).toBe(0);
     expect(range.maxY).toBe(447);
+  });
+
+  it("constrains the view/tile extent to clamped_view, not the full continent", () => {
+    // The continent is 81920x114688 but tiles only exist within clamped_view;
+    // the band above y=9000 and below y=111000 is void and 404s. (Y flips sign
+    // into OL space.)
+    expect(getClampedExtent(TYRIA_MAP_CONFIG)).toEqual([0, -111000, 81920, -9000]);
+
+    // Grid built from the clamped extent skips the void rows: y 9000..111000
+    // at z7 (256px tiles) -> rows 35..433, never the full 0..447.
+    const range = createTileGrid(TYRIA_MAP_CONFIG).getFullTileRange(7)!;
+    expect(range.minX).toBe(0);
+    expect(range.maxX).toBe(319);
+    expect(range.minY).toBe(35);
+    expect(range.maxY).toBe(433);
+  });
+
+  it("falls back to the full continent extent when clampedView is absent", () => {
+    const {clampedView, ...noClamp} = TYRIA_MAP_CONFIG;
+    expect(getClampedExtent(noClamp)).toEqual(getExtent(noClamp));
   });
 });

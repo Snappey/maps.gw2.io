@@ -1,0 +1,28 @@
+<table class="history">
+  <thead>
+    <tr>
+      <th class="label-col">Skirmish</th>
+      @for (team of teams; track team) {
+        <th class="mists" [ngClass]="team">{{teamNames[team]}}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of totalRows; track row.label) {
+      <tr class="total">
+        <td class="label-col">{{row.label}}</td>
+        @for (team of teams; track team) {
+          <td>{{row.values[team]}}</td>
+        }
+      </tr>
+    }
+    @for (row of skirmishRows; track row.label) {
+      <tr>
+        <td class="label-col">{{row.label}}</td>
+        @for (team of teams; track team) {
+          <td>{{row.scores[team] | number}}</td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>

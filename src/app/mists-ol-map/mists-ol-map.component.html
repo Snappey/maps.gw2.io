@@ -1,46 +1,66 @@
-<div class="map-host" #mapHost></div>
+<div class="map-host" #mapHost [appTacoDrop]="2"></div>
 
-<div #tooltipEl class="tooltip-overlay ol-marker-tooltip"></div>
-
-<div [hidden]="showMatches" class="w-30rem" style="position: absolute; z-index: 999; left: 10px; top: 50px">
-  @if (activeMatch$ | async; as activeMatch) {
-    <app-score-overview [loading]="false" [small]="smallScreen" [match]="activeMatch"></app-score-overview>
+<div #tooltipEl class="ol-marker-tooltip">
+  <span #tooltipTextEl class="tooltip-overlay plain-tip" [hidden]="!!hoveredObjective"></span>
+  @if (hoveredObjective) {
+    <app-objective-tooltip [obj]="hoveredObjective"></app-objective-tooltip>
   }
 </div>
 
-<app-toolbar [buttons]="leftToolbar" style="position: absolute; z-index: 999; width: 25vw; left: 10px; top: 5px;"></app-toolbar>
+<div [hidden]="menu.isOpen('matches')" class="score-hud">
+  @if (activeMatch$ | async; as activeMatch) {
+    <app-war-score-bar [small]="smallScreen" [match]="activeMatch"></app-war-score-bar>
+  }
+</div>
+
+<app-toolbar [buttons]="leftToolbar" [activePanel]="menu.active" style="position: absolute; z-index: 999; width: 25vw; left: 10px; top: 5px;"></app-toolbar>
 <app-toolbar [buttons]="rightToolbar" [leftToRight]="false" style="position: absolute; z-index: 999; width: 25vw; right: 10px; top: 5px;"></app-toolbar>
 
-<app-settings-modal [(visible)]="showSettings"></app-settings-modal>
-<app-about-modal [(visible)]="showAbout"></app-about-modal>
+<app-settings-modal [visible]="menu.isOpen('settings')" (visibleChange)="menu.setVisible('settings', $event)"></app-settings-modal>
+<app-about-modal [visible]="menu.isOpen('about')" (visibleChange)="menu.setVisible('about', $event)"></app-about-modal>
 
-@if (showLayers) {
-  <div class="layer-panel tooltip">
-    <app-layer-options [layers]="mapLayers" (layerUpdated)="layerUpdated($event)"></app-layer-options>
-    <p-button class="block mt-1" label="Custom Layers" icon="pi pi-plus" size="small" [text]="true"
-      (onClick)="showUserLayers = true"></p-button>
+@if (menu.isOpen('layers')) {
+  <div class="layer-panel">
+    <app-layer-options [layers]="(mapLayers$ | async) ?? {}" (layerUpdated)="layerUpdated($event)" (removeLayers)="removeUserLayers($event)"></app-layer-options>
   </div>
 }
 
-@if (showScore) {
-  <div style="position: absolute; z-index: 999; left: 15%; top: 25%; width: 75vw; height: 50vh;">
+<app-floor-picker [state]="floorState$ | async" [class.raised]="fpsVisible" (floorSelected)="selectFloor($event)"></app-floor-picker>
+
+@if (menu.isOpen('score')) {
+  <div style="position: absolute; z-index: 999; left: 12%; top: 12%; width: 76vw;">
     @if (activeMatch$ | async; as activeMatch) {
-      <div class="tooltip p-3">
-        <app-skirmish-stats-chart [match]="activeMatch" height="50vh"></app-skirmish-stats-chart>
+      <div class="tooltip p-3 stats-panel">
+        <div class="stats-tabs">
+          <button type="button" [class.active]="statsTab === 'details'" (click)="statsTab = 'details'">Skirmish Details</button>
+          <button type="button" [class.active]="statsTab === 'history'" (click)="statsTab = 'history'">Match History</button>
+          <button type="button" [class.active]="statsTab === 'chart'" (click)="statsTab = 'chart'">Score Graph</button>
+        </div>
+        @switch (statsTab) {
+          @case ('details') {
+            <app-skirmish-details [match]="activeMatch"></app-skirmish-details>
+          }
+          @case ('history') {
+            <app-match-history [match]="activeMatch"></app-match-history>
+          }
+          @case ('chart') {
+            <app-skirmish-stats-chart [match]="activeMatch" height="50vh"></app-skirmish-stats-chart>
+          }
+        }
       </div>
     }
   </div>
 }
 
-<div [hidden]="!showMatches" class="overflow-auto h-auto w-auto my-5" style="position: absolute; z-index: 999; left: 0; right: 0; top: 25px; margin-left: auto; margin-right: auto">
+<div [hidden]="!menu.isOpen('matches')" class="overflow-auto h-auto w-auto my-5" style="position: absolute; z-index: 999; left: 0; right: 0; top: 25px; margin-left: auto; margin-right: auto">
   <app-match-overview (clickedMatch)="overviewMatchClicked($event)"></app-match-overview>
 </div>
 
-<p-dialog header="Objective Upgrades" [(visible)]="showObjectiveDetails" [style]="{width: '50vw'}"
-  [draggable]="true" [resizable]="false">
+<p-dialog header="Objective Upgrades" [visible]="menu.isOpen('objectiveDetails')" (visibleChange)="menu.setVisible('objectiveDetails', $event)" [style]="{width: '50vw'}"
+  [breakpoints]="{'1200px': '75vw', '768px': '95vw'}" [draggable]="true" [resizable]="false">
   @if (selectedObjective) {
     <app-objective-details [objective]="selectedObjective"></app-objective-details>
   }
 </p-dialog>
 
-<app-user-layer-manager [(visible)]="showUserLayers" [continentId]="2"></app-user-layer-manager>
+<app-user-layer-manager [visible]="menu.isOpen('userLayers')" (visibleChange)="menu.setVisible('userLayers', $event)" [continentId]="2"></app-user-layer-manager>

@@ -39,6 +39,8 @@ The [Official Guild Wars 2 API](https://wiki.guildwars2.com/wiki/API:Main) and [
 
 ## Development
 
+See [ARCHITECTURE.md](ARCHITECTURE.md) for a map of how the app is structured.
+
 Requires Node.js 20+ and npm.
 
 ```sh
@@ -47,22 +49,7 @@ npm start          # dev server on http://localhost:4200
 npm run build      # production build
 ```
 
-### Data generation scripts
-
-```sh
-npm run cache-poi      # POI/label data from the GW2 API
-npm run cache-regions  # region/map heading data from the GW2 API
-npm run cache-extras   # adventures + city markers scraped from the GW2 wiki
-```
-
-### Vector tiles (OpenLayers migration)
-
-Overlay data is being migrated to pre-generated vector tiles (PMTiles) rendered
-with OpenLayers. Building the tile archives requires the
-[go-pmtiles](https://github.com/protomaps/go-pmtiles) CLI (`pmtiles`) on PATH to
-convert the intermediate MBTiles output:
-
-```sh
-# Windows: download the release binary, or
-go install github.com/protomaps/go-pmtiles/main@latest
-```
+The map overlay data (`src/assets/data`, `src/assets/tiles`, and the cached
+`city_icons`/`wvw` PNGs) is generated from the GW2 API and wiki by the scripts in
+[`scripts/`](scripts/) — see [scripts/README.md](scripts/README.md) for the
+seeding pipeline.

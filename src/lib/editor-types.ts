@@ -1,4 +1,4 @@
-/** Editor marker kinds, formerly in the Leaflet-coupled EditorService. */
+/** Formerly lived in the Leaflet-coupled EditorService. */
 export enum MarkerType {
   Unknown,
   Waypoint,

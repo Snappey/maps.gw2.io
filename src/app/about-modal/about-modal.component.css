@@ -1,0 +1,8 @@
+h4 {
+  color: var(--p-primary-color);
+}
+
+/* Chat-link URLs are long unbreakable tokens that x-overflow narrow dialogs. */
+a {
+  overflow-wrap: anywhere;
+}

@@ -20,6 +20,10 @@ export interface UserLayer {
   continentId: 1 | 2;
   color: string;
   features: UserFeature[];
+  /** In-memory only: skipped by localStorage so it clears on reload (e.g. imported TacO packs). */
+  ephemeral?: boolean;
+  /** Ancestor group names for the layer-panel tree (e.g. pack → map). */
+  group?: string[];
 }
 
 const STORAGE_KEY = "gw2io.userLayers";
@@ -75,10 +79,19 @@ export class UserLayerService {
       continentId,
       color,
       features,
+      group: ["Custom Layers"],
     };
 
-    this.persist([...this.layersSubject.value, layer]);
+    this.update([...this.layersSubject.value, layer]);
     return layer;
+  }
+
+  /** Adds already-built layers (e.g. parsed from a TacO pack). Mark them
+   *  `ephemeral` to keep them out of localStorage. */
+  addLayers(layers: UserLayer[]) {
+    if (layers.length) {
+      this.update([...this.layersSubject.value, ...layers]);
+    }
   }
 
   exportGeoJson(id: string): string | undefined {
@@ -101,11 +114,13 @@ export class UserLayerService {
   }
 
   remove(id: string) {
-    this.persist(this.layersSubject.value.filter(l => l.id !== id));
+    this.update(this.layersSubject.value.filter(l => l.id !== id));
   }
 
-  private persist(layers: UserLayer[]) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(layers));
+  /** Persists non-ephemeral layers to localStorage, then emits the full set
+   *  (ephemeral included) so the maps render them this session only. */
+  private update(layers: UserLayer[]) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(layers.filter(l => !l.ephemeral)));
     this.layersSubject.next(layers);
   }
 

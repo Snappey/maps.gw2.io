@@ -1,0 +1,49 @@
+:host {
+  display: block;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.history {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--p-text-color);
+}
+
+.history th {
+  position: sticky;
+  top: 0;
+  background: var(--p-gw2-surface-sticky);
+  padding: 6px 10px;
+  text-align: right;
+  font-weight: 600;
+}
+
+.history th.label-col {
+  text-align: left;
+  color: var(--p-primary-color);
+}
+
+.history td {
+  padding: 4px 10px;
+  text-align: right;
+}
+
+.history td.label-col {
+  text-align: left;
+  color: var(--p-gw2-gold-label);
+}
+
+.history tbody tr:nth-child(odd) {
+  background: var(--p-gw2-surface-row);
+}
+
+.history tr.total td {
+  color: var(--p-primary-color);
+  font-weight: 600;
+}
+
+.history tr.total:last-of-type td {
+  border-bottom: 1px solid var(--p-gw2-separator);
+  padding-bottom: 6px;
+}

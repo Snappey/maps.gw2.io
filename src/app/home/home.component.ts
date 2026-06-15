@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavigationEnd, Router} from "@angular/router";
+import {NavigationEnd, Router, RouterOutlet} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {distinctUntilChanged, filter, map} from "rxjs";
 import {settingsAction} from "../../state/settings/settings.action";
@@ -12,7 +12,7 @@ declare const gtag: ((...args: unknown[]) => void) | undefined;
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css'],
-    standalone: false
+    imports: [RouterOutlet]
 })
 export class HomeComponent {
   constructor(private store: Store, private ccService: NgcCookieConsentService, router: Router) {

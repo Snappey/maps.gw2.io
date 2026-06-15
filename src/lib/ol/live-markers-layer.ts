@@ -4,17 +4,31 @@ import Point from "ol/geom/Point";
 import VectorSource from "ol/source/Vector";
 import {Icon, Style} from "ol/style";
 import {containsCoordinate} from "ol/extent";
-import {BehaviorSubject, interval, map, Observable, of, Subject, Subscription, switchMap, take, tap, timer} from "rxjs";
+import {
+  animationFrames,
+  BehaviorSubject,
+  defer,
+  interval,
+  map,
+  Observable,
+  of,
+  Subject,
+  Subscription,
+  switchMap,
+  take,
+  tap,
+  timer,
+} from "rxjs";
 import {
   CharacterPositionUpdate,
   CharacterStateUpdate,
   Mount,
   MqttPayloadType,
   Profession,
+  SidebarLiveMarker,
   Vector2,
   Vector3,
-} from "../../state/live-markers/live-markers.feature";
-import {SidebarLiveMarker} from "../live-marker-types";
+} from "../live-marker-types";
 import {gw2ToOl} from "./gw2-projection";
 
 const FORWARD_VECTOR: Vector3 = {X: 1, Y: 0, Z: 0};
@@ -22,10 +36,23 @@ const EXPIRY_MS = 40_000;
 const EXPIRY_SWEEP_MS = 30_000;
 const DEG_TO_RAD = Math.PI / 180;
 
+// Time constant (ms) for the exponential ease used while following a marker.
+// Smaller = a tighter, more rigid follow; larger = more trailing/cinematic.
+// ~120ms keeps the marker very near centre while smoothing out discrete jumps.
+const FOLLOW_TAU_MS = 120;
+
+// Pacing bounds for position interpolation (see trackTiming). Each Catmull-Rom
+// segment is animated over ~the measured packet interval; clamp that so an
+// off-screen gap or a stall can't leave it crawling, and finish a touch early
+// (FILL) so arrival jitter never cuts a segment short into a visible snap.
+const PER_POSITION_MIN_MS = 120;
+const PER_POSITION_MAX_MS = 600;
+const PER_POSITION_FILL = 0.9;
+
 /**
  * One live player on an OL map: a single Feature whose geometry/rotation are
- * animated in place. Ports the Catmull-Rom position interpolation, EMA speed
- * pacing, and shortest-path rotation lerp from src/lib/live-marker.ts.
+ * animated in place via Catmull-Rom position interpolation (paced to the packet
+ * cadence) and a shortest-path rotation lerp.
  */
 export class OlLiveMarker implements SidebarLiveMarker {
   readonly feature: Feature<Point>;
@@ -40,14 +67,16 @@ export class OlLiveMarker implements SidebarLiveMarker {
   private profession: Profession = Profession.Unknown;
   private mount: Mount = Mount.None;
 
-  // Interpolation state (same constants as the Leaflet implementation).
+  // Interpolation pacing: each Catmull-Rom segment is animated over roughly the
+  // smoothed packet interval, so it finishes just as the next packet arrives and
+  // the marker flows continuously. (The old speed-based duration grew unbounded
+  // as speed dropped, so slow walking segments never finished and snapped.)
   private lastPositions: Vector2[] = [];
   private frameTime = 15;
   private perPositionTime = 300;
   private lastTimestamp = 0;
-  private emaSpeed = 0;
-  private alpha = 0.2;
-  private speedCap = 0.05;
+  private emaInterval = 0;
+  private intervalAlpha = 0.2;
 
   private updateMarkerPosition = new Subject<Vector2>();
   private updateMarkerRotation = new Subject<number>();
@@ -77,7 +106,7 @@ export class OlLiveMarker implements SidebarLiveMarker {
     source.addFeature(this.feature);
 
     this.positionSub = this.updateMarkerPosition.pipe(
-      tap(position => this.trackSpeed(position)),
+      tap(position => this.trackTiming(position)),
       switchMap(() => {
         if (this.lastPositions.length < 4) {
           return of(null);
@@ -120,7 +149,7 @@ export class OlLiveMarker implements SidebarLiveMarker {
     });
   }
 
-  private trackSpeed(position: Vector2) {
+  private trackTiming(position: Vector2) {
     const currentTimestamp = Date.now();
     const deltaTime = this.lastTimestamp ? currentTimestamp - this.lastTimestamp : 0;
     this.lastTimestamp = currentTimestamp;
@@ -130,12 +159,18 @@ export class OlLiveMarker implements SidebarLiveMarker {
       this.lastPositions.shift();
     }
 
-    if (this.lastPositions.length > 1 && deltaTime > 0) {
-      const currentSpeed = distance(this.lastPositions.at(-1)!, this.lastPositions.at(-2)!) / deltaTime;
-      this.emaSpeed = this.alpha * currentSpeed + (1 - this.alpha) * this.emaSpeed;
-      this.perPositionTime = this.emaSpeed > this.speedCap ?
-        this.frameTime * (1 / this.speedCap) * 0.9 :
-        this.frameTime * (1 / this.emaSpeed);
+    // Pace the segment animation to the packet cadence rather than to speed, so
+    // it lasts the same fraction of the gap whether the player is walking or
+    // mounted. Ignore outlier gaps (e.g. a marker returning to view) so they
+    // can't poison the estimate; seed on the first real sample to converge fast.
+    if (deltaTime > 0 && deltaTime < PER_POSITION_MAX_MS * 2) {
+      this.emaInterval = this.emaInterval ?
+        this.intervalAlpha * deltaTime + (1 - this.intervalAlpha) * this.emaInterval :
+        deltaTime;
+      this.perPositionTime = Math.min(
+        PER_POSITION_MAX_MS,
+        Math.max(PER_POSITION_MIN_MS, this.emaInterval * PER_POSITION_FILL),
+      );
     }
   }
 
@@ -168,16 +203,38 @@ export class OlLiveMarker implements SidebarLiveMarker {
     return Date.now() - this.lastModified > EXPIRY_MS;
   }
 
-  panTo(setZoom: boolean = true) {
-    const view = this.olMap.getView();
-    if (setZoom) {
-      view.setZoom(view.getMaxZoom());
-    }
-    view.setCenter(this.feature.getGeometry()!.getCoordinates());
-  }
-
+  /**
+   * Smoothly keeps the view centred on this marker. Unsubscribe to stop.
+   *
+   * The geometry is interpolated every ~15ms (Catmull-Rom), so snapping the
+   * centre to it every 250ms (the old approach) produced a sawtooth. Instead we
+   * ease the centre toward the marker's live coordinate every animation frame
+   * with a frame-rate-independent exponential smooth: the marker stays near
+   * centre during steady motion and discrete jumps (initial snap, off-screen
+   * re-entry, zoom-in on entry) become smooth glides.
+   */
   follow(setZoom: boolean = true): Observable<number> {
-    return timer(0, 250).pipe(tap(() => this.panTo(setZoom)));
+    return defer(() => {
+      const view = this.olMap.getView();
+      if (setZoom) {
+        view.setZoom(view.getMaxZoom());
+      }
+      let last = 0;
+      return animationFrames().pipe(
+        map(({timestamp, elapsed}) => {
+          const target = this.feature.getGeometry()!.getCoordinates();
+          const center = view.getCenter() ?? target;
+          const dt = last ? timestamp - last : 0;
+          last = timestamp;
+          const k = 1 - Math.exp(-dt / FOLLOW_TAU_MS);
+          view.setCenter([
+            center[0] + (target[0] - center[0]) * k,
+            center[1] + (target[1] - center[1]) * k,
+          ]);
+          return elapsed;
+        }),
+      );
+    });
   }
 
   getProfessionIcon(): string {
@@ -331,9 +388,6 @@ const MOUNT_ICONS: {[mount in Mount]?: string} = {
   [Mount.Skiff]: "/assets/skiff_icon.png",
   [Mount.SiegeTurtle]: "/assets/turtle_icon.png",
 };
-
-const distance = (p1: Vector2, p2: Vector2): number =>
-  Math.sqrt((p2.X - p1.X) ** 2 + (p2.Y - p1.Y) ** 2);
 
 function catmullRom(t: number, points: Vector2[]): Vector2 | null {
   const n = points.length;

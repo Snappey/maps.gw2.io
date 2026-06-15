@@ -2,12 +2,16 @@
 import {MarkerType} from "../../lib/editor-types";
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {PointTuple} from "../../lib/types";
+import { FormsModule } from '@angular/forms';
+import { Bind } from 'primeng/bind';
+import { ButtonDirective } from 'primeng/button';
+import { KeyValuePipe } from '@angular/common';
 
 @Component({
     selector: 'app-editor-modal',
     templateUrl: './editor-modal.component.html',
     styleUrls: ['./editor-modal.component.css'],
-    standalone: false
+    imports: [FormsModule, Bind, ButtonDirective, KeyValuePipe]
 })
 export class EditorModalComponent implements OnInit {
   coords: PointTuple = [0,0];

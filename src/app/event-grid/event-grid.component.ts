@@ -1,11 +1,13 @@
 ﻿import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Event, EventMap} from "../../services/event-timer.service";
+import { EventPanelComponent } from '../event-panel/event-panel.component';
+import { KeyValuePipe } from '@angular/common';
 
 @Component({
     selector: 'app-event-grid',
     templateUrl: './event-grid.component.html',
     styleUrls: ['./event-grid.component.css'],
-    standalone: false
+    imports: [EventPanelComponent, KeyValuePipe]
 })
 export class EventGridComponent {
 
@@ -21,13 +23,16 @@ export class EventGridComponent {
     this.eventClicked.emit($event);
   }
 
-  friendlyXpacNames: any = {
+  friendlyXpacNames: Record<string, string> = {
     "core": "Core",
     "hot": "Heart of Thorns",
     "pof": "Path of Fire",
     "ibs": "Icebrood Saga",
     "eod": "End of Dragons",
-    "soto": "Secrets of the Obscure"
+    "soto": "Secrets of the Obscure",
+    "jw": "Janthir Wilds",
+    "voe": "Visions of Eternity",
+    "public": "Public Instances"
   }
 
   friendlyXpacName(key: string): string {

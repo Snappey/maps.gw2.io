@@ -1,0 +1,29 @@
+/* Floating chip in the bottom-left; the top-left is occupied by the toolbar,
+   layer panel, and live-marker sidebar. */
+:host {
+  position: absolute;
+  left: 1.5vw;
+  bottom: 3vh;
+  z-index: 10;
+  display: block;
+}
+
+/* The FPS widget (dev/diagnostic) sits at bottom:8px and is ~54px tall; lift
+   the picker above it so the two don't overlap. */
+:host(.raised) {
+  bottom: calc(3vh + 60px);
+}
+
+.floor-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 8px;
+  min-width: 160px;
+}
+
+.map-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: center;
+}

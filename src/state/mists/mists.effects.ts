@@ -4,6 +4,7 @@ import {catchError, map, of, switchMap} from 'rxjs';
 import {WvwService} from "../../services/wvw.service";
 import {mistsActions} from "./mists.action";
 import {Store} from "@ngrx/store";
+import {errorMessage} from "../../lib/errors";
 
 @Injectable()
 export class MistsEffects {
@@ -12,7 +13,7 @@ export class MistsEffects {
     ofType(mistsActions.loadMatches),
     switchMap((_) => this.wvwService.getAllMatchDetails().pipe(
       map(matches => mistsActions.loadMatchesSuccess({ matches })),
-      catchError(error => of(mistsActions.loadMatchesFailed({ error })))
+      catchError(error => of(mistsActions.loadMatchesFailed({ error: errorMessage(error) })))
     ))
   ))
 
@@ -20,7 +21,7 @@ export class MistsEffects {
     ofType(mistsActions.updateMatch, mistsActions.setActiveMatch),
     switchMap(props => this.wvwService.getMatchDetails(props.matchId).pipe(
       map(match => mistsActions.updateMatchSuccess({ match })),
-      catchError(error => of(mistsActions.updateMatchFailed({ error })))
+      catchError(error => of(mistsActions.updateMatchFailed({ error: errorMessage(error) })))
     ))
   ))
 
@@ -28,7 +29,7 @@ export class MistsEffects {
     ofType(mistsActions.setActiveWorld),
     switchMap(props => this.wvwService.getMatchDetailsByWorldId(props.worldId).pipe(
       map(match => mistsActions.setActiveMatch({ matchId: match.id })),
-      catchError(error => of(mistsActions.setActiveWorldFailed({ error })))
+      catchError(error => of(mistsActions.setActiveWorldFailed({ error: errorMessage(error) })))
     ))
   ))
 

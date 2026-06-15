@@ -1,15 +1,14 @@
-import {createFeature, createReducer, on} from '@ngrx/store';
-import {Match, Objective} from "../../services/wvw.service";
+import {createFeature, createReducer, createSelector, on} from '@ngrx/store';
+import {Match} from "../../services/wvw.model";
+import {AppState} from "../appState";
 import {mistsActions} from "./mists.action";
 
 export interface MistsState {
   loading: boolean
   updatingMatch: boolean
   matches: {[id: string]: Match}
-  objectives: Objective[]
 
   activeMatchId: string | null
-  activeMatch: Match | null
   error: string
 }
 
@@ -17,10 +16,8 @@ const initialState: MistsState = {
   loading: false,
   updatingMatch: false,
   matches: {},
-  objectives: [],
 
   activeMatchId: null,
-  activeMatch: null,
   error: ""
 };
 
@@ -64,7 +61,7 @@ export const mistsFeature = createFeature({
         error
       }
     }),
-    on(mistsActions.updateMatch, (state, {matchId}) => {
+    on(mistsActions.updateMatch, (state) => {
       return {
         ...state,
         updatingMatch: true,
@@ -74,7 +71,6 @@ export const mistsFeature = createFeature({
       return {
         ...state,
         matches: {  ...state.matches, [match.id]: match},
-        activeMatch: match,
         updatingMatch: false,
       }
     }),
@@ -87,6 +83,17 @@ export const mistsFeature = createFeature({
     })
   ),
 });
+
+/**
+ * The currently-viewed match, derived from the matches dictionary + the active
+ * id (the update effect always refreshes `matches[activeMatchId]`), so it never
+ * needs to be stored separately.
+ */
+export const selectActiveMatch = createSelector(
+  (state: AppState) => state.mists.matches,
+  (state: AppState) => state.mists.activeMatchId,
+  (matches, activeMatchId) => (activeMatchId ? matches[activeMatchId] ?? null : null),
+);
 
 export const {
   name, // feature name

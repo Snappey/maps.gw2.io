@@ -50,6 +50,14 @@ function toOlGeometry(geometry: UserLayer["features"][number]["geometry"]) {
   }
 }
 
+// Keep marker icons above paths. Within a layer, points draw above lines/polygons
+// (style zIndex); across layers, any layer that contains a path renders a band
+// below point-only layers (userLayerZIndex), so no path ever sits in the icon band.
+const POINT_STYLE_Z = 1;
+const SHAPE_STYLE_Z = 0;
+const ICON_LAYER_Z = 5;
+const PATH_LAYER_Z = 4;
+
 /** Points render as the feature's icon or a coloured dot; lines/polygons in the layer colour. */
 export function userLayerStyle(color: string): StyleLike {
   const [r, g, b] = asArray(color);
@@ -61,14 +69,20 @@ export function userLayerStyle(color: string): StyleLike {
       fill: new Fill({color}),
       stroke: new Stroke({color: "rgba(0, 0, 0, 0.8)", width: 2}),
     }),
+    zIndex: POINT_STYLE_Z,
   });
-  const shape = new Style({stroke, fill});
+  const shape = new Style({stroke, fill, zIndex: SHAPE_STYLE_Z});
 
   return (feature: FeatureLike) => {
     if (feature.getGeometry()?.getType() === "Point") {
       const icon = feature.get("icon");
-      return icon ? iconStyle(icon) : dot;
+      return icon ? iconStyle(icon, 32, POINT_STYLE_Z) : dot;
     }
     return shape;
   };
+}
+
+/** Point-only layers sit a band above any layer containing a path, so icons always render above paths. */
+export function userLayerZIndex(layer: UserLayer): number {
+  return layer.features.some(f => f.geometry.type !== "Point") ? PATH_LAYER_Z : ICON_LAYER_Z;
 }

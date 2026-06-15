@@ -3,8 +3,8 @@
 //
 // The tile grid is, by construction, the GW2 raster grid: 256px tiles in
 // continent pixel coordinates (origin top-left, y down), resolution 2^(maxZoom-z).
-// MVT local coords are also y-down, so no axis flips happen here at all; the
-// only y flip in the whole stack lives in src/lib/ol/gw2-projection.ts.
+// MVT local coords are also y-down, so no axis flips happen here; the only y flip
+// in the whole stack lives in src/lib/ol/gw2-projection.ts.
 //
 // Usage: node scripts/generate_tiles.mjs
 import Database from "better-sqlite3";
@@ -15,9 +15,33 @@ import {gzipSync} from "node:zlib";
 import fs from "node:fs";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
+import {writeJsonAtomic} from "./lib/io.mjs";
+import {assertNonEmptyArray} from "./lib/validate.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const DATA = (file) => JSON.parse(fs.readFileSync(path.join(ROOT, "src/assets/data", file), "utf8"));
+const DATA_DIR = path.join(ROOT, "src/assets/data");
+const DATA = (file) => JSON.parse(fs.readFileSync(path.join(DATA_DIR, file), "utf8"));
+
+// Every JSON input the collect functions read. Validated up front so a missing
+// or empty file (a cache-* step skipped or failed) aborts before we emit
+// half-empty tiles over the committed archives.
+const REQUIRED_INPUTS = [
+  "poi_labels_1_1.json",
+  "poi_labels_2_1.json",
+  "region_labels_1_1.json",
+  "adventure_labels.json",
+  "city_markers.json",
+  "mists_objectives.json",
+];
+
+function preflight() {
+  for (const file of REQUIRED_INPUTS) {
+    if (!fs.existsSync(path.join(DATA_DIR, file))) {
+      throw new Error(`missing tile input src/assets/data/${file} — run the cache-* scripts first`);
+    }
+    assertNonEmptyArray(DATA(file), file);
+  }
+}
 
 const EXTENT = 4096;
 const TILE_SIZE = 256;
@@ -359,6 +383,8 @@ function writeMbtiles(continent, tiles, outFile) {
 
 // --- Main ---------------------------------------------------------------------
 
+preflight();
+
 for (const continent of CONTINENTS) {
   const {features, chatLinkIndex} = continent.collect(continent);
   const counts = {};
@@ -373,7 +399,6 @@ for (const continent of CONTINENTS) {
   console.log(`[${continent.name}] wrote ${written} tiles -> ${mbtiles}`);
 
   const indexFile = path.join(ROOT, "src/assets/tiles", `${continent.name}_${continent.continentId}_${continent.floorId}.index.json`);
-  fs.mkdirSync(path.dirname(indexFile), {recursive: true});
-  fs.writeFileSync(indexFile, JSON.stringify(chatLinkIndex));
+  writeJsonAtomic(indexFile, chatLinkIndex);
   console.log(`[${continent.name}] chat-link index (${Object.keys(chatLinkIndex).length} entries) -> ${indexFile}`);
 }

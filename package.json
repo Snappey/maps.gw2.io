@@ -4,13 +4,21 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --aot --build-optimizer",
+    "build": "ng build",
+    "build:stats": "ng build --source-map",
+    "analyze": "source-map-explorer \"dist/map-gw2-io/**/*.js\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "cache-regions": "node scripts/generate_regions.js",
-    "cache-poi": "node scripts/generate_pois.js",
-    "cache-extras": "node scripts/generate_extras.js",
-    "build-tiles": "node scripts/generate_tiles.mjs && scripts/bin/pmtiles convert scripts/out/tyria_1_1.mbtiles src/assets/tiles/tyria_1_1.pmtiles && scripts/bin/pmtiles convert scripts/out/mists_2_1.mbtiles src/assets/tiles/mists_2_1.pmtiles"
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCI",
+    "lint": "eslint src",
+    "seed": "node scripts/seed-all.mjs",
+    "cache-regions": "node scripts/generate_regions.mjs",
+    "cache-poi": "node scripts/generate_pois.mjs",
+    "cache-extras": "node scripts/generate_extras.mjs",
+    "cache-event-timers": "node scripts/generate_event_timers.mjs",
+    "build-tiles": "node scripts/build-tiles.mjs",
+    "cache-city-icons": "node scripts/download_city_icons.mjs",
+    "cache-wvw-icons": "node scripts/generate_wvw_icons.mjs"
   },
   "private": true,
   "dependencies": {
@@ -31,7 +39,7 @@
     "@primeuix/themes": "^2.0.3",
     "chart.js": "^4.1.1",
     "cookieconsent": "^3.1.1",
-    "moment": "^2.29.4",
+    "jszip": "^3.10.1",
     "ngx-clipboard": "^16.0.0",
     "ngx-cookie": "^6.0.1",
     "ngx-cookieconsent": "^8.0.0",
@@ -49,11 +57,14 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^21.2.14",
+    "@angular-eslint/schematics": "^21.4.0",
     "@angular/cli": "~21.2.14",
     "@angular/compiler-cli": "^21.2.16",
+    "@eslint/js": "^9.39.4",
     "@types/jasmine": "~4.0.0",
-    "axios": "^0.27.2",
+    "angular-eslint": "^21.4.0",
     "better-sqlite3": "^12.10.0",
+    "eslint": "^9.39.4",
     "jasmine-core": "~4.1.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -61,7 +72,10 @@
     "karma-jasmine": "~5.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "lineclip": "^2.0.0",
+    "pngjs": "^7.0.0",
+    "source-map-explorer": "^2.5.3",
     "typescript": "~5.9.3",
+    "typescript-eslint": "^8.61.0",
     "vt-pbf": "^3.1.3"
   }
 }

@@ -8,8 +8,8 @@ export interface MapContextMenuItem {
 }
 
 /**
- * Minimal absolutely-positioned context menu for the dev editor — replaces
- * the leaflet-contextmenu plugin. Hidden whenever `position` is undefined.
+ * Context menu for the dev editor — replaces the leaflet-contextmenu plugin.
+ * Hidden whenever `position` is undefined.
  */
 @Component({
   selector: "app-map-context-menu",
