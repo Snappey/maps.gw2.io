@@ -27,8 +27,7 @@ import {FloorPickerState} from "../lib/ol/floor-lookup";
 import {MapFloorInfo} from "../services/map.service";
 import {UserLayer, UserLayerService} from "../services/user-layer.service";
 // Type-only: the runtime modules (~25KB of dev/diagnostic tooling) are
-// dynamically imported in enableFpsMeter so they land in a lazy chunk and stay
-// out of the production bundle unless ?fps is set.
+// dynamically imported in enableFpsMeter, so they stay out of the prod bundle.
 import type {FpsMeter} from "../lib/ol/fps-meter";
 import type {BenchmarkResult} from "../lib/ol/pan-benchmark";
 import type {ZoomBenchmarkResult} from "../lib/ol/zoom-benchmark";
@@ -44,6 +43,8 @@ export interface OlLayerOptions {
   icon?: string;
   state: LayerState;
   group?: string[];
+  hideFromPanel?: boolean;
+  keepOnHideAll?: boolean;
 }
 
 /**
@@ -61,10 +62,9 @@ function isFpsEnabled(): boolean {
 export abstract class BaseOlMap {
   Map?: OlMap;
   /**
-   * Live layer registry. Mutated in place by register/unregister/layerUpdated;
-   * `mapLayers$` is the panel's view of it and is re-emitted on every change so
-   * the layer-options panel re-renders without callers having to remember to
-   * "pulse" the reference.
+   * Live layer registry, mutated in place by register/unregister/layerUpdated.
+   * `mapLayers$` mirrors it and re-emits on every change so the layer panel
+   * re-renders.
    */
   mapLayers: {[key: string]: OlLayerOptions} = {};
   readonly mapLayers$ = new BehaviorSubject<{[key: string]: OlLayerOptions}>({});
@@ -167,7 +167,6 @@ export abstract class BaseOlMap {
    * zoom sweep over the map's densest marker areas.
    */
   private async enableFpsMeter(olMap: OlMap) {
-    // Dynamic import: keeps the dev-only meter + benchmarks out of the prod bundle.
     const [{FpsMeter}, {runPanBenchmark}, {runZoomBenchmark}] = await Promise.all([
       import("../lib/ol/fps-meter"),
       import("../lib/ol/pan-benchmark"),
@@ -183,8 +182,8 @@ export abstract class BaseOlMap {
     this.fpsMeter = new FpsMeter(olMap, {
       onClick: () => void bench().catch(err => this.fpsMeter?.showSummary(String(err instanceof Error ? err.message : err))),
     });
-    // The meter exists only in dev/?fps, but its visibility still follows the
-    // widget registry — so the Events panel (and any future toggle) hides it too.
+    // Visibility still follows the widget registry, so the Events panel (and any
+    // future toggle) hides the meter too.
     this.fpsVisibilitySub = this.widgets.changes$.pipe(
       map(() => this.widgets.isVisible("fps")),
       distinctUntilChanged(),
@@ -210,10 +209,9 @@ export abstract class BaseOlMap {
     this.fpsMeter = undefined;
     delete (window as {gw2Bench?: unknown}).gw2Bench;
     delete (window as {gw2ZoomBench?: unknown}).gw2ZoomBench;
-    // Floor swaps detach their own prefetcher via unregisterLayer; a base raster
-    // layer still live at destroy never goes through it, so detach here too —
-    // otherwise its moveend/loadend listeners and pending debounce outlive the
-    // map and post a stale prefetch batch to the shared worker after teardown.
+    // Floor swaps detach their prefetcher via unregisterLayer, but a base raster
+    // layer still live at destroy never does — detach here too, or its listeners
+    // and pending debounce post a stale prefetch batch after teardown.
     Object.values(this.prefetchTeardowns).forEach(teardown => teardown());
     this.prefetchTeardowns = {};
     this.Map?.setTarget(undefined);
@@ -310,6 +308,8 @@ export abstract class BaseOlMap {
       icon: def.icon,
       state: def.state,
       group: def.group,
+      hideFromPanel: def.hideFromPanel,
+      keepOnHideAll: def.keepOnHideAll,
     };
 
     this.applyState(def.id);
@@ -338,9 +338,9 @@ export abstract class BaseOlMap {
   }
 
   /**
-   * Publishes a fresh snapshot of the registry to `mapLayers$`. Runs inside the
-   * zone so the panel updates even when called from OL callbacks / init (which
-   * run outside Angular); a no-op re-entry when already inside the zone.
+   * Publishes a fresh registry snapshot to `mapLayers$`, inside the zone so the
+   * panel updates even when called from OL callbacks / init (which run outside
+   * Angular; re-entry is a no-op when already inside).
    */
   private emitLayers(): void {
     this.ngZone.run(() => this.mapLayers$.next({...this.mapLayers}));
@@ -357,7 +357,7 @@ export abstract class BaseOlMap {
     if (!options) {
       return;
     }
-    const {friendlyName, icon, state} = options;
+    const {friendlyName, icon, state, group, keepOnHideAll} = options;
     this.unregisterLayer(layerId);
     this.registerLayer({
       kind: "raster",
@@ -366,6 +366,8 @@ export abstract class BaseOlMap {
       friendlyName,
       icon,
       state,
+      group,
+      keepOnHideAll,
       zIndex: 0,
     });
   }

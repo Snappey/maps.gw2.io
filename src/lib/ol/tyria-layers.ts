@@ -25,6 +25,8 @@ export interface MarkerSublayer {
   friendlyName: string;
   icon: string;
   state: LayerState;
+  /** Panel category (collapsible header) this kind nests under. */
+  group?: string[];
   style: (feature: FeatureLike) => Style | undefined;
 }
 
@@ -32,52 +34,52 @@ export interface MarkerSublayer {
  * The icon overlays, merged into ONE vector-tile layer at render time. A layer
  * per kind cost a separate canvas + per-frame render pass and re-scanned every
  * feature of every shared source tile — the dominant zoom/pan cost in dense
- * areas (see gw2ZoomBench). Ids, zoom thresholds and panel behaviour unchanged.
+ * areas (see gw2ZoomBench).
  */
 export const TYRIA_MARKER_SUBLAYERS: MarkerSublayer[] = [
   {
     id: "waypoints", sourceLayer: "waypoint", zIndex: 0, minZoomLevel: 5,
-    friendlyName: "Waypoints", icon: "/assets/waypoint.png", state: LayerState.Enabled,
+    friendlyName: "Waypoints", icon: "/assets/waypoint.png", state: LayerState.Enabled, group: ["World Completion"],
     style: () => iconStyle("assets/waypoint.png", 32, 0),
   },
   {
     id: "landmarks", sourceLayer: "poi", zIndex: 1, minZoomLevel: 6,
-    friendlyName: "Points of Interest", icon: "/assets/poi.png", state: LayerState.Enabled,
+    friendlyName: "Points of Interest", icon: "/assets/poi.png", state: LayerState.Enabled, group: ["World Completion"],
     style: () => iconStyle("assets/poi.png", 32, 1),
   },
   {
     id: "vista", sourceLayer: "vista", zIndex: 2, minZoomLevel: 6,
-    friendlyName: "Vistas", icon: "/assets/vista.png", state: LayerState.Enabled,
+    friendlyName: "Vistas", icon: "/assets/vista.png", state: LayerState.Enabled, group: ["World Completion"],
     style: () => iconStyle("assets/vista.png", 32, 2),
   },
   {
     id: "unlocks", sourceLayer: "unlock", zIndex: 3, minZoomLevel: 4,
-    friendlyName: "Instanced Content", icon: "/assets/commander_blue.png", state: LayerState.Enabled,
+    friendlyName: "Instanced Content", icon: "/assets/commander_blue.png", state: LayerState.Enabled, group: ["Activities"],
     style: f => iconStyle(localIconSrc(f.get("icon") || "assets/poi.png"), 32, 3),
   },
   {
     id: "heart_labels", sourceLayer: "heart", zIndex: 4, minZoomLevel: 6,
-    friendlyName: "Hearts", icon: "/assets/hearts.png", state: LayerState.Enabled,
+    friendlyName: "Hearts", icon: "/assets/hearts.png", state: LayerState.Enabled, group: ["World Completion"],
     style: () => iconStyle("assets/hearts.png", 32, 4),
   },
   {
     id: "heropoint_labels", sourceLayer: "heropoint", zIndex: 5, minZoomLevel: 6,
-    friendlyName: "Hero Points", icon: "/assets/heropoint.png", state: LayerState.Enabled,
+    friendlyName: "Hero Points", icon: "/assets/heropoint.png", state: LayerState.Enabled, group: ["World Completion"],
     style: () => iconStyle("assets/heropoint.png", 32, 5),
   },
   {
     id: "masteries_labels", sourceLayer: "mastery", zIndex: 6, minZoomLevel: 6,
-    friendlyName: "Masteries", icon: "/assets/core_mastery.png", state: LayerState.Enabled,
+    friendlyName: "Masteries", icon: "/assets/core_mastery.png", state: LayerState.Enabled, group: ["World Completion"],
     style: f => iconStyle(masteryIcon(f.get("region")), 32, 6),
   },
   {
     id: "adventure_labels", sourceLayer: "adventure", zIndex: 7, minZoomLevel: 6,
-    friendlyName: "Adventures", icon: "/assets/adventure_icon.png", state: LayerState.Enabled,
+    friendlyName: "Adventures", icon: "/assets/adventure_icon.png", state: LayerState.Enabled, group: ["Activities"],
     style: () => iconStyle("assets/adventure_icon.png", 32, 7),
   },
   {
     id: "city_markers", sourceLayer: "city", zIndex: 8, minZoomLevel: 7,
-    friendlyName: "City Markers", icon: "/assets/portal_icon.png", state: LayerState.Enabled,
+    friendlyName: "City Markers", icon: "/assets/portal_icon.png", state: LayerState.Enabled, group: ["World Map"],
     style: f => f.get("icon") ? iconStyle(localIconSrc(f.get("icon")), 24, 8) : undefined,
   },
 ];
@@ -91,11 +93,10 @@ export function sublayerVisible(sub: MarkerSublayer, state: LayerState, zoom: nu
     case LayerState.Disabled:
       return false;
     case LayerState.Pinned:
-      // Pinned kinds are drawn at every zoom by a full, non-tiled overlay the
-      // component owns (the vector tiles carry no geometry below a kind's
-      // display zoom). The merged tiled layer must NOT draw them too, or they
-      // double up in the kind's normal zoom range. See loadPinFeatures /
-      // syncPinOverlay in tyria-ol-map.component.ts.
+      // Pinned kinds are drawn at every zoom by a full, non-tiled overlay
+      // (PinOverlays) the component owns, since the vector tiles carry no
+      // geometry below a kind's display zoom. The merged tiled layer must NOT
+      // draw them too, or they double up in the kind's normal zoom range.
       return false;
     default:
       return sub.minZoomLevel === undefined || zoom > sub.minZoomLevel - 0.5;
@@ -121,12 +122,11 @@ export function mergedMarkerStyle(maxZoom: number, getState: (id: string) => Lay
 
 // --- Pin overlay -------------------------------------------------------------
 // A pinned kind must show at EVERY zoom, but the PMTiles only carry a kind's
-// geometry within its display-zoom range (see generate_tiles.mjs). So when a
-// kind is pinned the component renders its full feature set from these JSON
-// assets in a non-tiled overlay instead. The builders below mirror
-// collectTyriaFeatures in generate_tiles.mjs, tagging each feature with the
-// same `layer` and props the vector tiles carry so the merged style, tooltips,
-// wiki links and chat-link copy all keep working unchanged.
+// geometry within its display-zoom range. So when pinned, the component renders
+// the kind's full feature set from these JSON assets in a non-tiled overlay.
+// The builders below mirror collectTyriaFeatures in generate_tiles.mjs, tagging
+// each feature with the same `layer` and props the vector tiles carry so the
+// merged style, tooltips, wiki links and chat-link copy keep working.
 
 /** Which src/assets/data file a pinnable marker kind loads its full set from. */
 export const PIN_SOURCE: {[id: string]: "poi" | "adventure" | "city"} = {
@@ -210,40 +210,37 @@ export function buildCityPinFeatures(raw: CityPinLabel[]): Feature<Point>[] {
 /**
  * The non-icon Tyria overlays sharing the PMTiles source, plus one panel-stub
  * layer per marker sublayer (the icons themselves render in the merged layer
- * the component owns). Ids, zoom thresholds and opacity tables match the
- * Leaflet registrations in tyria-map.component.ts so the layer panel behaves
- * identically.
+ * the component owns).
  */
 export function createTyriaOverlayDefinitions(source: VectorTile): LayerDefinition[] {
   return [
     ...TYRIA_MARKER_SUBLAYERS.map((sub): LayerDefinition => ({
       kind: "vector", id: sub.id, source: new VectorSource(),
       minZoomLevel: sub.minZoomLevel,
-      friendlyName: sub.friendlyName, icon: sub.icon, state: sub.state, zIndex: 2,
+      friendlyName: sub.friendlyName, icon: sub.icon, state: sub.state, group: sub.group, zIndex: 2,
     })),
-    // The heading layers are visibility stubs for the layer panel: the text
-    // itself is drawn by the LabelOverlays SVG, which follows their
-    // visibility. A vector-tile layer here would process every label tile on
-    // every rendered frame just to draw nothing.
+    // Visibility stubs for the layer panel: the text is drawn by the
+    // LabelOverlays SVG, which follows their visibility. A vector-tile layer
+    // here would process every label tile per frame just to draw nothing.
     {
       kind: "vector", id: "region_labels", source: new VectorSource(),
       minZoomLevel: 2, maxZoomLevel: 5, opacityLevels: {5: .2, 4: .6},
-      friendlyName: "Region Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, zIndex: 3,
+      friendlyName: "Region Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, group: ["World Map"], zIndex: 3,
     },
     {
       kind: "vector", id: "map_labels", source: new VectorSource(),
       minZoomLevel: 3, maxZoomLevel: 5, opacityLevels: {5: .7},
-      friendlyName: "Map Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, zIndex: 3,
+      friendlyName: "Map Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, group: ["World Map"], zIndex: 3,
     },
     {
       kind: "vector-tile", id: "sector_headings", source, sourceLayer: "label_sector", declutter: "labels",
       style: forSourceLayer("label_sector", f => labelStyle("sector", f.get("tooltip") ?? "")),
-      minZoomLevel: 7, friendlyName: "Sector Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, zIndex: 3,
+      minZoomLevel: 7, friendlyName: "Sector Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, group: ["World Map"], zIndex: 3,
     },
     {
       kind: "vector-tile", id: "sector_polygons", source, sourceLayer: "sector_bounds",
       style: forSourceLayer("sector_bounds", () => SECTOR_BOUNDS_STYLE),
-      minZoomLevel: 7, friendlyName: "Sector Outlines", icon: "/assets/list_icon.png", state: LayerState.Disabled, zIndex: 1,
+      minZoomLevel: 7, friendlyName: "Sector Outlines", icon: "/assets/list_icon.png", state: LayerState.Disabled, group: ["World Map"], zIndex: 1,
     },
   ];
 }
@@ -268,7 +265,7 @@ interface TimedEvent {
 
 /**
  * Upserts world-boss markers in place from a 15s timer tick; only events
- * starting within `showWithinMinutes` are shown (matches createEventsLayer).
+ * starting within `showWithinMinutes` are shown.
  */
 export function syncEventFeatures(
   source: VectorSource,

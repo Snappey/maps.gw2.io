@@ -1,30 +1,58 @@
-<div class="flex flex-auto flex-column overflow-y-auto" style="max-height: 80vh;">
-  <!-- Built-in map layers stay flat at the top. -->
-  @for (layer of ungrouped; track layer.id) {
-    <ng-container *ngTemplateOutlet="leafTpl; context: {$implicit: layer, depth: 0}"></ng-container>
-  }
-  <!-- Imported/custom layers nest under collapsible group headers. -->
-  @for (group of tree; track group.key) {
-    <ng-container *ngTemplateOutlet="groupTpl; context: {$implicit: group, depth: 0}"></ng-container>
-  }
+<div class="layer-options flex flex-column">
+  <!-- Search + global show/hide all -->
+  <div class="search-row flex align-items-center gap-2">
+    <p-iconfield class="flex-auto">
+      <p-inputicon styleClass="pi pi-search"></p-inputicon>
+      <input type="text" pInputText class="search-input" placeholder="Search layers"
+        [(ngModel)]="filterText" (ngModelChange)="onFilterChange()"/>
+    </p-iconfield>
+    <div class="global-actions flex align-items-center flex-none">
+      <button type="button" class="icon-btn" (click)="setAllVisible(true)"
+        pTooltip="Show all" tooltipPosition="bottom" tooltipStyleClass="tooltip">
+        <i class="pi pi-eye"></i>
+      </button>
+      <button type="button" class="icon-btn" (click)="setAllVisible(false)"
+        pTooltip="Hide all" tooltipPosition="bottom" tooltipStyleClass="tooltip">
+        <i class="pi pi-eye-slash"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="layer-scroll flex flex-column">
+    <!-- Uncategorised layers (e.g. editor / Mists-only) stay flat at the top. -->
+    @for (layer of ungrouped; track layer.id) {
+      <ng-container *ngTemplateOutlet="leafTpl; context: {$implicit: layer, depth: 0}"></ng-container>
+    }
+    <!-- Built-in categories + imported/TacO packs nest under collapsible headers. -->
+    @for (group of tree; track group.key) {
+      <ng-container *ngTemplateOutlet="groupTpl; context: {$implicit: group, depth: 0}"></ng-container>
+    }
+    @if (!ungrouped.length && !tree.length) {
+      <div class="empty-hint">No matching layers</div>
+    }
+  </div>
 </div>
 
+<!-- GROUP/CATEGORY HEADER: collapsible section with a count pill + show/hide all -->
 <ng-template #groupTpl let-group let-depth="depth">
-  <div class="layer-row group-header flex align-items-center justify-content-between tooltip"
-       [style.padding-left.px]="5 + depth * 12" (click)="toggleExpand(group)">
-    <span class="flex align-items-center gap-1 text-left overflow-hidden">
+  <div class="category-header flex align-items-center justify-content-between"
+       [style.padding-left.px]="depth * 12" (click)="toggleExpand(group)">
+    <span class="cat-left flex align-items-center gap-2 overflow-hidden">
       <i class="pi chevron" [class.pi-chevron-right]="!isExpanded(group)" [class.pi-chevron-down]="isExpanded(group)"></i>
-      <span class="group-name">{{group.name}}</span>
-      <small class="count">{{groupCount(group)}}</small>
+      <span class="cat-name">{{group.name}}</span>
     </span>
-    <span class="flex align-self-center flex-none">
-      <p-button [text]="true" size="small"
-        [icon]="groupAllHidden(group) ? 'pi pi-eye-slash' : 'pi pi-eye'"
-        pTooltip="Show / hide all" tooltipPosition="left" tooltipStyleClass="tooltip"
-        (onClick)="toggleGroup(group, $event)"></p-button>
-      <p-button [text]="true" size="small" severity="danger" icon="pi pi-trash"
-        pTooltip="Remove" tooltipPosition="left" tooltipStyleClass="tooltip"
-        (onClick)="removeGroup(group, $event)"></p-button>
+    <span class="cat-right flex align-items-center gap-1 flex-none">
+      <span class="count-pill">{{groupCount(group)}}</span>
+      <button type="button" class="icon-btn" (click)="toggleGroup(group, $event)"
+        pTooltip="Show / hide all" tooltipPosition="left" tooltipStyleClass="tooltip">
+        <i class="pi" [class.pi-eye-slash]="groupAllHidden(group)" [class.pi-eye]="!groupAllHidden(group)"></i>
+      </button>
+      @if (isRemovable(group)) {
+        <button type="button" class="icon-btn danger" (click)="removeGroup(group, $event)"
+          pTooltip="Remove" tooltipPosition="left" tooltipStyleClass="tooltip">
+          <i class="pi pi-trash"></i>
+        </button>
+      }
     </span>
   </div>
   @if (isExpanded(group)) {
@@ -37,19 +65,26 @@
   }
 </ng-template>
 
+<!-- LEAF ROW: icon + name + independent lock (pin) and eye (visibility) toggles -->
 <ng-template #leafTpl let-layer let-depth="depth">
-  <div class="layer-row flex align-items-center justify-content-between tooltip" [style.padding-left.px]="5 + depth * 12">
-    <span class="flex text-left align-items-center overflow-hidden">
-      <img class="mr-1 flex-none" [src]="layer.icon" width="18" height="18" alt="layer icon"/>
-      <span class="leaf-name">{{layer.friendlyName}}</span>
+  <div class="layer-row flex align-items-center justify-content-between"
+       [class.is-hidden]="!isVisible(layer)" [style.margin-left.px]="depth * 12"
+       (click)="toggleVisible(layer)">
+    <span class="row-left flex align-items-center overflow-hidden">
+      <img class="row-icon flex-none" [src]="layer.icon" width="20" height="20" alt=""/>
+      <span class="row-name">{{layer.friendlyName}}</span>
     </span>
-    <span class="align-self-center flex-none">
-      <p-button
-        [text]="true" size="small"
-        [icon]="stateIcon(layer)"
-        [pTooltip]="stateLabel(layer)" tooltipPosition="left" tooltipStyleClass="tooltip"
-        (onClick)="onLayerToggle(layer)">
-      </p-button>
+    <span class="row-actions flex align-items-center flex-none">
+      <button type="button" class="icon-btn lock" [class.active]="isPinned(layer)" (click)="togglePinned(layer, $event)"
+        [pTooltip]="isPinned(layer) ? 'Unpin (respect zoom)' : 'Pin to all zooms'"
+        tooltipPosition="left" tooltipStyleClass="tooltip">
+        <i class="pi" [class.pi-lock]="isPinned(layer)" [class.pi-lock-open]="!isPinned(layer)"></i>
+      </button>
+      <button type="button" class="icon-btn eye" (click)="toggleVisible(layer, $event)"
+        [pTooltip]="isVisible(layer) ? 'Hide' : 'Show'"
+        tooltipPosition="left" tooltipStyleClass="tooltip">
+        <i class="pi" [class.pi-eye]="isVisible(layer)" [class.pi-eye-slash]="!isVisible(layer)"></i>
+      </button>
     </span>
   </div>
 </ng-template>

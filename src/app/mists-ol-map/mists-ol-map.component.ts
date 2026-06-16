@@ -213,6 +213,8 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       friendlyName: "Mists",
       icon: "/assets/mists_icon.png",
       state: LayerState.Enabled,
+      group: ["World Map"],
+      keepOnHideAll: true,
       zIndex: 0,
     });
 
@@ -273,6 +275,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       friendlyName: "Objectives",
       icon: "/assets/keep_icon.png",
       state: LayerState.Enabled,
+      group: ["Objectives"],
       zIndex: 4,
     });
     this.interactiveLayers.add(objectivesLayer);
@@ -290,6 +293,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       friendlyName: "Live Map",
       icon: "/assets/player_marker.png",
       state: LayerState.Enabled,
+      group: ["World Map"],
       zIndex: 6,
     });
     this.interactiveLayers.add(liveLayer);
@@ -302,6 +306,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       friendlyName: "Spawn Headings",
       icon: "/assets/list_icon.png",
       state: LayerState.Enabled,
+      group: ["Objectives"],
       zIndex: 3,
     });
 

@@ -127,6 +127,58 @@ export const EVENT_EXCLUDE = new Set([
 // when no per-phase chat-link coordinate is found). Empty until a run needs it.
 export const EVENT_MAP_OVERRIDES = {};
 
+// --- generate_taco_trails ---------------------------------------------------
+// Raw-file base for the bundled TacO marker pack (Lady Elyssa's Markers). No
+// trailing slash; callers URL-encode each path segment (filenames have spaces).
+// The repo has no license file (all rights reserved) — we bundle the selected
+// data with visible attribution to Lady Elyssa's Markers + a link to the repo.
+export const TACO_REPO_RAW =
+  "https://raw.githubusercontent.com/LadyElyssa/LadyElyssaTacoTrails/HEAD";
+
+// Whitelist of source files to convert, ONE UserLayer per content file (not the
+// nested TacO category tree). Each content file (e.g. "Bounty.xml") carries the
+// <POI>/<Trail> placements; the paired menu file carries the <MarkerCategory>
+// tree with the display names / icons / colours those placements reference by
+// `type`, so both are fetched.
+//   menuFile      — defaults to 10_Menu_<name, spaces→underscores>.xml, but the
+//                  pack doesn't always follow that: "Rift Hunting.xml" uses
+//                  10_Menu_Rifts.xml, and every "Gathering - *.xml" shares the
+//                  single 10_Menu_Gathering.xml — so those override it.
+//   subgroup      — optional second-level panel group under "Lady Elyssa's
+//                  Guides" (e.g. nest the many Gathering layers under "Gathering").
+//   continentId   — the layer's continent (1 = Tyria); features resolving to a
+//                  different continent are skipped.
+//   includeTrails — default false: <Trail> elements and their .trl binaries are
+//                  skipped entirely (POIs only). Flip true to also import trails.
+//   colorFallback — layer colour when no trail colour resolves (also the POI
+//                  dot colour for markers without an icon).
+export const TACO_TRAILS = [
+  {contentFile: "Bounty.xml", layerName: "Bounty", continentId: 1, includeTrails: false, colorFallback: "#FFCC66"},
+  {contentFile: "Ranger Pets.xml", layerName: "Ranger Pets", continentId: 1, includeTrails: false, colorFallback: "#66CCFF"},
+  {contentFile: "Fishing.xml", layerName: "Fishing", continentId: 1, includeTrails: false, colorFallback: "#66FF99"},
+  {contentFile: "Vendors.xml", layerName: "Vendors", continentId: 1, includeTrails: false, colorFallback: "#FFD27F"},
+  {contentFile: "Rift Hunting.xml", menuFile: "10_Menu_Rifts.xml", layerName: "Rift Hunting", continentId: 1, includeTrails: false, colorFallback: "#C792EA"},
+  // Gathering — all share 10_Menu_Gathering.xml; nested under a "Gathering" subgroup.
+  {contentFile: "Gathering - Ore.xml", menuFile: "10_Menu_Gathering.xml", subgroup: "Gathering", layerName: "Ore", continentId: 1, includeTrails: false, colorFallback: "#B0BEC5"},
+  {contentFile: "Gathering - Wood.xml", menuFile: "10_Menu_Gathering.xml", subgroup: "Gathering", layerName: "Wood", continentId: 1, includeTrails: false, colorFallback: "#A1887F"},
+  {contentFile: "Gathering - Plants.xml", menuFile: "10_Menu_Gathering.xml", subgroup: "Gathering", layerName: "Plants", continentId: 1, includeTrails: false, colorFallback: "#81C784"},
+  {contentFile: "Gathering - General.xml", menuFile: "10_Menu_Gathering.xml", subgroup: "Gathering", layerName: "General", continentId: 1, includeTrails: false, colorFallback: "#90CAF9"},
+  {contentFile: "Gathering - Ascended.xml", menuFile: "10_Menu_Gathering.xml", subgroup: "Gathering", layerName: "Ascended", continentId: 1, includeTrails: false, colorFallback: "#FF8A65"},
+  {contentFile: "Gathering - Expac.xml", menuFile: "10_Menu_Gathering.xml", subgroup: "Gathering", layerName: "Expansions", continentId: 1, includeTrails: false, colorFallback: "#CE93D8"},
+  {contentFile: "Gathering - LWS3.xml", menuFile: "10_Menu_Gathering.xml", subgroup: "Gathering", layerName: "Living World S3", continentId: 1, includeTrails: false, colorFallback: "#80CBC4"},
+  {contentFile: "Gathering - LWS4.xml", menuFile: "10_Menu_Gathering.xml", subgroup: "Gathering", layerName: "Living World S4", continentId: 1, includeTrails: false, colorFallback: "#80CBC4"},
+  {contentFile: "Gathering - LWS5.xml", menuFile: "10_Menu_Gathering.xml", subgroup: "Gathering", layerName: "Living World S5", continentId: 1, includeTrails: false, colorFallback: "#80CBC4"},
+];
+
+// Some marker categories are excluded from the bundled guides — we ship the
+// resource/vendor/etc. markers, not the route-navigation chrome: "summon your
+// mount here" hints (Mounts/) and the numbered step markers that sequence a
+// gathering route (Numbers/ — bare "1","2","3"… overlays). A marker is dropped
+// when its icon resolves under one of these rel-path prefixes OR its category
+// `type` contains one of these exact dotted segments. (generate_taco_trails.mjs)
+export const TACO_EXCLUDE_ICON_PREFIXES = ["Mounts/", "Numbers/"];
+export const TACO_EXCLUDE_CATEGORY_SEGMENTS = ["mounts"];
+
 // --- validation floors ------------------------------------------------------
 // ratio: fail if a fresh run drops below ratio*previous committed count.
 // minAbsolute: hard floor used on first run / when no previous file exists.
@@ -141,4 +193,8 @@ export const VALIDATION = {
   // event_timers.json is an object; the floor is on its total displayable phase
   // count (see assertEventTimers).
   event_timers: {ratio: 0.85, minAbsolute: 30, label: "event_timers"},
+  // taco_trails.json is an array of UserLayer (one per whitelisted file).
+  // ratio/minAbsolute gate the layer COUNT (3); minFeatures is a separate
+  // explicit guard against POI/trail collapse (checked in generate_taco_trails).
+  taco_trails: {ratio: 0.9, minAbsolute: 3, minFeatures: 100, label: "taco_trails"},
 };

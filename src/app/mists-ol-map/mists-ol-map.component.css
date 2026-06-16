@@ -67,10 +67,15 @@
   top: 5vh;
   left: 1.5vw;
   z-index: 10;
-  max-width: 200px;
+  width: 320px;
+  max-width: 88vw;
   max-height: 85vh;
   overflow-y: auto;
-  padding: 6px;
+  padding: 0;
+  background: rgba(10, 10, 10, 0.92);
+  border: 1px solid var(--p-gw2-separator);
+  border-radius: 2px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 
 .stats-panel {

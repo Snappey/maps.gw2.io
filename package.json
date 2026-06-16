@@ -23,7 +23,8 @@
     "cache-event-timers": "node scripts/generate_event_timers.mjs",
     "build-tiles": "node scripts/build-tiles.mjs",
     "cache-city-icons": "node scripts/download_city_icons.mjs",
-    "cache-wvw-icons": "node scripts/generate_wvw_icons.mjs"
+    "cache-wvw-icons": "node scripts/generate_wvw_icons.mjs",
+    "cache-taco-trails": "node scripts/generate_taco_trails.mjs"
   },
   "private": true,
   "dependencies": {
@@ -67,6 +68,7 @@
     "@angular/compiler-cli": "^21.2.16",
     "@eslint/js": "^9.39.4",
     "@types/jasmine": "~4.0.0",
+    "@xmldom/xmldom": "^0.9.10",
     "angular-eslint": "^21.4.0",
     "better-sqlite3": "^12.10.0",
     "eslint": "^9.39.4",

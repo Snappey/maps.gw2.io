@@ -24,10 +24,10 @@ export const teamColor = (owner: string | undefined): string =>
 export const TEAM_ORDER = ["red", "blue", "green"] as const;
 
 /**
- * Static mists overlays from PMTiles. Objectives/spawn texts are realtime
- * (see createObjectiveFeatures) — here only waypoints, headings, and the
- * sector outlines whose stroke colour is resolved per render via the
- * ownership lookup the component maintains from match polling.
+ * Static mists overlays from PMTiles. Objectives/spawn texts are realtime (see
+ * syncObjectiveFeatures); here only waypoints, headings, and the sector outlines
+ * whose stroke colour resolves per render via the ownership lookup the component
+ * maintains from match polling.
  */
 export function createMistsStaticDefinitions(
   source: VectorTile,
@@ -38,27 +38,26 @@ export function createMistsStaticDefinitions(
       kind: "vector-tile", id: "mists_sector_objective", source, sourceLayer: "sector_bounds",
       style: forSourceLayer("sector_bounds", (f, resolution) =>
         sectorStrokeStyle(teamColor(sectorOwner(f.get("id"))), resolution)),
-      friendlyName: "Objective Sectors", icon: "/assets/sector_icon.png", state: LayerState.Enabled, zIndex: 1,
+      friendlyName: "Objective Sectors", icon: "/assets/sector_icon.png", state: LayerState.Enabled, group: ["Objectives"], zIndex: 1,
     },
     // Visibility stub for the layer panel: the heading text is drawn by the
     // LabelOverlays SVG, which follows this layer's visibility.
     {
       kind: "vector", id: "mists_map_headings", source: new VectorSource(),
-      friendlyName: "Map Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, zIndex: 3,
+      friendlyName: "Map Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, group: ["World Map"], zIndex: 3,
     },
     {
       kind: "vector-tile", id: "waypoints", source, sourceLayer: "waypoint",
       style: forSourceLayer("waypoint", () => iconStyle("assets/waypoint.png")),
-      minZoomLevel: 6, friendlyName: "Waypoints", icon: "/assets/waypoint.png", state: LayerState.Enabled, zIndex: 2,
+      minZoomLevel: 6, friendlyName: "Waypoints", icon: "/assets/waypoint.png", state: LayerState.Enabled, group: ["World Map"], zIndex: 2,
     },
   ];
 }
 
-// Sector bounds as a solid team-coloured line, no interior fill. The stroke
-// width tapers with zoom: the sector polygons are shrunk 3%, so when zoomed
-// out only a few screen px separate neighbouring borders and a fixed 5px
-// stroke would blend them into one. Widths are bucketed to 0.5px so the
-// style cache stays small.
+// Sector bounds as a solid team-coloured line, no fill. The stroke width tapers
+// with zoom: the polygons are shrunk 3%, so zoomed out only a few screen px
+// separate neighbouring borders and a fixed 5px stroke would blend them. Widths
+// bucket to 0.5px to keep the style cache small.
 const sectorStyleCache = new Map<string, Style>();
 const sectorStrokeStyle = (color: string, resolution: number): Style => {
   const width = Math.round(Math.max(1.5, Math.min(5, 16 / resolution)) * 2) / 2;

@@ -17,17 +17,19 @@ const DOMAINS = {
   regions: () => import("./generate_regions.mjs"),
   extras: () => import("./generate_extras.mjs"),
   "event-timers": () => import("./generate_event_timers.mjs"),
+  "taco-trails": () => import("./generate_taco_trails.mjs"),
   "city-icons": () => import("./download_city_icons.mjs"),
   "wvw-icons": () => import("./generate_wvw_icons.mjs"),
   tiles: () => import("./build-tiles.mjs"),
 };
 
 // Dependency stages: each completes before the next begins.
-//   A: JSON from the GW2 API + wiki
+//   A: JSON from the GW2 API + wiki (taco-trails also self-fetches its own icons
+//      from GitHub, so it needs nothing from a later stage)
 //   B: icons referenced by that JSON (city-icons needs extras' city_markers.json)
 //   C: vector tiles built from all the JSON
 const STAGES = [
-  ["poi", "regions", "extras", "event-timers"],
+  ["poi", "regions", "extras", "event-timers", "taco-trails"],
   ["city-icons", "wvw-icons"],
   ["tiles"],
 ];

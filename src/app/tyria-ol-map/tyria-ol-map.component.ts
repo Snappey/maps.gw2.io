@@ -37,6 +37,7 @@ import {
   syncEventFeatures, TYRIA_MARKER_SUBLAYERS,
 } from "../../lib/ol/tyria-layers";
 import {PinOverlays} from "../../lib/ol/pin-overlays";
+import {buildUserLayerSource, userLayerStyle, userLayerZIndex, TACO_PACK_ATTRIBUTION} from "../../lib/ol/user-layers";
 import {chatLinkFor, tooltipFor, wikiUrlFor} from "../../lib/ol/feature-meta";
 import {iconStyle} from "../../lib/ol/marker-styles";
 import {LabelEntry, LabelOverlays} from "../../lib/ol/label-overlay";
@@ -54,6 +55,7 @@ import {MapContextMenuComponent, MapContextMenuItem} from "../map-context-menu/m
 import {EditorModalComponent} from "../editor-modal/editor-modal.component";
 import {FloorPickerComponent} from "../floor-picker/floor-picker.component";
 import {MapService} from "../../services/map.service";
+import {TacoTrailsService} from "../../services/taco-trails.service";
 import {CORE_FLOOR_MAP_TYPES} from "../../lib/ol/floor-lookup";
 import {MenuPanelService} from "../../services/menu-panel.service";
 import {WidgetService} from "../../services/widget.service";
@@ -148,6 +150,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     private dialogService: DialogService,
     private store: Store<AppState>,
     private mapService: MapService,
+    private tacoTrailsService: TacoTrailsService,
   ) {
     super(ngZone, route, router, TYRIA_MAP_CONFIG);
   }
@@ -163,13 +166,13 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     const markersLayer = this.registerLayer({
       kind: "vector", id: "editable_markers", source: this.editor.markersSource,
       minZoomLevel: 3, friendlyName: "Editor Markers", icon: "/assets/poi.png",
-      state: LayerState.Enabled, zIndex: 7,
+      state: LayerState.Enabled, hideFromPanel: true, zIndex: 7,
     });
     this.registerLayer({
       kind: "vector", id: "editable_text", source: this.editor.textSource,
       minZoomLevel: 2, maxZoomLevel: 6, opacityLevels: {5: .8, 6: .5},
       friendlyName: "Editor Text", icon: "/assets/list_icon.png",
-      state: LayerState.Enabled, zIndex: 7,
+      state: LayerState.Enabled, hideFromPanel: true, zIndex: 7,
     });
     this.interactiveLayers.add(markersLayer as Layer);
 
@@ -287,6 +290,8 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     this.initEvents();
     // User-made layers from localStorage; re-synced on every import/delete.
     this.initUserLayers();
+    // Bundled community TacO marker layers (off by default).
+    this.initTacoTrails();
     if (isDevMode()) {
       this.initEditor(olMap);
     }
@@ -320,6 +325,8 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       friendlyName: "Tyria",
       icon: "/assets/tyria_icon.png",
       state: LayerState.Enabled,
+      group: ["World Map"],
+      keepOnHideAll: true,
       zIndex: 0,
     });
   }
@@ -327,8 +334,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   /**
    * "Above the clouds" sheet for the zoomed-out world view. The OL layer is a
    * panel-toggle stub (empty source); the visible effect is a CSS-driven DOM
-   * overlay that follows this layer's visibility and fades out as you zoom in
-   * (see CloudOverlay).
+   * overlay that follows its visibility and fades out as you zoom in (CloudOverlay).
    */
   private initClouds(olMap: OlMap): void {
     this.registerLayer({
@@ -338,6 +344,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       friendlyName: "Clouds",
       icon: "/assets/skyscale_icon.png",
       state: LayerState.Enabled,
+      group: ["World Map"],
       zIndex: 0,
     });
     this.clouds = new CloudOverlay(olMap, {
@@ -367,11 +374,10 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
         layers: [...TYRIA_MARKER_SUBLAYERS.map(s => s.sourceLayer), "label_sector", "sector_bounds", "heart_bounds"],
       }),
       wrapX: false,
-      // Parsed source tiles are shared by the marker/sector/heart layers and
-      // cost real main-thread time to decode — keep enough of them that
-      // panning back over a visited area never re-parses. With the archive
-      // resident in memory (preloadPmtilesIntoMemory) a miss costs only a
-      // re-parse, not a network fetch, so a larger cache is cheap insurance.
+      // Parsed source tiles (shared by the marker/sector/heart layers) cost
+      // main-thread decode time, so keep enough that panning back never
+      // re-parses. With the archive in memory (preloadPmtilesIntoMemory) a miss
+      // is only a re-parse, not a network fetch.
       cacheSize: 1024,
     });
     throttleVectorTileParsing(vtSource,
@@ -452,6 +458,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       friendlyName: "Live Map",
       icon: "/assets/player_marker.png",
       state: LayerState.Enabled,
+      group: ["World Map"],
       zIndex: 6,
     });
     this.interactiveLayers.add(liveLayer as Layer);
@@ -467,6 +474,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       friendlyName: "Events",
       icon: "/assets/event-boss.png",
       state: LayerState.Enabled,
+      group: ["Activities"],
       zIndex: 4,
     });
     this.interactiveLayers.add(eventsLayer as Layer);
@@ -474,6 +482,37 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     this.eventTimerService.getNextEventsTimer(8).pipe(
       takeUntil(this.unsubscribe$),
     ).subscribe(events => syncEventFeatures(this.eventsSource, events));
+  }
+
+  /**
+   * Bundled TacO overlay layers (committed by scripts/generate_taco_trails.mjs),
+   * registered as vector layers under the "Lady Elyssa's Markers" panel group,
+   * off by default. Registered directly (not via UserLayerService) with a
+   * "taco_" id, so syncUserLayers — which tears down "user_" layers on every
+   * change — leaves them be.
+   */
+  private initTacoTrails(): void {
+    this.tacoTrailsService.getLayers().pipe(
+      take(1),
+      takeUntil(this.unsubscribe$),
+    ).subscribe(layers => this.ngZone.run(() => {
+      for (const layer of layers.filter(l => l.continentId === this.config.continentId)) {
+        const source = buildUserLayerSource(layer);
+        source.setAttributions(TACO_PACK_ATTRIBUTION);
+        const olLayer = this.registerLayer({
+          kind: "vector",
+          id: layer.id,
+          source,
+          style: userLayerStyle(layer.color),
+          friendlyName: layer.name,
+          group: layer.group,
+          icon: "/assets/list_icon.png",
+          state: LayerState.Disabled,
+          zIndex: userLayerZIndex(layer),
+        });
+        this.interactiveLayers.add(olLayer as Layer);
+      }
+    }));
   }
 
   /**

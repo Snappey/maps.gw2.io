@@ -27,6 +27,10 @@ export interface CommonLayerOptions {
   state: LayerState;
   /** Ancestor group names for the layer panel tree (e.g. pack → map). */
   group?: string[];
+  /** When true the layer renders on the map but is omitted from the layer panel. */
+  hideFromPanel?: boolean;
+  /** When true the panel's global "hide all" leaves this layer visible (the base map). */
+  keepOnHideAll?: boolean;
   minZoomLevel?: number;
   maxZoomLevel?: number;
   opacityLevels?: {[zoomLevel: number]: number};
@@ -49,11 +53,9 @@ export function buildLayer(def: LayerDefinition): BaseLayer {
           attributions: def.config.attribution,
           wrapX: false,
           // At fractional zooms between two native levels, fetch the deeper
-          // (sharper) tile instead of upscaling the coarser one — the map looks
-          // crisp as soon as you zoom into a step, not just at the integer. The
-          // pyramid is a handful of tiles, so the extra early loads are cheap.
-          // Note: this can't sharpen the z>maxNativeZoom overzoom band (no
-          // deeper raster exists there); it clamps to the deepest native tile.
+          // (sharper) tile instead of upscaling the coarser one, so the map
+          // looks crisp mid-step. Can't sharpen the z>maxNativeZoom overzoom
+          // band (no deeper raster exists) — it clamps to the deepest tile.
           zDirection: -1,
         }),
         // The whole ancestor pyramid is only a handful of tiles, and having it

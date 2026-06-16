@@ -14,6 +14,14 @@ import {iconStyle} from "./marker-styles";
 
 export const USER_LAYER_ID_PREFIX = "user_";
 
+/**
+ * Credit for the bundled Lady Elyssa marker pack, set on each TacO source so the
+ * OpenLayers attribution control shows it whenever one of those layers is enabled
+ * (mirrors the About-modal credit; OL dedupes the identical string to one entry).
+ */
+export const TACO_PACK_ATTRIBUTION =
+  '<a href="https://github.com/LadyElyssa/LadyElyssaTacoTrails" target="_blank">Lady Elyssa\'s Markers</a>';
+
 /** Builds a VectorSource from a user layer's normalized features. */
 export function buildUserLayerSource(layer: UserLayer): VectorSource {
   const source = new VectorSource();
