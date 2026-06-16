@@ -22,16 +22,21 @@ export class FloorController {
   /** Floor the raster currently shows; DEFAULT_FLOOR unless the user overrode it. */
   private selected = DEFAULT_FLOOR;
   private readonly moveKey: EventsKey;
+  /** Map `type`s the picker may resolve to; other maps under the view are
+   *  ignored (e.g. CORE_FLOOR_MAP_TYPES / MISTS_FLOOR_MAP_TYPES). */
+  private readonly allowedTypes: ReadonlySet<string>;
 
   constructor(
     private readonly olMap: OlMap,
     private readonly config: Gw2MapConfig,
     private readonly maps: MapFloorInfo[],
+    allowedTypes: readonly string[],
     /** Swap the raster to this floor (rebuilds the base layer). */
     private readonly onFloorChange: (floorId: number) => void,
     /** Push picker state to the UI; null hides the picker. */
     private readonly onState: (state: FloorPickerState | null) => void,
   ) {
+    this.allowedTypes = new Set(allowedTypes);
     this.moveKey = this.olMap.on("moveend", () => this.update());
     this.update();
   }
@@ -56,7 +61,7 @@ export class FloorController {
     // OL extent is [minX, minY, maxX, maxY]; flip Y to GW2 continent px.
     const ext = view.calculateExtent(size);
     const viewRect: [number, number, number, number] = [ext[0], -ext[3], ext[2], -ext[1]];
-    const map = findDominantMap(this.maps, this.config.continentId, viewRect);
+    const map = findDominantMap(this.maps, this.config.continentId, viewRect, this.allowedTypes);
 
     // Revert to floor 1 when the view moves onto a map that can't show the
     // overridden floor (selectFloor handles the forward direction). Runs at

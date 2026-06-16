@@ -42,6 +42,8 @@ import {iconStyle} from "../../lib/ol/marker-styles";
 import {LabelEntry, LabelOverlays} from "../../lib/ol/label-overlay";
 import {CloudOverlay} from "../../lib/ol/cloud-overlay";
 import {throttleVectorTileParsing} from "../../lib/ol/vt-parse-queue";
+import {attachMarkerPrefetch} from "../../lib/ol/marker-prefetch";
+import {preloadPmtilesIntoMemory} from "../../lib/ol/pmtiles-preload";
 import {OlEditor} from "../../lib/ol/editor";
 import {MarkerType} from "../../lib/editor-types";
 import {ButtonModule} from "primeng/button";
@@ -52,6 +54,7 @@ import {MapContextMenuComponent, MapContextMenuItem} from "../map-context-menu/m
 import {EditorModalComponent} from "../editor-modal/editor-modal.component";
 import {FloorPickerComponent} from "../floor-picker/floor-picker.component";
 import {MapService} from "../../services/map.service";
+import {CORE_FLOOR_MAP_TYPES} from "../../lib/ol/floor-lookup";
 import {MenuPanelService} from "../../services/menu-panel.service";
 import {WidgetService} from "../../services/widget.service";
 import {TacoDropDirective} from "../taco-drop/taco-drop.directive";
@@ -126,6 +129,8 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   private clouds?: CloudOverlay;
   private heartBoundsLayer?: VectorTileLayer;
   private markersLayer?: VectorTileLayer;
+  private markerPrefetchTeardown?: () => void;
+  private pmtilesPreloadTeardown?: () => void;
   private markerVisibilitySignature = "";
   // Pinned marker kinds render at every zoom from a full, non-tiled overlay;
   // the controller owns the lazy load + per-kind cache (see PinOverlays).
@@ -252,6 +257,8 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.markerPrefetchTeardown?.();
+    this.pmtilesPreloadTeardown?.();
     this.liveMarkers?.destroy();
     this.headingLabels?.destroy();
     this.clouds?.destroy();
@@ -295,7 +302,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     // Dynamic raster floors: once the map list loads, watch the view and offer
     // the floors available where the user is looking. Failure hides the picker.
     this.mapService.getAllMaps().pipe(take(1), catchError(() => of([]))).subscribe(
-      maps => this.ngZone.runOutsideAngular(() => this.initFloorPicker("core", maps)));
+      maps => this.ngZone.runOutsideAngular(() => this.initFloorPicker("core", maps, CORE_FLOOR_MAP_TYPES)));
 
     this.handleChatLinkRoute(coord => {
       this.highlightEl.nativeElement.style.display = "block";
@@ -362,8 +369,10 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       wrapX: false,
       // Parsed source tiles are shared by the marker/sector/heart layers and
       // cost real main-thread time to decode — keep enough of them that
-      // panning back over a visited area never re-parses.
-      cacheSize: 512,
+      // panning back over a visited area never re-parses. With the archive
+      // resident in memory (preloadPmtilesIntoMemory) a miss costs only a
+      // re-parse, not a network fetch, so a larger cache is cheap insurance.
+      cacheSize: 1024,
     });
     throttleVectorTileParsing(vtSource,
       () => olMap.getView().getAnimating() || olMap.getView().getInteracting());
@@ -377,13 +386,21 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       style: mergedMarkerStyle(this.config.maxZoom, id => this.mapLayers[id]?.state ?? LayerState.Enabled),
       renderBuffer: 256,
       preload: 1,
-      cacheSize: 128,
+      cacheSize: 256,
       zIndex: 2,
     });
     olMap.addLayer(this.markersLayer);
     this.interactiveLayers.add(this.markersLayer);
     olMap.getView().on("change:resolution", () => this.syncMarkerVisibility());
     this.syncMarkerVisibility();
+
+    // Warm a ring + adjacent zooms of marker tiles so icons are ready as the
+    // user pans/zooms in, instead of fetch+parsing on demand (the pop-in).
+    this.markerPrefetchTeardown = attachMarkerPrefetch(olMap, vtSource);
+    // Pull the whole archive into memory so marker tile reads stop hitting the
+    // network — the dominant cost on a remote CDN, where pmtiles' no-store
+    // bypass makes every uncached tile a fresh Range request.
+    this.pmtilesPreloadTeardown = preloadPmtilesIntoMemory(vtSource, "assets/tiles/tyria_1_1.pmtiles");
 
     return vtSource;
   }

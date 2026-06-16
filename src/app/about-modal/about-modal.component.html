@@ -33,6 +33,10 @@
     </ul>
   </div>
 
+  <div class="build-date mt-3">
+    Last updated {{ buildDate | date:'longDate' }}
+  </div>
+
   <ng-template pTemplate="footer">
     <div class="flex flex-wrap justify-content-center gap-2 w-full">
       <p-button icon="pi pi-discord" (click)="openDiscord()" label="Discord" severity="info" [outlined]="true"></p-button>

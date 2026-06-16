@@ -210,6 +210,12 @@ export abstract class BaseOlMap {
     this.fpsMeter = undefined;
     delete (window as {gw2Bench?: unknown}).gw2Bench;
     delete (window as {gw2ZoomBench?: unknown}).gw2ZoomBench;
+    // Floor swaps detach their own prefetcher via unregisterLayer; a base raster
+    // layer still live at destroy never goes through it, so detach here too —
+    // otherwise its moveend/loadend listeners and pending debounce outlive the
+    // map and post a stale prefetch batch to the shared worker after teardown.
+    Object.values(this.prefetchTeardowns).forEach(teardown => teardown());
+    this.prefetchTeardowns = {};
     this.Map?.setTarget(undefined);
     this.Map = undefined;
   }
@@ -368,7 +374,11 @@ export abstract class BaseOlMap {
    * Starts the dynamic-floor picker once the map list has loaded. Both map
    * components call this from initMap with their raster layer's id.
    */
-  protected initFloorPicker(rasterLayerId: string, maps: MapFloorInfo[]): void {
+  protected initFloorPicker(
+    rasterLayerId: string,
+    maps: MapFloorInfo[],
+    allowedTypes: readonly string[],
+  ): void {
     if (!this.Map) {
       return;
     }
@@ -376,6 +386,7 @@ export abstract class BaseOlMap {
       this.Map,
       this.config,
       maps,
+      allowedTypes,
       floorId => this.setRasterFloor(rasterLayerId, floorId),
       state => this.ngZone.run(() => this.floorState$.next(state)),
     );

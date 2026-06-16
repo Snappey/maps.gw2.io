@@ -48,6 +48,9 @@ Thumbs.db
 .env
 .env.*
 
+# Build stamp (regenerated on prebuild/postinstall; see scripts/generate-build-info.mjs)
+/src/environments/build-info.ts
+
 # Claude Code local tooling
 .claude/
 

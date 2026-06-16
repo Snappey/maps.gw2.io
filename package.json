@@ -7,6 +7,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "postinstall": "node scripts/generate-build-info.mjs",
+    "prebuild": "node scripts/generate-build-info.mjs",
     "build": "ng build",
     "build:stats": "ng build --source-map",
     "analyze": "source-map-explorer \"dist/map-gw2-io/**/*.js\"",

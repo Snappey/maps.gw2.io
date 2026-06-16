@@ -29,6 +29,10 @@ export interface MapFloorInfo {
   name:           string;
   continent_id:   number;
   default_floor:  number;
+  /** GW2 map type, e.g. "Public", "Instance", "Pvp", "Center" (EBG), the WvW
+   *  "*Home" borderlands, "EdgeOfTheMists". The floor picker uses this to keep
+   *  open-world / WvW maps and ignore dungeon-and-story instances. */
+  type:           string;
   floors:         number[];
   continent_rect: number[][];
   /** Map bounds in GW2 world units (inches), Y increasing north. Used to place

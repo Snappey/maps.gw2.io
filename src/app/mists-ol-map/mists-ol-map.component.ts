@@ -42,6 +42,8 @@ import {
 import {tooltipFor} from "../../lib/ol/feature-meta";
 import {LabelOverlays} from "../../lib/ol/label-overlay";
 import {throttleVectorTileParsing} from "../../lib/ol/vt-parse-queue";
+import {attachMarkerPrefetch} from "../../lib/ol/marker-prefetch";
+import {preloadPmtilesIntoMemory} from "../../lib/ol/pmtiles-preload";
 import {ButtonModule} from "primeng/button";
 import {LayerOptionsComponent} from "../layer-options/layer-options.component";
 import {UserLayerManagerComponent} from "../user-layer-manager/user-layer-manager.component";
@@ -50,6 +52,7 @@ import {SkirmishDetailsComponent} from "../mists-chrome/skirmish-details/skirmis
 import {MatchHistoryComponent} from "../mists-chrome/match-history/match-history.component";
 import {FloorPickerComponent} from "../floor-picker/floor-picker.component";
 import {MapService} from "../../services/map.service";
+import {MISTS_FLOOR_MAP_TYPES} from "../../lib/ol/floor-lookup";
 import {MenuPanelService} from "../../services/menu-panel.service";
 import {WidgetService} from "../../services/widget.service";
 import {TacoDropDirective} from "../taco-drop/taco-drop.directive";
@@ -87,6 +90,8 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   private headingLabels?: LabelOverlays;
   private sectorOwnership = new Map<number, string>();
   private liveMarkers?: OlLiveMarkersController;
+  private markerPrefetchTeardown?: () => void;
+  private pmtilesPreloadTeardown?: () => void;
   private latestRiExpiry = 0;
 
   activeMatch$ = this.store.select(selectActiveMatch);
@@ -152,9 +157,11 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       takeUntil(this.unsubscribe$),
     ).subscribe(id => {
       if (id) {
-        id.toString().includes("-") ?
-          this.store.dispatch(mistsActions.setActiveMatch({matchId: id})) :
+        if (id.toString().includes("-")) {
+          this.store.dispatch(mistsActions.setActiveMatch({matchId: id}));
+        } else {
           this.store.dispatch(mistsActions.setActiveWorld({worldId: id}));
+        }
       } else {
         this.menu.open("matches");
       }
@@ -179,6 +186,8 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.markerPrefetchTeardown?.();
+    this.pmtilesPreloadTeardown?.();
     this.liveMarkers?.destroy();
     this.headingLabels?.destroy();
     this.destroyMap();
@@ -215,7 +224,10 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       // overlay); skipping the rest avoids MVT decode cost on the main thread.
       format: new MVT({layers: ["waypoint", "sector_bounds"]}),
       wrapX: false,
-      cacheSize: 512,
+      // Larger parsed-tile cache so panning back never re-parses; with the
+      // archive resident in memory (preloadPmtilesIntoMemory) a miss is only a
+      // re-parse, not a network fetch.
+      cacheSize: 1024,
     });
     throttleVectorTileParsing(vtSource,
       () => olMap.getView().getAnimating() || olMap.getView().getInteracting());
@@ -226,6 +238,14 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
         this.interactiveLayers.add(layer);
       }
     }
+
+    // Warm a ring + adjacent zooms of marker tiles so waypoints are ready as the
+    // user pans/zooms in, instead of fetch+parsing on demand (the pop-in).
+    this.markerPrefetchTeardown = attachMarkerPrefetch(olMap, vtSource);
+    // Pull the whole archive into memory so marker tile reads stop hitting the
+    // network — the dominant cost on a remote CDN, where pmtiles' no-store
+    // bypass makes every uncached tile a fresh Range request.
+    this.pmtilesPreloadTeardown = preloadPmtilesIntoMemory(vtSource, "assets/tiles/mists_2_1.pmtiles");
 
     this.http.get<any[]>("assets/data/region_labels_2_1.json").pipe(take(1)).subscribe(raw => {
       const entries = raw
@@ -329,7 +349,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     // Dynamic raster floors: once the map list loads, watch the view and offer
     // the floors available where the user is looking. Failure hides the picker.
     this.mapService.getAllMaps().pipe(take(1), catchError(() => of([]))).subscribe(
-      maps => this.ngZone.runOutsideAngular(() => this.initFloorPicker("mists_tiles", maps)));
+      maps => this.ngZone.runOutsideAngular(() => this.initFloorPicker("mists_tiles", maps, MISTS_FLOOR_MAP_TYPES)));
 
     this.handleChatLinkRoute(coord => this.panTo(coord, 6));
   }

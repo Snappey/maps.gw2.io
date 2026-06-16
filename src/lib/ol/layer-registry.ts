@@ -77,7 +77,7 @@ export function buildLayer(def: LayerDefinition): BaseLayer {
         // cost is paid once — but MVT parsing runs on the main thread, so
         // keep preload shallow or panning stutters.
         preload: 1,
-        cacheSize: 128,
+        cacheSize: 256,
         zIndex: def.zIndex ?? 1,
       });
     case "vector":

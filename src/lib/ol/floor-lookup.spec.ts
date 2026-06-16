@@ -6,6 +6,7 @@ const mapInfo = (over: Partial<MapFloorInfo>): MapFloorInfo => ({
   name: "",
   continent_id: 1,
   default_floor: 1,
+  type: "Public",
   floors: [1],
   continent_rect: [[0, 0], [100, 100]],
   map_rect: [[0, 0], [100, 100]],
@@ -49,6 +50,24 @@ describe("floor-lookup", () => {
       const view: [number, number, number, number] = [450, 450, 550, 550];
       expect(findDominantMap([region, inner], 1, view)?.id).toBe(2);
       expect(findDominantMap([inner, region], 1, view)?.id).toBe(2);
+    });
+
+    it("skips maps whose type is not allowed", () => {
+      // A dungeon instance nested inside Queensdale would normally win on the
+      // tie-break (smaller area), but the public-only filter ignores it so the
+      // picker resolves to the open-world map underneath.
+      const instance = mapInfo({
+        id: 67, type: "Instance", continent_rect: [[43500, 28500], [44000, 29000]],
+      });
+      const view: [number, number, number, number] = [43600, 28600, 43900, 28900];
+      expect(findDominantMap([queensdale, instance], 1, view)?.id).toBe(67);
+      const publicOnly = new Set(["Public"]);
+      expect(findDominantMap([queensdale, instance], 1, view, publicOnly)?.id).toBe(15);
+    });
+
+    it("returns undefined when no map under the view has an allowed type", () => {
+      const instance = mapInfo({id: 67, type: "Instance", continent_rect: [[42624, 28032], [46208, 30464]]});
+      expect(findDominantMap([instance], 1, [43000, 28500, 45000, 30000], new Set(["Public"]))).toBeUndefined();
     });
   });
 

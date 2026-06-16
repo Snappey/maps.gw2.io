@@ -59,9 +59,15 @@ function worldText(content: string, x: number, y: number, sizeWorldPx: number, c
   text.setAttribute("dominant-baseline", "central");
   text.style.font = `italic ${sizeWorldPx / BASE_RESOLUTION}px 'PT Serif', serif`;
   text.style.fill = color;
-  // Same soft shadow as the production CSS; px here are pre-transform SVG
-  // units so the shadow scales with the text.
-  text.style.textShadow = "0.4px 0.25px 0.4px #000, -0.25px -0.25px 0.4px #010";
+  // Soft drop shadow modelled on the production Leaflet CSS (.region-heading /
+  // .map-heading used 3px 2px 3px / -2px -2px 3px); px here are pre-transform SVG
+  // units laid out at world/BASE_RESOLUTION, so dividing the production offsets by
+  // the same BASE_RESOLUTION reproduces the original on-screen geometry and keeps
+  // it scaling with the text. The primary (down-right) pass is drawn twice so the
+  // opaque-black shadow composites onto itself and reads a touch darker than the
+  // original, without enlarging the footprint.
+  text.style.textShadow =
+    "0.5px 0.333px 0.5px #000, 0.5px 0.333px 0.5px #000, -0.333px -0.333px 0.5px #010";
   text.textContent = content;
   return text;
 }
@@ -215,9 +221,9 @@ export class LabelOverlays {
     // params are device px, unaffected by the context transform.
     const shadowUnit = (BASE_RESOLUTION / resolution) * deviceScale;
     ctx.shadowColor = "#000";
-    ctx.shadowOffsetX = 0.4 * shadowUnit;
-    ctx.shadowOffsetY = 0.25 * shadowUnit;
-    ctx.shadowBlur = 0.4 * shadowUnit;
+    ctx.shadowOffsetX = 0.5 * shadowUnit;
+    ctx.shadowOffsetY = 0.333 * shadowUnit;
+    ctx.shadowBlur = 0.5 * shadowUnit;
 
     const zoom = this.map.getView().getZoom() ?? 0;
     for (const group of this.groups) {
@@ -243,11 +249,17 @@ export class LabelOverlays {
         }
         ctx.font = `italic ${sizePx}px 'PT Serif', serif`;
         ctx.fillStyle = style.color;
+        // Drawn twice so the opaque-black shadow composites onto itself, matching
+        // the stacked primary text-shadow on the SVG path. The fill is opaque, so
+        // the second pass only deepens the shadow (idempotent for the glyph body
+        // at full group opacity — the prominent case).
+        ctx.fillText(entry.heading, x, y);
         ctx.fillText(entry.heading, x, y);
         if (entry.subheading) {
           const sub = WORLD_LABEL_STYLES.map_sub;
           ctx.font = `italic ${sub.sizeWorldPx / resolution}px 'PT Serif', serif`;
           ctx.fillStyle = sub.color;
+          ctx.fillText(entry.subheading, x, y + sub.offsetYWorldPx / resolution);
           ctx.fillText(entry.subheading, x, y + sub.offsetYWorldPx / resolution);
         }
       }

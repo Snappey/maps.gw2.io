@@ -6,3 +6,8 @@ h4 {
 a {
   overflow-wrap: anywhere;
 }
+
+.build-date {
+  color: var(--p-text-muted-color);
+  font-size: 0.875rem;
+}
