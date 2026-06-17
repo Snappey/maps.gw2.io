@@ -1,7 +1,7 @@
-﻿<div class="event-grid-container px-6 fadein animation-duration-300">
+﻿<div class="event-grid-container fadein animation-duration-300">
   @for (region of upcomingEvents | keyvalue; track region.key) {
     <div class="flex flex-column">
-      <div class="mb-1 align-items-center h-2rem tooltip">
+      <div class="mb-1 flex align-items-center justify-content-center tooltip xpac-heading">
         <h3 class="my-1 text-center">{{friendlyXpacName(region.key)}}</h3>
       </div>
       @for (event of region.value; track event.name) {
