@@ -41,7 +41,6 @@ import {
 } from "../../lib/ol/mists-layers";
 import {tooltipFor} from "../../lib/ol/feature-meta";
 import {LabelOverlays} from "../../lib/ol/label-overlay";
-import {attachWorkerVectorTileParsing} from "../../lib/ol/mvt-worker-loader";
 import {attachMarkerPrefetch} from "../../lib/ol/marker-prefetch";
 import {preloadPmtilesIntoMemory} from "../../lib/ol/pmtiles-preload";
 import {ButtonModule} from "primeng/button";
@@ -92,7 +91,6 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   private liveMarkers?: OlLiveMarkersController;
   private markerPrefetchTeardown?: () => void;
   private pmtilesPreloadTeardown?: () => void;
-  private vtParseTeardown?: () => void;
   private latestRiExpiry = 0;
 
   activeMatch$ = this.store.select(selectActiveMatch);
@@ -189,7 +187,6 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     this.unsubscribe$.complete();
     this.markerPrefetchTeardown?.();
     this.pmtilesPreloadTeardown?.();
-    this.vtParseTeardown?.();
     this.liveMarkers?.destroy();
     this.headingLabels?.destroy();
     this.destroyMap();
@@ -220,26 +217,20 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       zIndex: 0,
     });
 
-    // Only these source-layers are styled (map headings come from the SVG
-    // overlay); skipping the rest avoids MVT decode cost. Shared by the MVT
-    // format (renderer metadata) and the worker decoder, which must agree.
-    const markerLayers = ["waypoint", "sector_bounds"];
     const vtSource = new PMTilesVectorSource({
       url: "assets/tiles/mists_2_1.pmtiles",
       projection: getProjection(this.config),
       tileGrid: createVectorTileGrid(this.config),
-      format: new MVT({layers: markerLayers}),
+      // Only these source-layers are styled (map headings come from the SVG
+      // overlay); skipping the rest avoids MVT decode cost on ol-pmtiles' stock
+      // (synchronous, main-thread) tile loader.
+      format: new MVT({layers: ["waypoint", "sector_bounds"]}),
       wrapX: false,
       // Larger parsed-tile cache so panning back never re-parses; with the
       // archive resident in memory (preloadPmtilesIntoMemory) a miss is only a
       // re-parse, not a network fetch.
       cacheSize: 1024,
     });
-    // Decode MVT off the main thread; falls back to the frame-budgeted main-thread
-    // decoder if the worker can't start.
-    this.vtParseTeardown = attachWorkerVectorTileParsing(vtSource,
-      () => olMap.getView().getAnimating() || olMap.getView().getInteracting(),
-      markerLayers);
 
     for (const def of createMistsStaticDefinitions(vtSource, id => this.sectorOwnership.get(id))) {
       const layer = this.registerLayer(def);

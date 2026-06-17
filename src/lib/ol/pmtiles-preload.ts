@@ -64,8 +64,8 @@ export function preloadPmtilesIntoMemory(source: PMTilesVectorSource, url: strin
       await pmtiles.getHeader();
       if (!disposed) {
         // pmtiles_ is a public field on PMTilesVectorSource (ol-pmtiles' own
-        // tileLoadFunction and our throttleVectorTileParsing both read it per
-        // tile), so reassigning it redirects every later tile load to memory.
+        // tileLoadFunction reads it per tile), so reassigning it redirects every
+        // later tile load to memory.
         source.pmtiles_ = pmtiles;
       }
     })

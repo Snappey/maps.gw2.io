@@ -8,12 +8,11 @@ import {collectPrefetchTileCoords, DEBOUNCE_MS} from "./tile-prefetch";
 
 /**
  * Most tiles a warm pass retains before the oldest are released. A pass warms at
- * most MARKER_MAX_TILES tiles, so this keeps ~2 gestures' worth resident — enough
- * that panning back, and the deeper tiles warmed for an in-progress zoom-in, stay
- * put across the next gesture, while bounding the parsed-tile memory (see the leak
- * note below).
+ * most MARKER_MAX_TILES tiles, so this keeps ~2-3 gestures' worth resident —
+ * enough that panning back lands on warm tiles, while bounding the parsed-tile
+ * memory (see the leak note below).
  */
-export const WARM_CAPACITY = 768;
+export const WARM_CAPACITY = 512;
 
 /**
  * Ring width and per-gesture cap for the MARKER warm pass. Wider and deeper than
@@ -23,16 +22,7 @@ export const WARM_CAPACITY = 768;
  * per-call so the shared raster prefetch defaults stay untouched.
  */
 const MARKER_BUFFER_RATIO = 0.5;
-const MARKER_MAX_TILES = 350;
-/**
- * Warm two levels deeper than the current zoom, not just one: the densest marker
- * kinds only surface at the deepest zooms (POIs at z6, city markers at z7), so a
- * user zooming in from an overview needs the intermediate AND target levels
- * parsed ahead, not just the next step. Affordable because marker tiles warm from
- * the in-memory archive (CPU-only); the raised MARKER_MAX_TILES stops the deeper
- * band from starving the current-zoom ring of budget.
- */
-const MARKER_DEEPER_LEVELS = 2;
+const MARKER_MAX_TILES = 200;
 
 /**
  * Warms the marker VectorTile source's parsed-tile cache in a ring around the
@@ -45,10 +35,10 @@ const MARKER_DEEPER_LEVELS = 2;
  * `cache: "no-store"` on Chrome/Windows). The only cache that helps is OL's own
  * parsed-tile map (source.sourceTiles_): getTile(...).load() loads the data tiles
  * into it, and when the renderer later needs the same tile it reuses the parsed
- * features (no re-fetch, no re-parse). The MVT parse runs on vt-parse-queue's
- * idle budget because this fires DEBOUNCE_MS after the gesture settles (and bails
- * while the view is still interacting/animating), so it never competes with pan
- * frames.
+ * features (no re-fetch, no re-parse). The MVT parse (ol-pmtiles' stock loader,
+ * synchronous on the main thread) runs here rather than during a pan because this
+ * fires DEBOUNCE_MS after the gesture settles (and bails while the view is still
+ * interacting/animating), so it never competes with pan frames.
  *
  * Leak control: a warmed render tile keeps its source tiles in sourceTiles_ until
  * released — left unreleased they accumulate forever. So warmed tiles are held in
@@ -66,9 +56,9 @@ const MARKER_DEEPER_LEVELS = 2;
  * flicker, no thrown error). marker-prefetch.spec.ts pins both so an OL upgrade
  * fails CI instead of shipping the regression.
  *
- * Call from outside the Angular zone (warming schedules on requestAnimationFrame
- * via the parse queue). Returns a teardown that releases everything and detaches
- * the listeners.
+ * Call from outside the Angular zone (each tile.load() kicks off a fetch +
+ * synchronous decode that zone.js would otherwise turn into change-detection
+ * churn). Returns a teardown that releases everything and detaches the listeners.
  */
 export function attachMarkerPrefetch(olMap: OlMap, source: VectorTileSource): () => void {
   // key "z/x/y" -> warmed tile, in insertion order (oldest first) for FIFO eviction.
@@ -100,7 +90,7 @@ export function attachMarkerPrefetch(olMap: OlMap, source: VectorTileSource): ()
     // already warm so a coord still resident is never re-fetched.
     const tileGrid = source.getTileGridForProjection(projection);
     const coords = collectPrefetchTileCoords(olMap, tileGrid, new Set(warm.keys()),
-      {zDirection, bufferRatio: MARKER_BUFFER_RATIO, maxTiles: MARKER_MAX_TILES, deeperLevels: MARKER_DEEPER_LEVELS});
+      {zDirection, bufferRatio: MARKER_BUFFER_RATIO, maxTiles: MARKER_MAX_TILES});
     for (const [z, x, y] of coords) {
       const tile = source.getTile(z, x, y, DEVICE_PIXEL_RATIO, projection);
       // IDLE skips EMPTY tiles (e.g. z+1 past the deepest pmtiles level, or

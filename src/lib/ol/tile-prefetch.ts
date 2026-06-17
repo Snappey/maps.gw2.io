@@ -7,6 +7,22 @@ import {unByKey} from "ol/Observable";
 import {expandUrl, pickUrl, renderXYZTemplate} from "ol/uri";
 import {buffer as bufferExtent, Extent, getHeight, getIntersection, getWidth, isEmpty} from "ol/extent";
 
+/**
+ * Warms the browser HTTP cache for raster tiles in a ring around the viewport
+ * and at the adjacent zoom levels, so panning and zooming land on cached tiles
+ * instead of popping in.
+ *
+ * OL 10 keeps the tile cache inside the layer renderer where it can't be
+ * populated from outside, so prefetching happens at the network layer: these
+ * fetches use the same CORS mode as the renderer's <img> loads and therefore
+ * share the HTTP cache with them.
+ *
+ * The fetch+read loop runs in a Web Worker: on the main thread its promise
+ * churn (wrapped by zone.js) and arrayBuffer reads showed up inside pan-frame
+ * spikes when profiled. The worker shares the renderer's HTTP cache; only the
+ * URL selection (tile-grid math) stays on the main thread.
+ */
+
 /** Extra viewport fraction fetched per side at the current zoom. */
 const BUFFER_RATIO = 0.25;
 /** Hard cap per pan/zoom gesture so a fast pan can't queue thousands of tiles. */
@@ -74,22 +90,22 @@ export interface PrefetchCoordOptions {
   /** Hard cap on NEW (unseen) coords returned per call. */
   maxTiles?: number;
   /**
-   * How many levels deeper than the current zoom to warm (for zooming in).
-   */
-  deeperLevels?: number;
-  /**
    * Nearest-direction hint for picking the tile z from the view resolution;
+   * defaults to 0 (nearest). Pass a source's `zDirection` to match how its own
+   * renderer rounds at fractional zoom.
    */
   zDirection?: number;
   /**
    * Dedup key for a coord; defaults to "z/x/y". The raster prefetch keys by URL
+   * instead, so the worker's failure-retry (which deletes the failed URL from
+   * `seen`) still lines up with the set.
    */
   keyOf?: (coord: TileCoord) => string;
 }
 
 /**
  * Tile coords to warm around the current view: a buffer ring at the current
- * zoom, `deeperLevels` levels deeper (for zooming in), and the buffer ring one
+ * zoom, the viewport one level deeper (for zooming in), and the buffer ring one
  * level shallower (for zooming out). Deduped against `seen`, clamped to the grid
  * so no void tile is addressed, the visible extent skipped where the renderer
  * already loads it, and capped at `maxTiles`. Shared by the raster (warms the
@@ -102,7 +118,7 @@ export function collectPrefetchTileCoords(
   seen: Set<string>,
   options: PrefetchCoordOptions = {},
 ): TileCoord[] {
-  const {bufferRatio = BUFFER_RATIO, maxTiles = MAX_TILES_PER_MOVE, zDirection = 0, keyOf = coordKey, deeperLevels = 1} = options;
+  const {bufferRatio = BUFFER_RATIO, maxTiles = MAX_TILES_PER_MOVE, zDirection = 0, keyOf = coordKey} = options;
   const view = olMap.getView();
   const size = olMap.getSize();
   const resolution = view.getResolution();
@@ -139,12 +155,9 @@ export function collectPrefetchTileCoords(
     });
   };
 
-  const span = Math.max(getWidth(visible), getHeight(visible));
-  const buffered = bufferExtent(visible, bufferRatio * span);
-  collect(buffered, z, true);
-  for (let level = 1; level <= deeperLevels; level++) {
-    collect(bufferExtent(visible, (bufferRatio / level) * span), z + level, false);
-  }
+  const buffered = bufferExtent(visible, bufferRatio * Math.max(getWidth(visible), getHeight(visible)));
+  collect(buffered, z, true);      // ring around the viewport
+  collect(visible, z + 1, false);  // one level deeper, for zooming in
   collect(buffered, z - 1, true);  // one level shallower, for zooming out
 
   if (seen.size > SEEN_LIMIT) {
