@@ -4,6 +4,7 @@ import { Bind } from 'primeng/bind';
 import { Dialog } from 'primeng/dialog';
 import { PrimeTemplate } from 'primeng/api';
 import { Button } from 'primeng/button';
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from 'primeng/tabs';
 import { DatePipe } from '@angular/common';
 import { buildInfo } from "../../environments/build-info";
 
@@ -11,7 +12,7 @@ import { buildInfo } from "../../environments/build-info";
     selector: 'app-about-modal',
     templateUrl: './about-modal.component.html',
     styleUrls: ['./about-modal.component.css'],
-    imports: [Bind, Dialog, PrimeTemplate, Button, DatePipe]
+    imports: [Bind, Dialog, PrimeTemplate, Button, Tabs, TabList, Tab, TabPanels, TabPanel, DatePipe]
 })
 export class AboutModalComponent extends ToggleableDialog {
   readonly buildDate = buildInfo.buildDate;
