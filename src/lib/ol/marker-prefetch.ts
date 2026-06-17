@@ -8,11 +8,12 @@ import {collectPrefetchTileCoords, DEBOUNCE_MS} from "./tile-prefetch";
 
 /**
  * Most tiles a warm pass retains before the oldest are released. A pass warms at
- * most MARKER_MAX_TILES tiles, so this keeps ~2-3 gestures' worth resident —
- * enough that panning back lands on warm tiles, while bounding the parsed-tile
- * memory (see the leak note below).
+ * most MARKER_MAX_TILES tiles, so this keeps ~2 gestures' worth resident — enough
+ * that panning back, and the deeper tiles warmed for an in-progress zoom-in, stay
+ * put across the next gesture, while bounding the parsed-tile memory (see the leak
+ * note below).
  */
-export const WARM_CAPACITY = 512;
+export const WARM_CAPACITY = 768;
 
 /**
  * Ring width and per-gesture cap for the MARKER warm pass. Wider and deeper than
@@ -22,7 +23,16 @@ export const WARM_CAPACITY = 512;
  * per-call so the shared raster prefetch defaults stay untouched.
  */
 const MARKER_BUFFER_RATIO = 0.5;
-const MARKER_MAX_TILES = 200;
+const MARKER_MAX_TILES = 350;
+/**
+ * Warm two levels deeper than the current zoom, not just one: the densest marker
+ * kinds only surface at the deepest zooms (POIs at z6, city markers at z7), so a
+ * user zooming in from an overview needs the intermediate AND target levels
+ * parsed ahead, not just the next step. Affordable because marker tiles warm from
+ * the in-memory archive (CPU-only); the raised MARKER_MAX_TILES stops the deeper
+ * band from starving the current-zoom ring of budget.
+ */
+const MARKER_DEEPER_LEVELS = 2;
 
 /**
  * Warms the marker VectorTile source's parsed-tile cache in a ring around the
@@ -90,7 +100,7 @@ export function attachMarkerPrefetch(olMap: OlMap, source: VectorTileSource): ()
     // already warm so a coord still resident is never re-fetched.
     const tileGrid = source.getTileGridForProjection(projection);
     const coords = collectPrefetchTileCoords(olMap, tileGrid, new Set(warm.keys()),
-      {zDirection, bufferRatio: MARKER_BUFFER_RATIO, maxTiles: MARKER_MAX_TILES});
+      {zDirection, bufferRatio: MARKER_BUFFER_RATIO, maxTiles: MARKER_MAX_TILES, deeperLevels: MARKER_DEEPER_LEVELS});
     for (const [z, x, y] of coords) {
       const tile = source.getTile(z, x, y, DEVICE_PIXEL_RATIO, projection);
       // IDLE skips EMPTY tiles (e.g. z+1 past the deepest pmtiles level, or

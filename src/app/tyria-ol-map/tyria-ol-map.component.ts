@@ -42,7 +42,7 @@ import {chatLinkFor, tooltipFor, wikiUrlFor} from "../../lib/ol/feature-meta";
 import {iconStyle} from "../../lib/ol/marker-styles";
 import {LabelEntry, LabelOverlays} from "../../lib/ol/label-overlay";
 import {CloudOverlay} from "../../lib/ol/cloud-overlay";
-import {throttleVectorTileParsing} from "../../lib/ol/vt-parse-queue";
+import {attachWorkerVectorTileParsing} from "../../lib/ol/mvt-worker-loader";
 import {attachMarkerPrefetch} from "../../lib/ol/marker-prefetch";
 import {preloadPmtilesIntoMemory} from "../../lib/ol/pmtiles-preload";
 import {OlEditor} from "../../lib/ol/editor";
@@ -133,6 +133,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   private markersLayer?: VectorTileLayer;
   private markerPrefetchTeardown?: () => void;
   private pmtilesPreloadTeardown?: () => void;
+  private vtParseTeardown?: () => void;
   private markerVisibilitySignature = "";
   // Pinned marker kinds render at every zoom from a full, non-tiled overlay;
   // the controller owns the lazy load + per-kind cache (see PinOverlays).
@@ -262,6 +263,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     this.unsubscribe$.complete();
     this.markerPrefetchTeardown?.();
     this.pmtilesPreloadTeardown?.();
+    this.vtParseTeardown?.();
     this.liveMarkers?.destroy();
     this.headingLabels?.destroy();
     this.clouds?.destroy();
@@ -363,16 +365,16 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
    * heart-bounds highlight layer can reuse it.
    */
   private initMarkerLayer(olMap: OlMap): PMTilesVectorSource {
+    // Source-layers something actually styles: the heading text layers
+    // (label_region/label_map) are drawn by the SVG overlay, and MVT geometry
+    // decoding is the dominant pan-spike cost — so skip the rest. Shared by the
+    // MVT format (renderer metadata) and the worker decoder, which must agree.
+    const markerLayers = [...TYRIA_MARKER_SUBLAYERS.map(s => s.sourceLayer), "label_sector", "sector_bounds", "heart_bounds"];
     const vtSource = new PMTilesVectorSource({
       url: "assets/tiles/tyria_1_1.pmtiles",
       projection: getProjection(this.config),
       tileGrid: createVectorTileGrid(this.config),
-      // Parse only the source-layers something actually styles: the heading
-      // text layers (label_region/label_map) are drawn by the SVG overlay,
-      // and MVT geometry decoding is the dominant pan-spike cost.
-      format: new MVT({
-        layers: [...TYRIA_MARKER_SUBLAYERS.map(s => s.sourceLayer), "label_sector", "sector_bounds", "heart_bounds"],
-      }),
+      format: new MVT({layers: markerLayers}),
       wrapX: false,
       // Parsed source tiles (shared by the marker/sector/heart layers) cost
       // main-thread decode time, so keep enough that panning back never
@@ -380,8 +382,11 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       // is only a re-parse, not a network fetch.
       cacheSize: 1024,
     });
-    throttleVectorTileParsing(vtSource,
-      () => olMap.getView().getAnimating() || olMap.getView().getInteracting());
+    // Decode MVT off the main thread; falls back to the frame-budgeted main-thread
+    // decoder if the worker can't start.
+    this.vtParseTeardown = attachWorkerVectorTileParsing(vtSource,
+      () => olMap.getView().getAnimating() || olMap.getView().getInteracting(),
+      markerLayers);
 
     for (const def of createTyriaOverlayDefinitions(vtSource)) {
       this.registerLayer(def);

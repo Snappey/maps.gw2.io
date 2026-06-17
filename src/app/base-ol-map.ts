@@ -34,6 +34,13 @@ import type {ZoomBenchmarkResult} from "../lib/ol/zoom-benchmark";
 import {WidgetService} from "../services/widget.service";
 import {TOAST_TOP_RIGHT} from "../lib/toast-options";
 
+/**
+ * Master switch for the dynamic raster floor picker (both Tyria and Mists).
+ * Disabled for now; the controller, component, and plumbing stay wired so this
+ * is the only line to flip to bring it back. See initFloorPicker.
+ */
+const FLOOR_PICKER_ENABLED = false;
+
 export interface OlLayerOptions {
   layer: BaseLayer;
   minZoomLevel?: number;
@@ -381,7 +388,7 @@ export abstract class BaseOlMap {
     maps: MapFloorInfo[],
     allowedTypes: readonly string[],
   ): void {
-    if (!this.Map) {
+    if (!FLOOR_PICKER_ENABLED || !this.Map) {
       return;
     }
     this.floorController = new FloorController(
