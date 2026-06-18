@@ -1,9 +1,9 @@
 <div class="map-host" #mapHost [appTacoDrop]="2"></div>
 
 <div #tooltipEl class="ol-marker-tooltip">
-  <span #tooltipTextEl class="tooltip-overlay plain-tip" [hidden]="!!hoveredObjective"></span>
-  @if (hoveredObjective) {
-    <app-objective-tooltip [obj]="hoveredObjective"></app-objective-tooltip>
+  <span #tooltipTextEl class="tooltip-overlay plain-tip" [hidden]="!!hoveredObjective()"></span>
+  @if (hoveredObjective(); as obj) {
+    <app-objective-tooltip [obj]="obj"></app-objective-tooltip>
   }
 </div>
 
@@ -21,7 +21,7 @@
 
 @if (menu.isOpen('layers')) {
   <div class="layer-panel">
-    <app-layer-options [layers]="(mapLayers$ | async) ?? {}" (layerUpdated)="layerUpdated($event)" (removeLayers)="removeUserLayers($event)"></app-layer-options>
+    <app-layer-options [layers]="mapLayers$()" (layerUpdated)="layerUpdated($event)" (removeLayers)="removeUserLayers($event)"></app-layer-options>
   </div>
 }
 
@@ -56,8 +56,8 @@
 
 <p-dialog header="Objective Upgrades" [visible]="menu.isOpen('objectiveDetails')" (visibleChange)="menu.setVisible('objectiveDetails', $event)" [style]="{width: '50vw'}"
   [breakpoints]="{'1200px': '75vw', '768px': '95vw'}" [draggable]="true" [resizable]="false">
-  @if (selectedObjective) {
-    <app-objective-details [objective]="selectedObjective"></app-objective-details>
+  @if (selectedObjective(); as obj) {
+    <app-objective-details [objective]="obj"></app-objective-details>
   }
 </p-dialog>
 

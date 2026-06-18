@@ -1,9 +1,9 @@
-import {inject, isDevMode, NgZone} from "@angular/core";
+import {inject, isDevMode, NgZone, signal} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {ToastrService} from "ngx-toastr";
 import {ClipboardService} from "ngx-clipboard";
-import {BehaviorSubject, combineLatestWith, debounceTime, distinctUntilChanged, filter, fromEvent, map, Subject, Subscription, switchMap, take, takeUntil} from "rxjs";
+import {combineLatestWith, debounceTime, distinctUntilChanged, filter, fromEvent, map, Subject, Subscription, switchMap, take, takeUntil} from "rxjs";
 import {Feature} from "ol";
 import {FeatureLike} from "ol/Feature";
 import OlMap from "ol/Map";
@@ -44,16 +44,35 @@ export interface OlLayerOptions {
   keepOnHideAll?: boolean;
 }
 
-/**
- * `?fps` enables the meter anywhere — it must work in prod since dev-mode perf
- * isn't representative. sessionStorage keeps it sticky because in-app navigation
- * drops the query string (moveend fragment writes don't preserve it).
- */
 function isFpsEnabled(): boolean {
-  if (new URLSearchParams(window.location.search).has("fps")) {
-    sessionStorage.setItem("gw2:fps", "1");
+  return isDevMode() || new URLSearchParams(window.location.search).has("fps");
+}
+
+const STATE_CODES: Record<LayerState, string> = {
+  [LayerState.Enabled]: 'e',
+  [LayerState.Disabled]: 'd',
+  [LayerState.Hidden]: 'h',
+  [LayerState.Pinned]: 'p',
+};
+const CODE_STATES: Record<string, LayerState> = {
+  e: LayerState.Enabled, d: LayerState.Disabled,
+  h: LayerState.Hidden,  p: LayerState.Pinned,
+};
+
+function encodeLayerParam(overrides: Record<string, LayerState>): string | null {
+  const parts = Object.entries(overrides).map(([id, s]) => `${id}:${STATE_CODES[s]}`);
+  return parts.length ? parts.join(',') : null;
+}
+
+function decodeLayerParam(param: string): Record<string, LayerState> {
+  const result: Record<string, LayerState> = {};
+  for (const part of param.split(',')) {
+    const i = part.lastIndexOf(':');
+    if (i < 1) continue;
+    const code = part.slice(i + 1);
+    if (code in CODE_STATES) result[part.slice(0, i)] = CODE_STATES[code];
   }
-  return isDevMode() || sessionStorage.getItem("gw2:fps") === "1";
+  return result;
 }
 
 export abstract class BaseOlMap {
@@ -64,7 +83,7 @@ export abstract class BaseOlMap {
    * re-renders.
    */
   mapLayers: {[key: string]: OlLayerOptions} = {};
-  readonly mapLayers$ = new BehaviorSubject<{[key: string]: OlLayerOptions}>({});
+  readonly mapLayers$ = signal<{[key: string]: OlLayerOptions}>({});
   /** Visibility registry for on-map widgets (compass, FPS meter); used in templates. */
   protected readonly widgets = inject(WidgetService);
   protected readonly http = inject(HttpClient);
@@ -85,6 +104,10 @@ export abstract class BaseOlMap {
 
   /** Per-layer prefetch detachers, so a raster swap doesn't leak listeners. */
   private prefetchTeardowns: {[id: string]: () => void} = {};
+
+  private layerDefaults: Record<string, LayerState> = {};
+  /** Parsed once at init; entries deleted as each layer consumes its override. */
+  private urlLayerOverrides: Record<string, LayerState> | undefined;
 
   /** Set by subclasses to handle a clean right-click (no drag) — e.g. the dev editor menu. */
   protected onRightClick?: (event: PointerEvent) => void;
@@ -115,6 +138,9 @@ export abstract class BaseOlMap {
   protected onMapInitialised(olMap: OlMap) {
     this.Map = olMap;
 
+    const layerParam = this.route.snapshot.queryParamMap.get('layers');
+    this.urlLayerOverrides = layerParam ? decodeLayerParam(layerParam) : {};
+
     // Restore "#lat,lng,zoom" (Leaflet CRS.Simple format) unless deep-linked to a marker.
     this.router.routerState.root.fragment.pipe(
       combineLatestWith(this.route.params),
@@ -140,6 +166,7 @@ export abstract class BaseOlMap {
       this.ngZone.run(() => this.router.navigate([], {
         replaceUrl: true,
         fragment: viewToFragment(center, zoom, this.config),
+        queryParamsHandling: 'preserve',
       }));
     });
 
@@ -304,6 +331,12 @@ export abstract class BaseOlMap {
       keepOnHideAll: def.keepOnHideAll,
     };
 
+    this.layerDefaults[def.id] = def.state;
+    if (this.urlLayerOverrides && def.id in this.urlLayerOverrides) {
+      this.mapLayers[def.id].state = this.urlLayerOverrides[def.id];
+      delete this.urlLayerOverrides[def.id];
+    }
+
     this.applyState(def.id);
     this.Map?.addLayer(layer);
     if (def.kind === "raster" && this.Map && layer instanceof TileLayer) {
@@ -323,19 +356,15 @@ export abstract class BaseOlMap {
     if (options) {
       this.prefetchTeardowns[id]?.();
       delete this.prefetchTeardowns[id];
+      delete this.layerDefaults[id];
       this.Map?.removeLayer(options.layer);
       delete this.mapLayers[id];
       this.emitLayers();
     }
   }
 
-  /**
-   * Publishes a fresh registry snapshot to `mapLayers$`, inside the zone so the
-   * panel updates even when called from OL callbacks / init (which run outside
-   * Angular; re-entry is a no-op when already inside).
-   */
   private emitLayers(): void {
-    this.ngZone.run(() => this.mapLayers$.next({...this.mapLayers}));
+    this.mapLayers$.set({...this.mapLayers});
   }
 
   layerUpdated([id, state]: [string, LayerState]) {
@@ -343,7 +372,26 @@ export abstract class BaseOlMap {
       this.mapLayers[id].state = state;
       this.applyState(id);
       this.emitLayers();
+      this.syncLayersToUrl();
     }
+  }
+
+  private buildLayerQueryParam(): string | null {
+    const overrides: Record<string, LayerState> = {};
+    for (const [id, opts] of Object.entries(this.mapLayers)) {
+      if (opts.state !== this.layerDefaults[id]) overrides[id] = opts.state;
+    }
+    return encodeLayerParam(overrides);
+  }
+
+  private syncLayersToUrl(): void {
+    const layers = this.buildLayerQueryParam();
+    this.router.navigate([], {
+      replaceUrl: true,
+      queryParams: {layers: layers ?? null},
+      queryParamsHandling: 'merge',
+      preserveFragment: true,
+    });
   }
 
   /**
@@ -403,7 +451,7 @@ export abstract class BaseOlMap {
   protected initUserLayers(): void {
     this.userLayerService.layersFor(this.config.continentId).pipe(
       takeUntil(this.unsubscribe$),
-    ).subscribe(layers => this.ngZone.run(() => this.syncUserLayers(layers)));
+    ).subscribe(layers => this.syncUserLayers(layers));
   }
 
   /** Registers/refreshes user layers; runs inside the zone so the panel updates. */

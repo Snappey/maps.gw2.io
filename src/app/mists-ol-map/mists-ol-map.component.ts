@@ -1,8 +1,8 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, isDevMode, NgZone, OnDestroy, OnInit, signal, ViewChild} from "@angular/core";
 import {AsyncPipe} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {catchError, combineLatestWith, filter, interval, map, of, switchMap, take, takeUntil} from "rxjs";
+import {EMPTY, catchError, combineLatestWith, filter, interval, map, of, switchMap, take, takeUntil, takeWhile} from "rxjs";
 
 import OlMap from "ol/Map";
 import Overlay from "ol/Overlay";
@@ -81,8 +81,8 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   /** Tracks which single overlay is open so opening one closes the others. */
   protected readonly menu = inject(MenuPanelService);
   statsTab: "details" | "history" | "chart" = "details";
-  selectedObjective?: FullMatchObjective;
-  hoveredObjective?: FullMatchObjective;
+  readonly selectedObjective = signal<FullMatchObjective | undefined>(undefined);
+  readonly hoveredObjective = signal<FullMatchObjective | undefined>(undefined);
   private hoveredObjectiveId: string | null = null;
 
   private objectivesSource = new VectorSource();
@@ -90,7 +90,6 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   private headingLabels?: LabelOverlays;
   private sectorOwnership = new Map<number, string>();
   private liveMarkers?: OlLiveMarkersController;
-  private latestRiExpiry = 0;
 
   activeMatch$ = this.store.select(selectActiveMatch);
 
@@ -119,7 +118,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       Tooltip: "Tyria",
       Icon: "/assets/tyria_icon.png",
       IconHover: "/assets/tyria_hovered_icon.png",
-      OnClick: () => this.ngZone.run(() => this.router.navigate(["/tyria"]))
+      OnClick: () => this.router.navigate(["/tyria"])
     }
   ];
 
@@ -299,27 +298,28 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     });
 
     // Realtime: match poll drives objective properties + sector ownership.
+    // RI countdown ticks only while one is live; switchMap cancels the previous
+    // interval on each new match so no 1Hz loop runs on idle maps.
     this.activeMatch$.pipe(
       filter((match): match is Match => match != null),
+      switchMap(match => {
+        this.ngZone.runOutsideAngular(() => {
+          this.sectorOwnership = new Map(
+            match.objectives.map(obj => [obj.sector_id, obj.owner] as [number, string]));
+          syncObjectiveFeatures(this.objectivesSource, this.spawnSource,
+            match.objectives, EDGE_OF_THE_MISTS_MAP_ID);
+          // Sector colours live in a style closure over sectorOwnership; force re-render.
+          this.mapLayers["mists_sector_objective"]?.layer.changed();
+        });
+        const riExpiry = match.objectives.reduce((latest, obj) =>
+          obj.last_flipped ? Math.max(latest, new Date(obj.last_flipped).getTime() + RECENT_FLIP_WINDOW_MS) : latest, 0);
+        const remaining = riExpiry + 2_000 - Date.now();
+        return remaining > 0
+          ? interval(1000).pipe(takeWhile(() => Date.now() < riExpiry + 2_000))
+          : EMPTY;
+      }),
       takeUntil(this.unsubscribe$),
-    ).subscribe(match => {
-      this.sectorOwnership = new Map(
-        match.objectives.map(obj => [obj.sector_id, obj.owner] as [number, string]));
-      syncObjectiveFeatures(this.objectivesSource, this.spawnSource,
-        match.objectives, EDGE_OF_THE_MISTS_MAP_ID);
-      // Sector colours live in a style closure over sectorOwnership; force re-render.
-      this.mapLayers["mists_sector_objective"]?.layer.changed();
-      this.latestRiExpiry = match.objectives.reduce((latest, obj) =>
-        obj.last_flipped ? Math.max(latest, new Date(obj.last_flipped).getTime() + RECENT_FLIP_WINDOW_MS) : latest, 0);
-    });
-
-    // RI countdowns tick once a second, but only invalidate the layer while
-    // one is live (+2s grace so the final 0:01 render clears).
-    interval(1000).pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-      if (Date.now() < this.latestRiExpiry + 2_000) {
-        this.mapLayers["mists_objective"]?.layer.changed();
-      }
-    });
+    ).subscribe(() => this.ngZone.runOutsideAngular(() => this.mapLayers["mists_objective"]?.layer.changed()));
 
     this.initUserLayers();
 
@@ -371,7 +371,7 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     if (objective && objective.owner !== undefined) {
       this.wvwService.prefetchObjectiveAssets(objective);
     }
-    this.ngZone.run(() => this.hoveredObjective = objective);
+    this.hoveredObjective.set(objective);
   }
 
   overviewMatchClicked(match: Match) {
@@ -389,10 +389,8 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     // everything else copies its chat link.
     const objective = feature.get("objective_data") as FullMatchObjective | undefined;
     if (objective && objective.owner !== undefined) {
-      this.ngZone.run(() => {
-        this.selectedObjective = objective;
-        this.menu.open("objectiveDetails");
-      });
+      this.selectedObjective.set(objective);
+      this.menu.open("objectiveDetails");
       return;
     }
 

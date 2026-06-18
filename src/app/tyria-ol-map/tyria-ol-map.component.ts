@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, isDevMode, NgZone, OnDestroy, OnInit, signal, ViewChild} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AsyncPipe} from "@angular/common";
@@ -116,13 +116,13 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       Tooltip: "WvW",
       Icon: "/assets/mists_icon.png",
       IconHover: "/assets/mists_hovered_icon.png",
-      OnClick: () => this.ngZone.run(() => this.router.navigate(["/wvw"]))
+      OnClick: () => this.router.navigate(["/wvw"])
     }
   ];
 
   // Dev editor (replaces the leaflet-contextmenu flow)
-  contextMenuItems: MapContextMenuItem[] = [];
-  contextMenuPosition?: {x: number, y: number};
+  readonly contextMenuItems = signal<MapContextMenuItem[]>([]);
+  readonly contextMenuPosition = signal<{x: number, y: number} | undefined>(undefined);
   private editor = new OlEditor();
 
   private tooltipOverlay?: Overlay;
@@ -182,11 +182,9 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       }
 
       const coords = this.getCoords(olMap.getEventCoordinate(event));
-      this.ngZone.run(() => {
-        this.menu.close();
-        this.contextMenuItems = this.buildContextMenu(coords);
-        this.contextMenuPosition = {x: pixel[0], y: pixel[1]};
-      });
+      this.menu.close();
+      this.contextMenuItems.set(this.buildContextMenu(coords));
+      this.contextMenuPosition.set({x: pixel[0], y: pixel[1]});
     };
   }
 
@@ -215,21 +213,19 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   }
 
   private placeMarker(header: string, type: MarkerType, coords: [number, number]) {
-    this.ngZone.run(() => {
-      this.dialogService.open(EditorModalComponent, {
-        header,
-        data: {type, coords},
-      })?.onClose.pipe(take(1)).subscribe(metadata => {
-        if (!metadata) {
-          return;
+    this.dialogService.open(EditorModalComponent, {
+      header,
+      data: {type, coords},
+    })?.onClose.pipe(take(1)).subscribe(metadata => {
+      if (!metadata) {
+        return;
+      }
+      this.ngZone.runOutsideAngular(() => {
+        if (type === MarkerType.Map || type === MarkerType.Region) {
+          this.editor.addText(type, coords, metadata);
+        } else {
+          this.editor.addMarker(type, coords, metadata);
         }
-        this.ngZone.runOutsideAngular(() => {
-          if (type === MarkerType.Map || type === MarkerType.Region) {
-            this.editor.addText(type, coords, metadata);
-          } else {
-            this.editor.addMarker(type, coords, metadata);
-          }
-        });
       });
     });
   }
@@ -465,7 +461,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     this.tacoTrailsService.getLayers().pipe(
       take(1),
       takeUntil(this.unsubscribe$),
-    ).subscribe(layers => this.ngZone.run(() => {
+    ).subscribe(layers => {
       for (const layer of layers.filter(l => l.continentId === this.config.continentId)) {
         const source = buildUserLayerSource(layer);
         source.setAttributions(TACO_PACK_ATTRIBUTION);
@@ -482,7 +478,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
         });
         this.interactiveLayers.add(olLayer as Layer);
       }
-    }));
+    });
   }
 
   /** Tooltip + highlight overlays and the pointer interaction handlers. */
