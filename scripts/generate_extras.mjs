@@ -65,13 +65,14 @@ function extractMarkers(text) {
   return text.slice(startOfData, end).trim();
 }
 
-// Each line is one marker object with a trailing comma; strip the comma and
-// parse it. A malformed line throws, failing the whole page (and, fail-closed,
-// the run). Note: unconditionally drops the last char of every line.
+// Each line is one marker object, optionally with a trailing comma. Skip blank
+// lines and HTML comments (wiki drift). Strip trailing comma only when present.
 function parseMarkers(markerDataStr) {
   return markerDataStr
     .split("\n")
-    .map((s) => s.substring(0, s.length - 1))
+    .map((s) => s.trim())
+    .filter((s) => s && !s.startsWith("<!--"))
+    .map((s) => (s.endsWith(",") ? s.slice(0, -1) : s))
     .map((s) => JSON.parse(s));
 }
 
@@ -80,7 +81,7 @@ async function getWikiImageUrl(filename) {
   const body = await fetchJson(url, {delayMs: 50});
   const pages = body.query.pages;
   const pageId = Object.keys(pages)[0];
-  return pages[pageId].imageinfo[0].url;
+  return pages[pageId].imageinfo?.[0]?.url ?? null;
 }
 
 async function generateCityMarkers() {
@@ -97,6 +98,10 @@ async function generateCityMarkers() {
       for (const markerStr of markerStrs) {
         for (const marker of parseMarkers(markerStr)) {
           const icon = await getWikiImageUrl(marker.icon);
+          if (icon === null) {
+            log.warn(`skipping marker "${marker.name}" (${pageTitle}): icon not found on wiki: ${marker.icon}`);
+            continue;
+          }
           pageMarkers.push({...marker, icon});
         }
       }

@@ -438,7 +438,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/e/e7/Strike_Mission_%28map_icon%29.png",
     "name": "Scrying Stone",
-    "text": "[[Strike Mission: Old Lion's Court]]"
+    "text": "[[Old Lion's Court]]"
   },
   {
     "coord": [
@@ -1175,6 +1175,15 @@
       32256
     ],
     "icon": "https://wiki.guildwars2.com/images/8/86/Raid_%28map_icon%29.png",
+    "name": "Raid—Combined",
+    "text": "Portal to all raids"
+  },
+  {
+    "coord": [
+      49224,
+      32212
+    ],
+    "icon": "https://wiki.guildwars2.com/images/8/86/Raid_%28map_icon%29.png",
     "name": "Raid—Bastion of the Penitent",
     "text": "Portal to [[Bastion of the Penitent]]"
   },
@@ -1267,6 +1276,744 @@
     "icon": "https://wiki.guildwars2.com/images/d/d5/Trading_Post_%28map_icon%29.png",
     "name": "Trading Post",
     "text": "[[Trading Post Representative]]"
+  },
+  {
+    "coord": [
+      49260,
+      32165
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Merchant (Aerodrome)|Merchant]]"
+  },
+  {
+    "coord": [
+      49381,
+      32187
+    ],
+    "icon": "https://wiki.guildwars2.com/images/6/6f/Mystic_Forge.png",
+    "name": "Mystic Forge",
+    "text": "Crafting station"
+  },
+  {
+    "coord": [
+      49385,
+      32191
+    ],
+    "icon": "https://wiki.guildwars2.com/images/6/6f/Mystic_Forge.png",
+    "name": "Miyani",
+    "text": "Keeper of the Mystic Forge"
+  },
+  {
+    "coord": [
+      49266,
+      32077
+    ],
+    "icon": "https://wiki.guildwars2.com/images/b/b2/Jeweling_Station_%28map_icon%29.png",
+    "name": "Jeweling Station",
+    "text": "Crafting station"
+  },
+  {
+    "coord": [
+      49259,
+      32076
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Jeweler (Aerodrome)",
+    "text": "Master jeweler"
+  },
+  {
+    "coord": [
+      49243,
+      32084
+    ],
+    "icon": "https://wiki.guildwars2.com/images/1/12/Tailoring_Station_%28map_icon%29.png",
+    "name": "Tailoring Station",
+    "text": "Crafting station"
+  },
+  {
+    "coord": [
+      49235,
+      32081
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Tailor (Aerodrome)",
+    "text": "Master tailor"
+  },
+  {
+    "coord": [
+      49240,
+      32050
+    ],
+    "icon": "https://wiki.guildwars2.com/images/d/db/Leatherworking_Station_%28map_icon%29.png",
+    "name": "Leatherworking Station",
+    "text": "Crafting station"
+  },
+  {
+    "coord": [
+      49245,
+      32054
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Leatherworker (Aerodrome)",
+    "text": "Master leatherworker"
+  },
+  {
+    "coord": [
+      49203,
+      32067
+    ],
+    "icon": "https://wiki.guildwars2.com/images/1/1d/Huntsman%27s_Station_%28map_icon%29.png",
+    "name": "Huntsman's Station",
+    "text": "Crafting station"
+  },
+  {
+    "coord": [
+      49201,
+      32062
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Huntsman (Aerodrome)",
+    "text": "Master huntsman"
+  },
+  {
+    "coord": [
+      49132,
+      32088
+    ],
+    "icon": "https://wiki.guildwars2.com/images/d/d7/Armorsmithing_Station_%28map_icon%29.png",
+    "name": "Armorsmithing Station",
+    "text": "Crafting station"
+  },
+  {
+    "coord": [
+      49130,
+      32083
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Armorsmith (Aerodrome)",
+    "text": "Master armorsmith"
+  },
+  {
+    "coord": [
+      49179,
+      32085
+    ],
+    "icon": "https://wiki.guildwars2.com/images/7/75/Weaponsmithing_Station_%28map_icon%29.png",
+    "name": "Weaponsmithing Station",
+    "text": "Crafting station"
+  },
+  {
+    "coord": [
+      49178,
+      32077
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Weaponsmith (Aerodrome)",
+    "text": "Master weaponsmith"
+  },
+  {
+    "coord": [
+      49207,
+      32086
+    ],
+    "icon": "https://wiki.guildwars2.com/images/7/73/Artificing_Station_%28map_icon%29.png",
+    "name": "Artificing Station",
+    "text": "Crafting station"
+  },
+  {
+    "coord": [
+      49208,
+      32093
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Artificer (Aerodrome)",
+    "text": "Master artificer"
+  },
+  {
+    "coord": [
+      49231,
+      32097
+    ],
+    "icon": "https://wiki.guildwars2.com/images/c/c4/Cooking_Station_%28map_icon%29.png",
+    "name": "Cooking Station",
+    "text": "Crafting station"
+  },
+  {
+    "coord": [
+      49239,
+      32101
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Chef (Aerodrome)",
+    "text": "Master chef"
+  },
+  {
+    "coord": [
+      57691.2,
+      30697.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/5/50/Reinforce_Armor_%28map_icon%29.png",
+    "name": "Reinforce Armor",
+    "text": "[[Fraxis]]"
+  },
+  {
+    "coord": [
+      57752.3,
+      30767.5
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Volare]]"
+  },
+  {
+    "coord": [
+      57696.3,
+      30924.2
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Bartender",
+    "text": "[[Jaust]]"
+  },
+  {
+    "coord": [
+      57447.6,
+      30652.3
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/ea/Armorsmith_%28map_icon%29.png",
+    "name": "Armorsmith",
+    "text": "[[Trenur]]"
+  },
+  {
+    "coord": [
+      57434.6,
+      30651.3
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/92/Weaponsmith_%28map_icon%29.png",
+    "name": "Weaponsmith",
+    "text": "[[Quell]]"
+  },
+  {
+    "coord": [
+      57407.9,
+      30565.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/0/0f/Birthday_Gift.png",
+    "name": "Decade Armorsmith",
+    "text": "[[Ancient Armorsmith]]"
+  },
+  {
+    "coord": [
+      57546.8,
+      30564.6
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Tacita]]"
+  },
+  {
+    "coord": [
+      57322.6,
+      30733.6
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Buel]]"
+  },
+  {
+    "coord": [
+      57183.8,
+      30888.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Ulsus]]"
+  },
+  {
+    "coord": [
+      57169.2,
+      30863.2
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Bartender",
+    "text": "[[Renae Silverguard]]"
+  },
+  {
+    "coord": [
+      57142.3,
+      30854
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Sidra]]"
+  },
+  {
+    "coord": [
+      57121.7,
+      30868.4
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Litus]]"
+  },
+  {
+    "coord": [
+      57119,
+      30884.2
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Varian]]"
+  },
+  {
+    "coord": [
+      57139.4,
+      30903.2
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Lorem]]"
+  },
+  {
+    "coord": [
+      57156.8,
+      30907.3
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Caeva]]"
+  },
+  {
+    "coord": [
+      57061.8,
+      30812.4
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/43/Speed_boons.png",
+    "name": "Speed Boons",
+    "text": "[[Velox Windblade]]—Grants [[Inspired by Victory]]"
+  },
+  {
+    "coord": [
+      57395.4,
+      31000.6
+    ],
+    "icon": "https://wiki.guildwars2.com/images/2/2b/Proxemics_Lab_Cat.png",
+    "name": "Hungry Cat Scavenger Hunt",
+    "text": "[[Cat]]—Requires [[Super-Hot Poultry and Leek Soup]]"
+  },
+  {
+    "coord": [
+      57298.4,
+      31059.4
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Barax]]"
+  },
+  {
+    "coord": [
+      57493.8,
+      31162.3
+    ],
+    "icon": "https://wiki.guildwars2.com/images/a/aa/Collection_%28map_icon%29.png",
+    "name": "Achievement objective",
+    "text": "[[Fires of the Legion]]"
+  },
+  {
+    "coord": [
+      57146.2,
+      30530
+    ],
+    "icon": "https://wiki.guildwars2.com/images/a/a8/Cultural_Armorsmith_%28map_icon%29.png",
+    "name": "Cultural Armorsmith—Tier 3",
+    "text": "[[Scyllix]]"
+  },
+  {
+    "coord": [
+      57198.8,
+      30604.5
+    ],
+    "icon": "https://wiki.guildwars2.com/images/a/a8/Cultural_Armorsmith_%28map_icon%29.png",
+    "name": "Cultural Armorsmith—Tier 2",
+    "text": "[[Eliana]]"
+  },
+  {
+    "coord": [
+      57160.1,
+      30680.5
+    ],
+    "icon": "https://wiki.guildwars2.com/images/a/a8/Cultural_Armorsmith_%28map_icon%29.png",
+    "name": "Cultural Armorsmith—Tier 1",
+    "text": "[[Comidus]]"
+  },
+  {
+    "coord": [
+      57093.5,
+      30612.2
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/43/Speed_boons.png",
+    "name": "Speed Boons",
+    "text": "[[Vitas Quickeye]]—Grants [[Double Time!]]"
+  },
+  {
+    "coord": [
+      57184.7,
+      30542.2
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/9e/Personal_waypoint_blue_%28map_icon%29.png",
+    "name": "Instance",
+    "text": "[[Ash Tribune Quarters]]"
+  },
+  {
+    "coord": [
+      57153.6,
+      30610.9
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/9e/Personal_waypoint_blue_%28map_icon%29.png",
+    "name": "Instance",
+    "text": "[[The Command Core]]"
+  },
+  {
+    "coord": [
+      57113.6,
+      30692.7
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/9e/Personal_waypoint_blue_%28map_icon%29.png",
+    "name": "Instance",
+    "text": "[[Blood Tribune Quarters]]"
+  },
+  {
+    "coord": [
+      57134.4,
+      30575.4
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/92/Weaponsmith_%28map_icon%29.png",
+    "name": "Weaponsmith",
+    "text": "[[Rarrii]]"
+  },
+  {
+    "coord": [
+      57111.5,
+      30660.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Casta]]"
+  },
+  {
+    "coord": [
+      57201.3,
+      30587.2
+    ],
+    "icon": "https://wiki.guildwars2.com/images/3/3e/Commander_Trainer_%28map_icon%29.png",
+    "name": "Trainer",
+    "text": "[[Master Strategist Rego]]"
+  },
+  {
+    "coord": [
+      57213.7,
+      30571.1
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/9e/Personal_waypoint_blue_%28map_icon%29.png",
+    "name": "Instance",
+    "text": "[[Citadel Stockade]]"
+  },
+  {
+    "coord": [
+      57192.4,
+      30469.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Gram]]"
+  },
+  {
+    "coord": [
+      56940.9,
+      30235.5
+    ],
+    "icon": "https://wiki.guildwars2.com/images/a/aa/Laurel_Merchant_%28map_icon%29.png",
+    "name": "Laurel Merchant",
+    "text": "[[Laurel Merchant]]"
+  },
+  {
+    "coord": [
+      56968.2,
+      30152.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Consortium Officer",
+    "text": "[[Ripmaul]]"
+  },
+  {
+    "coord": [
+      56973.1,
+      30144.4
+    ],
+    "icon": "https://wiki.guildwars2.com/images/6/61/Makeover_Preview_%28map_icon%29.png",
+    "name": "Black Lion Aesthetician",
+    "text": "[[Aesthetician]]"
+  },
+  {
+    "coord": [
+      56964.1,
+      30111.4
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/ea/Armorsmith_%28map_icon%29.png",
+    "name": "Black Lion Armorsmith",
+    "text": "[[Black Lion Trader (Armorsmith)|Black Lion Trader]]"
+  },
+  {
+    "coord": [
+      56939.1,
+      30128.3
+    ],
+    "icon": "https://wiki.guildwars2.com/images/d/d5/Trading_Post_%28map_icon%29.png",
+    "name": "Black Lion Trading Company",
+    "text": "[[Black Lion Trader]] (x3)"
+  },
+  {
+    "coord": [
+      56917.5,
+      30115.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/a/a7/Guild_Trader_%28map_icon%29.png",
+    "name": "Black Lion Exchange Specialist",
+    "text": "[[Black Lion Exchange Specialist]]"
+  },
+  {
+    "coord": [
+      56910.5,
+      30134.3
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/92/Weaponsmith_%28map_icon%29.png",
+    "name": "Black Lion Weapons Specialist",
+    "text": "[[Black Lion Weapons Specialist]]"
+  },
+  {
+    "coord": [
+      56902.4,
+      30149.5
+    ],
+    "icon": "https://wiki.guildwars2.com/images/a/a4/Black_Lion_Chest_Merchant.png",
+    "name": "Black Lion Chest Merchant",
+    "text": "[[Black Lion Chest Merchant]]"
+  },
+  {
+    "coord": [
+      57016.5,
+      30156
+    ],
+    "icon": "https://wiki.guildwars2.com/images/2/2a/Faction_Provisioner_%28map_icon%29.png",
+    "name": "Faction Provisioner",
+    "text": "[[Ash Legion Provisioner]]"
+  },
+  {
+    "coord": [
+      57012.6,
+      30172.9
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/ea/Armorsmith_%28map_icon%29.png",
+    "name": "Armorsmith",
+    "text": "[[Veryta Plainstread]]"
+  },
+  {
+    "coord": [
+      57010.1,
+      30225.7
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/92/Weaponsmith_%28map_icon%29.png",
+    "name": "Cultural Weaponsmiths",
+    "text": "[[Culis Cannonbite]], [[Mala Greenbow]] and [[Armis Slapsharp]]"
+  },
+  {
+    "coord": [
+      57349.9,
+      30518.2
+    ],
+    "icon": "https://wiki.guildwars2.com/images/6/67/Jade_Bot_Workbench_%28map_icon%29.png",
+    "name": "Jade Bot Terminal",
+    "text": "[[Jade Bot Terminal]]"
+  },
+  {
+    "coord": [
+      57312.5,
+      30096
+    ],
+    "icon": "https://wiki.guildwars2.com/images/8/88/Bank_%28map_icon%29.png",
+    "name": "Bankers",
+    "text": "[[Cratus]] and [[Orres]]"
+  },
+  {
+    "coord": [
+      57293,
+      30090
+    ],
+    "icon": "https://wiki.guildwars2.com/images/d/d8/Guild_Banker_%28map_icon%29.png",
+    "name": "Guild Banker",
+    "text": "[[Quora]]"
+  },
+  {
+    "coord": [
+      57335,
+      30100
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Larisa Keencoin]]"
+  },
+  {
+    "coord": [
+      57187,
+      30149
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Tycho]]"
+  },
+  {
+    "coord": [
+      57200,
+      30143
+    ],
+    "icon": "https://wiki.guildwars2.com/images/1/16/Gathering_Merchant_%28map_icon%29.png",
+    "name": "Gathering Merchant",
+    "text": "[[Brunarr Sharpclaw]]"
+  },
+  {
+    "coord": [
+      57367,
+      30274
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/92/Weaponsmith_%28map_icon%29.png",
+    "name": "Weaponsmith",
+    "text": "[[Orrius]]"
+  },
+  {
+    "coord": [
+      57361,
+      30279
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/ea/Armorsmith_%28map_icon%29.png",
+    "name": "Armorsmith",
+    "text": "[[Paedra]]"
+  },
+  {
+    "coord": [
+      57303,
+      30263
+    ],
+    "icon": "https://wiki.guildwars2.com/images/5/50/Reinforce_Armor_%28map_icon%29.png",
+    "name": "Reinforce Armor",
+    "text": "[[Zyra]]"
+  },
+  {
+    "coord": [
+      57194,
+      30244
+    ],
+    "icon": "https://wiki.guildwars2.com/images/1/12/Tailoring_Station_%28map_icon%29.png",
+    "name": "Tailor",
+    "text": "[[Braugh Steelfoot]]"
+  },
+  {
+    "coord": [
+      57243,
+      30107
+    ],
+    "icon": "https://wiki.guildwars2.com/images/c/c4/Cooking_Station_%28map_icon%29.png",
+    "name": "Chef",
+    "text": "[[Gurges Burnpaw]]"
+  },
+  {
+    "coord": [
+      57187,
+      30325
+    ],
+    "icon": "https://wiki.guildwars2.com/images/d/d7/Armorsmithing_Station_%28map_icon%29.png",
+    "name": "Armorsmith",
+    "text": "[[Morgaah Bloodseeker]]"
+  },
+  {
+    "coord": [
+      57308,
+      30345
+    ],
+    "icon": "https://wiki.guildwars2.com/images/7/73/Artificing_Station_%28map_icon%29.png",
+    "name": "Artificer",
+    "text": "[[Ruuga Blackear]]"
+  },
+  {
+    "coord": [
+      57390,
+      30176
+    ],
+    "icon": "https://wiki.guildwars2.com/images/d/db/Leatherworking_Station_%28map_icon%29.png",
+    "name": "Leatherworker",
+    "text": "[[Snaarl Stainedclaw]]"
+  },
+  {
+    "coord": [
+      57246,
+      30364
+    ],
+    "icon": "https://wiki.guildwars2.com/images/7/75/Weaponsmithing_Station_%28map_icon%29.png",
+    "name": "Weaponsmith",
+    "text": "[[Taask Steamcaller]]"
+  },
+  {
+    "coord": [
+      57162,
+      30293
+    ],
+    "icon": "https://wiki.guildwars2.com/images/b/b2/Jeweling_Station_%28map_icon%29.png",
+    "name": "Jeweler",
+    "text": "[[Vatia the Keen-Eyed]]"
+  },
+  {
+    "coord": [
+      57336,
+      30312
+    ],
+    "icon": "https://wiki.guildwars2.com/images/1/1d/Huntsman%27s_Station_%28map_icon%29.png",
+    "name": "Huntsman",
+    "text": "[[Vauldis Grawlbutcher]]"
+  },
+  {
+    "coord": [
+      56588.8,
+      31488.6
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/9c/Ranger_icon.png",
+    "name": "Lashtail Devourer",
+    "text": "[[Juvenile Lashtail Devourer]]"
+  },
+  {
+    "coord": [
+      56560.3,
+      31061.9
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/9c/Ranger_icon.png",
+    "name": "Whiptail Devourer",
+    "text": "[[Juvenile Whiptail Devourer]]"
+  },
+  {
+    "coord": [
+      56582.3,
+      31083
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/9c/Ranger_icon.png",
+    "name": "Whiptail Devourer",
+    "text": "[[Juvenile Whiptail Devourer]]"
+  },
+  {
+    "coord": [
+      56559,
+      31109.3
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/9c/Ranger_icon.png",
+    "name": "Whiptail Devourer",
+    "text": "[[Juvenile Whiptail Devourer]]"
   },
   {
     "coord": [
@@ -1365,7 +2112,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/6/6c/Asura_gate_%28map_icon%29.png",
     "name": "Asura Gate",
-    "text": "[[Ancient Gate]]<br>[[Strike Mission]]s"
+    "text": "[[Ancient Gate]]<br>[[Raid Encounters]]"
   },
   {
     "coord": [
@@ -1591,6 +2338,779 @@
     "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
     "name": "Exchanges",
     "text": "[[Gharr Leadclaw]]"
+  },
+  {
+    "coord": [
+      55753.3,
+      39111.7
+    ],
+    "icon": "https://wiki.guildwars2.com/images/8/88/Bank_%28map_icon%29.png",
+    "name": "Bank",
+    "text": "[[Banker]]"
+  },
+  {
+    "coord": [
+      55704,
+      39091.3
+    ],
+    "icon": "https://wiki.guildwars2.com/images/d/d5/Trading_Post_%28map_icon%29.png",
+    "name": "Trading Post",
+    "text": "[[Black Lion Trader]]"
+  },
+  {
+    "coord": [
+      55710.2,
+      39059.9
+    ],
+    "icon": "https://wiki.guildwars2.com/images/c/cf/Raptor_%28map_icon%29.png",
+    "name": "Raptor Rental",
+    "text": "[[Mount Rental]]"
+  },
+  {
+    "coord": [
+      55768.8,
+      39007.7
+    ],
+    "icon": "https://wiki.guildwars2.com/images/3/3b/Vendor_Star_%28map_icon%29.png",
+    "name": "Zephyrite Weapon Enchanter",
+    "text": "[[Zephyrite Weapon Enchanter]]"
+  },
+  {
+    "coord": [
+      55622.2,
+      39029.5
+    ],
+    "icon": "https://wiki.guildwars2.com/images/6/69/Zeghai_of_the_Lost.png",
+    "name": "Treasure Hunt Reward Vendor",
+    "text": "[[Treasure Hunt Reward Vendor]]"
+  },
+  {
+    "coord": [
+      55710.1,
+      39035.9
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Zalman]]"
+  },
+  {
+    "coord": [
+      55723.6,
+      39025.6
+    ],
+    "icon": "https://wiki.guildwars2.com/images/a/a7/Guild_Trader_%28map_icon%29.png",
+    "name": "Bazaar Traders",
+    "text": "[[Trader]]"
+  },
+  {
+    "coord": [
+      55830.4,
+      39003
+    ],
+    "icon": "https://wiki.guildwars2.com/images/5/50/Reinforce_Armor_%28map_icon%29.png",
+    "name": "Reinforce Armor",
+    "text": "[[Blacksmith]]"
+  },
+  {
+    "coord": [
+      55834.2,
+      38957.3
+    ],
+    "icon": "https://wiki.guildwars2.com/images/9/92/Weaponsmith_%28map_icon%29.png",
+    "name": "Weaponsmith",
+    "text": "[[Ulster]]"
+  },
+  {
+    "coord": [
+      55809.7,
+      38957.6
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/ea/Armorsmith_%28map_icon%29.png",
+    "name": "Aarmorsmith",
+    "text": "[[Kimmi]]"
+  },
+  {
+    "coord": [
+      55743.4,
+      39000.4
+    ],
+    "icon": "https://wiki.guildwars2.com/images/2/2d/Karma_Merchant_%28map_icon_2%29.png",
+    "name": "Karma Merchant",
+    "text": "[[Trader]]"
+  },
+  {
+    "coord": [
+      55776.5,
+      39029.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/2/23/Festival_Merchant.png",
+    "name": "Weapons",
+    "text": "[[Sparking Stone]]"
+  },
+  {
+    "coord": [
+      55754.91,
+      39035.94
+    ],
+    "icon": "https://wiki.guildwars2.com/images/3/3b/Vendor_Star_%28map_icon%29.png",
+    "name": "Festival Rewards Vendor",
+    "text": "[[Festival Rewards Vendor (Festival Rewards)]]"
+  },
+  {
+    "coord": [
+      55772.3,
+      39047.4
+    ],
+    "icon": "https://wiki.guildwars2.com/images/3/3b/Vendor_Star_%28map_icon%29.png",
+    "name": "Festival Rewards Vendor (Weekly)",
+    "text": "[[Festival Rewards Vendor (Weekly)]]"
+  },
+  {
+    "coord": [
+      55794.5,
+      39037.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/a/a7/Guild_Trader_%28map_icon%29.png",
+    "name": "Drooburt",
+    "text": "[[Drooburt's Ghost]]"
+  },
+  {
+    "coord": [
+      55808.9,
+      39041.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/2/2d/Karma_Merchant_%28map_icon_2%29.png",
+    "name": "Karma Merchant",
+    "text": "[[Trader]]"
+  },
+  {
+    "coord": [
+      55824.7,
+      39018.1
+    ],
+    "icon": "https://wiki.guildwars2.com/images/2/2d/Karma_Merchant_%28map_icon_2%29.png",
+    "name": "Karma Merchant",
+    "text": "[[Trader]]"
+  },
+  {
+    "coord": [
+      55747,
+      39072.2
+    ],
+    "icon": "https://wiki.guildwars2.com/images/1/13/Adventure_%28map_icon%29.png",
+    "name": "Adventure",
+    "text": "[[Time Trial: Flying Dolyak]]"
+  },
+  {
+    "coord": [
+      55730.8,
+      39067.5
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/e3/Transport_Facilitator_%28map_icon%29.png",
+    "name": "Festival Travel",
+    "text": "[[Lionguard (Labyrinthine Cliffs Transport Facilitator)|Lionguard]]"
+  },
+  {
+    "coord": [
+      55749.7,
+      39215.6
+    ],
+    "icon": "https://wiki.guildwars2.com/images/c/cb/Griffon_%28map_icon%29.png",
+    "name": "Griffon Rental",
+    "text": "[[Tasa]]"
+  },
+  {
+    "coord": [
+      55554,
+      39122.3
+    ],
+    "icon": "https://wiki.guildwars2.com/images/5/59/Jackal_%28map_icon%29.png",
+    "name": "Jackal Rental",
+    "text": "[[Mount Rental]]"
+  },
+  {
+    "coord": [
+      55534.6,
+      39098.1
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Folamh]]"
+  },
+  {
+    "coord": [
+      55642,
+      39197.4
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/40/Hot_Air_Balloon.png",
+    "name": "Festival Travel",
+    "text": "[[Lionguard Aircrew (Festival Travel)|Lionguard Aircrew]] and [[Hot Air Balloon]]"
+  },
+  {
+    "coord": [
+      55696.7,
+      39225.5
+    ],
+    "icon": "https://wiki.guildwars2.com/images/0/03/Bazaar_of_the_Four_Winds.png",
+    "name": "No One Likes a Wet Charr achievement",
+    "text": "[[Evon Gnashblade#Related achievements|Evon Gnashblade]]"
+  },
+  {
+    "coord": [
+      55733.2,
+      39169.3
+    ],
+    "icon": "https://wiki.guildwars2.com/images/2/27/Activity_%28map_icon%29.png",
+    "name": "Activity: Sanctum Sprint",
+    "text": "[[Zephyrite (Sanctum Sprint)]]"
+  },
+  {
+    "coord": [
+      55702.6,
+      39161.4
+    ],
+    "icon": "https://wiki.guildwars2.com/images/2/27/Activity_%28map_icon%29.png",
+    "name": "Activity: Aspect Arena",
+    "text": "[[Zephyrite (Aspect Arena)]]"
+  },
+  {
+    "coord": [
+      55502,
+      39087.7
+    ],
+    "icon": "https://wiki.guildwars2.com/images/1/13/Adventure_%28map_icon%29.png",
+    "name": "Adventure",
+    "text": "[[Labyrinthine Cliffs Griffon Master]]"
+  },
+  {
+    "coord": [
+      55619.2,
+      39467.2
+    ],
+    "icon": "https://wiki.guildwars2.com/images/1/13/Adventure_%28map_icon%29.png",
+    "name": "Adventure",
+    "text": "[[Labyrinthine Cliffs Griffon Expert]]"
+  },
+  {
+    "coord": [
+      55684.9,
+      39453.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/2/26/Personal_waypoint_%28map_icon%29.png",
+    "name": "Landmark",
+    "text": "[[Phoenix Dawn]]"
+  },
+  {
+    "coord": [
+      55638.9,
+      38956.6
+    ],
+    "icon": "https://wiki.guildwars2.com/images/2/2d/Karma_Merchant_%28map_icon_2%29.png",
+    "name": "Karma Merchant",
+    "text": "[[Trader (karma merchant)]]"
+  },
+  {
+    "coord": [
+      55762.9,
+      38969
+    ],
+    "icon": "https://wiki.guildwars2.com/images/1/13/Adventure_%28map_icon%29.png",
+    "name": "Adventure",
+    "text": "[[Labyrinthine Cliffs Crystal Collection]]"
+  },
+  {
+    "coord": [
+      55876.9,
+      39083.8
+    ],
+    "icon": "https://wiki.guildwars2.com/images/a/a9/Springer_%28map_icon%29.png",
+    "name": "Springer Rental",
+    "text": "[[Mount Rental]]"
+  },
+  {
+    "coord": [
+      55884.6,
+      39120.1
+    ],
+    "icon": "https://wiki.guildwars2.com/images/2/2d/Karma_Merchant_%28map_icon_2%29.png",
+    "name": "Karma Merchant",
+    "text": "[[Stranger]]"
+  },
+  {
+    "coord": [
+      55924.2,
+      39173.6
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Andile]]"
+  },
+  {
+    "coord": [
+      55933.6,
+      39064.5
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Lonan]]"
+  },
+  {
+    "coord": [
+      55883.4,
+      39056.4
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Merchant",
+    "text": "[[Penna]]"
+  },
+  {
+    "coord": [
+      55607,
+      39560.7
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Fishing Supplies",
+    "text": "[[Tournament Organizer Yu]]"
+  },
+  {
+    "coord": [
+      56050.91,
+      39734.45
+    ],
+    "icon": "https://wiki.guildwars2.com/images/1/13/Adventure_%28map_icon%29.png",
+    "name": "Adventure",
+    "text": "[[Time Trial: Labyrinthine Skiffs]]"
+  },
+  {
+    "coord": [
+      56083,
+      39707
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/e3/Transport_Facilitator_%28map_icon%29.png",
+    "name": "[[Raia Keelbreak]]"
+  },
+  {
+    "coord": [
+      55626.7,
+      39213.7
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f5/Skimmer_%28map_icon%29.png",
+    "name": "Skimmer Rental",
+    "text": "[[Mount Rental]]"
+  },
+  {
+    "coord": [
+      55577.9,
+      39378.9
+    ],
+    "icon": "https://wiki.guildwars2.com/images/1/13/Adventure_%28map_icon%29.png",
+    "name": "Adventure",
+    "text": "[[Time Trial: Skimmer Slalom]]"
+  },
+  {
+    "coord": [
+      55269,
+      38939
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Freshwater Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55353,
+      39068
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55764,
+      39100
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55624,
+      39111
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55703,
+      39123
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Offshore Fish]]"
+  },
+  {
+    "coord": [
+      55758,
+      39140
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55248,
+      39147
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Offshore Fish]]<br>[[Saltwater Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55354,
+      39163
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Saltwater Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      55800,
+      39208
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55848,
+      39229
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55535,
+      39251
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55312,
+      39274
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Offshore Fish]]<br>[[Saltwater Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      55388,
+      39323
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Desert Fish]]<br>[[Lake Fish]]<br>[[Offshore Fish]]<br>[[Saltwater Fish]]"
+  },
+  {
+    "coord": [
+      55561,
+      39331
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      56008,
+      39393
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      55409,
+      39418
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Shore Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      55289,
+      39429
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55648,
+      39477
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Lake Fish]]<br>[[River Fish]]"
+  },
+  {
+    "coord": [
+      55335,
+      39516
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      56104,
+      39532
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]"
+  },
+  {
+    "coord": [
+      55778,
+      39536
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Lake Fish]]"
+  },
+  {
+    "coord": [
+      55724,
+      39599
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Lake Fish]]<br>[[River Fish]]"
+  },
+  {
+    "coord": [
+      55424,
+      39644
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Freshwater Fish]]<br>[[Lake Fish]]<br>[[Saltwater Fish]]<br>[[Shore Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      56059,
+      39645
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Desert Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]<br>[[Saltwater Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      56156,
+      39667
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]"
+  },
+  {
+    "coord": [
+      55869,
+      39675
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Lake Fish]]"
+  },
+  {
+    "coord": [
+      55256,
+      39687
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Desert Fish]]<br>[[Freshwater Fish]]<br>[[Offshore Fish]]"
+  },
+  {
+    "coord": [
+      55761,
+      39700
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Lake Fish]]<br>[[River Fish]]"
+  },
+  {
+    "coord": [
+      55650,
+      39704
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Lake Fish]]"
+  },
+  {
+    "coord": [
+      55345,
+      39719
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55624,
+      39762
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Lake Fish]]"
+  },
+  {
+    "coord": [
+      55752,
+      39774
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Lake Fish]]<br>[[River Fish]]"
+  },
+  {
+    "coord": [
+      55265,
+      39801
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Lake Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      55360,
+      39813
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Freshwater Fish]]"
+  },
+  {
+    "coord": [
+      55542,
+      39821
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      55852,
+      39829
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Desert Fish]]<br>[[Lake Fish]]<br>[[Saltwater Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      55956,
+      39852
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]"
+  },
+  {
+    "coord": [
+      55673,
+      39854
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Freshwater Fish]]<br>[[Shore Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      55406,
+      39859
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      55467,
+      39863
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Offshore Fish]]"
+  },
+  {
+    "coord": [
+      55720,
+      39863
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Freshwater Fish]]<br>[[Saltwater Fish]]<br>[[Volcanic Fish]]"
+  },
+  {
+    "coord": [
+      55404,
+      39916
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Offshore Fish]]"
+  },
+  {
+    "coord": [
+      55507,
+      39920
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Freshwater Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      55893,
+      39923
+    ],
+    "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
+    "name": "Fishing hole",
+    "text": "[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]<br>[[Saltwater Fish]]<br>[[Shore Fish]]"
+  },
+  {
+    "coord": [
+      56083.1,
+      39249
+    ],
+    "icon": "https://wiki.guildwars2.com/images/a/aa/Collection_%28map_icon%29.png",
+    "name": "The Goldclaw Holiday Collection (Taking Heart)",
+    "text": "[[Taking Heart by Snargle Goldclaw]]"
   },
   {
     "coord": [

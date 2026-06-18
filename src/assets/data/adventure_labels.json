@@ -205,6 +205,30 @@
   },
   {
     "coordinates": [
+      4069,
+      62184
+    ],
+    "data": {
+      "tooltip": "Catch fish to feed the local kitshark population!",
+      "url": "//wiki.guildwars2.com/wiki/Eternity%27s_Garden:_Kitshark_Fishing"
+    },
+    "id": "Eternity's Garden: Kitshark Fishing",
+    "type": "Adventure"
+  },
+  {
+    "coordinates": [
+      4607,
+      60634
+    ],
+    "data": {
+      "tooltip": "Jump on your skimmer and scour for seer relics!",
+      "url": "//wiki.guildwars2.com/wiki/Eternity%27s_Garden:_Scour_for_Seer_Relics"
+    },
+    "id": "Eternity's Garden: Scour for Seer Relics",
+    "type": "Adventure"
+  },
+  {
+    "coordinates": [
       33977.7,
       33476.5
     ],
@@ -221,7 +245,7 @@
       19052.3
     ],
     "data": {
-      "tooltip": "Earn Favor with Eagle by following the Spirit's flight path.",
+      "tooltip": "Earn Favor with [[Eagle Spirit|Eagle]] by following the Spirit's flight path.",
       "url": "//wiki.guildwars2.com/wiki/Flight_of_the_Eagle_Spirit"
     },
     "id": "Flight of the Eagle Spirit",
@@ -257,7 +281,7 @@
       22882
     ],
     "data": {
-      "tooltip": "Free as much Kryptis essence as you can. Each bit of essence freed restores your mount's energy, allowing you to fly longer without landing.",
+      "tooltip": "Free as much [[Kryptis]] essence as you can. Each bit of essence freed restores your [[mount]]'s energy, allowing you to fly longer without landing.",
       "url": "//wiki.guildwars2.com/wiki/Free_Kryptis_Essence"
     },
     "id": "Free Kryptis Essence",
@@ -285,6 +309,18 @@
       "url": "//wiki.guildwars2.com/wiki/Glimmering_Arches_Grand_Prix"
     },
     "id": "Glimmering Arches Grand Prix",
+    "type": "Adventure"
+  },
+  {
+    "coordinates": [
+      49362,
+      30734
+    ],
+    "data": {
+      "tooltip": "Steal as many shinies as you can before time runs out!",
+      "url": "//wiki.guildwars2.com/wiki/Gnashbash_Heist"
+    },
+    "id": "Gnashbash Heist",
     "type": "Adventure"
   },
   {
@@ -629,7 +665,7 @@
       23833
     ],
     "data": {
-      "tooltip": "Search the area and match the lost Kryptis to their guardians before time runs out.\n\nKeep an eye out for swiftspike plants, and get near them for a boost!",
+      "tooltip": "Search the area and match the lost [[Kryptis]] to their guardians before time runs out.\n\nKeep an eye out for swiftspike plants, and get near them for a boost!",
       "url": "//wiki.guildwars2.com/wiki/Reuniting_Lost_Kryptis"
     },
     "id": "Reuniting Lost Kryptis",
@@ -1001,7 +1037,7 @@
       32107.2
     ],
     "data": {
-      "tooltip": "Burn tendrils and avoid unexploded shot before time runs out!",
+      "tooltip": "Burn [[Vine Tendril|tendrils]] and avoid [[Unexploded Shot|unexploded shot]] before time runs out!",
       "url": "//wiki.guildwars2.com/wiki/Tendril_Torchers"
     },
     "id": "Tendril Torchers",
@@ -1049,7 +1085,7 @@
       19308.4
     ],
     "data": {
-      "tooltip": "Collect resilience essence to impress Ox. Avoid Ox's attempts to knock you back, as each hit will consume some of your collected essence.",
+      "tooltip": "Collect resilience essence to impress [[Ox Spirit|Ox]]. Avoid Ox's attempts to knock you back, as each hit will consume some of your collected essence.",
       "url": "//wiki.guildwars2.com/wiki/The_Ox%27s_Yoke"
     },
     "id": "The Ox's Yoke",

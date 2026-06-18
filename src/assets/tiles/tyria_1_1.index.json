@@ -471,6 +471,14 @@
     "tooltip": "Runoff Taint",
     "type": "poi"
   },
+  "&BAAQAAA": {
+    "coord": [
+      4206.99,
+      61166
+    ],
+    "tooltip": "Sunken Leyspring",
+    "type": "poi"
+  },
   "&BAEAAAA": {
     "coord": [
       52412.7,
@@ -591,6 +599,14 @@
     "tooltip": "Kindle Barrens",
     "type": "poi"
   },
+  "&BAEQAAA": {
+    "coord": [
+      4677.62,
+      61107.7
+    ],
+    "tooltip": "Inquest Bridgehead",
+    "type": "poi"
+  },
   "&BAIAAAA": {
     "coord": [
       54163.6,
@@ -693,6 +709,14 @@
       23883.1
     ],
     "tooltip": "Divinity's Falls",
+    "type": "poi"
+  },
+  "&BAIQAAA": {
+    "coord": [
+      4936.66,
+      62869.1
+    ],
+    "tooltip": "Pilfered Inquest Equipment",
     "type": "poi"
   },
   "&BAMAAAA": {
@@ -799,6 +823,14 @@
     "tooltip": "Hibernation Grotto",
     "type": "poi"
   },
+  "&BAMQAAA": {
+    "coord": [
+      4956.15,
+      62317.5
+    ],
+    "tooltip": "Pilgrim's Approach",
+    "type": "poi"
+  },
   "&BAQAAAA": {
     "coord": [
       42759.5,
@@ -891,6 +923,14 @@
     "coord": [
       41732.7,
       22803.6
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
+  },
+  "&BAQQAAA": {
+    "coord": [
+      5307.32,
+      60805.1
     ],
     "tooltip": "Vista",
     "type": "vista"
@@ -1007,6 +1047,14 @@
     "tooltip": "Wasted Shallows",
     "type": "poi"
   },
+  "&BAUQAAA": {
+    "coord": [
+      3495.67,
+      61747.2
+    ],
+    "tooltip": "Chamber of Discipline",
+    "type": "poi"
+  },
   "&BAYAAAA": {
     "coord": [
       42299.7,
@@ -1119,6 +1167,14 @@
     "tooltip": "The Cathedral of Blood",
     "type": "poi"
   },
+  "&BAYQAAA": {
+    "coord": [
+      3530.31,
+      60397.1
+    ],
+    "tooltip": "Whispering Artifact",
+    "type": "poi"
+  },
   "&BAcAAAA": {
     "coord": [
       45163.2,
@@ -1229,6 +1285,14 @@
       15865
     ],
     "tooltip": "Sacrifical Grounds",
+    "type": "poi"
+  },
+  "&BAcQAAA": {
+    "coord": [
+      4438.5,
+      62600.3
+    ],
+    "tooltip": "Aperture Falls",
     "type": "poi"
   },
   "&BAgAAAA": {
@@ -1351,6 +1415,14 @@
     "tooltip": "Thunder Bay Point",
     "type": "poi"
   },
+  "&BAgQAAA": {
+    "coord": [
+      5411.04,
+      60230.9
+    ],
+    "tooltip": "Glowing Pond",
+    "type": "poi"
+  },
   "&BAkAAAA": {
     "coord": [
       52619.5,
@@ -1469,6 +1541,14 @@
       22005.2
     ],
     "tooltip": "Alder Cove",
+    "type": "poi"
+  },
+  "&BAkQAAA": {
+    "coord": [
+      4001.32,
+      62600.8
+    ],
+    "tooltip": "Infested Thicket",
     "type": "poi"
   },
   "&BAoAAAA": {
@@ -19457,11 +19537,11 @@
   },
   "&BM8BAAA": {
     "coord": [
-      49164.7,
-      37688.1
+      5160.31,
+      62548.2
     ],
-    "tooltip": "Aleem's Waypoint",
-    "type": "waypoint"
+    "tooltip": "Help out with research and expedition tasks around Pilgrim's Rest.",
+    "type": "heart"
   },
   "&BM8CAAA": {
     "coord": [
@@ -20959,6 +21039,14 @@
     "tooltip": "Vista",
     "type": "vista"
   },
+  "&BN0PAAA": {
+    "coord": [
+      4926.76,
+      60741.7
+    ],
+    "tooltip": "Dilapidated Auditorium",
+    "type": "poi"
+  },
   "&BN4AAAA": {
     "coord": [
       45852.1,
@@ -21055,6 +21143,14 @@
     "tooltip": "Wry Lichen's House",
     "type": "poi"
   },
+  "&BN4PAAA": {
+    "coord": [
+      4380.55,
+      61306.2
+    ],
+    "tooltip": "Gardesano's Atelier",
+    "type": "poi"
+  },
   "&BN8AAAA": {
     "coord": [
       46449.5,
@@ -21135,6 +21231,14 @@
     "tooltip": "Harvest Shore Waypoint",
     "type": "waypoint"
   },
+  "&BN8PAAA": {
+    "coord": [
+      5320.82,
+      62324.1
+    ],
+    "tooltip": "Luce's Garden",
+    "type": "poi"
+  },
   "&BNAAAAA": {
     "coord": [
       63429.5,
@@ -21145,11 +21249,11 @@
   },
   "&BNABAAA": {
     "coord": [
-      48647.6,
-      38360.6
+      4665.5,
+      61492.1
     ],
-    "tooltip": "Splintered Coast Waypoint",
-    "type": "waypoint"
+    "tooltip": "Assist the Stewards of Galdra around the forge.",
+    "type": "heart"
   },
   "&BNACAAA": {
     "coord": [
@@ -22015,6 +22119,14 @@
     "tooltip": "Vista",
     "type": "vista"
   },
+  "&BNgPAAA": {
+    "coord": [
+      3788.7,
+      60888
+    ],
+    "tooltip": "Deepwood Outpost",
+    "type": "poi"
+  },
   "&BNkAAAA": {
     "coord": [
       56554.4,
@@ -22111,6 +22223,14 @@
     "tooltip": "Haar Clearing",
     "type": "poi"
   },
+  "&BNkPAAA": {
+    "coord": [
+      4282.58,
+      62461.2
+    ],
+    "tooltip": "Deserted Inquest Camp",
+    "type": "poi"
+  },
   "&BNoAAAA": {
     "coord": [
       43330.3,
@@ -22197,6 +22317,14 @@
       15775.1
     ],
     "tooltip": "The Atrium",
+    "type": "poi"
+  },
+  "&BNoPAAA": {
+    "coord": [
+      3452.43,
+      60255.4
+    ],
+    "tooltip": "The First Elder",
     "type": "poi"
   },
   "&BNsAAAA": {
@@ -22293,6 +22421,14 @@
       15937.6
     ],
     "tooltip": "Dellam's Cove",
+    "type": "poi"
+  },
+  "&BNsPAAA": {
+    "coord": [
+      4766.48,
+      61684.7
+    ],
+    "tooltip": "The Animal Apothecary",
     "type": "poi"
   },
   "&BNwAAAA": {
@@ -22399,6 +22535,14 @@
     "tooltip": "Cliffside Lookout",
     "type": "poi"
   },
+  "&BNwPAAA": {
+    "coord": [
+      3700.61,
+      61891.2
+    ],
+    "tooltip": "Western Outpost",
+    "type": "poi"
+  },
   "&BO0AAAA": {
     "coord": [
       50046.1,
@@ -22495,6 +22639,14 @@
     "tooltip": "Pathway to Redemption",
     "type": "poi"
   },
+  "&BO0PAAA": {
+    "coord": [
+      3418.12,
+      62534.1
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
+  },
   "&BO4AAAA": {
     "coord": [
       50142.9,
@@ -22589,6 +22741,14 @@
       15248.2
     ],
     "tooltip": "The Faded Neck",
+    "type": "poi"
+  },
+  "&BO4PAAA": {
+    "coord": [
+      3496.87,
+      61933.3
+    ],
+    "tooltip": "Serene Nursery",
     "type": "poi"
   },
   "&BO8AAAA": {
@@ -22687,6 +22847,14 @@
     "tooltip": "The First Bloodtree",
     "type": "poi"
   },
+  "&BO8PAAA": {
+    "coord": [
+      4108.01,
+      62034.9
+    ],
+    "tooltip": "Hydrothermal Vents",
+    "type": "poi"
+  },
   "&BOAAAAA": {
     "coord": [
       46363.7,
@@ -22775,6 +22943,14 @@
     "tooltip": "The Twin's Table",
     "type": "poi"
   },
+  "&BOAPAAA": {
+    "coord": [
+      5058.59,
+      62736
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
+  },
   "&BOEAAAA": {
     "coord": [
       48027,
@@ -22861,6 +23037,14 @@
       14441.4
     ],
     "tooltip": "Thunder Bay",
+    "type": "poi"
+  },
+  "&BOEPAAA": {
+    "coord": [
+      4300.25,
+      61683.6
+    ],
+    "tooltip": "Supra Fortis",
     "type": "poi"
   },
   "&BOIAAAA": {
@@ -22951,6 +23135,14 @@
     "tooltip": "The Molded Lands",
     "type": "poi"
   },
+  "&BOIPAAA": {
+    "coord": [
+      4764.53,
+      62523.9
+    ],
+    "tooltip": "Gated Waterfall",
+    "type": "poi"
+  },
   "&BOMAAAA": {
     "coord": [
       48668.1,
@@ -23037,6 +23229,14 @@
       15979.8
     ],
     "tooltip": "Buried Sacrament",
+    "type": "poi"
+  },
+  "&BOMPAAA": {
+    "coord": [
+      5395.98,
+      60445.5
+    ],
+    "tooltip": "Issvano's Reliquary",
     "type": "poi"
   },
   "&BOQAAAA": {
@@ -23134,6 +23334,14 @@
     ],
     "tooltip": "Harvest Plots",
     "type": "poi"
+  },
+  "&BOQPAAA": {
+    "coord": [
+      3804.34,
+      60931.1
+    ],
+    "tooltip": "Deepwood Outpost Waypoint",
+    "type": "waypoint"
   },
   "&BOUAAAA": {
     "coord": [
@@ -23239,6 +23447,14 @@
     "tooltip": "Battledance Beach",
     "type": "poi"
   },
+  "&BOUPAAA": {
+    "coord": [
+      4808.92,
+      60923.6
+    ],
+    "tooltip": "Arcanological Survey Station",
+    "type": "poi"
+  },
   "&BOYAAAA": {
     "coord": [
       50668.5,
@@ -23325,6 +23541,14 @@
       15499
     ],
     "tooltip": "Athenaeum of Miracles",
+    "type": "poi"
+  },
+  "&BOYPAAA": {
+    "coord": [
+      4048.29,
+      62208.7
+    ],
+    "tooltip": "Kitshark Den",
     "type": "poi"
   },
   "&BOcAAAA": {
@@ -23415,6 +23639,14 @@
     "tooltip": "Old Gavril Plaza",
     "type": "poi"
   },
+  "&BOcPAAA": {
+    "coord": [
+      4016.48,
+      60780.8
+    ],
+    "tooltip": "Leylit Retreat",
+    "type": "poi"
+  },
   "&BOgAAAA": {
     "coord": [
       46909.7,
@@ -23503,6 +23735,14 @@
     "tooltip": "Fading Aurora's House",
     "type": "poi"
   },
+  "&BOgPAAA": {
+    "coord": [
+      5156.2,
+      61454.1
+    ],
+    "tooltip": "Crumbling Edifice",
+    "type": "poi"
+  },
   "&BOkAAAA": {
     "coord": [
       50639.8,
@@ -23581,6 +23821,14 @@
       14926.6
     ],
     "tooltip": "Dead Lovers Rock",
+    "type": "poi"
+  },
+  "&BOkPAAA": {
+    "coord": [
+      4200.63,
+      62407.5
+    ],
+    "tooltip": "Beetle Gallery",
     "type": "poi"
   },
   "&BOoAAAA": {
@@ -23662,6 +23910,14 @@
     ],
     "tooltip": "Lowland Hot Springs",
     "type": "poi"
+  },
+  "&BOoPAAA": {
+    "coord": [
+      4755.91,
+      60312
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
   },
   "&BOsAAAA": {
     "coord": [
@@ -23749,6 +24005,14 @@
       21928.2
     ],
     "tooltip": "Reptilia Pools",
+    "type": "poi"
+  },
+  "&BOsPAAA": {
+    "coord": [
+      4274.39,
+      60930.9
+    ],
+    "tooltip": "Ascendant's Way",
     "type": "poi"
   },
   "&BOwAAAA": {
@@ -23847,6 +24111,14 @@
     "tooltip": "Vista",
     "type": "vista"
   },
+  "&BOwPAAA": {
+    "coord": [
+      3473.45,
+      62678.5
+    ],
+    "tooltip": "Raul's Watch",
+    "type": "poi"
+  },
   "&BP0AAAA": {
     "coord": [
       43261.9,
@@ -23926,6 +24198,14 @@
     ],
     "tooltip": "Vista",
     "type": "vista"
+  },
+  "&BP0PAAA": {
+    "coord": [
+      5277.25,
+      60740.5
+    ],
+    "tooltip": "Dome of the Indelible Word",
+    "type": "poi"
   },
   "&BP4AAAA": {
     "coord": [
@@ -24031,6 +24311,14 @@
     "tooltip": "Fishing Village Aquarium",
     "type": "poi"
   },
+  "&BP4PAAA": {
+    "coord": [
+      4516.1,
+      60428.1
+    ],
+    "tooltip": "Grand Colonnade",
+    "type": "poi"
+  },
   "&BP8AAAA": {
     "coord": [
       42674.2,
@@ -24127,6 +24415,14 @@
     "tooltip": "The Second Bloodtree",
     "type": "poi"
   },
+  "&BP8PAAA": {
+    "coord": [
+      4565.64,
+      61529.3
+    ],
+    "tooltip": "The Forge",
+    "type": "poi"
+  },
   "&BPAAAAA": {
     "coord": [
       43356.9,
@@ -24207,6 +24503,14 @@
     "tooltip": "Boathouse",
     "type": "poi"
   },
+  "&BPAPAAA": {
+    "coord": [
+      4867.48,
+      61003.2
+    ],
+    "tooltip": "Sanctum Exterior Waypoint",
+    "type": "waypoint"
+  },
   "&BPEAAAA": {
     "coord": [
       50096.1,
@@ -24285,6 +24589,14 @@
       15672.9
     ],
     "tooltip": "Nivermer Rill",
+    "type": "poi"
+  },
+  "&BPEPAAA": {
+    "coord": [
+      3508.5,
+      61643.5
+    ],
+    "tooltip": "Hidden Cellar",
     "type": "poi"
   },
   "&BPIAAAA": {
@@ -24367,6 +24679,14 @@
     "tooltip": "The Wrinkled Wetlands",
     "type": "poi"
   },
+  "&BPIPAAA": {
+    "coord": [
+      4107.85,
+      60431.4
+    ],
+    "tooltip": "The All Seer",
+    "type": "poi"
+  },
   "&BPMAAAA": {
     "coord": [
       49858.3,
@@ -24445,6 +24765,14 @@
       15311
     ],
     "tooltip": "Eroded Notch",
+    "type": "poi"
+  },
+  "&BPMPAAA": {
+    "coord": [
+      5334.73,
+      61940.3
+    ],
+    "tooltip": "Toppled Monument",
     "type": "poi"
   },
   "&BPQAAAA": {
@@ -24535,6 +24863,14 @@
     "tooltip": "Springer's Peak",
     "type": "poi"
   },
+  "&BPQPAAA": {
+    "coord": [
+      4500.1,
+      61647.3
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
+  },
   "&BPUAAAA": {
     "coord": [
       49388.3,
@@ -24614,6 +24950,14 @@
     ],
     "tooltip": "Mountain Pass Lookout",
     "type": "poi"
+  },
+  "&BPUPAAA": {
+    "coord": [
+      4122.26,
+      60763.8
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
   },
   "&BPYAAAA": {
     "coord": [
@@ -24711,6 +25055,14 @@
     "tooltip": "Vista",
     "type": "vista"
   },
+  "&BPYPAAA": {
+    "coord": [
+      5310.05,
+      61307.7
+    ],
+    "tooltip": "Quarry Depths",
+    "type": "poi"
+  },
   "&BPcAAAA": {
     "coord": [
       45699.3,
@@ -24806,6 +25158,14 @@
     ],
     "tooltip": "Vista",
     "type": "vista"
+  },
+  "&BPcPAAA": {
+    "coord": [
+      4726.96,
+      61370.7
+    ],
+    "tooltip": "Steward Trial Chamber",
+    "type": "poi"
   },
   "&BPgAAAA": {
     "coord": [
@@ -24903,6 +25263,14 @@
     "tooltip": "Vista",
     "type": "vista"
   },
+  "&BPgPAAA": {
+    "coord": [
+      4827.92,
+      60346.3
+    ],
+    "tooltip": "Spire of Exaltation",
+    "type": "poi"
+  },
   "&BPkAAAA": {
     "coord": [
       44718,
@@ -24999,6 +25367,14 @@
     "tooltip": "The Inn",
     "type": "poi"
   },
+  "&BPkPAAA": {
+    "coord": [
+      5082.37,
+      62488.9
+    ],
+    "tooltip": "Alliance Expedition Camp",
+    "type": "poi"
+  },
   "&BPoAAAA": {
     "coord": [
       42830.3,
@@ -25087,6 +25463,14 @@
     "tooltip": "Maghead Beach",
     "type": "poi"
   },
+  "&BPoPAAA": {
+    "coord": [
+      3722.91,
+      61850.8
+    ],
+    "tooltip": "Temple of Abnegation Waypoint",
+    "type": "waypoint"
+  },
   "&BPsAAAA": {
     "coord": [
       44435.3,
@@ -25174,6 +25558,14 @@
     ],
     "tooltip": "Journeykin Outpost Waypoint",
     "type": "waypoint"
+  },
+  "&BPsPAAA": {
+    "coord": [
+      3984.94,
+      61777.1
+    ],
+    "tooltip": "Logistics Depot",
+    "type": "poi"
   },
   "&BPwAAAA": {
     "coord": [
@@ -25270,5 +25662,13 @@
     ],
     "tooltip": "Vista",
     "type": "vista"
+  },
+  "&BPwPAAA": {
+    "coord": [
+      5162.33,
+      62438.5
+    ],
+    "tooltip": "Pilgrim's Rest Waypoint",
+    "type": "waypoint"
   }
 }

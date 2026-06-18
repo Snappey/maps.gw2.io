@@ -834,6 +834,25 @@
   {
     "coordinates": [
       [
+        59392,
+        17504
+      ],
+      [
+        62592,
+        20064
+      ]
+    ],
+    "heading": "Shiverpeaks Pass (Public)",
+    "label_coordinates": [
+      60992,
+      18784
+    ],
+    "subheading": "80",
+    "type": "Map"
+  },
+  {
+    "coordinates": [
+      [
         42880,
         38784
       ],
@@ -1993,6 +2012,25 @@
     "label_coordinates": [
       10800,
       58830
+    ],
+    "subheading": "80",
+    "type": "Map"
+  },
+  {
+    "coordinates": [
+      [
+        3130,
+        59945
+      ],
+      [
+        5690,
+        63145
+      ]
+    ],
+    "heading": "Eternity's Garden",
+    "label_coordinates": [
+      4470,
+      62000
     ],
     "subheading": "80",
     "type": "Map"
