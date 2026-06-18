@@ -1,6 +1,7 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
-import {debounceTime, filter, map, Subscription, switchMap} from "rxjs";
+import {debounceTime, filter, map, switchMap} from "rxjs";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {Store} from "@ngrx/store";
 import {ChannelType, SettingsState} from "../../state/settings/settings.feature";
 import {settingsAction} from "../../state/settings/settings.action";
@@ -22,7 +23,10 @@ import { ButtonDirective, Button } from 'primeng/button';
     styleUrls: ['./settings-modal.component.css'],
     imports: [Bind, Dialog, FormsModule, ReactiveFormsModule, Password, LetDirective, SelectButton, Select, PrimeTemplate, ButtonDirective, Button]
 })
-export class SettingsModalComponent extends ToggleableDialog implements OnDestroy {
+export class SettingsModalComponent extends ToggleableDialog {
+  private store = inject<Store<AppState>>(Store);
+  private accountService = inject(AccountService);
+
   settingsForm = new FormGroup({
     apiKey: new FormControl(),
     liveMapEnabled: new FormControl(),
@@ -35,7 +39,6 @@ export class SettingsModalComponent extends ToggleableDialog implements OnDestro
   ChannelType = ChannelType;
   authChannelTypes: ChannelType[] = [ChannelType.Global, ChannelType.Guild, ChannelType.Solo, ChannelType.Custom];
   unauthChannelTypes: ChannelType[] = [ChannelType.Global]
-  settings$: Subscription;
   validateApiKey$ = this.settingsForm.get("apiKey")?.valueChanges.pipe(
     filter(apiKey => !!apiKey && apiKey.length == 72),
     debounceTime(5000),
@@ -48,13 +51,11 @@ export class SettingsModalComponent extends ToggleableDialog implements OnDestro
     map(guilds => [...guilds].sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)),
   )
 
-  constructor(private store: Store<AppState>, private accountService: AccountService) {
+  constructor() {
     super();
-    this.settings$ = this.store.select(s => s.settings).subscribe(s => this.settingsForm.patchValue(s));
-  }
-
-  ngOnDestroy() {
-    this.settings$.unsubscribe();
+    this.store.select(s => s.settings)
+      .pipe(takeUntilDestroyed())
+      .subscribe(s => this.settingsForm.patchValue(s));
   }
 
   onSubmit() {

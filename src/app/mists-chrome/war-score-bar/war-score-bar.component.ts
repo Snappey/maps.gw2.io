@@ -1,5 +1,5 @@
-import {Component, Input, OnChanges} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {Component, inject, Input, OnChanges} from "@angular/core";
+import {DecimalPipe, NgClass} from "@angular/common";
 import {Match, WvwService} from "../../../services/wvw.service";
 
 /** Left-to-right segment order of the in-game war score bar. */
@@ -22,7 +22,7 @@ interface TeamPlate {
 @Component({
   selector: "app-war-score-bar",
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgClass, DecimalPipe],
   templateUrl: "./war-score-bar.component.html",
   styleUrls: ["./war-score-bar.component.css"],
 })
@@ -32,11 +32,10 @@ export class WarScoreBarComponent implements OnChanges {
   @Input()
   small = false;
 
+  private wvwService = inject(WvwService);
+
   plates: TeamPlate[] = [];
   segments: {team: string, pct: number}[] = [];
-
-  constructor(private wvwService: WvwService) {
-  }
 
   ngOnChanges(): void {
     const match = this.match;

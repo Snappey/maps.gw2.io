@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {DecimalPipe, NgClass} from "@angular/common";
 import {Match, Scores} from "../../../services/wvw.service";
 
 const TEAMS = ["red", "blue", "green"];
@@ -21,7 +21,7 @@ interface TotalRow {
 @Component({
   selector: "app-match-history",
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgClass, DecimalPipe],
   templateUrl: "./match-history.component.html",
   styleUrls: ["./match-history.component.css"],
 })

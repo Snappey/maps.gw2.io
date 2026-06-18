@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from "@angular/core";
+import {Component, inject, Input, OnChanges} from "@angular/core";
 import {map, Observable, takeWhile, timer} from "rxjs";
 import {FullMatchObjective, WvwService} from "../../../services/wvw.service";
 import {Guild, GuildService} from "../../../services/guild.service";
@@ -28,6 +28,9 @@ export class ObjectiveTooltipComponent implements OnChanges {
   @Input()
   obj!: FullMatchObjective;
 
+  private wvwService = inject(WvwService);
+  private guildService = inject(GuildService);
+
   tier = 0;
   tierName = "";
   tierPips: number[] = [];
@@ -35,9 +38,6 @@ export class ObjectiveTooltipComponent implements OnChanges {
   ewpSlotted = false;
   guild$?: Observable<Guild>;
   ri$?: Observable<RiState>;
-
-  constructor(private wvwService: WvwService, private guildService: GuildService) {
-  }
 
   ngOnChanges(): void {
     const obj = this.obj;

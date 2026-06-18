@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, HostListener, inject, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AsyncPipe} from "@angular/common";
@@ -70,6 +70,7 @@ interface RegionLabelJson {
   providers: [DialogService, MenuPanelService, WidgetService],
   templateUrl: "./tyria-ol-map.component.html",
   styleUrls: ["./tyria-ol-map.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("mapHost") mapHost!: ElementRef<HTMLDivElement>;

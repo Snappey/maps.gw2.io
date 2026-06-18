@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {DecimalPipe, NgClass} from "@angular/common";
 import {ChartModule} from "primeng/chart";
 import {WvwMap, Match, WvwService} from "../../../services/wvw.service";
 import {TEAM_COLORS} from "../../../lib/ol/mists-layers";
@@ -31,7 +31,7 @@ interface TeamRow {
 @Component({
   selector: "app-skirmish-details",
   standalone: true,
-  imports: [CommonModule, ChartModule],
+  imports: [NgClass, DecimalPipe, ChartModule],
   templateUrl: "./skirmish-details.component.html",
   styleUrls: ["./skirmish-details.component.css"],
 })

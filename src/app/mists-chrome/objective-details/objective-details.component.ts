@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, inject, Input, OnChanges} from '@angular/core';
 import {FullMatchObjective, ObjectiveTiers, WvwService} from "../../../services/wvw.service";
 import {Guild, GuildService} from "../../../services/guild.service";
 import {map, Observable, timer} from "rxjs";
@@ -15,13 +15,13 @@ export class ObjectiveDetailsComponent implements OnChanges {
   @Input()
   objective!: FullMatchObjective;
 
+  guildService = inject(GuildService);
+  wvwService = inject(WvwService);
+
   guildDetails$: Observable<Guild> | undefined;
   upgradeDetails$: Observable<ObjectiveTiers> | undefined;
   heldFor$: Observable<string> | undefined;
   emblemLoaded: boolean = false;
-
-  constructor(public guildService: GuildService, public wvwService: WvwService) {
-  }
 
   ngOnChanges() {
     this.emblemLoaded = false;

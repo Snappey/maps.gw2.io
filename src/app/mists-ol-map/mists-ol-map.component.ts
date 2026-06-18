@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, HostListener, inject, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, isDevMode, NgZone, OnDestroy, OnInit, ViewChild} from "@angular/core";
 import {AsyncPipe} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Store} from "@ngrx/store";
@@ -69,6 +69,7 @@ const MATCH_POLL_MS = 20_000;
   providers: [MenuPanelService, WidgetService],
   templateUrl: "./mists-ol-map.component.html",
   styleUrls: ["./mists-ol-map.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("mapHost") mapHost!: ElementRef<HTMLDivElement>;

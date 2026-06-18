@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {NavigationEnd, Router, RouterOutlet} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {distinctUntilChanged, filter, map} from "rxjs";
@@ -30,6 +31,7 @@ export class HomeComponent {
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
       map(event => event.urlAfterRedirects.split("#")[0]),
       distinctUntilChanged(),
+      takeUntilDestroyed(),
     ).subscribe(pagePath => {
       if (typeof gtag === "function") {
         gtag("event", "page_view", {page_path: pagePath});
@@ -37,6 +39,7 @@ export class HomeComponent {
     });
 
     this.ccService.initialized$.pipe(
+      takeUntilDestroyed(),
     ).subscribe(_ => ccService.open())
   }
 

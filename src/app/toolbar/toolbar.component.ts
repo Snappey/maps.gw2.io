@@ -1,5 +1,6 @@
-import {Component, Input, OnDestroy} from '@angular/core';
-import {filter, fromEvent, map, Subject, takeUntil} from "rxjs";
+import {Component, Input} from '@angular/core';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {filter, fromEvent, map} from "rxjs";
 import { NgClass } from '@angular/common';
 import { Tooltip as Tooltip_1 } from 'primeng/tooltip';
 
@@ -23,7 +24,7 @@ interface AppToolbarButton extends ToolbarButton {
     styleUrls: ['./toolbar.component.css'],
     imports: [NgClass, Tooltip_1]
 })
-export class ToolbarComponent implements OnDestroy {
+export class ToolbarComponent {
   _buttons: AppToolbarButton[] = [];
   @Input()
   public set buttons(buttons: ToolbarButton[]) {
@@ -40,11 +41,9 @@ export class ToolbarComponent implements OnDestroy {
   @Input()
   activePanel: string | null = null;
 
-  private unsubscribe$ = new Subject<void>();
-
   constructor() {
     fromEvent(document, "keydown").pipe(
-      takeUntil(this.unsubscribe$),
+      takeUntilDestroyed(),
       // Don't fire hotkeys while the user is typing into a field.
       filter(() => !ToolbarComponent.isTypingTarget()),
       map(event => this._buttons.filter(button => button.Keybindings?.includes((event as KeyboardEvent).code)))
@@ -57,11 +56,6 @@ export class ToolbarComponent implements OnDestroy {
     const el = document.activeElement as HTMLElement | null;
     const tag = el?.tagName;
     return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || !!el?.isContentEditable;
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
   toolbarClasses(): string[] {
