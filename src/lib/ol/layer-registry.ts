@@ -1,24 +1,21 @@
 import BaseLayer from "ol/layer/Base";
 import TileLayer from "ol/layer/Tile";
 import VectorLayer from "ol/layer/Vector";
-import VectorTileLayer from "ol/layer/VectorTile";
 import ImageTileSource from "ol/source/ImageTile";
 import VectorSource from "ol/source/Vector";
-import VectorTile from "ol/source/VectorTile";
 import {StyleLike} from "ol/style/Style";
 import {LayerState} from "../layer-state";
 import {createTileGrid, getProjection, Gw2MapConfig} from "./gw2-projection";
 
 /**
- * Declarative layer definitions — the seam future layer kinds plug into.
- * User-made and realtime (MQTT/WvW) layers are `kind: "vector"` with a
- * caller-owned VectorSource whose features are mutated in place.
+ * Declarative layer definitions — the seam future layer kinds plug into. The
+ * markers, user-made, and realtime (MQTT/WvW) layers are all `kind: "vector"`
+ * with a caller-owned VectorSource whose features are set/mutated in place.
  */
 export type LayerDefinition =
   | {kind: "raster"; config: Gw2MapConfig} & CommonLayerOptions
-  | {kind: "vector-tile"; source: VectorTile; sourceLayer: string; style: StyleLike; declutter?: string | boolean; renderBuffer?: number} & CommonLayerOptions
   // style omitted -> features carry their own styles (e.g. live player markers)
-  | {kind: "vector"; source: VectorSource; style?: StyleLike} & CommonLayerOptions;
+  | {kind: "vector"; source: VectorSource; style?: StyleLike; declutter?: string | boolean} & CommonLayerOptions;
 
 export interface CommonLayerOptions {
   id: string;
@@ -67,25 +64,11 @@ export function buildLayer(def: LayerDefinition): BaseLayer {
         cacheSize: 1024,
         zIndex: def.zIndex ?? 0,
       });
-    case "vector-tile":
-      return new VectorTileLayer({
-        source: def.source,
-        style: def.style,
-        declutter: def.declutter ?? false,
-        renderBuffer: def.renderBuffer ?? 256,
-        // One ancestor level warm and a real render-tile cache (default
-        // auto-grows from 0) stop overlays blinking out during zoom changes.
-        // Source tiles are shared across all overlay layers, so the network
-        // cost is paid once — but MVT parsing runs on the main thread, so
-        // keep preload shallow or panning stutters.
-        preload: 1,
-        cacheSize: 256,
-        zIndex: def.zIndex ?? 1,
-      });
     case "vector":
       return new VectorLayer({
         source: def.source,
-        ...(def.style ? {style: def.style} : {}),
+        style: def.style,
+        declutter: def.declutter,
         zIndex: def.zIndex ?? 5,
         updateWhileAnimating: true,
         updateWhileInteracting: true,

@@ -15,13 +15,12 @@ import { SelectButton } from 'primeng/selectbutton';
 import { Select } from 'primeng/select';
 import { PrimeTemplate } from 'primeng/api';
 import { ButtonDirective, Button } from 'primeng/button';
-import { ArraySortPipe } from '../../pipes/orderBy.pipe';
 
 @Component({
     selector: 'app-settings-modal',
     templateUrl: './settings-modal.component.html',
     styleUrls: ['./settings-modal.component.css'],
-    imports: [Bind, Dialog, FormsModule, ReactiveFormsModule, Password, LetDirective, SelectButton, Select, PrimeTemplate, ButtonDirective, Button, ArraySortPipe]
+    imports: [Bind, Dialog, FormsModule, ReactiveFormsModule, Password, LetDirective, SelectButton, Select, PrimeTemplate, ButtonDirective, Button]
 })
 export class SettingsModalComponent extends ToggleableDialog implements OnDestroy {
   settingsForm = new FormGroup({
@@ -46,6 +45,7 @@ export class SettingsModalComponent extends ToggleableDialog implements OnDestro
   userGuilds$ = this.store.select(s => s.user.guild_details).pipe(
     map(guilds => Object.values(guilds)),
     filter(guilds => guilds.length > 0),
+    map(guilds => [...guilds].sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)),
   )
 
   constructor(private store: Store<AppState>, private accountService: AccountService) {

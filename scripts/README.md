@@ -26,13 +26,13 @@ npm run cache-extras         # adventures + city markers scraped from the GW2 wi
 npm run cache-event-timers   # meta-event schedule (event_timers.json)
 npm run cache-city-icons     # local copies of wiki city icons (CORS workaround)
 npm run cache-wvw-icons      # local copies of WvW objective markers
-npm run build-tiles          # vector tiles (PMTiles) from all the JSON above
+npm run build-marker-features # consolidated marker feature files + chat-link index
 ```
 
 `seed-all.mjs` sequences the domains in dependency stages: JSON from the API and
-wiki first, then the icons that JSON references, then the vector tiles built from
-it. `--only=<domains>` runs a subset — valid domains are `poi`, `regions`,
-`extras`, `event-timers`, `city-icons`, `wvw-icons`, `tiles`.
+wiki first, then the icons that JSON references, then the consolidated marker
+feature files built from it. `--only=<domains>` runs a subset — valid domains are
+`poi`, `regions`, `extras`, `event-timers`, `city-icons`, `wvw-icons`, `markers`.
 
 ## Guarantees
 
@@ -50,13 +50,17 @@ Refreshed data is committed manually — review the diff, then commit.
 `mists_objectives.json` is hand-maintained and is not produced by the pipeline
 (it only reads it).
 
-## Vector tiles (go-pmtiles)
+## Marker features
 
-`npm run build-tiles` converts the intermediate MBTiles to PMTiles with the
-[go-pmtiles](https://github.com/protomaps/go-pmtiles) CLI. The binary is located
-at build time from, in order: the `PMTILES_BIN` env var, `pmtiles` on `PATH`,
-then `scripts/bin/pmtiles[.exe]`. Install a release binary, or:
+`npm run build-marker-features` collects every static map marker (waypoints,
+POIs, vistas, hearts, hero points, masteries, adventures, cities, sector
+outlines/labels, heart bounds) into one flat JSON file per continent that the
+OpenLayers vector layers load directly:
 
-```sh
-go install github.com/protomaps/go-pmtiles/main@latest
-```
+- `src/assets/data/markers_tyria_1_1.json`
+- `src/assets/data/markers_mists_2_1.json`
+
+Each feature is `{layer, geometry, ...props}` in GW2 continent pixels, where
+`layer` is the source-layer name the map's styles and hit-testing branch on. The
+same pass also emits the chat-link deep-link index (`src/assets/tiles/*.index.json`),
+which maps a normalized chat link to its coordinate for `/tyria/:chatLink` links.

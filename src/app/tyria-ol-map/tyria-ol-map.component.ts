@@ -8,11 +8,9 @@ import OlMap from "ol/Map";
 import Overlay from "ol/Overlay";
 import {MapBrowserEvent} from "ol";
 import Layer from "ol/layer/Base";
-import VectorTileLayer from "ol/layer/VectorTile";
+import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import {defaults as defaultControls} from "ol/control/defaults";
-import {PMTilesVectorSource} from "ol-pmtiles";
-import {MVT} from "ol/format";
 
 import {BaseOlMap} from "../base-ol-map";
 import {LayerState} from "../../lib/layer-state";
@@ -31,19 +29,17 @@ import {SettingsModalComponent} from "../settings-modal/settings-modal.component
 import {WizardVaultGridComponent} from "../wizard-vault-grid/wizard-vault-grid.component";
 import {TooltipModule} from "primeng/tooltip";
 import {OlLiveMarkersController} from "../../lib/ol/live-markers-layer";
-import {createVectorTileGrid, getProjection, gw2ToOl, TYRIA_MAP_CONFIG} from "../../lib/ol/gw2-projection";
+import {gw2ToOl, TYRIA_MAP_CONFIG} from "../../lib/ol/gw2-projection";
 import {
-  createTyriaOverlayDefinitions, HEART_BOUNDS_STYLE, mergedMarkerStyle, sublayerVisible,
-  syncEventFeatures, TYRIA_MARKER_SUBLAYERS,
+  createTyriaOverlayDefinitions, HEART_BOUNDS_STYLE,
+  mergedMarkerStyle, sublayerVisible, syncEventFeatures, TYRIA_MARKER_SUBLAYERS,
 } from "../../lib/ol/tyria-layers";
-import {PinOverlays} from "../../lib/ol/pin-overlays";
+import {buildMarkerFeatures, markerFeaturesUrl, MarkerFeatureJson} from "../../lib/ol/marker-source";
 import {buildUserLayerSource, userLayerStyle, userLayerZIndex, TACO_PACK_ATTRIBUTION} from "../../lib/ol/user-layers";
 import {chatLinkFor, tooltipFor, wikiUrlFor} from "../../lib/ol/feature-meta";
 import {iconStyle} from "../../lib/ol/marker-styles";
 import {LabelEntry, LabelOverlays} from "../../lib/ol/label-overlay";
 import {CloudOverlay} from "../../lib/ol/cloud-overlay";
-import {attachMarkerPrefetch} from "../../lib/ol/marker-prefetch";
-import {preloadPmtilesIntoMemory} from "../../lib/ol/pmtiles-preload";
 import {OlEditor} from "../../lib/ol/editor";
 import {MarkerType} from "../../lib/editor-types";
 import {ButtonModule} from "primeng/button";
@@ -52,19 +48,23 @@ import {LayerOptionsComponent} from "../layer-options/layer-options.component";
 import {UserLayerManagerComponent} from "../user-layer-manager/user-layer-manager.component";
 import {MapContextMenuComponent, MapContextMenuItem} from "../map-context-menu/map-context-menu.component";
 import {EditorModalComponent} from "../editor-modal/editor-modal.component";
-import {FloorPickerComponent} from "../floor-picker/floor-picker.component";
-import {MapService} from "../../services/map.service";
 import {TacoTrailsService} from "../../services/taco-trails.service";
-import {CORE_FLOOR_MAP_TYPES} from "../../lib/ol/floor-lookup";
 import {MenuPanelService} from "../../services/menu-panel.service";
 import {WidgetService} from "../../services/widget.service";
 import {TacoDropDirective} from "../taco-drop/taco-drop.directive";
+
+interface RegionLabelJson {
+  label_coordinates: [number, number] | null;
+  heading: string;
+  subheading?: string;
+  type: string;
+}
 
 @Component({
   selector: "app-tyria-ol-map",
   standalone: true,
   imports: [LayerOptionsComponent, UserLayerManagerComponent, ButtonModule, TooltipModule,
-    MapContextMenuComponent, AsyncPipe, FloorPickerComponent, TacoDropDirective,
+    MapContextMenuComponent, AsyncPipe, TacoDropDirective,
     ToolbarComponent, AboutModalComponent, EventGridComponent, LiveMarkerSidebarComponent,
     SettingsModalComponent, WizardVaultGridComponent],
   providers: [DialogService, MenuPanelService, WidgetService],
@@ -128,14 +128,9 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   private highlightOverlay?: Overlay;
   private headingLabels?: LabelOverlays;
   private clouds?: CloudOverlay;
-  private heartBoundsLayer?: VectorTileLayer;
-  private markersLayer?: VectorTileLayer;
-  private markerPrefetchTeardown?: () => void;
-  private pmtilesPreloadTeardown?: () => void;
+  private heartBoundsLayer?: Layer;
+  private markersLayer?: Layer;
   private markerVisibilitySignature = "";
-  // Pinned marker kinds render at every zoom from a full, non-tiled overlay;
-  // the controller owns the lazy load + per-kind cache (see PinOverlays).
-  private pins?: PinOverlays;
   private highlightedHeartId?: number;
   private eventsSource = new VectorSource();
   private liveMarkers?: OlLiveMarkersController;
@@ -148,7 +143,6 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     private liveMarkersService: LiveMarkersService,
     private dialogService: DialogService,
     private store: Store<AppState>,
-    private mapService: MapService,
     private tacoTrailsService: TacoTrailsService,
   ) {
     super(ngZone, route, router, TYRIA_MAP_CONFIG);
@@ -259,12 +253,9 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-    this.markerPrefetchTeardown?.();
-    this.pmtilesPreloadTeardown?.();
     this.liveMarkers?.destroy();
     this.headingLabels?.destroy();
     this.clouds?.destroy();
-    this.pins?.destroy();
     this.destroyMap();
   }
 
@@ -283,7 +274,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
 
     this.initBaseRaster();
     this.initClouds(olMap);
-    const vtSource = this.initMarkerLayer(olMap);
+    this.initMarkers(olMap);
     this.initHeadingLabels(olMap);
     this.initLiveMarkers(olMap);
     this.initEvents();
@@ -294,19 +285,7 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     if (isDevMode()) {
       this.initEditor(olMap);
     }
-    this.initHeartHighlight(olMap, vtSource);
     this.initInteractionOverlays(olMap);
-
-    this.pins = new PinOverlays(
-      olMap, this.interactiveLayers,
-      url => this.http.get<any[]>(url).pipe(take(1)),
-      id => this.mapLayers[id]?.state === LayerState.Pinned,
-    );
-
-    // Dynamic raster floors: once the map list loads, watch the view and offer
-    // the floors available where the user is looking. Failure hides the picker.
-    this.mapService.getAllMaps().pipe(take(1), catchError(() => of([]))).subscribe(
-      maps => this.ngZone.runOutsideAngular(() => this.initFloorPicker("core", maps, CORE_FLOOR_MAP_TYPES)));
 
     this.handleChatLinkRoute(coord => {
       this.highlightEl.nativeElement.style.display = "block";
@@ -356,42 +335,26 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   }
 
   /**
-   * Builds the shared PMTiles vector source and the merged marker layer that
-   * renders every icon kind (the panel stubs from createTyriaOverlayDefinitions
-   * carry per-kind state the style function consults). Returns the source so the
-   * heart-bounds highlight layer can reuse it.
+   * Loads every marker feature for the continent once from markers_*.json into a
+   * single VectorSource, shared by the merged marker layer (icons), the sector
+   * heading/outline layers, and the heart-bounds hover layer. Per-kind and
+   * per-zoom visibility is enforced entirely by the style functions returning
+   * undefined — a feature styled undefined neither draws nor hit-tests — so all
+   * features can stay in the source at every zoom.
    */
-  private initMarkerLayer(olMap: OlMap): PMTilesVectorSource {
-    const vtSource = new PMTilesVectorSource({
-      url: "assets/tiles/tyria_1_1.pmtiles",
-      projection: getProjection(this.config),
-      tileGrid: createVectorTileGrid(this.config),
-      // Parse only the source-layers something actually styles: the heading
-      // text layers (label_region/label_map) are drawn by the SVG overlay, and
-      // MVT geometry decoding is the dominant pan-spike cost — so skipping the
-      // rest is the main lever, now that decode runs on ol-pmtiles' stock
-      // (synchronous, main-thread) tile loader.
-      format: new MVT({
-        layers: [...TYRIA_MARKER_SUBLAYERS.map(s => s.sourceLayer), "label_sector", "sector_bounds", "heart_bounds"],
-      }),
-      wrapX: false,
-      // Parsed source tiles (shared by the marker/sector/heart layers) cost
-      // main-thread decode time, so keep enough that panning back never
-      // re-parses. With the archive in memory (preloadPmtilesIntoMemory) a miss
-      // is only a re-parse, not a network fetch.
-      cacheSize: 1024,
-    });
+  private initMarkers(olMap: OlMap): void {
+    const source = new VectorSource();
 
-    for (const def of createTyriaOverlayDefinitions(vtSource)) {
+    for (const def of createTyriaOverlayDefinitions(source)) {
       this.registerLayer(def);
     }
 
-    this.markersLayer = new VectorTileLayer({
-      source: vtSource,
+    // Static data, so the layer renders to a canvas that just translates while
+    // panning (no updateWhileInteracting); the merged style is re-evaluated on
+    // moveend, which is when a zoom can cross a kind's min-zoom threshold.
+    this.markersLayer = new VectorLayer({
+      source,
       style: mergedMarkerStyle(this.config.maxZoom, id => this.mapLayers[id]?.state ?? LayerState.Enabled),
-      renderBuffer: 256,
-      preload: 1,
-      cacheSize: 256,
       zIndex: 2,
     });
     olMap.addLayer(this.markersLayer);
@@ -399,24 +362,31 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     olMap.getView().on("change:resolution", () => this.syncMarkerVisibility());
     this.syncMarkerVisibility();
 
-    // Warm a ring + adjacent zooms of marker tiles so icons are ready as the
-    // user pans/zooms in, instead of fetch+parsing on demand (the pop-in).
-    this.markerPrefetchTeardown = attachMarkerPrefetch(olMap, vtSource);
-    // Pull the whole archive into memory so marker tile reads stop hitting the
-    // network — the dominant cost on a remote CDN, where pmtiles' no-store
-    // bypass makes every uncached tile a fresh Range request.
-    this.pmtilesPreloadTeardown = preloadPmtilesIntoMemory(vtSource, "assets/tiles/tyria_1_1.pmtiles");
+    // Heart-bounds hover highlight over the same source; hidden until a heart is
+    // hovered. heart_bounds features aren't styled by the merged layer, so they
+    // only ever draw here.
+    this.heartBoundsLayer = new VectorLayer({
+      source,
+      zIndex: 1,
+      visible: false,
+      style: feature =>
+        feature.get("layer") === "heart_bounds" && feature.get("heart_id") === this.highlightedHeartId
+          ? HEART_BOUNDS_STYLE
+          : undefined,
+    });
+    olMap.addLayer(this.heartBoundsLayer);
 
-    return vtSource;
+    this.http.get<MarkerFeatureJson[]>(markerFeaturesUrl(this.config)).pipe(take(1), catchError(() => of([])))
+      .subscribe(raw => source.addFeatures(buildMarkerFeatures(raw)));
   }
 
   /** Region/map heading text drawn by the SVG label overlay. */
   private initHeadingLabels(olMap: OlMap): void {
-    this.http.get<any[]>("assets/data/region_labels_1_1.json").pipe(take(1)).subscribe(raw => {
+    this.http.get<RegionLabelJson[]>("assets/data/region_labels_1_1.json").pipe(take(1), catchError(() => of([]))).subscribe(raw => {
       const entries: LabelEntry[] = raw
         .filter(l => l.label_coordinates != null)
         .map(l => ({
-          coord: gw2ToOl(l.label_coordinates),
+          coord: gw2ToOl(l.label_coordinates!),
           heading: l.heading,
           subheading: l.subheading || undefined,
           kind: (l.type as string).toLowerCase() as "region" | "map",
@@ -514,24 +484,6 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     }));
   }
 
-  /**
-   * Hover highlight for heart bounds; not part of the layer panel. Hidden until
-   * a heart is hovered — while visible it re-processes every tile of the shared
-   * source on every rendered frame.
-   */
-  private initHeartHighlight(olMap: OlMap, vtSource: PMTilesVectorSource): void {
-    this.heartBoundsLayer = new VectorTileLayer({
-      source: vtSource,
-      zIndex: 1,
-      visible: false,
-      style: feature =>
-        feature.get("layer") === "heart_bounds" && feature.get("heart_id") === this.highlightedHeartId
-          ? HEART_BOUNDS_STYLE
-          : undefined,
-    });
-    olMap.addLayer(this.heartBoundsLayer);
-  }
-
   /** Tooltip + highlight overlays and the pointer interaction handlers. */
   private initInteractionOverlays(olMap: OlMap): void {
     this.tooltipOverlay = this.createTooltipOverlay(olMap, this.tooltipEl.nativeElement, [25, 0]);
@@ -549,9 +501,11 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   }
 
   /**
-   * Marker styles are baked into the merged layer's render tiles, so a state
-   * toggle or a zoom crossing a sublayer threshold needs a rebuild — OL's own
-   * per-layer min/max zoom no longer applies to individual icon kinds.
+   * The merged layer's style reads each kind's panel state, so a state toggle
+   * needs an explicit re-render — a state change alone doesn't trigger one (OL's
+   * per-layer min/max zoom can't gate individual icon kinds within the one layer).
+   * Zoom changes already re-render, so the signature check just skips redundant
+   * invalidations when no kind crossed its threshold.
    */
   private syncMarkerVisibility(force = false): void {
     const zoom = this.Map?.getView().getZoom();
@@ -571,7 +525,6 @@ export class TyriaOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     super.layerUpdated(event);
     if (TYRIA_MARKER_SUBLAYERS.some(sub => sub.id === event[0])) {
       this.syncMarkerVisibility(true);
-      this.pins?.sync(event[0], event[1] === LayerState.Pinned);
     }
   }
 

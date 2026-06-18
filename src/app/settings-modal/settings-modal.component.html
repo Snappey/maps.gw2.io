@@ -39,7 +39,7 @@
             id="guild"
             appendTo="body"
             [style]="{width: '100%'}"
-            [options]="userGuilds | orderBy: 'name'"
+            [options]="userGuilds"
             optionLabel="name" optionValue="id"
             formControlName="guildChannel">
             <ng-template let-guild pTemplate="item">

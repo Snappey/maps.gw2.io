@@ -160,26 +160,6 @@ export const createTileGrid = (config: Gw2MapConfig): TileGrid =>
   });
 
 /**
- * PMTiles only addresses the standard square pyramid (x,y < 2^z) while the GW2
- * grid is wider (320x448 tiles at Tyria z7), so generate_tiles.mjs stores tiles
- * at PMTiles z + VECTOR_TILE_ZOOM_OFFSET. This grid exposes those zooms with
- * matching resolutions, so the source requests the right PMTiles IDs while view
- * zoom semantics stay identical.
- */
-export const VECTOR_TILE_ZOOM_OFFSET = 2;
-
-export const createVectorTileGrid = (config: Gw2MapConfig): TileGrid =>
-  new TileGrid({
-    extent: getExtent(config),
-    origin: [0, 0],
-    resolutions: Array.from(
-      {length: config.maxZoom + VECTOR_TILE_ZOOM_OFFSET + 1},
-      (_, z) => 2 ** (config.maxZoom + VECTOR_TILE_ZOOM_OFFSET - z)),
-    tileSize: 256,
-    minZoom: VECTOR_TILE_ZOOM_OFFSET,
-  });
-
-/**
  * URL fragments keep the Leaflet CRS.Simple format "#lat,lng,zoom" so links
  * shared from the old map keep working: lat = -y / 2^maxNativeZoom, lng = x / 2^maxNativeZoom.
  */

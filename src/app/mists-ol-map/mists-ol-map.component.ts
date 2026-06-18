@@ -9,8 +9,6 @@ import Overlay from "ol/Overlay";
 import {MapBrowserEvent} from "ol";
 import VectorSource from "ol/source/Vector";
 import {defaults as defaultControls} from "ol/control/defaults";
-import {PMTilesVectorSource} from "ol-pmtiles";
-import {MVT} from "ol/format";
 
 import {AppState} from "../../state/appState";
 import {mistsActions} from "../../state/mists/mists.action";
@@ -31,7 +29,7 @@ import {DialogModule} from "primeng/dialog";
 import {OlLiveMarkersController} from "../../lib/ol/live-markers-layer";
 import {BaseOlMap} from "../base-ol-map";
 import {LayerState} from "../../lib/layer-state";
-import {createVectorTileGrid, getProjection, gw2ToOl, MISTS_MAP_CONFIG} from "../../lib/ol/gw2-projection";
+import {gw2ToOl, MISTS_MAP_CONFIG} from "../../lib/ol/gw2-projection";
 import {
   createMistsStaticDefinitions,
   objectiveStyle,
@@ -39,22 +37,24 @@ import {
   spawnHeadingStyle,
   syncObjectiveFeatures,
 } from "../../lib/ol/mists-layers";
+import {buildMarkerFeatures, markerFeaturesUrl, MarkerFeatureJson} from "../../lib/ol/marker-source";
 import {tooltipFor} from "../../lib/ol/feature-meta";
 import {LabelOverlays} from "../../lib/ol/label-overlay";
-import {attachMarkerPrefetch} from "../../lib/ol/marker-prefetch";
-import {preloadPmtilesIntoMemory} from "../../lib/ol/pmtiles-preload";
 import {ButtonModule} from "primeng/button";
 import {LayerOptionsComponent} from "../layer-options/layer-options.component";
 import {UserLayerManagerComponent} from "../user-layer-manager/user-layer-manager.component";
 import {WarScoreBarComponent} from "../mists-chrome/war-score-bar/war-score-bar.component";
 import {SkirmishDetailsComponent} from "../mists-chrome/skirmish-details/skirmish-details.component";
 import {MatchHistoryComponent} from "../mists-chrome/match-history/match-history.component";
-import {FloorPickerComponent} from "../floor-picker/floor-picker.component";
-import {MapService} from "../../services/map.service";
-import {MISTS_FLOOR_MAP_TYPES} from "../../lib/ol/floor-lookup";
 import {MenuPanelService} from "../../services/menu-panel.service";
 import {WidgetService} from "../../services/widget.service";
 import {TacoDropDirective} from "../taco-drop/taco-drop.directive";
+
+interface RegionLabelJson {
+  label_coordinates: [number, number] | null;
+  heading: string;
+  subheading?: string;
+}
 
 const EDGE_OF_THE_MISTS_MAP_ID = 968;
 const MATCH_POLL_MS = 20_000;
@@ -63,7 +63,7 @@ const MATCH_POLL_MS = 20_000;
   selector: "app-mists-ol-map",
   standalone: true,
   imports: [LayerOptionsComponent, UserLayerManagerComponent, ButtonModule, DialogModule, AsyncPipe,
-    WarScoreBarComponent, SkirmishDetailsComponent, MatchHistoryComponent, FloorPickerComponent, TacoDropDirective,
+    WarScoreBarComponent, SkirmishDetailsComponent, MatchHistoryComponent, TacoDropDirective,
     ToolbarComponent, AboutModalComponent, SettingsModalComponent, MatchOverviewComponent,
     ObjectiveDetailsComponent, ObjectiveTooltipComponent, SkirmishStatsChartComponent],
   providers: [MenuPanelService, WidgetService],
@@ -89,8 +89,6 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   private headingLabels?: LabelOverlays;
   private sectorOwnership = new Map<number, string>();
   private liveMarkers?: OlLiveMarkersController;
-  private markerPrefetchTeardown?: () => void;
-  private pmtilesPreloadTeardown?: () => void;
   private latestRiExpiry = 0;
 
   activeMatch$ = this.store.select(selectActiveMatch);
@@ -131,7 +129,6 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
     private store: Store<AppState>,
     private wvwService: WvwService,
     private liveMarkersService: LiveMarkersService,
-    private mapService: MapService,
   ) {
     super(ngZone, route, router, MISTS_MAP_CONFIG);
   }
@@ -185,8 +182,6 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-    this.markerPrefetchTeardown?.();
-    this.pmtilesPreloadTeardown?.();
     this.liveMarkers?.destroy();
     this.headingLabels?.destroy();
     this.destroyMap();
@@ -217,41 +212,24 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
       zIndex: 0,
     });
 
-    const vtSource = new PMTilesVectorSource({
-      url: "assets/tiles/mists_2_1.pmtiles",
-      projection: getProjection(this.config),
-      tileGrid: createVectorTileGrid(this.config),
-      // Only these source-layers are styled (map headings come from the SVG
-      // overlay); skipping the rest avoids MVT decode cost on ol-pmtiles' stock
-      // (synchronous, main-thread) tile loader.
-      format: new MVT({layers: ["waypoint", "sector_bounds"]}),
-      wrapX: false,
-      // Larger parsed-tile cache so panning back never re-parses; with the
-      // archive resident in memory (preloadPmtilesIntoMemory) a miss is only a
-      // re-parse, not a network fetch.
-      cacheSize: 1024,
-    });
-
-    for (const def of createMistsStaticDefinitions(vtSource, id => this.sectorOwnership.get(id))) {
+    // Every static feature loaded once into one VectorSource. Sector colours
+    // resolve per render via the forSourceLayer styles and the ownership closure,
+    // so the layer.changed() on a match poll recolours them.
+    const markerSource = new VectorSource();
+    for (const def of createMistsStaticDefinitions(markerSource, id => this.sectorOwnership.get(id))) {
       const layer = this.registerLayer(def);
-      if (def.kind === "vector-tile" && def.sourceLayer === "waypoint") {
+      if (def.id === "waypoints") {
         this.interactiveLayers.add(layer);
       }
     }
+    this.http.get<MarkerFeatureJson[]>(markerFeaturesUrl(this.config)).pipe(take(1), catchError(() => of([])))
+      .subscribe(raw => markerSource.addFeatures(buildMarkerFeatures(raw)));
 
-    // Warm a ring + adjacent zooms of marker tiles so waypoints are ready as the
-    // user pans/zooms in, instead of fetch+parsing on demand (the pop-in).
-    this.markerPrefetchTeardown = attachMarkerPrefetch(olMap, vtSource);
-    // Pull the whole archive into memory so marker tile reads stop hitting the
-    // network — the dominant cost on a remote CDN, where pmtiles' no-store
-    // bypass makes every uncached tile a fresh Range request.
-    this.pmtilesPreloadTeardown = preloadPmtilesIntoMemory(vtSource, "assets/tiles/mists_2_1.pmtiles");
-
-    this.http.get<any[]>("assets/data/region_labels_2_1.json").pipe(take(1)).subscribe(raw => {
+    this.http.get<RegionLabelJson[]>("assets/data/region_labels_2_1.json").pipe(take(1), catchError(() => of([]))).subscribe(raw => {
       const entries = raw
         .filter(l => l.label_coordinates != null)
         .map(l => ({
-          coord: gw2ToOl(l.label_coordinates),
+          coord: gw2ToOl(l.label_coordinates!),
           heading: l.heading,
           subheading: l.subheading || undefined,
           kind: "map" as const,
@@ -321,16 +299,16 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
 
     // Realtime: match poll drives objective properties + sector ownership.
     this.activeMatch$.pipe(
-      filter(match => !!match),
+      filter((match): match is Match => match != null),
       takeUntil(this.unsubscribe$),
     ).subscribe(match => {
       this.sectorOwnership = new Map(
-        match!.objectives.map(obj => [obj.sector_id, obj.owner] as [number, string]));
+        match.objectives.map(obj => [obj.sector_id, obj.owner] as [number, string]));
       syncObjectiveFeatures(this.objectivesSource, this.spawnSource,
-        match!.objectives, EDGE_OF_THE_MISTS_MAP_ID);
+        match.objectives, EDGE_OF_THE_MISTS_MAP_ID);
       // Sector colours live in a style closure over sectorOwnership; force re-render.
       this.mapLayers["mists_sector_objective"]?.layer.changed();
-      this.latestRiExpiry = match!.objectives.reduce((latest, obj) =>
+      this.latestRiExpiry = match.objectives.reduce((latest, obj) =>
         obj.last_flipped ? Math.max(latest, new Date(obj.last_flipped).getTime() + RECENT_FLIP_WINDOW_MS) : latest, 0);
     });
 
@@ -348,11 +326,6 @@ export class MistsOlMapComponent extends BaseOlMap implements OnInit, AfterViewI
 
     olMap.on("pointermove", e => this.onPointerMove(e));
     olMap.on("singleclick", e => this.onClick(e));
-
-    // Dynamic raster floors: once the map list loads, watch the view and offer
-    // the floors available where the user is looking. Failure hides the picker.
-    this.mapService.getAllMaps().pipe(take(1), catchError(() => of([]))).subscribe(
-      maps => this.ngZone.runOutsideAngular(() => this.initFloorPicker("mists_tiles", maps, MISTS_FLOOR_MAP_TYPES)));
 
     this.handleChatLinkRoute(coord => this.panTo(coord, 6));
   }

@@ -22,8 +22,6 @@
   </div>
 }
 
-<app-floor-picker [state]="floorState$ | async" [class.raised]="fpsVisible" (floorSelected)="selectFloor($event)"></app-floor-picker>
-
 @if (menu.isOpen('liveMarkers')) {
   <app-live-marker-sidebar [markers]="liveMarkerList$" style="position: absolute; left: 15px; top: 5vh; z-index: 999"></app-live-marker-sidebar>
 }

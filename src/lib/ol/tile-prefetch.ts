@@ -84,41 +84,19 @@ function getWorker(): Worker | null {
 
 const coordKey = (coord: TileCoord): string => coord[0] + "/" + coord[1] + "/" + coord[2];
 
-export interface PrefetchCoordOptions {
-  /** Extra viewport fraction collected per side at the current zoom. */
-  bufferRatio?: number;
-  /** Hard cap on NEW (unseen) coords returned per call. */
-  maxTiles?: number;
-  /**
-   * Nearest-direction hint for picking the tile z from the view resolution;
-   * defaults to 0 (nearest). Pass a source's `zDirection` to match how its own
-   * renderer rounds at fractional zoom.
-   */
-  zDirection?: number;
-  /**
-   * Dedup key for a coord; defaults to "z/x/y". The raster prefetch keys by URL
-   * instead, so the worker's failure-retry (which deletes the failed URL from
-   * `seen`) still lines up with the set.
-   */
-  keyOf?: (coord: TileCoord) => string;
-}
-
 /**
  * Tile coords to warm around the current view: a buffer ring at the current
  * zoom, the viewport one level deeper (for zooming in), and the buffer ring one
  * level shallower (for zooming out). Deduped against `seen`, clamped to the grid
  * so no void tile is addressed, the visible extent skipped where the renderer
- * already loads it, and capped at `maxTiles`. Shared by the raster (warms the
- * HTTP cache) and marker (warms the vector-tile data cache) prefetchers — only
- * the per-coord "warm" step the caller runs differs.
+ * already loads it, and capped at MAX_TILES_PER_MOVE.
  */
 export function collectPrefetchTileCoords(
   olMap: OlMap,
   tileGrid: TileGrid,
   seen: Set<string>,
-  options: PrefetchCoordOptions = {},
+  keyOf: (coord: TileCoord) => string = coordKey,
 ): TileCoord[] {
-  const {bufferRatio = BUFFER_RATIO, maxTiles = MAX_TILES_PER_MOVE, zDirection = 0, keyOf = coordKey} = options;
   const view = olMap.getView();
   const size = olMap.getSize();
   const resolution = view.getResolution();
@@ -128,7 +106,7 @@ export function collectPrefetchTileCoords(
   const gridExtent = tileGrid.getExtent();
   const visible = view.calculateExtent(size);
   // Clamps to the deepest native level, so the Mists overzoom works out.
-  const z = tileGrid.getZForResolution(resolution, zDirection);
+  const z = tileGrid.getZForResolution(resolution, 0);
 
   const coords: TileCoord[] = [];
   const collect = (extent: Extent, tileZ: number, skipVisible: boolean) => {
@@ -144,7 +122,7 @@ export function collectPrefetchTileCoords(
     // still in flight.
     const visibleRange = skipVisible ? tileGrid.getTileRangeForExtentAndZ(visible, tileZ) : undefined;
     tileGrid.forEachTileCoord(clamped, tileZ, coord => {
-      if (coords.length >= maxTiles || visibleRange?.containsXY(coord[1], coord[2])) {
+      if (coords.length >= MAX_TILES_PER_MOVE || visibleRange?.containsXY(coord[1], coord[2])) {
         return;
       }
       const key = keyOf(coord);
@@ -155,7 +133,7 @@ export function collectPrefetchTileCoords(
     });
   };
 
-  const buffered = bufferExtent(visible, bufferRatio * Math.max(getWidth(visible), getHeight(visible)));
+  const buffered = bufferExtent(visible, BUFFER_RATIO * Math.max(getWidth(visible), getHeight(visible)));
   collect(buffered, z, true);      // ring around the viewport
   collect(visible, z + 1, false);  // one level deeper, for zooming in
   collect(buffered, z - 1, true);  // one level shallower, for zooming out
@@ -198,7 +176,7 @@ export function attachRasterPrefetch(olMap: OlMap, layer: TileLayer<ImageTileSou
     // Key the seen-set by URL (not coord), so the worker's failure-retry — which
     // posts the failed URL back to delete it from `seen` — still lines up.
     const coords = collectPrefetchTileCoords(olMap, tileGrid, seen,
-      {keyOf: coord => urlFor(coord[0], coord[1], coord[2])});
+      coord => urlFor(coord[0], coord[1], coord[2]));
     const urls = coords.map(coord => urlFor(coord[0], coord[1], coord[2])).filter(Boolean);
 
     const worker = getWorker();

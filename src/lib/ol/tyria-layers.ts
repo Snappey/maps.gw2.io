@@ -2,7 +2,6 @@ import {Feature} from "ol";
 import {FeatureLike} from "ol/Feature";
 import Point from "ol/geom/Point";
 import VectorSource from "ol/source/Vector";
-import VectorTile from "ol/source/VectorTile";
 import {Fill, Stroke, Style} from "ol/style";
 import {StyleLike} from "ol/style/Style";
 import {LayerState} from "../layer-state";
@@ -31,10 +30,9 @@ export interface MarkerSublayer {
 }
 
 /**
- * The icon overlays, merged into ONE vector-tile layer at render time. A layer
- * per kind cost a separate canvas + per-frame render pass and re-scanned every
- * feature of every shared source tile — the dominant zoom/pan cost in dense
- * areas (see gw2ZoomBench).
+ * The icon overlays, merged into ONE vector layer at render time. A layer per
+ * kind cost a separate canvas + per-frame render pass and re-scanned every
+ * in-view feature — the dominant zoom/pan cost in dense areas (see gw2ZoomBench).
  */
 export const TYRIA_MARKER_SUBLAYERS: MarkerSublayer[] = [
   {
@@ -93,21 +91,19 @@ export function sublayerVisible(sub: MarkerSublayer, state: LayerState, zoom: nu
     case LayerState.Disabled:
       return false;
     case LayerState.Pinned:
-      // Pinned kinds are drawn at every zoom by a full, non-tiled overlay
-      // (PinOverlays) the component owns, since the vector tiles carry no
-      // geometry below a kind's display zoom. The merged tiled layer must NOT
-      // draw them too, or they double up in the kind's normal zoom range.
-      return false;
+      // Every feature is already loaded, so pinning a kind just means "ignore its
+      // min-zoom gate" — the merged layer draws it at every zoom.
+      return true;
     default:
       return sub.minZoomLevel === undefined || zoom > sub.minZoomLevel - 0.5;
   }
 }
 
 /**
- * Style function for the merged marker layer. NOTE: vector-tile styles are
- * baked into render tiles, not re-evaluated per frame — the owning component
- * must call layer.changed() when a sublayer's state or zoom-range visibility
- * flips (see syncMarkerVisibility in tyria-ol-map.component.ts).
+ * Style function for the merged marker layer. The style reads each kind's panel
+ * state, so the owning component must call layer.changed() when a sublayer's
+ * state flips (a zoom change re-renders the layer on its own); see
+ * syncMarkerVisibility in tyria-ol-map.component.ts.
  */
 export function mergedMarkerStyle(maxZoom: number, getState: (id: string) => LayerState): StyleLike {
   const bySourceLayer = new Map(TYRIA_MARKER_SUBLAYERS.map(s => [s.sourceLayer, s]));
@@ -120,108 +116,19 @@ export function mergedMarkerStyle(maxZoom: number, getState: (id: string) => Lay
   };
 }
 
-// --- Pin overlay -------------------------------------------------------------
-// A pinned kind must show at EVERY zoom, but the PMTiles only carry a kind's
-// geometry within its display-zoom range. So when pinned, the component renders
-// the kind's full feature set from these JSON assets in a non-tiled overlay.
-// The builders below mirror collectTyriaFeatures in generate_tiles.mjs, tagging
-// each feature with the same `layer` and props the vector tiles carry so the
-// merged style, tooltips, wiki links and chat-link copy keep working.
-
-/** Which src/assets/data file a pinnable marker kind loads its full set from. */
-export const PIN_SOURCE: {[id: string]: "poi" | "adventure" | "city"} = {
-  waypoints: "poi", landmarks: "poi", vista: "poi", unlocks: "poi",
-  heart_labels: "poi", heropoint_labels: "poi", masteries_labels: "poi",
-  adventure_labels: "adventure", city_markers: "city",
-};
-
-interface PoiPinLabel {
-  id: string | number;
-  coordinates?: [number, number];
-  type: string;
-  data?: {tooltip?: string; chat_link?: string; icon?: string; type?: string};
-}
-interface AdventurePinLabel {
-  id: string | number;
-  coordinates?: [number, number];
-  data?: {tooltip?: string; url?: string};
-}
-interface CityPinLabel {
-  coord?: [number, number];
-  name?: string;
-  text?: string;
-  icon?: string;
-}
-
-const pinFeature = (sourceLayer: string, coords: [number, number], props: object): Feature<Point> => {
-  const feature = new Feature({geometry: new Point(gw2ToOl(coords))});
-  feature.setProperties({layer: sourceLayer, ...props});
-  return feature;
-};
-
-/** Full feature sets, per sublayer id, for the seven poi_labels-derived kinds. */
-export function buildPoiPinFeatures(raw: PoiPinLabel[]): Map<string, Feature<Point>[]> {
-  const out = new Map<string, Feature<Point>[]>(
-    ["waypoints", "landmarks", "vista", "unlocks", "heart_labels", "heropoint_labels", "masteries_labels"]
-      .map((id): [string, Feature<Point>[]] => [id, []]));
-  for (const label of raw) {
-    if (!label.coordinates) continue;
-    const d = label.data ?? {};
-    const c = label.coordinates;
-    switch (label.type) {
-      case "waypoint":
-        out.get("waypoints")!.push(pinFeature("waypoint", c, {id: label.id, tooltip: d.tooltip ?? "", chat_link: d.chat_link ?? ""}));
-        break;
-      case "landmark":
-        out.get("landmarks")!.push(pinFeature("poi", c, {id: label.id, tooltip: d.tooltip ?? "", chat_link: d.chat_link ?? ""}));
-        break;
-      case "vista":
-        out.get("vista")!.push(pinFeature("vista", c, {id: label.id, chat_link: d.chat_link ?? ""}));
-        break;
-      case "unlock":
-        out.get("unlocks")!.push(pinFeature("unlock", c, {id: label.id, tooltip: d.tooltip ?? "", chat_link: d.chat_link ?? "", icon: d.icon ?? ""}));
-        break;
-      case "heart":
-        out.get("heart_labels")!.push(pinFeature("heart", c, {id: label.id, tooltip: d.tooltip ?? "", chat_link: d.chat_link ?? ""}));
-        break;
-      case "skillpoint":
-        out.get("heropoint_labels")!.push(pinFeature("heropoint", c, {id: String(label.id)}));
-        break;
-      case "mastery":
-        out.get("masteries_labels")!.push(pinFeature("mastery", c, {id: label.id, region: d.type ?? "Tyria"}));
-        break;
-    }
-  }
-  return out;
-}
-
-export function buildAdventurePinFeatures(raw: AdventurePinLabel[]): Feature<Point>[] {
-  return raw
-    .filter((l): l is AdventurePinLabel & {coordinates: [number, number]} => !!l.coordinates)
-    .map(l => pinFeature("adventure", l.coordinates, {name: String(l.id), tooltip: l.data?.tooltip ?? "", url: l.data?.url ?? ""}));
-}
-
-export function buildCityPinFeatures(raw: CityPinLabel[]): Feature<Point>[] {
-  return raw
-    .filter((l): l is CityPinLabel & {coord: [number, number]} => !!l.coord)
-    .map(l => pinFeature("city", l.coord, {name: (l.text ?? l.name ?? "").replaceAll(/([\[\]])*/g, ""), icon: l.icon ?? ""}));
-}
-
 /**
- * The non-icon Tyria overlays sharing the PMTiles source, plus one panel-stub
- * layer per marker sublayer (the icons themselves render in the merged layer
- * the component owns).
+ * The non-icon Tyria overlays: panel-toggle stubs (empty sources, one per marker
+ * sublayer plus region/map heading toggles — they exist only so the panel has a
+ * toggle; actual rendering is in the merged marker layer and SVG LabelOverlays),
+ * plus the sector heading-text and sector-outline layers backed by `source`.
  */
-export function createTyriaOverlayDefinitions(source: VectorTile): LayerDefinition[] {
+export function createTyriaOverlayDefinitions(source: VectorSource): LayerDefinition[] {
   return [
     ...TYRIA_MARKER_SUBLAYERS.map((sub): LayerDefinition => ({
       kind: "vector", id: sub.id, source: new VectorSource(),
       minZoomLevel: sub.minZoomLevel,
       friendlyName: sub.friendlyName, icon: sub.icon, state: sub.state, group: sub.group, zIndex: 2,
     })),
-    // Visibility stubs for the layer panel: the text is drawn by the
-    // LabelOverlays SVG, which follows their visibility. A vector-tile layer
-    // here would process every label tile per frame just to draw nothing.
     {
       kind: "vector", id: "region_labels", source: new VectorSource(),
       minZoomLevel: 2, maxZoomLevel: 5, opacityLevels: {5: .2, 4: .6},
@@ -233,12 +140,12 @@ export function createTyriaOverlayDefinitions(source: VectorTile): LayerDefiniti
       friendlyName: "Map Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, group: ["World Map"], zIndex: 3,
     },
     {
-      kind: "vector-tile", id: "sector_headings", source, sourceLayer: "label_sector", declutter: "labels",
+      kind: "vector", id: "sector_headings", source, declutter: "labels",
       style: forSourceLayer("label_sector", f => labelStyle("sector", f.get("tooltip") ?? "")),
       minZoomLevel: 7, friendlyName: "Sector Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, group: ["World Map"], zIndex: 3,
     },
     {
-      kind: "vector-tile", id: "sector_polygons", source, sourceLayer: "sector_bounds",
+      kind: "vector", id: "sector_polygons", source,
       style: forSourceLayer("sector_bounds", () => SECTOR_BOUNDS_STYLE),
       minZoomLevel: 7, friendlyName: "Sector Outlines", icon: "/assets/list_icon.png", state: LayerState.Disabled, group: ["World Map"], zIndex: 1,
     },

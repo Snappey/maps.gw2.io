@@ -2,7 +2,6 @@ import {Feature} from "ol";
 import {FeatureLike} from "ol/Feature";
 import Point from "ol/geom/Point";
 import VectorSource from "ol/source/Vector";
-import VectorTile from "ol/source/VectorTile";
 import {Fill, Icon, Stroke, Style, Text} from "ol/style";
 import {LayerState} from "../layer-state";
 import {gw2ToOl} from "./gw2-projection";
@@ -24,18 +23,18 @@ export const teamColor = (owner: string | undefined): string =>
 export const TEAM_ORDER = ["red", "blue", "green"] as const;
 
 /**
- * Static mists overlays from PMTiles. Objectives/spawn texts are realtime (see
- * syncObjectiveFeatures); here only waypoints, headings, and the sector outlines
- * whose stroke colour resolves per render via the ownership lookup the component
- * maintains from match polling.
+ * Static Mists overlays sharing the non-tiled marker source: waypoint icons, the
+ * map-heading panel stub, and the sector outlines whose stroke colour resolves
+ * per render via the ownership lookup the component maintains from match polling
+ * (objectives/spawn texts are realtime — see syncObjectiveFeatures).
  */
 export function createMistsStaticDefinitions(
-  source: VectorTile,
+  source: VectorSource,
   sectorOwner: (sectorId: number) => string | undefined,
 ): LayerDefinition[] {
   return [
     {
-      kind: "vector-tile", id: "mists_sector_objective", source, sourceLayer: "sector_bounds",
+      kind: "vector", id: "mists_sector_objective", source,
       style: forSourceLayer("sector_bounds", (f, resolution) =>
         sectorStrokeStyle(teamColor(sectorOwner(f.get("id"))), resolution)),
       friendlyName: "Objective Sectors", icon: "/assets/sector_icon.png", state: LayerState.Enabled, group: ["Objectives"], zIndex: 1,
@@ -47,7 +46,7 @@ export function createMistsStaticDefinitions(
       friendlyName: "Map Headings", icon: "/assets/list_icon.png", state: LayerState.Enabled, group: ["World Map"], zIndex: 3,
     },
     {
-      kind: "vector-tile", id: "waypoints", source, sourceLayer: "waypoint",
+      kind: "vector", id: "waypoints", source,
       style: forSourceLayer("waypoint", () => iconStyle("assets/waypoint.png")),
       minZoomLevel: 6, friendlyName: "Waypoints", icon: "/assets/waypoint.png", state: LayerState.Enabled, group: ["World Map"], zIndex: 2,
     },

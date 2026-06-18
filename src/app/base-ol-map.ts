@@ -18,13 +18,10 @@ import {Coordinate} from "ol/coordinate";
 import TileLayer from "ol/layer/Tile";
 import ImageTileSource from "ol/source/ImageTile";
 import {LayerState} from "../lib/layer-state";
-import {fragmentToView, getClampedExtent, getProjection, getResolutions, gw2ToOl, Gw2MapConfig, olToGw2, tileUrlFor, viewToFragment} from "../lib/ol/gw2-projection";
+import {fragmentToView, getClampedExtent, getProjection, getResolutions, gw2ToOl, Gw2MapConfig, olToGw2, viewToFragment} from "../lib/ol/gw2-projection";
 import {buildLayer, LayerDefinition} from "../lib/ol/layer-registry";
 import {buildUserLayerSource, USER_LAYER_ID_PREFIX, userLayerStyle, userLayerZIndex} from "../lib/ol/user-layers";
 import {attachRasterPrefetch} from "../lib/ol/tile-prefetch";
-import {FloorController} from "../lib/ol/floor-controller";
-import {FloorPickerState} from "../lib/ol/floor-lookup";
-import {MapFloorInfo} from "../services/map.service";
 import {UserLayer, UserLayerService} from "../services/user-layer.service";
 // Type-only: the runtime modules (~25KB of dev/diagnostic tooling) are
 // dynamically imported in enableFpsMeter, so they stay out of the prod bundle.
@@ -33,13 +30,6 @@ import type {BenchmarkResult} from "../lib/ol/pan-benchmark";
 import type {ZoomBenchmarkResult} from "../lib/ol/zoom-benchmark";
 import {WidgetService} from "../services/widget.service";
 import {TOAST_TOP_RIGHT} from "../lib/toast-options";
-
-/**
- * Master switch for the dynamic raster floor picker (both Tyria and Mists).
- * Disabled for now; the controller, component, and plumbing stay wired so this
- * is the only line to flip to bring it back. See initFloorPicker.
- */
-const FLOOR_PICKER_ENABLED = false;
 
 export interface OlLayerOptions {
   layer: BaseLayer;
@@ -95,9 +85,6 @@ export abstract class BaseOlMap {
 
   /** Per-layer prefetch detachers, so a raster swap doesn't leak listeners. */
   private prefetchTeardowns: {[id: string]: () => void} = {};
-  private floorController?: FloorController;
-  /** Current floor-picker state for the template; null hides the picker. */
-  readonly floorState$ = new BehaviorSubject<FloorPickerState | null>(null);
 
   /** Set by subclasses to handle a clean right-click (no drag) — e.g. the dev editor menu. */
   protected onRightClick?: (event: PointerEvent) => void;
@@ -208,8 +195,6 @@ export abstract class BaseOlMap {
 
   /** Tears down base-class-owned map resources; components call this from ngOnDestroy. */
   protected destroyMap(): void {
-    this.floorController?.destroy();
-    this.floorController = undefined;
     this.fpsVisibilitySub?.unsubscribe();
     this.fpsVisibilitySub = undefined;
     this.fpsMeter?.destroy();
@@ -351,65 +336,6 @@ export abstract class BaseOlMap {
    */
   private emitLayers(): void {
     this.ngZone.run(() => this.mapLayers$.next({...this.mapLayers}));
-  }
-
-  /**
-   * Swaps the raster base layer to a different floor by rebuilding it with a
-   * new tile URL (ImageTileSource has no setUrl). Keeps the panel metadata,
-   * state, and zIndex 0 so it stays under the overlays. No-op when the id isn't
-   * a registered raster layer.
-   */
-  protected setRasterFloor(layerId: string, floorId: number): void {
-    const options = this.mapLayers[layerId];
-    if (!options) {
-      return;
-    }
-    const {friendlyName, icon, state, group, keepOnHideAll} = options;
-    this.unregisterLayer(layerId);
-    this.registerLayer({
-      kind: "raster",
-      id: layerId,
-      config: {...this.config, floorId, tileUrl: tileUrlFor(this.config.continentId, floorId)},
-      friendlyName,
-      icon,
-      state,
-      group,
-      keepOnHideAll,
-      zIndex: 0,
-    });
-  }
-
-  /**
-   * Starts the dynamic-floor picker once the map list has loaded. Both map
-   * components call this from initMap with their raster layer's id.
-   */
-  protected initFloorPicker(
-    rasterLayerId: string,
-    maps: MapFloorInfo[],
-    allowedTypes: readonly string[],
-  ): void {
-    if (!FLOOR_PICKER_ENABLED || !this.Map) {
-      return;
-    }
-    this.floorController = new FloorController(
-      this.Map,
-      this.config,
-      maps,
-      allowedTypes,
-      floorId => this.setRasterFloor(rasterLayerId, floorId),
-      state => this.ngZone.run(() => this.floorState$.next(state)),
-    );
-  }
-
-  /** Bound from the template; forwards a picker selection to the controller. */
-  selectFloor(floorId: number): void {
-    this.floorController?.selectFloor(floorId);
-  }
-
-  /** True once the dev/diagnostic FPS widget is mounted (bottom-left); the
-   * floor picker shifts up to clear it. */
-  get fpsVisible(): boolean {
-    return !!this.fpsMeter;
   }
 
   layerUpdated([id, state]: [string, LayerState]) {

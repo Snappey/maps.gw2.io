@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {catchError, combineLatest, forkJoin, map, Observable, of, switchMap} from "rxjs";
 import {GuildService} from "./guild.service";
-import {preloadImage} from "../lib/preload-image";
 import {cacheById} from "../lib/http-cache";
 import {
   FullMatchObjective, Match, MatchOverview, Objective, ObjectiveTiers,
@@ -20,6 +19,7 @@ export type * from "./wvw.model";
 export class WvwService {
 
   private objectiveTiersCache: {[id: string]: Observable<ObjectiveTiers>} = {};
+  private readonly preloadedImages = new Set<string>();
 
   constructor(private httpClient: HttpClient, private guildService: GuildService) { }
 
@@ -89,17 +89,17 @@ export class WvwService {
   prefetchObjectiveAssets(objective: FullMatchObjective): void {
     this.getObjectiveTiers(objective.upgrade_id).subscribe(({tiers}) => {
       for (const tier of tiers) {
-        preloadImage(`assets/${tier.name.toLowerCase()}.png`);
-        tier.upgrades.forEach(upgrade => preloadImage(upgrade.icon));
+        this.preloadImage(`assets/${tier.name.toLowerCase()}.png`);
+        tier.upgrades.forEach(upgrade => this.preloadImage(upgrade.icon));
       }
     });
 
     for (const upgradeId of objective.guild_upgrades ?? []) {
-      this.guildService.getGuildUpgrade(upgradeId).subscribe(upgrade => preloadImage(upgrade.icon));
+      this.guildService.getGuildUpgrade(upgradeId).subscribe(upgrade => this.preloadImage(upgrade.icon));
     }
 
     if (objective.claimed_by) {
-      preloadImage(`https://emblem.werdes.net/emblem/${objective.claimed_by}`);
+      this.preloadImage(`https://emblem.werdes.net/emblem/${objective.claimed_by}`);
     }
   }
 
@@ -168,31 +168,14 @@ export class WvwService {
     )
   }
 
-  // --- Scoring facade: logic lives in wvw-scoring.ts; these thin delegators
-  //     keep the API stable for the components and templates that call them. ---
-
-  getTier(match: Match): string {
-    return scoring.getTier(match);
-  }
-
-  getRegion(match: Match): string {
-    return scoring.getRegion(match);
-  }
+  // Scoring delegators: logic lives in wvw-scoring.ts.
 
   getLastResetTime(region: "eu" | "us"): Date | undefined {
     return scoring.getLastResetTime(region);
   }
 
-  cumulativeYakThresholds(tiers: Tier[]): number[] {
-    return scoring.cumulativeYakThresholds(tiers);
-  }
-
   calculateUpgradeProgress(yaksDelivered: number | undefined, tiers: Tier[], tierIndex: number): number {
     return scoring.calculateUpgradeProgress(yaksDelivered, tiers, tierIndex);
-  }
-
-  calculateUpgradeLevel(yaksDelivered: number | undefined, tiers: Tier[]): number {
-    return scoring.calculateUpgradeLevel(yaksDelivered, tiers);
   }
 
   getFriendlyUpgradeLevel(level: number): string {
@@ -205,5 +188,11 @@ export class WvwService {
 
   calculateMatchPointsTick(match: Match, team: string): number {
     return scoring.calculateMatchPointsTick(match, team);
+  }
+
+  private preloadImage(url: string | undefined): void {
+    if (!url || this.preloadedImages.has(url)) return;
+    this.preloadedImages.add(url);
+    new Image().src = url;
   }
 }
