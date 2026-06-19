@@ -1,27 +1,34 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {World, WvwService} from "../../services/wvw.service";
-import {debounceTime, filter, map, Observable, Subscription, switchMap} from "rxjs";
+import {Component, inject} from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {debounceTime, filter, map, switchMap} from "rxjs";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {Store} from "@ngrx/store";
 import {ChannelType, SettingsState} from "../../state/settings/settings.feature";
 import {settingsAction} from "../../state/settings/settings.action";
 import {AppState} from "../../state/appState";
 import {AccountService} from "../../services/account.service";
+import {ToggleableDialog} from "../shared/toggleable-dialog";
+import { Bind } from 'primeng/bind';
+import { Dialog } from 'primeng/dialog';
+import { Password } from 'primeng/password';
+import { LetDirective } from '@ngrx/component';
+import { SelectButton } from 'primeng/selectbutton';
+import { Select } from 'primeng/select';
+import { PrimeTemplate } from 'primeng/api';
+import { ButtonDirective, Button } from 'primeng/button';
 
 @Component({
-  selector: 'app-settings-modal',
-  templateUrl: './settings-modal.component.html',
-  styleUrls: ['./settings-modal.component.css']
+    selector: 'app-settings-modal',
+    templateUrl: './settings-modal.component.html',
+    styleUrls: ['./settings-modal.component.css'],
+    imports: [Bind, Dialog, FormsModule, ReactiveFormsModule, Password, LetDirective, SelectButton, Select, PrimeTemplate, ButtonDirective, Button]
 })
-export class SettingsModalComponent implements OnDestroy {
-  @Input()
-  visible!: boolean;
-  @Output()
-  visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+export class SettingsModalComponent extends ToggleableDialog {
+  private store = inject<Store<AppState>>(Store);
+  private accountService = inject(AccountService);
 
   settingsForm = new FormGroup({
     apiKey: new FormControl(),
-    homeWorld: new FormControl(),
     liveMapEnabled: new FormControl(),
     selectedChannel: new FormControl(),
     guildChannel: new FormControl(),
@@ -32,8 +39,6 @@ export class SettingsModalComponent implements OnDestroy {
   ChannelType = ChannelType;
   authChannelTypes: ChannelType[] = [ChannelType.Global, ChannelType.Guild, ChannelType.Solo, ChannelType.Custom];
   unauthChannelTypes: ChannelType[] = [ChannelType.Global]
-  worlds$: Observable<World[]> = this.wvwService.getAllWorlds()
-  settings$: Subscription;
   validateApiKey$ = this.settingsForm.get("apiKey")?.valueChanges.pipe(
     filter(apiKey => !!apiKey && apiKey.length == 72),
     debounceTime(5000),
@@ -43,23 +48,18 @@ export class SettingsModalComponent implements OnDestroy {
   userGuilds$ = this.store.select(s => s.user.guild_details).pipe(
     map(guilds => Object.values(guilds)),
     filter(guilds => guilds.length > 0),
+    map(guilds => [...guilds].sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)),
   )
 
-  constructor(private wvwService: WvwService, private store: Store<AppState>, private accountService: AccountService) {
-    this.settings$ = this.store.select(s => s.settings).subscribe(s => this.settingsForm.patchValue(s));
-  }
-
-  ngOnDestroy() {
-    this.settings$.unsubscribe();
+  constructor() {
+    super();
+    this.store.select(s => s.settings)
+      .pipe(takeUntilDestroyed())
+      .subscribe(s => this.settingsForm.patchValue(s));
   }
 
   onSubmit() {
     this.store.dispatch(settingsAction.setAll({ settings: this.settingsForm.value as SettingsState }));
     this.close();
-  }
-
-  close() {
-    this.visible = false;
-    this.visibleChange.emit(false)
   }
 }

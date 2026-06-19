@@ -5,11 +5,14 @@
 /tmp
 /out-tsc
 /bazel-out
+*.tsbuildinfo
 
 # Node
 /node_modules
-npm-debug.log
-yarn-error.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # IDEs and editors
 .idea/
@@ -40,3 +43,23 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Local environment / secrets
+.env
+.env.*
+
+# Build stamp (regenerated on prebuild/postinstall; see scripts/generate-build-info.mjs)
+/src/environments/build-info.ts
+
+# Claude Code local tooling
+.claude/
+
+# go-pmtiles CLI binary (see README) + tiler intermediates
+scripts/bin/
+scripts/out/
+
+# TACO marker packs (large user-imported binaries; never source)
+*.taco
+
+# Temporary scratch / test artifacts
+__tmp_*

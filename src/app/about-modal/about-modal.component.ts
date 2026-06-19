@@ -1,25 +1,23 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component} from '@angular/core';
+import {ToggleableDialog} from "../shared/toggleable-dialog";
+import { Bind } from 'primeng/bind';
+import { Dialog } from 'primeng/dialog';
+import { PrimeTemplate } from 'primeng/api';
+import { Button } from 'primeng/button';
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from 'primeng/tabs';
+import { DatePipe } from '@angular/common';
+import { buildInfo } from "../../environments/build-info";
 
 @Component({
-  selector: 'app-about-modal',
-  templateUrl: './about-modal.component.html',
-  styleUrls: ['./about-modal.component.css']
+    selector: 'app-about-modal',
+    templateUrl: './about-modal.component.html',
+    styleUrls: ['./about-modal.component.css'],
+    imports: [Bind, Dialog, PrimeTemplate, Button, Tabs, TabList, Tab, TabPanels, TabPanel, DatePipe]
 })
-export class AboutModalComponent {
-  @Input()
-  visible!: boolean;
-  @Output()
-  visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  constructor() {
-  }
+export class AboutModalComponent extends ToggleableDialog {
+  readonly buildDate = buildInfo.buildDate;
 
   openDiscord = () => window.open("https://discord.gg/8vCN5RBz75", "_blank");
   openGithub = () => window.open("https://github.com/Snappey/maps.gw2.io/", "_blank");
   openGithubIssues = () => window.open("https://github.com/Snappey/maps.gw2.io/issues/new", "_blank");
-
-  close() {
-    this.visible = false;
-    this.visibleChange.emit(false)
-  }
 }

@@ -1,200 +1,25 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {combineLatest, forkJoin, map, Observable, of, switchMap,} from "rxjs";
+import {catchError, combineLatest, forkJoin, map, Observable, of, switchMap} from "rxjs";
 import {GuildService} from "./guild.service";
-import {PointTuple} from "leaflet";
+import {cacheById} from "../lib/http-cache";
+import {
+  FullMatchObjective, Match, MatchOverview, Objective, ObjectiveTiers,
+  staticWorldNames, Tier, World, WorldDictionary,
+} from "./wvw.model";
+import * as scoring from "./wvw-scoring";
 
-export interface Objective {
-  id: string;
-  name: string;
-  sector_id: number;
-  type: string;
-  map_type: string;
-  map_id: number;
-  upgrade_id: number;
-  coord: PointTuple;
-  label_coord: PointTuple;
-  marker: string;
-  chat_link: string;
-}
-
-export interface Scores {
-  [team: string]: number;
-  red: number;
-  blue: number;
-  green: number;
-}
-
-export interface WorldNames {
-  [team: string]: string[];
-  red: string[];
-  blue: string[];
-  green: string[];
-}
-
-export interface FriendlyWorldNames {
-  [team: string]: string;
-  red: string;
-  blue: string;
-  green: string;
-}
-
-export interface MapScore {
-  type: string;
-  scores: Scores;
-}
-
-export interface Skirmish {
-  id: number;
-  scores: Scores;
-  map_scores: MapScore[];
-}
-
-export interface Bonus {
-  type: string;
-  owner: string;
-}
-
-export interface MatchObjective {
-  id: string;
-  type: string;
-  owner: string;
-  friendlyOwner: string;
-  last_flipped: Date;
-  points_tick: number;
-  points_capture: number;
-  claimed_by: string;
-  claimed_at?: Date;
-  yaks_delivered?: number;
-  guild_upgrades: string[];
-}
-
-export interface Map {
-  id: number;
-  type: string;
-  scores: Scores;
-  bonuses: Bonus[];
-  objectives: MatchObjective[];
-  deaths: Scores;
-  kills: Scores;
-}
-
-export interface Match {
-  id: string;
-  start_time: Date;
-  end_time: Date;
-  scores: Scores;
-  worlds: Scores;
-  tier: string;
-  region: string;
-  deaths: Scores;
-  kills: Scores;
-  victory_points: Scores;
-  skirmishes: Skirmish[];
-  maps: Map[];
-
-  // Custom
-  all_worlds: WorldNames;
-  all_worlds_names: WorldNames
-  friendly_names: FriendlyWorldNames
-  objectives: FullMatchObjective[]
-}
-
-export interface MatchOverview {
-  id: string;
-  worlds: Scores;
-  all_worlds: WorldNames;
-  start_time: Date;
-  end_time: Date;
-}
-
-export interface World {
-  id: string;
-  name: string;
-  population: string;
-}
-
-export interface WorldDictionary {
-  [id: string]: World;
-}
-
-export interface Upgrade {
-  name: string;
-  description: string;
-  icon: string;
-}
-
-export interface Tier {
-  name: string;
-  yaks_required: number;
-  upgrades: Upgrade[];
-}
-
-export interface ObjectiveTiers {
-  id: number;
-  tiers: Tier[];
-}
-
-export interface FullMatchObjective extends MatchObjective, Objective {}
-
-const staticWorldNames: WorldDictionary = {
-  "2001": { id: "2001", name: "Skrittsburgh", population: "N/A" },
-  "2002": { id: "2002", name: "Fortune's Vale", population: "N/A" },
-  "2003": { id: "2003", name: "Silent Woods", population: "N/A" },
-  "2004": { id: "2004", name: "Ettin's Back", population: "N/A" },
-  "2005": { id: "2005", name: "Domain of Anguish", population: "N/A" },
-  "2006": { id: "2006", name: "Palawadan", population: "N/A" },
-  "2007": { id: "2007", name: "Bloodstone Gulch", population: "N/A" },
-  "2008": { id: "2008", name: "Frost Citadel", population: "N/A" },
-  "2009": { id: "2009", name: "Dragrimmar", population: "N/A" },
-  "2010": { id: "2010", name: "Grenth's Door", population: "N/A" },
-  "2011": { id: "2011", name: "Mirror of Lyssa", population: "N/A" },
-  "2012": { id: "2012", name: "Melandru's Dome", population: "N/A" },
-  "2013": { id: "2013", name: "Kormir's Library", population: "N/A" },
-  "2014": { id: "2014", name: "Great House Aviary", population: "N/A" },
-  "2101": { id: "2101", name: "Bava Nisos", population: "N/A" },
-  "2102": { id: "2102", name: "Temple of Febe", population: "N/A" },
-  "2103": { id: "2103", name: "Gyala Hatchery", population: "N/A" },
-  "2104": { id: "2104", name: "Grekvelnn Burrows", population: "N/A" },
-  "1001": { id: "1001", name: "Moogooloo", population: "N/A" },
-  "1002": { id: "1002", name: "Rall's Rest", population: "N/A" },
-  "1003": { id: "1003", name: "Domain of Torment", population: "N/A" },
-  "1004": { id: "1004", name: "Yohlon Haven", population: "N/A" },
-  "1005": { id: "1005", name: "Tombs of Drascir", population: "N/A" },
-  "1006": { id: "1006", name: "Hall of Judgment", population: "N/A" },
-  "1007": { id: "1007", name: "Throne of Balthazar", population: "N/A" },
-  "1008": { id: "1008", name: "Dwayna's Temple", population: "N/A" },
-  "1009": { id: "1009", name: "Abaddon's Prison", population: "N/A" },
-  "1010": { id: "1010", name: "Ruined Cathedral of Blood", population: "N/A" },
-  "1011": { id: "1011", name: "Lutgardis Conservatory", population: "N/A" },
-  "1012": { id: "1012", name: "Mosswood", population: "N/A" },
-  "1013": { id: "1013", name: "Mithric Cliffs", population: "N/A" },
-  "1014": { id: "1014", name: "Lagula's Kraal", population: "N/A" },
-  "1015": { id: "1015", name: "De Molish Post", population: "N/A" },
-  "1016": { id: "1016", name: "Sea of Sorrows", population: "VeryHigh" },
-  "1017": { id: "1017", name: "Tarnished Coast", population: "VeryHigh" },
-  "1018": { id: "1018", name: "Northern Shiverpeaks", population: "Medium" },
-  "1019": { id: "1019", name: "Blackgate", population: "Full" },
-  "1020": { id: "1020", name: "Ferguson's Crossing", population: "Medium" },
-  "1021": { id: "1021", name: "Dragonbrand", population: "High" },
-  "1022": { id: "1022", name: "Kaineng", population: "Medium" },
-  "1023": { id: "1023", name: "Devona's Rest", population: "VeryHigh" },
-  "1024": { id: "1024", name: "Eredon Terrace", population: "High" },
-  "2105": { id: "2105", name: "Arborstone [FR]", population: "Medium" },
-  "2201": { id: "2201", name: "Kodash [DE]", population: "Medium" },
-  "2202": { id: "2202", name: "Riverside [DE]", population: "VeryHigh" },
-  "2203": { id: "2203", name: "Elona Reach [DE]", population: "Medium" },
-  "2204": { id: "2204", name: "Abaddon's Mouth [DE]", population: "Medium" },
-  "2205": { id: "2205", name: "Drakkar Lake [DE]", population: "VeryHigh" },
-  "2206": { id: "2206", name: "Miller's Sound [DE]", population: "Medium" },
-  "2207": { id: "2207", name: "Dzagonur [DE]", population: "Medium" },
-  "2301": { id: "2301", name: "Baruch Bay [SP]", population: "VeryHigh" }
-};
+// Domain types live in wvw.model.ts; re-exported here so existing
+// `import {Match, ...} from ".../wvw.service"` sites keep working.
+export type * from "./wvw.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class WvwService {
+
+  private objectiveTiersCache: {[id: string]: Observable<ObjectiveTiers>} = {};
+  private readonly preloadedImages = new Set<string>();
 
   constructor(private httpClient: HttpClient, private guildService: GuildService) { }
 
@@ -208,12 +33,6 @@ export class WvwService {
 
   getAllObjectives(): Observable<Objective[]> {
     return this.httpClient.get<Objective[]>(`/assets/data/mists_objectives.json`);
-    /*return this.getObjectives()
-      .pipe(
-        exhaustMap((objectiveIds) =>
-          zip(...objectiveIds.map(id => this.getObjectiveDetails(id)))
-        )
-      );*/
   }
 
   getAllMatchDetails(): Observable<Match[]> {
@@ -224,65 +43,10 @@ export class WvwService {
   }
 
   getObjectiveTiers(id: number): Observable<ObjectiveTiers> {
-    return this.httpClient.get<ObjectiveTiers>(`https://api.guildwars2.com/v2/wvw/upgrades/${id}`)
-  }
-
-  private mapWorldNames(match: Match): Observable<Match> {
-    const worldNames = of(staticWorldNames);
-
-    return forkJoin([worldNames]).pipe(
-      map(([worlds]) => {
-        const getWorldName = (id: string) => {
-          if (id in worlds) {
-            return worlds[id].name;
-          }
-          return "Unknown";
-        }
-
-
-        match.all_worlds_names = {
-          red: [getWorldName(match.worlds.red.toString())],
-          green: [getWorldName(match.worlds.green.toString())],
-          blue: [getWorldName(match.worlds.blue.toString())]
-        }
-        match.friendly_names = {
-          red: match.all_worlds_names.red.join(", "),
-          green: match.all_worlds_names.green.join(", "),
-          blue: match.all_worlds_names.blue.join(", ")
-        }
-        match.tier = this.getTier(match);
-        match.region = this.getRegion(match);
-
-        return match;
-      })
-    )
-  }
-
-  private mapObjectives(match: Match): Observable<Match> {
-    return forkJoin([this.getAllObjectives()]).pipe(
-      map(src => {
-        const objectives = src[0]
-        const matchObj = match.maps.map(m => m.objectives).flat();
-        match.objectives = matchObj.reduce((res: FullMatchObjective[], matchObj) => {
-          const obj = objectives.find(o => matchObj.id === o.id);
-          if (obj) {
-            res.push({...obj, ...matchObj, friendlyOwner: match.friendly_names[matchObj.owner.toLowerCase()]})
-          }
-
-          return res;
-        }, []);
-
-        return match;
-      })
-    )
-  }
-
-  getTier(match: Match): string {
-    return match.id.split("-")[1];
-  }
-
-  getRegion(match: Match): string {
-    return match.id.split("-")[0] === "1" ? "us" : "eu";
+    // Cached + in-flight de-duped (a hover prefetch can race the click that
+    // opens the dialog); cacheById evicts on error so failures don't stick.
+    return cacheById(this.objectiveTiersCache, String(id), () =>
+      this.httpClient.get<ObjectiveTiers>(`https://api.guildwars2.com/v2/wvw/upgrades/${id}`));
   }
 
   getMatchDetails(id: string): Observable<Match> {
@@ -313,105 +77,122 @@ export class WvwService {
       )
   }
 
-  getAllWorlds(): Observable<World[]> {
-    return this.httpClient.get<World[]>(`https://api.guildwars2.com/v2/worlds?ids=all`);
-  }
-
   getMatchOverviewByWorldId(worldId: string): Observable<MatchOverview> {
     return this.httpClient.get<MatchOverview>(`https://api.guildwars2.com/v2/wvw/matches/overview?world=${worldId}`)
   }
 
-  private getLastDayOccurence (date: Date, day: "sun" | "mon" | "tue" | "wed" | "thurs" | "fri" | "sat"): Date {
-    const d = new Date(date.getTime());
-    const days = ['sun', 'mon', 'tue', 'wed', 'thurs', 'fri', 'sat'];
-    if (days.includes(day)) {
-      const modifier = (d.getDay() + days.length - days.indexOf(day)) % 7 || 7;
-      d.setDate(d.getDate() - modifier);
+  /**
+   * Warm the browser cache for the images the objective-details dialog renders
+   * (tier-upgrade icons, claimed guild upgrades and emblem) so they don't pop
+   * in when the dialog opens. Driven by hover; safe to call repeatedly.
+   */
+  prefetchObjectiveAssets(objective: FullMatchObjective): void {
+    this.getObjectiveTiers(objective.upgrade_id).subscribe(({tiers}) => {
+      for (const tier of tiers) {
+        this.preloadImage(`assets/${tier.name.toLowerCase()}.png`);
+        tier.upgrades.forEach(upgrade => this.preloadImage(upgrade.icon));
+      }
+    });
+
+    for (const upgradeId of objective.guild_upgrades ?? []) {
+      this.guildService.getGuildUpgrade(upgradeId).subscribe(upgrade => this.preloadImage(upgrade.icon));
     }
-    return d;
+
+    if (objective.claimed_by) {
+      this.preloadImage(`https://emblem.werdes.net/emblem/${objective.claimed_by}`);
+    }
   }
+
+  /** Fills in the `// Custom` world-name/tier/region fields from the static dictionary. */
+  private mapWorldNames(match: Match): Observable<Match> {
+    const worlds = staticWorldNames;
+    const getWorldName = (id: string) => id in worlds ? worlds[id].name : "Unknown";
+
+    match.all_worlds_names = {
+      red: [getWorldName(match.worlds.red.toString())],
+      green: [getWorldName(match.worlds.green.toString())],
+      blue: [getWorldName(match.worlds.blue.toString())]
+    }
+    match.friendly_names = {
+      red: match.all_worlds_names.red.join(", "),
+      green: match.all_worlds_names.green.join(", "),
+      blue: match.all_worlds_names.blue.join(", ")
+    }
+    match.tier = scoring.getTier(match);
+    match.region = scoring.getRegion(match);
+
+    return of(match);
+  }
+
+  /** Joins live match objectives with their static details and resolves each upgrade tier. */
+  private mapObjectives(match: Match): Observable<Match> {
+    return this.getAllObjectives().pipe(
+      switchMap(objectives => {
+        const matchObjs = match.maps.map(m => m.objectives).flat();
+        match.objectives = matchObjs.reduce((res: FullMatchObjective[], matchObj) => {
+          const obj = objectives.find(o => matchObj.id === o.id);
+          if (obj) {
+            res.push({...obj, ...matchObj, friendlyOwner: match.friendly_names[matchObj.owner.toLowerCase()]})
+          }
+
+          return res;
+        }, []);
+
+        // Yak thresholds differ per objective, so the live yak total alone
+        // can't tell us the built tier — resolve each schedule from
+        // /wvw/upgrades (cached). A failed/absent schedule falls back to
+        // tier 0 rather than breaking the whole match feed.
+        const upgradeIds = [...new Set(match.objectives.map(o => o.upgrade_id))];
+        if (upgradeIds.length === 0) {
+          return of(match);
+        }
+
+        return forkJoin(upgradeIds.map(id =>
+          this.getObjectiveTiers(id).pipe(
+            map(({tiers}) => [id, tiers] as const),
+            catchError(() => of([id, [] as Tier[]] as const)),
+          ),
+        )).pipe(
+          map(entries => {
+            const schedules: {[id: number]: Tier[]} = {};
+            for (const [id, tiers] of entries) {
+              schedules[id] = tiers;
+            }
+            for (const obj of match.objectives) {
+              obj.upgrade_tier = scoring.calculateUpgradeLevel(obj.yaks_delivered, schedules[obj.upgrade_id] ?? []);
+            }
+            return match;
+          }),
+        );
+      })
+    )
+  }
+
+  // Scoring delegators: logic lives in wvw-scoring.ts.
 
   getLastResetTime(region: "eu" | "us"): Date | undefined {
-    let resetDay = undefined;
-    switch(region) {
-      case "eu":
-        resetDay = this.getLastDayOccurence(new Date(), "fri")
-        resetDay.setHours(18, 0, 0)
-        break;
-      case "us":
-        resetDay = this.getLastDayOccurence(new Date(), "sat")
-        resetDay.setHours(2, 0, 0)
-    }
-
-    return resetDay;
+    return scoring.getLastResetTime(region);
   }
 
-  calculateUpgradeProgress(yaksDelivered: number | undefined, friendlyUpgradeLevel: string): number {
-    if (yaksDelivered === undefined) {
-      return 0;
-    }
-
-    switch (friendlyUpgradeLevel) {
-      case "Secured":
-        return Math.max(yaksDelivered, 0)
-      case "Reinforced":
-        return Math.max(yaksDelivered - 20, 0)
-      case "Fortified":
-        return Math.max(yaksDelivered - 60, 0);
-      default:
-        return Math.max(yaksDelivered, 0);
-    }
-  }
-
-  calculateUpgradeLevel(yaksDelivered: number | undefined): number {
-    if (yaksDelivered === undefined) {
-      return 0;
-    }
-
-    if (yaksDelivered >= 140) {
-      return 3;
-    } else {
-      if (yaksDelivered >= 20) {
-        return yaksDelivered >= 60 ? 2 : 1;
-      }
-    }
-    return 0
+  calculateUpgradeProgress(yaksDelivered: number | undefined, tiers: Tier[], tierIndex: number): number {
+    return scoring.calculateUpgradeProgress(yaksDelivered, tiers, tierIndex);
   }
 
   getFriendlyUpgradeLevel(level: number): string {
-    switch(level) {
-      case 3:
-        return "Fortified";
-      case 2:
-        return "Reinforced";
-      case 1:
-        return "Secured";
-      default:
-        return "N/A"
-    }
+    return scoring.getFriendlyUpgradeLevel(level);
   }
 
-  hasUpgradeLevel(yaksDelivered: number | undefined, friendlyUpgradeLevel: string): boolean {
-    if (yaksDelivered === undefined) {
-      return false;
-    }
-
-    switch (friendlyUpgradeLevel) {
-      case "Secured":
-        return yaksDelivered >= 20;
-      case "Reinforced":
-        return yaksDelivered >= 60;
-      case "Fortified":
-        return yaksDelivered >= 140;
-      default:
-        return false;
-    }
+  hasUpgradeLevel(yaksDelivered: number | undefined, tiers: Tier[], tierIndex: number): boolean {
+    return scoring.hasUpgradeLevel(yaksDelivered, tiers, tierIndex);
   }
 
   calculateMatchPointsTick(match: Match, team: string): number {
-    return match.maps.flat()
-      .map(o => o.objectives).flat()
-      .filter(o => o.owner.toLowerCase() === team.toLowerCase())
-      .map(o => o.points_tick).reduce((total, cur) => total + cur);
+    return scoring.calculateMatchPointsTick(match, team);
+  }
+
+  private preloadImage(url: string | undefined): void {
+    if (!url || this.preloadedImages.has(url)) return;
+    this.preloadedImages.add(url);
+    new Image().src = url;
   }
 }

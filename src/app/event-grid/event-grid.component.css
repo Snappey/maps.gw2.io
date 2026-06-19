@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+
+/* Up to five equal columns*/
+.event-grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 1.5rem;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-bottom: 1rem;
+}
+
+/* Fewer columns on narrower screens so panels stay readable. */
+@media (max-width: 1400px) {
+  .event-grid-container { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 1100px) {
+  .event-grid-container { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 800px) {
+  .event-grid-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .event-grid-container {
+    grid-template-columns: 1fr;
+    row-gap: 0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+.xpac-heading {
+  min-height: 2rem;
+}

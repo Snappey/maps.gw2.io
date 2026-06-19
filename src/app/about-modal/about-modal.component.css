@@ -1,0 +1,75 @@
+h4 {
+  color: var(--p-primary-color);
+}
+
+/* Chat-link URLs are long unbreakable tokens that x-overflow narrow dialogs. */
+a {
+  overflow-wrap: anywhere;
+}
+
+.intro {
+  margin: 0 0 1rem;
+  line-height: 1.5;
+}
+
+/* Keep the dialog height steady when switching between tabs of different lengths. */
+:host ::ng-deep .p-tabpanels {
+  min-height: 14rem;
+}
+
+.usage {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.usage li {
+  padding: 0.3rem 0;
+  line-height: 1.5;
+}
+
+.usage strong {
+  color: var(--p-primary-color);
+}
+
+.shortcuts {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.4rem;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--p-text-muted-color);
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.experimental {
+  margin: 0 0 0.5rem;
+  color: var(--p-text-muted-color);
+  font-style: italic;
+}
+
+.contact {
+  line-height: 1.5;
+}
+
+.contact-handles {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--p-text-muted-color);
+}
+
+.build-date {
+  color: var(--p-text-muted-color);
+  font-size: 0.875rem;
+}

@@ -1,0 +1,64 @@
+<div class="map-host" #mapHost [appTacoDrop]="2"></div>
+
+<div #tooltipEl class="ol-marker-tooltip">
+  <span #tooltipTextEl class="tooltip-overlay plain-tip" [hidden]="!!hoveredObjective()"></span>
+  @if (hoveredObjective(); as obj) {
+    <app-objective-tooltip [obj]="obj"></app-objective-tooltip>
+  }
+</div>
+
+<div [hidden]="menu.isOpen('matches')" class="score-hud">
+  @if (activeMatch$ | async; as activeMatch) {
+    <app-war-score-bar [small]="smallScreen" [match]="activeMatch"></app-war-score-bar>
+  }
+</div>
+
+<app-toolbar [buttons]="leftToolbar" [activePanel]="menu.active" style="position: absolute; z-index: 999; width: 25vw; left: 10px; top: 5px;"></app-toolbar>
+<app-toolbar [buttons]="rightToolbar" [leftToRight]="false" style="position: absolute; z-index: 999; width: 25vw; right: 10px; top: 5px;"></app-toolbar>
+
+<app-settings-modal [visible]="menu.isOpen('settings')" (visibleChange)="menu.setVisible('settings', $event)"></app-settings-modal>
+<app-about-modal [visible]="menu.isOpen('about')" (visibleChange)="menu.setVisible('about', $event)"></app-about-modal>
+
+@if (menu.isOpen('layers')) {
+  <div class="layer-panel">
+    <app-layer-options [layers]="mapLayers$()" (layerUpdated)="layerUpdated($event)" (removeLayers)="removeUserLayers($event)"></app-layer-options>
+  </div>
+}
+
+@if (menu.isOpen('score')) {
+  <div style="position: absolute; z-index: 999; left: 12%; top: 12%; width: 76vw;">
+    @if (activeMatch$ | async; as activeMatch) {
+      <div class="tooltip p-3 stats-panel">
+        <div class="stats-tabs">
+          <button type="button" [class.active]="statsTab === 'details'" (click)="statsTab = 'details'">Skirmish Details</button>
+          <button type="button" [class.active]="statsTab === 'history'" (click)="statsTab = 'history'">Match History</button>
+          <button type="button" [class.active]="statsTab === 'chart'" (click)="statsTab = 'chart'">Score Graph</button>
+        </div>
+        @switch (statsTab) {
+          @case ('details') {
+            <app-skirmish-details [match]="activeMatch"></app-skirmish-details>
+          }
+          @case ('history') {
+            <app-match-history [match]="activeMatch"></app-match-history>
+          }
+          @case ('chart') {
+            <app-skirmish-stats-chart [match]="activeMatch" height="50vh"></app-skirmish-stats-chart>
+          }
+        }
+      </div>
+    }
+  </div>
+}
+
+<div [hidden]="!menu.isOpen('matches')" class="overflow-auto h-auto w-auto my-5" style="position: absolute; z-index: 999; left: 0; right: 0; top: 25px; margin-left: auto; margin-right: auto">
+  <app-match-overview (clickedMatch)="overviewMatchClicked($event)"></app-match-overview>
+</div>
+
+<p-dialog header="Objective Upgrades" [visible]="menu.isOpen('objectiveDetails')" (visibleChange)="menu.setVisible('objectiveDetails', $event)" [style]="{width: '50vw'}"
+  [breakpoints]="{'1200px': '75vw', '768px': '95vw'}" [draggable]="true" [resizable]="false">
+  @if (selectedObjective(); as obj) {
+    <app-objective-details [objective]="obj"></app-objective-details>
+  }
+</p-dialog>
+
+<app-user-layer-manager [visible]="menu.isOpen('userLayers')" (visibleChange)="menu.setVisible('userLayers', $event)" [continentId]="2"></app-user-layer-manager>

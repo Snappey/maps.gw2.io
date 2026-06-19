@@ -1,5 +1,5 @@
 import {createActionGroup, emptyProps, props} from "@ngrx/store";
-import {Match} from "../../services/wvw.service";
+import {Match} from "../../services/wvw.model";
 
 export const mistsActions = createActionGroup({
   source: 'mists',

@@ -10,7 +10,7 @@ export enum ChannelType {
 
 export interface SettingsState {
   apiKey: string | undefined;
-  homeWorld: string | undefined;
+  lastMatchId: string | undefined;
 
   liveMapEnabled: boolean;
   selectedChannel: ChannelType;
@@ -20,7 +20,7 @@ export interface SettingsState {
 
 const initialState: SettingsState = {
   apiKey: undefined,
-  homeWorld: undefined,
+  lastMatchId: undefined,
 
   liveMapEnabled: false,
   selectedChannel: ChannelType.Global,
@@ -32,8 +32,10 @@ export const settingsFeature = createFeature({
   name: 'settings',
   reducer: createReducer(
     initialState,
+    // Merge, don't replace: the settings form has no lastMatchId control.
     on(settingsAction.setAll, (state, props) => {
       return {
+        ...state,
         ...props.settings,
       }
     }),
@@ -43,10 +45,10 @@ export const settingsFeature = createFeature({
         apiKey: props.settings.apiKey
       }
     }),
-    on(settingsAction.setHomeWorld, (state, props) => {
-      return {
+    on(settingsAction.setLastMatch, (state, props) => {
+      return state.lastMatchId === props.matchId ? state : {
         ...state,
-        homeWorld: props.world.id
+        lastMatchId: props.matchId
       }
     }),
     on(settingsAction.loadCookieSuccess, (state, props) => {
@@ -65,5 +67,5 @@ export const settingsFeature = createFeature({
 });
 
 export const {
-  name, // feature name
+  name,
 } = settingsFeature;

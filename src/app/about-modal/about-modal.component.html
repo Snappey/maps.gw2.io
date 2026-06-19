@@ -1,43 +1,101 @@
-<p-dialog header="About" [(visible)]="this.visible" [style]="{width: '50vw'}">
-  <div>
-    Created because I like scrolling around on maps when I'm wasting time and there were none for Guild Wars 2 that I enjoyed using.
-    Little things like (hopefully) smooth performance when panning around but still being able to see all the relevant information and schedules for the currently active events for each expansion.
+<p-dialog header="About" [(visible)]="this.visible" [style]="{width: '50vw'}" [breakpoints]="{'1200px': '75vw', '768px': '95vw'}">
+  <p class="intro">
+    A fast, friendly map for Guild Wars 2 — built because I love scrolling around maps while wasting time, and none of the others felt nice to use.
+    Smooth panning, every marker you need, and live event schedules for each expansion.
+  </p>
+
+  <p-tabs value="0" [scrollable]="true">
+    <p-tablist>
+      <p-tab value="0">Basics</p-tab>
+      <p-tab value="1">Markers</p-tab>
+      <p-tab value="2">Layers</p-tab>
+      <p-tab value="3">WvW</p-tab>
+      <p-tab value="4">Live Map</p-tab>
+    </p-tablist>
+
+    <p-tabpanels>
+      <p-tabpanel value="0">
+        <ul class="usage">
+          <li><strong>Move around</strong> — drag to pan, scroll to zoom.</li>
+          <li><strong>Draw</strong> — hold right-click to sketch, just like in-game. Your line fades after you let go.</li>
+          <li><strong>Share a view</strong> — the link follows where you're looking, so just copy the URL. Here's the <a href="/tyria#-494.40625,432.0625,4" target="_blank">Isle of Istan</a>.</li>
+          <li><strong>Jump to a chat link</strong> — paste one on the end, e.g. <a href="/tyria/[&BO8AAAA=]">https://maps.gw2.io/tyria/[&BO8AAAA=]</a>, and a green circle marks the spot.</li>
+        </ul>
+
+        <h4 class="mb-1 mt-3">Shortcuts</h4>
+        <ul class="shortcuts">
+          <li><kbd>1</kbd> Layers</li>
+          <li><kbd>2</kbd> Live Markers / Matches</li>
+          <li><kbd>3</kbd> Events / Match Stats</li>
+          <li><kbd>4</kbd> Wizards Vault</li>
+          <li><kbd>Esc</kbd> Close panels</li>
+        </ul>
+      </p-tabpanel>
+
+      <p-tabpanel value="1">
+        <ul class="usage">
+          <li><strong>Click</strong> a marker — copies its chat link to your clipboard.</li>
+          <li><strong>Double-click</strong> a marker — opens its wiki page.</li>
+          <li><strong>Big cities</strong> like Lion's Arch and Arborstone come with extra detail.</li>
+          <li><strong>World bosses</strong> pop onto the map as they're about to start — click one to fly there and grab the nearest waypoint.</li>
+          <li><strong>Events</strong> — press <kbd>3</kbd> for full schedules, grouped by expansion.</li>
+        </ul>
+      </p-tabpanel>
+
+      <p-tabpanel value="2">
+        <ul class="usage">
+          <li><strong>Open it</strong> — from the toolbar, or press <kbd>1</kbd>.</li>
+          <li><strong>Toggle</strong> anything on or off with the eye.</li>
+          <li><strong>Search</strong> to filter the list fast.</li>
+          <li><strong>Pin</strong> a layer to keep it visible at every zoom level.</li>
+          <li><strong>Show all / hide all</strong> in one click.</li>
+        </ul>
+
+        <h4 class="mb-1 mt-3">Marker packs</h4>
+        <div>
+          Optional layers from the community. <strong>Lady Elyssa's Markers</strong> (Bounty, Ranger Pets, Fishing) are courtesy of
+          <a href="https://github.com/LadyElyssa/LadyElyssaTacoTrails" target="_blank">Lady Elyssa's Markers</a> — flip them on from the Layers panel.
+        </div>
+      </p-tabpanel>
+
+      <p-tabpanel value="3">
+        <ul class="usage">
+          <li><strong>Switch to the Mists</strong> from the toolbar.</li>
+          <li><strong>Pick a match</strong> to load it onto the map.</li>
+          <li><strong>Score bar</strong> up top tracks points and per-tick for all three teams.</li>
+          <li><strong>Click an objective</strong> — see who owns it, the claiming guild, upgrades, time held and the RI timer.</li>
+          <li><strong>Sector colours</strong> show who controls what at a glance.</li>
+          <li><strong>Match stats</strong> — skirmish details, full history and a score graph.</li>
+        </ul>
+      </p-tabpanel>
+
+      <p-tabpanel value="4">
+        <p class="experimental">Experimental — not officially supported.</p>
+        <ul class="usage">
+          <li><strong>See live markers</strong> for yourself, your guild, everyone, or a custom mix — even in WvW.</li>
+          <li><strong>See it in action</strong> — watch a <a href="https://user-images.githubusercontent.com/4106212/268472576-068d7b4d-78cf-4098-8b98-7c1b69c5973e.mp4" target="_blank">quick demo</a>.</li>
+          <li><strong>Add an API key</strong> in Settings to switch it on.</li>
+          <li><strong>Works with BlishHUD</strong> for your in-game position.</li>
+          <li><strong>Need a hand?</strong> Setup help is on the GW2 Dev Discord below, with a great guide from Xinterp.</li>
+        </ul>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+
+  <div class="contact mt-3">
+    Got a suggestion or found a bug? Open an issue on GitHub, contact me on the GW2 Dev Discord, or send me a mail in-game.
+    <span class="contact-handles">Discord <strong>&#64;spai</strong> · In-game <strong>Snappy.8941</strong></span>
   </div>
-  <div>
-    <h4 class="mb-1">Marker Interaction</h4>
-    Clicking a marker to copy its chat link to your clipboard or
-    double clicking to be taken to the wiki. Along with increased detail on major cities such as Lion's Arch and Arborstone.
-  </div>
-  <div>
-    <h4 class="mb-1">Direct Links</h4>
-    You can also link others directly to a location on the map, look here is the <a href="/tyria#-494.40625,432.0625,4" target="_blank">Isle of Istan</a> or using a chat link you add it to the end e.g. <a href="/tyria/[&BO8AAAA=]">https://maps.gw2.io/tyria/[&BO8AAAA=]</a> and a green circle will highlight it.
-  </div>
-  <div>
-    <h4 class="mb-1">Drawing</h4>
-    Draw in the same style as in-game by holding the right click, your line will slowly fade after you let go.
-  </div>
-  <div>
-    <h4 class="mb-1">Live Map</h4>
-    There is support for a "Live Map" (requires an API key), allowing you to see yourself, guild, everyone or a special mix of all the above as markers on the map including in WvW. This includes segmentation to prevent leaking your position to anyone who shouldn't know about it. Currently it's a private BlishHud module that has not been released, if you're interested in trying it out reach out on the Gw2 Developer Discord below.
-  </div>
-  <div>
-    <h4 class="mb-1">Finally</h4>
-    Any suggestions, issues, or feedback feel free to open an issue on GitHub, find me in my Gw2 Dev Discord below or send me a mail in-game.
-  </div>
-  <div>
-    <h4 class="mb-1">Contact Me</h4>
-    <ul>
-      <li>Discord: @spai</li>
-      <li>Github: <a href="https://github.com/snappey">Snappey</a></li>
-      <li>In-Game: Snappy.8941</li>
-    </ul>
+
+  <div class="build-date mt-2">
+    Last updated {{ buildDate | date:'longDate' }}
   </div>
 
   <ng-template pTemplate="footer">
-    <div class="flex justify-content-around px-8">
-      <p-button icon="pi pi-discord" (click)="openDiscord()" label="Discord" styleClass="p-button p-button-info" class="flex"></p-button>
-      <p-button icon="pi pi-github" (click)="openGithub()" label="GitHub" styleClass="p-button p-button-info" class="flex"></p-button>
-      <p-button icon="pi pi-exclamation-triangle" (click)="openGithubIssues()" label="Report an Issue" styleClass="p-button p-button-danger" class="flex"></p-button>
+    <div class="flex flex-wrap justify-content-center gap-2 w-full">
+      <p-button icon="pi pi-discord" (click)="openDiscord()" label="Discord" severity="info" [outlined]="true"></p-button>
+      <p-button icon="pi pi-github" (click)="openGithub()" label="GitHub" severity="info" [outlined]="true"></p-button>
+      <p-button icon="pi pi-exclamation-triangle" (click)="openGithubIssues()" label="Report an Issue" severity="danger" [outlined]="true"></p-button>
     </div>
   </ng-template>
 </p-dialog>

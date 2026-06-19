@@ -3,7 +3,7 @@ import {AccountInfo} from "../../services/account.service";
 import {userActions} from "./user.action";
 import {Guild} from "../../services/guild.service";
 import {AppState} from "../appState";
-import {MatchOverview} from "../../services/wvw.service";
+import {MatchOverview} from "../../services/wvw.model";
 
 export interface UserState extends AccountInfo {
   error: string

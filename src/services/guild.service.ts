@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable, of, tap} from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import {Observable} from "rxjs";
+import {cacheById} from "../lib/http-cache";
 
 export interface Layer {
   id: number;
@@ -50,33 +51,18 @@ export interface GuildUpgrade {
   providedIn: 'root'
 })
 export class GuildService {
-  guildCache: {[id: string]: Guild}
-  guildUpgradeCache: {[id: string]: GuildUpgrade};
+  private readonly guildCache: {[id: string]: Observable<Guild>} = {};
+  private readonly guildUpgradeCache: {[id: string]: Observable<GuildUpgrade>} = {};
 
-  constructor(private httpClient: HttpClient) {
-    this.guildCache = {};
-    this.guildUpgradeCache = {};
-  }
+  constructor(private httpClient: HttpClient) {}
 
   getGuild(id: string): Observable<Guild> {
-    if (id in this.guildCache) {
-      return of(this.guildCache[id])
-    }
-
-    return this.httpClient.get<Guild>(`https://api.guildwars2.com/v2/guild/${id}`)
-      .pipe(
-        tap(guild => this.guildCache[guild.id] = guild)
-      );
+    return cacheById(this.guildCache, id, () =>
+      this.httpClient.get<Guild>(`https://api.guildwars2.com/v2/guild/${id}`));
   }
 
   getGuildUpgrade(id: string): Observable<GuildUpgrade> {
-    if (id in this.guildUpgradeCache) {
-      return of(this.guildUpgradeCache[id])
-    }
-
-    return this.httpClient.get<GuildUpgrade>(`https://api.guildwars2.com/v2/guild/upgrades/${id}`)
-      .pipe(
-        tap(upgrade => this.guildUpgradeCache[upgrade.id] = upgrade)
-      );
+    return cacheById(this.guildUpgradeCache, id, () =>
+      this.httpClient.get<GuildUpgrade>(`https://api.guildwars2.com/v2/guild/upgrades/${id}`));
   }
 }

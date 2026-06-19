@@ -1,0 +1,59 @@
+.card {
+  display: inline-block;
+  padding: 6px 12px 8px 10px;
+  min-width: 11rem;
+}
+
+.name {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.type-line {
+  color: var(--p-text-color);
+}
+
+.pip {
+  width: 10px;
+  height: 10px;
+  margin-left: 2px;
+}
+
+.wp {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.tick {
+  color: var(--p-gw2-gold-bright);
+  font-weight: 600;
+}
+
+.tick img {
+  vertical-align: middle;
+}
+
+.label {
+  color: var(--p-gw2-gold-label);
+}
+
+hr.sep {
+  border: 0;
+  border-top: 1px solid var(--p-gw2-separator);
+  margin: 4px 0;
+}
+
+.ri {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+.ri img {
+  vertical-align: middle;
+}
+
+.muted {
+  color: var(--p-text-muted-color);
+  font-size: 0.85rem;
+}

@@ -1,0 +1,35 @@
+.layer-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.color-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.feature-count {
+  opacity: 0.6;
+}
+
+.color-input {
+  width: 3rem;
+  height: auto;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.geojson-input {
+  width: 100%;
+  font-family: monospace;
+  font-size: 0.85rem;
+  resize: vertical;
+}
+
+.import-error {
+  color: #ef9a9a;
+}

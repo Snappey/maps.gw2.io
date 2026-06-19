@@ -1,0 +1,175 @@
+:host {
+  display: block;
+  font-size: 0.8rem;
+  line-height: 1.15;
+  color: var(--p-surface-700);
+}
+
+/* ---- Search row (sticky) + global show / hide all ---- */
+.search-row {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 8px;
+  background: var(--p-gw2-surface-sticky);
+  border-bottom: 1px solid var(--p-gw2-separator);
+}
+
+.search-input {
+  width: 100%;
+  font-size: 0.8rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+}
+
+:host ::ng-deep .p-iconfield {
+  display: block;
+  width: 100%;
+}
+
+.global-actions {
+  border: 1px solid var(--p-gw2-separator);
+  border-radius: 2px;
+}
+
+/* ---- Shared icon buttons (globals, header eye/trash, row lock/eye) ---- */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--p-gw2-gold-label);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: color 0.12s ease, background-color 0.12s ease;
+}
+
+.icon-btn .pi {
+  font-size: 0.9rem;
+}
+
+.icon-btn:hover {
+  color: var(--p-primary-color);
+  background: var(--p-gw2-hover-bg);
+}
+
+/* Eye reads as the primary "on" control; the row dims when hidden. */
+.icon-btn.eye {
+  color: var(--p-primary-color);
+}
+
+/* Lock is muted until pinned, then bright gold. */
+.icon-btn.lock.active {
+  color: var(--p-primary-color);
+}
+
+.icon-btn.danger:hover {
+  color: var(--p-gw2-team-red);
+  background: rgba(220, 57, 57, 0.12);
+}
+
+/* ---- Scroll body ---- */
+.layer-scroll {
+  padding: 8px;
+}
+
+/* ---- Category / group headers ---- */
+.category-header {
+  cursor: pointer;
+  user-select: none;
+  padding: 0.3rem 0.15rem;
+  margin-top: 0.4rem;
+}
+
+.category-header:first-child {
+  margin-top: 0;
+}
+
+.category-header:hover .cat-name,
+.category-header:hover .chevron {
+  color: var(--p-primary-color);
+}
+
+.chevron {
+  font-size: 0.7rem;
+  color: var(--p-gw2-gold-label);
+}
+
+.cat-name {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--p-gw2-gold-label);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.count-pill {
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--p-primary-color);
+  background: var(--p-gw2-surface-row);
+  border: 1px solid var(--p-gw2-separator);
+  border-radius: 999px;
+  padding: 0.18rem 0.45rem;
+  min-width: 2.2rem;
+  text-align: center;
+}
+
+/* ---- Leaf rows ---- */
+.layer-row {
+  gap: 0.4rem;
+  padding: 0.3rem 0.35rem;
+  margin-bottom: 0.25rem;
+  border-radius: 3px;
+  background: var(--p-gw2-surface-row);
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.12s ease, border-color 0.12s ease, opacity 0.12s ease;
+}
+
+.layer-row:hover {
+  background: var(--p-gw2-hover-bg);
+  border-color: var(--p-gw2-separator);
+}
+
+.layer-row.is-hidden {
+  opacity: 0.45;
+}
+
+.layer-row.is-hidden:hover {
+  opacity: 0.75;
+}
+
+.row-left {
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.row-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.row-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--p-surface-700);
+}
+
+.empty-hint {
+  padding: 0.9rem 0.5rem;
+  color: var(--p-surface-500);
+  font-style: italic;
+  text-align: center;
+}

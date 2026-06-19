@@ -1,0 +1,44 @@
+<p-dialog header="Custom Layers" [(visible)]="visible" [modal]="true" [style]="{width: '34rem'}" appendTo="body">
+  @if (layers$ | async; as layers) {
+    @if (layers.length > 0) {
+      <div class="mb-3">
+        @for (layer of layers; track layer.id) {
+          <div class="flex align-items-center justify-content-between py-2 layer-row">
+            <span class="flex align-items-center gap-2">
+              <span class="color-swatch" [style.background]="layer.color"></span>
+              {{layer.name}}
+              <small class="feature-count">{{layer.features.length}} features</small>
+            </span>
+            <span class="flex gap-1">
+              <p-button icon="pi pi-copy" [text]="true" size="small"
+                pTooltip="Copy GeoJSON" tooltipStyleClass="tooltip" (onClick)="export(layer)"></p-button>
+              <p-button icon="pi pi-trash" [text]="true" size="small" severity="danger"
+                pTooltip="Delete layer" tooltipStyleClass="tooltip" (onClick)="remove(layer)"></p-button>
+            </span>
+          </div>
+        }
+      </div>
+    } @else {
+      <p class="feature-count mb-3">No custom layers yet. Import a GeoJSON FeatureCollection below —
+        coordinates are GW2 continent pixels, with optional <code>name</code>, <code>description</code>
+        and <code>icon</code> properties.</p>
+    }
+  }
+
+  <div class="flex flex-column gap-2">
+    <div class="flex gap-2">
+      <input pInputText class="flex-grow-1" placeholder="Layer name" [(ngModel)]="importName"/>
+      <input type="color" class="color-input" [(ngModel)]="importColor" pTooltip="Layer colour" tooltipStyleClass="tooltip"/>
+    </div>
+    <textarea class="geojson-input" rows="6" spellcheck="false"
+      placeholder='{"type": "FeatureCollection", "features": [...]}' [(ngModel)]="importGeoJson"></textarea>
+    <div class="flex align-items-center justify-content-between">
+      <input type="file" accept=".json,.geojson,application/json" (change)="onFileSelected($event)"/>
+      <p-button label="Import" icon="pi pi-plus" size="small"
+        [disabled]="!importName || !importGeoJson" (onClick)="import()"></p-button>
+    </div>
+    @if (importError) {
+      <small class="import-error">{{importError}}</small>
+    }
+  </div>
+</p-dialog>

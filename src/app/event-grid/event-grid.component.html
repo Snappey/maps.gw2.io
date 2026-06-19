@@ -1,0 +1,14 @@
+﻿<div class="event-grid-container fadein animation-duration-300">
+  @for (region of upcomingEvents | keyvalue; track region.key) {
+    <div class="flex flex-column">
+      <div class="mb-1 flex align-items-center justify-content-center tooltip xpac-heading">
+        <h3 class="my-1 text-center">{{friendlyXpacName(region.key)}}</h3>
+      </div>
+      @for (event of region.value; track event.name) {
+        <div class="my-2 clickable hover">
+          <app-event-panel [event]="event" (clickedEvent)="forwardsEvent($event)"></app-event-panel>
+        </div>
+      }
+    </div>
+  }
+</div>

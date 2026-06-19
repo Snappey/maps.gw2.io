@@ -1,0 +1,53 @@
+<div class="map-host" #mapHost [appTacoDrop]="1"></div>
+
+<div #tooltipEl class="tooltip ol-marker-tooltip"></div>
+<img #highlightEl class="ol-marker-highlight" src="/assets/small_drawn_circle.png" alt=""/>
+
+<app-toolbar [buttons]="leftToolbar" [activePanel]="menu.active" style="position: absolute; z-index: 999; width: 25vw; left: 10px; top: 5px;"></app-toolbar>
+<app-toolbar [buttons]="rightToolbar" [leftToRight]="false" style="position: absolute; z-index: 999; width: 25vw; right: 10px; top: 5px;"></app-toolbar>
+
+<app-settings-modal [visible]="menu.isOpen('settings')" (visibleChange)="menu.setVisible('settings', $event)"></app-settings-modal>
+<app-about-modal [visible]="menu.isOpen('about')" (visibleChange)="menu.setVisible('about', $event)"></app-about-modal>
+
+@if (menu.isOpen('events')) {
+  @if (upcomingEvents$ | async; as upcomingEvents) {
+    <app-event-grid [upcomingEvents]="upcomingEvents" (eventClicked)="panToEvent($event)"
+      style="position: absolute; z-index: 999; width: 95vw; left: 2.5vw; top: 5vw;"></app-event-grid>
+  }
+}
+
+@if (menu.isOpen('layers')) {
+  <div class="layer-panel">
+    <app-layer-options [layers]="mapLayers$()" (layerUpdated)="layerUpdated($event)" (removeLayers)="removeUserLayers($event)"></app-layer-options>
+  </div>
+}
+
+@if (menu.isOpen('liveMarkers')) {
+  <app-live-marker-sidebar [markers]="liveMarkerList$" style="position: absolute; left: 15px; top: 5vh; z-index: 999"></app-live-marker-sidebar>
+}
+
+@if (menu.isOpen('wizardsVault')) {
+  <app-wizard-vault-grid style="position: absolute; z-index: 999; width: 95vw; left: 2.5vw; top: 5vw;"></app-wizard-vault-grid>
+}
+
+@if (!smallScreen && widgets.isVisible('compass')) {
+  <img src="assets/compass.png" width="128" height="128" alt="map compass" style="scale: 1.25; position: absolute; z-index: 999; bottom: 65px; right: 55px"/>
+  <div class="clickable compass-button core" style="position: absolute; z-index: 1000; bottom: 165px; right: 95px" (click)="panTo([49024,31272])"
+    pTooltip="Core Tyria" tooltipPosition="left" tooltipStyleClass="tooltip"></div>
+  <div class="clickable compass-button eod" style="position: absolute; z-index: 1000; bottom: 45px; right: 95px" (click)="panTo([28832,101176])"
+    pTooltip="End of Dragons" tooltipPosition="left" tooltipStyleClass="tooltip"></div>
+  <div class="clickable compass-button pof" style="position: absolute; z-index: 1000; bottom: 105px; right: 35px" (click)="panTo([59904,48080])"
+    pTooltip="Path of Fire" tooltipPosition="left" tooltipStyleClass="tooltip"></div>
+  <div class="clickable compass-button hot" style="position: absolute; z-index: 1000; bottom: 108px; right: 155px" (click)="panTo([35407,33800])"
+    pTooltip="Heart of Thorns" tooltipPosition="left" tooltipStyleClass="tooltip"></div>
+  <div class="clickable compass-button-corner soto" style="position: absolute; z-index: 1000; bottom: 163px; right: 152px" (click)="panTo([26407,21800])"
+    pTooltip="Secrets of the Obscure" tooltipPosition="left" tooltipStyleClass="tooltip"></div>
+  <div class="clickable compass-button-corner voe" style="position: absolute; z-index: 1000; bottom: 62px; right: 150px" (click)="panTo([9716,58756])"
+    pTooltip="Visions of Eternity" tooltipPosition="left" tooltipStyleClass="tooltip"></div>
+  <div class="clickable compass-button-player" style="position: absolute; z-index: 1000; bottom: 114px; right: 101px;"></div>
+}
+
+<app-user-layer-manager [visible]="menu.isOpen('userLayers')" (visibleChange)="menu.setVisible('userLayers', $event)" [continentId]="1"></app-user-layer-manager>
+
+<app-map-context-menu [items]="contextMenuItems()" [position]="contextMenuPosition()"
+  (closed)="contextMenuPosition.set(undefined)"></app-map-context-menu>

@@ -1,35 +1,41 @@
-<div class="flex flex-auto flex-column overflow-y-auto fadein animation-duration-300" style="max-height: 80vh;">
-  <ng-container *ngIf="isEnabled$ | async; else notEnabled">
-      <div *ngIf="channelDetails$ | async as channelDetails" class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
-        <h4 class="my-1 text-center">{{channelDetails[0]}} <span *ngIf="liveMapState$ | async as liveMapState">({{liveMapState}})</span></h4>
+﻿<div class="flex flex-auto flex-column overflow-y-auto fadein animation-duration-300" style="max-height: 80vh;">
+  @if (isEnabled$ | async) {
+    @if (channelDetails$ | async; as channelDetails) {
+      <div class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
+        <h4 class="my-1 text-center">{{channelDetails[0]}} @if (liveMapState$ | async; as liveMapState) {
+          <span>({{liveMapState}})</span>
+        }</h4>
       </div>
-      <ng-container *ngIf="liveMapState$ | async | titlecase; else notConnected">
-        <div *ngIf="!(activeMarkers$ | async)?.length" class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
+    }
+    @if (liveMapState$ | async | titlecase) {
+      @if (!(activeMarkers$ | async)?.length) {
+        <div class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
           <div class="my-1 text-center text-white">There is no one here.. :(</div>
         </div>
-
+      }
+      @for (marker of activeMarkers$ | async; track marker.accountName) {
         <div class="flex flex-row align-items-center justify-content-start tooltip p-1 pr-2 my-1 clickable text-center w-auto border-1 hover:border-green-200"
-             [ngStyle]="{'background-color': marker.getProfessionColour()}"
-             [ngClass]="{'border-green-500': isFollowing$ | async}"
-             *ngFor="let marker of activeMarkers$ | async"
-             (click)="clickedMarker$.next(marker)">
+          [ngStyle]="{'background-color': marker.getProfessionColour()}"
+          [ngClass]="{'border-green-500': isFollowing$ | async}"
+          (click)="clickedMarker$.next(marker)">
           <img alt="player profession icon" [src]="marker.getProfessionIcon()" width="24" height="24">
           <span class="px-1 font-light" [ngStyle]="{'color': marker.isSelf ? '#FFCC77' : 'white'}">{{marker.accountName}}</span>
-          <img alt="player active mount" class="ml-auto" *ngIf="marker.isMounted()" [ngSrc]="marker.getMountIcon()" width="24" height="24">
+          @if (marker.isMounted()) {
+            <img alt="player active mount" class="ml-auto" [ngSrc]="marker.getMountIcon()" width="24" height="24">
+          }
         </div>
-      </ng-container>
-  </ng-container>
+      }
+    } @else {
+      <div class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
+        <div class="my-1 text-center text-white">Disconnected from Live Markers.. (will reconnect automatically)</div>
+      </div>
+    }
+  } @else {
+    <div class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
+      <div class="my-1 text-center text-white">Live Markers are not enabled.. (check your settings)</div>
+    </div>
+  }
 </div>
 
 
-<ng-template #notEnabled>
-  <div class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
-    <div class="my-1 text-center text-white">Live Markers are not enabled.. (check your settings)</div>
-  </div>
-</ng-template>
 
-<ng-template #notConnected>
-  <div class="mb-1 flex-1 flex-grow-1 align-items-center lg:w-15rem w-5rem h-2rem tooltip">
-    <div class="my-1 text-center text-white">Disconnected from Live Markers.. (will reconnect automatically)</div>
-  </div>
-</ng-template>

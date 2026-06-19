@@ -1,0 +1,6203 @@
+[
+  {
+    "chat_link": "[&BBYEAAA=]",
+    "geometry": {
+      "coordinates": [
+        5350.55,
+        6925.49
+      ],
+      "type": "Point"
+    },
+    "id": 1046,
+    "layer": "waypoint",
+    "tooltip": "PvP Lobby Waypoint"
+  },
+  {
+    "chat_link": "[&BEkFAAA=]",
+    "geometry": {
+      "coordinates": [
+        5562.98,
+        7106.84
+      ],
+      "type": "Point"
+    },
+    "id": 1353,
+    "layer": "waypoint",
+    "tooltip": "Portal to Lion's Arch"
+  },
+  {
+    "chat_link": "[&BEoFAAA=]",
+    "geometry": {
+      "coordinates": [
+        5756.61,
+        6737.69
+      ],
+      "type": "Point"
+    },
+    "id": 1354,
+    "layer": "waypoint",
+    "tooltip": "Combat Training Waypoint"
+  },
+  {
+    "chat_link": "[&BNgJAAA=]",
+    "geometry": {
+      "coordinates": [
+        5540.46,
+        6742.55
+      ],
+      "type": "Point"
+    },
+    "id": 2520,
+    "layer": "waypoint",
+    "tooltip": "Market Waypoint"
+  },
+  {
+    "chat_link": "[&BNkJAAA=]",
+    "geometry": {
+      "coordinates": [
+        5786.27,
+        7214.86
+      ],
+      "type": "Point"
+    },
+    "id": 2521,
+    "layer": "waypoint",
+    "tooltip": "Siege Training Waypoint"
+  },
+  {
+    "chat_link": "[&BNoJAAA=]",
+    "geometry": {
+      "coordinates": [
+        5097.78,
+        7180.97
+      ],
+      "type": "Point"
+    },
+    "id": 2522,
+    "layer": "waypoint",
+    "tooltip": "Arena Waypoint"
+  },
+  {
+    "chat_link": "[&BEwEAAA=]",
+    "geometry": {
+      "coordinates": [
+        3907.24,
+        5932.69
+      ],
+      "type": "Point"
+    },
+    "id": 1100,
+    "layer": "waypoint",
+    "tooltip": "Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BE0EAAA=]",
+    "geometry": {
+      "coordinates": [
+        3508.69,
+        5614.63
+      ],
+      "type": "Point"
+    },
+    "id": 1101,
+    "layer": "waypoint",
+    "tooltip": "Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BE4EAAA=]",
+    "geometry": {
+      "coordinates": [
+        7446.2,
+        5307.14
+      ],
+      "type": "Point"
+    },
+    "id": 1102,
+    "layer": "waypoint",
+    "tooltip": "Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BE8EAAA=]",
+    "geometry": {
+      "coordinates": [
+        7623.86,
+        5309.97
+      ],
+      "type": "Point"
+    },
+    "id": 1103,
+    "layer": "waypoint",
+    "tooltip": "Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BPAEAAA=]",
+    "geometry": {
+      "coordinates": [
+        3285.69,
+        8587.37
+      ],
+      "type": "Point"
+    },
+    "id": 1264,
+    "layer": "waypoint",
+    "tooltip": "Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BPEEAAA=]",
+    "geometry": {
+      "coordinates": [
+        2838.1,
+        8931.83
+      ],
+      "type": "Point"
+    },
+    "id": 1265,
+    "layer": "waypoint",
+    "tooltip": "Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BNEGAAA=]",
+    "geometry": {
+      "coordinates": [
+        4334.22,
+        9744.68
+      ],
+      "type": "Point"
+    },
+    "id": 1745,
+    "layer": "waypoint",
+    "tooltip": "Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BNMGAAA=]",
+    "geometry": {
+      "coordinates": [
+        4698.75,
+        9778.31
+      ],
+      "type": "Point"
+    },
+    "id": 1747,
+    "layer": "waypoint",
+    "tooltip": "Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BPYGAAA=]",
+    "geometry": {
+      "coordinates": [
+        2523.2,
+        5937.65
+      ],
+      "type": "Point"
+    },
+    "id": 1782,
+    "layer": "waypoint",
+    "tooltip": "Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BPcGAAA=]",
+    "geometry": {
+      "coordinates": [
+        2413.93,
+        5930.11
+      ],
+      "type": "Point"
+    },
+    "id": 1783,
+    "layer": "waypoint",
+    "tooltip": "Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BAUHAAA=]",
+    "geometry": {
+      "coordinates": [
+        7595.29,
+        7882.28
+      ],
+      "type": "Point"
+    },
+    "id": 1797,
+    "layer": "waypoint",
+    "tooltip": "Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BAYHAAA=]",
+    "geometry": {
+      "coordinates": [
+        7595.8,
+        7586.38
+      ],
+      "type": "Point"
+    },
+    "id": 1798,
+    "layer": "waypoint",
+    "tooltip": "Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BGYHAAA=]",
+    "geometry": {
+      "coordinates": [
+        2470.2,
+        7676.69
+      ],
+      "type": "Point"
+    },
+    "id": 1894,
+    "layer": "waypoint",
+    "tooltip": "Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BGcHAAA=]",
+    "geometry": {
+      "coordinates": [
+        2729.1,
+        7676.14
+      ],
+      "type": "Point"
+    },
+    "id": 1895,
+    "layer": "waypoint",
+    "tooltip": "Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BJsHAAA=]",
+    "geometry": {
+      "coordinates": [
+        9199.74,
+        8156.37
+      ],
+      "type": "Point"
+    },
+    "id": 1947,
+    "layer": "waypoint",
+    "tooltip": "Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BJ0HAAA=]",
+    "geometry": {
+      "coordinates": [
+        8702.53,
+        7857.22
+      ],
+      "type": "Point"
+    },
+    "id": 1949,
+    "layer": "waypoint",
+    "tooltip": "Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BEMJAAA=]",
+    "geometry": {
+      "coordinates": [
+        8574.96,
+        7105.89
+      ],
+      "type": "Point"
+    },
+    "id": 2371,
+    "layer": "waypoint",
+    "tooltip": "Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BEcJAAA=]",
+    "geometry": {
+      "coordinates": [
+        8109.55,
+        7113.19
+      ],
+      "type": "Point"
+    },
+    "id": 2375,
+    "layer": "waypoint",
+    "tooltip": "Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BFoJAAA=]",
+    "geometry": {
+      "coordinates": [
+        10542.7,
+        7061.04
+      ],
+      "type": "Point"
+    },
+    "id": 2394,
+    "layer": "waypoint",
+    "tooltip": "Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BGcJAAA=]",
+    "geometry": {
+      "coordinates": [
+        11008.9,
+        7333.18
+      ],
+      "type": "Point"
+    },
+    "id": 2407,
+    "layer": "waypoint",
+    "tooltip": "Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BJwLAAA=]",
+    "geometry": {
+      "coordinates": [
+        12845.9,
+        6159.29
+      ],
+      "type": "Point"
+    },
+    "id": 2972,
+    "layer": "waypoint",
+    "tooltip": "Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BJ0LAAA=]",
+    "geometry": {
+      "coordinates": [
+        12693.3,
+        6158.78
+      ],
+      "type": "Point"
+    },
+    "id": 2973,
+    "layer": "waypoint",
+    "tooltip": "Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BPoDAAA=]",
+    "geometry": {
+      "coordinates": [
+        11889.6,
+        15719.6
+      ],
+      "type": "Point"
+    },
+    "id": 1018,
+    "layer": "waypoint",
+    "tooltip": " Hill Waypoint"
+  },
+  {
+    "chat_link": "[&BPsDAAA=]",
+    "geometry": {
+      "coordinates": [
+        10562.3,
+        13020.3
+      ],
+      "type": "Point"
+    },
+    "id": 1019,
+    "layer": "waypoint",
+    "tooltip": " Hill Waypoint"
+  },
+  {
+    "chat_link": "[&BPwDAAA=]",
+    "geometry": {
+      "coordinates": [
+        9081.58,
+        15652.5
+      ],
+      "type": "Point"
+    },
+    "id": 1020,
+    "layer": "waypoint",
+    "tooltip": " Hill Waypoint"
+  },
+  {
+    "chat_link": "[&BL0EAAA=]",
+    "geometry": {
+      "coordinates": [
+        10621.7,
+        14619.2
+      ],
+      "type": "Point"
+    },
+    "id": 1213,
+    "layer": "waypoint",
+    "tooltip": "Stonemist Waypoint"
+  },
+  {
+    "chat_link": "[&BL4EAAA=]",
+    "geometry": {
+      "coordinates": [
+        10836.5,
+        13669.2
+      ],
+      "type": "Point"
+    },
+    "id": 1214,
+    "layer": "waypoint",
+    "tooltip": "Overlook Waypoint"
+  },
+  {
+    "chat_link": "[&BL8EAAA=]",
+    "geometry": {
+      "coordinates": [
+        11554.7,
+        15223.9
+      ],
+      "type": "Point"
+    },
+    "id": 1215,
+    "layer": "waypoint",
+    "tooltip": "Valley Waypoint"
+  },
+  {
+    "chat_link": "[&BMAEAAA=]",
+    "geometry": {
+      "coordinates": [
+        9648.42,
+        15184.7
+      ],
+      "type": "Point"
+    },
+    "id": 1216,
+    "layer": "waypoint",
+    "tooltip": "Lowlands Waypoint"
+  },
+  {
+    "chat_link": "[&BDcIAAA=]",
+    "geometry": {
+      "coordinates": [
+        11368.1,
+        15484.8
+      ],
+      "type": "Point"
+    },
+    "id": 2103,
+    "layer": "waypoint",
+    "tooltip": "Langor Gulch Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BD0IAAA=]",
+    "geometry": {
+      "coordinates": [
+        9387.45,
+        14900.3
+      ],
+      "type": "Point"
+    },
+    "id": 2109,
+    "layer": "waypoint",
+    "tooltip": "Aldon's Ledge Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BFYIAAA=]",
+    "geometry": {
+      "coordinates": [
+        10181.7,
+        14047.1
+      ],
+      "type": "Point"
+    },
+    "id": 2134,
+    "layer": "waypoint",
+    "tooltip": "Anzalias Pass Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BGEIAAA=]",
+    "geometry": {
+      "coordinates": [
+        10273.5,
+        15074.3
+      ],
+      "type": "Point"
+    },
+    "id": 2145,
+    "layer": "waypoint",
+    "tooltip": "Klovan Gully Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BGQIAAA=]",
+    "geometry": {
+      "coordinates": [
+        11016.3,
+        14073.3
+      ],
+      "type": "Point"
+    },
+    "id": 2148,
+    "layer": "waypoint",
+    "tooltip": "Ogrewatch Cut Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BGoIAAA=]",
+    "geometry": {
+      "coordinates": [
+        11710,
+        14825.7
+      ],
+      "type": "Point"
+    },
+    "id": 2154,
+    "layer": "waypoint",
+    "tooltip": "Bravost Escarpment Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BKkIAAA=]",
+    "geometry": {
+      "coordinates": [
+        11063.2,
+        13506.2
+      ],
+      "type": "Point"
+    },
+    "id": 2217,
+    "layer": "waypoint",
+    "tooltip": "Veloka Slope Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BLQIAAA=]",
+    "geometry": {
+      "coordinates": [
+        10615,
+        14533.8
+      ],
+      "type": "Point"
+    },
+    "id": 2228,
+    "layer": "waypoint",
+    "tooltip": "Stonemist Castle Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BMMIAAA=]",
+    "geometry": {
+      "coordinates": [
+        10836.3,
+        13695.8
+      ],
+      "type": "Point"
+    },
+    "id": 2243,
+    "layer": "waypoint",
+    "tooltip": "Overlook Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BMwIAAA=]",
+    "geometry": {
+      "coordinates": [
+        9619.78,
+        15205
+      ],
+      "type": "Point"
+    },
+    "id": 2252,
+    "layer": "waypoint",
+    "tooltip": "Lowlands Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BM0IAAA=]",
+    "geometry": {
+      "coordinates": [
+        10906.7,
+        15178.6
+      ],
+      "type": "Point"
+    },
+    "id": 2253,
+    "layer": "waypoint",
+    "tooltip": "Quentin Lake Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BNcIAAA=]",
+    "geometry": {
+      "coordinates": [
+        9815.85,
+        15379.6
+      ],
+      "type": "Point"
+    },
+    "id": 2263,
+    "layer": "waypoint",
+    "tooltip": "Jerrifer's Slough Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BNsIAAA=]",
+    "geometry": {
+      "coordinates": [
+        11257.5,
+        14523.3
+      ],
+      "type": "Point"
+    },
+    "id": 2267,
+    "layer": "waypoint",
+    "tooltip": "Durios Gulch Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BOMIAAA=]",
+    "geometry": {
+      "coordinates": [
+        10235.3,
+        13387
+      ],
+      "type": "Point"
+    },
+    "id": 2275,
+    "layer": "waypoint",
+    "tooltip": "Mendon's Gap Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BOgIAAA=]",
+    "geometry": {
+      "coordinates": [
+        9984.85,
+        14583.5
+      ],
+      "type": "Point"
+    },
+    "id": 2280,
+    "layer": "waypoint",
+    "tooltip": "Wildcreek Run Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BPUIAAA=]",
+    "geometry": {
+      "coordinates": [
+        11587.2,
+        15145.7
+      ],
+      "type": "Point"
+    },
+    "id": 2293,
+    "layer": "waypoint",
+    "tooltip": "Valley Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BJQOAAA=]",
+    "geometry": {
+      "coordinates": [
+        10813.5,
+        13569.9
+      ],
+      "type": "Point"
+    },
+    "id": 3732,
+    "layer": "waypoint",
+    "tooltip": "Overlook Emergency Waypoint C"
+  },
+  {
+    "chat_link": "[&BJgOAAA=]",
+    "geometry": {
+      "coordinates": [
+        10594,
+        14655.4
+      ],
+      "type": "Point"
+    },
+    "id": 3736,
+    "layer": "waypoint",
+    "tooltip": "Stonemist Castle Emergency Waypoint C"
+  },
+  {
+    "chat_link": "[&BJkOAAA=]",
+    "geometry": {
+      "coordinates": [
+        11539.9,
+        15074.3
+      ],
+      "type": "Point"
+    },
+    "id": 3737,
+    "layer": "waypoint",
+    "tooltip": "Valley Emergency Waypoint C"
+  },
+  {
+    "chat_link": "[&BJsOAAA=]",
+    "geometry": {
+      "coordinates": [
+        10552.1,
+        14704.3
+      ],
+      "type": "Point"
+    },
+    "id": 3739,
+    "layer": "waypoint",
+    "tooltip": "Stonemist Castle Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BJ4OAAA=]",
+    "geometry": {
+      "coordinates": [
+        11458.2,
+        15170.9
+      ],
+      "type": "Point"
+    },
+    "id": 3742,
+    "layer": "waypoint",
+    "tooltip": "Valley Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BJ8OAAA=]",
+    "geometry": {
+      "coordinates": [
+        9478.28,
+        15174.9
+      ],
+      "type": "Point"
+    },
+    "id": 3743,
+    "layer": "waypoint",
+    "tooltip": "Lowlands Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BKQOAAA=]",
+    "geometry": {
+      "coordinates": [
+        9697.96,
+        15161.6
+      ],
+      "type": "Point"
+    },
+    "id": 3748,
+    "layer": "waypoint",
+    "tooltip": "Lowlands Emergency Waypoint C"
+  },
+  {
+    "chat_link": "[&BKsOAAA=]",
+    "geometry": {
+      "coordinates": [
+        10676.3,
+        13700.9
+      ],
+      "type": "Point"
+    },
+    "id": 3755,
+    "layer": "waypoint",
+    "tooltip": "Overlook Emergency Waypoint B"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10246.103,
+            14843.063
+          ],
+          [
+            10136.105,
+            14673.021999999999
+          ],
+          [
+            10195.081,
+            14476.112
+          ],
+          [
+            10235.142,
+            14202.863000000001
+          ],
+          [
+            10480.552,
+            14158.922
+          ],
+          [
+            10799.002999999999,
+            14165.518
+          ],
+          [
+            11001.345,
+            14228.859
+          ],
+          [
+            11045.383,
+            14350.4
+          ],
+          [
+            10999.211000000001,
+            14502.399
+          ],
+          [
+            11043.152,
+            14781.953000000001
+          ],
+          [
+            10941.399000000001,
+            14933.176
+          ],
+          [
+            10764.664999999999,
+            15036.966
+          ],
+          [
+            10484.044,
+            14976.05
+          ],
+          [
+            10246.103,
+            14843.063
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 833,
+    "layer": "sector_bounds",
+    "tooltip": "Stonemist Castle"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11063.102,
+            14798.375
+          ],
+          [
+            11455.564,
+            14831.646
+          ],
+          [
+            11821.351,
+            15184.241
+          ],
+          [
+            11589.23,
+            15429.166
+          ],
+          [
+            11375.733,
+            15322.271999999999
+          ],
+          [
+            11124.794,
+            15325.473
+          ],
+          [
+            11080.077,
+            15049.411
+          ],
+          [
+            10961.349,
+            14949.598
+          ],
+          [
+            11063.102,
+            14798.375
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 834,
+    "layer": "sector_bounds",
+    "tooltip": " Valley"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11362.934000000001,
+            14371.266
+          ],
+          [
+            11491.847,
+            14247.494
+          ],
+          [
+            11538.407,
+            14115.477
+          ],
+          [
+            11785.369,
+            14114.895
+          ],
+          [
+            11948.523,
+            14271.065
+          ],
+          [
+            11956.283,
+            14460.312
+          ],
+          [
+            11899.247,
+            14582.532000000001
+          ],
+          [
+            11464.687,
+            14668.765
+          ],
+          [
+            11362.934000000001,
+            14371.266
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 835,
+    "layer": "sector_bounds",
+    "tooltip": "Umberglade Woods"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11834.83,
+            15196.49
+          ],
+          [
+            12009.43,
+            15085.715999999999
+          ],
+          [
+            11995.85,
+            15480.894
+          ],
+          [
+            11970.048,
+            15820.491
+          ],
+          [
+            11619.684,
+            15849.009
+          ],
+          [
+            11275.043,
+            15762.485
+          ],
+          [
+            11602.708999999999,
+            15441.415
+          ],
+          [
+            11834.83,
+            15196.49
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 836,
+    "layer": "sector_bounds",
+    "tooltip": " Hill"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10826.711,
+            15791.955
+          ],
+          [
+            10827.681,
+            15354.485
+          ],
+          [
+            11116.838,
+            15338.577000000001
+          ],
+          [
+            11193.565,
+            15491.837
+          ],
+          [
+            11253.608,
+            15763.34
+          ],
+          [
+            10826.711,
+            15791.955
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 837,
+    "layer": "sector_bounds",
+    "tooltip": "Danelon Passage"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11020.434,
+            14216.763
+          ],
+          [
+            11172.821,
+            14094.543
+          ],
+          [
+            11238.393,
+            13992.014
+          ],
+          [
+            11388.161,
+            13926.151
+          ],
+          [
+            11526.386,
+            14109.675000000001
+          ],
+          [
+            11479.826000000001,
+            14241.692000000001
+          ],
+          [
+            11350.913,
+            14365.464
+          ],
+          [
+            11064.472,
+            14338.304
+          ],
+          [
+            11020.434,
+            14216.763
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 841,
+    "layer": "sector_bounds",
+    "tooltip": "Orgath Uplands"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10358.785,
+            15264.140000000001
+          ],
+          [
+            10483.333,
+            15003.403999999999
+          ],
+          [
+            10763.954,
+            15064.32
+          ],
+          [
+            10814.976,
+            15352.313
+          ],
+          [
+            10814.006,
+            15789.783
+          ],
+          [
+            10726.221,
+            15802.780999999999
+          ],
+          [
+            10566.171,
+            15803.557
+          ],
+          [
+            10434.348,
+            15724.599
+          ],
+          [
+            10358.785,
+            15264.140000000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 842,
+    "layer": "sector_bounds",
+    "tooltip": "Darkrait Inlet"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10482.718,
+            14135.795
+          ],
+          [
+            10357.491,
+            13749.832
+          ],
+          [
+            10556.632000000001,
+            13511.891000000001
+          ],
+          [
+            10829.298999999999,
+            13537.984
+          ],
+          [
+            10905.444,
+            13647.691
+          ],
+          [
+            10952.003999999999,
+            13750.996000000001
+          ],
+          [
+            10844.140000000001,
+            13866.523
+          ],
+          [
+            10801.169,
+            14142.391000000001
+          ],
+          [
+            10482.718,
+            14135.795
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 843,
+    "layer": "sector_bounds",
+    "tooltip": " Overlook"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9711.780599999998,
+            13178.874
+          ],
+          [
+            10094.532899999998,
+            13670.276
+          ],
+          [
+            9956.2594,
+            13943.137
+          ],
+          [
+            9506.3831,
+            13966.707999999999
+          ],
+          [
+            9382.1843,
+            13443.005
+          ],
+          [
+            9711.780599999998,
+            13178.874
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 844,
+    "layer": "sector_bounds",
+    "tooltip": "Speldan Clearcut"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10551.046,
+            13494.947
+          ],
+          [
+            10422.133,
+            13292.993
+          ],
+          [
+            9888.2256,
+            13039.144
+          ],
+          [
+            10575.877999999999,
+            12891.607
+          ],
+          [
+            10918.482,
+            13129.063
+          ],
+          [
+            10823.713,
+            13521.04
+          ],
+          [
+            10551.046,
+            13494.947
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 845,
+    "layer": "sector_bounds",
+    "tooltip": " Hill"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11228.938999999998,
+            13498.393
+          ],
+          [
+            11350.48,
+            13696.855
+          ],
+          [
+            11387.243,
+            13914.523
+          ],
+          [
+            11237.475,
+            13980.385999999999
+          ],
+          [
+            11044.057,
+            13774.746
+          ],
+          [
+            11228.938999999998,
+            13498.393
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 846,
+    "layer": "sector_bounds",
+    "tooltip": "Pangloss Rise"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9704.8589,
+            14366.268
+          ],
+          [
+            9443.599100000001,
+            14318.155999999999
+          ],
+          [
+            9509.4815,
+            13984.864
+          ],
+          [
+            9959.3578,
+            13961.293
+          ],
+          [
+            10210.8303,
+            14193.317000000001
+          ],
+          [
+            10170.7693,
+            14466.565999999999
+          ],
+          [
+            9835.643999999998,
+            14428.542000000001
+          ],
+          [
+            9704.8589,
+            14366.268
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 847,
+    "layer": "sector_bounds",
+    "tooltip": "Molevekian Delve"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9414.0314,
+            15199.581999999999
+          ],
+          [
+            9573.266599999999,
+            14930.892
+          ],
+          [
+            9737.8077,
+            14771.715
+          ],
+          [
+            9948.3365,
+            14721.081
+          ],
+          [
+            10112.1695,
+            14686.548999999999
+          ],
+          [
+            10222.1675,
+            14856.59
+          ],
+          [
+            10131.763500000001,
+            14959.992
+          ],
+          [
+            9935.8914,
+            15284.166
+          ],
+          [
+            9809.2191,
+            15296.097
+          ],
+          [
+            9575.8953,
+            15440.53
+          ],
+          [
+            9414.0314,
+            15199.581999999999
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 848,
+    "layer": "sector_bounds",
+    "tooltip": " Lowlands"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9945.3369,
+            15298.953
+          ],
+          [
+            10345.006000000001,
+            15265.1
+          ],
+          [
+            10420.569,
+            15725.559
+          ],
+          [
+            9932.6784,
+            15740.885
+          ],
+          [
+            9945.3369,
+            15298.953
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 849,
+    "layer": "sector_bounds",
+    "tooltip": "Golanta Clearing"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9558.283200000002,
+            15455.02
+          ],
+          [
+            9530.560599999999,
+            15760.570000000002
+          ],
+          [
+            9346.1345,
+            15788.894
+          ],
+          [
+            9156.547999999999,
+            15838.558
+          ],
+          [
+            8988.932,
+            15627.098
+          ],
+          [
+            8984.5282,
+            15274.697
+          ],
+          [
+            9110.4245,
+            15022.303
+          ],
+          [
+            9396.4193,
+            15214.072
+          ],
+          [
+            9558.283200000002,
+            15455.02
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 850,
+    "layer": "sector_bounds",
+    "tooltip": " Hill"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9698.0795,
+            14373.969
+          ],
+          [
+            9828.864599999999,
+            14436.243
+          ],
+          [
+            9730.6521,
+            14756.343
+          ],
+          [
+            9343.2147,
+            14618.797
+          ],
+          [
+            9436.8197,
+            14325.857
+          ],
+          [
+            9698.0795,
+            14373.969
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 851,
+    "layer": "sector_bounds",
+    "tooltip": "Rogue's Quarry"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9401.495,
+            15196.309
+          ],
+          [
+            9560.7302,
+            14927.618999999999
+          ],
+          [
+            9725.271299999999,
+            14768.442000000001
+          ],
+          [
+            9337.833900000001,
+            14630.895999999999
+          ],
+          [
+            9115.5002,
+            15004.54
+          ],
+          [
+            9401.495,
+            15196.309
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 882,
+    "layer": "sector_bounds",
+    "tooltip": "Aldon's Ledge"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9920.524800000001,
+            15741.065
+          ],
+          [
+            9933.1833,
+            15299.133
+          ],
+          [
+            9806.511,
+            15311.063999999998
+          ],
+          [
+            9573.1872,
+            15455.497000000001
+          ],
+          [
+            9545.4646,
+            15761.047
+          ],
+          [
+            9920.524800000001,
+            15741.065
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 883,
+    "layer": "sector_bounds",
+    "tooltip": "Jerrifer's Slough"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10143.24,
+            14961.644999999999
+          ],
+          [
+            9947.3679,
+            15285.819
+          ],
+          [
+            10347.037,
+            15251.966
+          ],
+          [
+            10471.585000000001,
+            14991.23
+          ],
+          [
+            10233.643999999998,
+            14858.243
+          ],
+          [
+            10143.24,
+            14961.644999999999
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 884,
+    "layer": "sector_bounds",
+    "tooltip": "Klovan Gully"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9839.5785,
+            14439.537
+          ],
+          [
+            10174.703800000001,
+            14477.561
+          ],
+          [
+            10115.727799999999,
+            14674.471
+          ],
+          [
+            9951.8948,
+            14709.003
+          ],
+          [
+            9741.366,
+            14759.637
+          ],
+          [
+            9839.5785,
+            14439.537
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 885,
+    "layer": "sector_bounds",
+    "tooltip": "Wildcreek Run"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11835.055,
+            15176.858
+          ],
+          [
+            11469.268,
+            14824.263
+          ],
+          [
+            11467.231,
+            14684.098
+          ],
+          [
+            11901.791,
+            14597.865
+          ],
+          [
+            11911.006,
+            14841.238
+          ],
+          [
+            12009.655,
+            15066.083999999999
+          ],
+          [
+            11835.055,
+            15176.858
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 886,
+    "layer": "sector_bounds",
+    "tooltip": "Bravost Escarpment"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11589.280999999999,
+            15439.99
+          ],
+          [
+            11261.615,
+            15761.06
+          ],
+          [
+            11201.572,
+            15489.557
+          ],
+          [
+            11124.845000000001,
+            15336.297
+          ],
+          [
+            11375.784,
+            15333.096
+          ],
+          [
+            11589.280999999999,
+            15439.99
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 887,
+    "layer": "sector_bounds",
+    "tooltip": "Langor Gulch"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11349.479000000001,
+            14378.178
+          ],
+          [
+            11451.232,
+            14675.677
+          ],
+          [
+            11453.269,
+            14815.842
+          ],
+          [
+            11060.807,
+            14782.571
+          ],
+          [
+            11016.866,
+            14503.017
+          ],
+          [
+            11063.037999999999,
+            14351.018
+          ],
+          [
+            11349.479000000001,
+            14378.178
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 888,
+    "layer": "sector_bounds",
+    "tooltip": "Durios Gulch"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10950.474,
+            14950.609
+          ],
+          [
+            10773.74,
+            15054.399000000001
+          ],
+          [
+            10824.762,
+            15342.392
+          ],
+          [
+            11113.919,
+            15326.484
+          ],
+          [
+            11069.202,
+            15050.422
+          ],
+          [
+            10950.474,
+            14950.609
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 889,
+    "layer": "sector_bounds",
+    "tooltip": "Quentin Lake"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10341.018,
+            13738.123
+          ],
+          [
+            10540.159000000001,
+            13500.182
+          ],
+          [
+            10411.246,
+            13298.228
+          ],
+          [
+            9877.3386,
+            13044.378999999999
+          ],
+          [
+            9724.883699999998,
+            13171.74
+          ],
+          [
+            10107.635999999999,
+            13663.142
+          ],
+          [
+            10341.018,
+            13738.123
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 890,
+    "layer": "sector_bounds",
+    "tooltip": "Mendon's Gap"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11220.949999999999,
+            13491.771999999999
+          ],
+          [
+            10932.084,
+            13138.789
+          ],
+          [
+            10837.314999999999,
+            13530.766
+          ],
+          [
+            10913.46,
+            13640.473
+          ],
+          [
+            10960.019999999999,
+            13743.778
+          ],
+          [
+            11036.068000000001,
+            13768.125
+          ],
+          [
+            11220.949999999999,
+            13491.771999999999
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 891,
+    "layer": "sector_bounds",
+    "tooltip": "Veloka Slope"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10809.976999999999,
+            14147.935000000001
+          ],
+          [
+            11012.319,
+            14211.276
+          ],
+          [
+            11164.706,
+            14089.056
+          ],
+          [
+            11230.278,
+            13986.527
+          ],
+          [
+            11036.86,
+            13780.886999999999
+          ],
+          [
+            10960.812,
+            13756.54
+          ],
+          [
+            10852.948,
+            13872.067
+          ],
+          [
+            10809.976999999999,
+            14147.935000000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 892,
+    "layer": "sector_bounds",
+    "tooltip": "Ogrewatch Cut"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10222.506,
+            14184.209
+          ],
+          [
+            10467.916,
+            14140.268
+          ],
+          [
+            10342.689,
+            13754.305
+          ],
+          [
+            10109.306999999999,
+            13679.324
+          ],
+          [
+            9971.0335,
+            13952.185
+          ],
+          [
+            10222.506,
+            14184.209
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 893,
+    "layer": "sector_bounds",
+    "tooltip": "Anzalias Pass"
+  },
+  {
+    "chat_link": "[&BNkEAAA=]",
+    "geometry": {
+      "coordinates": [
+        5914.98,
+        13561.3
+      ],
+      "type": "Point"
+    },
+    "id": 1241,
+    "layer": "waypoint",
+    "tooltip": "Dreadfall Bay Waypoint"
+  },
+  {
+    "chat_link": "[&BNoEAAA=]",
+    "geometry": {
+      "coordinates": [
+        5982.5,
+        14787.3
+      ],
+      "type": "Point"
+    },
+    "id": 1242,
+    "layer": "waypoint",
+    "tooltip": "Border Waypoint"
+  },
+  {
+    "chat_link": "[&BNsEAAA=]",
+    "geometry": {
+      "coordinates": [
+        6845.84,
+        13105.6
+      ],
+      "type": "Point"
+    },
+    "id": 1243,
+    "layer": "waypoint",
+    "tooltip": "Garrison Waypoint"
+  },
+  {
+    "chat_link": "[&BNwEAAA=]",
+    "geometry": {
+      "coordinates": [
+        6918.62,
+        12519
+      ],
+      "type": "Point"
+    },
+    "id": 1244,
+    "layer": "waypoint",
+    "tooltip": "Citadel Waypoint"
+  },
+  {
+    "chat_link": "[&BN0EAAA=]",
+    "geometry": {
+      "coordinates": [
+        8005.86,
+        13509.5
+      ],
+      "type": "Point"
+    },
+    "id": 1245,
+    "layer": "waypoint",
+    "tooltip": "Shadaran Hills Waypoint"
+  },
+  {
+    "chat_link": "[&BN4EAAA=]",
+    "geometry": {
+      "coordinates": [
+        7810.08,
+        14728.8
+      ],
+      "type": "Point"
+    },
+    "id": 1246,
+    "layer": "waypoint",
+    "tooltip": "Border Waypoint"
+  },
+  {
+    "chat_link": "[&BBUJAAA=]",
+    "geometry": {
+      "coordinates": [
+        7435.65,
+        12754.4
+      ],
+      "type": "Point"
+    },
+    "id": 2325,
+    "layer": "waypoint",
+    "tooltip": "Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BCEJAAA=]",
+    "geometry": {
+      "coordinates": [
+        7884.35,
+        13487.6
+      ],
+      "type": "Point"
+    },
+    "id": 2337,
+    "layer": "waypoint",
+    "tooltip": "Shadaran Hills Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BCIJAAA=]",
+    "geometry": {
+      "coordinates": [
+        7358.2,
+        14031.9
+      ],
+      "type": "Point"
+    },
+    "id": 2338,
+    "layer": "waypoint",
+    "tooltip": "Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BCcJAAA=]",
+    "geometry": {
+      "coordinates": [
+        6359.44,
+        12700.6
+      ],
+      "type": "Point"
+    },
+    "id": 2343,
+    "layer": "waypoint",
+    "tooltip": "Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BCkJAAA=]",
+    "geometry": {
+      "coordinates": [
+        6598.35,
+        14017.6
+      ],
+      "type": "Point"
+    },
+    "id": 2345,
+    "layer": "waypoint",
+    "tooltip": "Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BCsJAAA=]",
+    "geometry": {
+      "coordinates": [
+        6857.34,
+        12985.5
+      ],
+      "type": "Point"
+    },
+    "id": 2347,
+    "layer": "waypoint",
+    "tooltip": "Garrison Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BC4JAAA=]",
+    "geometry": {
+      "coordinates": [
+        5943.38,
+        13516
+      ],
+      "type": "Point"
+    },
+    "id": 2350,
+    "layer": "waypoint",
+    "tooltip": "Dreadfall Bay Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BJoOAAA=]",
+    "geometry": {
+      "coordinates": [
+        5907.66,
+        13719.7
+      ],
+      "type": "Point"
+    },
+    "id": 3738,
+    "layer": "waypoint",
+    "tooltip": "Dreadfall Bay Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BKAOAAA=]",
+    "geometry": {
+      "coordinates": [
+        6936,
+        12931.4
+      ],
+      "type": "Point"
+    },
+    "id": 3744,
+    "layer": "waypoint",
+    "tooltip": "Garrison Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BKYOAAA=]",
+    "geometry": {
+      "coordinates": [
+        8042.55,
+        13569
+      ],
+      "type": "Point"
+    },
+    "id": 3750,
+    "layer": "waypoint",
+    "tooltip": "Shadaran Hills Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BKgOAAA=]",
+    "geometry": {
+      "coordinates": [
+        6780.56,
+        13110.9
+      ],
+      "type": "Point"
+    },
+    "id": 3752,
+    "layer": "waypoint",
+    "tooltip": "Garrison Emergency Waypoint C"
+  },
+  {
+    "chat_link": "[&BKkOAAA=]",
+    "geometry": {
+      "coordinates": [
+        5839.52,
+        13489.9
+      ],
+      "type": "Point"
+    },
+    "id": 3753,
+    "layer": "waypoint",
+    "tooltip": "Dreadfall Bay Emergency Waypoint C"
+  },
+  {
+    "chat_link": "[&BK0OAAA=]",
+    "geometry": {
+      "coordinates": [
+        7841.34,
+        13572.8
+      ],
+      "type": "Point"
+    },
+    "id": 3757,
+    "layer": "waypoint",
+    "tooltip": "Shadaran Hills Emergency Waypoint C"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6409.011,
+            12883.267
+          ],
+          [
+            6344.3023,
+            13068.052
+          ],
+          [
+            6560.9324,
+            13256.717
+          ],
+          [
+            6927.7961,
+            13273.012999999999
+          ],
+          [
+            7200.1236,
+            13277.572
+          ],
+          [
+            7314.4187,
+            13159.911
+          ],
+          [
+            7308.0749,
+            12921.97
+          ],
+          [
+            7145.6386999999995,
+            12652.600999999999
+          ],
+          [
+            6917.4074,
+            12789.759
+          ],
+          [
+            6812.4437,
+            12739.319000000001
+          ],
+          [
+            6645.3224,
+            12641.834
+          ],
+          [
+            6409.011,
+            12883.267
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 992,
+    "layer": "sector_bounds",
+    "tooltip": " Garrison"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6814.307,
+            12719.729000000001
+          ],
+          [
+            6919.2707,
+            12770.169
+          ],
+          [
+            7147.5019999999995,
+            12633.010999999999
+          ],
+          [
+            7394.0857,
+            12451.815
+          ],
+          [
+            7431.9642,
+            12236.280999999999
+          ],
+          [
+            7426.6292,
+            12092.624
+          ],
+          [
+            7289.8592,
+            12015.412
+          ],
+          [
+            7206.0318,
+            12071.672
+          ],
+          [
+            7139.9457,
+            12132.491
+          ],
+          [
+            7057.5442,
+            12137.244
+          ],
+          [
+            6977.1894,
+            12055.957999999999
+          ],
+          [
+            6932.2881,
+            12076.425
+          ],
+          [
+            6822.6393,
+            12204.756
+          ],
+          [
+            6518.3018,
+            12177.887
+          ],
+          [
+            6468.2692,
+            12258.688
+          ],
+          [
+            6462.4007,
+            12323.193
+          ],
+          [
+            6517.6131000000005,
+            12487.026
+          ],
+          [
+            6563.853,
+            12547.069000000001
+          ],
+          [
+            6647.1857,
+            12622.244
+          ],
+          [
+            6814.307,
+            12719.729000000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 993,
+    "layer": "sector_bounds",
+    "tooltip": " Citadel"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            7714.8735,
+            12418.001
+          ],
+          [
+            8118.1413,
+            12476.297999999999
+          ],
+          [
+            8135.4461,
+            12827.729000000001
+          ],
+          [
+            8080.4762,
+            13075.176
+          ],
+          [
+            8076.3149,
+            13189.345
+          ],
+          [
+            7811.9511,
+            13234.741
+          ],
+          [
+            7536.5875,
+            13145.501
+          ],
+          [
+            7714.8735,
+            12418.001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 995,
+    "layer": "sector_bounds",
+    "tooltip": "Foghaven"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            7314.7961000000005,
+            13764.923
+          ],
+          [
+            7269.1576,
+            13557.925000000001
+          ],
+          [
+            7225.6725,
+            13294.57
+          ],
+          [
+            7339.9676,
+            13176.909
+          ],
+          [
+            7530.5338,
+            13164.298999999999
+          ],
+          [
+            7805.8974,
+            13253.538999999999
+          ],
+          [
+            8070.2612,
+            13208.143
+          ],
+          [
+            8078.2249,
+            13310.478
+          ],
+          [
+            8141.0712,
+            13513.208
+          ],
+          [
+            8136.6674,
+            13596.046
+          ],
+          [
+            8024.9525,
+            13824.384
+          ],
+          [
+            7866.8425,
+            13865.706
+          ],
+          [
+            7782.6562,
+            13862.796
+          ],
+          [
+            7667.7888,
+            13855.23
+          ],
+          [
+            7591.12,
+            13793.926
+          ],
+          [
+            7314.7961000000005,
+            13764.923
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 996,
+    "layer": "sector_bounds",
+    "tooltip": "Shadaran Hills"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            7068.9677,
+            14428.339
+          ],
+          [
+            7566.6262,
+            14164.596
+          ],
+          [
+            7764.2637,
+            14398.463000000002
+          ],
+          [
+            8053.9639,
+            14317.177
+          ],
+          [
+            8086.1388,
+            14458.991
+          ],
+          [
+            8102.5027,
+            14687.038
+          ],
+          [
+            8085.8963,
+            14835.933
+          ],
+          [
+            7986.9563,
+            14950.101999999999
+          ],
+          [
+            7828.4776999999995,
+            15021.009
+          ],
+          [
+            7620.2963,
+            15037.111
+          ],
+          [
+            7536.0712,
+            15033.813
+          ],
+          [
+            7313.4077,
+            15034.976999999999
+          ],
+          [
+            7164.4351,
+            14626.316
+          ],
+          [
+            7092.8588,
+            14551.238000000001
+          ],
+          [
+            7068.9677,
+            14428.339
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 997,
+    "layer": "sector_bounds",
+    "tooltip": " Border"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            7207.7469,
+            12061.964
+          ],
+          [
+            7141.6608,
+            12122.783
+          ],
+          [
+            7059.2593,
+            12127.536
+          ],
+          [
+            6978.9045,
+            12046.25
+          ],
+          [
+            6934.0032,
+            12066.717
+          ],
+          [
+            6824.3544,
+            12195.047999999999
+          ],
+          [
+            6520.0169,
+            12168.179
+          ],
+          [
+            6469.9843,
+            12248.98
+          ],
+          [
+            6464.1158,
+            12313.484999999999
+          ],
+          [
+            5713.4619,
+            12123.752999999999
+          ],
+          [
+            5758.4893,
+            11615.279
+          ],
+          [
+            6494.1858,
+            11601.99
+          ],
+          [
+            6738.1408,
+            11610.72
+          ],
+          [
+            6922.4893,
+            11558.34
+          ],
+          [
+            7164.2133,
+            11619.838
+          ],
+          [
+            7351.5882,
+            11611.011
+          ],
+          [
+            8122.0107,
+            11597.237
+          ],
+          [
+            8090.1170999999995,
+            12448.8
+          ],
+          [
+            7686.8493,
+            12390.502999999999
+          ],
+          [
+            7433.6793,
+            12226.572999999999
+          ],
+          [
+            7428.3443,
+            12082.916000000001
+          ],
+          [
+            7291.5743,
+            12005.704
+          ],
+          [
+            7207.7469,
+            12061.964
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 998,
+    "layer": "sector_bounds",
+    "tooltip": "The Titanpaw"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6317.7349,
+            13086.442000000001
+          ],
+          [
+            6534.365,
+            13275.107
+          ],
+          [
+            6424.1924,
+            13505.094000000001
+          ],
+          [
+            6399.9424,
+            13801.623
+          ],
+          [
+            6169.2473,
+            13915.307
+          ],
+          [
+            6038.3361,
+            13940.624
+          ],
+          [
+            5874.9687,
+            13991.161
+          ],
+          [
+            5752.1085,
+            14074.872000000001
+          ],
+          [
+            5734.3575,
+            13923.552
+          ],
+          [
+            5671.5112,
+            13788.722
+          ],
+          [
+            5651.7911,
+            13646.132
+          ],
+          [
+            5653.5662,
+            13493.551
+          ],
+          [
+            5691.5999,
+            13234.755
+          ],
+          [
+            5693.6563,
+            13041.434000000001
+          ],
+          [
+            6180.0725,
+            13019.9
+          ],
+          [
+            6317.7349,
+            13086.442000000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 999,
+    "layer": "sector_bounds",
+    "tooltip": "Dreadfall Bay"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6309.7796,
+            14229.021
+          ],
+          [
+            6556.8871,
+            14382.475
+          ],
+          [
+            6704.8897,
+            14361.135
+          ],
+          [
+            6758.1233,
+            14427.58
+          ],
+          [
+            6766.0773,
+            14549.896999999999
+          ],
+          [
+            6667.3895,
+            14618.67
+          ],
+          [
+            6441.7384,
+            15050.902
+          ],
+          [
+            6358.396,
+            14955.066
+          ],
+          [
+            6211.8872,
+            14982.808
+          ],
+          [
+            6048.8108,
+            15015.982
+          ],
+          [
+            5949.7835,
+            15000.656
+          ],
+          [
+            5878.8571,
+            14968.452
+          ],
+          [
+            5771.1871,
+            14823.534
+          ],
+          [
+            5717.3909,
+            14704.708999999999
+          ],
+          [
+            5697.1373,
+            14579.966999999999
+          ],
+          [
+            5689.7847,
+            14347.458
+          ],
+          [
+            6127.3323,
+            14326.603000000001
+          ],
+          [
+            6309.7796,
+            14229.021
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1000,
+    "layer": "sector_bounds",
+    "tooltip": " Border"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            7870.891,
+            13881.21
+          ],
+          [
+            7786.7047,
+            13878.3
+          ],
+          [
+            7671.8373,
+            13870.734
+          ],
+          [
+            7572.4996,
+            14145.729000000001
+          ],
+          [
+            7770.1371,
+            14379.596000000001
+          ],
+          [
+            8059.8373,
+            14298.31
+          ],
+          [
+            8103.0023,
+            14129.432999999999
+          ],
+          [
+            8029.001,
+            13839.887999999999
+          ],
+          [
+            7870.891,
+            13881.21
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1003,
+    "layer": "sector_bounds",
+    "tooltip": "Redwater Lowlands"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6779.4154,
+            14057.014000000001
+          ],
+          [
+            7058.7754,
+            14061.088
+          ],
+          [
+            7082.9381,
+            14207.267
+          ],
+          [
+            7078.5731,
+            14307.662
+          ],
+          [
+            7046.3594,
+            14421.637
+          ],
+          [
+            7070.2505,
+            14544.536
+          ],
+          [
+            7141.8268,
+            14619.614
+          ],
+          [
+            7290.7994,
+            15028.275
+          ],
+          [
+            6462.5455,
+            15044.668
+          ],
+          [
+            6688.1966,
+            14612.436000000002
+          ],
+          [
+            6786.8844,
+            14543.662999999999
+          ],
+          [
+            6778.9304,
+            14421.346000000001
+          ],
+          [
+            6725.6968,
+            14354.901
+          ],
+          [
+            6729.2179,
+            14193.299
+          ],
+          [
+            6779.4154,
+            14057.014000000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1004,
+    "layer": "sector_bounds",
+    "tooltip": "Hero's Lodge"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6039.7329,
+            13956.599
+          ],
+          [
+            6170.6441,
+            13931.282000000001
+          ],
+          [
+            6308.4229,
+            14080.274000000001
+          ],
+          [
+            6304.3004,
+            14212.485
+          ],
+          [
+            6121.8531,
+            14310.067000000001
+          ],
+          [
+            5684.3055,
+            14330.922
+          ],
+          [
+            5753.5053,
+            14090.847
+          ],
+          [
+            5876.3655,
+            14007.135999999999
+          ],
+          [
+            6039.7329,
+            13956.599
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1005,
+    "layer": "sector_bounds",
+    "tooltip": "Bluevale Refuge"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            7408.4764,
+            12463.638
+          ],
+          [
+            7446.3549,
+            12248.104
+          ],
+          [
+            7699.5249,
+            12412.034
+          ],
+          [
+            7521.2389,
+            13139.534
+          ],
+          [
+            7330.6727,
+            13152.143999999998
+          ],
+          [
+            7324.3288999999995,
+            12914.203
+          ],
+          [
+            7161.8927,
+            12644.833999999999
+          ],
+          [
+            7408.4764,
+            12463.638
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1006,
+    "layer": "sector_bounds",
+    "tooltip": "Cragtop"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6439.4396,
+            12330.489
+          ],
+          [
+            6494.652,
+            12494.322
+          ],
+          [
+            6540.8919,
+            12554.365000000002
+          ],
+          [
+            6624.2246,
+            12629.54
+          ],
+          [
+            6387.9132,
+            12870.973
+          ],
+          [
+            6166.5495,
+            12767.086
+          ],
+          [
+            6053.4669,
+            12689.874
+          ],
+          [
+            5668.2896,
+            12721.205
+          ],
+          [
+            5617.287,
+            12398.68
+          ],
+          [
+            5688.7857,
+            12140.757
+          ],
+          [
+            6439.4396,
+            12330.489
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1007,
+    "layer": "sector_bounds",
+    "tooltip": "Sunnyhill"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            7070.5369,
+            14049.432999999999
+          ],
+          [
+            7302.1244,
+            13780.937
+          ],
+          [
+            7578.4483,
+            13809.94
+          ],
+          [
+            7655.1170999999995,
+            13871.244
+          ],
+          [
+            7555.7794,
+            14146.239
+          ],
+          [
+            7058.1209,
+            14409.982
+          ],
+          [
+            7090.3346,
+            14296.007
+          ],
+          [
+            7094.6996,
+            14195.612
+          ],
+          [
+            7070.5369,
+            14049.432999999999
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1008,
+    "layer": "sector_bounds",
+    "tooltip": "Redlake"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6571.1444,
+            13898.647
+          ],
+          [
+            6767.4142,
+            14046.184000000001
+          ],
+          [
+            6717.2167,
+            14182.469000000001
+          ],
+          [
+            6713.6956,
+            14344.071
+          ],
+          [
+            6565.693,
+            14365.411
+          ],
+          [
+            6318.5855,
+            14211.957
+          ],
+          [
+            6322.708,
+            14079.746000000001
+          ],
+          [
+            6184.9292000000005,
+            13930.754
+          ],
+          [
+            6415.6243,
+            13817.07
+          ],
+          [
+            6571.1444,
+            13898.647
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1009,
+    "layer": "sector_bounds",
+    "tooltip": "Bluebriar"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6384.8517,
+            12880.636
+          ],
+          [
+            6320.143,
+            13065.421
+          ],
+          [
+            6182.4806,
+            12998.879
+          ],
+          [
+            5696.0644,
+            13020.413
+          ],
+          [
+            5665.2281,
+            12730.868
+          ],
+          [
+            6050.4054,
+            12699.537
+          ],
+          [
+            6163.488,
+            12776.749
+          ],
+          [
+            6384.8517,
+            12880.636
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1010,
+    "layer": "sector_bounds",
+    "tooltip": "Faithleap"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6860.7726,
+            13601.368999999999
+          ],
+          [
+            6580.4426,
+            13892.563
+          ],
+          [
+            6776.7124,
+            14040.1
+          ],
+          [
+            7056.0724,
+            14044.173999999999
+          ],
+          [
+            6860.7726,
+            13601.368999999999
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1376,
+    "layer": "sector_bounds",
+    "tooltip": "Temple of the Fallen"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6868.1454,
+            13587.434
+          ],
+          [
+            6933.5815999999995,
+            13286.831
+          ],
+          [
+            7205.9091,
+            13291.390000000001
+          ],
+          [
+            7249.3942,
+            13554.745
+          ],
+          [
+            6868.1454,
+            13587.434
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1377,
+    "layer": "sector_bounds",
+    "tooltip": "Cohen's Overlook"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6869.8386,
+            13596.818
+          ],
+          [
+            7251.0874,
+            13564.129
+          ],
+          [
+            7296.7259,
+            13771.127
+          ],
+          [
+            7065.1384,
+            14039.623
+          ],
+          [
+            6869.8386,
+            13596.818
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1380,
+    "layer": "sector_bounds",
+    "tooltip": "Patrick's Ascent"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6853.3602,
+            13595.501
+          ],
+          [
+            6441.7601,
+            13508.589
+          ],
+          [
+            6417.5101,
+            13805.118
+          ],
+          [
+            6573.0302,
+            13886.695
+          ],
+          [
+            6853.3602,
+            13595.501
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1383,
+    "layer": "sector_bounds",
+    "tooltip": "Norfolk's Hollow"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            6857.073,
+            13586.855
+          ],
+          [
+            6445.4729,
+            13499.943000000001
+          ],
+          [
+            6555.6455,
+            13269.956
+          ],
+          [
+            6922.5092,
+            13286.252
+          ],
+          [
+            6857.073,
+            13586.855
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1388,
+    "layer": "sector_bounds",
+    "tooltip": "Gertzz's Estate"
+  },
+  {
+    "chat_link": "[&BNMEAAA=]",
+    "geometry": {
+      "coordinates": [
+        13083,
+        12921.3
+      ],
+      "type": "Point"
+    },
+    "id": 1235,
+    "layer": "waypoint",
+    "tooltip": "Ascension Bay Waypoint"
+  },
+  {
+    "chat_link": "[&BNQEAAA=]",
+    "geometry": {
+      "coordinates": [
+        13150.5,
+        14147.3
+      ],
+      "type": "Point"
+    },
+    "id": 1236,
+    "layer": "waypoint",
+    "tooltip": "Border Waypoint"
+  },
+  {
+    "chat_link": "[&BNUEAAA=]",
+    "geometry": {
+      "coordinates": [
+        14013.8,
+        12465.6
+      ],
+      "type": "Point"
+    },
+    "id": 1237,
+    "layer": "waypoint",
+    "tooltip": "Garrison Waypoint"
+  },
+  {
+    "chat_link": "[&BNYEAAA=]",
+    "geometry": {
+      "coordinates": [
+        14086.6,
+        11879
+      ],
+      "type": "Point"
+    },
+    "id": 1238,
+    "layer": "waypoint",
+    "tooltip": "Citadel Waypoint"
+  },
+  {
+    "chat_link": "[&BNcEAAA=]",
+    "geometry": {
+      "coordinates": [
+        15173.9,
+        12869.5
+      ],
+      "type": "Point"
+    },
+    "id": 1239,
+    "layer": "waypoint",
+    "tooltip": "Askalion Hills Waypoint"
+  },
+  {
+    "chat_link": "[&BNgEAAA=]",
+    "geometry": {
+      "coordinates": [
+        14978.1,
+        14088.8
+      ],
+      "type": "Point"
+    },
+    "id": 1240,
+    "layer": "waypoint",
+    "tooltip": "Border Waypoint"
+  },
+  {
+    "chat_link": "[&BBIJAAA=]",
+    "geometry": {
+      "coordinates": [
+        14025.3,
+        12345.5
+      ],
+      "type": "Point"
+    },
+    "id": 2322,
+    "layer": "waypoint",
+    "tooltip": "Garrison Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BBQJAAA=]",
+    "geometry": {
+      "coordinates": [
+        14603.7,
+        12114.4
+      ],
+      "type": "Point"
+    },
+    "id": 2324,
+    "layer": "waypoint",
+    "tooltip": "Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BBgJAAA=]",
+    "geometry": {
+      "coordinates": [
+        15052.3,
+        12847.6
+      ],
+      "type": "Point"
+    },
+    "id": 2328,
+    "layer": "waypoint",
+    "tooltip": "Askalion Hills Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BCMJAAA=]",
+    "geometry": {
+      "coordinates": [
+        13527.4,
+        12060.6
+      ],
+      "type": "Point"
+    },
+    "id": 2339,
+    "layer": "waypoint",
+    "tooltip": "Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BCUJAAA=]",
+    "geometry": {
+      "coordinates": [
+        13766.3,
+        13377.6
+      ],
+      "type": "Point"
+    },
+    "id": 2341,
+    "layer": "waypoint",
+    "tooltip": "Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BCwJAAA=]",
+    "geometry": {
+      "coordinates": [
+        14526.2,
+        13391.9
+      ],
+      "type": "Point"
+    },
+    "id": 2348,
+    "layer": "waypoint",
+    "tooltip": "Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BC8JAAA=]",
+    "geometry": {
+      "coordinates": [
+        13111.4,
+        12876
+      ],
+      "type": "Point"
+    },
+    "id": 2351,
+    "layer": "waypoint",
+    "tooltip": "Ascension Bay Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BJUOAAA=]",
+    "geometry": {
+      "coordinates": [
+        14104,
+        12291.4
+      ],
+      "type": "Point"
+    },
+    "id": 3733,
+    "layer": "waypoint",
+    "tooltip": "Garrison Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BJ0OAAA=]",
+    "geometry": {
+      "coordinates": [
+        15210.6,
+        12929
+      ],
+      "type": "Point"
+    },
+    "id": 3741,
+    "layer": "waypoint",
+    "tooltip": "Askalion Hills Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BKEOAAA=]",
+    "geometry": {
+      "coordinates": [
+        13075.7,
+        13079.7
+      ],
+      "type": "Point"
+    },
+    "id": 3745,
+    "layer": "waypoint",
+    "tooltip": "Ascension Bay Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BKMOAAA=]",
+    "geometry": {
+      "coordinates": [
+        15009.3,
+        12932.8
+      ],
+      "type": "Point"
+    },
+    "id": 3747,
+    "layer": "waypoint",
+    "tooltip": "Askalion Hills Emergency Waypoint C"
+  },
+  {
+    "chat_link": "[&BKcOAAA=]",
+    "geometry": {
+      "coordinates": [
+        13948.6,
+        12470.9
+      ],
+      "type": "Point"
+    },
+    "id": 3751,
+    "layer": "waypoint",
+    "tooltip": "Garrison Emergency Waypoint C"
+  },
+  {
+    "chat_link": "[&BKoOAAA=]",
+    "geometry": {
+      "coordinates": [
+        13007.5,
+        12849.9
+      ],
+      "type": "Point"
+    },
+    "id": 3754,
+    "layer": "waypoint",
+    "tooltip": "Ascension Bay Emergency Waypoint C"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            13485.734,
+            12446.442000000001
+          ],
+          [
+            13702.335,
+            12635.107
+          ],
+          [
+            13592.24,
+            12865.094000000001
+          ],
+          [
+            13567.99,
+            13161.623
+          ],
+          [
+            13337.226999999999,
+            13275.307
+          ],
+          [
+            13206.374,
+            13300.624
+          ],
+          [
+            13042.929,
+            13351.161
+          ],
+          [
+            12920.127,
+            13434.872000000001
+          ],
+          [
+            12902.376,
+            13283.552
+          ],
+          [
+            12839.519999999999,
+            13148.722
+          ],
+          [
+            12819.829,
+            13006.132
+          ],
+          [
+            12821.574999999999,
+            12853.551
+          ],
+          [
+            12859.599,
+            12594.755
+          ],
+          [
+            12861.636,
+            12401.434000000001
+          ],
+          [
+            13348.091,
+            12379.9
+          ],
+          [
+            13485.734,
+            12446.442000000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 973,
+    "layer": "sector_bounds",
+    "tooltip": "Ascension Bay"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            14236.948,
+            13788.339
+          ],
+          [
+            14734.655,
+            13524.596
+          ],
+          [
+            14932.243999999999,
+            13758.463000000002
+          ],
+          [
+            15221.983,
+            13677.177
+          ],
+          [
+            15254.09,
+            13818.991
+          ],
+          [
+            15270.483,
+            14047.038
+          ],
+          [
+            15253.896,
+            14195.933
+          ],
+          [
+            15154.956,
+            14310.101999999999
+          ],
+          [
+            14996.458,
+            14381.009
+          ],
+          [
+            14788.296,
+            14397.111
+          ],
+          [
+            14704.1,
+            14393.813
+          ],
+          [
+            14481.388,
+            14394.976999999999
+          ],
+          [
+            14332.396,
+            13986.316
+          ],
+          [
+            14260.810000000001,
+            13911.238000000001
+          ],
+          [
+            14236.948,
+            13788.339
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 974,
+    "layer": "sector_bounds",
+    "tooltip": " Border"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            13577.001,
+            12243.267
+          ],
+          [
+            13512.302,
+            12428.052
+          ],
+          [
+            13728.902999999998,
+            12616.717
+          ],
+          [
+            14095.757,
+            12633.012999999999
+          ],
+          [
+            14368.133,
+            12637.572
+          ],
+          [
+            14482.399000000001,
+            12519.911
+          ],
+          [
+            14476.094000000001,
+            12281.97
+          ],
+          [
+            14313.619,
+            12012.600999999999
+          ],
+          [
+            14085.377999999999,
+            12149.759
+          ],
+          [
+            13980.424,
+            12099.319000000001
+          ],
+          [
+            13813.293,
+            12001.834
+          ],
+          [
+            13577.001,
+            12243.267
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 976,
+    "layer": "sector_bounds",
+    "tooltip": " Garrison"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            13477.769,
+            13589.021
+          ],
+          [
+            13724.925,
+            13742.475
+          ],
+          [
+            13872.85,
+            13721.135
+          ],
+          [
+            13926.103,
+            13787.58
+          ],
+          [
+            13934.057,
+            13909.896999999999
+          ],
+          [
+            13835.408,
+            13978.67
+          ],
+          [
+            13609.786,
+            14410.902
+          ],
+          [
+            13526.366,
+            14315.066
+          ],
+          [
+            13379.895999999999,
+            14342.808
+          ],
+          [
+            13216.839,
+            14375.982
+          ],
+          [
+            13117.802,
+            14360.656
+          ],
+          [
+            13046.895,
+            14328.452
+          ],
+          [
+            12939.225,
+            14183.534
+          ],
+          [
+            12885.39,
+            14064.708999999999
+          ],
+          [
+            12865.117,
+            13939.966999999999
+          ],
+          [
+            12857.745,
+            13707.458
+          ],
+          [
+            13295.312,
+            13686.603000000001
+          ],
+          [
+            13477.769,
+            13589.021
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 977,
+    "layer": "sector_bounds",
+    "tooltip": " Border"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            14375.786,
+            11421.964
+          ],
+          [
+            14309.632,
+            11482.783
+          ],
+          [
+            14227.279,
+            11487.536
+          ],
+          [
+            14146.866,
+            11406.25
+          ],
+          [
+            14101.955,
+            11426.717
+          ],
+          [
+            13992.345000000001,
+            11555.047999999999
+          ],
+          [
+            13688.056,
+            11528.179
+          ],
+          [
+            13638.003999999999,
+            11608.98
+          ],
+          [
+            13632.087,
+            11673.484999999999
+          ],
+          [
+            12881.501,
+            11483.752999999999
+          ],
+          [
+            12926.509,
+            10975.279
+          ],
+          [
+            13662.157,
+            10961.99
+          ],
+          [
+            13906.112,
+            10970.72
+          ],
+          [
+            14090.509,
+            10918.34
+          ],
+          [
+            14332.233,
+            10979.838
+          ],
+          [
+            14519.636999999999,
+            10971.011
+          ],
+          [
+            15290.011,
+            10957.237
+          ],
+          [
+            15258.098,
+            11808.8
+          ],
+          [
+            14854.868999999999,
+            11750.502999999999
+          ],
+          [
+            14601.699,
+            11586.572999999999
+          ],
+          [
+            14596.364,
+            11442.916000000001
+          ],
+          [
+            14459.594,
+            11365.704
+          ],
+          [
+            14375.786,
+            11421.964
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 978,
+    "layer": "sector_bounds",
+    "tooltip": "The Spiritholme"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            14482.824,
+            13124.923
+          ],
+          [
+            14437.137,
+            12917.925000000001
+          ],
+          [
+            14393.680999999999,
+            12654.57
+          ],
+          [
+            14507.947,
+            12536.909
+          ],
+          [
+            14698.552,
+            12524.298999999999
+          ],
+          [
+            14973.935,
+            12613.538999999999
+          ],
+          [
+            15238.26,
+            12568.143
+          ],
+          [
+            15246.214,
+            12670.478
+          ],
+          [
+            15309.07,
+            12873.208
+          ],
+          [
+            15304.705,
+            12956.046
+          ],
+          [
+            15192.961,
+            13184.384
+          ],
+          [
+            15034.850999999999,
+            13225.706
+          ],
+          [
+            14950.655,
+            13222.796
+          ],
+          [
+            14835.807,
+            13215.23
+          ],
+          [
+            14759.08,
+            13153.926
+          ],
+          [
+            14482.824,
+            13124.923
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 979,
+    "layer": "sector_bounds",
+    "tooltip": "Askalion Hills"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            13982.287,
+            12079.729000000001
+          ],
+          [
+            14087.241,
+            12130.169
+          ],
+          [
+            14315.482,
+            11993.010999999999
+          ],
+          [
+            14562.055999999999,
+            11811.815
+          ],
+          [
+            14599.983,
+            11596.280999999999
+          ],
+          [
+            14594.648,
+            11452.624
+          ],
+          [
+            14457.877999999999,
+            11375.412
+          ],
+          [
+            14374.07,
+            11431.672
+          ],
+          [
+            14307.916,
+            11492.491
+          ],
+          [
+            14225.563,
+            11497.244
+          ],
+          [
+            14145.15,
+            11415.957999999999
+          ],
+          [
+            14100.239000000001,
+            11436.425
+          ],
+          [
+            13990.629,
+            11564.756
+          ],
+          [
+            13686.34,
+            11537.887
+          ],
+          [
+            13636.288,
+            11618.688
+          ],
+          [
+            13630.371,
+            11683.193
+          ],
+          [
+            13685.661,
+            11847.026
+          ],
+          [
+            13731.832999999999,
+            11907.069000000001
+          ],
+          [
+            13815.155999999999,
+            11982.244
+          ],
+          [
+            13982.287,
+            12079.729000000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 980,
+    "layer": "sector_bounds",
+    "tooltip": " Citadel"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            15038.901,
+            13241.21
+          ],
+          [
+            14954.705,
+            13238.3
+          ],
+          [
+            14839.857,
+            13230.734
+          ],
+          [
+            14740.529,
+            13505.729000000001
+          ],
+          [
+            14938.118,
+            13739.596000000001
+          ],
+          [
+            15227.857,
+            13658.31
+          ],
+          [
+            15271.022,
+            13489.432999999999
+          ],
+          [
+            15197.010999999999,
+            13199.887999999999
+          ],
+          [
+            15038.901,
+            13241.21
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 983,
+    "layer": "sector_bounds",
+    "tooltip": "Greenwater Lowlands"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            13947.395999999999,
+            13417.014000000001
+          ],
+          [
+            14226.756,
+            13421.088
+          ],
+          [
+            14250.909,
+            13567.267
+          ],
+          [
+            14246.544,
+            13667.662
+          ],
+          [
+            14214.34,
+            13781.637
+          ],
+          [
+            14238.202000000001,
+            13904.536
+          ],
+          [
+            14309.788,
+            13979.614
+          ],
+          [
+            14458.78,
+            14388.275
+          ],
+          [
+            13630.594,
+            14404.668
+          ],
+          [
+            13856.216,
+            13972.436000000002
+          ],
+          [
+            13954.865,
+            13903.662999999999
+          ],
+          [
+            13946.911,
+            13781.346000000001
+          ],
+          [
+            13893.658,
+            13714.901
+          ],
+          [
+            13897.247000000001,
+            13553.299
+          ],
+          [
+            13947.395999999999,
+            13417.014000000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 984,
+    "layer": "sector_bounds",
+    "tooltip": "Champion's Demesne"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            13207.772,
+            13316.599
+          ],
+          [
+            13338.625,
+            13291.282000000001
+          ],
+          [
+            13476.462,
+            13440.274000000001
+          ],
+          [
+            13472.291000000001,
+            13572.485
+          ],
+          [
+            13289.834,
+            13670.067000000001
+          ],
+          [
+            12852.267,
+            13690.922
+          ],
+          [
+            12921.525,
+            13450.847
+          ],
+          [
+            13044.327,
+            13367.135999999999
+          ],
+          [
+            13207.772,
+            13316.599
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 985,
+    "layer": "sector_bounds",
+    "tooltip": "Redvale Refuge"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            14882.892,
+            11778.001
+          ],
+          [
+            15286.121000000001,
+            11836.297999999999
+          ],
+          [
+            15303.484,
+            12187.729000000001
+          ],
+          [
+            15248.484999999999,
+            12435.176
+          ],
+          [
+            15244.314,
+            12549.345
+          ],
+          [
+            14979.989,
+            12594.741
+          ],
+          [
+            14704.606,
+            12505.501
+          ],
+          [
+            14882.892,
+            11778.001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 986,
+    "layer": "sector_bounds",
+    "tooltip": "Stargrove"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            14576.447,
+            11823.638
+          ],
+          [
+            14614.374,
+            11608.104
+          ],
+          [
+            14867.544,
+            11772.034
+          ],
+          [
+            14689.258,
+            12499.534
+          ],
+          [
+            14498.653,
+            12512.143999999998
+          ],
+          [
+            14492.348,
+            12274.203
+          ],
+          [
+            14329.873,
+            12004.833999999999
+          ],
+          [
+            14576.447,
+            11823.638
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 987,
+    "layer": "sector_bounds",
+    "tooltip": "Dawn's Eyrie"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            13607.411999999998,
+            11690.489
+          ],
+          [
+            13662.702,
+            11854.322
+          ],
+          [
+            13708.874,
+            11914.365000000002
+          ],
+          [
+            13792.197,
+            11989.54
+          ],
+          [
+            13555.905,
+            12230.973
+          ],
+          [
+            13334.551,
+            12127.086
+          ],
+          [
+            13221.449,
+            12049.874
+          ],
+          [
+            12836.261999999999,
+            12081.205
+          ],
+          [
+            12785.240000000002,
+            11758.68
+          ],
+          [
+            12856.826000000001,
+            11500.757
+          ],
+          [
+            13607.411999999998,
+            11690.489
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 988,
+    "layer": "sector_bounds",
+    "tooltip": "Woodhaven"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            14238.516,
+            13409.432999999999
+          ],
+          [
+            14470.152,
+            13140.937
+          ],
+          [
+            14746.408,
+            13169.94
+          ],
+          [
+            14823.135,
+            13231.244
+          ],
+          [
+            14723.807,
+            13506.239
+          ],
+          [
+            14226.1,
+            13769.982
+          ],
+          [
+            14258.304,
+            13656.007
+          ],
+          [
+            14262.669,
+            13555.612
+          ],
+          [
+            14238.516,
+            13409.432999999999
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 989,
+    "layer": "sector_bounds",
+    "tooltip": "Greenlake"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            13739.165,
+            13258.647
+          ],
+          [
+            13935.395999999999,
+            13406.184000000001
+          ],
+          [
+            13885.247000000001,
+            13542.469000000001
+          ],
+          [
+            13881.658,
+            13704.071
+          ],
+          [
+            13733.733,
+            13725.411
+          ],
+          [
+            13486.577000000001,
+            13571.957
+          ],
+          [
+            13490.748,
+            13439.746000000001
+          ],
+          [
+            13352.911,
+            13290.754
+          ],
+          [
+            13583.673999999999,
+            13177.07
+          ],
+          [
+            13739.165,
+            13258.647
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 990,
+    "layer": "sector_bounds",
+    "tooltip": "Redbriar"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            13552.842,
+            12240.636
+          ],
+          [
+            13488.143,
+            12425.421
+          ],
+          [
+            13350.5,
+            12358.879
+          ],
+          [
+            12864.045,
+            12380.413
+          ],
+          [
+            12833.198999999999,
+            12090.868
+          ],
+          [
+            13218.386,
+            12059.537
+          ],
+          [
+            13331.488,
+            12136.749
+          ],
+          [
+            13552.842,
+            12240.636
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 991,
+    "layer": "sector_bounds",
+    "tooltip": "Godslore"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            14025.093,
+            12946.855
+          ],
+          [
+            13613.521999999999,
+            12859.943000000001
+          ],
+          [
+            13723.617,
+            12629.956
+          ],
+          [
+            14090.471,
+            12646.252
+          ],
+          [
+            14025.093,
+            12946.855
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1374,
+    "layer": "sector_bounds",
+    "tooltip": "Bauer's Estate"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            14028.792,
+            12961.368999999999
+          ],
+          [
+            13748.462,
+            13252.563
+          ],
+          [
+            13944.693,
+            13400.1
+          ],
+          [
+            14224.053,
+            13404.173999999999
+          ],
+          [
+            14028.792,
+            12961.368999999999
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1381,
+    "layer": "sector_bounds",
+    "tooltip": "Temple of Lost Prayers"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            14037.858,
+            12956.818
+          ],
+          [
+            14419.068000000001,
+            12924.129
+          ],
+          [
+            14464.755000000001,
+            13131.127
+          ],
+          [
+            14233.118999999999,
+            13399.623
+          ],
+          [
+            14037.858,
+            12956.818
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1382,
+    "layer": "sector_bounds",
+    "tooltip": "Carver's Ascent"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            14036.166000000001,
+            12947.434
+          ],
+          [
+            14101.544,
+            12646.831
+          ],
+          [
+            14373.92,
+            12651.390000000001
+          ],
+          [
+            14417.376,
+            12914.745
+          ],
+          [
+            14036.166000000001,
+            12947.434
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1384,
+    "layer": "sector_bounds",
+    "tooltip": "Orchard Overlook"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            14021.379,
+            12955.501
+          ],
+          [
+            13609.807999999999,
+            12868.589
+          ],
+          [
+            13585.557999999999,
+            13165.118
+          ],
+          [
+            13741.049,
+            13246.695
+          ],
+          [
+            14021.379,
+            12955.501
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1386,
+    "layer": "sector_bounds",
+    "tooltip": "Battle's Hollow"
+  },
+  {
+    "chat_link": "[&BEMHAAA=]",
+    "geometry": {
+      "coordinates": [
+        7929.77,
+        8550.1
+      ],
+      "type": "Point"
+    },
+    "id": 1859,
+    "layer": "waypoint",
+    "tooltip": "Overgrowth Safe Zone Waypoint"
+  },
+  {
+    "chat_link": "[&BEkHAAA=]",
+    "geometry": {
+      "coordinates": [
+        8467.17,
+        11177.8
+      ],
+      "type": "Point"
+    },
+    "id": 1865,
+    "layer": "waypoint",
+    "tooltip": "Frostreach Safe Zone Waypoint"
+  },
+  {
+    "chat_link": "[&BEoHAAA=]",
+    "geometry": {
+      "coordinates": [
+        6463.9,
+        11289.6
+      ],
+      "type": "Point"
+    },
+    "id": 1866,
+    "layer": "waypoint",
+    "tooltip": "Badlands Safe Zone Waypoint"
+  },
+  {
+    "chat_link": "[&BEsHAAA=]",
+    "geometry": {
+      "coordinates": [
+        6364.52,
+        10662.9
+      ],
+      "type": "Point"
+    },
+    "id": 1867,
+    "layer": "waypoint",
+    "tooltip": "Arid Fortress Waypoint"
+  },
+  {
+    "chat_link": "[&BEwHAAA=]",
+    "geometry": {
+      "coordinates": [
+        8675.3,
+        10669.2
+      ],
+      "type": "Point"
+    },
+    "id": 1868,
+    "layer": "waypoint",
+    "tooltip": "Thunder Hollow Waypoint"
+  },
+  {
+    "chat_link": "[&BE0HAAA=]",
+    "geometry": {
+      "coordinates": [
+        7513.14,
+        8671.58
+      ],
+      "type": "Point"
+    },
+    "id": 1869,
+    "layer": "waypoint",
+    "tooltip": "Overgrown Fane Waypoint"
+  },
+  {
+    "chat_link": "[&BIQMAAA=]",
+    "geometry": {
+      "coordinates": [
+        6224.46,
+        8496.38
+      ],
+      "type": "Point"
+    },
+    "id": 3204,
+    "layer": "waypoint",
+    "tooltip": "Mists Arena Spectator Rally Point"
+  },
+  {
+    "chat_link": "[&BIUMAAA=]",
+    "geometry": {
+      "coordinates": [
+        6431.45,
+        9067.42
+      ],
+      "type": "Point"
+    },
+    "id": 3205,
+    "layer": "waypoint",
+    "tooltip": "Mists Arena Red Team Rally Point"
+  },
+  {
+    "chat_link": "[&BIYMAAA=]",
+    "geometry": {
+      "coordinates": [
+        6940.95,
+        8743.26
+      ],
+      "type": "Point"
+    },
+    "id": 3206,
+    "layer": "waypoint",
+    "tooltip": "Mists Arena Blue Team Rally Point"
+  },
+  {
+    "chat_link": "[&BCsIAAA=]",
+    "geometry": {
+      "coordinates": [
+        10781.9,
+        10036.5
+      ],
+      "type": "Point"
+    },
+    "id": 2091,
+    "layer": "waypoint",
+    "tooltip": "Stoic Rampart Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BDQIAAA=]",
+    "geometry": {
+      "coordinates": [
+        10339.5,
+        11434.2
+      ],
+      "type": "Point"
+    },
+    "id": 2100,
+    "layer": "waypoint",
+    "tooltip": "Parched Outpost Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BGYIAAA=]",
+    "geometry": {
+      "coordinates": [
+        12032.4,
+        10704.6
+      ],
+      "type": "Point"
+    },
+    "id": 2150,
+    "layer": "waypoint",
+    "tooltip": "Osprey's Palace Waypoint"
+  },
+  {
+    "chat_link": "[&BIsIAAA=]",
+    "geometry": {
+      "coordinates": [
+        12111.4,
+        11893.5
+      ],
+      "type": "Point"
+    },
+    "id": 2187,
+    "layer": "waypoint",
+    "tooltip": "Border Waypoint"
+  },
+  {
+    "chat_link": "[&BJMIAAA=]",
+    "geometry": {
+      "coordinates": [
+        12002.6,
+        10706.7
+      ],
+      "type": "Point"
+    },
+    "id": 2195,
+    "layer": "waypoint",
+    "tooltip": "Osprey's Palace Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BJ8IAAA=]",
+    "geometry": {
+      "coordinates": [
+        9844.3,
+        9617.31
+      ],
+      "type": "Point"
+    },
+    "id": 2207,
+    "layer": "waypoint",
+    "tooltip": "O'del Academy Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BKEIAAA=]",
+    "geometry": {
+      "coordinates": [
+        11891.2,
+        9634.44
+      ],
+      "type": "Point"
+    },
+    "id": 2209,
+    "layer": "waypoint",
+    "tooltip": "Eternal Necropolis Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BK0IAAA=]",
+    "geometry": {
+      "coordinates": [
+        9492.81,
+        10632.5
+      ],
+      "type": "Point"
+    },
+    "id": 2221,
+    "layer": "waypoint",
+    "tooltip": "Blistering Undercroft Waypoint"
+  },
+  {
+    "chat_link": "[&BMQIAAA=]",
+    "geometry": {
+      "coordinates": [
+        11388.3,
+        11563.5
+      ],
+      "type": "Point"
+    },
+    "id": 2244,
+    "layer": "waypoint",
+    "tooltip": "Crankshaft Depot Emergency Waypoint"
+  },
+  {
+    "chat_link": "[&BMcIAAA=]",
+    "geometry": {
+      "coordinates": [
+        9518.5,
+        11814.3
+      ],
+      "type": "Point"
+    },
+    "id": 2247,
+    "layer": "waypoint",
+    "tooltip": "Border Waypoint"
+  },
+  {
+    "chat_link": "[&BMgIAAA=]",
+    "geometry": {
+      "coordinates": [
+        9504.06,
+        10695
+      ],
+      "type": "Point"
+    },
+    "id": 2248,
+    "layer": "waypoint",
+    "tooltip": "Blistering Undercroft Emergency Waypoint A"
+  },
+  {
+    "chat_link": "[&BOQIAAA=]",
+    "geometry": {
+      "coordinates": [
+        10757.3,
+        9181.29
+      ],
+      "type": "Point"
+    },
+    "id": 2276,
+    "layer": "waypoint",
+    "tooltip": "Citadel Waypoint"
+  },
+  {
+    "chat_link": "[&BP0IAAA=]",
+    "geometry": {
+      "coordinates": [
+        10774.6,
+        10071.3
+      ],
+      "type": "Point"
+    },
+    "id": 2301,
+    "layer": "waypoint",
+    "tooltip": "Stoic Rampart Waypoint"
+  },
+  {
+    "chat_link": "[&BJYOAAA=]",
+    "geometry": {
+      "coordinates": [
+        9446.7,
+        10520.3
+      ],
+      "type": "Point"
+    },
+    "id": 3734,
+    "layer": "waypoint",
+    "tooltip": "Blistering Undercroft Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BJcOAAA=]",
+    "geometry": {
+      "coordinates": [
+        10637.7,
+        10130.6
+      ],
+      "type": "Point"
+    },
+    "id": 3735,
+    "layer": "waypoint",
+    "tooltip": "Stoic Rampart Emergency Waypoint C"
+  },
+  {
+    "chat_link": "[&BJwOAAA=]",
+    "geometry": {
+      "coordinates": [
+        12067.4,
+        10567.6
+      ],
+      "type": "Point"
+    },
+    "id": 3740,
+    "layer": "waypoint",
+    "tooltip": "Osprey's Palace Emergency Waypoint C"
+  },
+  {
+    "chat_link": "[&BKIOAAA=]",
+    "geometry": {
+      "coordinates": [
+        10910.1,
+        10124.3
+      ],
+      "type": "Point"
+    },
+    "id": 3746,
+    "layer": "waypoint",
+    "tooltip": "Stoic Rampart Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BKUOAAA=]",
+    "geometry": {
+      "coordinates": [
+        12161.2,
+        10821.8
+      ],
+      "type": "Point"
+    },
+    "id": 3749,
+    "layer": "waypoint",
+    "tooltip": "Osprey's Palace Emergency Waypoint B"
+  },
+  {
+    "chat_link": "[&BKwOAAA=]",
+    "geometry": {
+      "coordinates": [
+        9280.3,
+        10789.5
+      ],
+      "type": "Point"
+    },
+    "id": 3756,
+    "layer": "waypoint",
+    "tooltip": "Blistering Undercroft Emergency Waypoint C"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10549.905,
+            11445.122000000001
+          ],
+          [
+            10449.995,
+            11978.815999999999
+          ],
+          [
+            10030.760999999999,
+            11947.291
+          ],
+          [
+            9992.155,
+            11729.138
+          ],
+          [
+            9899.8401,
+            11566.178
+          ],
+          [
+            9708.953800000001,
+            11447.256
+          ],
+          [
+            9877.3264,
+            11325.520999999999
+          ],
+          [
+            10283.834,
+            11141.706
+          ],
+          [
+            10345.526,
+            11275.565999999999
+          ],
+          [
+            10549.905,
+            11445.122000000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1277,
+    "layer": "sector_bounds",
+    "tooltip": "Parched Outpost"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11703.817,
+            11214.678
+          ],
+          [
+            11549.102,
+            11177.721
+          ],
+          [
+            11220.078,
+            11144.838
+          ],
+          [
+            11130.935,
+            11229.325
+          ],
+          [
+            11420.189,
+            11357.170999999998
+          ],
+          [
+            11751.152999999998,
+            11441.464
+          ],
+          [
+            11956.114,
+            11487.83
+          ],
+          [
+            12237.511,
+            11495.395999999999
+          ],
+          [
+            12227.132,
+            11299.068
+          ],
+          [
+            12072.417,
+            11253.575
+          ],
+          [
+            11942.242999999999,
+            11248.24
+          ],
+          [
+            11703.817,
+            11214.678
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1280,
+    "layer": "sector_bounds",
+    "tooltip": "Bauer Farmstead"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9899.8593,
+            11033.236
+          ],
+          [
+            10185.4758,
+            10989.586000000001
+          ],
+          [
+            10273.2608,
+            11132.369999999999
+          ],
+          [
+            9866.753200000001,
+            11316.185
+          ],
+          [
+            9698.3806,
+            11437.92
+          ],
+          [
+            9244.7019,
+            11488.457
+          ],
+          [
+            9249.920499999998,
+            11200.949
+          ],
+          [
+            9899.8593,
+            11033.236
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1286,
+    "layer": "sector_bounds",
+    "tooltip": "McLain's Encampment"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10741.687,
+            11405.65
+          ],
+          [
+            10955.475,
+            11388.578
+          ],
+          [
+            11072.456999999999,
+            11899.962000000001
+          ],
+          [
+            11058.683,
+            11980.083999999999
+          ],
+          [
+            10750.126,
+            12004.528
+          ],
+          [
+            10470.281,
+            11984.546
+          ],
+          [
+            10570.191,
+            11450.852
+          ],
+          [
+            10741.687,
+            11405.65
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1296,
+    "layer": "sector_bounds",
+    "tooltip": "Dustwhisper Well"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11766.757000000001,
+            10237.785
+          ],
+          [
+            12049.124,
+            10203.252999999999
+          ],
+          [
+            12250.593,
+            10230.316
+          ],
+          [
+            12266.113,
+            10708.817
+          ],
+          [
+            12215.285,
+            10938.707
+          ],
+          [
+            12227.798,
+            11283.93
+          ],
+          [
+            12073.083,
+            11238.437
+          ],
+          [
+            11942.909,
+            11233.102
+          ],
+          [
+            11704.483,
+            11199.539999999999
+          ],
+          [
+            11549.768,
+            11162.582999999999
+          ],
+          [
+            11220.743999999999,
+            11129.699999999999
+          ],
+          [
+            11254.597000000002,
+            10926.97
+          ],
+          [
+            11252.366,
+            10757.996000000001
+          ],
+          [
+            11220.356,
+            10497.551000000001
+          ],
+          [
+            11534.733,
+            10250.104000000001
+          ],
+          [
+            11766.757000000001,
+            10237.785
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1300,
+    "layer": "sector_bounds",
+    "tooltip": "Osprey's Palace"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10419.992,
+            10430.937
+          ],
+          [
+            10547.838000000002,
+            10360.03
+          ],
+          [
+            10844.658000000001,
+            10335.877
+          ],
+          [
+            11066.691,
+            10415.708
+          ],
+          [
+            11189.687,
+            10475.072
+          ],
+          [
+            11504.064,
+            10227.625
+          ],
+          [
+            11605.914,
+            9998.0454
+          ],
+          [
+            11346.342,
+            9656.198
+          ],
+          [
+            11252.64,
+            9626.8555
+          ],
+          [
+            10776.273000000001,
+            9642.2494
+          ],
+          [
+            10557.053,
+            9663.7543
+          ],
+          [
+            10343.75,
+            9745.1179
+          ],
+          [
+            9802.4415,
+            9911.1431
+          ],
+          [
+            9792.382599999999,
+            10088.333
+          ],
+          [
+            10144.706,
+            10181.453
+          ],
+          [
+            10419.992,
+            10430.937
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1303,
+    "layer": "sector_bounds",
+    "tooltip": "Stoic Rampart"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11379.294,
+            9641.7047
+          ],
+          [
+            11310.618,
+            9020.536100000001
+          ],
+          [
+            11936.268,
+            8977.3323
+          ],
+          [
+            12168.486,
+            9358.910899999999
+          ],
+          [
+            12170.426,
+            9496.2435
+          ],
+          [
+            12237.550000000001,
+            9775.3998
+          ],
+          [
+            11950.333,
+            9923.5673
+          ],
+          [
+            11810.653,
+            9930.163299999998
+          ],
+          [
+            11638.866,
+            9983.5521
+          ],
+          [
+            11379.294,
+            9641.7047
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1308,
+    "layer": "sector_bounds",
+    "tooltip": "Eternal Necropolis"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11755.915,
+            11452.064
+          ],
+          [
+            11963.98,
+            11501.825
+          ],
+          [
+            12245.377,
+            11509.391
+          ],
+          [
+            12255.077000000001,
+            11803.01
+          ],
+          [
+            12240.818,
+            11928.237000000001
+          ],
+          [
+            12180.969,
+            11985.855
+          ],
+          [
+            11941.088,
+            12017.089
+          ],
+          [
+            11485.576,
+            11970.335
+          ],
+          [
+            11755.915,
+            11452.064
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1311,
+    "layer": "sector_bounds",
+    "tooltip": " Border"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10779.078000000001,
+            9627.241600000001
+          ],
+          [
+            10559.858,
+            9648.746500000001
+          ],
+          [
+            10346.554999999998,
+            9730.1101
+          ],
+          [
+            10351.696,
+            9357.3003
+          ],
+          [
+            10750.851,
+            9342.469000000001
+          ],
+          [
+            11326.061,
+            9443.834
+          ],
+          [
+            11349.146999999999,
+            9641.190200000001
+          ],
+          [
+            11255.445,
+            9611.8477
+          ],
+          [
+            10779.078000000001,
+            9627.241600000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1314,
+    "layer": "sector_bounds",
+    "tooltip": "Hamm's Lab"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9565.9021,
+            9824.847600000001
+          ],
+          [
+            9764.0634,
+            9909.5189
+          ],
+          [
+            9754.0045,
+            10086.7088
+          ],
+          [
+            9616.584599999998,
+            10260.2418
+          ],
+          [
+            9258.771,
+            10255.779799999998
+          ],
+          [
+            9243.7845,
+            10031.515800000001
+          ],
+          [
+            9233.8808,
+            9830.2602
+          ],
+          [
+            9299.2685,
+            9772.8362
+          ],
+          [
+            9565.9021,
+            9824.847600000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1316,
+    "layer": "sector_bounds",
+    "tooltip": "Boettiger's Hideaway"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11813.77,
+            9944.7406
+          ],
+          [
+            11953.45,
+            9938.1446
+          ],
+          [
+            12240.667000000001,
+            9789.9771
+          ],
+          [
+            12264.432,
+            9977.5169
+          ],
+          [
+            12255.993,
+            10207.921
+          ],
+          [
+            12054.524,
+            10180.858
+          ],
+          [
+            11772.157000000001,
+            10215.39
+          ],
+          [
+            11540.133,
+            10227.709
+          ],
+          [
+            11641.983,
+            9998.1294
+          ],
+          [
+            11813.77,
+            9944.7406
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1322,
+    "layer": "sector_bounds",
+    "tooltip": "Roy's Refuge"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10351.018,
+            9345.4995
+          ],
+          [
+            10750.173,
+            9330.6682
+          ],
+          [
+            11325.383,
+            9432.033200000002
+          ],
+          [
+            11279.793,
+            9008.220800000001
+          ],
+          [
+            10920.408000000001,
+            8989.3543
+          ],
+          [
+            10730.676,
+            8990.7608
+          ],
+          [
+            10362.755000000001,
+            9002.2844
+          ],
+          [
+            10351.018,
+            9345.4995
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1343,
+    "layer": "sector_bounds",
+    "tooltip": " Citadel"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            9977.5729,
+            11735.9
+          ],
+          [
+            10016.178899999999,
+            11954.053
+          ],
+          [
+            9597.4493,
+            12004.105
+          ],
+          [
+            9413.1978,
+            11995.084
+          ],
+          [
+            9298.7378,
+            11899.151
+          ],
+          [
+            9240.693,
+            11504.555
+          ],
+          [
+            9694.371700000002,
+            11454.018
+          ],
+          [
+            9885.258,
+            11572.94
+          ],
+          [
+            9977.5729,
+            11735.9
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1350,
+    "layer": "sector_bounds",
+    "tooltip": " Border"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10118.051,
+            10196.894
+          ],
+          [
+            10393.337,
+            10446.378
+          ],
+          [
+            10345.904,
+            10520.971
+          ],
+          [
+            10318.064999999999,
+            10691.982
+          ],
+          [
+            10187.988000000001,
+            10969.693000000001
+          ],
+          [
+            9902.3715,
+            11013.343
+          ],
+          [
+            9252.4327,
+            11181.056
+          ],
+          [
+            9253.0826,
+            10543.96
+          ],
+          [
+            9270.4941,
+            10272.845
+          ],
+          [
+            9628.3077,
+            10277.306999999999
+          ],
+          [
+            9765.727599999998,
+            10103.774
+          ],
+          [
+            10118.051,
+            10196.894
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1351,
+    "layer": "sector_bounds",
+    "tooltip": "Blistering Undercroft"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10315.1279,
+            9727.099
+          ],
+          [
+            9773.8194,
+            9893.1242
+          ],
+          [
+            9575.658099999999,
+            9808.4529
+          ],
+          [
+            9309.0245,
+            9756.4415
+          ],
+          [
+            9358.3781,
+            9356.7627
+          ],
+          [
+            9521.212,
+            9178.3991
+          ],
+          [
+            9624.565499999999,
+            8964.1067
+          ],
+          [
+            10332.0059,
+            9011.0741
+          ],
+          [
+            10320.268900000001,
+            9354.2892
+          ],
+          [
+            10315.1279,
+            9727.099
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1352,
+    "layer": "sector_bounds",
+    "tooltip": "O'del Academy"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11116.432999999999,
+            11241.043
+          ],
+          [
+            11405.687,
+            11368.889
+          ],
+          [
+            11734.129,
+            11451.242
+          ],
+          [
+            11463.207999999999,
+            11968.058
+          ],
+          [
+            11353.016,
+            11978.825
+          ],
+          [
+            11166.097,
+            11982.317000000001
+          ],
+          [
+            11072.492,
+            11979.019
+          ],
+          [
+            11086.266,
+            11898.897
+          ],
+          [
+            10969.284000000001,
+            11387.513
+          ],
+          [
+            11116.432999999999,
+            11241.043
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1354,
+    "layer": "sector_bounds",
+    "tooltip": "Crankshaft Depot"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11196.170999999998,
+            11141.928
+          ],
+          [
+            11107.028,
+            11226.415
+          ],
+          [
+            10959.879,
+            11372.885
+          ],
+          [
+            10746.090999999999,
+            11389.957
+          ],
+          [
+            10738.234,
+            10906.121
+          ],
+          [
+            11196.170999999998,
+            11141.928
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1420,
+    "layer": "sector_bounds",
+    "tooltip": "Higgins's Ascent"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10722.622000000001,
+            10889.429
+          ],
+          [
+            10205.127,
+            10972.267
+          ],
+          [
+            10335.204,
+            10694.556
+          ],
+          [
+            10363.043,
+            10523.545
+          ],
+          [
+            10410.475999999999,
+            10448.952000000001
+          ],
+          [
+            10538.322,
+            10378.045
+          ],
+          [
+            10722.622000000001,
+            10889.429
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1421,
+    "layer": "sector_bounds",
+    "tooltip": "Bearce's Dwelling"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10733.731000000002,
+            10885.180999999999
+          ],
+          [
+            11068.284,
+            10429.475
+          ],
+          [
+            10846.251,
+            10349.644
+          ],
+          [
+            10549.431,
+            10373.797
+          ],
+          [
+            10733.731000000002,
+            10885.180999999999
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1436,
+    "layer": "sector_bounds",
+    "tooltip": "Tilly's Encampment"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            11077.755000000001,
+            10437.386
+          ],
+          [
+            11200.751,
+            10496.75
+          ],
+          [
+            11232.761,
+            10757.195000000002
+          ],
+          [
+            11234.992,
+            10926.169
+          ],
+          [
+            11201.139,
+            11128.899
+          ],
+          [
+            10743.202000000001,
+            10893.091999999999
+          ],
+          [
+            11077.755000000001,
+            10437.386
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1441,
+    "layer": "sector_bounds",
+    "tooltip": "Zak's Overlook"
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            10731.975999999999,
+            11389.300000000001
+          ],
+          [
+            10560.48,
+            11434.502
+          ],
+          [
+            10356.100999999999,
+            11264.946
+          ],
+          [
+            10294.409000000001,
+            11131.086
+          ],
+          [
+            10206.624,
+            10988.302000000001
+          ],
+          [
+            10724.119,
+            10905.464
+          ],
+          [
+            10731.975999999999,
+            11389.300000000001
+          ]
+        ]
+      ],
+      "type": "Polygon"
+    },
+    "id": 1444,
+    "layer": "sector_bounds",
+    "tooltip": "Darra's Maze"
+  }
+]

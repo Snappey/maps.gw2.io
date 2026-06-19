@@ -1,0 +1,43 @@
+@if (obj) {
+  <div class="card tooltip" [ngClass]="obj.owner ? 'overlay-' + obj.owner.toLowerCase() : ''">
+    <p class="name m-0 mists" [ngClass]="obj.owner ? obj.owner.toLowerCase() : ''">{{obj.name}}</p>
+    <p class="type-line m-0">
+      <span>{{obj.type}}</span>
+      @if (tier > 0) {
+        <span>&#8212;Tier {{tier}} {{tierName}}</span>
+        @for (_ of tierPips; track $index) {
+          <img class="pip" src="assets/upgrade_pip.png" alt=""/>
+        }
+      }
+    </p>
+    @if (hasWaypoint) {
+      <p class="m-0"><img class="wp" src="assets/waypoint.png" alt="Waypoint"/></p>
+    } @else if (ewpSlotted) {
+      <p class="m-0"><img class="wp" src="assets/wvw/emergency_waypoint.png" alt=""/>
+        <span class="muted"> Emergency Waypoint slotted</span></p>
+    }
+    @if (obj.points_tick !== undefined) {
+      <p class="tick m-0"><img src="assets/capture_icon.png" width="14" height="14" alt=""/> +{{obj.points_tick}} / Tick</p>
+    }
+    @if (obj.owner && obj.friendlyOwner) {
+      <hr class="sep"/>
+      <p class="label m-0">Controlled by:</p>
+      <p class="m-0 pl-2 mists" [ngClass]="obj.owner.toLowerCase()">{{obj.friendlyOwner}} ({{obj.owner}})</p>
+      @if (obj.claimed_by) {
+        <p class="label m-0">Claimed by:</p>
+        <p class="m-0 pl-2 mists" [ngClass]="obj.owner.toLowerCase()">
+          @if (guild$ | async; as guild) {
+            [{{guild.tag}}] {{guild.name}}
+          } @else {
+            &#8230;
+          }
+        </p>
+      }
+      @if (ri$ | async; as ri) {
+        @if (ri.active) {
+          <p class="ri m-0"><img src="assets/no_entry.png" width="12" height="12" alt=""/> Righteous Indignation {{ri.text}}</p>
+        }
+      }
+    }
+  </div>
+}

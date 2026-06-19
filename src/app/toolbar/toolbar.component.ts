@@ -1,5 +1,8 @@
-import {Component, Input, OnDestroy} from '@angular/core';
-import {fromEvent, map, Subject, takeUntil} from "rxjs";
+import {Component, Input} from '@angular/core';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {filter, fromEvent, map} from "rxjs";
+import { NgClass } from '@angular/common';
+import { Tooltip as Tooltip_1 } from 'primeng/tooltip';
 
 export interface ToolbarButton {
   Tooltip: string;
@@ -7,6 +10,8 @@ export interface ToolbarButton {
   IconHover: string;
   OnClick: () => void;
   Keybindings?: string[]
+  /** Panel id this button opens; used to keep its icon highlighted while open. */
+  PanelId?: string;
 }
 
 interface AppToolbarButton extends ToolbarButton {
@@ -14,11 +19,12 @@ interface AppToolbarButton extends ToolbarButton {
 }
 
 @Component({
-  selector: 'app-toolbar',
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css']
+    selector: 'app-toolbar',
+    templateUrl: './toolbar.component.html',
+    styleUrls: ['./toolbar.component.css'],
+    imports: [NgClass, Tooltip_1]
 })
-export class ToolbarComponent implements OnDestroy {
+export class ToolbarComponent {
   _buttons: AppToolbarButton[] = [];
   @Input()
   public set buttons(buttons: ToolbarButton[]) {
@@ -31,20 +37,25 @@ export class ToolbarComponent implements OnDestroy {
   @Input()
   leftToRight: boolean = true;
 
-  private unsubscribe$ = new Subject<void>();
+  /** Id of the currently open panel, so the matching button stays highlighted. */
+  @Input()
+  activePanel: string | null = null;
 
   constructor() {
     fromEvent(document, "keydown").pipe(
-      takeUntil(this.unsubscribe$),
+      takeUntilDestroyed(),
+      // Don't fire hotkeys while the user is typing into a field.
+      filter(() => !ToolbarComponent.isTypingTarget()),
       map(event => this._buttons.filter(button => button.Keybindings?.includes((event as KeyboardEvent).code)))
     ).subscribe(matchingButtons => {
       matchingButtons.forEach(button => button.OnClick());
     });
   }
 
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+  private static isTypingTarget(): boolean {
+    const el = document.activeElement as HTMLElement | null;
+    const tag = el?.tagName;
+    return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || !!el?.isContentEditable;
   }
 
   toolbarClasses(): string[] {

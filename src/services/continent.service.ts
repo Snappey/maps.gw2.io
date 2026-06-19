@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import {MapService} from "./map.service";
 
 interface Continent {
   texture_dims: number[]
@@ -25,12 +24,12 @@ interface Map {
   label_coord: number[]
   map_rect: number[][]
   continent_rect: number[][]
-  points_of_interest: any
-  tasks: any
-  skill_challenges: any
-  sectors: any
-  adventures: any
-  mastery_points: any
+  points_of_interest: unknown
+  tasks: unknown
+  skill_challenges: unknown
+  sectors: unknown
+  adventures: unknown
+  mastery_points: unknown
   id: number
 }
 
@@ -46,7 +45,7 @@ export interface MapLabel {
   providedIn: 'root'
 })
 export class ContinentService {
-  constructor(private http: HttpClient, private mapService: MapService) { }
+  constructor(private http: HttpClient) { }
 
   getContinent(id: number): Observable<Continent[]> {
     return this.http.get<Continent[]>(`https://api.guildwars2.com/v2/continents/${id}/floors?ids=1`)

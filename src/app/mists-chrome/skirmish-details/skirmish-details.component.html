@@ -1,0 +1,49 @@
+<div class="team-cards">
+  @for (card of cards; track card.team) {
+    <div class="team-card tooltip" [ngClass]="'overlay-' + card.team">
+      <div class="world mists-score">{{card.name}}</div>
+      <hr class="chev" [ngClass]="card.team + '-background'"/>
+      <div class="big-score">
+        <span class="diamond" [ngClass]="card.team + '-background'"></span>
+        <span>{{card.skirmishScore | number}}</span>
+      </div>
+      <div class="vp">Victory Points: {{card.victoryPoints | number}}</div>
+    </div>
+  }
+</div>
+
+<div class="body">
+  <div class="filters">
+    <div class="filters-head">Detailed Score</div>
+    @for (f of filters; track f.key) {
+      <button type="button" class="filter" [class.active]="f.key === selectedFilter" (click)="select(f)">{{f.label}}</button>
+    }
+  </div>
+
+  <div class="pie">
+    <p-chart type="pie" [data]="pieData" [options]="pieOptions" height="200px" width="200px"></p-chart>
+  </div>
+
+  <div class="contested">
+    <div class="head">
+      <span>Contested Areas</span>
+      <span>Potential Points</span>
+    </div>
+    @for (row of rows; track row.team) {
+      <div class="row">
+        <span class="objectives">
+          @for (type of objectiveTypes; track type) {
+            <span class="cnt" [class.zero]="row.counts[type] === 0">
+              <img [src]="'assets/' + type.toLowerCase() + '_' + row.team + '.png'" width="22" height="22" [title]="type" alt=""/>
+              <span>x {{row.counts[type]}}</span>
+            </span>
+          }
+        </span>
+        <span class="ppt">
+          <span class="diamond" [ngClass]="row.team + '-background'"></span>
+          +{{row.ppt}}
+        </span>
+      </div>
+    }
+  </div>
+</div>

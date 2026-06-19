@@ -11,31 +11,32 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "allowedCommonJsDependencies": [ "leaflet", "moment", "mqtt-browser", "xtend" ],
-            "outputPath": "dist/map-gw2-io",
+            "allowedCommonJsDependencies": [ "mqtt-browser", "xtend", "jszip" ],
+            "outputPath": { "base": "dist/map-gw2-io", "browser": "" },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/leaflet/dist/images",
-                "output": "assets/"
-              }
+              "src/favicon-16x16.png",
+              "src/favicon-32x32.png",
+              "src/apple-touch-icon.png",
+              "src/android-chrome-192x192.png",
+              "src/android-chrome-512x512.png",
+              "src/site.webmanifest",
+              "src/robots.txt",
+              "src/sitemap.xml",
+              "src/og-image.jpg",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css",
               "./node_modules/primeicons/primeicons.css",
-              "./node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "./node_modules/primeng/resources/primeng.min.css",
               "./node_modules/primeflex/primeflex.css",
-              "./node_modules/leaflet/dist/leaflet.css",
-              "./node_modules/leaflet-contextmenu/dist/leaflet.contextmenu.css",
+              "./node_modules/ol/ol.css",
               "./node_modules/ngx-toastr/toastr.css",
               "./node_modules/cookieconsent/build/cookieconsent.min.css",
             ],
@@ -48,7 +49,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2.5mb",
+                  "maximumWarning": "3mb",
                   "maximumError": "4mb"
                 },
                 {
@@ -66,24 +67,26 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "headers": {
+              "Document-Policy": "js-profiling"
+            }
+          },
           "configurations": {
             "production": {
-              "browserTarget": "map-gw2-io:build:production"
+              "buildTarget": "map-gw2-io:build:production"
             },
             "development": {
-              "browserTarget": "map-gw2-io:build:development"
+              "buildTarget": "map-gw2-io:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,7 +94,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "map-gw2-io:build"
+            "buildTarget": "map-gw2-io:build"
           }
         },
         "test": {
@@ -116,5 +119,31 @@
   },
   "cli": {
     "analytics": false
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
   }
 }
