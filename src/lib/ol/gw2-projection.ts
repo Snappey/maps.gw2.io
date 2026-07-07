@@ -51,17 +51,6 @@ export interface Gw2MapConfig {
   attribution: string;
 }
 
-/**
- * GW2 tile service XYZ template for a given continent + floor. Continent 1
- * (Tyria) serves from four subdomains (tiles1..tiles4); the Mists continent
- * only has the bare `tiles` host. The floor is part of the path, so swapping it
- * is the only thing a dynamic floor change needs to vary.
- */
-export const tileUrlFor = (continentId: number, floorId: number): string =>
-  continentId === 1
-    ? `https://tiles{1-4}.guildwars2.com/${continentId}/${floorId}/{z}/{x}/{y}.jpg`
-    : `https://tiles.guildwars2.com/${continentId}/${floorId}/{z}/{x}/{y}.jpg`;
-
 export const TYRIA_MAP_CONFIG: Gw2MapConfig = {
   code: "GW2:TYRIA",
   continentId: 1,
@@ -73,8 +62,8 @@ export const TYRIA_MAP_CONFIG: Gw2MapConfig = {
   minZoom: 2,
   maxZoom: 7,
   maxViewZoom: 8,
-  tileUrl: tileUrlFor(1, 1),
-  attribution: '<a href="https://www.arena.net/">ArenaNet</a> / <a href="https://wiki.guildwars2.com">Guild Wars 2 Wiki</a>',
+  tileUrl: "https://tiles{1-4}.gw2.io/1/1/{z}/{x}/{y}.jpg",
+  attribution: '<a href="https://www.arena.net/">ArenaNet</a> / <a href="https://wiki.guildwars2.com">Guild Wars 2 Wiki</a> / <a href="https://thatshaman.com/">ThatShaman</a>',
 };
 
 export const MISTS_MAP_CONFIG: Gw2MapConfig = {
@@ -88,7 +77,7 @@ export const MISTS_MAP_CONFIG: Gw2MapConfig = {
   minZoom: 4,
   maxZoom: 7,
   maxViewZoom: 8,
-  tileUrl: tileUrlFor(2, 1),
+  tileUrl: "https://tiles.guildwars2.com/2/1/{z}/{x}/{y}.jpg",
   attribution: '<a href="https://www.arena.net/">ArenaNet</a> / <a href="https://gw2timer.com/wvw">Gw2Timer</a>',
 };
 
