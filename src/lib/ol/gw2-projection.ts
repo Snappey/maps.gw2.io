@@ -2,6 +2,7 @@ import {addProjection, Projection} from "ol/proj";
 import TileGrid from "ol/tilegrid/TileGrid";
 import {Extent} from "ol/extent";
 import {Coordinate} from "ol/coordinate";
+import {environment} from "../../environments/environment";
 
 /**
  * GW2 "continent coordinates" are pixel coordinates at the maximum native tile
@@ -62,7 +63,8 @@ export const TYRIA_MAP_CONFIG: Gw2MapConfig = {
   minZoom: 2,
   maxZoom: 7,
   maxViewZoom: 8,
-  tileUrl: "https://tiles{1-4}.gw2.io/1/1/{z}/{x}/{y}.jpg",
+  // Host is per-environment so prod can be rolled back to CloudFront on its own.
+  tileUrl: `${environment.tyriaTileHost}/1/1/{z}/{x}/{y}.jpg`,
   attribution: '<a href="https://www.arena.net/">ArenaNet</a> / <a href="https://wiki.guildwars2.com">Guild Wars 2 Wiki</a> / <a href="https://thatshaman.com/">ThatShaman</a>',
 };
 

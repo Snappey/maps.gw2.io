@@ -2034,5 +2034,24 @@
     ],
     "subheading": "80",
     "type": "Map"
+  },
+  {
+    "coordinates": [
+      [
+        3130,
+        57385
+      ],
+      [
+        6330,
+        59945
+      ]
+    ],
+    "heading": "Leyspring Hollows",
+    "label_coordinates": [
+      4700,
+      58600
+    ],
+    "subheading": "80",
+    "type": "Map"
   }
 ]

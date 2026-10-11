@@ -10665,6 +10665,50 @@
       {
         "geometry": {
           "coordinates": [
+            4395.81,
+            58794.52
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ranger_Pets/Ley_Vampire_Bat.png",
+        "name": "Ley Vampire Bat — Leyspring Hollow"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            4302.35,
+            58752.76
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ranger_Pets/Ley_Vampire_Bat.png",
+        "name": "Ley Vampire Bat — Leyspring Hollow"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            4290.04,
+            58928.51
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ranger_Pets/Ley_Vampire_Bat.png",
+        "name": "Ley Vampire Bat — Leyspring Hollow"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            4333.44,
+            58970.49
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ranger_Pets/Ley_Vampire_Bat.png",
+        "name": "Ley Vampire Bat — Leyspring Hollow"
+      },
+      {
+        "geometry": {
+          "coordinates": [
             30850.66,
             101180.07
           ],
@@ -46998,6 +47042,28 @@
       {
         "geometry": {
           "coordinates": [
+            53643.75,
+            30821.01
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Square_-_Pink.png",
+        "name": "Sous-Chef Seimur Oxbone (Pink Square) — Trade Commons, Hoelbrak"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            57531.03,
+            30653.56
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Square_-_Pink.png",
+        "name": "Sous-Chef Seimur Oxbone (Pink Square) — Mustering Ground, Black Citadel"
+      },
+      {
+        "geometry": {
+          "coordinates": [
             43125.27,
             37490.2
           ],
@@ -47049,28 +47115,6 @@
         },
         "icon": "/assets/taco_icons/Square_-_Pink.png",
         "name": "Sous-Chef Seimur Oxbone (Pink Square) — Butcher's Block, Diessa Plateau"
-      },
-      {
-        "geometry": {
-          "coordinates": [
-            53643.75,
-            30821.01
-          ],
-          "type": "Point"
-        },
-        "icon": "/assets/taco_icons/Square_-_Pink.png",
-        "name": "Sous-Chef Seimur Oxbone (Pink Square) — Trade Commons, Hoelbrak"
-      },
-      {
-        "geometry": {
-          "coordinates": [
-            57531.03,
-            30653.56
-          ],
-          "type": "Point"
-        },
-        "icon": "/assets/taco_icons/Square_-_Pink.png",
-        "name": "Sous-Chef Seimur Oxbone (Pink Square) — Mustering Ground, Black Citadel"
       }
     ],
     "group": [
@@ -52813,6 +52857,127 @@
         },
         "icon": "/assets/taco_icons/Icons/Rift_Tier_3.png",
         "name": "Eternity's Garden — Tier 3"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            3494.39,
+            59242.17
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Rift_Tier_1.png",
+        "name": "Leyspring Hollow — Tier 1"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            5283.94,
+            58528.35
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Rift_Tier_1.png",
+        "name": "Leyspring Hollow — Tier 1"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            5940.01,
+            59470.2
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Rift_Tier_1.png",
+        "name": "Leyspring Hollow — Tier 1"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            5709.48,
+            58827.24
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Rift_Tier_1.png",
+        "name": "Leyspring Hollow — Tier 1"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            5529.65,
+            58710.94
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Rift_Tier_1.png",
+        "name": "Leyspring Hollow — Tier 1"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            4164.26,
+            57688.14
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Rift_Tier_2.png",
+        "name": "Leyspring Hollow — Tier 2"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            3980.69,
+            58304.3
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Rift_Tier_2.png",
+        "name": "Leyspring Hollow — Tier 2"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            3851.93,
+            59047.52
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Rift_Tier_2.png",
+        "name": "Leyspring Hollow — Tier 2"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            4687.77,
+            58767.81
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Rift_Tier_3.png",
+        "name": "Leyspring Hollow — Tier 3"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            4516.4,
+            57924.01
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Rift_Tier_3.png",
+        "name": "Leyspring Hollow — Tier 3"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            4396.58,
+            59528.17
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Rift_Tier_3.png",
+        "name": "Leyspring Hollow — Tier 3"
       }
     ],
     "group": [
@@ -52844,7 +53009,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -52866,7 +53031,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -52888,7 +53053,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -52899,7 +53064,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -52910,7 +53075,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -52921,7 +53086,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -52932,7 +53097,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -52954,7 +53119,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -52965,7 +53130,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -52976,7 +53141,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -52998,7 +53163,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -53020,7 +53185,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -53037,12 +53202,45 @@
       {
         "geometry": {
           "coordinates": [
+            43105.61,
+            30298.29
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
+        "name": "Rich Copper — Rich Copper Nodes"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            43674.85,
+            29315.81
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
+        "name": "Rich Copper — Rich Copper Nodes"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            43388.54,
+            29941.55
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
+        "name": "Rich Copper — Rich Copper Nodes"
+      },
+      {
+        "geometry": {
+          "coordinates": [
             58539.43,
             31749.79
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -53053,7 +53251,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Copper.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Copper-Outline.png",
         "name": "Rich Copper — Rich Copper Nodes"
       },
       {
@@ -53108,7 +53306,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Silver.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Silver-Outline.png",
         "name": "Rich Silver — Rich Silver Nodes"
       },
       {
@@ -53130,7 +53328,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Silver.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Silver-Outline.png",
         "name": "Rich Silver — Rich Silver Nodes"
       },
       {
@@ -53152,7 +53350,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Silver.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Silver-Outline.png",
         "name": "Rich Silver — Rich Silver Nodes"
       },
       {
@@ -53163,7 +53361,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Silver.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Silver-Outline.png",
         "name": "Rich Silver — Rich Silver Nodes"
       },
       {
@@ -53174,7 +53372,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Silver.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Silver-Outline.png",
         "name": "Rich Silver — Rich Silver Nodes"
       },
       {
@@ -53196,7 +53394,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Silver.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Silver-Outline.png",
         "name": "Rich Silver — Rich Silver Nodes"
       },
       {
@@ -53218,7 +53416,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Silver.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Silver-Outline.png",
         "name": "Rich Silver — Rich Silver Nodes"
       },
       {
@@ -53240,7 +53438,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Silver.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Silver-Outline.png",
         "name": "Rich Silver — Rich Silver Nodes"
       },
       {
@@ -53251,7 +53449,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Silver.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Silver-Outline.png",
         "name": "Rich Silver — Rich Silver Nodes"
       },
       {
@@ -53284,7 +53482,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Silver.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Silver-Outline.png",
         "name": "Rich Silver — Rich Silver Nodes"
       },
       {
@@ -53317,7 +53515,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53328,7 +53526,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53350,7 +53548,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53372,7 +53570,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53394,7 +53592,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53405,7 +53603,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53416,7 +53614,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53427,7 +53625,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53449,7 +53647,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53460,7 +53658,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53471,7 +53669,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53482,7 +53680,18 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
+        "name": "Rich Gold — Rich Gold Nodes"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            63952.8,
+            31488.11
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53493,7 +53702,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Gold.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
         "name": "Rich Gold — Rich Gold Nodes"
       },
       {
@@ -53521,6 +53730,39 @@
       {
         "geometry": {
           "coordinates": [
+            34651.5,
+            20920.38
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
+        "name": "Rich Gold — Rich Gold Nodes"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            34649.59,
+            20915.34
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
+        "name": "Rich Gold — Rich Gold Nodes"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            34648.03,
+            20911.22
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Ore-Gold-Outline.png",
+        "name": "Rich Gold — Rich Gold Nodes"
+      },
+      {
+        "geometry": {
+          "coordinates": [
             61741.48,
             33684.31
           ],
@@ -53537,7 +53779,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53570,7 +53812,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53581,7 +53823,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53592,7 +53834,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53605,6 +53847,17 @@
         },
         "icon": "/assets/taco_icons/Icons/Blank.png",
         "name": "Rich Iron — Waypoint"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            51122.02,
+            29510.04
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
+        "name": "Rich Iron — Rich iron Nodes"
       },
       {
         "geometry": {
@@ -53647,7 +53900,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53675,6 +53928,17 @@
       {
         "geometry": {
           "coordinates": [
+            45528.25,
+            31950.58
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Blank.png",
+        "name": "Rich Iron — Waypoint"
+      },
+      {
+        "geometry": {
+          "coordinates": [
             45408.21,
             31963.82
           ],
@@ -53686,8 +53950,8 @@
       {
         "geometry": {
           "coordinates": [
-            45505.64,
-            32135.11
+            45527.32,
+            32173.72
           ],
           "type": "Point"
         },
@@ -53713,8 +53977,19 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            42353.67,
+            31454.17
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Icons/Blank.png",
+        "name": "Rich Iron — Waypoint"
       },
       {
         "geometry": {
@@ -53746,7 +54021,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53757,7 +54032,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53768,7 +54043,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53779,7 +54054,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53790,7 +54065,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53801,7 +54076,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53812,7 +54087,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53823,7 +54098,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53834,7 +54109,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53845,7 +54120,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53856,7 +54131,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53867,7 +54142,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53878,7 +54153,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53889,7 +54164,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53900,7 +54175,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53911,7 +54186,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53922,7 +54197,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53933,7 +54208,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53944,7 +54219,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53955,7 +54230,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53966,7 +54241,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Iron.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Iron-Outline.png",
         "name": "Rich Iron — Rich iron Nodes"
       },
       {
@@ -53977,7 +54252,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -53988,7 +54263,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54010,7 +54285,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54021,7 +54296,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54054,7 +54329,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54065,7 +54340,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54076,7 +54351,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54098,7 +54373,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54109,7 +54384,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54120,7 +54395,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54153,7 +54428,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54164,7 +54439,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54175,7 +54450,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54219,7 +54494,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54230,7 +54505,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54241,7 +54516,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54252,7 +54527,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Platinum.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Platinum-Outline.png",
         "name": "Rich Platinum — Rich Platinum Nodes"
       },
       {
@@ -54263,7 +54538,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54274,7 +54549,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54307,7 +54582,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54318,7 +54593,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54329,7 +54604,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54384,7 +54659,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54395,7 +54670,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54406,7 +54681,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54439,7 +54714,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54450,7 +54725,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54472,7 +54747,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54494,7 +54769,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54516,7 +54791,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54527,7 +54802,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54549,7 +54824,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54560,7 +54835,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54571,7 +54846,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54582,7 +54857,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54593,7 +54868,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54604,7 +54879,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54615,7 +54890,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54626,7 +54901,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Mithril.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Mithril-Outline.png",
         "name": "Rich Mithril — Rich Mithril Nodes"
       },
       {
@@ -54648,7 +54923,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54670,7 +54945,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54703,7 +54978,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54714,7 +54989,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54725,7 +55000,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54736,7 +55011,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54769,7 +55044,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54780,7 +55055,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54802,7 +55077,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54813,7 +55088,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54824,7 +55099,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54846,7 +55121,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54857,7 +55132,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54890,7 +55165,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54901,7 +55176,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54912,7 +55187,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54923,7 +55198,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54934,7 +55209,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -54956,7 +55231,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       }
     ],
@@ -55298,7 +55573,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Icons/Ore-Orich.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Orich-Outline.png",
         "name": "Rich Orichalcum — Rich Orichalcum Nodes"
       },
       {
@@ -80853,7 +81128,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Square_-_Teal.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Quartz.png",
         "name": "Quartz Crystal — Quartz Nodes"
       },
       {
@@ -80864,7 +81139,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Square_-_Teal.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Quartz.png",
         "name": "Quartz Crystal — Quartz Nodes"
       },
       {
@@ -80886,7 +81161,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Square_-_Teal.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Quartz.png",
         "name": "Quartz Crystal — Quartz Nodes"
       },
       {
@@ -80897,7 +81172,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Square_-_Teal.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Quartz.png",
         "name": "Quartz Crystal — Quartz Nodes"
       },
       {
@@ -80908,7 +81183,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Square_-_Teal.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Quartz.png",
         "name": "Quartz Crystal — Quartz Nodes"
       },
       {
@@ -80919,7 +81194,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Square_-_Teal.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Quartz.png",
         "name": "Quartz Crystal — Quartz Nodes"
       },
       {
@@ -80930,7 +81205,7 @@
           ],
           "type": "Point"
         },
-        "icon": "/assets/taco_icons/Square_-_Teal.png",
+        "icon": "/assets/taco_icons/Icons/Ore-Quartz.png",
         "name": "Quartz Crystal — Quartz Nodes"
       },
       {
@@ -87765,6 +88040,1931 @@
         },
         "icon": "/assets/taco_icons/Hexagon_-_Purple.png",
         "name": "Janthir Wilds — Mursaat Obsidian and Titan Heatstone"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22301.03,
+            23270.32
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22336.51,
+            23258.79
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22289.33,
+            23205.26
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22220.4,
+            23202.77
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22262.04,
+            23140
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22267.81,
+            23096.94
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22310.94,
+            23088.21
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22073.84,
+            22509.29
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22047.33,
+            22524.15
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22031.56,
+            22548.86
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21979.36,
+            22556.23
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21910.74,
+            22489.42
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21914.16,
+            22457.91
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21938.08,
+            22459.58
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21964.78,
+            22448.8
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22495.82,
+            22301.64
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22502.1,
+            22275.52
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22506.24,
+            22259.31
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22508.86,
+            22245.77
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22511.93,
+            22231.96
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22517.91,
+            22206.68
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22523.06,
+            22185.67
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22807.55,
+            22742.36
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22816.23,
+            22838.59
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22746.69,
+            22732.11
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22705.87,
+            22834.91
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22762.36,
+            22872.99
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22682.78,
+            22815.56
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22769.81,
+            22754.14
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22791.68,
+            22871.09
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22823.67,
+            22826.48
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22704.67,
+            22737.24
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22832.03,
+            22858.41
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22715.91,
+            22705.53
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Finish_Flag.png",
+        "name": "Secrets of the Obscure — Calcified Gasp"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21856.02,
+            22315.85
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21889.6,
+            22281.23
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21887.42,
+            22347.27
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21917.92,
+            22332.44
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21879.99,
+            22292.75
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21983.68,
+            22314.3
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21998.5,
+            22255.87
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22028.89,
+            22269.5
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21964.14,
+            22301.75
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21909.64,
+            22317.62
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21903.59,
+            22375.9
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21856.82,
+            22315.59
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21839.56,
+            22368.71
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21532.84,
+            23148.01
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21338.55,
+            23095.52
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21241.31,
+            22925.62
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21247.54,
+            22741.36
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21363.63,
+            22771.82
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21515.81,
+            22867.87
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21613.07,
+            22985.07
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21611.61,
+            23086.16
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21502.99,
+            23115.87
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21390.85,
+            23089.54
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21232.52,
+            22945.76
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21163.23,
+            22867.03
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21153.39,
+            22793.68
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21104.53,
+            22466.43
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21174.07,
+            23465.47
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21219.6,
+            23470.74
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21228.46,
+            23511.58
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21169.9,
+            23511.3
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21149.29,
+            23482.87
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21145.92,
+            23467.09
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21146.79,
+            23475.63
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Finish_Flag.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21225.61,
+            23455.33
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21164.42,
+            23500.44
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21147.05,
+            23482.45
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            21267.85,
+            23432.39
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22059.18,
+            22315.28
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22228.77,
+            23690.73
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22241.71,
+            23619.2
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22255.95,
+            23545.57
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            42078.24,
+            38072.79
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            42091.42,
+            38062.1
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Calcified Gasp — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22911.93,
+            20906.38
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22911.94,
+            20906.34
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22912.01,
+            20906.43
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22912.04,
+            20906.33
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22971.65,
+            21015.43
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22971.69,
+            21057
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            22971.7,
+            21098.63
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23253.31,
+            21507.9
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23231.17,
+            21507.92
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23204.68,
+            21507.76
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23182.8,
+            21507.75
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23162.07,
+            21507.72
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23141.23,
+            21507.79
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Finish_Flag.png",
+        "name": "Secrets of the Obscure — Pinch of Stardust"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24152.91,
+            19515.38
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24194.66,
+            19515.29
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24236.24,
+            19515.34
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24277.88,
+            19515.53
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24319.66,
+            19515.41
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24202.09,
+            19328.53
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24106.98,
+            19329.12
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24121.08,
+            19351.77
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24158.15,
+            19426.66
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24135.05,
+            19496.8
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24122.15,
+            19489.33
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24200.3,
+            19472.49
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24159,
+            19381.83
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24199.13,
+            19490.64
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24245.21,
+            19631.48
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24259.86,
+            19674.35
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24237.57,
+            19595.73
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24202.97,
+            19618.85
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24239.69,
+            19719.55
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24268.01,
+            19842.06
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24281.53,
+            19795.26
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24287.45,
+            19712.71
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Finish_Flag.png",
+        "name": "Secrets of the Obscure — Pinch of Stardust"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            25202.91,
+            20309.71
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            25083.78,
+            20336.12
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            25066.47,
+            20340.35
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24952.54,
+            20313.06
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24800.2,
+            20307.62
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24911.82,
+            20295.76
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24870.21,
+            20362.19
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24828.62,
+            20429.14
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24511.16,
+            20678.64
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24517.58,
+            20706.04
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24504.04,
+            20807.37
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24538.07,
+            20821.45
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24557.86,
+            21073.18
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24590.42,
+            21033.85
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24664.98,
+            21059.76
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24727.44,
+            21102.35
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24725.95,
+            21283.46
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24767.65,
+            21283.56
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24809.29,
+            21283.53
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24808.06,
+            21414.9
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24771.5,
+            21370.9
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Finish_Flag.png",
+        "name": "Secrets of the Obscure — Pinch of Stardust"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24766.6,
+            21421.4
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24779.42,
+            21458.76
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24764.41,
+            21465
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            25297.57,
+            20353.73
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Pinch of Stardust — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24121.99,
+            23327.27
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Finish_Flag.png",
+        "name": "Secrets of the Obscure — Static Charge"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24230.25,
+            23561.35
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24230.29,
+            23602.35
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24256.86,
+            23633.54
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24297.08,
+            23640.79
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24332.55,
+            23620.22
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24346.6,
+            23581.75
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24332.43,
+            23543.2
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24296.92,
+            23522.62
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24256.65,
+            23529.78
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24149.9,
+            23271.11
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24146.96,
+            23272.47
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24148.43,
+            23271.54
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24078.91,
+            23306.59
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24053.12,
+            23315.94
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24007.8,
+            23333.53
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23985.84,
+            23290.85
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23975.57,
+            23291.35
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23961.71,
+            23293.78
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23970.19,
+            23243.07
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23942.73,
+            23239.23
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23917.49,
+            23234.66
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23919.23,
+            23234.84
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23865.06,
+            23175.9
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23845.65,
+            23165.2
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23840.61,
+            23144.5
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23812.22,
+            23120.58
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24047.31,
+            23186.24
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24004.34,
+            23193.55
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            23963.1,
+            23199.82
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24131.55,
+            23350.38
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24155.28,
+            23360.3
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24179.04,
+            23350.66
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24188.41,
+            23326.64
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24178.94,
+            23303.18
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24155.41,
+            23293.4
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
+      },
+      {
+        "geometry": {
+          "coordinates": [
+            24131.44,
+            23303.16
+          ],
+          "type": "Point"
+        },
+        "icon": "/assets/taco_icons/Ring.png",
+        "name": "Static Charge — Orb Visibility Rings"
       }
     ],
     "group": [

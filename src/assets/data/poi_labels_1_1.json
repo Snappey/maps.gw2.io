@@ -47380,6 +47380,97 @@
   {
     "continent": "Shiverpeak Mountains",
     "coordinates": [
+      58509,
+      18771.4
+    ],
+    "data": {
+      "type": "Tundra"
+    },
+    "id": 471,
+    "map": "Bjora Marches",
+    "type": "mastery"
+  },
+  {
+    "continent": "Shiverpeak Mountains",
+    "coordinates": [
+      58986.1,
+      17810.7
+    ],
+    "data": {
+      "type": "Tundra"
+    },
+    "id": 474,
+    "map": "Bjora Marches",
+    "type": "mastery"
+  },
+  {
+    "continent": "Shiverpeak Mountains",
+    "coordinates": [
+      57625,
+      17241.4
+    ],
+    "data": {
+      "type": "Tundra"
+    },
+    "id": 476,
+    "map": "Bjora Marches",
+    "type": "mastery"
+  },
+  {
+    "continent": "Shiverpeak Mountains",
+    "coordinates": [
+      57809,
+      18843.8
+    ],
+    "data": {
+      "type": "Tundra"
+    },
+    "id": 472,
+    "map": "Bjora Marches",
+    "type": "mastery"
+  },
+  {
+    "continent": "Shiverpeak Mountains",
+    "coordinates": [
+      55455.3,
+      18694
+    ],
+    "data": {
+      "type": "Tundra"
+    },
+    "id": 490,
+    "map": "Bjora Marches",
+    "type": "mastery"
+  },
+  {
+    "continent": "Shiverpeak Mountains",
+    "coordinates": [
+      56666.7,
+      17061.7
+    ],
+    "data": {
+      "type": "Tundra"
+    },
+    "id": 485,
+    "map": "Bjora Marches",
+    "type": "mastery"
+  },
+  {
+    "continent": "Shiverpeak Mountains",
+    "coordinates": [
+      56370.3,
+      17973.1
+    ],
+    "data": {
+      "type": "Tundra"
+    },
+    "id": 492,
+    "map": "Bjora Marches",
+    "type": "mastery"
+  },
+  {
+    "continent": "Shiverpeak Mountains",
+    "coordinates": [
       57658.4,
       18689.1
     ],
@@ -60628,6 +60719,148 @@
     },
     "id": 947,
     "map": "Trial and Error: Durmand Priory",
+    "type": "sector"
+  },
+  {
+    "continent": "Shiverpeak Mountains",
+    "coordinates": [
+      55359.4,
+      30960
+    ],
+    "data": {
+      "chat_link": "[&BGoBAAA=]",
+      "tooltip": "Heart of the Raven"
+    },
+    "id": 362,
+    "map": "Everything That We Are: Snowlord's Gate",
+    "type": "landmark"
+  },
+  {
+    "continent": "Shiverpeak Mountains",
+    "coordinates": [
+      55458.4,
+      31311.6
+    ],
+    "data": {
+      "bounds": [
+        [
+          54941.6,
+          31566.1
+        ],
+        [
+          54965.4,
+          31394.7
+        ],
+        [
+          55114.1,
+          31398.1
+        ],
+        [
+          55542.2,
+          31028.7
+        ],
+        [
+          55709.4,
+          30997.8
+        ],
+        [
+          55776.4,
+          30997.2
+        ],
+        [
+          55817.2,
+          31036.9
+        ],
+        [
+          55778.4,
+          31118.2
+        ],
+        [
+          55713.8,
+          31630.9
+        ],
+        [
+          55477.1,
+          31642.2
+        ],
+        [
+          55206.8,
+          31616.5
+        ],
+        [
+          54941.6,
+          31566.1
+        ]
+      ],
+      "level": 5,
+      "tooltip": "Borealis Forest"
+    },
+    "id": 200,
+    "map": "Everything That We Are: Snowlord's Gate",
+    "type": "sector"
+  },
+  {
+    "continent": "Shiverpeak Mountains",
+    "coordinates": [
+      55057.6,
+      31036
+    ],
+    "data": {
+      "bounds": [
+        [
+          55114.5,
+          31399.2
+        ],
+        [
+          55538.9,
+          31028.7
+        ],
+        [
+          55445,
+          30973.2
+        ],
+        [
+          55364.5,
+          30906.9
+        ],
+        [
+          55271.6,
+          30878.4
+        ],
+        [
+          55052.7,
+          30720.3
+        ],
+        [
+          54961.1,
+          30720.2
+        ],
+        [
+          54533,
+          30817.9
+        ],
+        [
+          54501.8,
+          31276.3
+        ],
+        [
+          54883.2,
+          31277.5
+        ],
+        [
+          54966.6,
+          31397.1
+        ],
+        [
+          55114.5,
+          31399.2
+        ]
+      ],
+      "level": 2,
+      "tooltip": "Snowlord's Gate"
+    },
+    "id": 201,
+    "map": "Everything That We Are: Snowlord's Gate",
     "type": "sector"
   },
   {
@@ -126590,6 +126823,140 @@
     "type": "sector"
   },
   {
+    "continent": "Ascalon",
+    "coordinates": [
+      58199.7,
+      30965.9
+    ],
+    "data": {
+      "chat_link": "[&BJUDAAA=]",
+      "tooltip": "Three Legions Court"
+    },
+    "id": 917,
+    "map": "Everything That We Are: Village of Smokestead",
+    "type": "landmark"
+  },
+  {
+    "continent": "Ascalon",
+    "coordinates": [
+      58156.3,
+      30833.9
+    ],
+    "data": {
+      "bounds": [
+        [
+          57856,
+          30550.5
+        ],
+        [
+          57996.7,
+          30571
+        ],
+        [
+          58378.9,
+          30592.8
+        ],
+        [
+          58545.1,
+          30743.8
+        ],
+        [
+          58526.7,
+          30851.5
+        ],
+        [
+          58424.6,
+          31121.2
+        ],
+        [
+          58158.3,
+          31028.9
+        ],
+        [
+          58070.5,
+          31085.8
+        ],
+        [
+          57749.8,
+          31164.6
+        ],
+        [
+          57856,
+          30629.2
+        ],
+        [
+          57856,
+          30550.5
+        ]
+      ],
+      "level": 3,
+      "tooltip": "Village of Smokestead"
+    },
+    "id": 270,
+    "map": "Everything That We Are: Village of Smokestead",
+    "type": "sector"
+  },
+  {
+    "continent": "Ascalon",
+    "coordinates": [
+      58277,
+      30394.2
+    ],
+    "data": {
+      "bounds": [
+        [
+          57811.7,
+          30326.9
+        ],
+        [
+          57985.1,
+          30336.6
+        ],
+        [
+          58139.5,
+          30216.8
+        ],
+        [
+          58197.2,
+          30260
+        ],
+        [
+          58466.1,
+          30120
+        ],
+        [
+          58627.1,
+          30196.5
+        ],
+        [
+          58748.3,
+          30586.6
+        ],
+        [
+          58543.3,
+          30743.6
+        ],
+        [
+          58379.7,
+          30589.3
+        ],
+        [
+          57871.7,
+          30565.2
+        ],
+        [
+          57811.7,
+          30326.9
+        ]
+      ],
+      "level": 3,
+      "tooltip": "Gunbreach Hills"
+    },
+    "id": 288,
+    "map": "Everything That We Are: Village of Smokestead",
+    "type": "sector"
+  },
+  {
     "continent": "Ruins of Orr",
     "coordinates": [
       47752.3,
@@ -166873,6 +167240,100 @@
     "type": "sector"
   },
   {
+    "continent": "Kryta",
+    "coordinates": [
+      43626.4,
+      28710.2
+    ],
+    "data": {
+      "chat_link": "[&BFMDAAA=]",
+      "tooltip": "Trainer's Terrace"
+    },
+    "id": 851,
+    "map": "Everything That We Are: Village of Shaemoor",
+    "type": "landmark"
+  },
+  {
+    "continent": "Kryta",
+    "coordinates": [
+      43851.1,
+      28584.1
+    ],
+    "data": {
+      "bounds": [
+        [
+          43670.1,
+          29135.4
+        ],
+        [
+          43655.4,
+          28861
+        ],
+        [
+          43582.2,
+          28798.4
+        ],
+        [
+          43572.7,
+          28690.6
+        ],
+        [
+          43344.9,
+          28504.9
+        ],
+        [
+          43349.9,
+          28334.1
+        ],
+        [
+          43544.3,
+          27970.2
+        ],
+        [
+          44210,
+          27964.2
+        ],
+        [
+          44215.7,
+          28204.6
+        ],
+        [
+          44337.6,
+          28406.8
+        ],
+        [
+          44276.1,
+          28565
+        ],
+        [
+          44149.8,
+          28593.5
+        ],
+        [
+          43992.9,
+          28684.6
+        ],
+        [
+          43984,
+          28862
+        ],
+        [
+          43880.9,
+          29185.6
+        ],
+        [
+          43670.1,
+          29135.4
+        ]
+      ],
+      "level": 4,
+      "tooltip": "Village of Shaemoor"
+    },
+    "id": 65,
+    "map": "Everything That We Are: Village of Shaemoor",
+    "type": "sector"
+  },
+  {
     "continent": "Tarnished Coast",
     "coordinates": [
       42207.5,
@@ -186324,6 +186785,514 @@
     },
     "id": 1022,
     "map": "Unscheduled Departures: Rata Sum Port Authority",
+    "type": "sector"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      40659.6,
+      36593.6
+    ],
+    "data": {
+      "chat_link": "[&BDMAAAA=]",
+      "tooltip": "Incinergen Labs"
+    },
+    "id": 51,
+    "map": "Everything That We Are: Soren Draa",
+    "type": "landmark"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      40583.5,
+      36342.7
+    ],
+    "data": {
+      "chat_link": "[&BDQAAAA=]",
+      "tooltip": "Battleground Plaza"
+    },
+    "id": 52,
+    "map": "Everything That We Are: Soren Draa",
+    "type": "landmark"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      40856.9,
+      36440.9
+    ],
+    "data": {
+      "chat_link": "[&BDQEAAA=]",
+      "tooltip": "Splorg Metamystics Lab"
+    },
+    "id": 1076,
+    "map": "Everything That We Are: Soren Draa",
+    "type": "landmark"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      40217.8,
+      36288.7
+    ],
+    "data": {
+      "chat_link": "[&BAkFAAA=]",
+      "tooltip": "Terranexic Lab"
+    },
+    "id": 1289,
+    "map": "Everything That We Are: Soren Draa",
+    "type": "landmark"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      40276.3,
+      36696
+    ],
+    "data": {
+      "bounds": [
+        [
+          40309.2,
+          36840.4
+        ],
+        [
+          40079.7,
+          36840.9
+        ],
+        [
+          40024,
+          36672.9
+        ],
+        [
+          40226.5,
+          36524.1
+        ],
+        [
+          40451.6,
+          36554.5
+        ],
+        [
+          40456.5,
+          36661
+        ],
+        [
+          40386.4,
+          36778.2
+        ],
+        [
+          40309.2,
+          36840.4
+        ]
+      ],
+      "level": 3,
+      "tooltip": "Wildflame Caverns"
+    },
+    "id": 151,
+    "map": "Everything That We Are: Soren Draa",
+    "type": "sector"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      40364.7,
+      35966.4
+    ],
+    "data": {
+      "bounds": [
+        [
+          40245.2,
+          36304.3
+        ],
+        [
+          40448.6,
+          36312.6
+        ],
+        [
+          40535.2,
+          36050
+        ],
+        [
+          40766.3,
+          35895.1
+        ],
+        [
+          40725.3,
+          35789.5
+        ],
+        [
+          40522.3,
+          35703.8
+        ],
+        [
+          40511.7,
+          35671.7
+        ],
+        [
+          40337.5,
+          35666.9
+        ],
+        [
+          40225.8,
+          35785.9
+        ],
+        [
+          40280.7,
+          36004.3
+        ],
+        [
+          40274.5,
+          36057
+        ],
+        [
+          40189.1,
+          36071.3
+        ],
+        [
+          40035.7,
+          36053.4
+        ],
+        [
+          40008.1,
+          36163.5
+        ],
+        [
+          40245.2,
+          36304.3
+        ]
+      ],
+      "level": 6,
+      "tooltip": "Obscura Incline"
+    },
+    "id": 152,
+    "map": "Everything That We Are: Soren Draa",
+    "type": "sector"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      40147.6,
+      36424
+    ],
+    "data": {
+      "bounds": [
+        [
+          40447.9,
+          36315.7
+        ],
+        [
+          40450.2,
+          36551.2
+        ],
+        [
+          40225.8,
+          36523.4
+        ],
+        [
+          40023.2,
+          36670.9
+        ],
+        [
+          39889.8,
+          36632
+        ],
+        [
+          39890.9,
+          36234.1
+        ],
+        [
+          40006.7,
+          36162.8
+        ],
+        [
+          40246.2,
+          36301.5
+        ],
+        [
+          40447.9,
+          36315.7
+        ]
+      ],
+      "level": 3,
+      "tooltip": "Soren Draa"
+    },
+    "id": 155,
+    "map": "Everything That We Are: Soren Draa",
+    "type": "sector"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      40678.6,
+      36522.9
+    ],
+    "data": {
+      "bounds": [
+        [
+          40449.1,
+          36313.1
+        ],
+        [
+          40471.8,
+          36252.9
+        ],
+        [
+          40534.3,
+          36063.8
+        ],
+        [
+          41149.2,
+          36393
+        ],
+        [
+          41160,
+          36824.4
+        ],
+        [
+          40733.5,
+          36842.8
+        ],
+        [
+          40624.6,
+          36797.9
+        ],
+        [
+          40531.4,
+          36609.9
+        ],
+        [
+          40453.2,
+          36608.7
+        ],
+        [
+          40449.1,
+          36313.1
+        ]
+      ],
+      "level": 3,
+      "tooltip": "The Hinterlabs"
+    },
+    "id": 164,
+    "map": "Everything That We Are: Soren Draa",
+    "type": "sector"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      42899,
+      36265.2
+    ],
+    "data": {
+      "chat_link": "[&BGcAAAA=]",
+      "tooltip": "Solitaire Island"
+    },
+    "id": 103,
+    "map": "Everything That We Are: Village of Astorea",
+    "type": "landmark"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      42611.3,
+      36132.9
+    ],
+    "data": {
+      "chat_link": "[&BEUEAAA=]",
+      "tooltip": "Rime's Garden"
+    },
+    "id": 1093,
+    "map": "Everything That We Are: Village of Astorea",
+    "type": "landmark"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      42726.4,
+      36165.8
+    ],
+    "data": {
+      "bounds": [
+        [
+          42733.3,
+          35970.5
+        ],
+        [
+          42729.5,
+          36009.1
+        ],
+        [
+          42777.3,
+          36039.4
+        ],
+        [
+          42766.9,
+          36058.8
+        ],
+        [
+          42613.8,
+          35967.6
+        ],
+        [
+          42537.2,
+          36016.6
+        ],
+        [
+          42514.4,
+          36065.1
+        ],
+        [
+          42503.5,
+          36174.5
+        ],
+        [
+          42531.3,
+          36245.4
+        ],
+        [
+          42499.9,
+          36517.1
+        ],
+        [
+          42705,
+          36551.3
+        ],
+        [
+          43019.2,
+          36497.1
+        ],
+        [
+          43045.4,
+          36261.7
+        ],
+        [
+          42952.2,
+          36098.4
+        ],
+        [
+          42967,
+          36014.4
+        ],
+        [
+          42733.3,
+          35970.5
+        ]
+      ],
+      "level": 2,
+      "tooltip": "Village of Astorea"
+    },
+    "id": 102,
+    "map": "Everything That We Are: Village of Astorea",
+    "type": "sector"
+  },
+  {
+    "continent": "Tarnished Coast",
+    "coordinates": [
+      42559.4,
+      36066.3
+    ],
+    "data": {
+      "bounds": [
+        [
+          42507.5,
+          35402.7
+        ],
+        [
+          42772.1,
+          35575.4
+        ],
+        [
+          42772.2,
+          35576.1
+        ],
+        [
+          42925,
+          35499.9
+        ],
+        [
+          42876.5,
+          35647.1
+        ],
+        [
+          42811.6,
+          35685.8
+        ],
+        [
+          42719.4,
+          35840.1
+        ],
+        [
+          42732.1,
+          35969.4
+        ],
+        [
+          42727.8,
+          36011.7
+        ],
+        [
+          42774.2,
+          36040.1
+        ],
+        [
+          42761.9,
+          36057.3
+        ],
+        [
+          42609.8,
+          35979
+        ],
+        [
+          42540.8,
+          36024.6
+        ],
+        [
+          42518,
+          36073.1
+        ],
+        [
+          42506.5,
+          36178.1
+        ],
+        [
+          42534.6,
+          36251.2
+        ],
+        [
+          42477.3,
+          36740.6
+        ],
+        [
+          42451.9,
+          36782.7
+        ],
+        [
+          42381.7,
+          36793
+        ],
+        [
+          42150.4,
+          36742.1
+        ],
+        [
+          42146,
+          36573.3
+        ],
+        [
+          42094,
+          36464.9
+        ],
+        [
+          42074.1,
+          35617.5
+        ],
+        [
+          42507.5,
+          35402.7
+        ]
+      ],
+      "level": 7,
+      "tooltip": "Ogham Wilds"
+    },
+    "id": 111,
+    "map": "Everything That We Are: Village of Astorea",
     "type": "sector"
   },
   {
@@ -327477,6 +328446,556 @@
     "type": "sector"
   },
   {
+    "continent": "Horn of Maguuma",
+    "coordinates": [
+      25205.8,
+      20921.5
+    ],
+    "data": {
+      "chat_link": "[&BAIOAAA=]",
+      "tooltip": "Grand Library of Amnytas"
+    },
+    "id": 3586,
+    "map": "Everything That We Are: Grand Library of Amnytas",
+    "type": "landmark"
+  },
+  {
+    "continent": "Horn of Maguuma",
+    "coordinates": [
+      23436.7,
+      20281.3
+    ],
+    "data": {
+      "bounds": [
+        [
+          23628.6,
+          20541.3
+        ],
+        [
+          23541.6,
+          20804.8
+        ],
+        [
+          23241.1,
+          21034.8
+        ],
+        [
+          22806.7,
+          21035.3
+        ],
+        [
+          22780.1,
+          19709.2
+        ],
+        [
+          23225.8,
+          19747.1
+        ],
+        [
+          23394.1,
+          19815.6
+        ],
+        [
+          23672.7,
+          19907.7
+        ],
+        [
+          23957.1,
+          19968
+        ],
+        [
+          23770,
+          20118.5
+        ],
+        [
+          23628.1,
+          20282.7
+        ],
+        [
+          23594.3,
+          20410.5
+        ],
+        [
+          23628.6,
+          20541.3
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Bastion of the Obscure"
+    },
+    "id": 1972,
+    "map": "Everything That We Are: Grand Library of Amnytas",
+    "type": "sector"
+  },
+  {
+    "continent": "Horn of Maguuma",
+    "coordinates": [
+      23646.8,
+      19625.5
+    ],
+    "data": {
+      "bounds": [
+        [
+          24159.1,
+          19129.8
+        ],
+        [
+          22977.1,
+          19139.4
+        ],
+        [
+          22906.9,
+          19221
+        ],
+        [
+          22780.1,
+          19709.2
+        ],
+        [
+          23225.8,
+          19747.1
+        ],
+        [
+          23394.1,
+          19815.6
+        ],
+        [
+          23672.7,
+          19907.7
+        ],
+        [
+          23957.1,
+          19968
+        ],
+        [
+          24085.6,
+          19918.1
+        ],
+        [
+          24212,
+          19969.6
+        ],
+        [
+          24237,
+          19552
+        ],
+        [
+          24153.5,
+          19428.9
+        ],
+        [
+          24159.1,
+          19129.8
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Bastion of Balance"
+    },
+    "id": 1973,
+    "map": "Everything That We Are: Grand Library of Amnytas",
+    "type": "sector"
+  },
+  {
+    "continent": "Horn of Maguuma",
+    "coordinates": [
+      24665.6,
+      19785.5
+    ],
+    "data": {
+      "bounds": [
+        [
+          24159.1,
+          19129.8
+        ],
+        [
+          24992.4,
+          19134.8
+        ],
+        [
+          25204.6,
+          19256.2
+        ],
+        [
+          25332.8,
+          19457.2
+        ],
+        [
+          25401.2,
+          20345.2
+        ],
+        [
+          24805.1,
+          20344.1
+        ],
+        [
+          24580.5,
+          20407.5
+        ],
+        [
+          24533,
+          20285.2
+        ],
+        [
+          24375.8,
+          20116
+        ],
+        [
+          24212,
+          19969.6
+        ],
+        [
+          24237,
+          19552
+        ],
+        [
+          24153.5,
+          19428.9
+        ],
+        [
+          24159.1,
+          19129.8
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Bastion of Strength"
+    },
+    "id": 1978,
+    "map": "Everything That We Are: Grand Library of Amnytas",
+    "type": "sector"
+  },
+  {
+    "continent": "Horn of Maguuma",
+    "coordinates": [
+      24071.4,
+      20393
+    ],
+    "data": {
+      "bounds": [
+        [
+          23628.6,
+          20541.3
+        ],
+        [
+          23784.8,
+          20706.2
+        ],
+        [
+          23957.7,
+          20860
+        ],
+        [
+          24089.5,
+          20885.4
+        ],
+        [
+          24212,
+          20860
+        ],
+        [
+          24377.1,
+          20705.5
+        ],
+        [
+          24530.2,
+          20540
+        ],
+        [
+          24580.5,
+          20407.5
+        ],
+        [
+          24533,
+          20285.2
+        ],
+        [
+          24375.8,
+          20116
+        ],
+        [
+          24212,
+          19969.6
+        ],
+        [
+          24085.6,
+          19918.1
+        ],
+        [
+          23957.1,
+          19968
+        ],
+        [
+          23887.1,
+          20408.4
+        ],
+        [
+          23974,
+          20276.8
+        ],
+        [
+          24087.1,
+          20231
+        ],
+        [
+          24200.4,
+          20276.8
+        ],
+        [
+          24284.7,
+          20407.9
+        ],
+        [
+          24200.2,
+          20539.7
+        ],
+        [
+          24087.2,
+          20585.7
+        ],
+        [
+          23975.6,
+          20540
+        ],
+        [
+          23887.1,
+          20408.4
+        ],
+        [
+          23957.2,
+          19967.9
+        ],
+        [
+          23770,
+          20118.5
+        ],
+        [
+          23628.1,
+          20282.7
+        ],
+        [
+          23594.3,
+          20410.5
+        ],
+        [
+          23628.6,
+          20541.3
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Bastion of the Celestial"
+    },
+    "id": 1979,
+    "map": "Everything That We Are: Grand Library of Amnytas",
+    "type": "sector"
+  },
+  {
+    "continent": "Horn of Maguuma",
+    "coordinates": [
+      24087,
+      20408.3
+    ],
+    "data": {
+      "bounds": [
+        [
+          24087.1,
+          20231
+        ],
+        [
+          24200.4,
+          20276.8
+        ],
+        [
+          24284.7,
+          20407.9
+        ],
+        [
+          24200.2,
+          20539.7
+        ],
+        [
+          24087.2,
+          20585.7
+        ],
+        [
+          23975.6,
+          20540
+        ],
+        [
+          23887.1,
+          20408.4
+        ],
+        [
+          23974,
+          20276.8
+        ],
+        [
+          24087.1,
+          20231
+        ]
+      ],
+      "level": 80,
+      "tooltip": "The World Spire"
+    },
+    "id": 1981,
+    "map": "Everything That We Are: Grand Library of Amnytas",
+    "type": "sector"
+  },
+  {
+    "continent": "Horn of Maguuma",
+    "coordinates": [
+      24825.4,
+      20922.5
+    ],
+    "data": {
+      "bounds": [
+        [
+          24674.6,
+          21064.9
+        ],
+        [
+          24737.6,
+          21179.2
+        ],
+        [
+          24770.1,
+          21692
+        ],
+        [
+          25287.9,
+          21552.8
+        ],
+        [
+          25385.5,
+          21446.9
+        ],
+        [
+          25428.7,
+          20909
+        ],
+        [
+          25401.2,
+          20345.2
+        ],
+        [
+          24805.1,
+          20344.1
+        ],
+        [
+          24580.5,
+          20407.5
+        ],
+        [
+          24530.2,
+          20540
+        ],
+        [
+          24377.1,
+          20705.5
+        ],
+        [
+          24212,
+          20860
+        ],
+        [
+          24539.2,
+          20945.2
+        ],
+        [
+          24674.6,
+          21064.9
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Bastion of Knowledge"
+    },
+    "id": 1987,
+    "map": "Everything That We Are: Grand Library of Amnytas",
+    "type": "sector"
+  },
+  {
+    "continent": "Horn of Maguuma",
+    "coordinates": [
+      23778.9,
+      21111.3
+    ],
+    "data": {
+      "bounds": [
+        [
+          24539.2,
+          20945.2
+        ],
+        [
+          24674.6,
+          21064.9
+        ],
+        [
+          24737.6,
+          21179.2
+        ],
+        [
+          24770.1,
+          21692
+        ],
+        [
+          23808.9,
+          21683
+        ],
+        [
+          22997.3,
+          21691.2
+        ],
+        [
+          22870.1,
+          21505.5
+        ],
+        [
+          22802,
+          21292.3
+        ],
+        [
+          22806.7,
+          21035.3
+        ],
+        [
+          23241.1,
+          21034.8
+        ],
+        [
+          23541.6,
+          20804.8
+        ],
+        [
+          23628.6,
+          20541.3
+        ],
+        [
+          23784.8,
+          20706.2
+        ],
+        [
+          23957.7,
+          20860
+        ],
+        [
+          24089.5,
+          20885.4
+        ],
+        [
+          24212,
+          20860
+        ],
+        [
+          24539.2,
+          20945.2
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Bastion of the Natural"
+    },
+    "id": 1988,
+    "map": "Everything That We Are: Grand Library of Amnytas",
+    "type": "sector"
+  },
+  {
     "continent": "Castora",
     "coordinates": [
       8634.84,
@@ -328817,17 +330336,17 @@
   {
     "continent": "Castora",
     "coordinates": [
-      6965.51,
+      6941.07,
       58674.5
     ],
     "data": {
       "bounds": [
         [
-          6482.25,
+          6329.61,
           59069.8
         ],
         [
-          6470.75,
+          6330.12,
           58467.4
         ],
         [
@@ -328871,7 +330390,7 @@
           59072.2
         ],
         [
-          6482.25,
+          6329.61,
           59069.8
         ]
       ],
@@ -328885,17 +330404,17 @@
   {
     "continent": "Castora",
     "coordinates": [
-      7044.4,
+      7008.61,
       59433
     ],
     "data": {
       "bounds": [
         [
-          6462.88,
+          6329.22,
           59798.5
         ],
         [
-          6482.25,
+          6329.61,
           59069.8
         ],
         [
@@ -328923,7 +330442,7 @@
           59818.5
         ],
         [
-          6462.88,
+          6329.22,
           59798.5
         ]
       ],
@@ -329137,7 +330656,7 @@
   {
     "continent": "Castora",
     "coordinates": [
-      7075.87,
+      7057.39,
       58218.8
     ],
     "data": {
@@ -329159,11 +330678,11 @@
           58430.6
         ],
         [
-          6470.75,
+          6330.12,
           58467.4
         ],
         [
-          6446.67,
+          6328.67,
           57500.8
         ],
         [
@@ -329513,17 +331032,17 @@
   {
     "continent": "Castora",
     "coordinates": [
-      6965.51,
+      6941.07,
       58674.5
     ],
     "data": {
       "bounds": [
         [
-          6482.25,
+          6329.61,
           59069.8
         ],
         [
-          6470.75,
+          6330.12,
           58467.4
         ],
         [
@@ -329567,7 +331086,7 @@
           59072.2
         ],
         [
-          6482.25,
+          6329.61,
           59069.8
         ]
       ],
@@ -331359,7 +332878,7 @@
   {
     "continent": "Castora",
     "coordinates": [
-      7075.87,
+      7057.39,
       58218.8
     ],
     "data": {
@@ -331381,11 +332900,11 @@
           58430.6
         ],
         [
-          6470.75,
+          6330.12,
           58467.4
         ],
         [
-          6446.67,
+          6328.67,
           57500.8
         ],
         [
@@ -331513,17 +333032,17 @@
   {
     "continent": "Castora",
     "coordinates": [
-      7044.4,
+      7008.61,
       59433
     ],
     "data": {
       "bounds": [
         [
-          6462.88,
+          6329.22,
           59798.5
         ],
         [
-          6482.25,
+          6329.61,
           59069.8
         ],
         [
@@ -331551,7 +333070,7 @@
           59818.5
         ],
         [
-          6462.88,
+          6329.22,
           59798.5
         ]
       ],
@@ -336109,6 +337628,4097 @@
     },
     "id": 2112,
     "map": "Divitium Nava: Seer Forge",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3686.16,
+      57935.4
+    ],
+    "data": {
+      "chat_link": "[&BC8QAAA=]",
+      "tooltip": "The Scriptorium"
+    },
+    "id": 4143,
+    "map": "The Burden of Seeing: Doyen's Adytum",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3801.04,
+      58362.3
+    ],
+    "data": {
+      "bounds": [
+        [
+          3386.17,
+          58837
+        ],
+        [
+          3428.62,
+          58790.7
+        ],
+        [
+          3490.29,
+          58743
+        ],
+        [
+          3554.25,
+          58709.2
+        ],
+        [
+          3484.67,
+          58651.9
+        ],
+        [
+          3464.17,
+          58607.5
+        ],
+        [
+          3490.29,
+          58538.8
+        ],
+        [
+          3515.38,
+          58481.8
+        ],
+        [
+          3405.92,
+          58445.5
+        ],
+        [
+          3362.83,
+          58396.3
+        ],
+        [
+          3341.67,
+          58249.2
+        ],
+        [
+          3374.67,
+          57991.2
+        ],
+        [
+          3404.75,
+          57959.7
+        ],
+        [
+          3480.17,
+          57882
+        ],
+        [
+          3581.29,
+          57834.2
+        ],
+        [
+          3694.08,
+          57801.4
+        ],
+        [
+          3791.12,
+          57945.2
+        ],
+        [
+          3841.92,
+          57908.9
+        ],
+        [
+          3894.04,
+          57897.2
+        ],
+        [
+          3959.67,
+          57847.1
+        ],
+        [
+          4061,
+          57913
+        ],
+        [
+          4158.88,
+          57846.7
+        ],
+        [
+          4217.62,
+          58024.9
+        ],
+        [
+          4307.96,
+          58039.6
+        ],
+        [
+          4295.83,
+          58203.2
+        ],
+        [
+          4273.25,
+          58326.5
+        ],
+        [
+          4240.54,
+          58403.4
+        ],
+        [
+          4169.38,
+          58484
+        ],
+        [
+          4191.04,
+          58682.3
+        ],
+        [
+          4138.21,
+          58700.2
+        ],
+        [
+          4166.83,
+          58826.2
+        ],
+        [
+          4129.38,
+          58942.4
+        ],
+        [
+          4014.17,
+          59008.3
+        ],
+        [
+          3870,
+          58939.2
+        ],
+        [
+          3856.21,
+          58821.6
+        ],
+        [
+          3386.17,
+          58837
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Doyen's Adytum"
+    },
+    "id": 2121,
+    "map": "The Burden of Seeing: Doyen's Adytum",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3551.27,
+      59346.3
+    ],
+    "data": {
+      "chat_link": "[&BCwQAAA=]",
+      "tooltip": "Primus Minor"
+    },
+    "id": 4140,
+    "map": "Under Pressure: Ordnance Depot",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3867.11,
+      59168.2
+    ],
+    "data": {
+      "chat_link": "[&BDQQAAA=]",
+      "tooltip": "Gloamlit Courtyard"
+    },
+    "id": 4148,
+    "map": "Under Pressure: Ordnance Depot",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3725.17,
+      59348
+    ],
+    "data": {
+      "bounds": [
+        [
+          3999,
+          59744
+        ],
+        [
+          3929.42,
+          59720.5
+        ],
+        [
+          3836.5,
+          59664.4
+        ],
+        [
+          3709,
+          59589.3
+        ],
+        [
+          3665.33,
+          59548.1
+        ],
+        [
+          3560.12,
+          59574.3
+        ],
+        [
+          3440.21,
+          59444.8
+        ],
+        [
+          3374.46,
+          59449.7
+        ],
+        [
+          3323.5,
+          59438.4
+        ],
+        [
+          3287.79,
+          59358.1
+        ],
+        [
+          3300.5,
+          59317.6
+        ],
+        [
+          3361.42,
+          59262
+        ],
+        [
+          3405.71,
+          59238.9
+        ],
+        [
+          3407.58,
+          59192.2
+        ],
+        [
+          3385.88,
+          59087.6
+        ],
+        [
+          3407.92,
+          59003.2
+        ],
+        [
+          3386.17,
+          58837
+        ],
+        [
+          3856.21,
+          58821.6
+        ],
+        [
+          3870,
+          58939.2
+        ],
+        [
+          4014.17,
+          59008.3
+        ],
+        [
+          4050.54,
+          59110
+        ],
+        [
+          4076.08,
+          59336.2
+        ],
+        [
+          4115.12,
+          59366.9
+        ],
+        [
+          4218.38,
+          59388.8
+        ],
+        [
+          4228.08,
+          59543.1
+        ],
+        [
+          4267.46,
+          59670.9
+        ],
+        [
+          4102.96,
+          59740.5
+        ],
+        [
+          3999,
+          59744
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Ordnance Depot"
+    },
+    "id": 2126,
+    "map": "Under Pressure: Ordnance Depot",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3587.37,
+      59446.6
+    ],
+    "data": {
+      "bounds": [
+        [
+          3614.52,
+          59519.1
+        ],
+        [
+          3767.43,
+          59305.5
+        ],
+        [
+          3666.05,
+          59049.4
+        ],
+        [
+          3257,
+          59309.6
+        ],
+        [
+          3396.97,
+          59482.8
+        ],
+        [
+          3614.52,
+          59519.1
+        ]
+      ],
+      "chat_link": "[&BNEBAAA=]",
+      "tooltip": "Assist Astral Ward Agent Snarlcrow and his associates in sabotaging the Inquest base of operations in Leyspring Hollows."
+    },
+    "id": 465,
+    "map": "Leyspring Hollows",
+    "type": "heart"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5118.23,
+      59287.9
+    ],
+    "data": {
+      "bounds": [
+        [
+          4710.85,
+          59566.5
+        ],
+        [
+          4794.58,
+          59797.3
+        ],
+        [
+          5205.58,
+          59771.3
+        ],
+        [
+          5279.85,
+          59588.7
+        ],
+        [
+          5175.96,
+          59182.4
+        ],
+        [
+          5048.97,
+          59142
+        ],
+        [
+          4917.75,
+          59142.1
+        ],
+        [
+          4885.92,
+          59113.8
+        ],
+        [
+          4778.19,
+          59102.2
+        ],
+        [
+          4655.8,
+          59139.4
+        ],
+        [
+          4691.31,
+          59271
+        ],
+        [
+          4710.85,
+          59566.5
+        ]
+      ],
+      "chat_link": "[&BNIBAAA=]",
+      "tooltip": "Train with alliance forces and assist around camp to prepare yourself for the fight ahead."
+    },
+    "id": 466,
+    "map": "Leyspring Hollows",
+    "type": "heart"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3969.88,
+      59310.6
+    ],
+    "data": {
+      "type": "Magic"
+    },
+    "id": 957,
+    "map": "Leyspring Hollows",
+    "type": "mastery"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4711.1,
+      57932.8
+    ],
+    "data": {
+      "type": "Magic"
+    },
+    "id": 951,
+    "map": "Leyspring Hollows",
+    "type": "mastery"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5740.98,
+      59383.4
+    ],
+    "data": {
+      "type": "Magic"
+    },
+    "id": 945,
+    "map": "Leyspring Hollows",
+    "type": "mastery"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4239.34,
+      58081.4
+    ],
+    "data": {
+      "type": "Magic"
+    },
+    "id": 950,
+    "map": "Leyspring Hollows",
+    "type": "mastery"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4318.04,
+      59351.4
+    ],
+    "data": {
+      "type": "Magic"
+    },
+    "id": 946,
+    "map": "Leyspring Hollows",
+    "type": "mastery"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5252.96,
+      58849.1
+    ],
+    "data": {
+      "type": "Magic"
+    },
+    "id": 953,
+    "map": "Leyspring Hollows",
+    "type": "mastery"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4164.69,
+      58608.1
+    ],
+    "data": {
+      "type": "Magic"
+    },
+    "id": 954,
+    "map": "Leyspring Hollows",
+    "type": "mastery"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4546.14,
+      58493.5
+    ],
+    "data": {
+      "chat_link": "[&BAoQAAA=]",
+      "tooltip": "Specimen Stage Beta"
+    },
+    "id": 4106,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5843.26,
+      58430.4
+    ],
+    "data": {
+      "chat_link": "[&BAsQAAA=]",
+      "tooltip": "Chak Hive"
+    },
+    "id": 4107,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4164.3,
+      58754.5
+    ],
+    "data": {
+      "chat_link": "[&BAwQAAA=]",
+      "tooltip": "Fool's Maze"
+    },
+    "id": 4108,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      6129.85,
+      59081.8
+    ],
+    "data": {
+      "chat_link": "[&BA0QAAA=]",
+      "tooltip": "Ley Altar"
+    },
+    "id": 4109,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4255.13,
+      59174.3
+    ],
+    "data": {
+      "chat_link": "[&BA4QAAA=]",
+      "tooltip": "Tactician's Chantry"
+    },
+    "id": 4110,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5852.88,
+      59596.6
+    ],
+    "data": {
+      "chat_link": "[&BA8QAAA=]",
+      "tooltip": "Spirit's Descent"
+    },
+    "id": 4111,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5811.82,
+      58465.8
+    ],
+    "data": {
+      "chat_link": "[&BBAQAAA=]"
+    },
+    "id": 4112,
+    "map": "Leyspring Hollows",
+    "type": "vista"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4152.29,
+      58939
+    ],
+    "data": {
+      "chat_link": "[&BBEQAAA=]",
+      "tooltip": "The Dueling Halls"
+    },
+    "id": 4113,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4707.15,
+      59586.6
+    ],
+    "data": {
+      "chat_link": "[&BBIQAAA=]",
+      "tooltip": "Proving Grounds"
+    },
+    "id": 4114,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3536.66,
+      58157.2
+    ],
+    "data": {
+      "chat_link": "[&BBMQAAA=]",
+      "tooltip": "Alliance Listening Post"
+    },
+    "id": 4115,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4649.13,
+      57848.7
+    ],
+    "data": {
+      "chat_link": "[&BBQQAAA=]",
+      "tooltip": "Exposed Ley Root"
+    },
+    "id": 4116,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3745.5,
+      58924.4
+    ],
+    "data": {
+      "chat_link": "[&BBUQAAA=]",
+      "tooltip": "Dreaming Chambers"
+    },
+    "id": 4117,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5819.77,
+      59557.2
+    ],
+    "data": {
+      "chat_link": "[&BBYQAAA=]",
+      "tooltip": "Sealed Vestibule Waypoint"
+    },
+    "id": 4118,
+    "map": "Leyspring Hollows",
+    "type": "waypoint"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3612.85,
+      58578.5
+    ],
+    "data": {
+      "chat_link": "[&BBcQAAA=]",
+      "tooltip": "Crystalline Nidus"
+    },
+    "id": 4119,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3827.79,
+      58639.9
+    ],
+    "data": {
+      "chat_link": "[&BBgQAAA=]"
+    },
+    "id": 4120,
+    "map": "Leyspring Hollows",
+    "type": "vista"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4647.2,
+      58006.4
+    ],
+    "data": {
+      "chat_link": "[&BBkQAAA=]",
+      "tooltip": "The Cannulae"
+    },
+    "id": 4121,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3759.27,
+      58182.2
+    ],
+    "data": {
+      "chat_link": "[&BBoQAAA=]",
+      "tooltip": "Wailer's Pulpit"
+    },
+    "id": 4122,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5605.75,
+      59340.5
+    ],
+    "data": {
+      "chat_link": "[&BBsQAAA=]",
+      "tooltip": "The Elder's Fruition"
+    },
+    "id": 4123,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5258.25,
+      58475.6
+    ],
+    "data": {
+      "chat_link": "[&BBwQAAA=]",
+      "tooltip": "Primus Minor Research Annex"
+    },
+    "id": 4124,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3816.24,
+      59095.3
+    ],
+    "data": {
+      "chat_link": "[&BB0QAAA=]"
+    },
+    "id": 4125,
+    "map": "Leyspring Hollows",
+    "type": "vista"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4284.74,
+      58768.6
+    ],
+    "data": {
+      "chat_link": "[&BB4QAAA=]",
+      "tooltip": "Arbor of Lamentation"
+    },
+    "id": 4126,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3657.78,
+      58080.6
+    ],
+    "data": {
+      "chat_link": "[&BB8QAAA=]",
+      "tooltip": "Doyen's Adytum Waypoint"
+    },
+    "id": 4127,
+    "map": "Leyspring Hollows",
+    "type": "waypoint"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4284.91,
+      58945.9
+    ],
+    "data": {
+      "chat_link": "[&BCAQAAA=]",
+      "tooltip": "Sequen Cromatica"
+    },
+    "id": 4128,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3512.9,
+      59046.6
+    ],
+    "data": {
+      "chat_link": "[&BCEQAAA=]",
+      "tooltip": "Crystalline Crest"
+    },
+    "id": 4129,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4284.23,
+      59435
+    ],
+    "data": {
+      "chat_link": "[&BCIQAAA=]",
+      "tooltip": "Leyspring Bore"
+    },
+    "id": 4130,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4288.61,
+      58730.2
+    ],
+    "data": {
+      "chat_link": "[&BCMQAAA=]",
+      "tooltip": "The Illuminated Path"
+    },
+    "id": 4131,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5254.25,
+      58835.1
+    ],
+    "data": {
+      "chat_link": "[&BCQQAAA=]",
+      "tooltip": "Attuning Chamber"
+    },
+    "id": 4132,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3614.48,
+      59410.8
+    ],
+    "data": {
+      "chat_link": "[&BCUQAAA=]",
+      "tooltip": "Storage Cellar"
+    },
+    "id": 4133,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4544.38,
+      59214.6
+    ],
+    "data": {
+      "chat_link": "[&BCYQAAA=]",
+      "tooltip": "Ethereal Cascade"
+    },
+    "id": 4134,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5501.36,
+      59454.7
+    ],
+    "data": {
+      "chat_link": "[&BCcQAAA=]",
+      "tooltip": "Flowstone Moor"
+    },
+    "id": 4135,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4661.5,
+      58635.8
+    ],
+    "data": {
+      "chat_link": "[&BCgQAAA=]",
+      "tooltip": "Specimen Stage Alpha"
+    },
+    "id": 4136,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3954.99,
+      58077.6
+    ],
+    "data": {
+      "chat_link": "[&BCkQAAA=]",
+      "tooltip": "Augmented Atelier"
+    },
+    "id": 4137,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4232.65,
+      58524.6
+    ],
+    "data": {
+      "chat_link": "[&BCoQAAA=]",
+      "tooltip": "Sealed Vault"
+    },
+    "id": 4138,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5423.75,
+      58330.9
+    ],
+    "data": {
+      "chat_link": "[&BCsQAAA=]",
+      "tooltip": "Skittering Corridor"
+    },
+    "id": 4139,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3551.27,
+      59346.3
+    ],
+    "data": {
+      "chat_link": "[&BCwQAAA=]",
+      "tooltip": "Primus Minor"
+    },
+    "id": 4140,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3806.18,
+      58625.5
+    ],
+    "data": {
+      "chat_link": "[&BC0QAAA=]",
+      "tooltip": "Natural Arch"
+    },
+    "id": 4141,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5292.94,
+      59290.3
+    ],
+    "data": {
+      "chat_link": "[&BC4QAAA=]",
+      "tooltip": "Path of the Uncloaked"
+    },
+    "id": 4142,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3686.16,
+      57935.4
+    ],
+    "data": {
+      "chat_link": "[&BC8QAAA=]",
+      "tooltip": "The Scriptorium"
+    },
+    "id": 4143,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3412.64,
+      59361.9
+    ],
+    "data": {
+      "chat_link": "[&BDAQAAA=]",
+      "tooltip": "Seat of the Director"
+    },
+    "id": 4144,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5826.97,
+      59238.5
+    ],
+    "data": {
+      "chat_link": "[&BDEQAAA=]"
+    },
+    "id": 4145,
+    "map": "Leyspring Hollows",
+    "type": "vista"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5856.92,
+      59088.1
+    ],
+    "data": {
+      "chat_link": "[&BDIQAAA=]",
+      "tooltip": "Ley Barbican"
+    },
+    "id": 4146,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3993.99,
+      58271.2
+    ],
+    "data": {
+      "chat_link": "[&BDMQAAA=]",
+      "tooltip": "Hidden Burrow"
+    },
+    "id": 4147,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3867.11,
+      59168.2
+    ],
+    "data": {
+      "chat_link": "[&BDQQAAA=]",
+      "tooltip": "Gloamlit Courtyard"
+    },
+    "id": 4148,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4802.72,
+      59112.9
+    ],
+    "data": {
+      "chat_link": "[&BDUQAAA=]",
+      "tooltip": "Subterranean Corridor"
+    },
+    "id": 4149,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4953.22,
+      59329.6
+    ],
+    "data": {
+      "chat_link": "[&BDYQAAA=]",
+      "tooltip": "Hall of Assemblage Waypoint"
+    },
+    "id": 4150,
+    "map": "Leyspring Hollows",
+    "type": "waypoint"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4761.25,
+      58492.8
+    ],
+    "data": {
+      "chat_link": "[&BDcQAAA=]",
+      "tooltip": "Specimen Stage Gamma"
+    },
+    "id": 4151,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4670.58,
+      57729.4
+    ],
+    "data": {
+      "chat_link": "[&BDgQAAA=]"
+    },
+    "id": 4152,
+    "map": "Leyspring Hollows",
+    "type": "vista"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4822.61,
+      59672
+    ],
+    "data": {
+      "chat_link": "[&BDkQAAA=]"
+    },
+    "id": 4153,
+    "map": "Leyspring Hollows",
+    "type": "vista"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4656.99,
+      58366.8
+    ],
+    "data": {
+      "chat_link": "[&BDoQAAA=]",
+      "tooltip": "Specimen Stage Delta"
+    },
+    "id": 4154,
+    "map": "Leyspring Hollows",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3801.04,
+      58362.3
+    ],
+    "data": {
+      "bounds": [
+        [
+          3386.17,
+          58837
+        ],
+        [
+          3428.62,
+          58790.7
+        ],
+        [
+          3490.29,
+          58743
+        ],
+        [
+          3554.25,
+          58709.2
+        ],
+        [
+          3484.67,
+          58651.9
+        ],
+        [
+          3464.17,
+          58607.5
+        ],
+        [
+          3490.29,
+          58538.8
+        ],
+        [
+          3515.38,
+          58481.8
+        ],
+        [
+          3405.92,
+          58445.5
+        ],
+        [
+          3362.83,
+          58396.3
+        ],
+        [
+          3341.67,
+          58249.2
+        ],
+        [
+          3374.67,
+          57991.2
+        ],
+        [
+          3404.75,
+          57959.7
+        ],
+        [
+          3480.17,
+          57882
+        ],
+        [
+          3581.29,
+          57834.2
+        ],
+        [
+          3694.08,
+          57801.4
+        ],
+        [
+          3791.12,
+          57945.2
+        ],
+        [
+          3841.92,
+          57908.9
+        ],
+        [
+          3894.04,
+          57897.2
+        ],
+        [
+          3959.67,
+          57847.1
+        ],
+        [
+          4061,
+          57913
+        ],
+        [
+          4158.88,
+          57846.7
+        ],
+        [
+          4217.62,
+          58024.9
+        ],
+        [
+          4307.96,
+          58039.6
+        ],
+        [
+          4295.83,
+          58203.2
+        ],
+        [
+          4273.25,
+          58326.5
+        ],
+        [
+          4240.54,
+          58403.4
+        ],
+        [
+          4169.38,
+          58484
+        ],
+        [
+          4191.04,
+          58682.3
+        ],
+        [
+          4138.21,
+          58700.2
+        ],
+        [
+          4166.83,
+          58826.2
+        ],
+        [
+          4129.38,
+          58942.4
+        ],
+        [
+          4014.17,
+          59008.3
+        ],
+        [
+          3870,
+          58939.2
+        ],
+        [
+          3856.21,
+          58821.6
+        ],
+        [
+          3386.17,
+          58837
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Doyen's Adytum"
+    },
+    "id": 2121,
+    "map": "Leyspring Hollows",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4662.15,
+      58442.8
+    ],
+    "data": {
+      "bounds": [
+        [
+          4930.83,
+          58846
+        ],
+        [
+          4757.46,
+          58894.5
+        ],
+        [
+          4644.21,
+          58909.1
+        ],
+        [
+          4569.08,
+          58855.5
+        ],
+        [
+          4279.33,
+          58677.6
+        ],
+        [
+          4191.04,
+          58682.3
+        ],
+        [
+          4169.38,
+          58484
+        ],
+        [
+          4240.54,
+          58403.4
+        ],
+        [
+          4273.25,
+          58326.5
+        ],
+        [
+          4295.83,
+          58203.2
+        ],
+        [
+          4366.58,
+          58178.1
+        ],
+        [
+          4434.71,
+          58232.7
+        ],
+        [
+          4512,
+          58201.4
+        ],
+        [
+          4591.25,
+          58190
+        ],
+        [
+          4709.33,
+          58183.8
+        ],
+        [
+          4756.04,
+          58152.5
+        ],
+        [
+          4926.17,
+          58144.7
+        ],
+        [
+          4981.79,
+          58058.3
+        ],
+        [
+          5048.54,
+          58158.2
+        ],
+        [
+          5186.67,
+          58430.8
+        ],
+        [
+          5174.08,
+          58541.2
+        ],
+        [
+          5119.83,
+          58692.3
+        ],
+        [
+          5071.46,
+          58737.3
+        ],
+        [
+          4930.83,
+          58846
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Navarium Core"
+    },
+    "id": 2122,
+    "map": "Leyspring Hollows",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4327.27,
+      57924.5
+    ],
+    "data": {
+      "bounds": [
+        [
+          4307.96,
+          58039.6
+        ],
+        [
+          4217.62,
+          58024.9
+        ],
+        [
+          4158.88,
+          57846.7
+        ],
+        [
+          4061,
+          57913
+        ],
+        [
+          3959.67,
+          57847.1
+        ],
+        [
+          3894.04,
+          57897.2
+        ],
+        [
+          3841.92,
+          57908.9
+        ],
+        [
+          3791.12,
+          57945.2
+        ],
+        [
+          3694.08,
+          57801.4
+        ],
+        [
+          3858.04,
+          57763.9
+        ],
+        [
+          3912.83,
+          57735.7
+        ],
+        [
+          4058.92,
+          57604.2
+        ],
+        [
+          4183.67,
+          57551.8
+        ],
+        [
+          4488.08,
+          57598.6
+        ],
+        [
+          4672.58,
+          57576
+        ],
+        [
+          4853.96,
+          57661.5
+        ],
+        [
+          4981,
+          57777.5
+        ],
+        [
+          4981.79,
+          58058.3
+        ],
+        [
+          4926.17,
+          58144.7
+        ],
+        [
+          4756.04,
+          58152.5
+        ],
+        [
+          4709.33,
+          58183.8
+        ],
+        [
+          4591.25,
+          58190
+        ],
+        [
+          4512,
+          58201.4
+        ],
+        [
+          4434.71,
+          58232.7
+        ],
+        [
+          4366.58,
+          58178.1
+        ],
+        [
+          4295.83,
+          58203.2
+        ],
+        [
+          4307.96,
+          58039.6
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Rooted Sanctuary"
+    },
+    "id": 2125,
+    "map": "Leyspring Hollows",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      3725.17,
+      59348
+    ],
+    "data": {
+      "bounds": [
+        [
+          3999,
+          59744
+        ],
+        [
+          3929.42,
+          59720.5
+        ],
+        [
+          3836.5,
+          59664.4
+        ],
+        [
+          3709,
+          59589.3
+        ],
+        [
+          3665.33,
+          59548.1
+        ],
+        [
+          3560.12,
+          59574.3
+        ],
+        [
+          3440.21,
+          59444.8
+        ],
+        [
+          3374.46,
+          59449.7
+        ],
+        [
+          3323.5,
+          59438.4
+        ],
+        [
+          3287.79,
+          59358.1
+        ],
+        [
+          3300.5,
+          59317.6
+        ],
+        [
+          3361.42,
+          59262
+        ],
+        [
+          3405.71,
+          59238.9
+        ],
+        [
+          3407.58,
+          59192.2
+        ],
+        [
+          3385.88,
+          59087.6
+        ],
+        [
+          3407.92,
+          59003.2
+        ],
+        [
+          3386.17,
+          58837
+        ],
+        [
+          3856.21,
+          58821.6
+        ],
+        [
+          3870,
+          58939.2
+        ],
+        [
+          4014.17,
+          59008.3
+        ],
+        [
+          4050.54,
+          59110
+        ],
+        [
+          4076.08,
+          59336.2
+        ],
+        [
+          4115.12,
+          59366.9
+        ],
+        [
+          4218.38,
+          59388.8
+        ],
+        [
+          4228.08,
+          59543.1
+        ],
+        [
+          4267.46,
+          59670.9
+        ],
+        [
+          4102.96,
+          59740.5
+        ],
+        [
+          3999,
+          59744
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Ordnance Depot"
+    },
+    "id": 2126,
+    "map": "Leyspring Hollows",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4775,
+      59378.9
+    ],
+    "data": {
+      "bounds": [
+        [
+          5299.29,
+          59146
+        ],
+        [
+          5209.5,
+          59136.9
+        ],
+        [
+          5065,
+          59092.4
+        ],
+        [
+          5014.12,
+          59037.1
+        ],
+        [
+          5012.88,
+          58959.5
+        ],
+        [
+          5007.79,
+          58787.3
+        ],
+        [
+          4930.83,
+          58846
+        ],
+        [
+          4757.46,
+          58894.5
+        ],
+        [
+          4644.21,
+          58909.1
+        ],
+        [
+          4636.08,
+          59336.8
+        ],
+        [
+          4639.67,
+          59432.4
+        ],
+        [
+          4492.42,
+          59476.3
+        ],
+        [
+          4218.38,
+          59388.8
+        ],
+        [
+          4228.08,
+          59543.1
+        ],
+        [
+          4267.46,
+          59670.9
+        ],
+        [
+          4320.33,
+          59658
+        ],
+        [
+          4385,
+          59634.9
+        ],
+        [
+          4447.04,
+          59664.2
+        ],
+        [
+          4545.46,
+          59743
+        ],
+        [
+          4609.5,
+          59775.3
+        ],
+        [
+          4992.96,
+          59808.7
+        ],
+        [
+          5236.96,
+          59752.7
+        ],
+        [
+          5290.08,
+          59744.3
+        ],
+        [
+          5349.46,
+          59656.3
+        ],
+        [
+          5299.29,
+          59146
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Hall of Assemblage"
+    },
+    "id": 2127,
+    "map": "Leyspring Hollows",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4290.7,
+      59069.9
+    ],
+    "data": {
+      "bounds": [
+        [
+          4644.21,
+          58909.1
+        ],
+        [
+          4569.08,
+          58855.5
+        ],
+        [
+          4279.33,
+          58677.6
+        ],
+        [
+          4191.04,
+          58682.3
+        ],
+        [
+          4138.21,
+          58700.2
+        ],
+        [
+          4166.83,
+          58826.2
+        ],
+        [
+          4129.38,
+          58942.4
+        ],
+        [
+          4014.17,
+          59008.3
+        ],
+        [
+          4050.54,
+          59110
+        ],
+        [
+          4076.08,
+          59336.2
+        ],
+        [
+          4115.12,
+          59366.9
+        ],
+        [
+          4218.38,
+          59388.8
+        ],
+        [
+          4492.42,
+          59476.3
+        ],
+        [
+          4639.67,
+          59432.4
+        ],
+        [
+          4636.08,
+          59336.8
+        ],
+        [
+          4644.21,
+          58909.1
+        ]
+      ],
+      "level": 80,
+      "tooltip": "The Auguratorium"
+    },
+    "id": 2129,
+    "map": "Leyspring Hollows",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5787.09,
+      59320.7
+    ],
+    "data": {
+      "bounds": [
+        [
+          6069.54,
+          59475.2
+        ],
+        [
+          6060.12,
+          59525.9
+        ],
+        [
+          5872.08,
+          59646.7
+        ],
+        [
+          5716.62,
+          59652.1
+        ],
+        [
+          5671.33,
+          59589.3
+        ],
+        [
+          5592.04,
+          59567.9
+        ],
+        [
+          5539.62,
+          59577.2
+        ],
+        [
+          5564.96,
+          59639
+        ],
+        [
+          5573.12,
+          59711.2
+        ],
+        [
+          5506.71,
+          59779.2
+        ],
+        [
+          5370,
+          59789.2
+        ],
+        [
+          5324.54,
+          59769.5
+        ],
+        [
+          5290.08,
+          59744.3
+        ],
+        [
+          5349.46,
+          59656.3
+        ],
+        [
+          5299.29,
+          59146
+        ],
+        [
+          5496.71,
+          58980.1
+        ],
+        [
+          5752.29,
+          58918.1
+        ],
+        [
+          5814.25,
+          58867.9
+        ],
+        [
+          5833.17,
+          58802.9
+        ],
+        [
+          5959.62,
+          58793.5
+        ],
+        [
+          5998.17,
+          58852.1
+        ],
+        [
+          6019.46,
+          58904.5
+        ],
+        [
+          6061.79,
+          58966.2
+        ],
+        [
+          6104.96,
+          58975.5
+        ],
+        [
+          6174.46,
+          59010
+        ],
+        [
+          6186.5,
+          59086.8
+        ],
+        [
+          6165.67,
+          59169.9
+        ],
+        [
+          6118.04,
+          59217.8
+        ],
+        [
+          6066.54,
+          59373.9
+        ],
+        [
+          6061.58,
+          59433.2
+        ],
+        [
+          6069.54,
+          59475.2
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Sealed Vestibule"
+    },
+    "id": 2132,
+    "map": "Leyspring Hollows",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5373.8,
+      58800.2
+    ],
+    "data": {
+      "bounds": [
+        [
+          5186.67,
+          58430.8
+        ],
+        [
+          5174.08,
+          58541.2
+        ],
+        [
+          5119.83,
+          58692.3
+        ],
+        [
+          5071.46,
+          58737.3
+        ],
+        [
+          5007.79,
+          58787.3
+        ],
+        [
+          5012.88,
+          58959.5
+        ],
+        [
+          5014.12,
+          59037.1
+        ],
+        [
+          5065,
+          59092.4
+        ],
+        [
+          5209.5,
+          59136.9
+        ],
+        [
+          5299.29,
+          59146
+        ],
+        [
+          5417.75,
+          59041
+        ],
+        [
+          5496.71,
+          58980.1
+        ],
+        [
+          5752.29,
+          58918.1
+        ],
+        [
+          5814.25,
+          58867.9
+        ],
+        [
+          5833.17,
+          58802.9
+        ],
+        [
+          5804,
+          58700.5
+        ],
+        [
+          5691.08,
+          58628.6
+        ],
+        [
+          5583.79,
+          58549.6
+        ],
+        [
+          5544.54,
+          58497.9
+        ],
+        [
+          5377.71,
+          58456.1
+        ],
+        [
+          5186.67,
+          58430.8
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Ley Distributary"
+    },
+    "id": 2135,
+    "map": "Leyspring Hollows",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5690.08,
+      58432.7
+    ],
+    "data": {
+      "bounds": [
+        [
+          5959.62,
+          58793.5
+        ],
+        [
+          5918.54,
+          58764.7
+        ],
+        [
+          5931,
+          58717.6
+        ],
+        [
+          5981.29,
+          58688.5
+        ],
+        [
+          6036.5,
+          58659.6
+        ],
+        [
+          6079.88,
+          58581.4
+        ],
+        [
+          6093.12,
+          58468.2
+        ],
+        [
+          6082.42,
+          58369.4
+        ],
+        [
+          6057.83,
+          58255
+        ],
+        [
+          5948.12,
+          58156.2
+        ],
+        [
+          5830.96,
+          58140.2
+        ],
+        [
+          5742.38,
+          58166.5
+        ],
+        [
+          5647.67,
+          58183.8
+        ],
+        [
+          5545.96,
+          58164.4
+        ],
+        [
+          5460.29,
+          58110.4
+        ],
+        [
+          5395.42,
+          58154.9
+        ],
+        [
+          5326.17,
+          58220.2
+        ],
+        [
+          5221.54,
+          58291.5
+        ],
+        [
+          5188.42,
+          58343.4
+        ],
+        [
+          5164.21,
+          58386.2
+        ],
+        [
+          5186.67,
+          58430.8
+        ],
+        [
+          5377.71,
+          58456.1
+        ],
+        [
+          5544.54,
+          58497.9
+        ],
+        [
+          5583.79,
+          58549.6
+        ],
+        [
+          5691.08,
+          58628.6
+        ],
+        [
+          5804,
+          58700.5
+        ],
+        [
+          5833.17,
+          58802.9
+        ],
+        [
+          5959.62,
+          58793.5
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Infested Sluiceways"
+    },
+    "id": 2136,
+    "map": "Leyspring Hollows",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      5787.09,
+      59320.7
+    ],
+    "data": {
+      "bounds": [
+        [
+          6069.54,
+          59475.2
+        ],
+        [
+          6060.12,
+          59525.9
+        ],
+        [
+          5872.08,
+          59646.7
+        ],
+        [
+          5716.62,
+          59652.1
+        ],
+        [
+          5671.33,
+          59589.3
+        ],
+        [
+          5592.04,
+          59567.9
+        ],
+        [
+          5539.62,
+          59577.2
+        ],
+        [
+          5564.96,
+          59639
+        ],
+        [
+          5573.12,
+          59711.2
+        ],
+        [
+          5506.71,
+          59779.2
+        ],
+        [
+          5370,
+          59789.2
+        ],
+        [
+          5324.54,
+          59769.5
+        ],
+        [
+          5290.08,
+          59744.3
+        ],
+        [
+          5349.46,
+          59656.3
+        ],
+        [
+          5299.29,
+          59146
+        ],
+        [
+          5496.71,
+          58980.1
+        ],
+        [
+          5752.29,
+          58918.1
+        ],
+        [
+          5814.25,
+          58867.9
+        ],
+        [
+          5833.17,
+          58802.9
+        ],
+        [
+          5959.62,
+          58793.5
+        ],
+        [
+          5998.17,
+          58852.1
+        ],
+        [
+          6019.46,
+          58904.5
+        ],
+        [
+          6061.79,
+          58966.2
+        ],
+        [
+          6104.96,
+          58975.5
+        ],
+        [
+          6174.46,
+          59010
+        ],
+        [
+          6186.5,
+          59086.8
+        ],
+        [
+          6165.67,
+          59169.9
+        ],
+        [
+          6118.04,
+          59217.8
+        ],
+        [
+          6066.54,
+          59373.9
+        ],
+        [
+          6061.58,
+          59433.2
+        ],
+        [
+          6069.54,
+          59475.2
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Sealed Vestibule"
+    },
+    "id": 2132,
+    "map": "Deeper Revelations: Leyspring Hollows",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11185.5,
+      59983.4
+    ],
+    "data": {
+      "chat_link": "[&BG4PAAA=]",
+      "tooltip": "Azure Depths"
+    },
+    "id": 3950,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10098.4,
+      58373.1
+    ],
+    "data": {
+      "chat_link": "[&BHMPAAA=]",
+      "tooltip": "Spindrift Burrow"
+    },
+    "id": 3955,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      9960.56,
+      59405.2
+    ],
+    "data": {
+      "chat_link": "[&BHUPAAA=]",
+      "tooltip": "Hammerhart Battery"
+    },
+    "id": 3957,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10011.2,
+      57948.7
+    ],
+    "data": {
+      "chat_link": "[&BHcPAAA=]",
+      "tooltip": "Thornbloom Ravine"
+    },
+    "id": 3959,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10577.5,
+      57614.5
+    ],
+    "data": {
+      "chat_link": "[&BHkPAAA=]",
+      "tooltip": "Starry Grotto Skimmerway"
+    },
+    "id": 3961,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      9763.07,
+      58796.5
+    ],
+    "data": {
+      "chat_link": "[&BHoPAAA=]",
+      "tooltip": "The Neverfalls"
+    },
+    "id": 3962,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11258.5,
+      59741.1
+    ],
+    "data": {
+      "chat_link": "[&BIIPAAA=]",
+      "tooltip": "Pub Canach"
+    },
+    "id": 3970,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10592.1,
+      60031.8
+    ],
+    "data": {
+      "chat_link": "[&BIMPAAA=]",
+      "tooltip": "Inquest Subterranean Research Facility"
+    },
+    "id": 3971,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11093.5,
+      59988.2
+    ],
+    "data": {
+      "chat_link": "[&BIQPAAA=]",
+      "tooltip": "Blue Hole"
+    },
+    "id": 3972,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10204.2,
+      58736.2
+    ],
+    "data": {
+      "chat_link": "[&BIkPAAA=]",
+      "tooltip": "Lilycreek Cascade"
+    },
+    "id": 3977,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11508.7,
+      60390.2
+    ],
+    "data": {
+      "chat_link": "[&BIsPAAA=]",
+      "tooltip": "Overgrown Channel Skimmerway"
+    },
+    "id": 3979,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10863.8,
+      58864.3
+    ],
+    "data": {
+      "chat_link": "[&BIwPAAA=]",
+      "tooltip": "Forecastle Rock"
+    },
+    "id": 3980,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11506,
+      57998.3
+    ],
+    "data": {
+      "chat_link": "[&BI4PAAA=]",
+      "tooltip": "Great Bewilderseed"
+    },
+    "id": 3982,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10178.9,
+      59588.1
+    ],
+    "data": {
+      "chat_link": "[&BJUPAAA=]",
+      "tooltip": "Bunkhome Square"
+    },
+    "id": 3989,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      9777.04,
+      59799.7
+    ],
+    "data": {
+      "chat_link": "[&BJcPAAA=]",
+      "tooltip": "Inquest Mining Operation"
+    },
+    "id": 3991,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11361.3,
+      58241
+    ],
+    "data": {
+      "chat_link": "[&BJoPAAA=]",
+      "tooltip": "Crimsonleaf Fountain"
+    },
+    "id": 3994,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10181.8,
+      59259.9
+    ],
+    "data": {
+      "chat_link": "[&BJsPAAA=]",
+      "tooltip": "Grogslinger's"
+    },
+    "id": 3995,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      9772.18,
+      57763.7
+    ],
+    "data": {
+      "chat_link": "[&BJ0PAAA=]",
+      "tooltip": "Congregation of the Sheltered"
+    },
+    "id": 3997,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10034.8,
+      60214.5
+    ],
+    "data": {
+      "chat_link": "[&BKAPAAA=]",
+      "tooltip": "Inquest Confinement Pens"
+    },
+    "id": 4000,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      9884.46,
+      59156.6
+    ],
+    "data": {
+      "chat_link": "[&BKYPAAA=]",
+      "tooltip": "The 'Booter's Path"
+    },
+    "id": 4006,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11240.6,
+      58064.1
+    ],
+    "data": {
+      "chat_link": "[&BKcPAAA=]",
+      "tooltip": "Soaring Copse"
+    },
+    "id": 4007,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11086.1,
+      57703.9
+    ],
+    "data": {
+      "chat_link": "[&BKkPAAA=]",
+      "tooltip": "Leystone Promontory"
+    },
+    "id": 4009,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      9725.46,
+      58276.9
+    ],
+    "data": {
+      "chat_link": "[&BKsPAAA=]",
+      "tooltip": "Starlit Stair"
+    },
+    "id": 4011,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11521.7,
+      58937.4
+    ],
+    "data": {
+      "chat_link": "[&BK8PAAA=]",
+      "tooltip": "Hullgarden Village Plaza"
+    },
+    "id": 4015,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10996.3,
+      58988.8
+    ],
+    "data": {
+      "chat_link": "[&BLEPAAA=]",
+      "tooltip": "Flotsam Grotto Skimmerway"
+    },
+    "id": 4017,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10433.7,
+      60254.7
+    ],
+    "data": {
+      "chat_link": "[&BLQPAAA=]",
+      "tooltip": "Inquest Supply Cavern"
+    },
+    "id": 4020,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11074.5,
+      59521.8
+    ],
+    "data": {
+      "chat_link": "[&BLYPAAA=]",
+      "tooltip": "Sailor's Heart"
+    },
+    "id": 4022,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10595.8,
+      58181.5
+    ],
+    "data": {
+      "chat_link": "[&BLcPAAA=]",
+      "tooltip": "Luminous Glade"
+    },
+    "id": 4023,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11845.7,
+      57824.3
+    ],
+    "data": {
+      "chat_link": "[&BLgPAAA=]",
+      "tooltip": "The Dark Leviathan"
+    },
+    "id": 4024,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10914.1,
+      58002.4
+    ],
+    "data": {
+      "chat_link": "[&BLsPAAA=]",
+      "tooltip": "The Beachtree"
+    },
+    "id": 4027,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10404.4,
+      59412.6
+    ],
+    "data": {
+      "chat_link": "[&BLwPAAA=]",
+      "tooltip": "Freebooter's Throughway"
+    },
+    "id": 4028,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10159.9,
+      59890.1
+    ],
+    "data": {
+      "chat_link": "[&BL0PAAA=]",
+      "tooltip": "Greenroot Grotto Skimmerway"
+    },
+    "id": 4029,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      9885.44,
+      58208.3
+    ],
+    "data": {
+      "chat_link": "[&BL4PAAA=]",
+      "tooltip": "Sheltered Path"
+    },
+    "id": 4030,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10215.5,
+      60157.8
+    ],
+    "data": {
+      "chat_link": "[&BL8PAAA=]",
+      "tooltip": "Structural Integrity Reinforcement"
+    },
+    "id": 4031,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      9903.58,
+      59681.3
+    ],
+    "data": {
+      "chat_link": "[&BMUPAAA=]",
+      "tooltip": "The Wardroom"
+    },
+    "id": 4037,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11826.1,
+      59836.1
+    ],
+    "data": {
+      "chat_link": "[&BMkPAAA=]",
+      "tooltip": "Morningrise Prow"
+    },
+    "id": 4041,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10334.4,
+      59137.9
+    ],
+    "data": {
+      "chat_link": "[&BMsPAAA=]",
+      "tooltip": "Castaway's Tears"
+    },
+    "id": 4043,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11410.3,
+      58745.3
+    ],
+    "data": {
+      "chat_link": "[&BNEPAAA=]",
+      "tooltip": "Littlewing Pond"
+    },
+    "id": 4049,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      9807.21,
+      59167.2
+    ],
+    "data": {
+      "chat_link": "[&BNIPAAA=]",
+      "tooltip": "Crow's Nest"
+    },
+    "id": 4050,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11271.3,
+      59032.6
+    ],
+    "data": {
+      "chat_link": "[&BNMPAAA=]",
+      "tooltip": "Coconut Grove"
+    },
+    "id": 4051,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      9936.29,
+      58512
+    ],
+    "data": {
+      "chat_link": "[&BNUPAAA=]",
+      "tooltip": "Seneschal Sands"
+    },
+    "id": 4053,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10201.1,
+      58589
+    ],
+    "data": {
+      "bounds": [
+        [
+          9528.91,
+          58292.8
+        ],
+        [
+          10254,
+          58222.6
+        ],
+        [
+          10403,
+          58355.8
+        ],
+        [
+          10466.7,
+          58478.8
+        ],
+        [
+          10613.1,
+          58592
+        ],
+        [
+          10612,
+          59090.4
+        ],
+        [
+          9530.08,
+          59090.7
+        ],
+        [
+          9528.91,
+          58292.8
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Guarded Glades"
+    },
+    "id": 2088,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11195.3,
+      58896.1
+    ],
+    "data": {
+      "bounds": [
+        [
+          10613.1,
+          58592
+        ],
+        [
+          10816.2,
+          58669.1
+        ],
+        [
+          10940.3,
+          58675.7
+        ],
+        [
+          11123.5,
+          58582.3
+        ],
+        [
+          11482,
+          58593.2
+        ],
+        [
+          11713.3,
+          58621.8
+        ],
+        [
+          11969.4,
+          58559.8
+        ],
+        [
+          11967.5,
+          59299
+        ],
+        [
+          11612.1,
+          59386.6
+        ],
+        [
+          10848.6,
+          59376.4
+        ],
+        [
+          10645.6,
+          59306.8
+        ],
+        [
+          10612,
+          59090.4
+        ],
+        [
+          10613.1,
+          58592
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Hullgarden"
+    },
+    "id": 2090,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11486.8,
+      59951
+    ],
+    "data": {
+      "bounds": [
+        [
+          10996.6,
+          59900.2
+        ],
+        [
+          11346.8,
+          60009.9
+        ],
+        [
+          11427.2,
+          60021.9
+        ],
+        [
+          11462.2,
+          59907.3
+        ],
+        [
+          11518,
+          59818.3
+        ],
+        [
+          11551.5,
+          59779.1
+        ],
+        [
+          11566.6,
+          59704
+        ],
+        [
+          11575.8,
+          59577.5
+        ],
+        [
+          11595.3,
+          59460.3
+        ],
+        [
+          11612.1,
+          59386.6
+        ],
+        [
+          11967.5,
+          59299
+        ],
+        [
+          11965,
+          60441.1
+        ],
+        [
+          11956,
+          60454.1
+        ],
+        [
+          11936.4,
+          60459.1
+        ],
+        [
+          10923.7,
+          60476.8
+        ],
+        [
+          10917.1,
+          60271.2
+        ],
+        [
+          10958.3,
+          60200.9
+        ],
+        [
+          10996.6,
+          59900.2
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Jetsam Point"
+    },
+    "id": 2093,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10352.4,
+      60144.2
+    ],
+    "data": {
+      "bounds": [
+        [
+          9534.92,
+          59901.4
+        ],
+        [
+          10375,
+          59713.8
+        ],
+        [
+          10538,
+          59742.2
+        ],
+        [
+          10996.6,
+          59900.2
+        ],
+        [
+          10958.3,
+          60200.9
+        ],
+        [
+          10917.1,
+          60271.2
+        ],
+        [
+          10923.7,
+          60476.8
+        ],
+        [
+          10134.5,
+          60478.4
+        ],
+        [
+          9985.75,
+          60462.8
+        ],
+        [
+          9800.42,
+          60290.9
+        ],
+        [
+          9711.88,
+          60148
+        ],
+        [
+          9534.92,
+          59901.4
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Riddled Cove"
+    },
+    "id": 2096,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11546,
+      58115.4
+    ],
+    "data": {
+      "bounds": [
+        [
+          11101.3,
+          57502.2
+        ],
+        [
+          11921,
+          57510.2
+        ],
+        [
+          11969.7,
+          57522.4
+        ],
+        [
+          11982.4,
+          57581.2
+        ],
+        [
+          11969.4,
+          58559.8
+        ],
+        [
+          11713.3,
+          58621.8
+        ],
+        [
+          11482,
+          58593.2
+        ],
+        [
+          11123.5,
+          58582.3
+        ],
+        [
+          11118.2,
+          58408.4
+        ],
+        [
+          11079.6,
+          58272.2
+        ],
+        [
+          11101.3,
+          57502.2
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Soaring Sands"
+    },
+    "id": 2097,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      11263.5,
+      59658.8
+    ],
+    "data": {
+      "bounds": [
+        [
+          10645.6,
+          59306.8
+        ],
+        [
+          10848.6,
+          59376.4
+        ],
+        [
+          11438.3,
+          59384.8
+        ],
+        [
+          11612.1,
+          59386.6
+        ],
+        [
+          11595.3,
+          59460.3
+        ],
+        [
+          11575.8,
+          59577.5
+        ],
+        [
+          11566.6,
+          59704
+        ],
+        [
+          11551.5,
+          59779.1
+        ],
+        [
+          11518,
+          59818.3
+        ],
+        [
+          11462.2,
+          59907.3
+        ],
+        [
+          11427.2,
+          60021.9
+        ],
+        [
+          11346.8,
+          60009.9
+        ],
+        [
+          10996.6,
+          59900.2
+        ],
+        [
+          10701.3,
+          59797.5
+        ],
+        [
+          10667,
+          59451.9
+        ],
+        [
+          10645.6,
+          59306.8
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Breezy Cay"
+    },
+    "id": 2098,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10279.7,
+      59541.1
+    ],
+    "data": {
+      "bounds": [
+        [
+          9529.85,
+          59090.7
+        ],
+        [
+          10612,
+          59090.4
+        ],
+        [
+          10667,
+          59451.9
+        ],
+        [
+          10701.3,
+          59797.5
+        ],
+        [
+          10538,
+          59742.2
+        ],
+        [
+          10375,
+          59713.8
+        ],
+        [
+          9534.92,
+          59901.4
+        ],
+        [
+          9529.85,
+          59090.7
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Twisting Hollows"
+    },
+    "id": 2100,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      10658.1,
+      58205.4
+    ],
+    "data": {
+      "bounds": [
+        [
+          10257.4,
+          57503.3
+        ],
+        [
+          11101.3,
+          57502.2
+        ],
+        [
+          11079.6,
+          58272.2
+        ],
+        [
+          11118.2,
+          58408.4
+        ],
+        [
+          11123.5,
+          58582.3
+        ],
+        [
+          10940.3,
+          58675.7
+        ],
+        [
+          10816.2,
+          58669.1
+        ],
+        [
+          10613.1,
+          58592
+        ],
+        [
+          10466.7,
+          58478.8
+        ],
+        [
+          10403,
+          58355.8
+        ],
+        [
+          10254,
+          58222.6
+        ],
+        [
+          10171.8,
+          57780.3
+        ],
+        [
+          10210,
+          57627.8
+        ],
+        [
+          10257.4,
+          57503.3
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Glimmering Arches"
+    },
+    "id": 2102,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      9892.89,
+      57738.1
+    ],
+    "data": {
+      "bounds": [
+        [
+          9529.67,
+          57470.5
+        ],
+        [
+          9662.97,
+          57454.9
+        ],
+        [
+          10257.4,
+          57503.3
+        ],
+        [
+          10210,
+          57627.8
+        ],
+        [
+          10171.8,
+          57780.3
+        ],
+        [
+          10254,
+          58222.6
+        ],
+        [
+          9528.91,
+          58292.8
+        ],
+        [
+          9528.32,
+          57552.8
+        ],
+        [
+          9529.67,
+          57470.5
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Shoalstone"
+    },
+    "id": 2107,
+    "map": "Everything That We Are: Pub Canach",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4649.13,
+      57848.7
+    ],
+    "data": {
+      "chat_link": "[&BBQQAAA=]",
+      "tooltip": "Exposed Ley Root"
+    },
+    "id": 4116,
+    "map": "Ripples in the Pond: Rooted Sanctuary",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4662.15,
+      58442.8
+    ],
+    "data": {
+      "bounds": [
+        [
+          4930.83,
+          58846
+        ],
+        [
+          4757.46,
+          58894.5
+        ],
+        [
+          4644.21,
+          58909.1
+        ],
+        [
+          4569.08,
+          58855.5
+        ],
+        [
+          4279.33,
+          58677.6
+        ],
+        [
+          4191.04,
+          58682.3
+        ],
+        [
+          4169.38,
+          58484
+        ],
+        [
+          4240.54,
+          58403.4
+        ],
+        [
+          4273.25,
+          58326.5
+        ],
+        [
+          4295.83,
+          58203.2
+        ],
+        [
+          4366.58,
+          58178.1
+        ],
+        [
+          4434.71,
+          58232.7
+        ],
+        [
+          4512,
+          58201.4
+        ],
+        [
+          4591.25,
+          58190
+        ],
+        [
+          4709.33,
+          58183.8
+        ],
+        [
+          4756.04,
+          58152.5
+        ],
+        [
+          4926.17,
+          58144.7
+        ],
+        [
+          4981.79,
+          58058.3
+        ],
+        [
+          5048.54,
+          58158.2
+        ],
+        [
+          5186.67,
+          58430.8
+        ],
+        [
+          5174.08,
+          58541.2
+        ],
+        [
+          5119.83,
+          58692.3
+        ],
+        [
+          5071.46,
+          58737.3
+        ],
+        [
+          4930.83,
+          58846
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Navarium Core"
+    },
+    "id": 2122,
+    "map": "Ripples in the Pond: Rooted Sanctuary",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4327.27,
+      57924.5
+    ],
+    "data": {
+      "bounds": [
+        [
+          4307.96,
+          58039.6
+        ],
+        [
+          4217.62,
+          58024.9
+        ],
+        [
+          4158.88,
+          57846.7
+        ],
+        [
+          4061,
+          57913
+        ],
+        [
+          3959.67,
+          57847.1
+        ],
+        [
+          3894.04,
+          57897.2
+        ],
+        [
+          3841.92,
+          57908.9
+        ],
+        [
+          3791.12,
+          57945.2
+        ],
+        [
+          3694.08,
+          57801.4
+        ],
+        [
+          3858.04,
+          57763.9
+        ],
+        [
+          3912.83,
+          57735.7
+        ],
+        [
+          4058.92,
+          57604.2
+        ],
+        [
+          4183.67,
+          57551.8
+        ],
+        [
+          4488.08,
+          57598.6
+        ],
+        [
+          4672.58,
+          57576
+        ],
+        [
+          4853.96,
+          57661.5
+        ],
+        [
+          4981,
+          57777.5
+        ],
+        [
+          4981.79,
+          58058.3
+        ],
+        [
+          4926.17,
+          58144.7
+        ],
+        [
+          4756.04,
+          58152.5
+        ],
+        [
+          4709.33,
+          58183.8
+        ],
+        [
+          4591.25,
+          58190
+        ],
+        [
+          4512,
+          58201.4
+        ],
+        [
+          4434.71,
+          58232.7
+        ],
+        [
+          4366.58,
+          58178.1
+        ],
+        [
+          4295.83,
+          58203.2
+        ],
+        [
+          4307.96,
+          58039.6
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Rooted Sanctuary"
+    },
+    "id": 2125,
+    "map": "Ripples in the Pond: Rooted Sanctuary",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4775,
+      59378.9
+    ],
+    "data": {
+      "bounds": [
+        [
+          5299.29,
+          59146
+        ],
+        [
+          5209.5,
+          59136.9
+        ],
+        [
+          5065,
+          59092.4
+        ],
+        [
+          5014.12,
+          59037.1
+        ],
+        [
+          5012.88,
+          58959.5
+        ],
+        [
+          5007.79,
+          58787.3
+        ],
+        [
+          4930.83,
+          58846
+        ],
+        [
+          4757.46,
+          58894.5
+        ],
+        [
+          4644.21,
+          58909.1
+        ],
+        [
+          4636.08,
+          59336.8
+        ],
+        [
+          4639.67,
+          59432.4
+        ],
+        [
+          4492.42,
+          59476.3
+        ],
+        [
+          4218.38,
+          59388.8
+        ],
+        [
+          4228.08,
+          59543.1
+        ],
+        [
+          4267.46,
+          59670.9
+        ],
+        [
+          4320.33,
+          59658
+        ],
+        [
+          4385,
+          59634.9
+        ],
+        [
+          4447.04,
+          59664.2
+        ],
+        [
+          4545.46,
+          59743
+        ],
+        [
+          4609.5,
+          59775.3
+        ],
+        [
+          4992.96,
+          59808.7
+        ],
+        [
+          5236.96,
+          59752.7
+        ],
+        [
+          5290.08,
+          59744.3
+        ],
+        [
+          5349.46,
+          59656.3
+        ],
+        [
+          5299.29,
+          59146
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Hall of Assemblage"
+    },
+    "id": 2127,
+    "map": "Ripples in the Pond: Hall of Assemblage",
+    "type": "sector"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4516.1,
+      60428.1
+    ],
+    "data": {
+      "chat_link": "[&BP4PAAA=]",
+      "tooltip": "Grand Colonnade"
+    },
+    "id": 4094,
+    "map": "Deeper Revelations: Temple of the Blessed Mantle",
+    "type": "landmark"
+  },
+  {
+    "continent": "Castora",
+    "coordinates": [
+      4354.05,
+      60764.4
+    ],
+    "data": {
+      "bounds": [
+        [
+          4802.93,
+          61125.4
+        ],
+        [
+          4641.38,
+          61105.5
+        ],
+        [
+          4522.05,
+          61108.9
+        ],
+        [
+          4389.25,
+          61130
+        ],
+        [
+          4164.02,
+          61168.5
+        ],
+        [
+          4065.97,
+          61247.7
+        ],
+        [
+          4006.96,
+          61274.1
+        ],
+        [
+          3956.01,
+          61288.5
+        ],
+        [
+          3955.54,
+          61163.9
+        ],
+        [
+          3943.3,
+          61065.1
+        ],
+        [
+          3941.89,
+          60958.3
+        ],
+        [
+          3955.39,
+          60885.8
+        ],
+        [
+          3839.94,
+          60711.8
+        ],
+        [
+          3808.46,
+          60490.7
+        ],
+        [
+          3781.64,
+          60340.9
+        ],
+        [
+          3802.25,
+          60244.8
+        ],
+        [
+          3833.88,
+          60148.8
+        ],
+        [
+          3880.91,
+          59997.9
+        ],
+        [
+          4980.73,
+          59998
+        ],
+        [
+          5004.8,
+          60194.5
+        ],
+        [
+          5009.12,
+          60305.4
+        ],
+        [
+          4999.42,
+          60425.9
+        ],
+        [
+          4969.59,
+          60566.9
+        ],
+        [
+          4967.55,
+          60784
+        ],
+        [
+          4976.3,
+          60976.3
+        ],
+        [
+          5005.97,
+          61167.9
+        ],
+        [
+          4802.93,
+          61125.4
+        ]
+      ],
+      "level": 80,
+      "tooltip": "Temple of the Blessed Mantle"
+    },
+    "id": 2118,
+    "map": "Deeper Revelations: Temple of the Blessed Mantle",
     "type": "sector"
   },
   {
@@ -353305,40 +358915,44 @@
     "data": {
       "bounds": [
         [
-          64213.9,
-          53997.1
-        ],
-        [
-          64263.5,
-          53974.1
-        ],
-        [
-          64303.3,
-          53830
-        ],
-        [
-          64187.4,
-          53711.3
-        ],
-        [
           64119.9,
           53749.8
+        ],
+        [
+          64222.3,
+          53530.8
+        ],
+        [
+          63835.2,
+          53524.1
+        ],
+        [
+          63673.4,
+          53608
+        ],
+        [
+          63654.8,
+          53775.6
+        ],
+        [
+          63714.4,
+          53917
+        ],
+        [
+          63770.3,
+          54022.6
+        ],
+        [
+          63801,
+          54060.6
         ],
         [
           63876.8,
           54088.7
         ],
         [
-          63907.5,
-          54095.9
-        ],
-        [
-          63929.7,
-          54092.5
-        ],
-        [
-          64213.9,
-          53997.1
+          64119.9,
+          53749.8
         ]
       ],
       "chat_link": "[&BIQBAAA=]",
@@ -353357,28 +358971,28 @@
     "data": {
       "bounds": [
         [
+          64043.6,
+          53095.3
+        ],
+        [
           63953.3,
           53132
-        ],
-        [
-          63672.3,
-          53255.1
-        ],
-        [
-          63655.6,
-          53370.6
-        ],
-        [
-          63680.3,
-          53587.9
         ],
         [
           63767.7,
           53550.9
         ],
         [
-          63953.3,
-          53132
+          63783,
+          53574.5
+        ],
+        [
+          63991.2,
+          53628
+        ],
+        [
+          64043.6,
+          53095.3
         ]
       ],
       "chat_link": "[&BIUBAAA=]",

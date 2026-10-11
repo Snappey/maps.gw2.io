@@ -13,29 +13,55 @@ import {assertNotShrunk} from "./lib/validate.mjs";
 import {log} from "./lib/log.mjs";
 import {WIKI_API, CITY_PAGES, VALIDATION, dataFile} from "./config.mjs";
 
+// Read coordinates straight from each page's {{Adventure infobox}} wikitext: the
+// wiki stopped annotating adventure coordinates as SMW properties (2026-08), so
+// the old `action=ask` query on "Has x coordinate" returns nothing.
 const ADVENTURES_QUERY_URL =
-  `${WIKI_API}?action=ask&format=json&query=[[Category:Adventures]]|[[Has%20x%20coordinate::%3E0]]` +
-  `|?Has%20x%20coordinate|?Has%20y%20coordinate|?Has game description|limit=500`;
+  `${WIKI_API}?action=query&format=json&generator=categorymembers&gcmtitle=Category:Adventures` +
+  `&gcmlimit=50&prop=revisions|info&rvprop=content&inprop=url`;
 
 const wikiTextQueryUrl = (pageTitle) =>
   `${WIKI_API}?action=query&format=json&prop=revisions&rvprop=content&titles=${pageTitle}`;
 
 // --- adventures -------------------------------------------------------------
 
+// [[Target|label]] -> label, [[Target]] -> Target, <br> -> newline.
+const stripWikiMarkup = (s) =>
+  s
+    .replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, "$1")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .trim();
+
 async function generateAdventures() {
-  const body = await fetchJson(ADVENTURES_QUERY_URL);
-  const adventures = Object.entries(body.query.results)
-    // Drop NPCs linked to adventures that have no game description.
-    .filter(([, data]) => data.printouts["Has game description"][0] !== undefined)
-    .map(([name, data]) => ({
-      id: name,
-      coordinates: [data.printouts["Has x coordinate"][0], data.printouts["Has y coordinate"][0]],
-      type: "Adventure",
-      data: {
-        tooltip: data.printouts["Has game description"][0],
-        url: data.fullurl,
-      },
-    }));
+  const pages = [];
+  let cont = "";
+  do {
+    const body = await fetchJson(ADVENTURES_QUERY_URL + cont);
+    pages.push(...Object.values(body.query.pages));
+    cont = body.continue ? `&gcmcontinue=${encodeURIComponent(body.continue.gcmcontinue)}` : "";
+  } while (cont);
+
+  const adventures = pages
+    .map((page) => {
+      const text = page.revisions[0]["*"];
+      // Seen on the wiki: `[x,y]`, `[x,y,floor]` and bare `x, y`.
+      const coords = text.match(/\|\s*coordinates\s*=\s*\[?\s*([\d.]+)\s*,\s*([\d.]+)/);
+      // Value runs (possibly over several lines) up to the next param / template end.
+      const description = text.match(/\|\s*description\s*=[ \t]*(\S[^]*?)\n\s*(?:\||\}\})/);
+      // Drop category pages that aren't a placed adventure (NPCs, the overview page).
+      if (!coords || !description) return null;
+      return {
+        id: page.title,
+        coordinates: [Number(coords[1]), Number(coords[2])],
+        type: "Adventure",
+        data: {
+          tooltip: stripWikiMarkup(description[1]),
+          url: page.fullurl.replace(/^https?:/, ""),
+        },
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.id.localeCompare(b.id));
 
   const out = dataFile("adventure_labels.json");
   writeJsonAtomic(out, adventures, {

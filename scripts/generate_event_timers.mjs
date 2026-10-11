@@ -35,7 +35,7 @@ import {
 } from "./config.mjs";
 
 const DAY = 1440; // minutes
-const EXPECTED_VERSION = "v5.2"; // pinned wiki schema version; drift only warns
+const EXPECTED_VERSION = "v5.4"; // pinned wiki schema version; drift only warns
 
 const getContinent = (id, floor) => fetchJson(`${GW2_API}/continents/${id}/floors/${floor}`);
 

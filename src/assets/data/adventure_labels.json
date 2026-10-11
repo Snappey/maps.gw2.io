@@ -245,7 +245,7 @@
       19052.3
     ],
     "data": {
-      "tooltip": "Earn Favor with [[Eagle Spirit|Eagle]] by following the Spirit's flight path.",
+      "tooltip": "Earn Favor with Eagle by following the Spirit's flight path.",
       "url": "//wiki.guildwars2.com/wiki/Flight_of_the_Eagle_Spirit"
     },
     "id": "Flight of the Eagle Spirit",
@@ -281,7 +281,7 @@
       22882
     ],
     "data": {
-      "tooltip": "Free as much [[Kryptis]] essence as you can. Each bit of essence freed restores your [[mount]]'s energy, allowing you to fly longer without landing.",
+      "tooltip": "Free as much Kryptis essence as you can. Each bit of essence freed restores your mount's energy, allowing you to fly longer without landing.",
       "url": "//wiki.guildwars2.com/wiki/Free_Kryptis_Essence"
     },
     "id": "Free Kryptis Essence",
@@ -293,7 +293,7 @@
       53200.5
     ],
     "data": {
-      "tooltip": "Gather refreshments and return them to the party in the [[Garden of Seborhin]] quickly!",
+      "tooltip": "Gather refreshments and return them to the party in the Garden of Seborhin quickly!",
       "url": "//wiki.guildwars2.com/wiki/Garden_Wine_and_Cheese_Run"
     },
     "id": "Garden Wine and Cheese Run",
@@ -377,7 +377,7 @@
       38416.9
     ],
     "data": {
-      "tooltip": "Gather weapons for [[Veteran Sergei|Sergei]] to fieldstrip before time runs out!",
+      "tooltip": "Gather weapons for Sergei to fieldstrip before time runs out!",
       "url": "//wiki.guildwars2.com/wiki/Ice_Floe_Magnet_Run"
     },
     "id": "Ice Floe Magnet Run",
@@ -517,6 +517,30 @@
   },
   {
     "coordinates": [
+      5776.9,
+      59328.3
+    ],
+    "data": {
+      "tooltip": "Use your skimmer's Aetherlocation skill to trace and gather as many orbs of ley energy as you can.",
+      "url": "//wiki.guildwars2.com/wiki/Leyspring_Hollow:_Aetherlocation_Detective"
+    },
+    "id": "Leyspring Hollow: Aetherlocation Detective",
+    "type": "Adventure"
+  },
+  {
+    "coordinates": [
+      3639.4,
+      59259.8
+    ],
+    "data": {
+      "tooltip": "Play a round of Serpent Simulator and consume as many nutrition nodes as you can.",
+      "url": "//wiki.guildwars2.com/wiki/Leyspring_Hollows:_Serpent_Simulator"
+    },
+    "id": "Leyspring Hollows: Serpent Simulator",
+    "type": "Adventure"
+  },
+  {
+    "coordinates": [
       43125.6,
       21862.9
     ],
@@ -605,7 +629,7 @@
       54797.9
     ],
     "data": {
-      "tooltip": "Gather embalming supplies and return them to [[the Necropolis]] before time runs out!",
+      "tooltip": "Gather embalming supplies and return them to the Necropolis before time runs out!",
       "url": "//wiki.guildwars2.com/wiki/Necropolis_Embalming_Supply_Run"
     },
     "id": "Necropolis Embalming Supply Run",
@@ -665,7 +689,7 @@
       23833
     ],
     "data": {
-      "tooltip": "Search the area and match the lost [[Kryptis]] to their guardians before time runs out.\n\nKeep an eye out for swiftspike plants, and get near them for a boost!",
+      "tooltip": "Search the area and match the lost Kryptis to their guardians before time runs out.\n\nKeep an eye out for swiftspike plants, and get near them for a boost!",
       "url": "//wiki.guildwars2.com/wiki/Reuniting_Lost_Kryptis"
     },
     "id": "Reuniting Lost Kryptis",
@@ -857,7 +881,7 @@
       51186.2
     ],
     "data": {
-      "tooltip": "Gather documents for [[Order of Shadows]] agents before time runs out!",
+      "tooltip": "Gather documents for Order of Shadows agents before time runs out!",
       "url": "//wiki.guildwars2.com/wiki/Shadows_Intel"
     },
     "id": "Shadows Intel",
@@ -929,7 +953,7 @@
       60021.3
     ],
     "data": {
-      "tooltip": "Race to the finish and destroy as many nets as you can within the time limit.\n\nDestroy nets by dashing through them or by using your skimmer's Water Jets skill (requires [[Convergent Evolution]] Mastery). Use both options together to get the highest score!\n\nRestore Water Jets ammo by flying through checkpoints and magic orbs.",
+      "tooltip": "Race to the finish and destroy as many nets as you can within the time limit.\n\nDestroy nets by dashing through them or by using your skimmer's Water Jets skill (requires Convergent Evolution Mastery). Use both options together to get the highest score!\n\nRestore Water Jets ammo by flying through checkpoints and magic orbs.",
       "url": "//wiki.guildwars2.com/wiki/Skimmer-Net_Scramble"
     },
     "id": "Skimmer-Net Scramble",
@@ -989,7 +1013,7 @@
       22158.1
     ],
     "data": {
-      "tooltip": "Race to the finish and destroy as many targets as you can within the time limit.<br>Destroy targets by dashing through them or by using your skyscale's Fireball skill (requires Fireball Mastery). Use both options together to get the highest score!<br>Restore Fireball ammo by flying through checkpoints and power-ups.",
+      "tooltip": "Race to the finish and destroy as many targets as you can within the time limit.\nDestroy targets by dashing through them or by using your skyscale's Fireball skill (requires Fireball Mastery). Use both options together to get the highest score!\nRestore Fireball ammo by flying through checkpoints and power-ups.",
       "url": "//wiki.guildwars2.com/wiki/Skyscale_Target_Practice_in_the_Wizard%27s_Tower"
     },
     "id": "Skyscale Target Practice in the Wizard's Tower",
@@ -1037,7 +1061,7 @@
       32107.2
     ],
     "data": {
-      "tooltip": "Burn [[Vine Tendril|tendrils]] and avoid [[Unexploded Shot|unexploded shot]] before time runs out!",
+      "tooltip": "Burn tendrils and avoid unexploded shot before time runs out!",
       "url": "//wiki.guildwars2.com/wiki/Tendril_Torchers"
     },
     "id": "Tendril Torchers",
@@ -1085,7 +1109,7 @@
       19308.4
     ],
     "data": {
-      "tooltip": "Collect resilience essence to impress [[Ox Spirit|Ox]]. Avoid Ox's attempts to knock you back, as each hit will consume some of your collected essence.",
+      "tooltip": "Collect resilience essence to impress Ox. Avoid Ox's attempts to knock you back, as each hit will consume some of your collected essence.",
       "url": "//wiki.guildwars2.com/wiki/The_Ox%27s_Yoke"
     },
     "id": "The Ox's Yoke",
@@ -1113,6 +1137,18 @@
       "url": "//wiki.guildwars2.com/wiki/Thunderhead_Keep_Volatile_Delivery"
     },
     "id": "Thunderhead Keep Volatile Delivery",
+    "type": "Adventure"
+  },
+  {
+    "coordinates": [
+      55747,
+      39072.2
+    ],
+    "data": {
+      "tooltip": "Complete the course as quickly as possible!",
+      "url": "//wiki.guildwars2.com/wiki/Time_Trial:_Flying_Dolyak"
+    },
+    "id": "Time Trial: Flying Dolyak",
     "type": "Adventure"
   },
   {
@@ -1193,7 +1229,7 @@
       53373
     ],
     "data": {
-      "tooltip": "Gather lost luxury goods and return them to [[Vehjin Palace]] before time runs out!",
+      "tooltip": "Gather lost luxury goods and return them to Vehjin Palace before time runs out!",
       "url": "//wiki.guildwars2.com/wiki/Vehjin_Noble_Necessities_Run"
     },
     "id": "Vehjin Noble Necessities Run",
@@ -1205,7 +1241,7 @@
       55041.8
     ],
     "data": {
-      "tooltip": "Gather school supplies and return them to [[Vehtendi Academy]] before time runs out!",
+      "tooltip": "Gather school supplies and return them to Vehtendi Academy before time runs out!",
       "url": "//wiki.guildwars2.com/wiki/Vehtendi_School_Supply_Run"
     },
     "id": "Vehtendi School Supply Run",

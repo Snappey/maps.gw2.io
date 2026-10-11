@@ -686,7 +686,7 @@
           "durationMinutes": 75,
           "link": "Defending Tarir",
           "map": "Auric Basin",
-          "name": "Pylons",
+          "name": "Defending Tarir (Pylons)",
           "offsets": [
             90,
             210,
@@ -701,7 +701,7 @@
             1290,
             1410
           ],
-          "segmentId": "1"
+          "segmentId": "0"
         },
         {
           "chatLink": "[&BGwIAAA=]",
@@ -727,7 +727,7 @@
             1245,
             1365
           ],
-          "segmentId": "2"
+          "segmentId": "1"
         },
         {
           "chatLink": "[&BAIIAAA=]",
@@ -738,7 +738,7 @@
           "durationMinutes": 20,
           "link": "Battle in Tarir",
           "map": "Auric Basin",
-          "name": "Octovine",
+          "name": "Battle in Tarir (Octovine)",
           "offsets": [
             60,
             180,
@@ -753,7 +753,7 @@
             1260,
             1380
           ],
-          "segmentId": "3"
+          "segmentId": "2"
         },
         {
           "chatLink": null,
@@ -779,7 +779,7 @@
             1280,
             1400
           ],
-          "segmentId": "4"
+          "segmentId": "3"
         }
       ],
       "xpac": "hot"
@@ -796,6 +796,21 @@
       "name": "Dragon's Stand",
       "phases": [
         {
+          "chatLink": null,
+          "coordinates": [
+            35584,
+            37440
+          ],
+          "durationMinutes": 90,
+          "link": "Advancing on the Blighting Towers",
+          "map": "Dragon's Stand",
+          "name": "(continued)",
+          "offsets": [
+            0
+          ],
+          "segmentId": "0"
+        },
+        {
           "chatLink": "[&BBAIAAA=]",
           "coordinates": [
             36649,
@@ -809,21 +824,6 @@
             90
           ],
           "segmentId": "1"
-        },
-        {
-          "chatLink": null,
-          "coordinates": [
-            35584,
-            37440
-          ],
-          "durationMinutes": 90,
-          "link": "Advancing on the Blighting Towers",
-          "map": "Dragon's Stand",
-          "name": "(continued)",
-          "offsets": [
-            0
-          ],
-          "segmentId": "2"
         }
       ],
       "xpac": "hot"
@@ -848,7 +848,7 @@
           "durationMinutes": 95,
           "link": "Advancing Across Tangled Roots",
           "map": "Tangled Depths",
-          "name": "Help the Outposts",
+          "name": "Advancing Across Tangled Roots (Outposts)",
           "offsets": [
             50,
             170,
@@ -863,7 +863,7 @@
             1250,
             1370
           ],
-          "segmentId": "1"
+          "segmentId": "0"
         },
         {
           "chatLink": null,
@@ -889,7 +889,7 @@
             1225,
             1345
           ],
-          "segmentId": "2"
+          "segmentId": "1"
         },
         {
           "chatLink": "[&BPUHAAA=]",
@@ -900,7 +900,7 @@
           "durationMinutes": 20,
           "link": "King of the Jungle",
           "map": "Tangled Depths",
-          "name": "Chak Gerent",
+          "name": "King of the Jungle (Chak Gerent)",
           "offsets": [
             30,
             150,
@@ -915,7 +915,7 @@
             1230,
             1350
           ],
-          "segmentId": "3"
+          "segmentId": "2"
         }
       ],
       "xpac": "hot"
@@ -955,7 +955,7 @@
             1230,
             1350
           ],
-          "segmentId": "1"
+          "segmentId": "0"
         },
         {
           "chatLink": null,
@@ -981,7 +981,7 @@
             1305,
             1425
           ],
-          "segmentId": "2"
+          "segmentId": "1"
         },
         {
           "chatLink": "[&BAgIAAA=]",
@@ -1007,7 +1007,7 @@
             1210,
             1330
           ],
-          "segmentId": "3"
+          "segmentId": "2"
         }
       ],
       "xpac": "hot"
@@ -1139,7 +1139,7 @@
             1320,
             1380
           ],
-          "segmentId": "1"
+          "segmentId": "0"
         },
         {
           "chatLink": "[&BIAHAAA=]",
@@ -1177,7 +1177,7 @@
             1360,
             1420
           ],
-          "segmentId": "2"
+          "segmentId": "1"
         }
       ],
       "xpac": "core"
@@ -2064,6 +2064,28 @@
             1350
           ],
           "segmentId": "2"
+        },
+        {
+          "chatLink": "[&BDYQAAA=]",
+          "coordinates": [
+            4953,
+            59330
+          ],
+          "durationMinutes": 10,
+          "link": "Convergence: Nexus of Eternity",
+          "map": "Leyspring Hollows",
+          "name": "Nexus of Eternity",
+          "offsets": [
+            60,
+            240,
+            420,
+            600,
+            780,
+            960,
+            1140,
+            1320
+          ],
+          "segmentId": "3"
         }
       ],
       "xpac": "public"
@@ -2380,18 +2402,54 @@
           "map": "Eternity's Garden",
           "name": "Shackles of the Ancients",
           "offsets": [
-            70,
-            190,
-            310,
-            430,
-            550,
-            670,
-            790,
-            910,
-            1030,
-            1150,
-            1270,
-            1390
+            75,
+            195,
+            315,
+            435,
+            555,
+            675,
+            795,
+            915,
+            1035,
+            1155,
+            1275,
+            1395
+          ],
+          "segmentId": "1"
+        }
+      ],
+      "xpac": "voe"
+    },
+    "voe-lh": {
+      "category": "Visions of Eternity",
+      "coordinates": [
+        4730,
+        58665
+      ],
+      "cycleMinutes": 180,
+      "key": "voe-lh",
+      "map": "Leyspring Hollows",
+      "name": "Leyspring Hollows",
+      "phases": [
+        {
+          "chatLink": "[&BDYQAAA=]",
+          "coordinates": [
+            4953,
+            59330
+          ],
+          "durationMinutes": 30,
+          "link": "Depths of Cruelty",
+          "map": "Leyspring Hollows",
+          "name": "Depths of Cruelty",
+          "offsets": [
+            120,
+            300,
+            480,
+            660,
+            840,
+            1020,
+            1200,
+            1380
           ],
           "segmentId": "1"
         }
@@ -2479,5 +2537,5 @@
       "xpac": "voe"
     }
   },
-  "version": "v5.2"
+  "version": "v5.4"
 }

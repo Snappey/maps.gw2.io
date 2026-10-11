@@ -119,6 +119,14 @@
     "tooltip": "Whispering Hollows",
     "type": "poi"
   },
+  "&BA0QAAA": {
+    "coord": [
+      6129.85,
+      59081.8
+    ],
+    "tooltip": "Ley Altar",
+    "type": "poi"
+  },
   "&BA4AAAA": {
     "coord": [
       54119.4,
@@ -239,6 +247,14 @@
     "tooltip": "Ruinous Divide",
     "type": "poi"
   },
+  "&BA4QAAA": {
+    "coord": [
+      4255.13,
+      59174.3
+    ],
+    "tooltip": "Tactician's Chantry",
+    "type": "poi"
+  },
   "&BA8AAAA": {
     "coord": [
       54668.6,
@@ -349,6 +365,14 @@
       23738
     ],
     "tooltip": "Bagoo Cave",
+    "type": "poi"
+  },
+  "&BA8QAAA": {
+    "coord": [
+      5852.88,
+      59596.6
+    ],
+    "tooltip": "Spirit's Descent",
     "type": "poi"
   },
   "&BAABAAA": {
@@ -1671,6 +1695,14 @@
     "tooltip": "Torpor Tavern",
     "type": "poi"
   },
+  "&BAoQAAA": {
+    "coord": [
+      4546.14,
+      58493.5
+    ],
+    "tooltip": "Specimen Stage Beta",
+    "type": "poi"
+  },
   "&BAsAAAA": {
     "coord": [
       53612.3,
@@ -1783,6 +1815,14 @@
     "tooltip": "Springer's Retreat",
     "type": "poi"
   },
+  "&BAsQAAA": {
+    "coord": [
+      5843.26,
+      58430.4
+    ],
+    "tooltip": "Chak Hive",
+    "type": "poi"
+  },
   "&BAwAAAA": {
     "coord": [
       42841,
@@ -1885,6 +1925,14 @@
       22843.7
     ],
     "tooltip": "Stoic Alder's House",
+    "type": "poi"
+  },
+  "&BAwQAAA": {
+    "coord": [
+      4164.3,
+      58754.5
+    ],
+    "tooltip": "Fool's Maze",
     "type": "poi"
   },
   "&BB0AAAA": {
@@ -1999,6 +2047,14 @@
     "tooltip": "Bearpaw Fields",
     "type": "poi"
   },
+  "&BB0QAAA": {
+    "coord": [
+      3816.24,
+      59095.3
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
+  },
   "&BB4AAAA": {
     "coord": [
       43862.6,
@@ -2095,6 +2151,14 @@
     "tooltip": "Springer's Base",
     "type": "poi"
   },
+  "&BB4QAAA": {
+    "coord": [
+      4284.74,
+      58768.6
+    ],
+    "tooltip": "Arbor of Lamentation",
+    "type": "poi"
+  },
   "&BB8AAAA": {
     "coord": [
       43612.4,
@@ -2182,6 +2246,14 @@
     ],
     "tooltip": "Deft Lahar's Abode",
     "type": "poi"
+  },
+  "&BB8QAAA": {
+    "coord": [
+      3657.78,
+      58080.6
+    ],
+    "tooltip": "Doyen's Adytum Waypoint",
+    "type": "waypoint"
   },
   "&BBAAAAA": {
     "coord": [
@@ -2286,6 +2358,14 @@
     ],
     "tooltip": "Apiary Holt",
     "type": "poi"
+  },
+  "&BBAQAAA": {
+    "coord": [
+      5811.82,
+      58465.8
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
   },
   "&BBEAAAA": {
     "coord": [
@@ -2407,6 +2487,14 @@
     "tooltip": "Astral Ward Moon Camp",
     "type": "poi"
   },
+  "&BBEQAAA": {
+    "coord": [
+      4152.29,
+      58939
+    ],
+    "tooltip": "The Dueling Halls",
+    "type": "poi"
+  },
   "&BBIAAAA": {
     "coord": [
       45528.3,
@@ -2501,6 +2589,14 @@
       22825.1
     ],
     "tooltip": "Vast Caldera's Room",
+    "type": "poi"
+  },
+  "&BBIQAAA": {
+    "coord": [
+      4707.15,
+      59586.6
+    ],
+    "tooltip": "Proving Grounds",
     "type": "poi"
   },
   "&BBMAAAA": {
@@ -2607,6 +2703,14 @@
     "tooltip": "Basilisk Falls",
     "type": "poi"
   },
+  "&BBMQAAA": {
+    "coord": [
+      3536.66,
+      58157.2
+    ],
+    "tooltip": "Alliance Listening Post",
+    "type": "poi"
+  },
   "&BBQAAAA": {
     "coord": [
       44843,
@@ -2693,6 +2797,14 @@
       23867.7
     ],
     "tooltip": "Timber Cave",
+    "type": "poi"
+  },
+  "&BBQQAAA": {
+    "coord": [
+      4649.13,
+      57848.7
+    ],
+    "tooltip": "Exposed Ley Root",
     "type": "poi"
   },
   "&BBUAAAA": {
@@ -2783,6 +2895,14 @@
     "tooltip": "Garenhoff Refugee Camp Waypoint",
     "type": "waypoint"
   },
+  "&BBUQAAA": {
+    "coord": [
+      3745.5,
+      58924.4
+    ],
+    "tooltip": "Dreaming Chambers",
+    "type": "poi"
+  },
   "&BBYAAAA": {
     "coord": [
       43589.1,
@@ -2871,6 +2991,14 @@
     "tooltip": "Hunter's Mesa",
     "type": "poi"
   },
+  "&BBYQAAA": {
+    "coord": [
+      5819.77,
+      59557.2
+    ],
+    "tooltip": "Sealed Vestibule Waypoint",
+    "type": "waypoint"
+  },
   "&BBcAAAA": {
     "coord": [
       45707.1,
@@ -2941,6 +3069,14 @@
       16725.1
     ],
     "tooltip": "Manor of the Cruel Hound",
+    "type": "poi"
+  },
+  "&BBcQAAA": {
+    "coord": [
+      3612.85,
+      58578.5
+    ],
+    "tooltip": "Crystalline Nidus",
     "type": "poi"
   },
   "&BBgAAAA": {
@@ -3031,6 +3167,14 @@
     "tooltip": "Valravn's Perch",
     "type": "poi"
   },
+  "&BBgQAAA": {
+    "coord": [
+      3827.79,
+      58639.9
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
+  },
   "&BBkAAAA": {
     "coord": [
       46100.6,
@@ -3117,6 +3261,14 @@
       16694.5
     ],
     "tooltip": "Forager's Hunt",
+    "type": "poi"
+  },
+  "&BBkQAAA": {
+    "coord": [
+      4647.2,
+      58006.4
+    ],
+    "tooltip": "The Cannulae",
     "type": "poi"
   },
   "&BBoAAAA": {
@@ -3206,6 +3358,14 @@
     ],
     "tooltip": "Vista",
     "type": "vista"
+  },
+  "&BBoQAAA": {
+    "coord": [
+      3759.27,
+      58182.2
+    ],
+    "tooltip": "Wailer's Pulpit",
+    "type": "poi"
   },
   "&BBsAAAA": {
     "coord": [
@@ -3309,6 +3469,14 @@
       22308.6
     ],
     "tooltip": "Valravn's Post",
+    "type": "poi"
+  },
+  "&BBsQAAA": {
+    "coord": [
+      5605.75,
+      59340.5
+    ],
+    "tooltip": "The Elder's Fruition",
     "type": "poi"
   },
   "&BBwAAAA": {
@@ -3423,6 +3591,14 @@
     "tooltip": "Vale Gazebo",
     "type": "poi"
   },
+  "&BBwQAAA": {
+    "coord": [
+      5258.25,
+      58475.6
+    ],
+    "tooltip": "Primus Minor Research Annex",
+    "type": "poi"
+  },
   "&BC0AAAA": {
     "coord": [
       49935.7,
@@ -3525,6 +3701,14 @@
       22466.6
     ],
     "tooltip": "Soaring Crest's House",
+    "type": "poi"
+  },
+  "&BC0QAAA": {
+    "coord": [
+      3806.18,
+      58625.5
+    ],
+    "tooltip": "Natural Arch",
     "type": "poi"
   },
   "&BC4AAAA": {
@@ -3639,6 +3823,14 @@
     "tooltip": "Autumn's Vale Waypoint",
     "type": "waypoint"
   },
+  "&BC4QAAA": {
+    "coord": [
+      5292.94,
+      59290.3
+    ],
+    "tooltip": "Path of the Uncloaked",
+    "type": "poi"
+  },
   "&BC8AAAA": {
     "coord": [
       48742.4,
@@ -3717,6 +3909,14 @@
       22732.3
     ],
     "tooltip": "Mire Switchback",
+    "type": "poi"
+  },
+  "&BC8QAAA": {
+    "coord": [
+      3686.16,
+      57935.4
+    ],
+    "tooltip": "The Scriptorium",
     "type": "poi"
   },
   "&BCAAAAA": {
@@ -3823,6 +4023,14 @@
     "tooltip": "Garden of Loetor",
     "type": "poi"
   },
+  "&BCAQAAA": {
+    "coord": [
+      4284.91,
+      58945.9
+    ],
+    "tooltip": "Sequen Cromatica",
+    "type": "poi"
+  },
   "&BCEAAAA": {
     "coord": [
       43161.6,
@@ -3909,6 +4117,14 @@
       16777.9
     ],
     "tooltip": "The Infested Quag",
+    "type": "poi"
+  },
+  "&BCEQAAA": {
+    "coord": [
+      3512.9,
+      59046.6
+    ],
+    "tooltip": "Crystalline Crest",
     "type": "poi"
   },
   "&BCIAAAA": {
@@ -4007,6 +4223,14 @@
     "tooltip": "Cragged Steps",
     "type": "poi"
   },
+  "&BCIQAAA": {
+    "coord": [
+      4284.23,
+      59435
+    ],
+    "tooltip": "Leyspring Bore",
+    "type": "poi"
+  },
   "&BCMAAAA": {
     "coord": [
       44382.8,
@@ -4085,6 +4309,14 @@
       23451.9
     ],
     "tooltip": "Training Pavilion",
+    "type": "poi"
+  },
+  "&BCMQAAA": {
+    "coord": [
+      4288.61,
+      58730.2
+    ],
+    "tooltip": "The Illuminated Path",
     "type": "poi"
   },
   "&BCQAAAA": {
@@ -4183,6 +4415,14 @@
     "tooltip": "Bonfire Lodge",
     "type": "poi"
   },
+  "&BCQQAAA": {
+    "coord": [
+      5254.25,
+      58835.1
+    ],
+    "tooltip": "Attuning Chamber",
+    "type": "poi"
+  },
   "&BCUAAAA": {
     "coord": [
       50051.3,
@@ -4277,6 +4517,14 @@
       23248.4
     ],
     "tooltip": "Amphibian's Knot",
+    "type": "poi"
+  },
+  "&BCUQAAA": {
+    "coord": [
+      3614.48,
+      59410.8
+    ],
+    "tooltip": "Storage Cellar",
     "type": "poi"
   },
   "&BCYAAAA": {
@@ -4375,6 +4623,14 @@
     "tooltip": "Corpse of the Deep Crawler",
     "type": "poi"
   },
+  "&BCYQAAA": {
+    "coord": [
+      4544.38,
+      59214.6
+    ],
+    "tooltip": "Ethereal Cascade",
+    "type": "poi"
+  },
   "&BCcAAAA": {
     "coord": [
       48691.5,
@@ -4470,6 +4726,14 @@
     ],
     "tooltip": "Astral Ward Moon Camp Waypoint",
     "type": "waypoint"
+  },
+  "&BCcQAAA": {
+    "coord": [
+      5501.36,
+      59454.7
+    ],
+    "tooltip": "Flowstone Moor",
+    "type": "poi"
   },
   "&BCgAAAA": {
     "coord": [
@@ -4573,6 +4837,14 @@
       22710.7
     ],
     "tooltip": "Warg Den",
+    "type": "poi"
+  },
+  "&BCgQAAA": {
+    "coord": [
+      4661.5,
+      58635.8
+    ],
+    "tooltip": "Specimen Stage Alpha",
     "type": "poi"
   },
   "&BCkAAAA": {
@@ -4679,6 +4951,14 @@
     "tooltip": "Tidal Tailgate",
     "type": "poi"
   },
+  "&BCkQAAA": {
+    "coord": [
+      3954.99,
+      58077.6
+    ],
+    "tooltip": "Augmented Atelier",
+    "type": "poi"
+  },
   "&BCoAAAA": {
     "coord": [
       48872.8,
@@ -4774,6 +5054,14 @@
     ],
     "tooltip": "Stricken Plains Waypoint",
     "type": "waypoint"
+  },
+  "&BCoQAAA": {
+    "coord": [
+      4232.65,
+      58524.6
+    ],
+    "tooltip": "Sealed Vault",
+    "type": "poi"
   },
   "&BCsAAAA": {
     "coord": [
@@ -4871,6 +5159,14 @@
     "tooltip": "Path to Balrior",
     "type": "poi"
   },
+  "&BCsQAAA": {
+    "coord": [
+      5423.75,
+      58330.9
+    ],
+    "tooltip": "Skittering Corridor",
+    "type": "poi"
+  },
   "&BCwAAAA": {
     "coord": [
       49389.6,
@@ -4966,6 +5262,14 @@
     ],
     "tooltip": "Sanguine Crater Waypoint",
     "type": "waypoint"
+  },
+  "&BCwQAAA": {
+    "coord": [
+      3551.27,
+      59346.3
+    ],
+    "tooltip": "Primus Minor",
+    "type": "poi"
   },
   "&BD0AAAA": {
     "coord": [
@@ -5383,6 +5687,14 @@
     "tooltip": "Fungal Woodland",
     "type": "poi"
   },
+  "&BDAQAAA": {
+    "coord": [
+      3412.64,
+      59361.9
+    ],
+    "tooltip": "Seat of the Director",
+    "type": "poi"
+  },
   "&BDEAAAA": {
     "coord": [
       49881.8,
@@ -5495,6 +5807,14 @@
     "tooltip": "The Third Bloodtree",
     "type": "poi"
   },
+  "&BDEQAAA": {
+    "coord": [
+      5826.97,
+      59238.5
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
+  },
   "&BDIAAAA": {
     "coord": [
       50209.6,
@@ -5583,6 +5903,14 @@
     "tooltip": "The Fourth Bloodtree",
     "type": "poi"
   },
+  "&BDIQAAA": {
+    "coord": [
+      5856.92,
+      59088.1
+    ],
+    "tooltip": "Ley Barbican",
+    "type": "poi"
+  },
   "&BDMAAAA": {
     "coord": [
       40659.6,
@@ -5653,6 +5981,14 @@
       24568.3
     ],
     "tooltip": "Ruins of Rhawat",
+    "type": "poi"
+  },
+  "&BDMQAAA": {
+    "coord": [
+      3993.99,
+      58271.2
+    ],
+    "tooltip": "Hidden Burrow",
     "type": "poi"
   },
   "&BDQAAAA": {
@@ -5741,6 +6077,14 @@
       22293.8
     ],
     "tooltip": "Sleuth Brawlfields",
+    "type": "poi"
+  },
+  "&BDQQAAA": {
+    "coord": [
+      3867.11,
+      59168.2
+    ],
+    "tooltip": "Gloamlit Courtyard",
     "type": "poi"
   },
   "&BDUAAAA": {
@@ -5839,6 +6183,14 @@
     "tooltip": "Journeykin Outpost",
     "type": "poi"
   },
+  "&BDUQAAA": {
+    "coord": [
+      4802.72,
+      59112.9
+    ],
+    "tooltip": "Subterranean Corridor",
+    "type": "poi"
+  },
   "&BDYAAAA": {
     "coord": [
       41131.2,
@@ -5926,6 +6278,14 @@
     ],
     "tooltip": "Maul Boneyards",
     "type": "poi"
+  },
+  "&BDYQAAA": {
+    "coord": [
+      4953.22,
+      59329.6
+    ],
+    "tooltip": "Hall of Assemblage Waypoint",
+    "type": "waypoint"
   },
   "&BDcAAAA": {
     "coord": [
@@ -6031,6 +6391,14 @@
     "tooltip": "Greer's Lab",
     "type": "poi"
   },
+  "&BDcQAAA": {
+    "coord": [
+      4761.25,
+      58492.8
+    ],
+    "tooltip": "Specimen Stage Gamma",
+    "type": "poi"
+  },
   "&BDgAAAA": {
     "coord": [
       41438.7,
@@ -6127,6 +6495,14 @@
     "tooltip": "Balrior Cavern",
     "type": "poi"
   },
+  "&BDgQAAA": {
+    "coord": [
+      4670.58,
+      57729.4
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
+  },
   "&BDkAAAA": {
     "coord": [
       42045.6,
@@ -6207,6 +6583,14 @@
     "tooltip": "Maw of Balrior",
     "type": "poi"
   },
+  "&BDkQAAA": {
+    "coord": [
+      4822.61,
+      59672
+    ],
+    "tooltip": "Vista",
+    "type": "vista"
+  },
   "&BDoAAAA": {
     "coord": [
       41974,
@@ -6285,6 +6669,14 @@
       15164
     ],
     "tooltip": "Magma Confluence",
+    "type": "poi"
+  },
+  "&BDoQAAA": {
+    "coord": [
+      4656.99,
+      58366.8
+    ],
+    "tooltip": "Specimen Stage Delta",
     "type": "poi"
   },
   "&BDsAAAA": {
@@ -21361,11 +21753,11 @@
   },
   "&BNEBAAA": {
     "coord": [
-      48380.7,
-      37754
+      3587.37,
+      59446.6
     ],
-    "tooltip": "Brooloonu Waypoint",
-    "type": "waypoint"
+    "tooltip": "Assist Astral Ward Agent Snarlcrow and his associates in sabotaging the Inquest base of operations in Leyspring Hollows.",
+    "type": "heart"
   },
   "&BNECAAA": {
     "coord": [
@@ -21453,6 +21845,14 @@
       26289.4
     ],
     "tooltip": "Help Forward Scout Greta cause chaos in the Modniir homeland.",
+    "type": "heart"
+  },
+  "&BNIBAAA": {
+    "coord": [
+      5118.23,
+      59287.9
+    ],
+    "tooltip": "Train with alliance forces and assist around camp to prepare yourself for the fight ahead.",
     "type": "heart"
   },
   "&BNICAAA": {

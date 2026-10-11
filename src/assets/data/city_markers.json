@@ -447,7 +447,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/9/9f/Shard_Collector_%28blue%29_%28map_icon%29.png",
     "name": "Shard Collector",
-    "text": "[[Archeologist Vorri]]"
+    "text": "[[Archaeologist Vorri]]"
   },
   {
     "coord": [
@@ -736,6 +736,33 @@
     "icon": "https://wiki.guildwars2.com/images/c/c6/Feat_chest_%28map_icon%29.png",
     "name": "Tri-key Chest",
     "text": "[[Tri-key Chest]]"
+  },
+  {
+    "coord": [
+      49964.8,
+      31167
+    ],
+    "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
+    "name": "Extra Pets Guide",
+    "text": "[[Extra Pets Guide]]"
+  },
+  {
+    "coord": [
+      49404,
+      31807
+    ],
+    "icon": "https://wiki.guildwars2.com/images/c/c0/Food_%28map_icon%29.png",
+    "name": "Food Service",
+    "text": "[[Cooking Golem]]"
+  },
+  {
+    "coord": [
+      49394,
+      31806
+    ],
+    "icon": "https://wiki.guildwars2.com/images/3/32/Gear_%28map_icon%29.png",
+    "name": "Sharpening Service",
+    "text": "[[Sharpening Golem]]"
   },
   {
     "coord": [
@@ -1477,6 +1504,15 @@
   },
   {
     "coord": [
+      57515.3,
+      30858.1
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/e3/Karma_Merchant_%28map_icon%29.png",
+    "name": "Karma merchant",
+    "text": "[[Sutia]]"
+  },
+  {
+    "coord": [
       57447.6,
       30652.3
     ],
@@ -1510,6 +1546,15 @@
     "icon": "https://wiki.guildwars2.com/images/4/44/Merchant_%28map_icon%29.png",
     "name": "Merchant",
     "text": "[[Tacita]]"
+  },
+  {
+    "coord": [
+      57336.5,
+      30683.6
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/e3/Karma_Merchant_%28map_icon%29.png",
+    "name": "Karma merchant",
+    "text": "[[Uram]]"
   },
   {
     "coord": [
@@ -1654,6 +1699,15 @@
     "icon": "https://wiki.guildwars2.com/images/4/43/Speed_boons.png",
     "name": "Speed Boons",
     "text": "[[Vitas Quickeye]]—Grants [[Double Time!]]"
+  },
+  {
+    "coord": [
+      57103.5,
+      30568
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/e3/Karma_Merchant_%28map_icon%29.png",
+    "name": "Karma merchant",
+    "text": "[[Preti]]"
   },
   {
     "coord": [
@@ -1873,6 +1927,33 @@
   },
   {
     "coord": [
+      57299,
+      30275
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/e3/Karma_Merchant_%28map_icon%29.png",
+    "name": "Karma Merchant",
+    "text": "[[Abella]]"
+  },
+  {
+    "coord": [
+      57273,
+      30359
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/e3/Karma_Merchant_%28map_icon%29.png",
+    "name": "Karma Merchant",
+    "text": "[[Catio]]"
+  },
+  {
+    "coord": [
+      57235,
+      30307
+    ],
+    "icon": "https://wiki.guildwars2.com/images/e/e3/Karma_Merchant_%28map_icon%29.png",
+    "name": "Karma Merchant",
+    "text": "[[Trina]]"
+  },
+  {
+    "coord": [
       57200,
       30143
     ],
@@ -2066,17 +2147,17 @@
       26971
     ],
     "icon": "https://wiki.guildwars2.com/images/a/ae/Asura_gate_starter_area_%28map_icon%29.png",
-    "name": "Zone portal",
+    "name": "Astral Ward portal",
     "text": "[[Lowland Shore]]"
   },
   {
     "coord": [
-      44030,
-      26971
+      44030.9,
+      26972.1
     ],
     "icon": "https://wiki.guildwars2.com/images/6/6c/Asura_gate_%28map_icon%29.png",
     "name": "Asura gate",
-    "text": "[[Mistburned Barrens]]"
+    "text": "[[Mistburned Barrens Asura Gate]] → [[Mistburned Barrens]]"
   },
   {
     "coord": [
@@ -2687,7 +2768,8 @@
       39707
     ],
     "icon": "https://wiki.guildwars2.com/images/e/e3/Transport_Facilitator_%28map_icon%29.png",
-    "name": "[[Raia Keelbreak]]"
+    "name": "Skiff Rental",
+    "text": "[[Raia Keelbreak]]"
   },
   {
     "coord": [
@@ -2714,7 +2796,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Freshwater Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Desert Fish]]\n[[Freshwater Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2723,7 +2805,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2732,7 +2814,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Offshore Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2741,7 +2823,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Offshore Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2759,7 +2841,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2768,7 +2850,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Offshore Fish]]<br>[[Saltwater Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Desert Fish]]\n[[Offshore Fish]]\n[[Saltwater Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2777,7 +2859,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Saltwater Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Saltwater Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -2786,7 +2868,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Offshore Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2795,7 +2877,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2804,7 +2886,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2813,7 +2895,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Offshore Fish]]<br>[[Saltwater Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Desert Fish]]\n[[Offshore Fish]]\n[[Saltwater Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -2822,7 +2904,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Desert Fish]]<br>[[Lake Fish]]<br>[[Offshore Fish]]<br>[[Saltwater Fish]]"
+    "text": "[[Desert Fish]]\n[[Lake Fish]]\n[[Offshore Fish]]\n[[Saltwater Fish]]"
   },
   {
     "coord": [
@@ -2831,7 +2913,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Offshore Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2840,7 +2922,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Coastal Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -2849,7 +2931,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Shore Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Shore Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -2858,7 +2940,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Desert Fish]]\n[[Offshore Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2867,7 +2949,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Lake Fish]]<br>[[River Fish]]"
+    "text": "[[Coastal Fish]]\n[[Lake Fish]]\n[[River Fish]]"
   },
   {
     "coord": [
@@ -2876,7 +2958,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -2885,7 +2967,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Freshwater Fish]]\n[[Lake Fish]]"
   },
   {
     "coord": [
@@ -2894,7 +2976,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Lake Fish]]"
+    "text": "[[Coastal Fish]]\n[[Lake Fish]]"
   },
   {
     "coord": [
@@ -2903,7 +2985,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Lake Fish]]<br>[[River Fish]]"
+    "text": "[[Coastal Fish]]\n[[Lake Fish]]\n[[River Fish]]"
   },
   {
     "coord": [
@@ -2912,7 +2994,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Freshwater Fish]]<br>[[Lake Fish]]<br>[[Saltwater Fish]]<br>[[Shore Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Freshwater Fish]]\n[[Lake Fish]]\n[[Saltwater Fish]]\n[[Shore Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -2921,7 +3003,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Desert Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]<br>[[Saltwater Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Boreal Fish]]\n[[Desert Fish]]\n[[Freshwater Fish]]\n[[Lake Fish]]\n[[Saltwater Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -2930,7 +3012,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Freshwater Fish]]\n[[Lake Fish]]"
   },
   {
     "coord": [
@@ -2948,7 +3030,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Desert Fish]]<br>[[Freshwater Fish]]<br>[[Offshore Fish]]"
+    "text": "[[Desert Fish]]\n[[Freshwater Fish]]\n[[Offshore Fish]]"
   },
   {
     "coord": [
@@ -2957,7 +3039,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Lake Fish]]<br>[[River Fish]]"
+    "text": "[[Coastal Fish]]\n[[Lake Fish]]\n[[River Fish]]"
   },
   {
     "coord": [
@@ -2966,7 +3048,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Lake Fish]]"
+    "text": "[[Coastal Fish]]\n[[Lake Fish]]"
   },
   {
     "coord": [
@@ -2975,7 +3057,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Freshwater Fish]]\n[[Lake Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -2993,7 +3075,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Lake Fish]]<br>[[River Fish]]"
+    "text": "[[Coastal Fish]]\n[[Lake Fish]]\n[[River Fish]]"
   },
   {
     "coord": [
@@ -3002,7 +3084,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Lake Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Coastal Fish]]\n[[Desert Fish]]\n[[Lake Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -3020,7 +3102,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -3029,7 +3111,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Desert Fish]]<br>[[Lake Fish]]<br>[[Saltwater Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Desert Fish]]\n[[Lake Fish]]\n[[Saltwater Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -3038,7 +3120,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Freshwater Fish]]\n[[Lake Fish]]"
   },
   {
     "coord": [
@@ -3047,7 +3129,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Freshwater Fish]]<br>[[Shore Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Desert Fish]]\n[[Freshwater Fish]]\n[[Shore Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -3056,7 +3138,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Offshore Fish]]\n[[Shore Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -3065,7 +3147,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Offshore Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Offshore Fish]]"
   },
   {
     "coord": [
@@ -3074,7 +3156,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Freshwater Fish]]<br>[[Saltwater Fish]]<br>[[Volcanic Fish]]"
+    "text": "[[Freshwater Fish]]\n[[Saltwater Fish]]\n[[Volcanic Fish]]"
   },
   {
     "coord": [
@@ -3083,7 +3165,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Offshore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Offshore Fish]]"
   },
   {
     "coord": [
@@ -3092,7 +3174,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Boreal Fish]]<br>[[Coastal Fish]]<br>[[Freshwater Fish]]<br>[[Offshore Fish]]<br>[[Shore Fish]]"
+    "text": "[[Boreal Fish]]\n[[Coastal Fish]]\n[[Freshwater Fish]]\n[[Offshore Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -3101,7 +3183,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/f/f3/Fish_resource_%28map_icon%29.png",
     "name": "Fishing hole",
-    "text": "[[Coastal Fish]]<br>[[Desert Fish]]<br>[[Freshwater Fish]]<br>[[Lake Fish]]<br>[[Saltwater Fish]]<br>[[Shore Fish]]"
+    "text": "[[Coastal Fish]]\n[[Desert Fish]]\n[[Freshwater Fish]]\n[[Lake Fish]]\n[[Saltwater Fish]]\n[[Shore Fish]]"
   },
   {
     "coord": [
@@ -3299,7 +3381,7 @@
     ],
     "icon": "https://wiki.guildwars2.com/images/e/e7/Strike_Mission_%28map_icon%29.png",
     "name": "Convergences",
-    "text": "[[Convergences (portal)|Convergences ]]"
+    "text": "[[Convergence: Outer Nayos (portal)|Convergences ]]"
   },
   {
     "coord": [
